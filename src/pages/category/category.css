@@ -1,0 +1,59 @@
+.banner img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .breadcrumbs {
+    line-height: 1;
+    color: #555;
+  }
+  
+  .breadcrumbs ul {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 0.75rem;
+  }
+  
+  .breadcrumbs ul li {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .breadcrumbs ul li::after {
+    font-family: 'themify';
+    font-size: 0.625rem;
+    display: inline-block;
+  
+  }
+  
+  .btn1-group button {
+    width: 130px;
+    margin-left: 3.5rem;
+    border:.5px solid;
+  }
+  
+  .accordion-item button .active {
+    font-weight: bold;
+    color: #FE9E2D;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #555;
+  }
+
+  Link {
+    text-decoration: none;
+  }
+
+  .card {
+    border:none;
+    border-radius: 0.2rem;
+    box-shadow: 2px 2px 2px 2px #adadad;
+    margin-top: 4rem;
+  }
+
+  .card .accc a {
+    text-decoration: none !important;
+  }
+
