@@ -28,6 +28,7 @@ const responsive = {
 const Categories = () => {
   const [category, setCategory] = useState([]);
   const [myoc, setMyoc] = useState([]);
+  
 
   axiosRetry(axios, { retries: 3 });
 
