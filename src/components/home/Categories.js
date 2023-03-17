@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 const responsive = {
   superLargeDesktop: {
@@ -28,18 +29,20 @@ const Categories = () => {
   const [category, setCategory] = useState([]);
   const [myoc, setMyoc] = useState([]);
 
+  axiosRetry(axios, { retries: 3 });
+
   useEffect(() => {
     setTimeout(() => {
       async function fetchData() {
         const options = {
           headers: {
-            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+            "X-Authorization": 'CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs',
             "Cache-Control": "no-cache, no-store, must-revalidate",
             mode: "cors",
             credentials: "include",
           },
         };
-        const response = await axios.get(`/categories`, options);
+        const response = await axios.get('/categories', options);
         setCategory(response.data);
       }
       fetchData();
@@ -55,7 +58,7 @@ const Categories = () => {
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
-      const response = await axios.get(`/settings`, options);
+      const response = await axios.get('/settings', options);
       setMyoc(response.data);
     }
     fetchData();

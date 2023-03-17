@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import axiosRetry from "axios-retry";
 
 const responsive = {
   superLargeDesktop: {
@@ -24,7 +25,8 @@ const responsive = {
 
 const Brands = () => {
   const [brand, setBrand] = useState([]);
-  console.log(process.env.REACT_APP_HEADER);
+  axiosRetry(axios, { retries: 3 });
+ 
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +38,7 @@ const Brands = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get(`/brands`, options);
+      const response = await axios.get('/brands', options);
       setBrand(response.data);
     }
     fetchData();

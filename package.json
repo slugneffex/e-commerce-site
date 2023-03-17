@@ -2,7 +2,7 @@
   "name": "combo-react-oct",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://combonation.in/mobile/api",
+  "proxy": "http://combonationbusiness.in/mobile/api",
   "homepage": " http://localhost:3000",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.0.0",
+    "axios-retry": "^3.4.0",
     "bootstrap": "^5.2.2",
     "bulid": "^1.0.0",
     "react": "^18.2.0",
@@ -48,6 +49,4 @@
       "last 1 safari version"
     ]
   }
-  
-
 }

@@ -279,8 +279,9 @@ body {
     font-style: italic;
     border: none;
     /* width: ; */
-    border: 2px solid #FE9E2D;
-    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: #ededed 5px 5px 5px 5px #ffffff  ;
+    
 }
 .testCard .card-head {
     padding: 0.5rem;
