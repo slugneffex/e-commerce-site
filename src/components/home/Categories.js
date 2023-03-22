@@ -31,6 +31,7 @@ const Categories = () => {
   
 
   axiosRetry(axios, { retries: 3 });
+  
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,6 +46,7 @@ const Categories = () => {
         };
         const response = await axios.get('/categories', options);
         setCategory(response.data);
+    
       }
       fetchData();
     }, 1000);

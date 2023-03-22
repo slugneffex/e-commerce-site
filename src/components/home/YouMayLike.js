@@ -106,33 +106,48 @@ const YouMayLike = () => {
               {Array.isArray(feature) &&
                 feature.map((e) => (
                   <div className="item" key={e.id} style={{ margin: ".4rem" }}>
-                    <div className="combo-card">
-                      <div className="combo-image">
+                    <div className="newComboCart">
+                      <div className="cart-img-sec">
+                        <Link className="addtofav">
+                          <li className="bi bi-heart"></li>
+                        </Link>
                         <Link to={`/combo/${e.id}`}>
-                          <img src={e.meta_img?.url} alt={e.name} />
+                          <img src={e.meta_img?.url} alt="img"></img>
                         </Link>
                       </div>
-                      <div className="cart-sec text-center py-2">
-                        <i
-                          onClick={() => {
-                            addToCart(e);
-                          }}
-                          id={e.id}
-                          className="bi bi-plus-lg"
-                          style={{ cursor: "pointer" }}
-                        ></i>
-                        <span>Add To Cart</span>
-                      </div>
-                      <div className="combo-body text-center">
-                        <h4>{e.name}</h4>
-                        <span className="packof">(Pack of 3)</span>
-                        <span className="sp">₹{e.selling_price}</span>
-                        <del>₹{e.mrp}</del>
-                        <div>
-                          <span className="discount">({e.discount}%)</span>
-                        </div>
 
-                        <br />
+                      <div className="card-det-sec">
+                        <div className="headingCard pt-3">
+                          <span>{e.name}</span>
+                        </div>
+                        <div>
+                          <span className="packof">(Pack of 2)</span>
+                        </div>
+                        <div className="price-sec">
+                          <div className="col-4" style={{ textAlign: "end" }}>
+                            <span className="sp">₹{e.selling_price}</span>
+                          </div>
+                          <div className="col-4">
+                            <del className="mrp">₹{e.mrp}</del>
+                          </div>
+                          <div className="col-4">
+                            <span className="discount">{e.discount}% OFF</span>
+                          </div>
+                        </div>
+                        <div className="card-btn-sec ">
+                          <Link className="btnC">
+                            <li
+                              className="bi bi-cart"
+                              onClick={() => {
+                                addToCart(e);
+                              }}
+                              id={e.id}
+                              style={{ cursor: "pointer" }}
+                            >
+                              Add to Cart
+                            </li>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
