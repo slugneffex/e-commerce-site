@@ -1,5 +1,5 @@
 import "./cart.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
@@ -18,6 +18,7 @@ import {
 const Cart = () => {
   // Combo Product Cart
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { totalCount } = useSelector((state) => state.cart);
   const { cartItems, subAmount,  totalAmount, totalDiscount } = useSelector(
     (state) => state.cart
@@ -32,7 +33,9 @@ const Cart = () => {
 
   // Single Product Cart
 
-  
+  if (totalCount === 0) {
+    navigate("/EmptyCart")
+  }
 
   return (
     <>
@@ -56,7 +59,7 @@ const Cart = () => {
             </div>
             <hr />
             <div className="row"></div>
-            <hr />
+            
             <div className="row mt-5">
               <div className="col-md-8">
                 <div className="cartCard ">
@@ -228,7 +231,7 @@ const Cart = () => {
                         {" "}
                         {totalCount} Item | ₹{parseFloat(subAmount).toFixed(2)}
                       </p>
-                      <Link to="/adress" className="btn">
+                      <Link to="/payment" className="btn">
                         Proceed To Pay
                       </Link>
                     </div>

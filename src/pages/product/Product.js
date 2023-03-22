@@ -49,7 +49,7 @@ const Product = () => {
                 >
                   <div className="item big-img" data-hash="one" key={combos.id}>
                     <img
-                      src={combos.front?.url}
+                      src={combos.meta_img?.url}
                       alt={combos.name}
                       className=""
                     />

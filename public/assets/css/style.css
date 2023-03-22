@@ -279,8 +279,9 @@ body {
     font-style: italic;
     border: none;
     /* width: ; */
-    border: 2px solid #FE9E2D;
-    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: #ededed 5px 5px 5px 5px #ffffff  ;
+    
 }
 .testCard .card-head {
     padding: 0.5rem;
@@ -522,7 +523,7 @@ body {
   }
   
   /* Newsletter footer*/
-  @-webkit-keyframes rotation {
+  /* @-webkit-keyframes rotation {
     from {
       -webkit-transform: rotate(0deg);
       -moz-transform: rotate(0deg);
@@ -537,7 +538,7 @@ body {
       -o-transform: rotate(359deg);
       transform: rotate(359deg);
     }
-  }
+  } */
   @media (max-width: 767px) {
     #newsletter {
       margin-top: 20px;
@@ -843,6 +844,124 @@ body {
     }
     /* Bottom Bar End */
   }
+
+  /* New card css */
+ .newComboCart {
+  border: none !important;
+  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+ }
+
+ .cart-img-sec {
+  border: 1px solid #d1d1d1;
+  border-bottom: none;
+ }
+
+ .addtofav {
+  position: relative;
+  margin-left: auto;
+  margin-top: 1%;
+ }
+
+ .addtofav li {
+  font-size: 18px;
+  font-weight: bold;
+  color: #434343;
+  margin-left: 12rem;
+  position: relative;
+ }
+
+ .card-det-sec {
+  border: 1px solid #d1d1d1;
+  text-align: center;
+  border-radius: 0px 0px 6px 6px ;
+ }
+
+ @media (max-width: 720px) {
+  .headingCard {
+    padding: 8px;
+    font-size: 11px;
+    color: #464646;
+  }
+
+  .packof {
+    color: #999999;
+    font-size: 16px;
+  }
+
+  .sp {
+      color: #464646;
+      font-size: 16px;
+  }
+
+  .mrp {
+    color: #999999;
+    font-size: 14px;
+  }
+
+  .discount {
+    color: #05a856;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .btn-atc {
+    border: 1px solid #ff9800;
+    padding: 0.5rem;
+    color: #ff9800;
+    background-color: #fff9f5;
+    font-weight: bold;
+  }
+  
+ }
+
+ .card-det-sec .price-sec {
+  display: flex;
+ }
+
+.cart-img-sec img {
+  width: 100%;
+}
+
+.headingCard {
+  padding: 8px;
+  font-size: 15px;
+  color: #464646;
+}
+
+.packof {
+  color: #999999;
+  font-size: 16px;
+}
+
+.sp {
+    color: #464646;
+    font-size: 16px;
+}
+
+.mrp {
+  color: #999999;
+  font-size: 14px;
+}
+
+.discount {
+  color: #05a856;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.btnC  {
+  color: #ff9800;
+  background-color: #fff9f5;
+  font-weight: bold;
+  padding: .4rem;
+}
+
+ a {
+  text-decoration: none !important;
+}
+
 
 
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import axiosRetry from "axios-retry";
 
 const responsive = {
   superLargeDesktop: {
@@ -25,18 +26,19 @@ const responsive = {
 
 const ForHer = () => {
   const [forher, setForher] = useState([]);
+  axiosRetry(axios, { retries: 3 });
 
   useEffect(() => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization": 'CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs',
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`/for-her`, options);
+      const response = await axios.get('/for-her', options);
       setForher(response.data);
     }
     fetchData();

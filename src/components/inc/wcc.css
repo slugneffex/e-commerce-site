@@ -1,0 +1,100 @@
+body {
+    font-family: 'Poppins';
+}
+
+h1 h2 h3 h4 h5 h6 p {
+    font-family: 'Poppins';
+}
+
+.heading h1 {
+    color: #969696;
+    font-weight: 400;
+    font-size: 40px;
+    
+}
+
+.heading h1 span {
+    color: #fe9e2d;
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-size: 40px;
+}
+
+.heading p {
+    color: #969696;
+    font-weight: 400;
+    font-family: 'Poppins';
+}
+
+.img1 img {
+    width: 90%;
+}
+
+.heading-two h1 {
+    margin-top: 6rem;
+    text-align: center;
+    font-weight: 500;
+    font-family: 'Poppins';
+    font-size: 35px;
+}
+
+.heading-two h1 span {
+    color: #fe9e2d;
+}
+
+.top-banner {
+    background-image: linear-gradient(to left,#FF5E00,#FD8A03);
+}
+
+.whyChooseCombonation {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.getAppSection {
+    padding-top: 6px;
+}
+
+.getApp {
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+.getAppSvg {
+    margin-right: 6px;
+}
+
+.saleSection {
+    border-left: 1px solid #FFFFFF;
+    padding-top: 8px;
+}
+
+.saleText {
+    text-decoration: none;
+    margin-left: 2px;
+}
+
+.helpSection {
+    border-left: 1px solid #FFFFFF;
+    padding-top: 5px;
+}
+
+.helpText {
+    margin-left: 6px;
+    text-decoration: none;
+}
+
+.helpSvg {
+    margin-right: 6px;
+}
+
+
+@media(max-width: 720px) {
+    .col-md-3 {
+        width: 50%;
+    }
+    
+    #values .col-md-6 {
+        width: 50%;
+    }
+}

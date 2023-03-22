@@ -3,7 +3,6 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
@@ -11,7 +10,6 @@ const BrandProduct = () => {
   const { brand_id } = useParams();
 
   const [brandProduct, setBrandProduct] = useState([]);
-  //   const [brandProdictimg, setBrandProductimg] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,10 +19,7 @@ const BrandProduct = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(
-        `/brand/${brand_id}`,
-        options
-      );
+      const response = await axios.get(`/brand/${brand_id}`, options);
       setBrandProduct(response.data.products.data);
     }
     fetchData();
@@ -75,17 +70,24 @@ const BrandProduct = () => {
             </div>
 
             <div className="col-md-9">
-              <div className="banner">
-                <img src="njsjhs" width="100%" alt="" />
+            <div className="row">
+              <nav>
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link to='/'>Home</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link>Brand</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link>Brand</Link>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+              <div className="byoccBrand">
+                <img src="/assets/img/byoc.png"  alt="byoc-img" />
               </div>
-              <Breadcrumb>
-                <Breadcrumb.Item active>
-                  {" "}
-                  <Link to="/">Home</Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active>Library</Breadcrumb.Item>
-                <Breadcrumb.Item active>Data</Breadcrumb.Item>
-              </Breadcrumb>
               <div className="row" style={{ marginTop: "3rem" }}>
                 <div className="col-md-6">
                   <h4>
@@ -154,52 +156,44 @@ const BrandProduct = () => {
 
               <div className="row" style={{ marginTop: "1rem" }}>
                 {brandProduct.map((e) => (
-                  <div className="col-6 col-md-4 col-xl-3 " key={e.id}>
-                    <div className="combo-card">
-                      <div className="combo-image">
+                  <div className="col-md-4 " key={e.id}>
+                    <div className="newComboCart">
+                      <div className="cart-img-sec">
+                        <Link className="addtofavCategory">
+                          <li className="bi bi-heart"></li>
+                        </Link>
                         <Link to={`/product/${e.id}`}>
-                          <img
-                            src={e.thumbnail_img?.original_url}
-                            alt={e.name}
-                          />
+                          <img src={e.thumbnail_img?.original_url} alt="img"></img>
                         </Link>
                       </div>
-                      <div className="cart-sec text-center py-2">
-                        <Link to="/">
-                          <i
-                            // id={e.id}
-                            className="bi bi-plus-lg"
-                            style={{ cursor: "pointer" }}
-                          ></i>
-                        </Link>
-                        <span>Add To Cart</span>
-                      </div>
-                      <div className="combo-body text-center">
-                        <h4>{e.name}</h4>
-                        <span className="packof">(Pack of 3)</span>
 
-                        <ul className="stars">
-                          <li>
-                            <i className="bi bi-star-fill"></i>
-                          </li>
-                          <li>
-                            <i className="bi bi-star-fill"></i>
-                          </li>
-                          <li>
-                            <i className="bi bi-star-fill"></i>
-                          </li>
-                          <li>
-                            <i className="bi bi-star-fill"></i>
-                          </li>
-                          <li>
-                            <i className="bi bi-star"></i>
-                          </li>
-                        </ul>
-                        <br />
-                        <div className="flash-deal">
-                          <Link to={`/product/${e.id}`}>
-                            <i className="bi bi-lightning-fill"></i>
-                            <p>Flash Deal</p>
+                      <div className="card-det-sec">
+                        <div className="headingCard pt-3">
+                          <span>{e.name}</span>
+                        </div>
+                        <div>
+                          <span className="packof">(Pack of 2)</span>
+                        </div>
+                        <div className="price-sec">
+                          <div className="col-4" style={{ textAlign: "end" }}>
+                            <span className="sp">₹{e.selling_price}</span>
+                          </div>
+                          <div className="col-4">
+                            <del className="mrp">₹{e.mrp}</del>
+                          </div>
+                          <div className="col-4">
+                            <span className="discount">{e.discount}% OFF</span>
+                          </div>
+                        </div>
+                        <div className="card-btn-sec ">
+                          <Link className="btnC">
+                            <li
+                              className="bi bi-cart"
+                              id={e.id}
+                              style={{ cursor: "pointer" }}
+                            >
+                              Add to Cart
+                            </li>
                           </Link>
                         </div>
                       </div>
