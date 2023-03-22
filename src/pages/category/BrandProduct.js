@@ -3,7 +3,6 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
@@ -11,7 +10,6 @@ const BrandProduct = () => {
   const { brand_id } = useParams();
 
   const [brandProduct, setBrandProduct] = useState([]);
-  //   const [brandProdictimg, setBrandProductimg] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -72,17 +70,24 @@ const BrandProduct = () => {
             </div>
 
             <div className="col-md-9">
-              <div className="banner">
-                <img src="njsjhs" width="100%" alt="" />
+            <div className="row">
+              <nav>
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link to='/'>Home</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link>Brand</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link>Brand</Link>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+              <div className="byoccBrand">
+                <img src="/assets/img/byoc.png"  alt="byoc-img" />
               </div>
-              <Breadcrumb>
-                <Breadcrumb.Item active>
-                  {" "}
-                  <Link to="/">Home</Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active>Library</Breadcrumb.Item>
-                <Breadcrumb.Item active>Data</Breadcrumb.Item>
-              </Breadcrumb>
               <div className="row" style={{ marginTop: "3rem" }}>
                 <div className="col-md-6">
                   <h4>

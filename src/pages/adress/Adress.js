@@ -7,21 +7,23 @@ const Adress = () => {
   return (
     <HomeLayout>
       <section className="address">
-        <div className="container">
+        <div className="container"  >
           <div className="row text-center py-5" id="progessbarRow">
-            <ul className="" id="progressbar">
-              <div className="col-md-4 col-sm-4">
-                <Link to="/Cart">
+            <ul className="" id="progressbar" style={{marginTop:'2rem'}}>
+              <div className="col-md-4 col-sm-4" >
+                <Link to="/Cart" className="bagLink">
                   <li id="bag">Bag</li>
                 </Link>
               </div>
               <div className="col-md-4 col-sm-4">
-                <li className="active" id="address">
-                  Address
+                <Link to='/payment' className="bagLink" >
+                <li  id="address">
+                  Payment
                 </li>
+                </Link>
               </div>
               <div className="col-md-4 col-sm-4">
-                <li id="payment">Payment</li>
+                <li className="active" id="payment">Address</li>
               </div>
             </ul>
           </div>
