@@ -5,13 +5,14 @@
  }
 
 #loginBg {
-    background-color: #999999;
+    background-color: #fff1db;
 }
 
 .loginCard {
     background-color: #FFF1DB;
     border: 1px solid #FE9E2D;
     padding: 2rem;
+    margin-top: 1rem;
 }
 
 .loginCard .loginCard-head .off-det h1 {

@@ -231,7 +231,7 @@ const Cart = () => {
                         {" "}
                         {totalCount} Item | ₹{parseFloat(subAmount).toFixed(2)}
                       </p>
-                      <Link to="/adress" className="btn">
+                      <Link to="/payment" className="btn">
                         Proceed To Pay
                       </Link>
                     </div>

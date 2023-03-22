@@ -104,24 +104,24 @@ const SignUp = () => {
                           <input type="checkbox" name="hide" onclick="hideShowPass()" />
                           <label htmlFor="hide">Show Password</label>
                         </div>
-                        <button role="button" type="submit" className="btn">Proceed To log In</button>
+                        <button  type="submit" className="btn">Proceed To log In</button>
                       </form>
                       <div className="social-login mt-3">
                         <span>or Login Via</span>
                         <div className="d-flex my-5">
                           <div className="col-4">
                             <a href="https://www.combonation.in/login/google" className>
-                              <img src="https://www.combonation.in/assets_new/img/social/google.png" alt="" />
+                              <img src="https://www.combonation.in/assets_new/img/social/google.png" alt="social-media-img" />
                             </a>
                           </div>
                           <div className="col-4">
                             <a href="https://www.combonation.in/login/facebook" className>
-                              <img src="https://www.combonation.in/assets_new/img/social/facebook.png" alt="" />
+                              <img src="https://www.combonation.in/assets_new/img/social/facebook.png" alt="social-media-img" />
                             </a>
                           </div>
                           <div className="col-4">
                             <a href className="https://www.combonation.in/login">
-                              <img src="https://www.combonation.in/assets_new/img/social/email.png" alt="" />
+                              <img src="https://www.combonation.in/assets_new/img/social/email.png" alt="social-media-img" />
                             </a>
                           </div>
                         </div>
