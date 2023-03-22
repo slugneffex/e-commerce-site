@@ -35,7 +35,7 @@ const TopTrendingCombos = () => {
               picks.map((e) => (
                 <div className="col-md-6" key={e.id}>
                   <div className="top-picks-img">
-                    <Link to="/">
+                    <Link to={`/brand/${e.id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="100%"

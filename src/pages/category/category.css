@@ -82,3 +82,17 @@ li {
  
 }
 
+.byoccBrand img {
+  width: 90%;
+  margin-top: 1rem;
+}
+
+.breadcrumb {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb-item .categoriesName {
+  text-decoration: none !important;
+  color: #FE9E2D;
+}

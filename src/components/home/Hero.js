@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
+import {Link} from "react-router-dom"
 
 const Hero = () => {
   const [banner, setBanner] = useState([]);
@@ -28,7 +29,9 @@ const Hero = () => {
           banner.map((e) => (
             <Carousel.Item key={e.banner?.id}>
               <div>
+                <Link to='/'>
                 <img src={e.banner?.original_url} alt="name" />
+                </Link>
               </div>
             </Carousel.Item>
           ))}

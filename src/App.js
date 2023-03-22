@@ -14,6 +14,7 @@ import Singleproduct from "./pages/product/Singleproduct";
 import BrandProduct from "./pages/category/BrandProduct";
 import MYOC from "./pages/MYOC/MYOC";
 import Emptycart from "./pages/emptyCart/Emptycart";
+import Payment from "./pages/payment/Payment"
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
       <Route path="/adress" element={<Adress />} />
       <Route path="/view-all-products" element={<MYOC />} />
       <Route path ="/EmptyCart" element={<Emptycart />} />
+      <Route path="/payment" element={<Payment />} />
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );

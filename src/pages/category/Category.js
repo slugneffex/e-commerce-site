@@ -118,14 +118,21 @@ const Category = () => {
                 <img src={banner.banner?.url} width="100%" alt="" />
               </div>
 
-              {/* <Breadcrumb>
-                <Breadcrumb.Item active>
-                  {" "}
-                  <Link to="/">Home</Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active>Library</Breadcrumb.Item>
-                <Breadcrumb.Item active>Data</Breadcrumb.Item>
-              </Breadcrumb> */}
+              <div className="row">
+              <nav>
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link to='/'>Home</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link>Categories</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="categoriesName">{banner.name}</Link>
+                  </li>
+                </ol>
+              </nav>
+            </div>
               <div className="row" style={{ marginTop: "3rem" }}>
                 <div className="col-md-6">
                   <h4>
@@ -252,7 +259,7 @@ const Category = () => {
                   <h3>Bulid Your Own Combo</h3>
                   <img src="/assets/img/byoc.png" alt="byoc-img" />
                 </div>
-                <div></div>
+                <hr />
 
                 {/* Single Products */}
 

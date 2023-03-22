@@ -1,5 +1,5 @@
 import React from "react";
-import Categories from "../components/home/Categories";
+import Categories from "../components/home/Categories/Categories";
 import Hero from "../components/home/Hero";
 import TopTrendingCombos from "../components/home/TopTrendingCombos";
 import HotDeals from "../components/home/HotDeals";
@@ -13,6 +13,7 @@ import TopProduct from "../components/home/TopProduct";
 import ForHer from "../components/home/ForHer";
 import ForHim from "../components/home/ForHim";
 import Brands from "../components/home/Brands";
+import BYOC from "../components/home/BYOC";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <main>
         <HomeLayout>
           <Categories></Categories>
+          <BYOC></BYOC>
           <Hero></Hero>
           <TopTrendingCombos></TopTrendingCombos>
           <YouMayLike></YouMayLike>

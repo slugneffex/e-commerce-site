@@ -1,0 +1,21 @@
+.categoriesMainDiv {
+    background-color: #FFF4E3;
+    margin-top: 9.8rem;
+}
+
+.categoriesDiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    margin-right: 40px;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.categoriesDiv a {
+    color: #464646;
+}
+
+.categoriesDiv a:hover {
+    color: #B53800;
+}
