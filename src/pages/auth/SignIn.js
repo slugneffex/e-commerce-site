@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link } from "react-router-dom";
 import "./login.css"
-import Features from "../../components/Fetures"
+import Features from "../../components/inc/Fetures"
 
 const SignIn = () => {
   const navigate = useNavigate();

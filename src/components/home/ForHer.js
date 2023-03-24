@@ -46,8 +46,8 @@ const ForHer = () => {
 
   return (
     <>
-      <div className="top-brand-deals">
-        <h3 className="text-center">Top Picks For Her</h3>
+      <div className="top-brand-deals container">
+        <h3 style={{ marginTop: "67px", marginBottom: "47px"}}>Top Picks For Her</h3>
         <div className="container">
           <Carousel responsive={responsive}>
             {Array.isArray(forher) &&
