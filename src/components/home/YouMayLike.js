@@ -41,7 +41,8 @@ const YouMayLike = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
@@ -84,12 +85,12 @@ const YouMayLike = () => {
   return (
     <div>
       <section>
-        <div className="top-trending">
+        <div className="top-trending container">
           <div
-            className="top-trending-head text-center"
-            style={{ marginTop: "2rem" }}
+            className="top-trending-head"
+            style={{ marginTop: "67px" }}
           >
-            <h3>Best Selling Combos</h3>
+            <h3>You May Like...</h3>
           </div>
         </div>
 

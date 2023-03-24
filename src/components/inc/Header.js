@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import "./wcc.css"
+import "./incAll.css"
+
 
 
 const Header = () => {
@@ -12,7 +13,8 @@ const Header = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
@@ -30,7 +32,8 @@ const Header = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
@@ -47,19 +50,17 @@ const Header = () => {
   return (
     <div>
      
-     
-      
-      <header className="mb-5 fixed-top">
+      <header className="my-auto">
          {/* wcc */}
-         <section className="top-bar-blink p-2 top-banner ">
+         <section className="top-bar-blink top-banner wcc">
         <div className="container text-white">
-          <div className="row">
-            <div className="col-md-6" id="mainTitle">
+          <div className="row py-1">
+            <div className="col-md-6 py-2" id="mainTitle">
               <a
                 href="/why-choose-combonation"
                 className="whyChooseCombonation"
               >
-                <p>Why Choose Combonation?</p>
+                <p className="my-auto">Why Choose Combonation?</p>
               </a>
             </div>
             <div className="col-md-2 getAppSection">
@@ -137,7 +138,7 @@ const Header = () => {
         </div>
       </section>
          {/*wcc end */}
-        <nav className="navbar navbar-expand-lg   bg-light">
+        <nav className="navbar navbar-expand-lg bg-light">
           <div className="container">
             {Array.isArray(logo) &&
               logo.map((e) => (
@@ -274,7 +275,7 @@ const Header = () => {
                   <Link to="/Cart" className="nav-link">
                     <i className="bi bi-cart-fill"></i>
                     <span>Cart</span>
-                    <strong>{totalCount}</strong>
+                    {/* <strong>{totalCount}</strong> */}
                   </Link>
                 </li>
               </ul>

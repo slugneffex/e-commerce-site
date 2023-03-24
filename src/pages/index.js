@@ -6,13 +6,13 @@ import HotDeals from "../components/home/HotDeals";
 import TopBrandDeals from "../components/home/TopBrandDeals";
 import YouMayLike from "../components/home/YouMayLike";
 import Testimonials from "../components/home/Testimonials";
-import ComingSoon from "../components/home/ComingSoon";
-import Features from "../components/Fetures";
+import DownloadApp from "../components/home/DownloadApp/DownloadApp";
+import Features from "../components/inc/Fetures";
 import HomeLayout from "../layouts/HomeLayout";
 import TopProduct from "../components/home/TopProduct";
 import ForHer from "../components/home/ForHer";
 import ForHim from "../components/home/ForHim";
-import Brands from "../components/home/Brands";
+import Brands from "../components/home/BrandLogos/Brands";
 import BYOC from "../components/home/BYOC";
 
 const Home = () => {
@@ -23,16 +23,17 @@ const Home = () => {
           <Categories></Categories>
           <BYOC></BYOC>
           <Hero></Hero>
-          <TopTrendingCombos></TopTrendingCombos>
           <YouMayLike></YouMayLike>
-          <TopProduct />
-          <HotDeals></HotDeals>
-          <TopBrandDeals></TopBrandDeals>
+          <TopTrendingCombos></TopTrendingCombos>
+          {/* <TopProduct /> */}
+          {/* <HotDeals></HotDeals> */}
+          {/* <TopBrandDeals></TopBrandDeals> */}
           <ForHer />
+          <YouMayLike></YouMayLike>
           <ForHim />
           <Brands />
-          <Testimonials></Testimonials>
-          <ComingSoon></ComingSoon>
+          {/* <Testimonials></Testimonials> */}
+          <DownloadApp></DownloadApp>
           <Features></Features>
         </HomeLayout>
       </main>

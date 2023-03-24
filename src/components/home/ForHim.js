@@ -44,10 +44,12 @@ const ForHim = () => {
 
   return (
     <>
-      <div className="top-brand-deals">
-        <h3 className="text-center">Top Picks For Him</h3>
+      <div className="top-brand-deals container">
+        <h3 style={{ marginTop: "67px", marginBottom: "47px"}}>Top Picks For Him</h3>
         <div className="container">
-          <Carousel responsive={responsive}>
+          <Carousel responsive={responsive}
+          dotListClass="custom-dot-list-style"
+          >
             {Array.isArray(forhim) &&
               forhim.map((e) => (
                 <div key={e.banner?.id}>
