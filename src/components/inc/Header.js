@@ -274,7 +274,7 @@ const Header = () => {
                   <Link to="/Cart" className="nav-link">
                     <i className="bi bi-cart-fill"></i>
                     <span>Cart</span>
-                    <strong>{totalCount}</strong>
+                    {/* <strong>{totalCount}</strong> */}
                   </Link>
                 </li>
               </ul>

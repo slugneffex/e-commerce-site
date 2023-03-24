@@ -1,124 +1,144 @@
 import React from "react";
 import HomeLayout from "../../layouts/HomeLayout";
-
 import { Link } from "react-router-dom";
+import './payment.css'
 
 const Payment = () => {
   return (
-    <div>
-      <div class="container-fluid thanks">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="col-md-10 thank">
-              <h3 class="mb-5">Choose your Payment Method</h3>
-              <div class=" card">
-                <div class="card-body">
-                  <div class="col-md-8 d-flex">
-                    <div class="col-md-6">
-                      <input
-                        type="radio"
-                        name="payment_method"
-                        value="razorpay"
-                        id="payment_type"
-                        class="form-check-input"
-                        required=""
-                      />
-                      <label for="payment_method">Online Payment</label>
-                    </div>
-
-                    <div class="col-md-2 d-flex">
-                      <img
-                        src="https://www.combonation.in/assets_new/img/online_methods.png"
-                        alt="payment-methods"
-                        width="161px"
-                        height="84px"
-                      />
-                      <div class="col-md-2">
-                        <i class="icon bi bi-arrow-right icons"></i>
+    <>
+      <HomeLayout>
+        <section className="payment">
+          <div className="container">
+          <div className="row text-center py-5" id="progessbarRow">
+            <ul className="" id="progressbarr" style={{marginTop:'8rem'}}>
+              <div className="col-md-4 col-sm-4" >
+                <Link to="/Cart" className="bagLink">
+                  <li id="bag">Bag</li>
+                </Link>
+              </div>
+              <div className="col-md-4 col-sm-4">
+                <Link to='/payment' className="active" >
+                <li  id="address">
+                  Payment
+                </li>
+                </Link>
+              </div>
+              <div className="col-md-4 col-sm-4">
+                <li  id="payment">Address</li>
+              </div>
+            </ul>
+          </div>
+            <hr />
+            <div className="row">
+              <div className="col-md-8">
+                <div className="card">
+                  <div className="row">
+                    <div className="col-9">
+                      <div className="form-group">
+                        <input
+                          type="radio"
+                          name="payment_type"
+                          id
+                          className="form-check-input"
+                        />
+                        <label htmlFor="payment_type" className="form-label">
+                          Online Payment
+                        </label>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-body">
-                  <div class="col-md-10 d-flex">
-                    <div class="col-md-8">
-                      <input
-                        type="radio"
-                        name="payment_method"
-                        value="cod"
-                        id="cod"
-                        class="form-check-input"
-                        required=""
-                      />
-                      <label for="payment_method">Cash on Delivery</label>
-                    </div>
-                    <div class="col-md-2">
-                      <i class="icon bi bi-arrow-right ic"></i>
+                    <div className="col-3 text-center">
+                      <i className="bi bi-arrow-right" />
                     </div>
                   </div>
                 </div>
+                <div className="card">
+                  <div className="row">
+                    <div className="col-md-8">
+                      <div className="form-group">
+                        <input
+                          type="radio"
+                          name="payment_type"
+                          id
+                          className="form-check-input"
+                        />
+                        <label htmlFor="payment_type" className="form-label">
+                          Cash On Delivery
+                        </label>
+                        <br />
+                        <span>This order is eligible for COD</span>
+                      </div>
+                    </div>
+                    <div className="col-3 text-center">
+                      <i className="bi bi-arrow-right" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row my-5">
+                  <div className="col-md-6">
+                    <div className="go-back">
+                      <a href>
+                        <i className="bi bi-chevron-left" />
+                        Go Back
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <a href className="btn_1">
+                      Proceed To Pay
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div></div>
-
-          <div class="col-md-6 mt-5">
-            <div class="overview-card">
-              <div class="overview-card-head ">
-                <h3>Order Summary</h3>
-              </div>
-
-              <div class="overview-card-body">
-                <p>Bill Details (1 Items)</p>
-
-                <ul class="price-breakup">
-                  <li class="price-type d-flex">
-                    <p>Total MRP (Incl Taxes)</p>
-                    <span>₹ 1938</span>
-                  </li>
-                  <li class="price-type d-flex">
-                    <p>Subtotal</p>
-                    <span style={{ color: "#009444" }}> ₹ 969</span>
-                  </li>
-                  <li class="price-type d-flex">
-                    <p>Total Discount</p>
-                    <span style={{ color: "#009444" }}> ₹ 969</span>
-                  </li>
-
-                  <li class="price-type d-flex">
-                    <p>Shipping</p>
-                    <span style={{ color: "#009444" }}>
-                      <del>₹ 50</del> Free
+              <div className="col-md-4">
+                <div className="overview-card">
+                  <div className="overview-card-head">
+                    <h3>Order Summary</h3>
+                  </div>
+                  <div className="overview-card-body">
+                    <h6>Bill Details (6 Items)</h6>
+                    <ul className="price-breakup">
+                      <li className="price-type">
+                        <p>Total Price (Incl Taxes)</p>
+                        <span>₹ 899</span>
+                      </li>
+                      <li className="price-type">
+                        <p>Total Discount</p>
+                        <span style={{ color: "#009444" }}>- ₹ 899</span>
+                      </li>
+                      <li className="price-type">
+                        <p>Coupon Discount (COUPON-CODE)</p>
+                        <span style={{ color: "#009444" }}>- ₹ 899</span>
+                      </li>
+                      <li className="price-type">
+                        <p>Shipping</p>
+                        <span style={{ color: "#009444" }}>₹ 50</span>
+                      </li>
+                    </ul>
+                    <span>
+                      Hurray! You Saved <strong>₹ 650</strong> On This Order
                     </span>
-                  </li>
-                </ul>
-                <span>
-                  Hurray! You Saved{" "}
-                  <strong>
-                    {" "}
-                    <span style={{ color: "#fe9e2d" }}>₹ 969</span>
-                  </strong>{" "}
-                  On This Order
-                </span>
-              </div>
-              <hr />
-              <div class="overview-card-footer ">
-                <div class="total-sec d-flex">
-                  <p class="total">Total</p>
-                  <span class="total">₹ 969</span>
-                </div>
-                <div class="extras" id="buttonPlace">
-                  <Link to="/adress">Add Delivery Details</Link>
+                  </div>
+                  <hr />
+                  <div className="overview-card-footer">
+                    <div className="total-sec">
+                      <p className="total">Total</p>
+                      <span className="total">₹ 650</span>
+                    </div>
+                    <div className="extras">
+                      <p> 3 Item | ₹ 650</p>
+                      <Link to='/adress' className="btn">
+                        Proceed To Pay
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+                
+        </section>
+      </HomeLayout>
+    </>
   );
 };
 

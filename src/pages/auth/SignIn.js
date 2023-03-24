@@ -1,15 +1,14 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link } from "react-router-dom";
-import "./login.css"
-import Features from "../../components/Fetures"
+import "./login.css";
+import Features from "../../components/Fetures";
 
 const SignIn = () => {
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/Account");
@@ -40,8 +39,6 @@ const SignIn = () => {
       )
 
       .then((res) => {
-        console.log(res.data);
-
         if (res.data.status === 401) {
           alert(res.data.message);
           navigate("/Signin");
@@ -146,7 +143,7 @@ const SignIn = () => {
                           />
                           <label htmlFor="hide">Show Password</label>
                         </div>
-                        <button role="button" type="submit" className="btn">
+                        <button type="submit" className="btn">
                           Proceed To log In
                         </button>
                       </form>

@@ -21,7 +21,7 @@ const Product = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(`/mobile/api/combo/${id}`, options);
+      const response = await axios.get(`/combo/${id}`, options);
       setCombos(response.data.combo);
       setComboproduct(response.data.combo.gallery)
     }

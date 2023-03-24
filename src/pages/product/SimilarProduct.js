@@ -25,7 +25,6 @@ const responsive = {
 };
 
 const SimilarProduct = (props) => {
-  
   // Related Product
   const id = props.id;
   const [related, setRelated] = useState([]);
@@ -38,14 +37,11 @@ const SimilarProduct = (props) => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(`/mobile/api/combo/${id}`, options);
+      const response = await axios.get(`/combo/${id}`, options);
       setRelated(response.data.related);
-      
     }
     fetchData();
   }, [id]);
-
-  
 
   return (
     <div>
@@ -63,219 +59,49 @@ const SimilarProduct = (props) => {
             >
               {related.map((e) => (
                 <div className="item" key={e.id}>
-                  <div className="combo-card">
-                    <div className="combo-image">
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <Link className="addtofav">
+                        <li className="bi bi-heart"></li>
+                      </Link>
                       <Link to={`/combo/${e.id}`}>
-                        <img src={e.meta_img?.url} alt={e.slug} />
+                        <img src={e.meta_img?.url} alt="img"></img>
                       </Link>
                     </div>
-                    <div className="cart-sec text-center py-2">
-                      <i
-                        id={e.id}
-                        className="bi bi-plus-lg"
-                        style={{ cursor: "pointer" }}
-                      ></i>
-                      <span>Add To Cart</span>
-                    </div>
-                    <div className="combo-body text-center">
-                      <h4>{e.name}</h4>
-                      <span className="packof">(Pack of 3)</span>
-                      <span className="sp">₹{e.selling_price}</span>
-                      <del>₹{e.mrp}</del>
-                      <span className="discount">({e.discount}% OFF)</span>
-                      <ul className="stars">
-                        <li>
-                          <i className="bi bi-star-fill"></i>
-                        </li>
-                        <li>
-                          <i className="bi bi-star-fill"></i>
-                        </li>
-                        <li>
-                          <i className="bi bi-star-fill"></i>
-                        </li>
-                        <li>
-                          <i className="bi bi-star-fill"></i>
-                        </li>
-                        <li>
-                          <i className="bi bi-star"></i>
-                        </li>
-                      </ul>
-                      <br />
-                      <div className="flash-deal">
-                        <i className="bi bi-lightning-fill"></i>
-                        <p>Flash Deal</p>
+
+                    <div className="card-det-sec">
+                      <div className="headingCard pt-3">
+                        <span>{e.name}</span>
+                      </div>
+                      <div>
+                        <span className="packof">(Pack of 2)</span>
+                      </div>
+                      <div className="price-sec">
+                        <div className="col-4" style={{ textAlign: "end" }}>
+                          <span className="sp">₹{e.selling_price}</span>
+                        </div>
+                        <div className="col-4">
+                          <del className="mrp">₹{e.mrp}</del>
+                        </div>
+                        <div className="col-4">
+                          <span className="discount">{e.discount}% OFF</span>
+                        </div>
+                      </div>
+                      <div className="card-btn-sec ">
+                        <Link className="btnC">
+                          <li
+                            className="bi bi-cart"
+                            id={e.id}
+                            style={{ cursor: "pointer" }}
+                          >
+                            Add to Cart
+                          </li>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
-              {/* <div className="item">
-                <div className="combo-card">
-                  <div className="combo-image">
-                    <img src="assets/img/you-may-like/bright-tone.png" alt="" />
-                  </div>
-                  <div className="cart-sec text-center py-2">
-                    <i className="bi bi-plus-lg"></i>
-                    <span>Add To Cart</span>
-                  </div>
-                  <div className="combo-body text-center">
-                    <h4>Baby's Day Out Combo</h4>
-                    <span className="packof">(Pack of 3)</span>
-                    <span className="sp">₹ 192</span>
-                    <del>₹ 530</del>
-                    <span className="discount">(40% OFF)</span>
-                    <ul className="stars">
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star"></i>
-                      </li>
-                    </ul>
-                    <br />
-                    <div className="flash-deal">
-                      <i className="bi bi-lightning-fill"></i>
-                      <p>Flash Deal</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="combo-card">
-                  <div className="combo-image">
-                    <img
-                      src="assets/img/you-may-like/organic-harvest.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="cart-sec text-center py-2">
-                    <i className="bi bi-plus-lg"></i>
-                    <span>Add To Cart</span>
-                  </div>
-                  <div className="combo-body text-center">
-                    <h4>Baby's Day Out Combo</h4>
-                    <span className="packof">(Pack of 3)</span>
-                    <span className="sp">₹ 192</span>
-                    <del>₹ 530</del>
-                    <span className="discount">(40% OFF)</span>
-                    <ul className="stars">
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star"></i>
-                      </li>
-                    </ul>
-                    <br />
-                    <div className="flash-deal">
-                      <i className="bi bi-lightning-fill"></i>
-                      <p>Flash Deal</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="combo-card">
-                  <div className="combo-image">
-                    <img src="assets/img/you-may-like/seba-med.png" alt="" />
-                  </div>
-                  <div className="cart-sec text-center py-2">
-                    <button className="bi bi-trash"></button>
-                    <input type="number" min="1" value="1" max="10" />
-                    <button className="bi bi-plus-lg"></button>
-                  </div>
-                  <div className="combo-body text-center">
-                    <h4>Baby's Day Out Combo</h4>
-                    <span className="packof">(Pack of 3)</span>
-                    <span className="sp">₹ 192</span>
-                    <del>₹ 530</del>
-                    <span className="discount">(40% OFF)</span>
-                    <ul className="stars">
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star"></i>
-                      </li>
-                    </ul>
-                    <br />
-                    <div className="flash-deal">
-                      <i className="bi bi-lightning-fill"></i>
-                      <p>Flash Deal</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="combo-card">
-                  <div className="combo-image">
-                    <img
-                      src="assets/img/you-may-like/the-man-company.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="cart-sec text-center py-2">
-                    <i className="bi bi-plus-lg"></i>
-                    <span>Add To Cart</span>
-                  </div>
-                  <div className="combo-body text-center">
-                    <h4>Baby's Day Out Combo</h4>
-                    <span className="packof">(Pack of 3)</span>
-                    <span className="sp">₹ 192</span>
-                    <del>₹ 530</del>
-                    <span className="discount">(40% OFF)</span>
-                    <ul className="stars">
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill"></i>
-                      </li>
-                      <li>
-                        <i className="bi bi-star"></i>
-                      </li>
-                    </ul>
-                    <br />
-                    <div className="flash-deal">
-                      <i className="bi bi-lightning-fill"></i>
-                      <p>Flash Deal</p>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </Carousel>
           </div>
         </div>

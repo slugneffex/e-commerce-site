@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -51,11 +52,13 @@ const TopBrandDeals = () => {
             {Array.isArray(cdeal) &&
               cdeal.map((e) => (
                 <div key={e.id}>
-                  <img
-                    src={e.thumbnail?.original_url}
-                    width="80%"
-                    alt={e.name}
-                  ></img>
+                  <Link>
+                    <img
+                      src={e.thumbnail?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    />
+                  </Link>
                 </div>
               ))}
           </Carousel>
