@@ -51,6 +51,16 @@ h1 h2 h3 h4 h5 h6 p {
     color: #FFFFFF;
 }
 
+.wcc{
+    display: block;
+}
+
+@media (max-width: 576px) {
+    .wcc {
+        display: none;
+    }
+}
+
 .getAppSection {
     padding-top: 6px;
 }
@@ -94,7 +104,10 @@ h1 h2 h3 h4 h5 h6 p {
         width: 50%;
     }
     
+
+
     #values .col-md-6 {
         width: 50%;
     }
 }
+

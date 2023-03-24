@@ -1,6 +1,6 @@
 .categoriesMainDiv {
     background-color: #FFF4E3;
-    margin-top: 9.8rem;
+    padding: 0.5rem;
 }
 
 .categoriesDiv {
@@ -18,4 +18,34 @@
 
 .categoriesDiv a:hover {
     color: #B53800;
+}
+
+.carouselResponsive {
+    width: 1296px;
+}
+.categoriesMobileDiv {
+    display: none;
+}
+
+.categoriesMobileDiv a{
+    color: #464646;
+}
+
+
+.categoriesMobileDiv a:hover {
+    color: #B53800;
+}
+
+
+
+@media (max-width: 576px) {
+    .categoriesMobileDiv {
+        display: block;
+        overflow-x: hidden;
+        margin: auto;
+    }
+
+    .categoriesMainDiv {
+        display: none;
+    }
 }

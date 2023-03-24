@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./categories.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const Categories = () => {
   const [category, setCategory] = useState([]);
-  
+
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +26,28 @@ const Categories = () => {
     fetchData();
   }, []);
 
- 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2
+    }
+  };
+
+
+
   return (
     <>
       <div className="categoriesMainDiv">
@@ -36,10 +59,45 @@ const Categories = () => {
               </Link>
             ))}
           </div>
+
+
+
         </div>
       </div>
+
+
+
+{/* for mobile */}
+      <div className="categoriesMobileDiv">
+        <div className="container" >
+          
+          <Carousel responsive={responsive}
+          arrows={false}
+          swipeable={true}
+          className="carouselResponsive">
+
+            {category.map((e) => (
+              <div className="my-auto" style={{marginLeft: "120px"}}>
+                <Link to={`/category/${e.id}`} key={e.id}>
+                  {e.name}
+                </Link>
+              </div>
+            ))}
+
+          </Carousel>
+        </div>
+      </div>
+
+
+
+
+
     </>
+
   );
 };
+
+
+
 
 export default Categories;

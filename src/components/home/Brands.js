@@ -32,7 +32,8 @@ const Brands = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
@@ -48,7 +49,9 @@ const Brands = () => {
       <div className="top-brand-deals">
         <h3 className="text-center">Build Your Combo From Top Brands ss</h3>
         <div className="container">
-          <Carousel responsive={responsive}>
+          <Carousel responsive={responsive}
+          arrows={false}
+          >
             {Array.isArray(brand) &&
               brand.map((e) => (
                 <div key={e.id}>

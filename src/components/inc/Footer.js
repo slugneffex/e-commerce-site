@@ -9,7 +9,8 @@ const Footer = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
@@ -76,15 +77,22 @@ const Footer = () => {
                 id="collapse_3"
               >
                 <ul>
-                  <li>
-                    <i className="bi bi-house-door-fill"></i>Our Address
+                  <li className="row">
+                    <div><i className="bi bi-phone-fill "></i></div>
+                      <p>Mobile: 9910722205 <br></br>
+                        Whatsapp: 9910722205
+                      </p>
                   </li>
                   <li>
-                    <i className="bi bi-phone-fill"></i>+91-8010589236
+                    <i class="bi bi-envelope-fill"></i>
+                    <Link to="#0">customercare@combonation.in</Link>
                   </li>
                   <li>
-                    <i className="bi bi-envelope-fill"></i>
-                    <Link to="#0">info@combonation.in</Link>
+                    <i class="bi bi-geo-alt"></i>301-303, 3rd Floor,<br />
+                    Good Earth Business Bay,<br />
+                    Sector - 58,<br />
+                    Gurugram, Haryana - 122098 <br />
+                    
                   </li>
                 </ul>
               </div>
