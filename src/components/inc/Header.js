@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import "./incAll.css"
 
 
@@ -45,7 +44,7 @@ const Header = () => {
     fetchData();
   }, []);
 
-  const { totalCount } = useSelector((state) => state.cart);
+  // const { totalCount } = useSelector((state) => state.cart);
 
   return (
     <div>
