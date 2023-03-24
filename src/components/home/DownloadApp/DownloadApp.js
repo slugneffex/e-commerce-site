@@ -1,20 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import "./DownloadApp.css"
 
-const ComingSoon = () => {
+const DownloadApp = () => {
   return (
     <div>
         <section className="coming-soon">
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 text-left">
-                        <h1>Coming Soon</h1>
-                        <h5>Join The Waitlist For Our App</h5>
-                        <div className="comingsoon-img">
-                            <span>On <Link to="/">Google Play</Link> And <Link to="/">Apple App</Link> Store</span>
-                            <br/>
-                            <img src="assets/img/play-app.png" alt=""/>
-                        </div>
+                        <h2>Download The <span>App</span> Now!</h2>
+                        <h5>Use code <span className=''>SINGUP10</span> and get upto <strong>Extra 10% off</strong> on your first order</h5>
+                        {/* QR */}
                     </div>
                     <div className="col-md-6">
                         <div className="mockup-img">
@@ -28,4 +25,4 @@ const ComingSoon = () => {
   )
 }
 
-export default ComingSoon;
+export default DownloadApp;

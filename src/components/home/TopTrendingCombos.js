@@ -9,7 +9,8 @@ const TopTrendingCombos = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
@@ -24,12 +25,12 @@ const TopTrendingCombos = () => {
   return (
     <div>
       <section>
-        <div className="top-trending">
-          <div className="top-trending-head text-center">
-            <h3>Top Picks For You</h3>
+        <div className="top-trending container">
+          <div className="top-trending-head" style={{ marginTop: "67px" }}>
+            <h3>Top Picks For You...</h3>
           </div>
         </div>
-        <div className="container">
+        <div className="container" style={{ marginTop: "48px" }}>
           <div className="row">
             {Array.isArray(picks) &&
               picks.map((e) => (
