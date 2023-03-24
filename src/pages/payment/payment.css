@@ -1,111 +1,12 @@
-.bag {
 
-    align-items: center;
-    display: inline-flex;
-}
-
-.horizontal {
-    color: #A2A2A2;
-    display: flex;
-    width: 100px;
-    margin-left: 2rem;
-    margin-right: 2rem;
-
-
-}
-
-.thank {
-    margin-left: 50px;
-}
-
-.form-check-input:checked {
-
-    background-color: #Ffff;
-    border-color: #fe9e2d;
-}
-
-.form-check-input[type="radio"] {
-    border-radius: 50%;
-
-}
-
-.form-check .form-check-input {
-    float: left;
-    margin-left: -1.5em;
-
-}
-
-.form-check-input {
-    width: 1em;
-    height: 1em;
-    margin-top: 0.25em;
-    vertical-align: top;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    border: 5px solid rgba(0, 0, 0, 0.25);
-    appearance: none;
-
-}
-
-.card {
-    justify-content: center;
-    padding-left: auto;
-}
-
-.icons {
-    margin-left: 130px;
-
-}
-
-.ic {
-    margin-left: 187px;
-}
-
-.thanks {
-    padding-top: 50px;
-}
-
-.add {
-    color: #fe9e2d;
-}
-
-.overview-card {
-    border: 1px solid #fe9e2d;
-    margin-top: 2rem;
-    margin-left: 7rem;
-    margin-right: 7rem;
-
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-
-}
-
-.overview-card-body {
-    padding: 2rem;
-}
-
-
-.overview-card .overview-card-head {
-    padding: 1rem;
-    background-color: #FFF1DB;
-}
-
-.overview-card .overview-card-body ul {
+#progressbarr{
     list-style: none;
-
+    display: flex;
+    margin-top: 3.2rem;
+    margin-bottom: -2.4rem;
 }
 
-.price-type span {
-    margin-left: auto;
-}
-
-.overview-card-footer {
-    padding-left: 2rem;
-    padding-right: 2rem;
-
-}
-
-.total-sec span {
-    margin-left: auto;
+#progressbarr .active {
+    font-weight: bold;
+    color: #FE9E2D;
 }

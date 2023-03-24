@@ -98,14 +98,23 @@
     background-position: center;
 } */
 
+#progressbarrr {
+    list-style: none;
+    display: flex;
+    margin-top: 7.5rem;
+   margin-bottom: -2.4rem;
+}
+
+#progressbarrr .active {
+    font-weight: bold;
+    color: #FE9E2D;
+}
+
 #progressbar {
     list-style: none;
     display: flex;
-}
-
-#progressbar .active {
-    font-weight: bold;
-    color: #FE9E2D;
+    margin-top: 2.3rem;
+  
 }
 
 /* Coupon Card */
@@ -306,7 +315,7 @@
 
 /* For Logged In User end */
 
-.btn-2 {
+.buttonAddress .btn-2 {
     padding-left: 3rem;
     padding-right: 3rem;
     padding-top: 0.8rem;
@@ -314,6 +323,14 @@
     text-decoration: none;
     color: #ffffff;
     background-color: #009444;
+    margin-top: .5rem;
+    
+}
+
+.buttonAddress {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 7.1rem;
 }
 
 .extras .btn {

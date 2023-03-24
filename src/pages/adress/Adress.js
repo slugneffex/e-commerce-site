@@ -1,29 +1,82 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./adress.css";
+import axios from "axios";
 
 const Adress = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/address");
+    }
+  });
+
+  const [state, setState] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
+  const [cities, setCities] = useState([]);
+
+  // get all state
+  useEffect(() => {
+    async function fetchData() {
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+        },
+      };
+      const response = await axios.get("getState", options);
+      setState(response.data);
+    }
+    fetchData();
+  }, []);
+
+  // get all city by stateid
+  const handleStateChange = (event) => {
+    const selectedID = event.target.value;
+    setSelectedState(selectedID);
+
+    const url = "/get-city-by-state";
+
+    axios
+      .post(
+        url,
+        {
+          state_id: selectedID,
+        },
+        {
+          headers: {
+            "X-Authorization":
+              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          },
+        }
+      )
+      .then((res) => {
+        setCities(res.data.cities);
+      });
+  };
+
   return (
     <HomeLayout>
       <section className="address">
-        <div className="container"  >
+        <div className="container">
           <div className="row text-center py-5" id="progessbarRow">
-            <ul className="" id="progressbar" style={{marginTop:'2rem'}}>
-              <div className="col-md-4 col-sm-4" >
+            <ul className="" id="progressbarrr">
+              <div className="col-md-4 col-sm-4">
                 <Link to="/Cart" className="bagLink">
                   <li id="bag">Bag</li>
                 </Link>
               </div>
               <div className="col-md-4 col-sm-4">
-                <Link to='/payment' className="bagLink" >
-                <li  id="address">
-                  Payment
-                </li>
+                <Link to="/payment" className="bagLink">
+                  <li id="address">Payment</li>
                 </Link>
               </div>
               <div className="col-md-4 col-sm-4">
-                <li className="active" id="payment">Address</li>
+                <li className="active" id="payment">
+                  Address
+                </li>
               </div>
             </ul>
           </div>
@@ -94,9 +147,15 @@ const Adress = () => {
                           name="state_id"
                           required
                           className="form-control"
+                          value={selectedState}
+                          onChange={handleStateChange}
                         >
                           <option value="null">State</option>
-                          <option value="haryana">Haryana</option>
+                          {state.map((e) => (
+                            <option value={e.id} key={e.id}>
+                              {e.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div className="col-6">
@@ -106,17 +165,21 @@ const Adress = () => {
                           className="form-control"
                         >
                           <option value="null">City</option>
-                          <option value="faridabad">Faridabad</option>
+                          {cities.map((e) => (
+                            <option value="faridabad" key={e.id}>
+                              {e.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="addressCard-head">
+                {/* <div className="addressCard-head">
                   <h3 className="heading">Save Address As</h3>
-                </div>
+                </div> */}
                 <div className="addressCard-body">
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-4">
                       <div className="form-group">
                         <label for="addres_type" className="form-label">
@@ -143,10 +206,10 @@ const Adress = () => {
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
-                <div className="addressCard-head"></div>
-                <div className="addressCard-body">
+
+                {/* <div className="addressCard-body">
                   <div className="lastform-sec">
                     <div className="form-group">
                       <input
@@ -163,7 +226,7 @@ const Adress = () => {
                       Save Address
                     </Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-md-4">
@@ -205,7 +268,7 @@ const Adress = () => {
                   <div className="extras">
                     <p> 3 Item | ₹ 650</p>
                     <Link to="/" className="btn">
-                      Proceed To Pay
+                      Place Your Order
                     </Link>
                   </div>
                 </div>
@@ -214,7 +277,7 @@ const Adress = () => {
           </div>
         </div>
         <hr />
-        <div className="container">
+        {/* <div className="container">
           <div className="row">
             <div className="col-md-8">
               <div className="heading">
@@ -380,7 +443,7 @@ const Adress = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
     </HomeLayout>
   );
