@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
-import { Link } from "react-router-dom";
-import "./login.css"
-import Features from "../../components/inc/Fetures"
+import "./login.css";
+import Features from "../../components/Fetures";
+
 
 const SignIn = () => {
   const navigate = useNavigate();
