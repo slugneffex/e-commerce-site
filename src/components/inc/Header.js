@@ -258,24 +258,11 @@ const Header = () => {
                   <ul className="dropdown-menu">
                     {store.map((e) => (
                       <li key={e.id}>
-                        <Link className="dropdown-item" to="/">
+                        <Link  className="dropdown-item" to={`/store/${e.id}`}>
                           {e.name}
                         </Link>
                       </li>
                     ))}
-                    {/* <li>
-                      <Link className="dropdown-item" to="/">
-                        Another action
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/">
-                        Something else here
-                      </Link>
-                    </li> */}
                   </ul>
                 </li>
               </ul>

@@ -17,6 +17,7 @@ import Emptycart from "./pages/emptyCart/Emptycart";
 import Payment from "./pages/payment/Payment"
 import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
+import Store from "./pages/Store/Store";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
       <Route path="/payment" element={<Payment />} />
       <Route path='/address' element={<Loginadress />} />
       <Route path="/why-choose-combonation"  element={<WCC />}/>
+      <Route path="/store/:id" element={<Store />} />
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );
