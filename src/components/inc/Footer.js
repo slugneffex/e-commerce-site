@@ -35,16 +35,10 @@ const Footer = () => {
                     <Link to="/">About us</Link>
                   </li>
                   <li>
-                    <Link to="/">Faq</Link>
-                  </li>
-                  <li>
                     <Link to="/">Help</Link>
                   </li>
                   <li>
                     <Link to="/">My account</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Blog</Link>
                   </li>
                   <li>
                     <Link to="/">Contacts</Link>
@@ -165,7 +159,7 @@ const Footer = () => {
         <hr />
         <section id="footer-secondary">
           <div className="container">
-            <div className="row add_bottom_25 p-5">
+            <div className="row add_bottom_25 p-5" style={{ alignItems: "end" }}>
               <div className="col-lg-6">
                 <h3>Working Hours:</h3>
                 <span>Mon-Fri: 10:00AM - 06:30PM | Sat-Sun Closed</span>
@@ -187,14 +181,14 @@ const Footer = () => {
                   </li>
                   <li>
                     <span>
-                      © 2020-22 Combonation.in. Powered By Born Unicorn Tech
+                      © 2020-22 Combonation.in. <br /> Powered By Born Unicorn Tech
                       Prise Pvt. Ltd.
                     </span>
                   </li>
                 </ul>
               </div>
               <hr />
-              <div className="col-md-8">
+              <div className="col-md-6">
                 <ul className="footer-selector clearfix mt-4">
                   <li>
                     <img
@@ -206,7 +200,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-6" style={{ width: "450px", marginLeft: "150px" }}>
                 <div className="how-we-help">
                   <i className="bi bi-headset"></i>
                   <h2>How may we help you</h2>

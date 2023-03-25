@@ -1,5 +1,9 @@
+.downloadAppHeading {
+    font-size: 3.2rem;
+}
+
 .signUpText {
-    font-size: 20px;
+    font-size: 1.8rem;
 }
 
 
@@ -8,3 +12,15 @@
     color: #fff;
 }
 
+
+.QR {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    margin-top: 4rem;
+    margin-left: 1rem;
+}
+
+.QR p {
+    margin-left: 3rem;
+}

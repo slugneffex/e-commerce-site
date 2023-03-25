@@ -8,23 +8,15 @@ const WCC = () => {
       <HomeLayout>
         <section>
           <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="heading">
+            <div className="row" style={{ marginTop: "2rem"}}>
+              <div className="col-md-6 ">
+                <div className="heading" style={{display: "flex", flexDirection: "column"}}>
                   <h1>
                     We Are <br />
                     <span>COMBONATION!</span>
                   </h1>
-                  <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo
+                  <p style={{ marginTop: "1rem"}}>
+                  Combonation is a one-stop solution to shop for your daily lifestyle needs. We offer a hassle-free curation of pre-curated bundles & wide assortment of top brands to build your own combos. Our expertise in sourcing top-branded products and bringing bundle shopping under one roof is one of our core USPs Pre-curated bundles let the shopper avail highest discounts on top products. Whereas Building your own combo is more fun. Loaded with additional benefits of freebies on your BYOC purchase. Users can avail off up to 100% of the purchased value. Happy Shopping
                   </p>
                 </div>
               </div>
@@ -173,18 +165,16 @@ const WCC = () => {
               </div>
 
               <div className="img-fluid">
-                <img src="./assets/img/wcc/Group 2591.png" alt="img" />
+                <img src="./assets/img/wcc/Group_2591.png" alt="img" />
               </div>
 
-              <div className="img-group">
-                <img src="assets/img/wcc/Group.png" alt="why-img" />
-              </div>
+              
 
               <div className="BYOC">
                 <h1>
                   How to add products through <span>BYOC</span>
                 </h1>
-                <img src="./assets/img/wcc/Group 1873.png" alt="WCCImg" />
+                <img src="./assets/img/wcc/Group_1873.png" alt="WCCImg" />
               </div>
 
               <div className="BYOC">
@@ -221,7 +211,7 @@ const WCC = () => {
                   <div
                     className="card cardd"
                     style={{
-                      width: "15rem",
+                      width: "100%",
                       height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
@@ -244,7 +234,7 @@ const WCC = () => {
                   <div
                     className="card"
                     style={{
-                      width: "15rem",
+                      width: "100%",
                       height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
@@ -270,7 +260,7 @@ const WCC = () => {
                   <div
                     className="card cardd"
                     style={{
-                      width: "15rem",
+                      width: "100%",
                       height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
@@ -293,7 +283,7 @@ const WCC = () => {
                   <div
                     className="card"
                     style={{
-                      width: "15rem",
+                      width: "100%",
                       height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
