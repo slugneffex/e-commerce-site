@@ -25,7 +25,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 4,
+    items: 3,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -103,14 +103,15 @@ const YouMayLike = () => {
               draggable={true}
               swipeable={true}
               removeArrowOnDeviceType={["tablet", "mobile"]}
+              arrows={false}
             >
               {Array.isArray(feature) &&
                 feature.map((e) => (
-                  <div className="item" key={e.id} style={{ margin: ".4rem" }}>
+                  <div className="item" key={e.id} style={{ marginRight: ".4rem" }}>
                     <div className="newComboCart">
                       <div className="cart-img-sec">
                         <Link className="addtofav">
-                          <li className="bi bi-heart"></li>
+                          <li><i className="bi bi-heart"></i></li>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>

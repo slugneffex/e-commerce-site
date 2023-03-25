@@ -78,10 +78,10 @@ const Footer = () => {
               >
                 <ul>
                   <li className="row">
-                    <div><i className="bi bi-phone-fill "></i></div>
-                      <p>Mobile: 9910722205 <br></br>
-                        Whatsapp: 9910722205
-                      </p>
+                    <i className="bi bi-phone-fill" style={{marginTop: ".5rem"}}></i>
+                    <p>Mobile: 9910722205 <br></br>
+                      Whatsapp: 9910722205
+                    </p>
                   </li>
                   <li>
                     <i class="bi bi-envelope-fill"></i>
@@ -92,7 +92,7 @@ const Footer = () => {
                     Good Earth Business Bay,<br />
                     Sector - 58,<br />
                     Gurugram, Haryana - 122098 <br />
-                    
+
                   </li>
                 </ul>
               </div>

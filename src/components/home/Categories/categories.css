@@ -21,8 +21,11 @@
 }
 
 .carouselResponsive {
-    width: 1296px;
+    text-align: center;
+    width: 500px;
+    /* margin-right: 20px; */
 }
+
 .categoriesMobileDiv {
     display: none;
 }

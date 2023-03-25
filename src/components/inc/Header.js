@@ -66,6 +66,7 @@ const Header = () => {
   return (
     <div>
       <header className="my-auto">
+
         {/* wcc */}
         <section className="top-bar-blink top-banner wcc">
           <div className="container text-white">
@@ -135,6 +136,7 @@ const Header = () => {
                   height="28.5"
                   viewBox="0 0 30.31 28.5"
                   className="helpSvg"
+
                 >
                   <path
                     id="Path_759"
@@ -145,10 +147,12 @@ const Header = () => {
                   />
                 </svg>
 
+
                 <a href="/help" className="text-white helpText">
                   Help
                 </a>
               </div>
+
             </div>
           </div>
         </section>

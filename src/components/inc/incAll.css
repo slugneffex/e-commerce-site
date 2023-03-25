@@ -51,14 +51,24 @@ h1 h2 h3 h4 h5 h6 p {
     color: #FFFFFF;
 }
 
-.wcc{
-    display: block;
-}
+
 
 @media (max-width: 576px) {
-    .wcc {
-        display: none;
+    
+    #mainTitle {
+        font-size: .6rem;
     }
+
+    .wccSections {
+        font-size: .6rem;
+    }
+
+    .wccSvg {
+        width: .5rem;
+        height: .5rem;
+    }
+
+   
 }
 
 .getAppSection {

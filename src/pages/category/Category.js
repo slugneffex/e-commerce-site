@@ -86,7 +86,7 @@ const Category = () => {
     <>
       <HomeLayout>
         <div className="container">
-          <div className="row" style={{ marginTop: "6rem" }}>
+          <div className="row">
             <div className="col-md-3">
               <div className="card">
                 <div
