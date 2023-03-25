@@ -74,10 +74,13 @@ const Categories = () => {
           <Carousel responsive={responsive}
           arrows={false}
           swipeable={true}
+          autoPlay
+          centerMode
+          infinite
           className="carouselResponsive">
 
             {category.map((e) => (
-              <div className="my-auto" style={{marginLeft: "120px"}}>
+              <div className="my-auto">
                 <Link to={`/category/${e.id}`} key={e.id}>
                   {e.name}
                 </Link>

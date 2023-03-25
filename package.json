@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "react-multi-carousel": "^2.8.2"
+    "react-multi-carousel": "^2.8.2",
+    "react-rating-stars-component": "^2.2.0"
   }
 }

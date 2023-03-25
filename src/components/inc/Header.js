@@ -51,10 +51,10 @@ const Header = () => {
      
       <header className="my-auto">
          {/* wcc */}
-         <section className="top-bar-blink top-banner wcc">
+         <section className="top-bar-blink top-banner" >
         <div className="container text-white">
-          <div className="row py-1">
-            <div className="col-md-6 py-2" id="mainTitle">
+          <div className="row py-1 wcc">
+            <div className="col-md-6 py-2 col-sm-6" id="mainTitle">
               <a
                 href="/why-choose-combonation"
                 className="whyChooseCombonation"
@@ -62,13 +62,13 @@ const Header = () => {
                 <p className="my-auto">Why Choose Combonation?</p>
               </a>
             </div>
-            <div className="col-md-2 getAppSection">
+            <div className="col-md-2 getAppSection col-sm-2 wccSections">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="23"
                 height="32"
                 viewBox="0 0 23 32"
-                className="getAppSvg"
+                className="getAppSvg wccSvg"
               >
                 <g
                   id="Icon_feather-smartphone"
@@ -98,13 +98,13 @@ const Header = () => {
               </svg>
 
               <a
-                className="text-white text-align: left; getApp"
+                className="text-white text-align: left getApp"
                 href="https://onelink.to/add7up"
               >
                 Get App
               </a>
             </div>
-            <div className="col-md-2 saleSection">
+            <div className="col-md-2 saleSection wccSections">
               <a
                 className="text-white saleText"
                 href="https://onelink.to/add7up"
@@ -112,13 +112,13 @@ const Header = () => {
                 SALE
               </a>
             </div>
-            <div className="col-md-2 helpSection">
+            <div className="col-md-2 helpSection col-sm-2 wccSections">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="30.31"
                 height="28.5"
                 viewBox="0 0 30.31 28.5"
-                className="helpSvg"
+                className="helpSvg wccSvg"
               >
                 <path
                   id="Path_759"

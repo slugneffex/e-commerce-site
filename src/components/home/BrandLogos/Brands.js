@@ -52,27 +52,18 @@ const Brands = () => {
           
           <Carousel responsive={responsive} className="py-14"
           swipeable={false}
-          // draggable={false}
-          // showDots={true}
-          // ssr={true} // means to render carousel on server-side.
-          // infinite={true}
-          // autoPlay={this.props.deviceType !== "mobile" ? true : false}
-          // autoPlaySpeed={1000}
-          // keyBoardControl={true}
-          // customTransition="all .5"
-          // transitionDuration={500}
-          // containerClass="carousel-container"
-          // removeArrowOnDeviceType={["tablet", "mobile"]}
-          // deviceType={this.props.deviceType}
-          // dotListClass="custom-dot-list-style"
-          // itemClass="carousel-item-padding-40-px">
+          autoPlay
+          customTransition="all .1"
+          transitionDuration={500}
+          arrows={false}
+          
           >
           
             {Array.isArray(brand) &&
               brand.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
-                    <a href="">
+                    <a href="#">
                     <img
                       src={e.image?.original_url}
                       width="80%"

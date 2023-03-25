@@ -10,7 +10,7 @@ const DownloadApp = () => {
                 <div className="row">
                     <div className="col-md-6 text-left">
                         <h2>Download The <span>App</span> Now!</h2>
-                        <h5>Use code <span className=''>SINGUP10</span> and get upto <strong>Extra 10% off</strong> on your first order</h5>
+                        <h5 className='signUpText'>Use code <span className='codeText'>SINGUP10</span> and get upto <strong>Extra 10% off</strong> on your first order</h5>
                         {/* QR */}
                     </div>
                     <div className="col-md-6">

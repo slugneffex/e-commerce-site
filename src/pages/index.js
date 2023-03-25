@@ -5,7 +5,7 @@ import TopTrendingCombos from "../components/home/TopTrendingCombos";
 // import HotDeals from "../components/home/HotDeals";
 // import TopBrandDeals from "../components/home/TopBrandDeals";
 import YouMayLike from "../components/home/YouMayLike";
-// import Testimonials from "../components/home/Testimonials";
+import Testimonials from "../components/home/Testimonials";
 import DownloadApp from "../components/home/DownloadApp/DownloadApp";
 import Features from "../components/inc/Fetures";
 import HomeLayout from "../layouts/HomeLayout";
@@ -32,7 +32,7 @@ const Home = () => {
           <YouMayLike></YouMayLike>
           <ForHim />
           <Brands />
-          {/* <Testimonials></Testimonials> */}
+          <Testimonials></Testimonials>
           <DownloadApp></DownloadApp>
           <Features></Features>
         </HomeLayout>
