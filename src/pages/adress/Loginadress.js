@@ -62,6 +62,7 @@ const Loginadress = () => {
   const [formData, setFormData] = useState({
     address: "",
     city_id: "",
+    address_id: "",
   });
 
   const sendData = () => {
@@ -85,7 +86,6 @@ const Loginadress = () => {
       .then((res) => {
         alert(res.data.message);
         window.location.reload();
-
       });
   };
 
@@ -106,6 +106,36 @@ const Loginadress = () => {
     }
     fetchData();
   }, [token]);
+
+  // delete the address
+
+  // const deleteData = () => {
+  //   axios
+  //     .post(`/deleteAddress/33`, {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       alert(res.data.message);
+  //     });
+
+  // };
+
+  function deleteData(id) {
+    axios
+      .post(`/deleteAddress/${id}`, {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      });
+  }
 
   return (
     <>
@@ -297,7 +327,7 @@ const Loginadress = () => {
             <div className="row">
               <div className="col-md-8">
                 <div className="heading">
-                  <h1>Your Addresses (3)</h1>
+                  <h1>Your Addresses ({address.length})</h1>
                 </div>
               </div>
             </div>
@@ -314,9 +344,7 @@ const Loginadress = () => {
                       <div className="col-7">
                         <div className="card-body">
                           <h6>{e.user?.name}</h6>
-                          <p>
-                            {e.address}
-                          </p>
+                          <p>{e.address}</p>
                           <p>Phone Number :- XXXXX56789</p>
                         </div>
                       </div>
@@ -324,7 +352,10 @@ const Loginadress = () => {
                         <div className="card-footer">
                           <div className="actions">
                             <i className="bi bi-pencil-square"></i>
-                            <i className="bi bi-trash3"></i>
+                            <i
+                              className="bi bi-trash3"
+                              onClick={() => deleteData(e.id)}
+                            ></i>
                           </div>
                           <div className="form-group mt-5">
                             <input
