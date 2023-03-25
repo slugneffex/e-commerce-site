@@ -16,6 +16,7 @@ import MYOC from "./pages/MYOC/MYOC";
 import Emptycart from "./pages/emptyCart/Emptycart";
 import Payment from "./pages/payment/Payment"
 import Loginadress from "./pages/adress/Loginadress";
+import WCC from "./pages/WCC/WCC.js";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
       <Route path ="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path='/address' element={<Loginadress />} />
+      <Route path="/why-choose-combonation"  element={<WCC />}/>
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );
