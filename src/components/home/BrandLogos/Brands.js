@@ -63,7 +63,7 @@ const Brands = () => {
               brand.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
-                    <a href="#">
+                    <a href="/#">
                     <img
                       src={e.image?.original_url}
                       width="80%"
