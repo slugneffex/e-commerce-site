@@ -20,7 +20,7 @@ import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
 // import Account from './pages/AccountDetails/Account'
 // import Sidebar from "./pages/AccountDetails/Sidebar";
-import Wishlist from "./pages/AccountDetails/Wishlist";
+// import Wishlist from "./pages/AccountDetails/Wishlist";
 
 const App = () => {
   return (
@@ -44,7 +44,7 @@ const App = () => {
       <Route path="/why-choose-combonation"  element={<WCC />}/>
       <Route path="/store/:id" element={<Store />} />
       <Route path="/Account" element={<Account />} />
-      <Route path="/wishlist" element={<Wishlist />} />
+      {/* <Route path="/wishlist" element={<Wishlist />} /> */}
      
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>

@@ -40,7 +40,7 @@ const Cart = () => {
   return (
     <>
       <HomeLayout>
-        <section className="cart" style={{ marginTop: "8rem" }}>
+        <section className="cart" style={{ margin: "0"}}>
           <div className="container">
             <div className="row text-center" id="progessbarRow">
               <ul className="" id="progressbar">
