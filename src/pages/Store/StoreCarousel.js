@@ -1,7 +1,6 @@
-import React,{useState,useEffect} from "react";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+import React, { useState, useEffect } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 // import img1 from "./Mask_Group _79.png";
@@ -25,6 +24,22 @@ const StoreCarousel = () => {
     fetchData();
   }, [id]);
 
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    }
+  };
+
   // const item = {
   //   items: [
   //     <img src={""} style={{ height: "100vh", width: "98vh" }} />,
@@ -43,11 +58,31 @@ const StoreCarousel = () => {
 
   return (
     <>
-      <OwlCarousel className="owl-theme" items="1" autoplay nav loop>
-        <div className="item " key={store.id}>
-          <img src={store.thumbnail?.url} alt="img" width='100%' height="400px" />
+      <div style={{ marginBottom: "2rem"}}>
+      <Carousel
+        showDots={false}
+        responsive={responsive}
+        arrows={false}
+        infinite={true}
+        autoPlay
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+
+      >
+        <div>
+          <img src={store.thumbnail?.url} alt="" width= "100%" height="500px" />
         </div>
-      </OwlCarousel>
+
+        
+        {/* <div>
+          <img src='./assets/img/hero/4286868.png' alt="" />
+        </div>
+        <div>
+          <img src='./assets/img/hero/4286868.png' alt="" />
+        </div> */}
+      </Carousel>
+      </div>
+
+
     </>
   );
 };

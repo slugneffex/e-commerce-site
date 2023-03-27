@@ -68,7 +68,7 @@ const Header = () => {
       <header className="my-auto">
 
         {/* wcc */}
-        <section className="top-bar-blink top-banner wcc">
+        <section className="top-bar-blink top-banner wcc desktop">
           <div className="container text-white">
             <div className="row py-1">
               <div className="col-md-6 py-2" id="mainTitle">
