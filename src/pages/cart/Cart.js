@@ -62,12 +62,12 @@ const Cart = () => {
             
             <div className="row mt-5">
               <div className="col-md-8">
-                <div className="cartCard ">
+                <div className="cartCard">
                   <div className="cart-type">
                     <h3>Pre Curated Combo</h3>{" "}
                     <span>(Total {totalCount} Items)</span>
                   </div>
-                  <div className="cart-card">
+                  <div className="cart-card" style={{backgroundColor: "#FFFFFF"}}>
                     <ul className="cart-list">
                       {cartItems.map((product, index) => (
                         <li className="cart-item" key={product.id}>
@@ -140,7 +140,7 @@ const Cart = () => {
                     <h3>Custom Combo</h3>{" "}
                     <span>(Total  Items)</span>
                   </div>
-                  <div className="cart-card">
+                  <div className="cart-card" style={{backgroundColor: "#FFFFFF"}}>
                     {/* <ul className="cart-list">
                       {SinglecartItems.map((products, Singleindex) => (
                         <li className="cart-item" key={products.Singleid}>
