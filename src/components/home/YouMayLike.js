@@ -82,14 +82,36 @@ const YouMayLike = () => {
     dispatch(getTotalDiscount());
   };
 
+  // add to wishlist
+  const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  function wishlistData(id) {
+    const data ={
+      combo_id:id,
+      user_id:user_id
+    }
+    axios
+      .post(
+        "/addWishlist",data,
+        {
+          headers: {
+            "X-Authorization":
+              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        alert(res.data.message);
+      });
+  }
+
   return (
     <div>
       <section>
         <div className="top-trending container">
-          <div
-            className="top-trending-head"
-            style={{ marginTop: "67px" }}
-          >
+          <div className="top-trending-head" style={{ marginTop: "67px" }}>
             <h3>You May Like...</h3>
           </div>
         </div>
@@ -107,11 +129,20 @@ const YouMayLike = () => {
             >
               {Array.isArray(feature) &&
                 feature.map((e) => (
+
                   <div className="item" key={e.id} style={{ marginRight: ".8rem" }}>
+
+                
+
                     <div className="newComboCart">
                       <div className="cart-img-sec">
-                        <Link className="addtofav">
-                          <li><i className="bi bi-heart"></i></li>
+                        <Link
+                          onClick={() => wishlistData(e.id)}
+                          className="addtofav"
+                        >
+                          <li>
+                            <i className="bi bi-heart"></i>
+                          </li>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>

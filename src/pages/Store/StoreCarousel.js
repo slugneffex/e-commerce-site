@@ -71,6 +71,7 @@ const StoreCarousel = () => {
         <div>
           <img src={store.thumbnail?.url} alt="" width= "100%" height="500px" />
         </div>
+
         
         {/* <div>
           <img src='./assets/img/hero/4286868.png' alt="" />
@@ -80,6 +81,8 @@ const StoreCarousel = () => {
         </div> */}
       </Carousel>
       </div>
+
+
     </>
   );
 };
