@@ -18,6 +18,9 @@ import Payment from "./pages/payment/Payment"
 import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
+// import Account from './pages/AccountDetails/Account'
+// import Sidebar from "./pages/AccountDetails/Sidebar";
+import Wishlist from "./pages/AccountDetails/Wishlist";
 
 const App = () => {
   return (
@@ -30,7 +33,7 @@ const App = () => {
       <Route path="/category/:id" element={<Category />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
-      <Route path="/Account" element={<Account />} />
+      {/* <Route path="/Account" element={<Account />} /> */}
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       <Route path="/adress" element={<Adress />} />
@@ -40,6 +43,9 @@ const App = () => {
       <Route path='/address' element={<Loginadress />} />
       <Route path="/why-choose-combonation"  element={<WCC />}/>
       <Route path="/store/:id" element={<Store />} />
+      <Route path="/Account" element={<Account />} />
+      <Route path="/wishlist" element={<Wishlist />} />
+     
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );
