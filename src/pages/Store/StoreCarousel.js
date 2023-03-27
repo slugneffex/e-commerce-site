@@ -47,12 +47,6 @@ const StoreCarousel = () => {
         <div className="item " key={store.id}>
           <img src={store.thumbnail?.url} alt="img" width='100%' height="400px" />
         </div>
-        {/* <div className="item">
-          <img src='./assets/img/hero/4286868.png' alt="" />
-        </div>
-        <div className="item">
-          <img src='./assets/img/hero/4286868.png'alt="" />
-        </div> */}
       </OwlCarousel>
     </>
   );
