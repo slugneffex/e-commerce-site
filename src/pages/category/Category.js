@@ -12,6 +12,10 @@ import {
   getTotalAmount,
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
+import {
+  singleaddCartProduct,
+  getsingleCartCount,
+} from "../../components/features/SingleCartSlice"
 import { useDispatch } from "react-redux";
 
 const Category = () => {
@@ -80,6 +84,32 @@ const Category = () => {
     dispatch(getSubTotal());
     dispatch(getTotalAmount());
     dispatch(getTotalDiscount());
+  };
+
+
+  // add to cart single product
+
+  let SingleproductObj ={
+    pid:"",
+    Ptitle: "",
+    Pprice: "",
+    Pimage: "",
+    Pmrp: "",
+    Pdiscount: "",
+  }
+
+  const addToSingleCart = (p) => {
+    SingleproductObj = {
+      pid: p.id,
+      ptitle: p.name,
+      pprice: p.selling_price,
+      pimage: p.thumbnail_img?.original_url,
+      pmrp: p.mrp,
+      pdiscount: p.discount,
+    };
+
+    dispatch(singleaddCartProduct(SingleproductObj));
+    dispatch(getsingleCartCount());
   };
 
   // ADd To wishlist combo
@@ -352,7 +382,7 @@ const Category = () => {
                             <li
                               className="bi bi-cart"
                               onClick={() => {
-                                addToCart(p);
+                                addToSingleCart(p);
                               }}
                               id={p.id}
                               style={{ cursor: "pointer" }}
