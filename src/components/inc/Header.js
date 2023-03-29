@@ -2,8 +2,55 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./incAll.css";
+import { SITE_API } from "./utils";
 
 const Header = () => {
+
+  //for search
+
+  // const [searchQuery, setSearchQuery] = useState("");
+  // console.log(searchQuery);
+  
+
+  // useEffect(()=>{
+  //     getSearchSuggestions()
+  // },[])
+
+  // const getSearchSuggestions=async()=>{
+  //         const options = {
+  //           method:'POST',
+  //           headers: {
+  //             "X-Authorization":
+  //               "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+  //             "Cache-Control": "no-cache, no-store, must-revalidate",
+  //           },
+  //         };
+  //   const data =  await fetch(SITE_API+searchQuery,options)
+  //   const json=data.json()
+  //   console.log(json.data)
+  // }
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization":
+  //           "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //       },
+  //     };
+  //     const response = await axios.post(
+  //       `/search`,{term:searchQuery},
+  //       options
+  //     );
+  //     setSearchQuery(response.data);
+  //   }
+  //   fetchData();
+  // }, []);
+
+
+  //for categories
+
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -18,6 +65,7 @@ const Header = () => {
       const response = await axios.get(`/categories`, options);
       setCategories(response.data);
     }
+
     fetchData();
   }, []);
 
@@ -66,7 +114,6 @@ const Header = () => {
   return (
     <div>
       <header className="my-auto">
-
         {/* wcc */}
         <section className="top-bar-blink top-banner wcc desktop">
           <div className="container text-white">
@@ -136,7 +183,6 @@ const Header = () => {
                   height="28.5"
                   viewBox="0 0 30.31 28.5"
                   className="helpSvg"
-
                 >
                   <path
                     id="Path_759"
@@ -147,12 +193,10 @@ const Header = () => {
                   />
                 </svg>
 
-
                 <a href="/help" className="text-white helpText">
                   Help
                 </a>
               </div>
-
             </div>
           </div>
         </section>
@@ -182,6 +226,8 @@ const Header = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                // value={searchQuery}
+                // onChange={(e) => setSearchQuery(e.target.value)}
               ></input>
             </form>
             <div
@@ -258,7 +304,7 @@ const Header = () => {
                   <ul className="dropdown-menu">
                     {store.map((e) => (
                       <li key={e.id}>
-                        <Link  className="dropdown-item" to={`/store/${e.id}`}>
+                        <Link className="dropdown-item" to={`/store/${e.id}`}>
                           {e.name}
                         </Link>
                       </li>
