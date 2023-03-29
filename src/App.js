@@ -18,9 +18,12 @@ import Payment from "./pages/payment/Payment"
 import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
-// import Account from './pages/AccountDetails/Account'
-// import Sidebar from "./pages/AccountDetails/Sidebar";
-// import Wishlist from "./pages/AccountDetails/Wishlist";
+
+import Address from "./pages/accountDetails/Address";
+import Wishlist from "./pages/accountDetails/Wishlist";
+import Wallet from "./pages/accountDetails/Wallet";
+import Orders from "./pages/accountDetails/Orders";
+import Acccount from "./pages/accountDetails/Acccount";
 
 const App = () => {
   return (
@@ -38,14 +41,20 @@ const App = () => {
       <Route path="Signin" element={<SignIn />} />
       <Route path="/adress" element={<Adress />} />
       <Route path="/view-all-products" element={<MYOC />} />
-      <Route path ="/EmptyCart" element={<Emptycart />} />
+      <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path='/address' element={<Loginadress />} />
-      <Route path="/why-choose-combonation"  element={<WCC />}/>
+      <Route path="/why-choose-combonation" element={<WCC />} />
       <Route path="/store/:id" element={<Store />} />
       <Route path="/Account" element={<Account />} />
-      {/* <Route path="/wishlist" element={<Wishlist />} /> */}
-     
+
+      
+      <Route path="/Acccount" element={<Acccount />} />
+      <Route path="/address" element={<Address />} />
+      <Route path="/Wishlist" element={<Wishlist />} />
+      <Route path="/Wallet" element={<Wallet />} />
+      <Route path="/Orders" element={<Orders />} />
+
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );

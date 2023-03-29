@@ -111,7 +111,7 @@ const YouMayLike = () => {
     <div>
       <section>
         <div className="top-trending container">
-          <div className="top-trending-head" style={{ marginTop: "67px" }}>
+          <div className="top-trending-head">
             <h3>You May Like...</h3>
           </div>
         </div>
