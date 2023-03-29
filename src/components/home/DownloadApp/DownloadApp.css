@@ -16,7 +16,7 @@
 .QR {
     display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: flex-end;
     margin-top: 4rem;
     margin-left: 1rem;
 }

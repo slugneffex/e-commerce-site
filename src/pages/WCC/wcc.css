@@ -141,13 +141,7 @@
 
 }
 
-.card img {
-    width: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-}
+
 
 .card .card-body h4 {
     text-align: center;

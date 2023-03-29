@@ -12,7 +12,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 3,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -49,7 +49,10 @@ const ForHer = () => {
       <div className="top-brand-deals container">
         <h3 style={{ marginTop: "67px", marginBottom: "47px"}}>Top Picks For Her</h3>
         <div className="container">
-          <Carousel responsive={responsive}>
+          <Carousel responsive={responsive}
+          arrows={false}
+          infinite
+          centerMode>
             {Array.isArray(forher) &&
               forher.map((e) => (
                 <div key={e.banner?.id}>
