@@ -26,7 +26,8 @@ const responsive = {
 const Brands = () => {
   const [brand, setBrand] = useState([]);
   axiosRetry(axios, { retries: 3 });
- 
+
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -44,24 +45,21 @@ const Brands = () => {
     }
     fetchData();
   }, []);
+
+  const filterApi = brand.filter((e) => e.focused==="on")
+  console.log(filterApi)
+
   return (
     <>
       <div className="top-brand-deals">
         <h3 className="text-center">Build Your Combo From Top Brands ss</h3>
         <div className="container">
-          <Carousel responsive={responsive}
-          arrows={false}
-          >
-            {Array.isArray(brand) &&
-              brand.map((e) => (
-                <div key={e.id}>
-                  <img
-                    src={e.image?.original_url}
-                    width="80%"
-                    alt={e.name}
-                  ></img>
-                </div>
-              ))}
+          <Carousel responsive={responsive} arrows={false}>
+            {filterApi.map((e) => (
+              <div key={e.id}>
+                <img src={e.image?.original_url} width="80%" alt={e.name}></img>
+              </div>
+            ))}
           </Carousel>
         </div>
       </div>

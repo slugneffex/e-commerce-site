@@ -49,7 +49,6 @@ const Hero = () => {
         responsive={responsive}
         infinite={true}
         autoPlay
-        className="desktop"
       >
 
         {Array.isArray(banner) &&

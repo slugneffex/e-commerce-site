@@ -90,22 +90,22 @@ const Category = () => {
   // add to cart single product
 
   let SingleproductObj ={
-    pid:"",
-    Ptitle: "",
-    Pprice: "",
-    Pimage: "",
-    Pmrp: "",
-    Pdiscount: "",
+    id:"",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
   }
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
-      pid: p.id,
-      ptitle: p.name,
-      pprice: p.selling_price,
-      pimage: p.thumbnail_img?.original_url,
-      pmrp: p.mrp,
-      pdiscount: p.discount,
+      id: p.id,
+      title: p.name,
+      price: p.selling_price,
+      image: p.thumbnail_img?.original_url,
+      mrp: p.mrp,
+      discount: p.discount,
     };
 
     dispatch(singleaddCartProduct(SingleproductObj));

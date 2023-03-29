@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./incAll.css";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
@@ -42,7 +43,10 @@ const Header = () => {
     fetchData();
   }, []);
 
-  // const { totalCount } = useSelector((state) => state.cart);
+  const { totalCount } = useSelector((state) => state.cart);
+  const { singletotalCount } = useSelector((statee) => statee.SingleCart);
+
+  const totalCartCount = totalCount + singletotalCount
 
   // For stores
 
@@ -58,7 +62,6 @@ const Header = () => {
       };
       const response = await axios.get("/stores", options);
       setStore(response.data);
-      console.log(response);
     }
     fetchData();
   }, []);
@@ -268,7 +271,7 @@ const Header = () => {
               </ul>
               <ul className="navbar-nav ml-auto" id="navbar-right">
                 <li className="nav-item">
-                  <Link to="/SignIn" className="nav-link">
+                  <Link to="/signin" className="nav-link">
                     <i className="bi bi-person-circle"></i>
                     <span>Account</span>
                   </Link>
@@ -283,7 +286,7 @@ const Header = () => {
                   <Link to="/Cart" className="nav-link">
                     <i className="bi bi-cart-fill"></i>
                     <span>Cart</span>
-                    {/* <strong>{totalCount}</strong> */}
+                    <strong>{totalCartCount}</strong>
                   </Link>
                 </li>
               </ul>

@@ -87,13 +87,13 @@ const YouMayLike = () => {
   const token = localStorage.getItem("token");
 
   function wishlistData(id) {
-    const data ={
-      combo_id:id,
-      user_id:user_id
+    const data = {
+      combo_id: id,
+      user_id: user_id
     }
     axios
       .post(
-        "/addWishlist",data,
+        "/addWishlist", data,
         {
           headers: {
             "X-Authorization":
@@ -111,7 +111,7 @@ const YouMayLike = () => {
     <div>
       <section>
         <div className="top-trending container">
-          <div className="top-trending-head" style={{ marginTop: "67px" }}>
+          <div className="top-trending-head">
             <h3>You May Like...</h3>
           </div>
         </div>
@@ -122,9 +122,6 @@ const YouMayLike = () => {
               responsive={responsive}
               showDots={false}
               infinite={true}
-              draggable={true}
-              swipeable={true}
-              removeArrowOnDeviceType={["tablet", "mobile"]}
               arrows={false}
             >
               {Array.isArray(feature) &&
@@ -132,17 +129,16 @@ const YouMayLike = () => {
 
                   <div className="item" key={e.id} style={{ marginRight: ".8rem" }}>
 
-                
-
                     <div className="newComboCart">
+                      <li className="youMayLikeHeart">
+                        <i className="bi bi-heart"></i>
+                      </li>
                       <div className="cart-img-sec">
                         <Link
                           onClick={() => wishlistData(e.id)}
                           className="addtofav"
                         >
-                          <li>
-                            <i className="bi bi-heart"></i>
-                          </li>
+
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>
