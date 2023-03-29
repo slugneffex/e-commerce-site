@@ -27,64 +27,39 @@ const Brands = () => {
   const [brand, setBrand] = useState([]);
   axiosRetry(axios, { retries: 3 });
 
- 
+  
 
   useEffect(() => {
-    axios
-      .get("/brands", {
+    async function fetchData() {
+      const options = {
         headers: {
           "X-Authorization":
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
         },
-      })
-      .then((response) => {
-        // Filter the products based on the focus condition
-        const filteredProducts = response.data.filter(
-          (e) => e.focused === "on"
-        );
-        setBrand(filteredProducts);
-        console.log(brand)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      };
+      const response = await axios.get('/brands', options);
+      setBrand(response.data);
+    }
+    fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization":
-  //           "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     const response = await axios.get('/brands', options);
-  //     setBrand(response.data);
-  //   }
-  //   fetchData();
-  // }, []);
+  const filterApi = brand.filter((e) => e.focused==="on")
+  console.log(filterApi)
 
   return (
     <>
       <div className="top-brand-deals">
         <h3 className="text-center">Build Your Combo From Top Brands ss</h3>
         <div className="container">
-          <Carousel responsive={responsive}
-          arrows={false}
-          >
-            {Array.isArray(brand) &&
-              brand.map((e) => (
-                <div key={e.id}>
-                  <img
-                    src={e.image?.original_url}
-                    width="80%"
-                    alt={e.name}
-                  ></img>
-                </div>
-              ))}
+          <Carousel responsive={responsive} arrows={false}>
+            {filterApi.map((e) => (
+              <div key={e.id}>
+                <img src={e.image?.original_url} width="80%" alt={e.name}></img>
+              </div>
+            ))}
           </Carousel>
         </div>
       </div>

@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 
+
+
+
 import Home from "./pages/index";
 import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
@@ -9,9 +12,6 @@ import Category from "./pages/category/Category";
 import VerifyOtp from "./pages/auth/VerifyOtp";
 import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SignIn";
-
-
-
 
 import Singleproduct from "./pages/product/Singleproduct";
 import BrandProduct from "./pages/category/BrandProduct";
@@ -23,9 +23,6 @@ import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
 
 
-
-
-import Thanks from "./pages/thankyou/Thanks";
 
 const App = () => {
   return (
@@ -49,9 +46,13 @@ const App = () => {
       <Route path="/view-all-products" element={<MYOC />} />
       <Route path ="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path='/address' element={<Loginadress />} />
-      <Route path="/why-choose-combonation"  element={<WCC />}/>
       <Route path="/store/:id" element={<Store />} />
+
+      <Route path="/Acccount" element={<Acccount />} />
+      <Route path="/Place" element={<Place />} />
+      <Route path="/Wishlist" element={<Wishlist />} />
+      <Route path="/Wallet" element={<Wallet />} />
+      <Route path="/Orders" element={<Orders />} />
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );
