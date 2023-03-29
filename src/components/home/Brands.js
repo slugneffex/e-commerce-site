@@ -26,24 +26,47 @@ const responsive = {
 const Brands = () => {
   const [brand, setBrand] = useState([]);
   axiosRetry(axios, { retries: 3 });
+
  
 
   useEffect(() => {
-    async function fetchData() {
-      const options = {
+    axios
+      .get("/brands", {
         headers: {
           "X-Authorization":
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
         },
-      };
-      const response = await axios.get('/brands', options);
-      setBrand(response.data);
-    }
-    fetchData();
+      })
+      .then((response) => {
+        // Filter the products based on the focus condition
+        const filteredProducts = response.data.filter(
+          (e) => e.focused === "on"
+        );
+        setBrand(filteredProducts);
+        console.log(brand)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization":
+  //           "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     const response = await axios.get('/brands', options);
+  //     setBrand(response.data);
+  //   }
+  //   fetchData();
+  // }, []);
+
   return (
     <>
       <div className="top-brand-deals">

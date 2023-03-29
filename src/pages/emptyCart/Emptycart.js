@@ -7,7 +7,7 @@ const Emptycart = () => {
   return (
     <>
       <HomeLayout>
-        <div classNameName="container" style={{ marginTop: "7rem" }}>
+        <div classNameName="container">
           <div w-full>
             <div className="container-fluid navigator ">
               <div className="row text-center" id="progessbarRow">
