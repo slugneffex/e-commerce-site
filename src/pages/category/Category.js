@@ -12,6 +12,10 @@ import {
   getTotalAmount,
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
+import {
+  singleaddCartProduct,
+  getsingleCartCount,
+} from "../../components/features/SingleCartSlice"
 import { useDispatch } from "react-redux";
 
 const Category = () => {
@@ -82,6 +86,76 @@ const Category = () => {
     dispatch(getTotalDiscount());
   };
 
+
+  // add to cart single product
+
+  let SingleproductObj ={
+    id:"",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
+  }
+
+  const addToSingleCart = (p) => {
+    SingleproductObj = {
+      id: p.id,
+      title: p.name,
+      price: p.selling_price,
+      image: p.thumbnail_img?.original_url,
+      mrp: p.mrp,
+      discount: p.discount,
+    };
+
+    dispatch(singleaddCartProduct(SingleproductObj));
+    dispatch(getsingleCartCount());
+  };
+
+  // ADd To wishlist combo
+  const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  function wishlistData(id) {
+    const data = {
+      user_id: user_id,
+      combo_id: id,
+    };
+
+    axios
+      .post("/addWishlist", data, {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      });
+  }
+
+  // Add to wishlist For product
+
+  function wishlistProductData(id) {
+    const data = {
+      user_id: user_id,
+      product_id: id,
+    };
+
+    axios
+      .post("/addWishlist", data, {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      });
+  }
+
   return (
     <>
       <HomeLayout>
@@ -119,20 +193,20 @@ const Category = () => {
               </div>
 
               <div className="row">
-              <nav>
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link to='/'>Home</Link>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <Link>Categories</Link>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <Link className="categoriesName">{banner.name}</Link>
-                  </li>
-                </ol>
-              </nav>
-            </div>
+                <nav>
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link>Categories</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link className="categoriesName">{banner.name}</Link>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
               <div className="row" style={{ marginTop: "3rem" }}>
                 <div className="col-md-6">
                   <h4>
@@ -210,7 +284,10 @@ const Category = () => {
                   <div className=" col-md-4" key={e.id}>
                     <div className="newComboCart">
                       <div className="cart-img-sec">
-                        <Link className="addtofavCategory">
+                        <Link
+                          onClick={() => wishlistData(e.id)}
+                          className="addtofavCategory"
+                        >
                           <li className="bi bi-heart"></li>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
@@ -267,7 +344,10 @@ const Category = () => {
                   <div className="col-md-4" key={p.id}>
                     <div className="newComboCart">
                       <div className="cart-img-sec">
-                        <Link className="addtofavCategory">
+                        <Link
+                          onClick={() => wishlistProductData(p.id)}
+                          className="addtofavCategory"
+                        >
                           <li className="bi bi-heart"></li>
                         </Link>
                         <Link to={`/product/${p.id}`}>
@@ -302,7 +382,7 @@ const Category = () => {
                             <li
                               className="bi bi-cart"
                               onClick={() => {
-                                addToCart(p);
+                                addToSingleCart(p);
                               }}
                               id={p.id}
                               style={{ cursor: "pointer" }}

@@ -153,7 +153,7 @@ const SignIn = () => {
                           <div className="col-4">
                             <a
                               href="https://www.combonation.in/login/google"
-                              className
+                              style={{ boxShadow: "none" }}
                             >
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
@@ -164,7 +164,7 @@ const SignIn = () => {
                           <div className="col-4">
                             <a
                               href="https://www.combonation.in/login/facebook"
-                              className
+                              style={{ boxShadow: "none" }}
                             >
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/facebook.png"
@@ -175,7 +175,7 @@ const SignIn = () => {
                           <div className="col-4">
                             <a
                               href="https://www.combonation.in/login"
-                              className
+                              style={{ boxShadow: "none" }}
                             >
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/email.png"

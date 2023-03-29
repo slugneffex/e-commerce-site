@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./incAll.css"
 
 const Footer = () => {
   const [categories, setCategories] = useState([]);
@@ -157,14 +158,14 @@ const Footer = () => {
           </div>
         </div>
         <hr />
-        <section id="footer-secondary">
-          <div className="container">
+        <section id="footer-secondary" >
+          <div className="container" >
             <div className="row add_bottom_25 p-5" style={{ alignItems: "end" }}>
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-md-12">
                 <h3>Working Hours:</h3>
                 <span>Mon-Fri: 10:00AM - 06:30PM | Sat-Sun Closed</span>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6" style={{ textAlign: "end" }}>
                 <ul className="additional_links">
                   <li>
                     <Link to="/page/terms-of-service">
@@ -188,7 +189,7 @@ const Footer = () => {
                 </ul>
               </div>
               <hr />
-              <div className="col-md-6">
+              <div className="col-md-6 ">
                 <ul className="footer-selector clearfix mt-4">
                   <li>
                     <img
@@ -200,7 +201,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-6" style={{ width: "450px", marginLeft: "150px" }}>
+              <div className="col-md-6 desktop" style={{ width: "450px", marginLeft: "150px" }}>
                 <div className="how-we-help">
                   <i className="bi bi-headset"></i>
                   <h2>How may we help you</h2>

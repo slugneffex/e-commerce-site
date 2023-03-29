@@ -11,7 +11,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 3,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -48,6 +48,9 @@ const ForHim = () => {
         <h3 style={{ marginTop: "67px", marginBottom: "47px"}}>Top Picks For Him</h3>
         <div className="container">
           <Carousel responsive={responsive}
+          arrows={false}
+          infinite
+          centerMode
           dotListClass="custom-dot-list-style"
           >
             {Array.isArray(forhim) &&

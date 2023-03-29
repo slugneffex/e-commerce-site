@@ -14,13 +14,18 @@ import {
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
 
+import {
+  getsingleCartProducts,
+  removesingleCartItem,
+  getsingleCartCount,
+} from "../../components/features/SingleCartSlice";
 
 const Cart = () => {
   // Combo Product Cart
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { totalCount } = useSelector((state) => state.cart);
-  const { cartItems, subAmount,  totalAmount, totalDiscount } = useSelector(
+  const { cartItems, subAmount, totalAmount, totalDiscount } = useSelector(
     (state) => state.cart
   );
   useEffect(() => {
@@ -33,14 +38,28 @@ const Cart = () => {
 
   // Single Product Cart
 
-  if (totalCount === 0) {
-    navigate("/EmptyCart")
+  const { singletotalCount } = useSelector((statee) => statee.SingleCart);
+
+  const { singleCartItems } = useSelector((statee) => statee.SingleCart);
+
+  useEffect(() => {
+    dispatch(getsingleCartProducts());
+    // dispatch(getSubTotal());
+    dispatch(getsingleCartCount());
+    // dispatch(getTotalAmount());
+    // dispatch(getTotalDiscount());
+  }, [dispatch]);
+
+  const totalCartCount = totalCount + singletotalCount;
+
+  if (totalCartCount === 0) {
+    navigate("/EmptyCart");
   }
 
   return (
     <>
       <HomeLayout>
-        <section className="cart" style={{ marginTop: "8rem" }}>
+        <section className="cart" style={{ margin: "0" }}>
           <div className="container">
             <div className="row text-center" id="progessbarRow">
               <ul className="" id="progressbar">
@@ -59,15 +78,18 @@ const Cart = () => {
             </div>
             <hr />
             <div className="row"></div>
-            
+
             <div className="row mt-5">
               <div className="col-md-8">
-                <div className="cartCard ">
+                <div className="cartCard">
                   <div className="cart-type">
                     <h3>Pre Curated Combo</h3>{" "}
                     <span>(Total {totalCount} Items)</span>
                   </div>
-                  <div className="cart-card">
+                  <div
+                    className="cart-card"
+                    style={{ backgroundColor: "#FFFFFF" }}
+                  >
                     <ul className="cart-list">
                       {cartItems.map((product, index) => (
                         <li className="cart-item" key={product.id}>
@@ -80,17 +102,13 @@ const Cart = () => {
 
                             <div className="col-6">
                               <div className="det">
-                                
-                                  <Link to={`/combo/${product.id}`}>
-                                    <h6>{product.title}</h6>
-                                  </Link>
-                              
+                                <Link to={`/combo/${product.id}`}>
+                                  <h6>{product.title}</h6>
+                                </Link>
+
                                 <br />
                                 <div className="form-group">
-                                  <select
-                                    name=""
-                                    id=""
-                                  >
+                                  <select name="" id="">
                                     {/* Qty
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -138,19 +156,22 @@ const Cart = () => {
                 <div className="cartCard py-5">
                   <div className="cart-type">
                     <h3>Custom Combo</h3>{" "}
-                    <span>(Total  Items)</span>
+                    <span>(Total {singletotalCount} Items)</span>
                   </div>
-                  <div className="cart-card">
-                    {/* <ul className="cart-list">
-                      {SinglecartItems.map((products, Singleindex) => (
-                        <li className="cart-item" key={products.Singleid}>
+                  <div
+                    className="cart-card"
+                    style={{ backgroundColor: "#FFFFFF" }}
+                  >
+                    <ul className="cart-list">
+                      {singleCartItems.map((products, Singleindex) => (
+                        <li className="cart-item" key={products.id}>
                           <div className="row">
                             <div className="col-3">
-                              <img src={products.Singleimage} alt="W" />
+                              <img src={products.image} alt="W" />
                             </div>
                             <div className="col-6">
                               <div className="det">
-                                <h6>{products.Singletitle}</h6>
+                                <h6>{products.title}</h6>
                                 <br />
                                 <div className="form-group">
                                   <select name="" id="">
@@ -173,14 +194,21 @@ const Cart = () => {
                             </div>
                             <div className="col-3">
                               <div className="actions">
-                                <i className="bi bi-trash"></i>
+                                <i
+                                  className="bi bi-trash"
+                                  onClick={() => {
+                                    dispatch(removesingleCartItem(products.id));
+                                    dispatch(getsingleCartCount());
+                                  }}
+                                  style={{ cursor: "pointer" }}
+                                ></i>
                                 <i className="bi bi-heart"></i>
                               </div>
                             </div>
                           </div>
                         </li>
                       ))}
-                    </ul> */}
+                    </ul>
                   </div>
                 </div>
               </div>
