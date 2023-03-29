@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
-import Account from "./pages/auth/Account";
+// import Account from "./pages/auth/Account";
 import Home from "./pages/index";
 import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
@@ -14,11 +14,10 @@ import Singleproduct from "./pages/product/Singleproduct";
 import BrandProduct from "./pages/category/BrandProduct";
 import MYOC from "./pages/MYOC/MYOC";
 import Emptycart from "./pages/emptyCart/Emptycart";
-import Payment from "./pages/payment/Payment"
+import Payment from "./pages/payment/Payment";
 import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
-
 import Place from "./pages/accountDetails/Place";
 import Wishlist from "./pages/accountDetails/Wishlist";
 import Wallet from "./pages/accountDetails/Wallet";
@@ -43,12 +42,11 @@ const App = () => {
       <Route path="/view-all-products" element={<MYOC />} />
       <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path='/address' element={<Loginadress />} />
+      <Route path="/address" element={<Loginadress />} />
       <Route path="/why-choose-combonation" element={<WCC />} />
       <Route path="/store/:id" element={<Store />} />
-      <Route path="/Account" element={<Account />} />
+      {/* <Route path="/Account" element={<Account />} /> */}
 
-      
       <Route path="/Acccount" element={<Acccount />} />
       <Route path="/Place" element={<Place />} />
       <Route path="/Wishlist" element={<Wishlist />} />
