@@ -87,13 +87,13 @@ const YouMayLike = () => {
   const token = localStorage.getItem("token");
 
   function wishlistData(id) {
-    const data ={
-      combo_id:id,
-      user_id:user_id
+    const data = {
+      combo_id: id,
+      user_id: user_id
     }
     axios
       .post(
-        "/addWishlist",data,
+        "/addWishlist", data,
         {
           headers: {
             "X-Authorization":
@@ -132,17 +132,18 @@ const YouMayLike = () => {
 
                   <div className="item" key={e.id} style={{ marginRight: ".8rem" }}>
 
-                
 
-                    <div className="newComboCart">
+
+                    <div className="newComboCart" style={{ position: "relative",marginRight: ".5rem" }}>
+                      <li style={{ position: "absolute", marginLeft: "160px", marginTop: ".7rem" }}>
+                        <i className="bi bi-heart"></i>
+                      </li>
                       <div className="cart-img-sec">
                         <Link
                           onClick={() => wishlistData(e.id)}
                           className="addtofav"
                         >
-                          <li>
-                            <i className="bi bi-heart"></i>
-                          </li>
+
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>
