@@ -38,7 +38,7 @@ const Cart = () => {
 
   // Single Product Cart
 
-  // const { singletotalCount } = useSelector((statee) => statee.SingleCart);
+  const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
   const { singleCartItems } = useSelector((statee) => statee.SingleCart);
 
@@ -50,11 +50,11 @@ const Cart = () => {
     // dispatch(getTotalDiscount());
   }, [dispatch]);
 
-  // const totalCartCount = totalCount + singletotalCount;
+  const totalCartCount = totalCount + singletotalCount;
 
-  // if (totalCartCount === 0) {
-  //   navigate("/EmptyCart");
-  // }
+  if (totalCartCount === 0) {
+    navigate("/EmptyCart");
+  }
 
   return (
     <>
@@ -156,7 +156,7 @@ const Cart = () => {
                 <div className="cartCard py-5">
                   <div className="cart-type">
                     <h3>Custom Combo</h3>{" "}
-                    <span>(Total Items)</span>
+                    <span>(Total {singletotalCount} Items)</span>
                   </div>
                   <div
                     className="cart-card"
@@ -164,14 +164,14 @@ const Cart = () => {
                   >
                     <ul className="cart-list">
                       {singleCartItems.map((products, Singleindex) => (
-                        <li className="cart-item" key={products.pid}>
+                        <li className="cart-item" key={products.id}>
                           <div className="row">
                             <div className="col-3">
-                              <img src={products.pimage} alt="W" />
+                              <img src={products.image} alt="W" />
                             </div>
                             <div className="col-6">
                               <div className="det">
-                                <h6>{products.ptitle}</h6>
+                                <h6>{products.title}</h6>
                                 <br />
                                 <div className="form-group">
                                   <select name="" id="">
@@ -197,7 +197,7 @@ const Cart = () => {
                                 <i
                                   className="bi bi-trash"
                                   onClick={() => {
-                                    dispatch(removesingleCartItem(products.pid));
+                                    dispatch(removesingleCartItem(products.id));
                                     dispatch(getsingleCartCount());
                                   }}
                                   style={{ cursor: "pointer" }}
