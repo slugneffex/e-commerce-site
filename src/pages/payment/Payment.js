@@ -33,7 +33,7 @@ const Payment = () => {
               <div className="col-md-8">
                 <div className="card">
                   <div className="row">
-                    <div className="col-9">
+                    <div className="col-md-4">
                       <div className="form-group">
                         <input
                           type="radio"
@@ -41,12 +41,15 @@ const Payment = () => {
                           id
                           className="form-check-input"
                         />
-                        <label htmlFor="payment_type" className="form-label">
+                        <label htmlFor="payment_type" className="form-label" style={{ marginLeft: "1rem" }}>
                           Online Payment
                         </label>
                       </div>
                     </div>
-                    <div className="col-3 text-center">
+                    <div className="col-md-4 text-center">
+                      <img src="./assets/img/paymentSection/Group_1735.png" alt="paymentOptions" width="60%" style={{ marginLeft: 0 }} />
+                    </div>
+                    <div className="col-md-4 text-center">
                       <i className="bi bi-arrow-right" />
                     </div>
                   </div>
@@ -61,7 +64,7 @@ const Payment = () => {
                           id
                           className="form-check-input"
                         />
-                        <label htmlFor="payment_type" className="form-label">
+                        <label htmlFor="payment_type" className="form-label" style={{ marginLeft: "1rem" }}>
                           Cash On Delivery
                         </label>
                         <br />
