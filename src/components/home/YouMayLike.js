@@ -122,9 +122,6 @@ const YouMayLike = () => {
               responsive={responsive}
               showDots={false}
               infinite={true}
-              draggable={true}
-              swipeable={true}
-              removeArrowOnDeviceType={["tablet", "mobile"]}
               arrows={false}
             >
               {Array.isArray(feature) &&
@@ -132,10 +129,8 @@ const YouMayLike = () => {
 
                   <div className="item" key={e.id} style={{ marginRight: ".8rem" }}>
 
-
-
-                    <div className="newComboCart" style={{ position: "relative",marginRight: ".5rem" }}>
-                      <li style={{ position: "absolute", marginLeft: "160px", marginTop: ".7rem" }}>
+                    <div className="newComboCart">
+                      <li className="youMayLikeHeart">
                         <i className="bi bi-heart"></i>
                       </li>
                       <div className="cart-img-sec">

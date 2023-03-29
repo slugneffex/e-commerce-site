@@ -19,7 +19,7 @@ import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
 
-import Address from "./pages/accountDetails/Address";
+import Place from "./pages/accountDetails/Place";
 import Wishlist from "./pages/accountDetails/Wishlist";
 import Wallet from "./pages/accountDetails/Wallet";
 import Orders from "./pages/accountDetails/Orders";
@@ -50,7 +50,7 @@ const App = () => {
 
       
       <Route path="/Acccount" element={<Acccount />} />
-      <Route path="/address" element={<Address />} />
+      <Route path="/Place" element={<Place />} />
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/Wallet" element={<Wallet />} />
       <Route path="/Orders" element={<Orders />} />

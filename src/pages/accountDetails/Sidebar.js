@@ -18,7 +18,7 @@ const sidebar = () => {
                                 </div>
                                 <hr class="hr" />
                                 <div class="account d-flex">
-                                    <NavLink to="/Address" className={"user"} type="button">My Addresses</NavLink>
+                                    <NavLink to="/Place" className={"user"} type="button">My Addresses</NavLink>
                                     <i class="bi bi-caret-right-fill bii"></i>
                                 </div>
                                 <hr class="hr" />

@@ -268,7 +268,7 @@ const Header = () => {
               </ul>
               <ul className="navbar-nav ml-auto" id="navbar-right">
                 <li className="nav-item">
-                  <Link to="/SignIn" className="nav-link">
+                  <Link to="/Acccount" className="nav-link">
                     <i className="bi bi-person-circle"></i>
                     <span>Account</span>
                   </Link>
