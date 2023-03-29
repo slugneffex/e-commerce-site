@@ -44,7 +44,7 @@ const App = () => {
       <Route path="/category/:id" element={<Category />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
-      <Route path="/Account" element={<Account />} />
+     
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       
