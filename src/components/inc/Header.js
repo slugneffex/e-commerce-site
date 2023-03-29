@@ -115,6 +115,31 @@ const Header = () => {
     fetchData();
   }, []);
 
+  // For brands
+
+  const [brand, setBrand] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const options = {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
+        },
+      };
+      const response = await axios.get('/brands', options);
+      setBrand(response.data);
+    }
+    fetchData();
+  }, []);
+
+  const filterbrandsApi = brand.filter((e) => e.focused==="on")
+
+
+
   return (
     <div>
       <header className="my-auto">
@@ -250,24 +275,13 @@ const Header = () => {
                     Brands
                   </Link>
                   <ul className="dropdown-menu">
-                    <li>
+                    { filterbrandsApi.map((e) => (
+                    <li key={e.id}>
                       <Link className="dropdown-item" to="/about">
-                        About
+                        {e.name}
                       </Link>
                     </li>
-                    <li>
-                      <Link className="dropdown-item" to="/">
-                        Another action
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/">
-                        Something else here
-                      </Link>
-                    </li>
+                    ))}
                   </ul>
                 </li>
                 <li className="nav-item dropdown">

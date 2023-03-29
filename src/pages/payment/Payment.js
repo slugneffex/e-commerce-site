@@ -129,7 +129,7 @@ const Payment = () => {
                     </div>
                     <div className="extras">
                       <p> 3 Item | ₹ 650</p>
-                      <Link to='/adress' className="btn">
+                      <Link to='/Address' className="btn">
                         Proceed To Pay
                       </Link>
                     </div>
