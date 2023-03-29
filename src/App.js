@@ -22,6 +22,11 @@ import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
 
+
+
+
+import Thanks from "./pages/thankyou/Thanks";
+
 const App = () => {
   return (
     <Routes>
@@ -33,25 +38,20 @@ const App = () => {
       <Route path="/category/:id" element={<Category />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
-      <Route path="/Account" element={<Account />} />
+      
+      <Route path="/Thanks" element={<Thanks />} />
+
+      
+      
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       
       <Route path="/view-all-products" element={<MYOC />} />
-      <Route path="/EmptyCart" element={<Emptycart />} />
+      <Route path ="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path='/address' element={<Loginadress />} />
-      <Route path="/why-choose-combonation" element={<WCC />} />
+      <Route path="/why-choose-combonation"  element={<WCC />}/>
       <Route path="/store/:id" element={<Store />} />
-      <Route path="/Account" element={<Account />} />
-
-      
-      <Route path="/Acccount" element={<Acccount />} />
-      <Route path="/Place" element={<Place />} />
-      <Route path="/Wishlist" element={<Wishlist />} />
-      <Route path="/Wallet" element={<Wallet />} />
-      <Route path="/Orders" element={<Orders />} />
-
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
   );
