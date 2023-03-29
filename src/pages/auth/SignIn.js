@@ -11,7 +11,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/Account");
+      navigate("/Acccount");
     }
   });
 

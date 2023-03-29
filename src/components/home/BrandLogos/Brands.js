@@ -44,6 +44,11 @@ const Brands = () => {
     }
     fetchData();
   }, []);
+
+  const fliterData = brand.filter((brand) => {
+      return (brand.focused === "on")
+  })
+
   return (
     <>
       <div className="top-brand-deals container">
@@ -53,14 +58,11 @@ const Brands = () => {
           <Carousel responsive={responsive} className="py-14"
           swipeable={false}
           autoPlay
-          customTransition="all .1"
-          transitionDuration={500}
           arrows={false}
-          
           >
           
-            {Array.isArray(brand) &&
-              brand.map((e) => (
+            {Array.isArray(fliterData) &&
+              fliterData.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
                     <a href="/#">
