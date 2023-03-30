@@ -356,7 +356,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">
+                  <Link to="/Wishlist" className="nav-link">
                     <i className="bi bi-heart"></i>
                     <span>Wishlist</span>
                   </Link>

@@ -12,6 +12,7 @@ const BrandProduct = () => {
   const { brand_id } = useParams();
 
   const [brandProduct, setBrandProduct] = useState([]);
+  const [brandName,setBrandName] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -23,6 +24,7 @@ const BrandProduct = () => {
       };
       const response = await axios.get(`/brand/${brand_id}`, options);
       setBrandProduct(response.data.products.data);
+      setBrandName(response.data.brand)
     }
     fetchData();
   }, [brand_id]);
@@ -92,7 +94,7 @@ const BrandProduct = () => {
                     <Link>Brand</Link>
                   </li>
                   <li className="breadcrumb-item">
-                    <Link>Brand</Link>
+                    <Link className="categoriesName">{brandName.name}</Link>
                   </li>
                 </ol>
               </nav>
