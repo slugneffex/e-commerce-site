@@ -330,10 +330,21 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Cart" className="nav-link">
+                  <Link to="/Cart" className="nav-link" style={{ position: "relative" }}>
                     <i className="bi bi-cart-fill"></i>
                     <span>Cart</span>
-                    <strong>{totalCartCount}</strong>
+                    <strong style={{
+                      position: "absolute",
+                      right: ".3rem",
+                      bottom: "3rem",
+                      zInd: "2",
+                      fontSize: "10px",
+                      color: "white",
+                      backgroundColor: "#FE9E2D",
+                      borderRadius: "50%",
+                      width: "15px",
+                      textAlign: "center"
+                    }}>{totalCartCount}</strong>
                   </Link>
                 </li>
               </ul>

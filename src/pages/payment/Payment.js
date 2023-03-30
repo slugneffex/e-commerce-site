@@ -10,7 +10,7 @@ const Payment = () => {
         <section className="payment">
           <div className="container">
           <div className="row text-center py-5" id="progessbarRow">
-            <ul className="" id="progressbarr" style={{marginTop:'8rem'}}>
+            <ul className="" id="progressbarr">
               <div className="col-md-4 col-sm-4" >
                 <Link to="/Cart" className="bagLink">
                   <li id="bag">Bag</li>
@@ -31,8 +31,8 @@ const Payment = () => {
             <hr />
             <div className="row">
               <div className="col-md-8">
-                <div className="card">
-                  <div className="row">
+                <div className="card" style={{ marginTop: "1rem" }}>
+                  <div className="row " style={{ alignItems: "center" }}>
                     <div className="col-md-4">
                       <div className="form-group">
                         <input
@@ -46,17 +46,17 @@ const Payment = () => {
                         </label>
                       </div>
                     </div>
-                    <div className="col-md-4 text-center">
-                      <img src="./assets/img/paymentSection/Group_1735.png" alt="paymentOptions" width="60%" style={{ marginLeft: 0 }} />
+                    <div className="col-md-4 ">
+                      <img src="./assets/img/paymentSection/Group_1735.png" alt="paymentOptions" width="60%" style={{ marginLeft: "0" }}  height="20%" />
                     </div>
                     <div className="col-md-4 text-center">
                       <i className="bi bi-arrow-right" />
                     </div>
                   </div>
                 </div>
-                <div className="card">
-                  <div className="row">
-                    <div className="col-md-8">
+                <div className="card" style={{ marginTop: "1rem" }}>
+                  <div className="row" style={{ position: "relative" }}>
+                    <div className="col-md-6">
                       <div className="form-group">
                         <input
                           type="radio"
@@ -68,10 +68,13 @@ const Payment = () => {
                           Cash On Delivery
                         </label>
                         <br />
-                        <span>This order is eligible for COD</span>
+                        <span style={{ color: "#A2A2A2", marginLeft: "2rem" }}>This shipping option is eligible for COD</span>
                       </div>
                     </div>
-                    <div className="col-3 text-center">
+                    <div className="col-2 text-center" >
+                      <img src="./assets/img/PaymentSection/Group_2286.png" alt="cashImg" style={{ border: ".1px solid #507C50"}}  />
+                    </div>
+                    <div className="col-4 text-center">
                       <i className="bi bi-arrow-right" />
                     </div>
                   </div>
@@ -85,7 +88,7 @@ const Payment = () => {
                       </a>
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6" style={{ position: "absolute", right: "0" }}>
                     <a href className="btn_1">
                       Proceed To Pay
                     </a>
