@@ -50,6 +50,8 @@ const Cart = () => {
     // dispatch(getTotalDiscount());
   }, [dispatch]);
 
+
+  // If cart is empty
   const totalCartCount = totalCount + singletotalCount;
 
   if (totalCartCount === 0) {

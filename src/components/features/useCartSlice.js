@@ -34,6 +34,7 @@ const useCartSlice = createSlice({
       let cartCount = state.cartItems.reduce((total, item) => {
         return item.quantity + total;
       }, 0);
+
       state.totalCount = cartCount;
     },
     getSubTotal: (state, action) => {

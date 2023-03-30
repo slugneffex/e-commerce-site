@@ -7,6 +7,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
 const BrandProduct = () => {
+
+// Brand products api
   const { brand_id } = useParams();
 
   const [brandProduct, setBrandProduct] = useState([]);
@@ -25,34 +27,43 @@ const BrandProduct = () => {
     fetchData();
   }, [brand_id]);
 
+  // total brands
+  const [brand, setBrand] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const options = {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
+        },
+      };
+      const response = await axios.get('/brands', options);
+      setBrand(response.data);
+    }
+    fetchData();
+  }, []);
+
+  const filterbrandsApi = brand.filter((e) => e.focused==="on")
+
+
+
   return (
     <div>
       <HomeLayout>
         <div className="container">
-          <div className="row" style={{ marginTop: "6rem" }}>
-            <div className="col-md-3">
+          <div className="row">
+          <div className="col-md-3">
               <div className="card">
-                <div className="card-body">
-                  <div
-                    className="accordion accordion-flush"
-                    id="accordionFlushExample"
-                  >
-                    <div className="accordion-item">
-                      <button
-                        className="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseOne"
-                      >
-                        <p>
-                          SORT BY: <span className="active">Popularity</span>
-                        </p>
-                      </button>
-                    </div>
-
-                    <Link to="/">
+                <div
+                  className="accordion accordion-flush accc"
+                  id="accordionFlushExample"
+                >
+                  { filterbrandsApi.map((e) => (
+                    <Link to={`/brand/${e.id}`} key={e.id}>
                       <div className="accordion-item">
                         <button
                           className="accordion-button collapsed"
@@ -61,14 +72,15 @@ const BrandProduct = () => {
                           data-bs-target="#flush-collapseThree"
                           aria-expanded="false"
                           aria-controls="flush-collapseThree"
-                        ></button>
+                        >
+                          {e.name}
+                        </button>
                       </div>
                     </Link>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
-
             <div className="col-md-9">
             <div className="row">
               <nav>
