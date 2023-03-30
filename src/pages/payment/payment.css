@@ -2,8 +2,7 @@
 #progressbarr{
     list-style: none;
     display: flex;
-    margin-top: 3.2rem;
-    margin-bottom: -2.4rem;
+    margin-bottom: -2rem;
 }
 
 #progressbarr .active {
