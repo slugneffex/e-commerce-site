@@ -39,6 +39,15 @@ const useSingleCartSlicer = createSlice({
       statee.singletotalCount = singlecartCount;
     },
 
+    getSubTotal: (statee, action) => {
+      statee.subAmount = statee.cartItems.reduce(
+        (acc, item) => {
+          return acc + item.price * item.quantity;
+        },
+        0
+      );
+    },
+
     removesingleCartItem: (statee, action) => {
       let index = statee.singleCartItems.findIndex(
         (item) => item.id === action.payload

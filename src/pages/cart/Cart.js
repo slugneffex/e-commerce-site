@@ -50,7 +50,6 @@ const Cart = () => {
     // dispatch(getTotalDiscount());
   }, [dispatch]);
 
-
   // If cart is empty
   const totalCartCount = totalCount + singletotalCount;
 
@@ -71,10 +70,10 @@ const Cart = () => {
                   </li>
                 </div>
                 <div className="col-md-4 col-sm-4">
-                  <li id="address">Address</li>
+                  <li id="payment">Payment</li>
                 </div>
                 <div className="col-md-4 col-sm-4">
-                  <li id="payment">Payment</li>
+                  <li id="address">Address</li>
                 </div>
               </ul>
             </div>
@@ -148,8 +147,6 @@ const Cart = () => {
                           </div>
                         </li>
                       ))}
-
-                      <hr />
                     </ul>
                   </div>
                 </div>
