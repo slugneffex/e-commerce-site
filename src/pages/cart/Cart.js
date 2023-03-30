@@ -77,6 +77,7 @@ const Cart = () => {
                 </div>
               </ul>
             </div>
+
             <hr />
             <div className="row"></div>
 
@@ -89,7 +90,7 @@ const Cart = () => {
                   </div>
                   <div
                     className="cart-card"
-                    style={{ backgroundColor: "#FFFFFF" }}
+                    style={{ backgroundColor: "#FFFFFF", padding: "1rem" }}
                   >
                     <ul className="cart-list">
                       {cartItems.map((product, index) => (
@@ -147,6 +148,35 @@ const Cart = () => {
                           </div>
                         </li>
                       ))}
+
+
+                      
+
+                      <hr />
+                      <div className="pt-3">
+                        <div className="row">
+                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303" }}>
+                            <span className="term">Precurated Total :-</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span>₹ 6859</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span className="term">Precurated Discount :-</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span>₹ 3041</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span className="term">Payble Amount :-</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span>₹ 3818</span>
+                          </div>
+                        </div>
+                      </div>
+
+
                     </ul>
                   </div>
                 </div>
@@ -207,6 +237,32 @@ const Cart = () => {
                           </div>
                         </li>
                       ))}
+
+                      <hr />
+
+                      <div className="pt-3">
+                        <div className="row">
+                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303" }}>
+                            <span className="term">Precurated Total :-</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span>₹ 6859</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span className="term">Precurated Discount :-</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span>₹ 3041</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span className="term">Payble Amount :-</span>
+                          </div>
+                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                            <span>₹ 3818</span>
+                          </div>
+                        </div>
+                      </div>
+
                     </ul>
                   </div>
                 </div>
