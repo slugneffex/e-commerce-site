@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./incAll.css";
+import { SITE_API } from "./utils";
 
 import { useSelector } from "react-redux";
 
@@ -10,13 +11,18 @@ const Header = () => {
 
   //for search
 
-  // const [searchQuery, setSearchQuery] = useState("");
+  // const [data, setData] = useState({
+  //   term:''
+  // });
+
+  // const[searchQuery,setSearchQuery]=useState('')
+  // const[searchResult,setSearchResult]=useState([])
   // console.log(searchQuery);
   
 
   // useEffect(()=>{
   //     getSearchSuggestions()
-  // },[])
+  // },[searchQuery])
 
   // const getSearchSuggestions=async()=>{
   //         const options = {
@@ -29,6 +35,7 @@ const Header = () => {
   //         };
   //   const data =  await fetch(SITE_API+searchQuery,options)
   //   const json=data.json()
+  //   setSearchResult(json.data)
   //   console.log(json.data)
   // }
 
@@ -42,10 +49,10 @@ const Header = () => {
   //       },
   //     };
   //     const response = await axios.post(
-  //       `/search`,{term:searchQuery},
+  //       `/search`,{term:`${data.term}`},
   //       options
   //     );
-  //     setSearchQuery(response.data);
+     
   //   }
   //   fetchData();
   // }, []);
@@ -226,14 +233,25 @@ const Header = () => {
             </button>
             <form className="d-flex search" role="search">
               <input
+              id="search"
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
                 // value={searchQuery}
                 // onChange={(e) => setSearchQuery(e.target.value)}
+                
               ></input>
             </form>
+
+            {/* <div>
+        {searchResult.map((result) => (
+          <div key={result.id}>
+            <h2>{result.title}</h2>
+          </div>
+        ))}
+      </div> */}
+
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
