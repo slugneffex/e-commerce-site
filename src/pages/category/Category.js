@@ -213,9 +213,9 @@ const Category = () => {
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="col-md-5">
+                <div className="col-md-6" style={{ textAlign: "end" }}>
+                  
+                    <div className="" style={{ }}>
                       <Dropdown>
                         <Dropdown.Toggle
                           variant=""
@@ -242,34 +242,8 @@ const Category = () => {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-                    <div className="col-md-5">
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant=""
-                          id="dropdown-basic"
-                          style={{
-                            border: "1px solid",
-                            marginLeft: "2rem",
-                            width: "120px",
-                          }}
-                        >
-                          Filter by
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">
-                            Action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Another action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Something else
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </div>
-                  </div>
+                   
+                  
                 </div>
               </div>
               <hr />
@@ -283,12 +257,12 @@ const Category = () => {
                 {category.map((e) => (
                   <div className=" col-md-4" key={e.id}>
                     <div className="newComboCart">
-                      <div className="cart-img-sec">
+                      <div className="cart-img-sec" style={{ position: "relative" }}>
                         <Link
                           onClick={() => wishlistData(e.id)}
                           className="addtofavCategory"
                         >
-                          <li className="bi bi-heart"></li>
+                          <li className="bi bi-heart" style={{ position: "absolute", right: "1rem", top: ".8rem" }}></li>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>
@@ -343,12 +317,12 @@ const Category = () => {
                 {product.map((p) => (
                   <div className="col-md-4" key={p.id}>
                     <div className="newComboCart">
-                      <div className="cart-img-sec">
+                      <div className="cart-img-sec" style={{ position: "relative" }}>
                         <Link
                           onClick={() => wishlistProductData(p.id)}
                           className="addtofavCategory"
                         >
-                          <li className="bi bi-heart"></li>
+                          <li className="bi bi-heart" style={{ position: "absolute", right: "1rem", top: ".8rem" }}></li>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img

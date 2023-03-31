@@ -23,6 +23,7 @@ import Wishlist from "./pages/accountDetails/Wishlist";
 import Wallet from "./pages/accountDetails/Wallet";
 import Orders from "./pages/accountDetails/Orders";
 import Acccount from "./pages/accountDetails/Acccount";
+import BrandLogosList from "./pages/BrandLogosList/BrandLogosList";
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/Wallet" element={<Wallet />} />
       <Route path="/Orders" element={<Orders />} />
+      <Route path="/brandlogolist" element={<BrandLogosList />} />
 
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
