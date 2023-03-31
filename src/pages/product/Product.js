@@ -6,6 +6,14 @@ import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import axios from "axios";
+import {
+  addCartProduct,
+  getCartCount,
+  getSubTotal,
+  getTotalAmount,
+  getTotalDiscount,
+} from "../../components/features/useCartSlice";
+import { useDispatch } from "react-redux";
 
 const Product = () => {
   // Combos Product
@@ -23,18 +31,48 @@ const Product = () => {
       };
       const response = await axios.get(`/combo/${id}`, options);
       setCombos(response.data.combo);
-      setComboproduct(response.data.combo.gallery)
+      setComboproduct(response.data.combo.gallery);
     }
     fetchData();
   }, [id]);
 
-  
+  // add to cart for combo
+
+  const dispatch = useDispatch();
+  let productObj = {
+    id: "",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
+  };
+  const addToCart = (e) => {
+    productObj = {
+      id: e.id,
+      title: e.name,
+      price: e.selling_price,
+      image: e.meta_img?.url,
+      mrp: e.mrp,
+      discount: e.discount,
+    };
+
+    dispatch(addCartProduct(productObj));
+    dispatch(getCartCount());
+    dispatch(getSubTotal());
+    dispatch(getTotalAmount());
+    dispatch(getTotalDiscount());
+  };
 
   return (
     <>
       <HomeLayout>
         <div className="byoc" style={{ marginTop: "5rem" }}>
-          <img src="assets/img/byoc.png" className="img-fluid" alt="super-deal" />
+          <img
+            src="assets/img/byoc.png"
+            className="img-fluid"
+            alt="super-deal"
+          />
         </div>
 
         <div className="container">
@@ -57,11 +95,7 @@ const Product = () => {
 
                   {comboproduct.map((e) => (
                     <div className="item big-img" data-hash="two" key={e.id}>
-                      <img
-                        src={e.original_url}
-                        alt="name"
-                        className=""
-                      />
+                      <img src={e.original_url} alt="name" className="" />
                     </div>
                   ))}
                 </Carousel>
@@ -147,7 +181,13 @@ const Product = () => {
                 </div>
                 <br />
                 <div className="addCart" id={combos.id}>
-                  <Link to="" className="btn_1">
+                  <Link
+                    to=""
+                    className="btn_1"
+                    onClick={() => {
+                      addToCart(combos);
+                    }}
+                  >
                     <i className="bi bi-cart"></i>Add To Cart
                   </Link>
                 </div>

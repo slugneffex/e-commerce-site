@@ -18,6 +18,9 @@ import {
   getsingleCartProducts,
   removesingleCartItem,
   getsingleCartCount,
+  getsingleTotalDiscount,
+  getsingleTotalAmount,
+  getsingleSubTotal
 } from "../../components/features/SingleCartSlice";
 
 const Cart = () => {
@@ -40,14 +43,14 @@ const Cart = () => {
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
-  const { singleCartItems } = useSelector((statee) => statee.SingleCart);
+  const { singleCartItems,singlesubAmount,singletotalAmount,singletotalDiscount } = useSelector((statee) => statee.SingleCart);
 
   useEffect(() => {
     dispatch(getsingleCartProducts());
-    // dispatch(getSubTotal());
+    dispatch(getsingleSubTotal());
     dispatch(getsingleCartCount());
-    // dispatch(getTotalAmount());
-    // dispatch(getTotalDiscount());
+    dispatch(getsingleTotalAmount());
+    dispatch(getsingleTotalDiscount());
   }, [dispatch]);
 
   // If cart is empty
@@ -56,6 +59,12 @@ const Cart = () => {
   if (totalCartCount === 0) {
     navigate("/EmptyCart");
   }
+
+  // Total Pricing of products
+
+  const totalCartAmount = totalAmount + singletotalAmount
+  const totalCartDiscount = totalDiscount + singletotalDiscount
+  const totalCartSubAmount = subAmount + singlesubAmount
 
   return (
     <>
@@ -117,7 +126,7 @@ const Cart = () => {
                                     <option value="3">3</option>
                                     <option value="4">4</option> */}
                                   </select>
-                                  <span>Only 2 Left</span>
+                                  {/* <span>Only 2 Left</span> */}
                                 </div>
                                 <div className="price-sec">
                                   <del className="mrp">₹{product.mrp}</del>
@@ -149,34 +158,77 @@ const Cart = () => {
                         </li>
                       ))}
 
-
-                      
-
                       <hr />
                       <div className="pt-3">
                         <div className="row">
-                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303" }}>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
                             <span className="term">Precurated Total :-</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
-                            <span>₹ 6859</span>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "right",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
+                            <span>₹ {parseFloat(totalAmount).toFixed(2)}</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
                             <span className="term">Precurated Discount :-</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
-                            <span>₹ 3041</span>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "right",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
+                            <span>₹ {parseFloat(totalDiscount).toFixed(2)}</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
                             <span className="term">Payble Amount :-</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
-                            <span>₹ 3818</span>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "right",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
+                            <span>₹ {parseFloat(subAmount).toFixed(2)}</span>
                           </div>
                         </div>
                       </div>
-
-
                     </ul>
                   </div>
                 </div>
@@ -210,14 +262,14 @@ const Cart = () => {
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                   </select>
-                                  <span>Only 2 Left</span>
+                                  {/* <span>Only 2 Left</span> */}
                                 </div>
                                 <div className="price-sec">
-                                  <del className="mrp">₹ 899</del>
-                                  <span className="sp">₹ 299</span>
-                                  <div className="youSave">
+                                  {/* <del className="mrp">₹ 899</del> */}
+                                  <span className="sp">₹ {products.price}</span>
+                                  {/* <div className="youSave">
                                     <span>Total Saving ₹ 599</span>
-                                  </div>
+                                  </div> */}
                                 </div>
                               </div>
                             </div>
@@ -228,6 +280,9 @@ const Cart = () => {
                                   onClick={() => {
                                     dispatch(removesingleCartItem(products.id));
                                     dispatch(getsingleCartCount());
+                                    dispatch(getsingleTotalAmount());
+                                    dispatch(getsingleTotalDiscount());
+                                    dispatch(getsingleSubTotal());
                                   }}
                                   style={{ cursor: "pointer" }}
                                 ></i>
@@ -242,27 +297,74 @@ const Cart = () => {
 
                       <div className="pt-3">
                         <div className="row">
-                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303" }}>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
                             <span className="term">Precurated Total :-</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
-                            <span>₹ 6859</span>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "right",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
+                            <span>₹ {parseFloat(singletotalAmount).toFixed(2)}</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
                             <span className="term">Precurated Discount :-</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
-                            <span>₹ 3041</span>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "right",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
+                            <span>₹ {parseFloat(singletotalDiscount).toFixed(2)}</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "left", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "left",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
                             <span className="term">Payble Amount :-</span>
                           </div>
-                          <div className="col-md-6" style={{ textAlign: "right", fontWeight: "bold", fontSize: "20px", color: "#30303"  }}>
-                            <span>₹ 3818</span>
+                          <div
+                            className="col-md-6"
+                            style={{
+                              textAlign: "right",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              color: "#30303",
+                            }}
+                          >
+                            <span>₹ {parseFloat(singlesubAmount).toFixed(2)}</span>
                           </div>
                         </div>
                       </div>
-
                     </ul>
                   </div>
                 </div>
@@ -273,21 +375,21 @@ const Cart = () => {
                     <h3>Order Summary</h3>
                   </div>
                   <div className="overview-card-body">
-                    <h6>Bill Details ({totalCount} Items)</h6>
+                    <h6>Bill Details ({totalCartCount} Items)</h6>
 
                     <ul className="price-breakup">
                       <li className="price-type">
                         <p>Total Price (Incl Taxes)</p>
-                        <span>₹{parseFloat(totalAmount).toFixed(2)}</span>
+                        <span>₹{parseFloat(totalCartAmount).toFixed(2)}</span>
                       </li>
                       <li className="price-type">
                         <p>Subtotal</p>
-                        <span>₹{parseFloat(subAmount).toFixed(2)}</span>
+                        <span>₹{parseFloat(totalCartSubAmount).toFixed(2)}</span>
                       </li>
                       <li className="price-type">
                         <p>Total Discount</p>
                         <span style={{ color: "#009444" }}>
-                          - ₹{parseFloat(totalDiscount).toFixed(2)}
+                          - ₹{parseFloat(totalCartDiscount).toFixed(2)}
                         </span>
                       </li>
                       {/* <li className="price-type">
@@ -297,7 +399,7 @@ const Cart = () => {
                     </ul>
                     <span>
                       Hurray! You Saved{" "}
-                      <strong>₹{parseFloat(totalDiscount).toFixed(2)}</strong>{" "}
+                      <strong>₹{parseFloat(totalCartDiscount).toFixed(2)}</strong>{" "}
                       On This Order
                     </span>
                   </div>
@@ -306,13 +408,13 @@ const Cart = () => {
                     <div className="total-sec">
                       <p className="total">Total</p>
                       <span className="total">
-                        ₹{parseFloat(subAmount).toFixed(2)}
+                        ₹{parseFloat(totalCartSubAmount).toFixed(2)}
                       </span>
                     </div>
                     <div className="extras">
                       <p>
                         {" "}
-                        {totalCount} Item | ₹{parseFloat(subAmount).toFixed(2)}
+                        {totalCartCount} Item | ₹{parseFloat(totalCartSubAmount).toFixed(2)}
                       </p>
                       <Link to="/payment" className="btn">
                         Proceed To Pay

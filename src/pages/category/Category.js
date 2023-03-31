@@ -15,7 +15,10 @@ import {
 import {
   singleaddCartProduct,
   getsingleCartCount,
-} from "../../components/features/SingleCartSlice"
+  getsingleSubTotal,
+  getsingleTotalAmount,
+  getsingleTotalDiscount,
+} from "../../components/features/SingleCartSlice";
 import { useDispatch } from "react-redux";
 
 const Category = () => {
@@ -86,17 +89,16 @@ const Category = () => {
     dispatch(getTotalDiscount());
   };
 
-
   // add to cart single product
 
-  let SingleproductObj ={
-    id:"",
+  let SingleproductObj = {
+    id: "",
     title: "",
     price: "",
     image: "",
     mrp: "",
     discount: "",
-  }
+  };
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
@@ -110,6 +112,9 @@ const Category = () => {
 
     dispatch(singleaddCartProduct(SingleproductObj));
     dispatch(getsingleCartCount());
+    dispatch(getsingleSubTotal());
+    dispatch(getsingleTotalAmount());
+    dispatch(getsingleTotalDiscount());
   };
 
   // ADd To wishlist combo

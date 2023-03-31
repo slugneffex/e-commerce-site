@@ -5,14 +5,21 @@ import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
+import {
+  singleaddCartProduct,
+  getsingleCartCount,
+  getsingleSubTotal,
+  getsingleTotalAmount,
+  getsingleTotalDiscount,
+} from "../../components/features/SingleCartSlice";
+import { useDispatch } from "react-redux";
 
 const BrandProduct = () => {
-
-// Brand products api
+  // Brand products api
   const { brand_id } = useParams();
 
   const [brandProduct, setBrandProduct] = useState([]);
-  const [brandName,setBrandName] = useState([])
+  const [brandName, setBrandName] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +31,7 @@ const BrandProduct = () => {
       };
       const response = await axios.get(`/brand/${brand_id}`, options);
       setBrandProduct(response.data.products.data);
-      setBrandName(response.data.brand)
+      setBrandName(response.data.brand);
     }
     fetchData();
   }, [brand_id]);
@@ -43,28 +50,56 @@ const BrandProduct = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get('/brands', options);
+      const response = await axios.get("/brands", options);
       setBrand(response.data);
     }
     fetchData();
   }, []);
 
-  const filterbrandsApi = brand.filter((e) => e.focused==="on")
+  const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
+  // Add to cart single brand products
 
+  const dispatch = useDispatch();
+
+  let SingleproductObj = {
+    id: "",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
+  };
+
+  const addToSingleCart = (p) => {
+    SingleproductObj = {
+      id: p.id,
+      title: p.name,
+      price: p.selling_price,
+      image: p.thumbnail_img?.original_url,
+      mrp: p.mrp,
+      discount: p.discount,
+    };
+
+    dispatch(singleaddCartProduct(SingleproductObj));
+    dispatch(getsingleCartCount());
+    dispatch(getsingleSubTotal());
+    dispatch(getsingleTotalAmount());
+    dispatch(getsingleTotalDiscount());
+  };
 
   return (
     <div>
       <HomeLayout>
         <div className="container">
           <div className="row">
-          <div className="col-md-3">
+            <div className="col-md-3">
               <div className="card">
                 <div
                   className="accordion accordion-flush accc"
                   id="accordionFlushExample"
                 >
-                  { filterbrandsApi.map((e) => (
+                  {filterbrandsApi.map((e) => (
                     <Link to={`/brand/${e.id}`} key={e.id}>
                       <div className="accordion-item">
                         <button
@@ -84,23 +119,23 @@ const BrandProduct = () => {
               </div>
             </div>
             <div className="col-md-9">
-            <div className="row">
-              <nav>
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link to='/'>Home</Link>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <Link>Brand</Link>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <Link className="categoriesName">{brandName.name}</Link>
-                  </li>
-                </ol>
-              </nav>
-            </div>
+              <div className="row">
+                <nav>
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link>Brand</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link className="categoriesName">{brandName.name}</Link>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
               <div className="byoccBrand">
-                <img src="/assets/img/byoc.png"  alt="byoc-img" />
+                <img src="/assets/img/byoc.png" alt="byoc-img" />
               </div>
               <div className="row" style={{ marginTop: "3rem" }}>
                 <div className="col-md-6">
@@ -169,42 +204,48 @@ const BrandProduct = () => {
               </div>
 
               <div className="row" style={{ marginTop: "1rem" }}>
-                {brandProduct.map((e) => (
-                  <div className="col-md-4 " key={e.id}>
+                {brandProduct.map((p) => (
+                  <div className="col-md-4 " key={p.id}>
                     <div className="newComboCart">
                       <div className="cart-img-sec">
                         <Link className="addtofavCategory">
                           <li className="bi bi-heart"></li>
                         </Link>
-                        <Link to={`/product/${e.id}`}>
-                          <img src={e.thumbnail_img?.original_url} alt="img"></img>
+                        <Link to={`/product/${p.id}`}>
+                          <img
+                            src={p.thumbnail_img?.original_url}
+                            alt="img"
+                          ></img>
                         </Link>
                       </div>
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{e.name}</span>
+                          <span>{p.name}</span>
                         </div>
                         <div>
                           <span className="packof">(Pack of 2)</span>
                         </div>
                         <div className="price-sec">
                           <div className="col-4" style={{ textAlign: "end" }}>
-                            <span className="sp">₹{e.selling_price}</span>
+                            <span className="sp">₹{p.selling_price}</span>
                           </div>
                           <div className="col-4">
-                            <del className="mrp">₹{e.mrp}</del>
+                            <del className="mrp">₹{p.mrp}</del>
                           </div>
                           <div className="col-4">
-                            <span className="discount">{e.discount}% OFF</span>
+                            <span className="discount">{p.discount}% OFF</span>
                           </div>
                         </div>
                         <div className="card-btn-sec ">
                           <Link className="btnC">
                             <li
                               className="bi bi-cart"
-                              id={e.id}
+                              id={p.id}
                               style={{ cursor: "pointer" }}
+                              onClick={() => {
+                                addToSingleCart(p);
+                              }}
                             >
                               Add to Cart
                             </li>

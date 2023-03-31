@@ -39,10 +39,22 @@ const useSingleCartSlicer = createSlice({
       statee.singletotalCount = singlecartCount;
     },
 
-    getSubTotal: (statee, action) => {
-      statee.subAmount = statee.cartItems.reduce(
+    getsingleSubTotal: (statee, action) => {
+      statee.singlesubAmount = statee.singleCartItems.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0);
+    },
+
+    getsingleTotalAmount: (statee, action) => {
+      statee.singletotalAmount = statee.singleCartItems.reduce((acc, item) => {
+        return acc + item.mrp * item.quantity;
+      }, 0);
+    },
+
+    getsingleTotalDiscount: (statee, action) => {
+      statee.singletotalDiscount = statee.singleCartItems.reduce(
         (acc, item) => {
-          return acc + item.price * item.quantity;
+          return acc + (item.mrp - item.price) * item.quantity;
         },
         0
       );
@@ -64,5 +76,8 @@ export const {
   getsingleCartProducts,
   removesingleCartItem,
   getsingleCartCount,
+  getsingleTotalDiscount,
+  getsingleTotalAmount,
+  getsingleSubTotal,
 } = useSingleCartSlicer.actions;
 export default useSingleCartSlicer.reducer;
