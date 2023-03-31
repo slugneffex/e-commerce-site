@@ -284,7 +284,7 @@ const Header = () => {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto mb-2">
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown megaMenu">
                   <Link
                     className="nav-link dropdown-toggle"
                     to="/"

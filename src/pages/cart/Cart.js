@@ -352,6 +352,38 @@ const Cart = () => {
               </div>
             </div>
           </ul>
+          <hr />
+
+
+          {/* for freebies */}
+
+          {/* <li className="desktop" style={{ padding: "1rem" }}>
+            <div className="signalCart">
+              <div className="col-2">
+                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
+              </div>
+              <div className="col-10">
+                <h3><strong>Hurray !</strong> You are Eligible To Add Freebies <span>Upto ₹ 814.71</span></h3>
+                <a href="/freebies" className="btn_1">Add Freebies Now <i className="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </li> */}
+
+
+
+
+
+          {/* It is for add more product for more saving and get 70 % OFF */}
+          {/* <li style={{ padding: "1rem" }}>
+            <div className="signalCart">
+              <div className="col-2">
+                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
+              </div>
+              <div className="col-10">
+                <h3><strong>Add More Products For More Savings !</strong> And Get <span>Upto 70% OFF</span></h3>
+              </div>
+            </div>
+          </li> */}
         </div>
       </div>
     );
