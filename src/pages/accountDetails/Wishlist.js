@@ -1,9 +1,17 @@
-import React from "react";
+import React,{useEffect} from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./accountDetails.css";
 import Sidebar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      alert("login please")
+      navigate("/Signin");
+    }
+  });
   return (
     <>
       <HomeLayout>

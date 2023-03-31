@@ -329,8 +329,8 @@ body {
 
 .youMayLikeHeart {
   position: absolute;
-  margin-left: 210px;
-  margin-top: .7rem;
+  right: 1rem;
+  top: .8rem
 }
 
 /* New card css */
@@ -439,10 +439,6 @@ body {
 
 /* Top Trending Combos */
 @media (max-width: 768px) {
-
-  .youMayLikeHeart {
-    margin-left: 155px;
-  }
 
   .top-trending-head {
     margin-top: 2.5rem;
