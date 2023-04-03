@@ -137,7 +137,13 @@ a:link{
 .accountAddress {
     margin-bottom: 1rem;
 
+    
 }
+
+.rupee{
+    margin-right:10px;
+    display: flex;
+ }
 
 
 .order-card  {
@@ -162,6 +168,8 @@ a:link{
 .order{
     border: 1px solid black;
 }
+
+
 
 @media(max-width: 720px) {
     /*for mobiles (ACCOUNT)*/
