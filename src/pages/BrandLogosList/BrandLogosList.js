@@ -47,7 +47,7 @@ const BrandLogosList = () => {
                                 <a className="box_topic" style={{ transition: "all 0.3s ease-in-out" }} href="https://www.combonation.in/brand/armaf">
                                     <div className="img-sec">
                                         <img src={e.image?.original_url} alt={e.name} style={{ width: "100px", height: "100px" }} />
-                                        {/* <img src="https://www.combonation.in/storage/13573/63f8a413896ff_ARMAF-LOGO.png" style="width: 100px; height: 100px;" alt="armaf" class="cat-img"> */}
+                                        
                                     </div>
                                     <div className="title text-center my-3">
                                         <h3 style={{ fontSize: "1.125rem" }}>{e.name}</h3>

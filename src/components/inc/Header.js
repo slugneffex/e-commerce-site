@@ -18,8 +18,12 @@ const Header = () => {
   // const[searchQuery,setSearchQuery]=useState('')
   // const[searchResult,setSearchResult]=useState([])
   // console.log(searchQuery);
+
   // console.log(searchResult)
   
+
+
+
 
   // useEffect(()=>{
   //     getSearchSuggestions()
@@ -52,10 +56,15 @@ const Header = () => {
   //     const response = await axios.post(
   //       `search`,{term:`${searchQuery.term}`},
   //       options
+
   //     )// .than((res)=>setSearchResult(res.data))
       
   //     setSearchResult(response)
      
+
+  //     );
+
+
   //   }
   //   fetchData();
   // }, []);
@@ -166,8 +175,13 @@ const Header = () => {
     fetchData();
   }, []);
 
-  const filterbrandsApi = brand.filter((e) => e.focused==="on")
+  const fliterData = brand.filter((brand) => {
+    return (brand.focused === "on")
+  })
 
+ 
+
+ 
 
 
   return (
@@ -281,13 +295,18 @@ const Header = () => {
             </button>
             <form className="d-flex search" role="search">
               <input
-              id="search"
+                id="search"
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+
                 // value={searchQuery}
-                // onChange={(e) => setSearchQuery(e.target.value)}               
+
+              // value={searchQuery}
+              // onChange={(e) => setSearchQuery(e.target.value)}
+
+
               ></input>
             </form>
             {/* <div>
@@ -300,20 +319,38 @@ const Header = () => {
 
             <div
               className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto mb-2">
-                <li className="nav-item dropdown">
+              id="navbarSupportedContent">
+              <ul id="brandHover" className="navbar-nav me-auto mb-2"
+              
+              >
+                <li className="nav-item dropdown megaMenu">
                   <Link
                     className="nav-link dropdown-toggle"
                     to="/"
                     role="button"
-                    data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    
                   >
                     Brands
                   </Link>
-                  <ul className="dropdown-menu">
+                  {/* <div className="menu-wrapper show_mega">
+                    <div className="row small-gutters">
+                      {fliterData.map((e) => (
+                        <div className="col-lg-3 col-50 text-center" key={e.id}>
+                          <Link to={`/brand/${e.id}`}>
+                            <a href="https://www.combonation.in/category/baby-care-new">
+                              <h3 style={{ textDecoration: "none" }}>{e.name}</h3>
+                              <img
+                                src={e.image?.original_url} alt={e.name}
+                                style={{ width: 100, height: "auto" }}
+                              />
+                            </a>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </div> */}
+                  {/* <ul className="dropdown-menu">
                     { filterbrandsApi.map((e) => (
                     <li key={e.id}>
                       <Link className="dropdown-item" to="/about">
@@ -321,7 +358,7 @@ const Header = () => {
                       </Link>
                     </li>
                     ))}
-                  </ul>
+                  </ul> */}
                 </li>
                 <li className="nav-item dropdown">
                   <Link

@@ -160,7 +160,7 @@ const Footer = () => {
         <hr />
         <section id="footer-secondary" >
           <div className="container" >
-            <div className="row add_bottom_25 p-5" style={{ alignItems: "end" }}>
+            <div className="row add_bottom_25 p-5" style={{ alignItems: "end", position: "relative" }}>
               <div className="col-lg-6 col-md-12">
                 <h3>Working Hours:</h3>
                 <span>Mon-Fri: 10:00AM - 06:30PM | Sat-Sun Closed</span>
@@ -201,7 +201,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-6 desktop" style={{ width: "450px", marginLeft: "150px" }}>
+              <div className="col-md-6 desktop" style={{ width: "450px", position: "absolute", right: "2.2rem"}}>
                 <div className="how-we-help">
                   <i className="bi bi-headset"></i>
                   <h2>How may we help you</h2>
