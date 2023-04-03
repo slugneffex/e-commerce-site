@@ -145,8 +145,11 @@ const Header = () => {
 
   const fliterData = brand.filter((brand) => {
     return (brand.focused === "on")
-})
+  })
 
+ 
+
+ 
 
 
   return (
@@ -281,26 +284,27 @@ const Header = () => {
 
             <div
               className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto mb-2">
+              id="navbarSupportedContent">
+              <ul id="brandHover" className="navbar-nav me-auto mb-2"
+              
+              >
                 <li className="nav-item dropdown megaMenu">
                   <Link
                     className="nav-link dropdown-toggle"
                     to="/"
                     role="button"
-                    data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    
                   >
                     Brands
                   </Link>
-                  <div className="menu-wrapper show_mega">
+                  {/* <div className="menu-wrapper show_mega">
                     <div className="row small-gutters">
                       {fliterData.map((e) => (
                         <div className="col-lg-3 col-50 text-center" key={e.id}>
                           <Link to={`/brand/${e.id}`}>
                             <a href="https://www.combonation.in/category/baby-care-new">
-                              <h3>{e.name}</h3>
+                              <h3 style={{ textDecoration: "none" }}>{e.name}</h3>
                               <img
                                 src={e.image?.original_url} alt={e.name}
                                 style={{ width: 100, height: "auto" }}
@@ -310,7 +314,7 @@ const Header = () => {
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                   {/* <ul className="dropdown-menu">
                     { filterbrandsApi.map((e) => (
                     <li key={e.id}>
