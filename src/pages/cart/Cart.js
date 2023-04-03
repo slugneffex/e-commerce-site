@@ -20,7 +20,7 @@ import {
   getsingleCartCount,
   getsingleTotalDiscount,
   getsingleTotalAmount,
-  getsingleSubTotal
+  getsingleSubTotal,
 } from "../../components/features/SingleCartSlice";
 
 const Cart = () => {
@@ -43,7 +43,12 @@ const Cart = () => {
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
-  const { singleCartItems,singlesubAmount,singletotalAmount,singletotalDiscount } = useSelector((statee) => statee.SingleCart);
+  const {
+    singleCartItems,
+    singlesubAmount,
+    singletotalAmount,
+    singletotalDiscount,
+  } = useSelector((statee) => statee.SingleCart);
 
   useEffect(() => {
     dispatch(getsingleCartProducts());
@@ -62,9 +67,327 @@ const Cart = () => {
 
   // Total Pricing of products
 
-  const totalCartAmount = totalAmount + singletotalAmount
-  const totalCartDiscount = totalDiscount + singletotalDiscount
-  const totalCartSubAmount = subAmount + singlesubAmount
+  const totalCartAmount = totalAmount + singletotalAmount;
+  const totalCartDiscount = totalDiscount + singletotalDiscount;
+  const totalCartSubAmount = subAmount + singlesubAmount;
+
+  // IF comboSection cart ===1 then i have to show the section
+
+  let ComboSection = null;
+  if (totalCount >= 1) {
+    ComboSection = (
+      <div className="cartCard">
+        <div className="cart-type">
+          <h3>Pre Curated Combo</h3> <span>(Total {totalCount} Items)</span>
+        </div>
+        <div
+          className="cart-card"
+          style={{ backgroundColor: "#FFFFFF", padding: "1rem" }}
+        >
+          <ul className="cart-list">
+            {cartItems.map((product, index) => (
+              <li className="cart-item" key={product.id}>
+                <div className="row">
+                  <div className="col-3">
+                    <Link to={`/combo/${product.id}`}>
+                      <img src={product.image} alt={product.title} />
+                    </Link>
+                  </div>
+
+                  <div className="col-6">
+                    <div className="det">
+                      <Link to={`/combo/${product.id}`}>
+                        <h6>{product.title}</h6>
+                      </Link>
+
+                      <br />
+                      <div className="form-group">
+                        <select name="" id="">
+                          {/* Qty
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option> */}
+                        </select>
+                        {/* <span>Only 2 Left</span> */}
+                      </div>
+                      <div className="price-sec">
+                        <del className="mrp">₹{product.mrp}</del>
+                        <span className="sp">₹{product.price}</span>
+                        {/* <div className="youSave">
+                                    <span>Total Saving ₹ {product.discount}</span>
+                                  </div> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-3">
+                    <div className="actions">
+                      <i
+                        className="bi bi-trash"
+                        onClick={() => {
+                          dispatch(removeCartItem(product.id));
+                          dispatch(getSubTotal());
+                          dispatch(getCartCount());
+                          dispatch(calculateTax());
+                          dispatch(getTotalAmount());
+                          dispatch(getTotalDiscount());
+                        }}
+                        style={{ cursor: "pointer" }}
+                      ></i>
+                      <i className="bi bi-heart"></i>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+
+            <hr />
+            <div className="pt-3">
+              <div className="row">
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "left",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span className="term">Precurated Total :-</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "right",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span>₹ {parseFloat(totalAmount).toFixed(2)}</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "left",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span className="term">Precurated Discount :-</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "right",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span>₹ {parseFloat(totalDiscount).toFixed(2)}</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "left",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span className="term">Payble Amount :-</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "right",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span>₹ {parseFloat(subAmount).toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  // If Single cart===1 then i have to show the section
+
+  let SingleCartSection = null;
+
+  if (singletotalCount >= 1) {
+    SingleCartSection = (
+      <div className="cartCard py-5">
+        <div className="cart-type">
+          <h3>Custom Combo</h3> <span>(Total {singletotalCount} Items)</span>
+        </div>
+        <div className="cart-card" style={{ backgroundColor: "#FFFFFF" }}>
+          <ul className="cart-list">
+            {singleCartItems.map((products, Singleindex) => (
+              <li className="cart-item" key={products.id}>
+                <div className="row">
+                  <div className="col-3">
+                    <img src={products.image} alt="W" />
+                  </div>
+                  <div className="col-6">
+                    <div className="det">
+                      <h6>{products.title}</h6>
+                      <br />
+                      <div className="form-group">
+                        <select name="" id="">
+                          Qty
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                        </select>
+                        {/* <span>Only 2 Left</span> */}
+                      </div>
+                      <div className="price-sec">
+                        {/* <del className="mrp">₹ 899</del> */}
+                        <span className="sp">₹ {products.price}</span>
+                        {/* <div className="youSave">
+                                    <span>Total Saving ₹ 599</span>
+                                  </div> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-3">
+                    <div className="actions">
+                      <i
+                        className="bi bi-trash"
+                        onClick={() => {
+                          dispatch(removesingleCartItem(products.id));
+                          dispatch(getsingleCartCount());
+                          dispatch(getsingleTotalAmount());
+                          dispatch(getsingleTotalDiscount());
+                          dispatch(getsingleSubTotal());
+                        }}
+                        style={{ cursor: "pointer" }}
+                      ></i>
+                      <i className="bi bi-heart"></i>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+
+            <hr />
+
+            <div className="pt-3">
+              <div className="row">
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "left",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span className="term">BYOC Total :-</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "right",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span>₹ {parseFloat(singletotalAmount).toFixed(2)}</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "left",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span className="term">BYOC Discount :-</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "right",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span>₹ {parseFloat(singletotalDiscount).toFixed(2)}</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "left",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span className="term">Payble Amount :-</span>
+                </div>
+                <div
+                  className="col-md-6"
+                  style={{
+                    textAlign: "right",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    color: "#30303",
+                  }}
+                >
+                  <span>₹ {parseFloat(singlesubAmount).toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+          </ul>
+          <hr />
+
+
+          {/* for freebies */}
+
+          {/* <li className="desktop" style={{ padding: "1rem" }}>
+            <div className="signalCart">
+              <div className="col-2">
+                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
+              </div>
+              <div className="col-10">
+                <h3><strong>Hurray !</strong> You are Eligible To Add Freebies <span>Upto ₹ 814.71</span></h3>
+                <a href="/freebies" className="btn_1">Add Freebies Now <i className="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </li> */}
+
+
+
+
+
+          {/* It is for add more product for more saving and get 70 % OFF */}
+          {/* <li style={{ padding: "1rem" }}>
+            <div className="signalCart">
+              <div className="col-2">
+                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
+              </div>
+              <div className="col-10">
+                <h3><strong>Add More Products For More Savings !</strong> And Get <span>Upto 70% OFF</span></h3>
+              </div>
+            </div>
+          </li> */}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -92,282 +415,8 @@ const Cart = () => {
 
             <div className="row mt-5">
               <div className="col-md-8">
-                <div className="cartCard">
-                  <div className="cart-type">
-                    <h3>Pre Curated Combo</h3>{" "}
-                    <span>(Total {totalCount} Items)</span>
-                  </div>
-                  <div
-                    className="cart-card"
-                    style={{ backgroundColor: "#FFFFFF", padding: "1rem" }}
-                  >
-                    <ul className="cart-list">
-                      {cartItems.map((product, index) => (
-                        <li className="cart-item" key={product.id}>
-                          <div className="row">
-                            <div className="col-3">
-                              <Link to={`/combo/${product.id}`}>
-                                <img src={product.image} alt={product.title} />
-                              </Link>
-                            </div>
-
-                            <div className="col-6">
-                              <div className="det">
-                                <Link to={`/combo/${product.id}`}>
-                                  <h6>{product.title}</h6>
-                                </Link>
-
-                                <br />
-                                <div className="form-group">
-                                  <select name="" id="">
-                                    {/* Qty
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option> */}
-                                  </select>
-                                  {/* <span>Only 2 Left</span> */}
-                                </div>
-                                <div className="price-sec">
-                                  <del className="mrp">₹{product.mrp}</del>
-                                  <span className="sp">₹{product.price}</span>
-                                  {/* <div className="youSave">
-                                    <span>Total Saving ₹ {product.discount}</span>
-                                  </div> */}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-3">
-                              <div className="actions">
-                                <i
-                                  className="bi bi-trash"
-                                  onClick={() => {
-                                    dispatch(removeCartItem(product.id));
-                                    dispatch(getSubTotal());
-                                    dispatch(getCartCount());
-                                    dispatch(calculateTax());
-                                    dispatch(getTotalAmount());
-                                    dispatch(getTotalDiscount());
-                                  }}
-                                  style={{ cursor: "pointer" }}
-                                ></i>
-                                <i className="bi bi-heart"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-
-                      <hr />
-                      <div className="pt-3">
-                        <div className="row">
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "left",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span className="term">Precurated Total :-</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "right",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span>₹ {parseFloat(totalAmount).toFixed(2)}</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "left",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span className="term">Precurated Discount :-</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "right",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span>₹ {parseFloat(totalDiscount).toFixed(2)}</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "left",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span className="term">Payble Amount :-</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "right",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span>₹ {parseFloat(subAmount).toFixed(2)}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </ul>
-                  </div>
-                </div>
-                <hr />
-
-                <div className="cartCard py-5">
-                  <div className="cart-type">
-                    <h3>Custom Combo</h3>{" "}
-                    <span>(Total {singletotalCount} Items)</span>
-                  </div>
-                  <div
-                    className="cart-card"
-                    style={{ backgroundColor: "#FFFFFF" }}
-                  >
-                    <ul className="cart-list">
-                      {singleCartItems.map((products, Singleindex) => (
-                        <li className="cart-item" key={products.id}>
-                          <div className="row">
-                            <div className="col-3">
-                              <img src={products.image} alt="W" />
-                            </div>
-                            <div className="col-6">
-                              <div className="det">
-                                <h6>{products.title}</h6>
-                                <br />
-                                <div className="form-group">
-                                  <select name="" id="">
-                                    Qty
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                  </select>
-                                  {/* <span>Only 2 Left</span> */}
-                                </div>
-                                <div className="price-sec">
-                                  {/* <del className="mrp">₹ 899</del> */}
-                                  <span className="sp">₹ {products.price}</span>
-                                  {/* <div className="youSave">
-                                    <span>Total Saving ₹ 599</span>
-                                  </div> */}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-3">
-                              <div className="actions">
-                                <i
-                                  className="bi bi-trash"
-                                  onClick={() => {
-                                    dispatch(removesingleCartItem(products.id));
-                                    dispatch(getsingleCartCount());
-                                    dispatch(getsingleTotalAmount());
-                                    dispatch(getsingleTotalDiscount());
-                                    dispatch(getsingleSubTotal());
-                                  }}
-                                  style={{ cursor: "pointer" }}
-                                ></i>
-                                <i className="bi bi-heart"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-
-                      <hr />
-
-                      <div className="pt-3">
-                        <div className="row">
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "left",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span className="term">Precurated Total :-</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "right",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span>₹ {parseFloat(singletotalAmount).toFixed(2)}</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "left",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span className="term">Precurated Discount :-</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "right",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span>₹ {parseFloat(singletotalDiscount).toFixed(2)}</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "left",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span className="term">Payble Amount :-</span>
-                          </div>
-                          <div
-                            className="col-md-6"
-                            style={{
-                              textAlign: "right",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              color: "#30303",
-                            }}
-                          >
-                            <span>₹ {parseFloat(singlesubAmount).toFixed(2)}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </ul>
-                  </div>
-                </div>
+                {ComboSection}
+                {SingleCartSection}
               </div>
               <div className="col-md-4 mt-5">
                 <div className="overview-card">
@@ -384,7 +433,9 @@ const Cart = () => {
                       </li>
                       <li className="price-type">
                         <p>Subtotal</p>
-                        <span>₹{parseFloat(totalCartSubAmount).toFixed(2)}</span>
+                        <span>
+                          ₹{parseFloat(totalCartSubAmount).toFixed(2)}
+                        </span>
                       </li>
                       <li className="price-type">
                         <p>Total Discount</p>
@@ -399,7 +450,9 @@ const Cart = () => {
                     </ul>
                     <span>
                       Hurray! You Saved{" "}
-                      <strong>₹{parseFloat(totalCartDiscount).toFixed(2)}</strong>{" "}
+                      <strong>
+                        ₹{parseFloat(totalCartDiscount).toFixed(2)}
+                      </strong>{" "}
                       On This Order
                     </span>
                   </div>
@@ -414,7 +467,8 @@ const Cart = () => {
                     <div className="extras">
                       <p>
                         {" "}
-                        {totalCartCount} Item | ₹{parseFloat(totalCartSubAmount).toFixed(2)}
+                        {totalCartCount} Item | ₹
+                        {parseFloat(totalCartSubAmount).toFixed(2)}
                       </p>
                       <Link to="/payment" className="btn">
                         Proceed To Pay
