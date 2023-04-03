@@ -65,12 +65,6 @@ const Cart = () => {
     navigate("/EmptyCart");
   }
 
-  // Total Pricing of products
-
-  const totalCartAmount = totalAmount + singletotalAmount;
-  const totalCartDiscount = totalDiscount + singletotalDiscount;
-  const totalCartSubAmount = subAmount + singlesubAmount;
-
   // IF comboSection cart ===1 then i have to show the section
 
   let ComboSection = null;
@@ -164,7 +158,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(totalAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(totalAmount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -186,7 +180,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(totalDiscount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(totalDiscount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -208,7 +202,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(subAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(subAmount).toFixed(0)}</span>
                 </div>
               </div>
             </div>
@@ -218,7 +212,109 @@ const Cart = () => {
     );
   }
 
+  // For freebies discount part
+
+  let discount = 0;
+  switch (true) {
+    case singlesubAmount >= 1000 && singlesubAmount < 3000:
+      discount = (singlesubAmount * 20) / 100;
+      break;
+    case singlesubAmount >= 3000 && singlesubAmount < 5000:
+      discount = (singlesubAmount * 30) / 100;
+      break;
+    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
+      discount = (singlesubAmount * 40) / 100;
+      break;
+    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
+      discount = (singlesubAmount * 50) / 100;
+      break;
+    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
+      discount = (singlesubAmount * 60) / 100;
+      break;
+    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
+      discount = (singlesubAmount * 100) / 100;
+      break;
+    default:
+      discount = 0;
+      break;
+  }
+
+  // Total Pricing of products
+  const { freebiestotalAmount } = useSelector((state) => state.freebies);
+  let ExtraFreebiesAmount = freebiestotalAmount - discount;
+
+  const totalCartAmount = totalAmount + singletotalAmount;
+  const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
+  const totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmount;
+
+  // Extra freebies amount
+
+  let ExtraFreebiesAmountSection = null;
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountSection = (
+      <li className="price-type">
+        <p>Extra Freebie Amount</p>
+        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+      </li>
+    );
+  }
+
+  //  Freebies Section
+
+  let freebiesDiscountSection = null;
+
+  if (singlesubAmount >= 1000) {
+    freebiesDiscountSection = (
+      <li className="desktop" style={{ padding: "1rem" }}>
+        <div className="signalCart">
+          <div className="col-2">
+            <img
+              src="./assets/img/percent-star.png"
+              alt="discountImg"
+              width="75px"
+              height="75px"
+            />
+          </div>
+          <div className="col-10">
+            <h3>
+              <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+              <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+            </h3>
+            <Link to="/freebies" className="btn_1">
+              Add Freebies Now <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
+        </div>
+      </li>
+    );
+  }
+
   // If Single cart===1 then i have to show the section
+
+  let freebiesUptoSection = null;
+
+  if (singlesubAmount < 1000) {
+    freebiesUptoSection = (
+      <li style={{ padding: "1rem" }}>
+        <div className="signalCart">
+          <div className="col-2">
+            <img
+              src="./assets/img/percent-star.png"
+              alt="discountImg"
+              width="75px"
+              height="75px"
+            />
+          </div>
+          <div className="col-10">
+            <h3>
+              <strong>Add More Products For More Savings !</strong> And Get{" "}
+              <span>Upto 70% OFF</span>
+            </h3>
+          </div>
+        </div>
+      </li>
+    );
+  }
 
   let SingleCartSection = null;
 
@@ -303,7 +399,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singletotalAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(singletotalAmount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -325,7 +421,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singletotalDiscount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -347,43 +443,18 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singlesubAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(singlesubAmount).toFixed(0)}</span>
                 </div>
               </div>
             </div>
           </ul>
           <hr />
 
-
           {/* for freebies */}
-
-          {/* <li className="desktop" style={{ padding: "1rem" }}>
-            <div className="signalCart">
-              <div className="col-2">
-                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
-              </div>
-              <div className="col-10">
-                <h3><strong>Hurray !</strong> You are Eligible To Add Freebies <span>Upto ₹ 814.71</span></h3>
-                <a href="/freebies" className="btn_1">Add Freebies Now <i className="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </li> */}
-
-
-
-
+          {freebiesDiscountSection}
 
           {/* It is for add more product for more saving and get 70 % OFF */}
-          {/* <li style={{ padding: "1rem" }}>
-            <div className="signalCart">
-              <div className="col-2">
-                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
-              </div>
-              <div className="col-10">
-                <h3><strong>Add More Products For More Savings !</strong> And Get <span>Upto 70% OFF</span></h3>
-              </div>
-            </div>
-          </li> */}
+          {freebiesUptoSection}
         </div>
       </div>
     );
@@ -429,20 +500,22 @@ const Cart = () => {
                     <ul className="price-breakup">
                       <li className="price-type">
                         <p>Total Price (Incl Taxes)</p>
-                        <span>₹{parseFloat(totalCartAmount).toFixed(2)}</span>
+                        <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
                       </li>
                       <li className="price-type">
                         <p>Subtotal</p>
                         <span>
-                          ₹{parseFloat(totalCartSubAmount).toFixed(2)}
+                          ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
                       </li>
                       <li className="price-type">
                         <p>Total Discount</p>
                         <span style={{ color: "#009444" }}>
-                          - ₹{parseFloat(totalCartDiscount).toFixed(2)}
+                          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
                         </span>
                       </li>
+                      {ExtraFreebiesAmountSection}
+
                       {/* <li className="price-type">
                         <p>Shipping</p>
                         <span style={{ color: "#009444" }}>₹ 50</span>
@@ -451,7 +524,7 @@ const Cart = () => {
                     <span>
                       Hurray! You Saved{" "}
                       <strong>
-                        ₹{parseFloat(totalCartDiscount).toFixed(2)}
+                        ₹{parseFloat(totalCartDiscount).toFixed(0)}
                       </strong>{" "}
                       On This Order
                     </span>
@@ -461,14 +534,14 @@ const Cart = () => {
                     <div className="total-sec">
                       <p className="total">Total</p>
                       <span className="total">
-                        ₹{parseFloat(totalCartSubAmount).toFixed(2)}
+                        ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                       </span>
                     </div>
                     <div className="extras">
                       <p>
                         {" "}
                         {totalCartCount} Item | ₹
-                        {parseFloat(totalCartSubAmount).toFixed(2)}
+                        {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
                       <Link to="/payment" className="btn">
                         Proceed To Pay
