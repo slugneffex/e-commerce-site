@@ -11,20 +11,40 @@ const Header = () => {
 
   //for search
 
-  // const [data, setData] = useState({
-  //   term:''
-  // });
+  const [data, setData] = useState({
+    term:''
+  });
 
-  // const[searchQuery,setSearchQuery]=useState('')
-  // const[searchResult,setSearchResult]=useState([])
-  // console.log(searchQuery);
-
-  // console.log(searchResult)
   
+  const[searchResult,setSearchResult]=useState([])
+  console.log(searchResult)
 
-
-
-
+  function submit(e) {
+    e.preventDefault();
+    axios
+      .post(
+        '/search',
+        {
+         term:data.search       
+        },
+        {
+          headers: {
+            "X-Authorization":
+              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          },
+        }
+      )
+      .then((res) => {
+        setSearchResult(res.data.combos)
+        console.log(searchResult)
+      });
+  }
+  function handle(e) {
+    const newdata = { ...data };
+    newdata[e.target.id] = e.target.value;
+    setData(newdata);
+    console.log(newdata);
+  }
   // useEffect(()=>{
   //     getSearchSuggestions()
   // },[searchQuery])
@@ -54,36 +74,32 @@ const Header = () => {
   //       },
   //     };
   //     const response = await axios.post(
-  //       `search`,{term:`${searchQuery.term}`},
+  //       `/search`,{term:`${searchQuery.term}`},
   //       options
-
-  //     )// .than((res)=>setSearchResult(res.data))
-      
-  //     setSearchResult(response)
+  //     ) 
+    
+  //     setSearchResult(response.data)
      
-
-  //     );
-
-
   //   }
   //   fetchData();
   // }, []);
 
 // 
 
-// const url = "https://combonationbusiness.in/frontend/api"+searchQuery
+// const url = "https://combonationbusiness.in/frontend/api/search"+searchQuery
 // useEffect(() => {
 //     async function fetchData() {
 //       const options = {
+        
+//       };
+//       axios.post(url,
+//        {
 //         headers: {
 //           "X-Authorization":
 //             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
 //           "Cache-Control": "no-cache, no-store, must-revalidate",
-//         },
-//       };
-//       axios.post(
-//         url,
-//         {options}
+//         }
+//        }
 //       ).than((res)=>setSearchResult(res.data)) 
 //     }
 //     fetchData();
@@ -175,13 +191,8 @@ const Header = () => {
     fetchData();
   }, []);
 
-  const fliterData = brand.filter((brand) => {
-    return (brand.focused === "on")
-  })
+  const filterbrandsApi = brand.filter((e) => e.focused==="on")
 
- 
-
- 
 
 
   return (
@@ -293,20 +304,16 @@ const Header = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <form className="d-flex search" role="search">
+            <form className="d-flex search" onSubmit={(e) => submit(e)}>
               <input
-                id="search"
+              id="search"
                 className="form-control me-2"
                 type="search"
+                name='search'
                 placeholder="Search"
                 aria-label="Search"
-
-                // value={searchQuery}
-
-              // value={searchQuery}
-              // onChange={(e) => setSearchQuery(e.target.value)}
-
-
+                value={data.search}
+                onChange={(e) => handle(e)}               
               ></input>
             </form>
             {/* <div>
@@ -319,38 +326,20 @@ const Header = () => {
 
             <div
               className="collapse navbar-collapse"
-              id="navbarSupportedContent">
-              <ul id="brandHover" className="navbar-nav me-auto mb-2"
-              
-              >
-                <li className="nav-item dropdown megaMenu">
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav me-auto mb-2">
+                <li className="nav-item dropdown">
                   <Link
                     className="nav-link dropdown-toggle"
                     to="/"
                     role="button"
+                    data-bs-toggle="dropdown"
                     aria-expanded="false"
-                    
                   >
                     Brands
                   </Link>
-                  {/* <div className="menu-wrapper show_mega">
-                    <div className="row small-gutters">
-                      {fliterData.map((e) => (
-                        <div className="col-lg-3 col-50 text-center" key={e.id}>
-                          <Link to={`/brand/${e.id}`}>
-                            <a href="https://www.combonation.in/category/baby-care-new">
-                              <h3 style={{ textDecoration: "none" }}>{e.name}</h3>
-                              <img
-                                src={e.image?.original_url} alt={e.name}
-                                style={{ width: 100, height: "auto" }}
-                              />
-                            </a>
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
-                  </div> */}
-                  {/* <ul className="dropdown-menu">
+                  <ul className="dropdown-menu">
                     { filterbrandsApi.map((e) => (
                     <li key={e.id}>
                       <Link className="dropdown-item" to="/about">
@@ -358,7 +347,7 @@ const Header = () => {
                       </Link>
                     </li>
                     ))}
-                  </ul> */}
+                  </ul>
                 </li>
                 <li className="nav-item dropdown">
                   <Link
