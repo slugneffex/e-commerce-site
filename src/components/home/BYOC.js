@@ -23,18 +23,39 @@ const Categories = () => {
 
   return (
     <div>
-      {Array.isArray(myoc) &&
-        myoc.map((e) => (
-          <div className="byoc" key={e.myoc_banner?.id}>
-            <Link to={`/view-all-products`}>
-              <img
-                src={e.myoc_banner?.original_url}
-                className="img-fluid"
-                alt="super-deal"
-              />
-            </Link>
-          </div>
-        ))}
+
+      {/* desktop  */}
+      <div className="desktop">
+        {Array.isArray(myoc) &&
+          myoc.map((e) => (
+            <div className="byoc" key={e.myoc_banner?.id}>
+              <Link to={`/view-all-products`}>
+                <img
+                  src={e.myoc_banner?.original_url}
+                  className="img-fluid"
+                  alt="super-deal"
+                />
+              </Link>
+            </div>
+          ))}
+      </div>
+
+      {/* mobile */}
+      <div className="mobile">
+        {Array.isArray(myoc) &&
+          myoc.map((e) => (
+            <div className="byoc" key={e.myoc_mobile?.id}>
+              <Link to={`/view-all-products`}>
+                <img
+                  src={e.myoc_mobile?.original_url}
+                  className="img-fluid"
+                  width="100%"
+                  alt="super-deal"
+                />
+              </Link>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

@@ -3,6 +3,10 @@ body {
   /* background-color: #ADADAD; */
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar-brand img {
   width: 130px;
   height: 60px;
@@ -58,7 +62,7 @@ body {
   display: block;
   position: absolute;
   top: 50%;
-  left: 0;
+  left: -50px;
 }
 
 .hr-line-head:after {
@@ -69,7 +73,7 @@ body {
   display: block;
   position: absolute;
   top: 50%;
-  right: 0;
+  right: -50px;
 }
 
 .btn_view_all {
@@ -333,6 +337,20 @@ body {
   top: .8rem
 }
 
+.notAdded {
+  display: block;
+  border: none;
+  background-color: #FFF;
+  padding-right: 0;
+}
+
+.redHeart {
+  display: none;
+  border: none;
+  background-color: #FFF;
+  padding-right: 0;
+}
+
 /* New card css */
 .newComboCart {
   border: none !important;
@@ -340,7 +358,6 @@ body {
   margin-top: 1rem;
   margin-bottom: 1rem;
   position: relative;
-  margin-right: .5rem;
 }
 
 .cart-img-sec {
@@ -349,7 +366,6 @@ body {
 }
 
 .addtofav {
-  position: relative;
   margin-left: auto;
   margin-top: 1%;
 }
@@ -902,6 +918,8 @@ ul.additional_links li:after {
     padding: 1rem;
   }
 
+  
+  
   .testCard .heading {
     overflow: hidden;
   }
@@ -1069,12 +1087,39 @@ ul.additional_links li:after {
   font-size: 15px;
 }
 
-.btnC {
-  color: #ff9800;
+.card-btn-sec {
+  padding: .8rem;
+  border-radius: 4px;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+
+
+.btn_atc {
+  border: 1px solid #FE9E2D;
   background-color: #fff9f5;
   font-weight: bold;
-  padding: .4rem;
+  padding: .8rem;
+  border-radius: 4px;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
+
+.btn_atc li {
+  color: #FE9E2D;
+}
+
+.btn_atc:hover {
+    color: #FFF;
+    background-color: #FF9800;
+}
+
+.btn_atc:hover li {
+  color: #FFF;
+}
+
+
 
 a {
   text-decoration: none !important;

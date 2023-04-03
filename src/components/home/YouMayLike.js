@@ -33,6 +33,9 @@ const responsive = {
   },
 };
 
+
+
+
 const YouMayLike = () => {
   // Featured combos
   const [feature, setFeature] = useState([]);
@@ -107,6 +110,7 @@ const YouMayLike = () => {
       });
   }
 
+
   return (
     <div>
       <section>
@@ -131,7 +135,8 @@ const YouMayLike = () => {
 
                     <div className="newComboCart">
                       <li className="youMayLikeHeart">
-                        <i className="bi bi-heart"></i>
+                        <button className="notAdded"><i className="bi bi-heart"></i></button>
+                        {/* <button className="redHeart"><i style={{ color: "red", borderColor: "#464646"}} class="bi bi-heart-fill"></i></button> */}
                       </li>
                       <div className="cart-img-sec">
                         <Link
@@ -164,7 +169,8 @@ const YouMayLike = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          <Link className="btnC">
+                        <div className="btn_atc">
+                        <Link>
                             <li
                               className="bi bi-cart"
                               onClick={() => {
@@ -176,6 +182,7 @@ const YouMayLike = () => {
                               Add to Cart
                             </li>
                           </Link>
+                        </div>
                         </div>
                       </div>
                     </div>

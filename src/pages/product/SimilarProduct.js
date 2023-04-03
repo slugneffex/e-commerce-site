@@ -44,13 +44,13 @@ const SimilarProduct = (props) => {
   }, [id]);
 
   return (
-    <div>
-      <section>
-        <div className="container my-5">
+    <>
+      
+        <div className="container mt-2 mb-5">
           <div className="row">
             <Carousel
               responsive={responsive}
-              showDots={true}
+              showDots={false}
               infinite={true}
               draggable={true}
               swipeable={true}
@@ -60,9 +60,9 @@ const SimilarProduct = (props) => {
               {related.map((e) => (
                 <div className="item" key={e.id}>
                   <div className="newComboCart">
-                    <div className="cart-img-sec">
+                    <div className="cart-img-sec" style={{ position: "relative" }}>
                       <Link className="addtofav">
-                        <li className="bi bi-heart"></li>
+                        <li className="bi bi-heart" style={{ position: "absolute", top:".3rem", right: ".8rem" }}></li>
                       </Link>
                       <Link to={`/combo/${e.id}`}>
                         <img src={e.meta_img?.url} alt="img"></img>
@@ -105,8 +105,8 @@ const SimilarProduct = (props) => {
             </Carousel>
           </div>
         </div>
-      </section>
-    </div>
+      
+    </>
   );
 };
 
