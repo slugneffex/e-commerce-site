@@ -24,6 +24,7 @@ import Wallet from "./pages/accountDetails/Wallet";
 import Orders from "./pages/accountDetails/Orders";
 import Acccount from "./pages/accountDetails/Acccount";
 import BrandLogosList from "./pages/BrandLogosList/BrandLogosList";
+import Searchedpage from "./pages/SearchedPage/Searchedpage";
 
 const App = () => {
   return (
@@ -54,6 +55,8 @@ const App = () => {
       <Route path="/Wallet" element={<Wallet />} />
       <Route path="/Orders" element={<Orders />} />
       <Route path="/brandlogolist" element={<BrandLogosList />} />
+
+      <Route path="/search" element={<Searchedpage/>}/>
 
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
