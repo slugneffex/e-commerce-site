@@ -4,7 +4,7 @@
     color: #A2A2A2;
  }
 
- 
+
  .product-car .big-img img {
     width: 100%;
     height: auto;
@@ -28,9 +28,15 @@ a {
     color: #464646;
 }
 
+.heading {
+    padding-left: 0;
+}
+
 .heading h1 {
     color: #464646;
 }
+
+
 
 .quantity span {
     color: #A2A2A2;

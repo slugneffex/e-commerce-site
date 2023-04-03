@@ -77,10 +77,10 @@ const Hero = () => {
 
         {Array.isArray(banner) &&
           banner.map((e) => (
-            <div key={e.banner?.id} style={{ width: "100%" }}>
+            <div key={e.mobile_banner?.id} style={{ width: "100%" }}>
               <div>
                 <Link to='/'>
-                  <img src={e.banner?.original_url} alt="name" width="100%" />
+                  <img src={e.mobile_banner?.original_url} alt="name" width="100%" />
                 </Link>
               </div>
             </div>

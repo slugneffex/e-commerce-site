@@ -20,7 +20,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 5,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -166,7 +166,8 @@ const BrandProducts = () => {
                         </div>
                       </div>
                       <div className="card-btn-sec ">
-                        <Link className="btnC">
+                        <div className="btn_atc">
+                        <Link >
                           <li
                             className="bi bi-cart"
                             onClick={() => {
@@ -178,6 +179,7 @@ const BrandProducts = () => {
                             Add to Cart
                           </li>
                         </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
