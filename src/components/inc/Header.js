@@ -19,6 +19,11 @@ const Header = () => {
   // const[searchResult,setSearchResult]=useState([])
   // console.log(searchQuery);
 
+  // console.log(searchResult)
+  
+
+
+
 
   // useEffect(()=>{
   //     getSearchSuggestions()
@@ -34,7 +39,7 @@ const Header = () => {
   //           },
   //         };
   //   const data =  await fetch(SITE_API+searchQuery,options)
-  //   const json=data.json()
+  //   const json= await data.json()
   //   setSearchResult(json.data)
   //   console.log(json.data)
   // }
@@ -49,13 +54,40 @@ const Header = () => {
   //       },
   //     };
   //     const response = await axios.post(
-  //       `/search`,{term:`${data.term}`},
+  //       `search`,{term:`${searchQuery.term}`},
   //       options
+
+  //     )// .than((res)=>setSearchResult(res.data))
+      
+  //     setSearchResult(response)
+     
+
   //     );
+
 
   //   }
   //   fetchData();
   // }, []);
+
+// 
+
+// const url = "https://combonationbusiness.in/frontend/api"+searchQuery
+// useEffect(() => {
+//     async function fetchData() {
+//       const options = {
+//         headers: {
+//           "X-Authorization":
+//             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+//           "Cache-Control": "no-cache, no-store, must-revalidate",
+//         },
+//       };
+//       axios.post(
+//         url,
+//         {options}
+//       ).than((res)=>setSearchResult(res.data)) 
+//     }
+//     fetchData();
+//   }, []);
 
 
   //for categories
@@ -268,12 +300,15 @@ const Header = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+
+                // value={searchQuery}
+
               // value={searchQuery}
               // onChange={(e) => setSearchQuery(e.target.value)}
 
+
               ></input>
             </form>
-
             {/* <div>
         {searchResult.map((result) => (
           <div key={result.id}>
