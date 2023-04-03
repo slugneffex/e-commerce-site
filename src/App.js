@@ -24,6 +24,7 @@ import Wallet from "./pages/accountDetails/Wallet";
 import Orders from "./pages/accountDetails/Orders";
 import Acccount from "./pages/accountDetails/Acccount";
 import BrandLogosList from "./pages/BrandLogosList/BrandLogosList";
+import Freebies from "./pages/FreebiePage/Freebies";
 
 const App = () => {
   return (
@@ -54,6 +55,10 @@ const App = () => {
       <Route path="/Wallet" element={<Wallet />} />
       <Route path="/Orders" element={<Orders />} />
       <Route path="/brandlogolist" element={<BrandLogosList />} />
+
+      {/* Route for Freebies */}
+      <Route path="/freebies" element={<Freebies />} />
+
 
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
