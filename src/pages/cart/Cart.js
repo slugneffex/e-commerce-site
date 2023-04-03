@@ -218,7 +218,87 @@ const Cart = () => {
     );
   }
 
+  // For freebies part
+
+  let discount = 0;
+  switch (true) {
+    case singlesubAmount >= 1000 && singlesubAmount < 3000:
+      discount = (singlesubAmount * 20) / 100;
+      break;
+    case singlesubAmount >= 3000 && singlesubAmount < 5000:
+      discount = (singlesubAmount * 30) / 100;
+      break;
+    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
+      discount = (singlesubAmount * 40) / 100;
+      break;
+    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
+      discount = (singlesubAmount * 50) / 100;
+      break;
+    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
+      discount = (singlesubAmount * 60) / 100;
+      break;
+    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
+      discount = (singlesubAmount * 100) / 100;
+      break;
+    default:
+      discount = 0;
+      break;
+  }
+
+  let freebiesDiscountSection = null;
+
+  if (singlesubAmount >= 1000) {
+    freebiesDiscountSection = (
+      <li className="desktop" style={{ padding: "1rem" }}>
+        <div className="signalCart">
+          <div className="col-2">
+            <img
+              src="./assets/img/percent-star.png"
+              alt="discountImg"
+              width="75px"
+              height="75px"
+            />
+          </div>
+          <div className="col-10">
+            <h3>
+              <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+              <span>Upto ₹ {discount}</span>
+            </h3>
+            <a href="/freebies" className="btn_1">
+              Add Freebies Now <i className="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+    );
+  }
+
   // If Single cart===1 then i have to show the section
+
+  let freebiesUptoSection = null;
+
+  if (singlesubAmount < 1000) {
+    freebiesUptoSection = (
+      <li style={{ padding: "1rem" }}>
+        <div className="signalCart">
+          <div className="col-2">
+            <img
+              src="./assets/img/percent-star.png"
+              alt="discountImg"
+              width="75px"
+              height="75px"
+            />
+          </div>
+          <div className="col-10">
+            <h3>
+              <strong>Add More Products For More Savings !</strong> And Get{" "}
+              <span>Upto 70% OFF</span>
+            </h3>
+          </div>
+        </div>
+      </li>
+    );
+  }
 
   let SingleCartSection = null;
 
@@ -354,36 +434,11 @@ const Cart = () => {
           </ul>
           <hr />
 
-
           {/* for freebies */}
-
-          {/* <li className="desktop" style={{ padding: "1rem" }}>
-            <div className="signalCart">
-              <div className="col-2">
-                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
-              </div>
-              <div className="col-10">
-                <h3><strong>Hurray !</strong> You are Eligible To Add Freebies <span>Upto ₹ 814.71</span></h3>
-                <a href="/freebies" className="btn_1">Add Freebies Now <i className="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </li> */}
-
-
-
-
+          {freebiesDiscountSection}
 
           {/* It is for add more product for more saving and get 70 % OFF */}
-          {/* <li style={{ padding: "1rem" }}>
-            <div className="signalCart">
-              <div className="col-2">
-                <img src="./assets/img/percent-star.png" alt="discountImg" width="75px" height="75px" />
-              </div>
-              <div className="col-10">
-                <h3><strong>Add More Products For More Savings !</strong> And Get <span>Upto 70% OFF</span></h3>
-              </div>
-            </div>
-          </li> */}
+          {freebiesUptoSection}
         </div>
       </div>
     );

@@ -9,11 +9,11 @@ import Testimonials from "../components/home/Testimonials";
 import DownloadApp from "../components/home/DownloadApp/DownloadApp";
 import Features from "../components/inc/Fetures";
 import HomeLayout from "../layouts/HomeLayout";
-// import TopProduct from "../components/home/TopProduct";
 import ForHer from "../components/home/ForHer";
 import ForHim from "../components/home/ForHim";
 import Brands from "../components/home/BrandLogos/Brands";
 import BYOC from "../components/home/BYOC";
+import BrandProducts from "../components/home/BrandProducts";
 
 const Home = () => {
   return (
@@ -25,11 +25,10 @@ const Home = () => {
           <Hero></Hero>
           <YouMayLike></YouMayLike>
           <TopTrendingCombos></TopTrendingCombos>
-          {/* <TopProduct /> */}
           {/* <HotDeals></HotDeals> */}
           {/* <TopBrandDeals></TopBrandDeals> */}
           <ForHer />
-          <YouMayLike></YouMayLike>
+          <BrandProducts />
           <ForHim />
           <Brands />
           <Testimonials></Testimonials>
