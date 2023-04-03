@@ -65,12 +65,6 @@ const Cart = () => {
     navigate("/EmptyCart");
   }
 
-  // Total Pricing of products
-
-  const totalCartAmount = totalAmount + singletotalAmount;
-  const totalCartDiscount = totalDiscount + singletotalDiscount;
-  const totalCartSubAmount = subAmount + singlesubAmount;
-
   // IF comboSection cart ===1 then i have to show the section
 
   let ComboSection = null;
@@ -164,7 +158,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(totalAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(totalAmount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -186,7 +180,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(totalDiscount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(totalDiscount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -208,7 +202,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(subAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(subAmount).toFixed(0)}</span>
                 </div>
               </div>
             </div>
@@ -218,7 +212,7 @@ const Cart = () => {
     );
   }
 
-  // For freebies part
+  // For freebies discount part
 
   let discount = 0;
   switch (true) {
@@ -245,6 +239,28 @@ const Cart = () => {
       break;
   }
 
+  // Total Pricing of products
+  const { freebiestotalAmount } = useSelector((state) => state.freebies);
+  let ExtraFreebiesAmount = freebiestotalAmount - discount;
+
+  const totalCartAmount = totalAmount + singletotalAmount;
+  const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
+  const totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmount;
+
+  // Extra freebies amount
+
+  let ExtraFreebiesAmountSection = null;
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountSection = (
+      <li className="price-type">
+        <p>Extra Freebie Amount</p>
+        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+      </li>
+    );
+  }
+
+  //  Freebies Section
+
   let freebiesDiscountSection = null;
 
   if (singlesubAmount >= 1000) {
@@ -262,11 +278,11 @@ const Cart = () => {
           <div className="col-10">
             <h3>
               <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-              <span>Upto ₹ {discount}</span>
+              <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
             </h3>
-            <a href="/freebies" className="btn_1">
+            <Link to="/freebies" className="btn_1">
               Add Freebies Now <i className="bi bi-arrow-right"></i>
-            </a>
+            </Link>
           </div>
         </div>
       </li>
@@ -383,7 +399,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singletotalAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(singletotalAmount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -405,7 +421,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singletotalDiscount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
                 </div>
                 <div
                   className="col-md-6"
@@ -427,7 +443,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singlesubAmount).toFixed(2)}</span>
+                  <span>₹ {parseFloat(singlesubAmount).toFixed(0)}</span>
                 </div>
               </div>
             </div>
@@ -484,20 +500,22 @@ const Cart = () => {
                     <ul className="price-breakup">
                       <li className="price-type">
                         <p>Total Price (Incl Taxes)</p>
-                        <span>₹{parseFloat(totalCartAmount).toFixed(2)}</span>
+                        <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
                       </li>
                       <li className="price-type">
                         <p>Subtotal</p>
                         <span>
-                          ₹{parseFloat(totalCartSubAmount).toFixed(2)}
+                          ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
                       </li>
                       <li className="price-type">
                         <p>Total Discount</p>
                         <span style={{ color: "#009444" }}>
-                          - ₹{parseFloat(totalCartDiscount).toFixed(2)}
+                          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
                         </span>
                       </li>
+                      {ExtraFreebiesAmountSection}
+
                       {/* <li className="price-type">
                         <p>Shipping</p>
                         <span style={{ color: "#009444" }}>₹ 50</span>
@@ -506,7 +524,7 @@ const Cart = () => {
                     <span>
                       Hurray! You Saved{" "}
                       <strong>
-                        ₹{parseFloat(totalCartDiscount).toFixed(2)}
+                        ₹{parseFloat(totalCartDiscount).toFixed(0)}
                       </strong>{" "}
                       On This Order
                     </span>
@@ -516,14 +534,14 @@ const Cart = () => {
                     <div className="total-sec">
                       <p className="total">Total</p>
                       <span className="total">
-                        ₹{parseFloat(totalCartSubAmount).toFixed(2)}
+                        ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                       </span>
                     </div>
                     <div className="extras">
                       <p>
                         {" "}
                         {totalCartCount} Item | ₹
-                        {parseFloat(totalCartSubAmount).toFixed(2)}
+                        {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
                       <Link to="/payment" className="btn">
                         Proceed To Pay
