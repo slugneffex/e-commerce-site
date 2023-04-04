@@ -1124,3 +1124,17 @@ ul.additional_links li:after {
 a {
   text-decoration: none !important;
 }
+
+
+@media (max-width: 720px) {
+
+  /* atc btn */
+  .btn_atc li {
+    font-size: 10px;
+  }
+
+   /* carousel */
+  .carouselItemCard {
+    margin-right: 1.2rem;
+  }
+}

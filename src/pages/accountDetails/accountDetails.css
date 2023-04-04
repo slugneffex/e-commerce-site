@@ -73,9 +73,10 @@ a:link{
 .button{
     align-items: center;
 }
-.container{
-    margin: left 20px;
-}
+/* .container{
+    margin-left:  20px;
+} */
+
 .first{
     flex: auto;
     

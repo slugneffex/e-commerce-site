@@ -415,7 +415,7 @@ const Header = () => {
                   <Link to="/Cart" className="nav-link" style={{ position: "relative" }}>
                     <i className="bi bi-cart-fill"></i>
                     <span>Cart</span>
-                    <strong style={{
+                    <strong className="desktop" style={{
                       position: "absolute",
                       right: ".3rem",
                       bottom: "3rem",
