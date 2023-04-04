@@ -57,7 +57,7 @@ h1 h2 h3 h4 h5 h6 p {
 
 
 
-@media (max-width: 576px) {
+@media (max-width: 720px) {
     
     #mainTitle {
         font-size: .6rem;
@@ -74,9 +74,11 @@ h1 h2 h3 h4 h5 h6 p {
 
     .bottomListItem {
         padding: 8px 0;
-        margin: 0;
         width: 75px;
+        margin: auto;
     }
+
+    
       
    
 }
@@ -130,6 +132,8 @@ h1 h2 h3 h4 h5 h6 p {
         width: 50%;
     }
 }
+
+
 
 
 

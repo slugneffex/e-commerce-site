@@ -529,8 +529,43 @@ const Cart = () => {
                 </div>
               </div>
             </div>
+
+            <hr />
+            <li className="cart-item" >
+              <div className="row">
+                <div className="col-3">
+                  <a href="#" className="cart-item-img">
+                    <img className="freebieFreeImg" />
+                      <img />
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <div className="det">
+                        <a href="https://www.combonation.in/combo/manestream-fenusmooth-frizzy-hair-treatment-&amp;-hair-shine-kit-300-ml">
+                          <h6>Manestream Fenusmooth Fri...</h6>
+                        </a>
+                        <br />
+
+                          <div className="price-sec">
+                            <del class="sp">₹ 1045</del>
+                            <span class="sp">Free</span>
+
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="actions">
+                        <div class="editFreebie">
+                          <a href="/freebies"><i class="bi bi-pencil-square"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </li>
           </ul>
-          <hr />
+
+
+
 
           {/* for freebies */}
           {freebiesDiscountSection}
@@ -538,6 +573,7 @@ const Cart = () => {
           {/* It is for add more product for more saving and get 70 % OFF */}
           {freebiesUptoSection}
         </div>
+
       </div>
     );
   }

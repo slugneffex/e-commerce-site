@@ -131,7 +131,7 @@ const YouMayLike = () => {
               {Array.isArray(feature) &&
                 feature.map((e) => (
 
-                  <div className="item" key={e.id} style={{ marginRight: ".8rem" }}>
+                  <div className="item carouselItemCard" key={e.id} style={{ marginRight: ".8rem" }}>
 
                     <div className="newComboCart">
                       <li className="youMayLikeHeart">
