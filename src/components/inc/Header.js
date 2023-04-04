@@ -17,9 +17,10 @@ const Header = () => {
     term:''
   });
 
+
   
-  const[searchResult,setSearchResult]=useState([])
-  console.log(searchResult)
+  const[searchResult,setSearchResult]=useState([])   
+  // console.log(searchResult)   
 
   function submit(e) {
     e.preventDefault();
@@ -318,15 +319,9 @@ const Header = () => {
                 value={data.search}
                 onChange={(e) => handle(e)}               
               ></input>
+              
             </form>
-            {/* <div>
-        {searchResult.map((result) => (
-          <div key={result.id}>
-            <h2>{result.title}</h2>
-          </div>
-        ))}
-      </div> */}
-
+    
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
