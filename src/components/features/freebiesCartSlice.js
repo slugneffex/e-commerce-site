@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
 const freebiesCartSlice = createSlice({
   name: "freebies",
   initialState: {
@@ -26,9 +24,9 @@ const freebiesCartSlice = createSlice({
       },
     },
     clearCart: (state) => {
-     
       state.freebiescartItems = [];
       state.freebiestotalAmount = 0;
+      state.freebiesCount = 0;
     },
 
     getfreebiesCartProducts: (state, action) => {
