@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import {
   getCartProducts,
   getSubTotal,
@@ -22,6 +23,7 @@ import {
   getsingleTotalAmount,
   getsingleSubTotal,
 } from "../../components/features/SingleCartSlice";
+import { clearCart } from "../../components/features/freebiesCartSlice";
 
 const Cart = () => {
   // Combo Product Cart
@@ -50,6 +52,8 @@ const Cart = () => {
     singletotalDiscount,
   } = useSelector((statee) => statee.SingleCart);
 
+  localStorage.setItem("singleSubAmount", singlesubAmount);
+
   useEffect(() => {
     dispatch(getsingleCartProducts());
     dispatch(getsingleSubTotal());
@@ -64,6 +68,32 @@ const Cart = () => {
   if (totalCartCount === 0) {
     navigate("/EmptyCart");
   }
+
+  // ADD TO WISHLIST
+
+  const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  function wishlistData(id) {
+    const data = {
+      user_id: user_id,
+      combo_id: id,
+    };
+
+    axios
+      .post("/add-to-wishlist", data, {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      });
+  }
+
+  // Clear freebies array if custom combo below 1000
 
   // IF comboSection cart ===1 then i have to show the section
 
@@ -128,7 +158,10 @@ const Cart = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       ></i>
-                      <i className="bi bi-heart"></i>
+                      <i
+                        className="bi bi-heart"
+                        onClick={() => wishlistData(product.id)}
+                      ></i>
                     </div>
                   </div>
                 </div>
@@ -242,10 +275,59 @@ const Cart = () => {
   // Total Pricing of products
   const { freebiestotalAmount } = useSelector((state) => state.freebies);
   let ExtraFreebiesAmount = freebiestotalAmount - discount;
+  const shippingAmount = 50;
 
   const totalCartAmount = totalAmount + singletotalAmount;
   const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
-  const totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmount;
+  const totalCartSubAmount =
+    subAmount + singlesubAmount + ExtraFreebiesAmount + shippingAmount;
+
+  // if custom combo amount is less than 1000 then delete freebies aaray
+  useEffect(() => {
+    if (singlesubAmount < 1000) {
+      dispatch(clearCart());
+    }
+  }, [singlesubAmount, dispatch]);
+
+  // Shipping amount less than 499
+
+  let shippingAmountSection = null;
+
+  if (totalCartSubAmount < 499) {
+    shippingAmountSection = (
+      <li className="price-type">
+        <p>Shipping</p>
+        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+      </li>
+    );
+  }
+
+  // if discount is 0 then hide the section
+
+  let discountSection = null;
+  if (totalCartDiscount > 0) {
+    discountSection = (
+      <li className="price-type">
+        <p>Total Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
+
+  // Hurry discount section
+
+  let hurrryDiscountSection = null;
+  if (totalCartDiscount > 0) {
+    hurrryDiscountSection = (
+      <span>
+        Hurray! You Saved{" "}
+        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
+        Order
+      </span>
+    );
+  }
 
   // Extra freebies amount
 
@@ -508,26 +590,12 @@ const Cart = () => {
                           ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
                       </li>
-                      <li className="price-type">
-                        <p>Total Discount</p>
-                        <span style={{ color: "#009444" }}>
-                          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
-                        </span>
-                      </li>
-                      {ExtraFreebiesAmountSection}
+                      {discountSection}
 
-                      {/* <li className="price-type">
-                        <p>Shipping</p>
-                        <span style={{ color: "#009444" }}>₹ 50</span>
-                      </li> */}
+                      {ExtraFreebiesAmountSection}
+                      {shippingAmountSection}
                     </ul>
-                    <span>
-                      Hurray! You Saved{" "}
-                      <strong>
-                        ₹{parseFloat(totalCartDiscount).toFixed(0)}
-                      </strong>{" "}
-                      On This Order
-                    </span>
+                    {hurrryDiscountSection}
                   </div>
                   <hr />
                   <div className="overview-card-footer">
