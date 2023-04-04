@@ -50,7 +50,7 @@ const Emptycart = () => {
               </div>
               <div className="col-12 p-2 d-flex justify-content-center">
                 <Link to="/">
-                  <a className="btn" href="#home" role="button">
+                  <a className="btn_atc" href="#home" role="button" >
                     Go Back to Home
                   </a>
                 </Link>

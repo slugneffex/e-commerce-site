@@ -61,7 +61,7 @@ const Brands = () => {
           autoPlay
           arrows={false}
           centerMode
-          
+          infinite
           >
           
             {Array.isArray(fliterData) &&
