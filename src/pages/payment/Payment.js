@@ -3,8 +3,8 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link } from "react-router-dom";
 import "./payment.css";
 import { useSelector } from "react-redux";
-import { useCallback } from "react";
-import useRazorpay from "react-razorpay";
+// import { useCallback } from "react";
+// import useRazorpay from "react-razorpay";
 
 const Payment = () => {
   // Single Product Cart
