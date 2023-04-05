@@ -488,6 +488,43 @@ const Cart = () => {
     );
   }
 
+  // Freebies discount section
+
+  let freebiesAmountSection = null;
+
+  if (discount > 0) {
+    freebiesAmountSection = (
+      <>
+        <div
+          className="col-md-6"
+          style={{
+            textAlign: "left",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span className="term" style={{ color: "#fe9e2d" }}>
+            Freebies Amount :-
+          </span>
+        </div>
+        <div
+          className="col-md-6"
+          style={{
+            textAlign: "right",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span style={{ color: "#fe9e2d" }}>
+            ₹ {parseFloat(discount).toFixed(0)}
+          </span>
+        </div>
+      </>
+    );
+  }
+
   let SingleCartSection = null;
 
   if (singletotalCount >= 1) {
@@ -579,33 +616,8 @@ const Cart = () => {
                   <span>₹ {parseFloat(singletotalAmount).toFixed(0)}</span>
                 </div>
                 {BYOCDiscountSection}
+                {freebiesAmountSection}
 
-                <div
-                  className="col-md-6"
-                  style={{
-                    textAlign: "left",
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                    color: "#30303",
-                  }}
-                >
-                  <span className="term" style={{ color: "#fe9e2d" }}>
-                    Freebies Amount :-
-                  </span>
-                </div>
-                <div
-                  className="col-md-6"
-                  style={{
-                    textAlign: "right",
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                    color: "#30303",
-                  }}
-                >
-                  <span style={{ color: "#fe9e2d" }}>
-                    ₹ {parseFloat(discount).toFixed(0)}
-                  </span>
-                </div>
                 {ExtraFreebiesAmountCustomComboSection}
 
                 <div
@@ -725,14 +737,13 @@ const Cart = () => {
                       </li>
                       {ExtraFreebiesAmountSection}
                       {discountSection}
+                      {shippingAmountSection}
                       <li className="price-type">
                         <p>Subtotal</p>
                         <span>
                           ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
                       </li>
-
-                      {shippingAmountSection}
                     </ul>
                     {hurrryDiscountSection}
                   </div>

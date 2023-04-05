@@ -26,7 +26,7 @@ import Acccount from "./pages/accountDetails/Acccount";
 import BrandLogosList from "./pages/BrandLogosList/BrandLogosList";
 
 import Searchedpage from "./pages/SearchedPage/Searchedpage";
-
+import Adress from "./pages/adress/Adress";
 import Freebies from "./pages/FreebiePage/Freebies";
 
 
@@ -49,6 +49,7 @@ const App = () => {
       <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/address" element={<Loginadress />} />
+      <Route path="/Adress" element={<Adress />} />
       <Route path="/why-choose-combonation" element={<WCC />} />
       <Route path="/store/:id" element={<Store />} />
       {/* <Route path="/Account" element={<Account />} /> */}

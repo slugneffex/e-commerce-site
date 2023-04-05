@@ -3,8 +3,20 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link } from "react-router-dom";
 import "./payment.css";
 import { useSelector } from "react-redux";
-// import { useCallback } from "react";
-// import useRazorpay from "react-razorpay";
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
 
 const Payment = () => {
   // Single Product Cart
@@ -113,9 +125,36 @@ const Payment = () => {
     );
   }
 
+  // Razorpay
 
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
 
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you Online");
+      return;
+    }
 
+    const options = {
+      key: "rzp_test_7Ynqg7Kwiuxr5Z",
+      amount: `${totalCartSubAmount}` * 100,
+      currency: "INR",
+      name: "Combonation",
+      description: "Test payment",
+      handler: function (response) {
+        alert("Payment Successful!");
+        alert(response.razorpay_payment_id);
+        localStorage.setItem("transaction_id", response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
 
   return (
     <>
@@ -147,6 +186,7 @@ const Payment = () => {
                     <div className="col-md-4">
                       <div className="form-group">
                         <input
+                          onClick={displayRazorpay}
                           type="radio"
                           name="payment_type"
                           id
@@ -229,6 +269,7 @@ const Payment = () => {
                   </div>
                 </div>
               </div>
+
               <div className="col-md-4 mt-5">
                 <div className="overview-card">
                   <div className="overview-card-head">
@@ -246,14 +287,13 @@ const Payment = () => {
                       </li>
                       {ExtraFreebiesAmountSection}
                       {discountSection}
+                      {shippingAmountSection}
                       <li className="price-type">
                         <p>Subtotal</p>
                         <span>
                           ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
                       </li>
-
-                      {shippingAmountSection}
                     </ul>
                     {hurrryDiscountSection}
                   </div>
@@ -271,7 +311,7 @@ const Payment = () => {
                         {totalCartCount} Item ({freebiesCount} Free) | ₹
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
-                      <Link to="/payment" className="btn">
+                      <Link to="/Adress" className="btn">
                         Proceed To Pay
                       </Link>
                     </div>
