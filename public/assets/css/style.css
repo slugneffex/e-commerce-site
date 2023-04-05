@@ -1106,6 +1106,10 @@ ul.additional_links li:after {
   padding-left: 2rem;
 }
 
+.btn_atc {
+  color: #FE9E2D;
+}
+
 .btn_atc li {
   color: #FE9E2D;
 }

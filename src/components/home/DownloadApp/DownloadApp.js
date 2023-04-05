@@ -15,7 +15,7 @@ const DownloadApp = () => {
                                 <p style={{color: "#464646" }}>*On the min purchase of `999</p>
                             </div>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 desktop">
                             <div className="mockup-img">
                                 <img src="./assets/img/downloadAppImg/CN_Mock.png" alt="mobileAppImg" height="450px" />
                             </div>
