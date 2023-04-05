@@ -6,8 +6,8 @@ import axios from "axios";
 // import img1 from "./Mask_Group _79.png";
 
 const StoreCarousel = () => {
-  const { id } = useParams();
-
+  const { id } = useParams();  
+  const [storeDetail, setStoreDetail] = useState([]);
   const [store, setStore] = useState([])
 
   useEffect(() => {
@@ -19,6 +19,7 @@ const StoreCarousel = () => {
         },
       };
       const response = await axios.get(`/store/${id}`, options);
+      setStoreDetail(response.data.gallery);
       setStore(response.data)
     }
     fetchData();
@@ -58,7 +59,9 @@ const StoreCarousel = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "2rem"}}>
+
+    {/* desktop */}
+      <div className="desktop" style={{ marginBottom: "2rem"}}>
       <Carousel
         showDots={false}
         responsive={responsive}
@@ -80,6 +83,43 @@ const StoreCarousel = () => {
           <img src='./assets/img/hero/4286868.png' alt="" />
         </div> */}
       </Carousel>
+      </div>
+      
+      {/* mobile */}
+      <div className="mobile" style={{ marginBottom: "4rem", marginTop: "2rem"}}>
+      <div key={storeDetail.id}>
+            <div style={{ marginLeft: "2rem" }}>
+              <h2 className="combonationStoreText">Combonation Store:</h2>
+              <h2>{store.name}</h2>
+              <h2>Store Address</h2>
+              <p>{store.full_address}</p>
+            </div>
+          </div>
+          <div style={{ marginTop: "2rem" }}>
+      <Carousel
+        showDots={false}
+        responsive={responsive}
+        arrows={false}
+        infinite={true}
+        autoPlay
+
+      >
+        {(storeDetail.slice(0, 6)).map((e) => (
+                <div key={e.id} style={{ height: "350px"}}>
+                  <img src={e.url} alt="storeImg" style={{height: "100vh", width: "100vw" }} />
+                </div>
+
+              ))}
+
+        
+        {/* <div>
+          <img src='./assets/img/hero/4286868.png' alt="" />
+        </div>
+        <div>
+          <img src='./assets/img/hero/4286868.png' alt="" />
+        </div> */}
+      </Carousel>
+      </div>
       </div>
 
 

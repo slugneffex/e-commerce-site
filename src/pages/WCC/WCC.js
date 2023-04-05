@@ -1,26 +1,77 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./wcc.css";
+import axios from "axios";
+import axiosRetry from "axios-retry";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom"
+
+
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 3,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 const WCC = () => {
+  const [brand, setBrand] = useState([]);
+  axiosRetry(axios, { retries: 3 });
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const options = {
+        headers: {
+          "X-Authorization": `CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs`,
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
+        },
+      };
+      const response = await axios.get('/brands', options);
+      setBrand(response.data);
+    }
+    fetchData();
+  }, []);
+
+  const fliterData = brand.filter((brand) => {
+    return (brand.focused === "on")
+})
+
+
   return (
     <>
       <HomeLayout>
         <section>
           <div className="container">
-            <div className="row" style={{ marginTop: "2rem"}}>
-              <div className="col-md-6 ">
-                <div className="heading" style={{display: "flex", flexDirection: "column"}}>
+            <div className="row col-direction" style={{ marginTop: "2rem" }}>
+              <div className="col-md-6 sffm">
+                <div className="heading" style={{ display: "flex", flexDirection: "column" }}>
                   <h1>
                     We Are <br />
                     <span>COMBONATION!</span>
                   </h1>
-                  <p style={{ marginTop: "1rem"}}>
-                  Combonation is a one-stop solution to shop for your daily lifestyle needs. We offer a hassle-free curation of pre-curated bundles & wide assortment of top brands to build your own combos. Our expertise in sourcing top-branded products and bringing bundle shopping under one roof is one of our core USPs Pre-curated bundles let the shopper avail highest discounts on top products. Whereas Building your own combo is more fun. Loaded with additional benefits of freebies on your BYOC purchase. Users can avail off up to 100% of the purchased value. Happy Shopping
+                  <p style={{ marginTop: "1rem" }}>
+                    Combonation is a one-stop solution to shop for your daily lifestyle needs. We offer a hassle-free curation of pre-curated bundles & wide assortment of top brands to build your own combos. Our expertise in sourcing top-branded products and bringing bundle shopping under one roof is one of our core USPs Pre-curated bundles let the shopper avail highest discounts on top products. Whereas Building your own combo is more fun. Loaded with additional benefits of freebies on your BYOC purchase. Users can avail off up to 100% of the purchased value. Happy Shopping
                   </p>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 sffm">
                 <div className="img1">
                   <img src="./assets/img/wcc/img1.png" alt="img1" />
                 </div>
@@ -34,11 +85,10 @@ const WCC = () => {
             </div>
 
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 sffm">
                 <div
                   className="card cart"
                   style={{
-                    width: "26rem",
                     backgroundColor: "#fe9e2d",
                     border: "2px solid #464646",
                   }}
@@ -93,7 +143,7 @@ const WCC = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 sffm">
                 <div className="img-two">
                   <img src="./assets/img/wcc/img2.png" alt="img-two" />
                 </div>
@@ -105,17 +155,16 @@ const WCC = () => {
                 Benefits of <span>BYOC</span>
               </h1>
             </div>
-            <div className="row">
-              <div className="col-md-6">
+            <div className="row col-direction">
+              <div className="col-md-6 sffm">
                 <div className="img-three">
                   <img src="./assets/img/wcc/img3.png" alt="img-three" />
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 sffm">
                 <div
                   className="card cart"
                   style={{
-                    width: "26rem",
                     backgroundColor: "#fe9e2d",
                     border: "2px solid #464646",
                   }}
@@ -168,7 +217,7 @@ const WCC = () => {
                 <img src="./assets/img/wcc/Group_2591.png" alt="img" />
               </div>
 
-              
+
 
               <div className="BYOC">
                 <h1>
@@ -183,7 +232,40 @@ const WCC = () => {
                 </h1>
               </div>
 
-              <div className="brand-sections">
+
+              <div className="container py-10 mt-5 ">
+
+                <Carousel responsive={responsive} className="py-14"
+                  swipeable={false}
+                  autoPlay
+                  arrows={false}
+                  centerMode
+                  infinite
+                >
+
+                  {Array.isArray(fliterData) &&
+                    fliterData.map((e) => (
+                      <div key={e.id} className="logoBox">
+                        <div className="logoImgDiv">
+                          <Link to={`/brand/${e.id}`}>
+                            <img
+                              src={e.image?.original_url}
+                              width="80%"
+                              alt={e.name}
+                            ></img>
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+
+                </Carousel>
+
+              </div>
+
+
+
+
+              {/* <div className="brand-sections">
                 <div className="row">
                   <div className="col-md-3 brand">
                     <img src="./assets/img/wcc/1.png" alt="wccImg" />
@@ -198,7 +280,7 @@ const WCC = () => {
                     <img src="./assets/img/wcc/4.png" alt="wccImg" />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="value">
                 <h1>
@@ -211,8 +293,8 @@ const WCC = () => {
                   <div
                     className="card cardd"
                     style={{
-                      width: "100%",
-                      height: "16rem",
+                      // width: "100%",
+                      // height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
                     }}
@@ -234,15 +316,17 @@ const WCC = () => {
                   <div
                     className="card"
                     style={{
-                      width: "100%",
-                      height: "16rem",
+                      paddingTop: "0",
+                      paddingBottom: "0",
+                      // width: "100%",
+                      // height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
                     }}
                   >
                     <img
                       src="./assets/img/wcc/img22.png"
-                      className="card-img-top"
+                      className="card-img-top nfm"
                       alt="..."
                     />
                     <div className="card-body">
@@ -255,13 +339,15 @@ const WCC = () => {
                 </div>
               </div>
 
-              <div className="row">
+              <div className="row roow">
                 <div className="col-md-6 colum">
                   <div
                     className="card cardd"
                     style={{
-                      width: "100%",
-                      height: "16rem",
+                      paddingTop: "0",
+                      paddingBottom: "0",
+                      // width: "100%",
+                      // height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
                     }}
@@ -283,8 +369,10 @@ const WCC = () => {
                   <div
                     className="card"
                     style={{
-                      width: "100%",
-                      height: "16rem",
+                      paddingTop: "0",
+                      paddingBottom: "0",
+                      // width: "100%",
+                      // height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
                     }}
