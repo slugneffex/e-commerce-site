@@ -14,6 +14,7 @@ const freebiesCartSlice = createSlice({
         let freebiescartIndex = state.freebiescartItems.findIndex(
           (item) => item.id === action.payload.id
         );
+
         if (freebiescartIndex >= 0) {
           state.freebiescartItems[freebiescartIndex].quantity += 1;
         } else {
@@ -21,6 +22,11 @@ const freebiesCartSlice = createSlice({
           state.freebiescartItems.push(tempProduct);
         }
       },
+    },
+    clearCart: (state) => {
+      state.freebiescartItems = [];
+      state.freebiestotalAmount = 0;
+      state.freebiesCount = 0;
     },
 
     getfreebiesCartProducts: (state, action) => {
@@ -61,5 +67,6 @@ export const {
   getfreebiesTotalAmount,
   getfreebiesCartProducts,
   getfreebiesCartCount,
+  clearCart,
 } = freebiesCartSlice.actions;
 export default freebiesCartSlice.reducer;

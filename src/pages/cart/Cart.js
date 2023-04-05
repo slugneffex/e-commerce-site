@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import {
   getCartProducts,
   getSubTotal,
@@ -22,6 +23,12 @@ import {
   getsingleTotalAmount,
   getsingleSubTotal,
 } from "../../components/features/SingleCartSlice";
+import { clearCart } from "../../components/features/freebiesCartSlice";
+import {
+  getfreebiesCartProducts,
+  getfreebiesTotalAmount,
+  getfreebiesCartCount,
+} from "../../components/features/freebiesCartSlice";
 
 const Cart = () => {
   // Combo Product Cart
@@ -64,6 +71,32 @@ const Cart = () => {
   if (totalCartCount === 0) {
     navigate("/EmptyCart");
   }
+
+  // ADD TO WISHLIST
+
+  const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  function wishlistData(id) {
+    const data = {
+      user_id: user_id,
+      combo_id: id,
+    };
+
+    axios
+      .post("/add-to-wishlist", data, {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      });
+  }
+
+  // Clear freebies array if custom combo below 1000
 
   // IF comboSection cart ===1 then i have to show the section
 
@@ -108,9 +141,18 @@ const Cart = () => {
                       <div className="price-sec">
                         <del className="mrp">₹{product.mrp}</del>
                         <span className="sp">₹{product.price}</span>
-                        {/* <div className="youSave">
-                                    <span>Total Saving ₹ {product.discount}</span>
-                                  </div> */}
+                        <div
+                          style={{
+                            marginLeft: "1rem",
+                            backgroundColor: "#fe9e2d",
+                            color: "#ffffff",
+                            padding: "0.4rem",
+                            fontSize: "1rem",
+                            fontWeight: "normal",
+                          }}
+                        >
+                          <span>{product.discount} % OFF</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -128,7 +170,10 @@ const Cart = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       ></i>
-                      <i className="bi bi-heart"></i>
+                      <i
+                        className="bi bi-heart"
+                        onClick={() => wishlistData(product.id)}
+                      ></i>
                     </div>
                   </div>
                 </div>
@@ -169,7 +214,9 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span className="term">Precurated Discount :-</span>
+                  <span className="term" style={{ color: "#fe9e2d" }}>
+                    Precurated Discount :-
+                  </span>
                 </div>
                 <div
                   className="col-md-6"
@@ -180,7 +227,9 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(totalDiscount).toFixed(0)}</span>
+                  <span style={{ color: "#fe9e2d" }}>
+                    ₹ {parseFloat(totalDiscount).toFixed(0)}
+                  </span>
                 </div>
                 <div
                   className="col-md-6"
@@ -239,13 +288,73 @@ const Cart = () => {
       break;
   }
 
+  // Freebies cart section
+  const { freebiesCount } = useSelector((state) => state.freebies);
+  const { freebiestotalAmount, freebiescartItems } = useSelector(
+    (state) => state.freebies
+  );
+
+  useEffect(() => {
+    dispatch(getfreebiesCartProducts());
+    dispatch(getfreebiesCartCount());
+    dispatch(getfreebiesTotalAmount());
+  }, [dispatch]);
+
   // Total Pricing of products
-  const { freebiestotalAmount } = useSelector((state) => state.freebies);
   let ExtraFreebiesAmount = freebiestotalAmount - discount;
+  const shippingAmount = 50;
 
   const totalCartAmount = totalAmount + singletotalAmount;
   const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
-  const totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmount;
+  const totalCartSubAmount =
+    subAmount + singlesubAmount + ExtraFreebiesAmount + shippingAmount;
+
+  // if custom combo amount is less than 1000 then delete freebies aaray
+  useEffect(() => {
+    if (singlesubAmount < 1000) {
+      dispatch(clearCart());
+    }
+  }, [singlesubAmount, dispatch]);
+
+  // Shipping amount less than 499
+
+  let shippingAmountSection = null;
+
+  if (totalCartSubAmount < 499) {
+    shippingAmountSection = (
+      <li className="price-type">
+        <p>Shipping</p>
+        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+      </li>
+    );
+  }
+
+  // if discount is 0 then hide the section
+
+  let discountSection = null;
+  if (totalCartDiscount > 0) {
+    discountSection = (
+      <li className="price-type">
+        <p>Total Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
+
+  // Hurry discount section
+
+  let hurrryDiscountSection = null;
+  if (totalCartDiscount > 0) {
+    hurrryDiscountSection = (
+      <span>
+        Hurray! You Saved{" "}
+        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
+        Order
+      </span>
+    );
+  }
 
   // Extra freebies amount
 
@@ -256,6 +365,37 @@ const Cart = () => {
         <p>Extra Freebie Amount</p>
         <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
       </li>
+    );
+  }
+
+  let ExtraFreebiesAmountCustomComboSection = null;
+
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountCustomComboSection = (
+      <>
+        <div
+          className="col-md-6"
+          style={{
+            textAlign: "left",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span className="term">Extra Freebie Amount :-</span>
+        </div>
+        <div
+          className="col-md-6"
+          style={{
+            textAlign: "right",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span>₹ {parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+        </div>
+      </>
     );
   }
 
@@ -316,6 +456,38 @@ const Cart = () => {
     );
   }
 
+  // BYOC discount section
+
+  let BYOCDiscountSection = null;
+  if (singletotalDiscount > 0) {
+    BYOCDiscountSection = (
+      <>
+        <div
+          className="col-md-6"
+          style={{
+            textAlign: "left",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span className="term">BYOC Discount :-</span>
+        </div>
+        <div
+          className="col-md-6"
+          style={{
+            textAlign: "right",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
+        </div>
+      </>
+    );
+  }
+
   let SingleCartSection = null;
 
   if (singletotalCount >= 1) {
@@ -324,6 +496,11 @@ const Cart = () => {
         <div className="cart-type">
           <h3>Custom Combo</h3> <span>(Total {singletotalCount} Items)</span>
         </div>
+        {/* for freebies */}
+        {freebiesDiscountSection}
+
+        {/* It is for add more product for more saving and get 70 % OFF */}
+        {freebiesUptoSection}
         <div className="cart-card" style={{ backgroundColor: "#FFFFFF" }}>
           <ul className="cart-list">
             {singleCartItems.map((products, Singleindex) => (
@@ -401,6 +578,8 @@ const Cart = () => {
                 >
                   <span>₹ {parseFloat(singletotalAmount).toFixed(0)}</span>
                 </div>
+                {BYOCDiscountSection}
+
                 <div
                   className="col-md-6"
                   style={{
@@ -410,7 +589,9 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span className="term">BYOC Discount :-</span>
+                  <span className="term" style={{ color: "#fe9e2d" }}>
+                    Freebies Amount :-
+                  </span>
                 </div>
                 <div
                   className="col-md-6"
@@ -421,8 +602,12 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
+                  <span style={{ color: "#fe9e2d" }}>
+                    ₹ {parseFloat(discount).toFixed(0)}
+                  </span>
                 </div>
+                {ExtraFreebiesAmountCustomComboSection}
+
                 <div
                   className="col-md-6"
                   style={{
@@ -443,18 +628,52 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>₹ {parseFloat(singlesubAmount).toFixed(0)}</span>
+                  <span>
+                    ₹{" "}
+                    {parseFloat(singlesubAmount + ExtraFreebiesAmount).toFixed(
+                      0
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
+
+            <hr />
+            {freebiescartItems.map((e, index) => (
+              <li className="cart-item" key={e.id}>
+                <div className="row">
+                  <div className="col-3">
+                    <Link to="/freebies" className="cart-item-img">
+                      <img className="freebieFreeImg" alt="freeImg" />
+                      <img src={e.image} alt="freebiesImg" />
+                    </Link>
+                  </div>
+                  <div class="col-6">
+                    <div className="det">
+                      <Link to="/freebies">
+                        <h6>{e.title.substring(0, 40)}...</h6>
+                      </Link>
+                      <br />
+
+                      <div className="price-sec">
+                        <del class="sp">₹ {e.price}</del>
+                        <span class="sp">Free</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="actions">
+                      <div class="editFreebie">
+                        <Link to="/freebies">
+                          <i class="bi bi-pencil-square"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
           </ul>
-          <hr />
-
-          {/* for freebies */}
-          {freebiesDiscountSection}
-
-          {/* It is for add more product for more saving and get 70 % OFF */}
-          {freebiesUptoSection}
         </div>
       </div>
     );
@@ -495,39 +714,27 @@ const Cart = () => {
                     <h3>Order Summary</h3>
                   </div>
                   <div className="overview-card-body">
-                    <h6>Bill Details ({totalCartCount} Items)</h6>
+                    <h6>
+                      Bill Details {totalCartCount} Items ({freebiesCount} Free)
+                    </h6>
 
                     <ul className="price-breakup">
                       <li className="price-type">
                         <p>Total Price (Incl Taxes)</p>
                         <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
                       </li>
+                      {ExtraFreebiesAmountSection}
+                      {discountSection}
                       <li className="price-type">
                         <p>Subtotal</p>
                         <span>
                           ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
                       </li>
-                      <li className="price-type">
-                        <p>Total Discount</p>
-                        <span style={{ color: "#009444" }}>
-                          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
-                        </span>
-                      </li>
-                      {ExtraFreebiesAmountSection}
 
-                      {/* <li className="price-type">
-                        <p>Shipping</p>
-                        <span style={{ color: "#009444" }}>₹ 50</span>
-                      </li> */}
+                      {shippingAmountSection}
                     </ul>
-                    <span>
-                      Hurray! You Saved{" "}
-                      <strong>
-                        ₹{parseFloat(totalCartDiscount).toFixed(0)}
-                      </strong>{" "}
-                      On This Order
-                    </span>
+                    {hurrryDiscountSection}
                   </div>
                   <hr />
                   <div className="overview-card-footer">
@@ -540,7 +747,7 @@ const Cart = () => {
                     <div className="extras">
                       <p>
                         {" "}
-                        {totalCartCount} Item | ₹
+                        {totalCartCount} Item ({freebiesCount} Free) | ₹
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
                       <Link to="/payment" className="btn">

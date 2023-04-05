@@ -24,130 +24,104 @@ const Testimonials = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1
-      
+
     }
   };
 
   return (
     <>
+      {/* desktop */}
+
       <div className="desktop">
-      <Carousel
-        arrows={false}
-        responsive={responsive}
-        infinite={true}
-        autoPlay
-        centerMode
-        
-      >
-        <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
-          <div className="col">
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
+        <Carousel
+          arrows={false}
+          responsive={responsive}
+          infinite={true}
+          autoPlay
+          centerMode
+
+        >
+          <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
+            <div className="col">
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+            </div>
+            <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
+            <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
+            <div>
+              <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
+              <p>Jaipur</p>
+            </div>
           </div>
-          <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
-          <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
-          <div>
-            <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
-            <p>Jaipur</p>
+          <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
+            <div className="col">
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+            </div>
+            <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
+            <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
+            <div>
+              <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
+              <p>Jaipur</p>
+            </div>
           </div>
-        </div>
-        <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
-        <div className="col">
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
+          <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
+            <div className="col">
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+              <FontAwesomeIcon icon={faStar} color="gold" />
+            </div>
+            <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
+            <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
+            <div>
+              <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
+              <p>Jaipur</p>
+            </div>
           </div>
-          <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
-          <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
-          <div>
-            <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
-            <p>Jaipur</p>
-          </div>
-        </div>
-        <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
-        <div className="col">
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-          </div>
-          <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
-          <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
-          <div>
-            <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
-            <p>Jaipur</p>
-          </div>
-        </div>
-      </Carousel>
+        </Carousel>
       </div>
-      
+
       {/* Mobile */}
 
 
-      <div className="mobile">
-      <Carousel
-        arrows={false}
-        responsive={responsive}
-        infinite={true}
-        // autoPlay
-      >
-        <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden", width: "100%" }}>
-          <div className="col">
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
+      <div className="mobile py-5">
+        <Carousel
+          arrows={false}
+          responsive={responsive}
+          infinite={true}
+          autoPlay
+        >
+          <div style={{ marginRight: "10px", width: "100%" }}>
+            <div className="text-center textCard" style={{ padding: "2rem", boxShadow: "3px 3px 5px 5px #F6F6F6", border: "none" }}>
+              <div className="col">
+                <FontAwesomeIcon icon={faStar} color="gold" />
+                <FontAwesomeIcon icon={faStar} color="gold" />
+                <FontAwesomeIcon icon={faStar} color="gold" />
+                <FontAwesomeIcon icon={faStar} color="gold" />
+                <FontAwesomeIcon icon={faStar} color="gold" />
+              </div>
+              <p style={{ padding: "8px", fontSize: "11px", color: "#464646" }}>Site-seeing at Combonation</p>
+              <p style={{ maxHeight: "75px", overflow: "hidden" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
+              <div>
+                <p style={{ fontSize: "15px", fontWeight: "bold" }}>Suhavi Sharma</p>
+                <p>Jaipur</p>
+              </div>
+            </div>
           </div>
-          <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
-          <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
-          <div>
-            <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
-            <p>Jaipur</p>
-          </div>
-        </div>
-        <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
-        <div className="col">
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-          </div>
-          <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
-          <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
-          <div>
-            <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
-            <p>Jaipur</p>
-          </div>
-        </div>
-        <div className="text-center textCard" style={{ margin: "2rem 3rem", overflow: "hidden" }}>
-        <div className="col">
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-            <FontAwesomeIcon icon={faStar} color="gold" />
-          </div>
-          <p style={{ fontSize: "20px", fontWeight: "medium" }}>Site-seeing at Combonation</p>
-          <p style={{ width: "600px", height: "120px", fontWeight: "italic", overflowY: "hidden", margin: "auto" }}>To begin with, the fact that the site gives you the authority to create your combos is really helpful. Also, this is the perfect destination that saves you time instead of running errands every weekend and missing out on parties. Do visit this beautiful site every weekend.</p>
-          <div>
-            <p style={{ marginBottom: ".2rem" }}>Suhavi Sharma</p>
-            <p>Jaipur</p>
-          </div>
-        </div>
-      </Carousel>
+        </Carousel>
       </div>
-      
-      
-      
-      
+
+
+
+
 
 
 
