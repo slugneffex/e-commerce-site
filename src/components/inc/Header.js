@@ -2,33 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./incAll.css";
-import { SITE_API } from "./utils";
 
 import { useSelector } from "react-redux";
 
-
 const Header = () => {
-
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   //for search
 
   const [data, setData] = useState({
-    term:''
+    term: "",
   });
 
-
-  
-  const[searchResult,setSearchResult]=useState([])   
-  // console.log(searchResult)   
+  const [searchResult, setSearchResult] = useState([]);
 
   function submit(e) {
     e.preventDefault();
     axios
       .post(
-        '/search',
+        "/search",
         {
-         term:data.search       
+          term: data.search,
         },
         {
           headers: {
@@ -38,9 +32,9 @@ const Header = () => {
         }
       )
       .then((res) => {
-        setSearchResult(res.data.combos)
-       navigate('/search')
-        console.log(searchResult)
+        setSearchResult(res.data);
+        navigate("/search", { state: res.data });
+        console.log(searchResult);
       });
   }
   function handle(e) {
@@ -49,66 +43,6 @@ const Header = () => {
     setData(newdata);
     console.log(newdata);
   }
-  // useEffect(()=>{
-  //     getSearchSuggestions()
-  // },[searchQuery])
-
-  // const getSearchSuggestions=async()=>{
-  //         const options = {
-  //           method:'POST',
-  //           headers: {
-  //             "X-Authorization":
-  //               "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-  //             "Cache-Control": "no-cache, no-store, must-revalidate",
-  //           },
-  //         };
-  //   const data =  await fetch(SITE_API+searchQuery,options)
-  //   const json= await data.json()
-  //   setSearchResult(json.data)
-  //   console.log(json.data)
-  // }
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization":
-  //           "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //       },
-  //     };
-  //     const response = await axios.post(
-  //       `/search`,{term:`${searchQuery.term}`},
-  //       options
-  //     ) 
-    
-  //     setSearchResult(response.data)
-     
-  //   }
-  //   fetchData();
-  // }, []);
-
-// 
-
-// const url = "https://combonationbusiness.in/frontend/api/search"+searchQuery
-// useEffect(() => {
-//     async function fetchData() {
-//       const options = {
-        
-//       };
-//       axios.post(url,
-//        {
-//         headers: {
-//           "X-Authorization":
-//             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-//           "Cache-Control": "no-cache, no-store, must-revalidate",
-//         }
-//        }
-//       ).than((res)=>setSearchResult(res.data)) 
-//     }
-//     fetchData();
-//   }, []);
-
 
   //for categories
 
@@ -154,7 +88,7 @@ const Header = () => {
   const { totalCount } = useSelector((state) => state.cart);
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
-  const totalCartCount = totalCount + singletotalCount
+  const totalCartCount = totalCount + singletotalCount;
 
   // For stores
 
@@ -189,15 +123,13 @@ const Header = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get('/brands', options);
+      const response = await axios.get("/brands", options);
       setBrand(response.data);
     }
     fetchData();
   }, []);
 
-  const filterbrandsApi = brand.filter((e) => e.focused==="on")
-
-
+  const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
   return (
     <div>
@@ -310,18 +242,17 @@ const Header = () => {
             </button>
             <form className="d-flex search" onSubmit={(e) => submit(e)}>
               <input
-              id="search"
+                id="search"
                 className="form-control me-2"
                 type="search"
-                name='search'
+                name="search"
                 placeholder="Search"
                 aria-label="Search"
                 value={data.search}
-                onChange={(e) => handle(e)}               
+                onChange={(e) => handle(e)}
               ></input>
-              
             </form>
-    
+
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -338,12 +269,12 @@ const Header = () => {
                     Brands
                   </Link>
                   <ul className="dropdown-menu">
-                    { filterbrandsApi.map((e) => (
-                    <li key={e.id}>
-                      <Link className="dropdown-item" to="/about">
-                        {e.name}
-                      </Link>
-                    </li>
+                    {filterbrandsApi.map((e) => (
+                      <li key={e.id}>
+                        <Link className="dropdown-item" to="/about">
+                          {e.name}
+                        </Link>
+                      </li>
                     ))}
                   </ul>
                 </li>
@@ -407,21 +338,30 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Cart" className="nav-link" style={{ position: "relative" }}>
+                  <Link
+                    to="/Cart"
+                    className="nav-link"
+                    style={{ position: "relative" }}
+                  >
                     <i className="bi bi-cart-fill"></i>
                     <span>Cart</span>
-                    <strong className="desktop" style={{
-                      position: "absolute",
-                      right: ".3rem",
-                      bottom: "3rem",
-                      zInd: "2",
-                      fontSize: "10px",
-                      color: "white",
-                      backgroundColor: "#FE9E2D",
-                      borderRadius: "50%",
-                      width: "15px",
-                      textAlign: "center"
-                    }}>{totalCartCount}</strong>
+                    <strong
+                      className="desktop"
+                      style={{
+                        position: "absolute",
+                        right: ".3rem",
+                        bottom: "3rem",
+                        zInd: "2",
+                        fontSize: "10px",
+                        color: "white",
+                        backgroundColor: "#FE9E2D",
+                        borderRadius: "50%",
+                        width: "15px",
+                        textAlign: "center",
+                      }}
+                    >
+                      {totalCartCount}
+                    </strong>
                   </Link>
                 </li>
               </ul>

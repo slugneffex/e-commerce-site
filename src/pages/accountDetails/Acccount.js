@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const Account = () => {
   const navigate = useNavigate();
 
-  // const user_id = localStorage.getItem("id");
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const phone = localStorage.getItem("phone");
