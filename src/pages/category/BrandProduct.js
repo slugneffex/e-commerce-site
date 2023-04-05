@@ -93,7 +93,7 @@ const BrandProduct = () => {
       <HomeLayout>
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 desktop">
               <div className="card">
                 <div
                   className="accordion accordion-flush accc"
@@ -144,8 +144,8 @@ const BrandProduct = () => {
                   </h4>
                 </div>
                 <div className="col-md-6">
-                  <div className="row">
-                    <div className="col-md-5">
+                  <div>
+                    <div style={{ textAlign: "end"}}>
                       <Dropdown>
                         <Dropdown.Toggle
                           variant=""
@@ -172,7 +172,7 @@ const BrandProduct = () => {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-                    <div className="col-md-5">
+                    {/* <div className="col-md-5">
                       <Dropdown>
                         <Dropdown.Toggle
                           variant=""
@@ -198,7 +198,7 @@ const BrandProduct = () => {
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -207,9 +207,9 @@ const BrandProduct = () => {
                 {brandProduct.map((p) => (
                   <div className="col-md-4 " key={p.id}>
                     <div className="newComboCart">
-                      <div className="cart-img-sec">
+                      <div className="cart-img-sec" style={{ position: "relative" }}>
                         <Link className="addtofavCategory">
-                          <li className="bi bi-heart"></li>
+                          <li className="bi bi-heart" style={{position: "absolute", right:"0.8rem", top: "0.5rem" }}></li>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img
@@ -238,7 +238,8 @@ const BrandProduct = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          <Link className="btnC">
+                          <div className="btn_atc">
+                          <Link>
                             <li
                               className="bi bi-cart"
                               id={p.id}
@@ -250,6 +251,7 @@ const BrandProduct = () => {
                               Add to Cart
                             </li>
                           </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -1133,6 +1133,9 @@ a {
 @media (max-width: 720px) {
 
   /* atc btn */
+  .btn_atc {
+    padding: 10px;
+  }
   .btn_atc li {
     font-size: 10px;
   }

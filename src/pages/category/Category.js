@@ -175,7 +175,8 @@ const Category = () => {
         </div>
         <hr />
         {category.map((e) => (
-          <div className=" col-md-4" key={e.id}>
+          <div className="col-md-4 " key={e.id}>
+
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
                 <Link
@@ -215,21 +216,24 @@ const Category = () => {
                   </div>
                 </div>
                 <div className="card-btn-sec ">
-                  <Link className="btnC">
-                    <li
-                      className="bi bi-cart"
-                      onClick={() => {
-                        addToCart(e);
-                      }}
-                      id={e.id}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Add to Cart
-                    </li>
-                  </Link>
+                  <div className="btn_atc">
+                    <Link>
+                      <li
+                        className="bi bi-cart"
+                        onClick={() => {
+                          addToCart(e);
+                        }}
+                        id={e.id}
+                        style={{ cursor: "pointer" }}
+                      >
+                        Add to Cart
+                      </li>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
         ))}
       </>
@@ -241,7 +245,7 @@ const Category = () => {
       <HomeLayout>
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 desktop">
               <div className="card">
                 <div
                   className="accordion accordion-flush accc"
@@ -267,7 +271,7 @@ const Category = () => {
               </div>
             </div>
 
-            <div className="col-md-9">
+            <div className="col-md-9 mt-2">
               <div className="banner" key={banner.id}>
                 <img src={banner.banner?.url} width="100%" alt="" />
               </div>
@@ -385,18 +389,20 @@ const Category = () => {
                           </div> */}
                         </div>
                         <div className="card-btn-sec ">
-                          <Link className="btnC">
-                            <li
-                              className="bi bi-cart"
-                              onClick={() => {
-                                addToSingleCart(p);
-                              }}
-                              id={p.id}
-                              style={{ cursor: "pointer" }}
-                            >
-                              Add to Cart
-                            </li>
-                          </Link>
+                          <div className="btn_atc">
+                            <Link>
+                              <li
+                                className="bi bi-cart"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                }}
+                                id={p.id}
+                                style={{ cursor: "pointer" }}
+                              >
+                                Add to Cart
+                              </li>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
