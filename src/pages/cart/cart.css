@@ -28,6 +28,8 @@
 .cart-card {
     background-color: #FFF4E3;
     padding: 2rem;
+    box-shadow: 1px 1px 10px #DDDDDD;
+    margin-bottom: 1.5rem;
 }
 
 .cartCard .cart-type {
