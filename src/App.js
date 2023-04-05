@@ -61,6 +61,7 @@ const App = () => {
       <Route path="/brandlogolist" element={<BrandLogosList />} />
 
 
+      {/* Route for search */}
       <Route path="/search" element={<Searchedpage/>}/>
 
       {/* Route for Freebies */}
