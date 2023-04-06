@@ -171,8 +171,8 @@ const Adress = () => {
     <HomeLayout>
       <section className="address">
         <div className="container">
-          <div className="row text-center " id="progessbarRow">
-            <ul className="" id="progressbarrr">
+          <div className="row text-center pb-5" id="progessbarRow">
+            <ul className="mt-5" id="progressbarrr">
               <div className="col-md-4 col-sm-4">
                 <Link to="/Cart" className="bagLink">
                   <li id="bag">Bag</li>
@@ -291,7 +291,7 @@ const Adress = () => {
               
               </div>
             </div>
-            <div className="col-md-4 mt-5">
+            <div className="col-md-4 mt-5 mb-5">
               <div className="overview-card">
                 <div className="overview-card-head">
                   <h3>Order Summary</h3>
