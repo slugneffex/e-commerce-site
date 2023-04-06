@@ -148,19 +148,19 @@ const Product = () => {
                   <span>Deal Price:</span>
                   <span className="sp">₹{combos.selling_price}</span>
                 </div>
-                <div style={{ marginTop: ".5rem"}}>
+                <div style={{ marginTop: ".5rem" }}>
                   <span>You Save:</span>
                   <span className="youSave">
                     ₹150 <strong>({combos.discount}%)</strong>
                   </span>
                 </div>
-                
+
                 <div style={{ marginTop: ".5rem" }}>
-                <span className="priceinc" >Price inclusive of all taxes</span>
+                  <span className="priceinc" >Price inclusive of all taxes</span>
                 </div>
               </div>
               <div className="cart">
-                <div className="d-flex" style={{ alignItems: "center" }}>
+                {/* <div className="d-flex" style={{ alignItems: "center" }}>
                   <div className="" style={{ marginRight: "2rem" }}>
                     <span className="quant">Quantity:</span>
                   </div>
@@ -180,20 +180,21 @@ const Product = () => {
                       <button className="bi bi-plus-lg"></button>
                     </form>
                   </div>
-                </div>
-             
+                </div> */}
+
                 <div className="addCart" id={combos.id}>
                   <Link
                     to=""
-                    className="btn_1"
                     onClick={() => {
                       addToCart(combos);
                     }}
                   >
-                    <i className="bi bi-cart" style={{ marginRight: ".5rem" }}></i>Add To Cart
+                    <div className="btn_atc">
+                      <i className="bi bi-cart" style={{ marginRight: ".5rem" }}></i>Add To Cart
+                    </div>
                   </Link>
                 </div>
-               
+
                 <div className="wishlist-sec">
                   <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
                   <Link to="#" className="wishlist">
@@ -201,7 +202,12 @@ const Product = () => {
                   </Link>
                 </div>
               </div>
-              <div className="coupon-sec text-center">
+
+              <div class="coupon-sec text-center mb-3">
+                <img src="../assets/img/usps.svg" alt="img-fluid" class="img-fluid" />
+              </div>
+
+              {/* <div className="coupon-sec text-center">
                 <div className="coupon-card">
                   <div className="card-head">
                     <div className="tag">
@@ -227,6 +233,14 @@ const Product = () => {
                 <div className="more-card my-3">
                   <Link to="">+ 10 More</Link>
                 </div>
+              </div> */}
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <img src="../assets/img/slabs-freebies.png" alt="img-fluid" class="img-fluid" />
+              </div>
+              <div class="col-md-6">
+                <img src="../assets/img/slabs-tnc.png" alt="img-fluid" class="img-fluid" />
               </div>
             </div>
           </div>
