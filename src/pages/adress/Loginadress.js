@@ -17,7 +17,7 @@ const Loginadress = () => {
   // Combo Product Cart
 
   const { totalCount } = useSelector((state) => state.cart);
-  const { subAmount, totalAmount, totalDiscount } = useSelector(
+  const { subAmount, totalAmount, totalDiscount,cartItems } = useSelector(
     (state) => state.cart
   );
 
@@ -246,7 +246,9 @@ const Loginadress = () => {
   // Order Validate
 
   const transaction_id = localStorage.getItem("transaction_id");
-  console.log(token);
+  const email = localStorage.getItem("email");
+  const password = localStorage.getItem("password");
+  console.log(token)
 
   const sendOrder = () => {
     axios
@@ -261,11 +263,14 @@ const Loginadress = () => {
           transaction_id: transaction_id,
           payment_type: "prepaid",
           payment_method: "prepaid",
-
+          email: email,
+          password: password,
           phone: formData.phone,
           subtotal: "1000",
-          grand_total: "2000",
+          grand_total: `${totalCartSubAmount}`,
           tax: "600",
+          lname:"tiwari",
+          cartItems:cartItems
         },
         {
           headers: {

@@ -46,6 +46,8 @@ const Cart = () => {
     dispatch(getTotalDiscount());
   }, [dispatch]);
 
+  console.log(cartItems);
+
   // Single Product Cart
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
@@ -405,7 +407,6 @@ const Cart = () => {
 
   if (singlesubAmount >= 1000) {
     freebiesDiscountSection = (
-
       <li style={{ padding: "1rem" }}>
         {/*  desktop */}
         <div className="desktop">
@@ -429,7 +430,6 @@ const Cart = () => {
             </div>
           </div>
         </div>
-
 
         {/*  mobile */}
         <div className="mobile">

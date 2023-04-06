@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-
 const Categories = () => {
   const [myoc, setMyoc] = useState([]);
+  const [error, setError] = useState(null);
   // myoc Poster
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
           "X-Authorization":
@@ -15,15 +16,29 @@ const Categories = () => {
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
-      const response = await axios.get("/settings", options);
-      setMyoc(response.data);
+      try {
+        const response = await axios.get("/settings", options);
+        setMyoc(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-
       {/* desktop  */}
       <div className="desktop">
         {Array.isArray(myoc) &&
