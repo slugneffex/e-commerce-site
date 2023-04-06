@@ -44,7 +44,6 @@ const Category = () => {
     fetchData();
   }, [id]);
 
-
   // Categories
   const [categoris, setCategories] = useState([]);
 
@@ -142,6 +141,7 @@ const Category = () => {
   }
 
   // Add to wishlist For product
+  const [heartFilled, setHeartFilled] = useState(null);
 
   function wishlistProductData(id) {
     const data = {
@@ -158,7 +158,12 @@ const Category = () => {
         },
       })
       .then((res) => {
-        alert(res.data.message);
+        if (res.data.status === true) {
+          setHeartFilled(id);
+          setTimeout(() => setHeartFilled(null), 4000);
+        } else {
+          alert(res.data.message);
+        }
       });
   }
 
@@ -176,7 +181,6 @@ const Category = () => {
         <hr />
         {category.map((e) => (
           <div className="col-md-4 " key={e.id}>
-
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
                 <Link
@@ -216,24 +220,20 @@ const Category = () => {
                   </div>
                 </div>
                 <div className="card-btn-sec ">
-                  <div className="btn_atc">
-                    <Link>
-                      <li
-                        className="bi bi-cart"
-                        onClick={() => {
-                          addToCart(e);
-                        }}
-                        id={e.id}
-                        style={{ cursor: "pointer" }}
-                      >
-                        Add to Cart
-                      </li>
-                    </Link>
+                  <div
+                    className="btn_atc"
+                    onClick={() => {
+                      addToCart(e);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <li className="bi bi-cart" id={e.id}>
+                      Add to Cart
+                    </li>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         ))}
       </>
@@ -313,9 +313,7 @@ const Category = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item >
-                          Low to High
-                        </Dropdown.Item>
+                        <Dropdown.Item>Low to High</Dropdown.Item>
                         <Dropdown.Item href="#/action-2">
                           Another action
                         </Dropdown.Item>
@@ -352,14 +350,16 @@ const Category = () => {
                           onClick={() => wishlistProductData(p.id)}
                           className="addtofavCategory"
                         >
-                          <li
-                            className="bi bi-heart"
-                            style={{
-                              position: "absolute",
-                              right: "1rem",
-                              top: ".8rem",
-                            }}
-                          ></li>
+                          <li className="youMayLikeHeart">
+                            {heartFilled === p.id ? (
+                              <i
+                                style={{ color: "#fe9e2d" }}
+                                class="bi bi-heart-fill"
+                              ></i>
+                            ) : (
+                              <i className="bi bi-heart"></i>
+                            )}
+                          </li>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img
@@ -389,19 +389,16 @@ const Category = () => {
                           </div> */}
                         </div>
                         <div className="card-btn-sec ">
-                          <div className="btn_atc">
-                            <Link>
-                              <li
-                                className="bi bi-cart"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                }}
-                                id={p.id}
-                                style={{ cursor: "pointer" }}
-                              >
-                                Add to Cart
-                              </li>
-                            </Link>
+                          <div
+                            className="btn_atc"
+                            onClick={() => {
+                              addToSingleCart(p);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <li className="bi bi-cart" id={p.id}>
+                              Add to Cart
+                            </li>
                           </div>
                         </div>
                       </div>

@@ -145,7 +145,7 @@ const BrandProduct = () => {
                 </div>
                 <div className="col-md-6">
                   <div>
-                    <div style={{ textAlign: "end"}}>
+                    <div style={{ textAlign: "end" }}>
                       <Dropdown>
                         <Dropdown.Toggle
                           variant=""
@@ -207,9 +207,19 @@ const BrandProduct = () => {
                 {brandProduct.map((p) => (
                   <div className="col-md-4 " key={p.id}>
                     <div className="newComboCart">
-                      <div className="cart-img-sec" style={{ position: "relative" }}>
+                      <div
+                        className="cart-img-sec"
+                        style={{ position: "relative" }}
+                      >
                         <Link className="addtofavCategory">
-                          <li className="bi bi-heart" style={{position: "absolute", right:"0.8rem", top: "0.5rem" }}></li>
+                          <li
+                            className="bi bi-heart"
+                            style={{
+                              position: "absolute",
+                              right: "0.8rem",
+                              top: "0.5rem",
+                            }}
+                          ></li>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img
@@ -221,11 +231,11 @@ const BrandProduct = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{p.name}</span>
+                          <span>{p.name.substring(0, 40)}</span>
                         </div>
-                        <div>
+                        {/* <div>
                           <span className="packof">(Pack of 2)</span>
-                        </div>
+                        </div> */}
                         <div className="price-sec">
                           <div className="col-4" style={{ textAlign: "end" }}>
                             <span className="sp">₹{p.selling_price}</span>
@@ -238,19 +248,16 @@ const BrandProduct = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          <div className="btn_atc">
-                          <Link>
-                            <li
-                              className="bi bi-cart"
-                              id={p.id}
-                              style={{ cursor: "pointer" }}
-                              onClick={() => {
-                                addToSingleCart(p);
-                              }}
-                            >
+                          <div
+                            className="btn_atc"
+                            onClick={() => {
+                              addToSingleCart(p);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <li className="bi bi-cart" id={p.id}>
                               Add to Cart
                             </li>
-                          </Link>
                           </div>
                         </div>
                       </div>
