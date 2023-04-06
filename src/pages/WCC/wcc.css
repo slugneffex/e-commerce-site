@@ -177,9 +177,13 @@ h1 span {
         padding: 0;
     }
 
-    .row {
-        justify-content: space-evenly;
+    .row .overviewMobile {
+        width: 100%;
     }
+
+    /* .row {
+        justify-content: space-evenly;
+    } */
 
     .row .card {
         padding: 0;

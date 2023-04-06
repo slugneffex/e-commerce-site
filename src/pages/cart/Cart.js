@@ -374,7 +374,7 @@ const Cart = () => {
     ExtraFreebiesAmountCustomComboSection = (
       <>
         <div
-          className="col-md-6"
+          className="col-6"
           style={{
             textAlign: "left",
             fontWeight: "bold",
@@ -385,7 +385,7 @@ const Cart = () => {
           <span className="term">Extra Freebie Amount :-</span>
         </div>
         <div
-          className="col-md-6"
+          className="col-6"
           style={{
             textAlign: "right",
             fontWeight: "bold",
@@ -405,24 +405,52 @@ const Cart = () => {
 
   if (singlesubAmount >= 1000) {
     freebiesDiscountSection = (
-      <li className="desktop" style={{ padding: "1rem" }}>
-        <div className="signalCart">
-          <div className="col-2">
-            <img
-              src="./assets/img/percent-star.png"
-              alt="discountImg"
-              width="75px"
-              height="75px"
-            />
+
+      <li style={{ padding: "1rem" }}>
+        {/*  desktop */}
+        <div className="desktop">
+          <div className="signalCart ">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-10">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
           </div>
-          <div className="col-10">
-            <h3>
-              <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-              <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
-            </h3>
-            <Link to="/freebies" className="btn_1">
-              Add Freebies Now <i className="bi bi-arrow-right"></i>
-            </Link>
+        </div>
+
+
+        {/*  mobile */}
+        <div className="mobile">
+          <div className="signalCart">
+            <div className="col-4">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-8">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
           </div>
         </div>
       </li>
@@ -462,27 +490,29 @@ const Cart = () => {
   if (singletotalDiscount > 0) {
     BYOCDiscountSection = (
       <>
-        <div
-          className="col-md-6"
-          style={{
-            textAlign: "left",
-            fontWeight: "bold",
-            fontSize: "20px",
-            color: "#30303",
-          }}
-        >
-          <span className="term">BYOC Discount :-</span>
-        </div>
-        <div
-          className="col-md-6"
-          style={{
-            textAlign: "right",
-            fontWeight: "bold",
-            fontSize: "20px",
-            color: "#30303",
-          }}
-        >
-          <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
+        <div className="row">
+          <div
+            className="col-md-6"
+            style={{
+              textAlign: "left",
+              fontWeight: "bold",
+              fontSize: "20px",
+              color: "#30303",
+            }}
+          >
+            <span className="term">BYOC Discount :-</span>
+          </div>
+          <div
+            className="col-md-6"
+            style={{
+              textAlign: "right",
+              fontWeight: "bold",
+              fontSize: "20px",
+              color: "#30303",
+            }}
+          >
+            <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
+          </div>
         </div>
       </>
     );
@@ -496,7 +526,7 @@ const Cart = () => {
     freebiesAmountSection = (
       <>
         <div
-          className="col-md-6"
+          className="col-6"
           style={{
             textAlign: "left",
             fontWeight: "bold",
@@ -509,7 +539,7 @@ const Cart = () => {
           </span>
         </div>
         <div
-          className="col-md-6"
+          className="col-6"
           style={{
             textAlign: "right",
             fontWeight: "bold",
@@ -529,7 +559,7 @@ const Cart = () => {
 
   if (singletotalCount >= 1) {
     SingleCartSection = (
-      <div className="cartCard py-5">
+      <div className="cartCard py-3">
         <div className="cart-type">
           <h3>Custom Combo</h3> <span>(Total {singletotalCount} Items)</span>
         </div>
@@ -594,7 +624,7 @@ const Cart = () => {
             <div className="pt-3">
               <div className="row">
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "left",
                     fontWeight: "bold",
@@ -605,7 +635,7 @@ const Cart = () => {
                   <span className="term">BYOC Total :-</span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "right",
                     fontWeight: "bold",
@@ -621,7 +651,7 @@ const Cart = () => {
                 {ExtraFreebiesAmountCustomComboSection}
 
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "left",
                     fontWeight: "bold",
@@ -632,7 +662,7 @@ const Cart = () => {
                   <span className="term">Payble Amount :-</span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "right",
                     fontWeight: "bold",
@@ -720,7 +750,7 @@ const Cart = () => {
                 {ComboSection}
                 {SingleCartSection}
               </div>
-              <div className="col-md-4 mt-5">
+              <div className="col-md-4 mt-5 overviewMobile">
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>
