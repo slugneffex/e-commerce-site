@@ -36,7 +36,24 @@ const responsive = {
 
 
 
+
+
 const YouMayLike = () => {
+  // changing wl btn
+  
+
+  const [btn_Wl, setBtn_Wl] = useState(false);
+  const changeWlBtn = (e) => {
+    if(this.btn_Wl === false) {
+      setBtn_Wl(true)
+    }
+    else {
+      setBtn_Wl(false)
+    }
+  }
+
+
+
   // Featured combos
   const [feature, setFeature] = useState([]);
 
@@ -135,8 +152,11 @@ const YouMayLike = () => {
 
                     <div className="newComboCart">
                       <li className="youMayLikeHeart">
-                        <button className="notAdded"><i className="bi bi-heart"></i></button>
-                        {/* <button className="redHeart"><i style={{ color: "red", borderColor: "#464646"}} class="bi bi-heart-fill"></i></button> */}
+                        {btn_Wl ?
+                          <i onClick={() => changeWlBtn(e.id)} id={e.id} style={{ color: "red" }} class="bi bi-heart-fill"></i>
+                          :
+                          <i onClick={() => changeWlBtn(e.id)} id={e.id} className="bi bi-heart"></i>
+                          }
                       </li>
                       <div className="cart-img-sec">
                         <Link
@@ -169,20 +189,20 @@ const YouMayLike = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                        <div className="btn_atc">
-                        <Link>
-                            <li
-                              className="bi bi-cart"
-                              onClick={() => {
-                                addToCart(e);
-                              }}
-                              id={e.id}
-                              style={{ cursor: "pointer" }}
-                            >
-                              Add to Cart
-                            </li>
-                          </Link>
-                        </div>
+                          <div className="btn_atc">
+                            <Link>
+                              <li
+                                className="bi bi-cart"
+                                onClick={() => {
+                                  addToCart(e);
+                                }}
+                                id={e.id}
+                                style={{ cursor: "pointer" }}
+                              >
+                                Add to Cart
+                              </li>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
