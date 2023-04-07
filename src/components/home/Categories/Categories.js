@@ -4,10 +4,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+// import * as ReactBootStrap from 'react-bootstrap'
+  
 
 const Categories = () => {
-  const [category, setCategory] = useState([]);
 
+  const [category, setCategory] = useState([]);
+  const[loading,setLoading]=useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -23,6 +26,7 @@ const Categories = () => {
       const response = await axios.get("/categories", options);
       setCategory(response.data);
     }
+    setLoading(true)
     fetchData();
   }, []);
 
@@ -50,7 +54,7 @@ const Categories = () => {
 
   return (
     <>
-      <div className="categoriesMainDiv">
+    {loading?(<div className="categoriesMainDiv">
         <div className="container" >
           <div className="my-auto categoriesDiv">
             {category.map((e) => (
@@ -59,11 +63,14 @@ const Categories = () => {
               </Link>
             ))}
           </div>
-
-
-
         </div>
-      </div>
+      </div>):(<div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>)}
+      
+      
 
 
 

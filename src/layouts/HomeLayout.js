@@ -5,6 +5,7 @@ import BottomBar from '../components/inc/BottomBar';
 
 
 const HomeLayout = ({children}) => {
+  
   return (
     <div>
         <main>
