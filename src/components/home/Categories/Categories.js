@@ -5,15 +5,9 @@ import { Link } from "react-router-dom";
 
 import Carousel from "react-multi-carousel";
 
-
-
 const Categories = () => {
-
-
-
   const [category, setCategory] = useState([]);
-  const[loading,setLoading]=useState(false)
-
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +26,7 @@ const Categories = () => {
       );
       setCategory(response.data);
     }
-    setLoading(true)
+    setLoading(true);
     fetchData();
   }, []);
 
@@ -58,13 +52,8 @@ const Categories = () => {
 
   return (
     <>
-
       <div className="categoriesMainDiv">
         <div className="container">
-
-    {loading?(<div className="categoriesMainDiv">
-        <div className="container" >
-
           <div className="my-auto categoriesDiv">
             {category.map((e) => (
               <Link to={`/category/${e.id}`} key={e.id}>
@@ -73,13 +62,12 @@ const Categories = () => {
             ))}
           </div>
         </div>
-      </div>):(<div class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>)}
-      
-      
+      </div>
+      {/* <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div> */}
 
       {/* for mobile */}
       <div className="categoriesMobileDiv">
