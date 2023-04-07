@@ -17,7 +17,7 @@ const Categories = () => {
         },
       };
       try {
-        const response = await axios.get(`https://combonationbusiness.in/frontend/api/settings`, options);
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/settings`, options);
         setMyoc(response.data);
       } catch (error) {
         if (error.response && error.response.status === 429) {
