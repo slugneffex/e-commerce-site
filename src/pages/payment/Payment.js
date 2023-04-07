@@ -65,14 +65,19 @@ const Payment = () => {
   }
 
   // Total Pricing of products
-  let ExtraFreebiesAmount = freebiestotalAmount - discount;
-  const shippingAmount = 50;
+  const ExtraFreebiesAmount = freebiestotalAmount - discount;
+  let ExtraFreebiesAmountt = 0;
+  if (ExtraFreebiesAmount > 0) {
+    ExtraFreebiesAmountt = ExtraFreebiesAmount;
+  } else if (ExtraFreebiesAmount < 0) {
+    ExtraFreebiesAmountt = 0;
+  }
+
+  let shippingAmount = 50;
 
   const totalCartAmount = totalAmount + singletotalAmount;
-  const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
-  const totalCartSubAmount =
-    subAmount + singlesubAmount + ExtraFreebiesAmount + shippingAmount;
-
+  const totalCartDiscount = totalDiscount + singletotalDiscount;
+  let totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmountt;
   // Extra freebies amount
 
   let ExtraFreebiesAmountSection = null;
@@ -117,10 +122,25 @@ const Payment = () => {
   let shippingAmountSection = null;
 
   if (totalCartSubAmount < 499) {
+    totalCartSubAmount += 50;
     shippingAmountSection = (
       <li className="price-type">
         <p>Shipping</p>
         <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+      </li>
+    );
+  } else {
+    shippingAmount = 0;
+  }
+
+  let FreebiesCartDiscountSection = null;
+  if (discount > 0) {
+    FreebiesCartDiscountSection = (
+      <li className="price-type">
+        <p>Freebies Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(discount).toFixed(0)}
+        </span>
       </li>
     );
   }
@@ -287,6 +307,7 @@ const Payment = () => {
                       </li>
                       {ExtraFreebiesAmountSection}
                       {discountSection}
+                      {FreebiesCartDiscountSection}
                       {shippingAmountSection}
                       <li className="price-type">
                         <p>Subtotal</p>

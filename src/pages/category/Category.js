@@ -160,12 +160,14 @@ const Category = () => {
       .then((res) => {
         if (res.data.status === true) {
           setHeartFilled(id);
-          setTimeout(() => setHeartFilled(null), 4000);
+          // setTimeout(() => setHeartFilled(null), 4000);
         } else {
           alert(res.data.message);
         }
       });
   }
+
+
 
   // if there is no combo hide the section of combos
 
@@ -353,6 +355,7 @@ const Category = () => {
                           <li className="youMayLikeHeart">
                             {heartFilled === p.id ? (
                               <i
+                                
                                 style={{ color: "#fe9e2d" }}
                                 class="bi bi-heart-fill"
                               ></i>

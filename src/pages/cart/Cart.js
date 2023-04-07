@@ -46,8 +46,6 @@ const Cart = () => {
     dispatch(getTotalDiscount());
   }, [dispatch]);
 
-  
-
   // Single Product Cart
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
@@ -99,6 +97,322 @@ const Cart = () => {
   }
 
   // Clear freebies array if custom combo below 1000
+
+  // For freebies discount part
+
+  let discount = 0;
+  switch (true) {
+    case singlesubAmount >= 1000 && singlesubAmount < 3000:
+      discount = (singlesubAmount * 20) / 100;
+      break;
+    case singlesubAmount >= 3000 && singlesubAmount < 5000:
+      discount = (singlesubAmount * 30) / 100;
+      break;
+    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
+      discount = (singlesubAmount * 40) / 100;
+      break;
+    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
+      discount = (singlesubAmount * 50) / 100;
+      break;
+    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
+      discount = (singlesubAmount * 60) / 100;
+      break;
+    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
+      discount = (singlesubAmount * 100) / 100;
+      break;
+    default:
+      discount = 0;
+      break;
+  }
+
+  // Freebies cart section
+  const { freebiesCount } = useSelector((state) => state.freebies);
+  const { freebiestotalAmount, freebiescartItems } = useSelector(
+    (state) => state.freebies
+  );
+
+  useEffect(() => {
+    dispatch(getfreebiesCartProducts());
+    dispatch(getfreebiesCartCount());
+    dispatch(getfreebiesTotalAmount());
+  }, [dispatch]);
+
+  // Total Pricing of products
+
+  const ExtraFreebiesAmount = freebiestotalAmount - discount;
+
+  let ExtraFreebiesAmountt = 0;
+  if (ExtraFreebiesAmount > 0) {
+    ExtraFreebiesAmountt = ExtraFreebiesAmount;
+  } else if (ExtraFreebiesAmount < 0) {
+    ExtraFreebiesAmountt = 0;
+  }
+
+  
+  let shippingAmount = 50;
+
+  const totalCartAmount = totalAmount + singletotalAmount;
+  const totalCartDiscount = totalDiscount + singletotalDiscount;
+  let totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmountt;
+
+  // if custom combo amount is less than 1000 then delete freebies aaray
+  useEffect(() => {
+    if (singlesubAmount < 1000) {
+      dispatch(clearCart());
+    }
+  }, [singlesubAmount, dispatch]);
+
+  // Shipping amount less than 499
+
+  let shippingAmountSection = null;
+
+  if (totalCartSubAmount < 499) {
+    totalCartSubAmount += 50;
+    shippingAmountSection = (
+      <li className="price-type">
+        <p>Shipping</p>
+        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+      </li>
+    );
+  } else {
+    shippingAmount = 0;
+  }
+
+  // if discount is 0 then hide the section
+
+  let discountSection = null;
+  if (totalCartDiscount > 0) {
+    discountSection = (
+      <li className="price-type">
+        <p>Total Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
+
+  // Hurry discount section
+
+  let hurrryDiscountSection = null;
+  if (totalCartDiscount > 0) {
+    hurrryDiscountSection = (
+      <span>
+        Hurray! You Saved{" "}
+        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
+        Order
+      </span>
+    );
+  }
+
+  // Extra freebies amount
+
+  let ExtraFreebiesAmountSection = null;
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountSection = (
+      <li className="price-type">
+        <p>Extra Freebie Amount</p>
+        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+      </li>
+    );
+  }
+
+  let ExtraFreebiesAmountCustomComboSection = null;
+
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountCustomComboSection = (
+      <>
+        <div
+          className="col-6"
+          style={{
+            textAlign: "left",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span className="term">Extra Freebie Amount :-</span>
+        </div>
+        <div
+          className="col-6"
+          style={{
+            textAlign: "right",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span>₹ {parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+        </div>
+      </>
+    );
+  }
+
+  //  Freebies Section
+
+  let freebiesDiscountSection = null;
+
+  if (singlesubAmount >= 1000) {
+    freebiesDiscountSection = (
+      <li style={{ padding: "1rem" }}>
+        {/*  desktop */}
+        <div className="desktop">
+          <div className="signalCart ">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-10">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/*  mobile */}
+        <div className="mobile">
+          <div className="signalCart">
+            <div className="col-4">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-8">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </li>
+    );
+  }
+
+  // If Single cart===1 then i have to show the section
+
+  let freebiesUptoSection = null;
+
+  if (singlesubAmount < 1000) {
+    freebiesUptoSection = (
+      <li style={{ padding: "1rem" }}>
+        <div className="signalCart">
+          <div className="col-2">
+            <img
+              src="./assets/img/percent-star.png"
+              alt="discountImg"
+              width="75px"
+              height="75px"
+            />
+          </div>
+          <div className="col-10">
+            <h3>
+              <strong>Add More Products For More Savings !</strong> And Get{" "}
+              <span>Upto 70% OFF</span>
+            </h3>
+          </div>
+        </div>
+      </li>
+    );
+  }
+
+  // BYOC discount section
+
+  let BYOCDiscountSection = null;
+  if (singletotalDiscount > 0) {
+    BYOCDiscountSection = (
+      <>
+        <div className="row">
+          <div
+            className="col-md-6"
+            style={{
+              textAlign: "left",
+              fontWeight: "bold",
+              fontSize: "20px",
+              color: "#30303",
+            }}
+          >
+            <span className="term">BYOC Discount :-</span>
+          </div>
+          <div
+            className="col-md-6"
+            style={{
+              textAlign: "right",
+              fontWeight: "bold",
+              fontSize: "20px",
+              color: "#30303",
+            }}
+          >
+            <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Freebies discount section
+
+  let freebiesAmountSection = null;
+
+  if (discount > 0) {
+    freebiesAmountSection = (
+      <>
+        <div
+          className="col-6"
+          style={{
+            textAlign: "left",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span className="term" style={{ color: "#fe9e2d" }}>
+            Freebies Amount :-
+          </span>
+        </div>
+        <div
+          className="col-6"
+          style={{
+            textAlign: "right",
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#30303",
+          }}
+        >
+          <span style={{ color: "#fe9e2d" }}>
+            ₹ {parseFloat(discount).toFixed(0)}
+          </span>
+        </div>
+      </>
+    );
+  }
+
+  let FreebiesCartDiscountSection = null;
+  if (discount > 0) {
+    FreebiesCartDiscountSection = (
+      <li className="price-type">
+        <p>Freebies Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(discount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
 
   // IF comboSection cart ===1 then i have to show the section
 
@@ -263,299 +577,8 @@ const Cart = () => {
     );
   }
 
-  // For freebies discount part
-
-  let discount = 0;
-  switch (true) {
-    case singlesubAmount >= 1000 && singlesubAmount < 3000:
-      discount = (singlesubAmount * 20) / 100;
-      break;
-    case singlesubAmount >= 3000 && singlesubAmount < 5000:
-      discount = (singlesubAmount * 30) / 100;
-      break;
-    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
-      discount = (singlesubAmount * 40) / 100;
-      break;
-    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
-      discount = (singlesubAmount * 50) / 100;
-      break;
-    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
-      discount = (singlesubAmount * 60) / 100;
-      break;
-    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
-      discount = (singlesubAmount * 100) / 100;
-      break;
-    default:
-      discount = 0;
-      break;
-  }
-
-  // Freebies cart section
-  const { freebiesCount } = useSelector((state) => state.freebies);
-  const { freebiestotalAmount, freebiescartItems } = useSelector(
-    (state) => state.freebies
-  );
-
-  useEffect(() => {
-    dispatch(getfreebiesCartProducts());
-    dispatch(getfreebiesCartCount());
-    dispatch(getfreebiesTotalAmount());
-  }, [dispatch]);
-
-  // Total Pricing of products
-  let ExtraFreebiesAmount = freebiestotalAmount - discount;
-  const shippingAmount = 50;
-
-  const totalCartAmount = totalAmount + singletotalAmount;
-  const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
-  const totalCartSubAmount =
-    subAmount + singlesubAmount + ExtraFreebiesAmount + shippingAmount;
-
-  // if custom combo amount is less than 1000 then delete freebies aaray
-  useEffect(() => {
-    if (singlesubAmount < 1000) {
-      dispatch(clearCart());
-    }
-  }, [singlesubAmount, dispatch]);
-
-  // Shipping amount less than 499
-
-  let shippingAmountSection = null;
-
-  if (totalCartSubAmount < 499) {
-    shippingAmountSection = (
-      <li className="price-type">
-        <p>Shipping</p>
-        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
-      </li>
-    );
-  }
-
-  // if discount is 0 then hide the section
-
-  let discountSection = null;
-  if (totalCartDiscount > 0) {
-    discountSection = (
-      <li className="price-type">
-        <p>Total Discount</p>
-        <span style={{ color: "#009444" }}>
-          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
-        </span>
-      </li>
-    );
-  }
-
-  // Hurry discount section
-
-  let hurrryDiscountSection = null;
-  if (totalCartDiscount > 0) {
-    hurrryDiscountSection = (
-      <span>
-        Hurray! You Saved{" "}
-        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
-        Order
-      </span>
-    );
-  }
-
-  // Extra freebies amount
-
-  let ExtraFreebiesAmountSection = null;
-  if (freebiestotalAmount > discount) {
-    ExtraFreebiesAmountSection = (
-      <li className="price-type">
-        <p>Extra Freebie Amount</p>
-        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
-      </li>
-    );
-  }
-
-  let ExtraFreebiesAmountCustomComboSection = null;
-
-  if (freebiestotalAmount > discount) {
-    ExtraFreebiesAmountCustomComboSection = (
-      <>
-        <div
-          className="col-6"
-          style={{
-            textAlign: "left",
-            fontWeight: "bold",
-            fontSize: "20px",
-            color: "#30303",
-          }}
-        >
-          <span className="term">Extra Freebie Amount :-</span>
-        </div>
-        <div
-          className="col-6"
-          style={{
-            textAlign: "right",
-            fontWeight: "bold",
-            fontSize: "20px",
-            color: "#30303",
-          }}
-        >
-          <span>₹ {parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
-        </div>
-      </>
-    );
-  }
-
-  console.log(singleCartItems);
-
-  //  Freebies Section
-
-  let freebiesDiscountSection = null;
-
-  if (singlesubAmount >= 1000) {
-    freebiesDiscountSection = (
-      <li style={{ padding: "1rem" }}>
-        {/*  desktop */}
-        <div className="desktop">
-          <div className="signalCart ">
-            <div className="col-2">
-              <img
-                src="./assets/img/percent-star.png"
-                alt="discountImg"
-                width="75px"
-                height="75px"
-              />
-            </div>
-            <div className="col-10">
-              <h3>
-                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
-              </h3>
-              <Link to="/freebies" className="btn_1">
-                Add Freebies Now <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/*  mobile */}
-        <div className="mobile">
-          <div className="signalCart">
-            <div className="col-4">
-              <img
-                src="./assets/img/percent-star.png"
-                alt="discountImg"
-                width="75px"
-                height="75px"
-              />
-            </div>
-            <div className="col-8">
-              <h3>
-                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
-              </h3>
-              <Link to="/freebies" className="btn_1">
-                Add Freebies Now <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </li>
-    );
-  }
-
-  // If Single cart===1 then i have to show the section
-
-  let freebiesUptoSection = null;
-
-  if (singlesubAmount < 1000) {
-    freebiesUptoSection = (
-      <li style={{ padding: "1rem" }}>
-        <div className="signalCart">
-          <div className="col-2">
-            <img
-              src="./assets/img/percent-star.png"
-              alt="discountImg"
-              width="75px"
-              height="75px"
-            />
-          </div>
-          <div className="col-10">
-            <h3>
-              <strong>Add More Products For More Savings !</strong> And Get{" "}
-              <span>Upto 70% OFF</span>
-            </h3>
-          </div>
-        </div>
-      </li>
-    );
-  }
-
-  // BYOC discount section
-
-  let BYOCDiscountSection = null;
-  if (singletotalDiscount > 0) {
-    BYOCDiscountSection = (
-      <>
-        <div className="row">
-          <div
-            className="col-md-6"
-            style={{
-              textAlign: "left",
-              fontWeight: "bold",
-              fontSize: "20px",
-              color: "#30303",
-            }}
-          >
-            <span className="term">BYOC Discount :-</span>
-          </div>
-          <div
-            className="col-md-6"
-            style={{
-              textAlign: "right",
-              fontWeight: "bold",
-              fontSize: "20px",
-              color: "#30303",
-            }}
-          >
-            <span>₹ {parseFloat(singletotalDiscount).toFixed(0)}</span>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  // Freebies discount section
-
-  let freebiesAmountSection = null;
-
-  if (discount > 0) {
-    freebiesAmountSection = (
-      <>
-        <div
-          className="col-6"
-          style={{
-            textAlign: "left",
-            fontWeight: "bold",
-            fontSize: "20px",
-            color: "#30303",
-          }}
-        >
-          <span className="term" style={{ color: "#fe9e2d" }}>
-            Freebies Amount :-
-          </span>
-        </div>
-        <div
-          className="col-6"
-          style={{
-            textAlign: "right",
-            fontWeight: "bold",
-            fontSize: "20px",
-            color: "#30303",
-          }}
-        >
-          <span style={{ color: "#fe9e2d" }}>
-            ₹ {parseFloat(discount).toFixed(0)}
-          </span>
-        </div>
-      </>
-    );
-  }
+  const BYOCSubTotal = singlesubAmount + ExtraFreebiesAmountt;
+  // single product cart section
 
   let SingleCartSection = null;
 
@@ -586,7 +609,6 @@ const Cart = () => {
                         <select name="" id="">
                           Qty
                           <option value="1">{products.quantity}</option>
-                         
                         </select>
                         {/* <span>Only 2 Left</span> */}
                       </div>
@@ -670,12 +692,7 @@ const Cart = () => {
                     color: "#30303",
                   }}
                 >
-                  <span>
-                    ₹{" "}
-                    {parseFloat(singlesubAmount + ExtraFreebiesAmount).toFixed(
-                      0
-                    )}
-                  </span>
+                  <span>₹ {parseFloat(BYOCSubTotal).toFixed(0)}</span>
                 </div>
               </div>
             </div>
@@ -767,6 +784,7 @@ const Cart = () => {
                       </li>
                       {ExtraFreebiesAmountSection}
                       {discountSection}
+                      {FreebiesCartDiscountSection}
                       {shippingAmountSection}
                       <li className="price-type">
                         <p>Subtotal</p>
