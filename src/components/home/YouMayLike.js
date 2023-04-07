@@ -33,26 +33,8 @@ const responsive = {
   },
 };
 
-
-
-
-
-
 const YouMayLike = () => {
   // changing wl btn
-  
-
-  const [btn_Wl, setBtn_Wl] = useState(false);
-  const changeWlBtn = (e) => {
-    if(this.btn_Wl === false) {
-      setBtn_Wl(true)
-    }
-    else {
-      setBtn_Wl(false)
-    }
-  }
-
-
 
   // Featured combos
   const [feature, setFeature] = useState([]);
@@ -105,28 +87,30 @@ const YouMayLike = () => {
   // add to wishlist
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
+  const [heartFilled, setHeartFilled] = useState(null);
 
   function wishlistData(id) {
     const data = {
       combo_id: id,
-      user_id: user_id
-    }
+      user_id: user_id,
+    };
     axios
-      .post(
-        "/addWishlist", data,
-        {
-          headers: {
-            "X-Authorization":
-              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .post("/addWishlist", data, {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
-        alert(res.data.message);
+        if (res.data.status === true) {
+          setHeartFilled(id);
+          setTimeout(() => setHeartFilled(null), 3000);
+        } else {
+          alert(res.data.message);
+        }
       });
   }
-
 
   return (
     <div>
@@ -147,23 +131,27 @@ const YouMayLike = () => {
             >
               {Array.isArray(feature) &&
                 feature.map((e) => (
-
-                  <div className="item carouselItemCard" key={e.id} style={{ marginRight: ".8rem" }}>
-
+                  <div
+                    className="item carouselItemCard"
+                    key={e.id}
+                    style={{ marginRight: ".8rem" }}
+                  >
                     <div className="newComboCart">
-                      <li className="youMayLikeHeart">
-                        {btn_Wl ?
-                          <i onClick={() => changeWlBtn(e.id)} id={e.id} style={{ color: "red" }} class="bi bi-heart-fill"></i>
-                          :
-                          <i onClick={() => changeWlBtn(e.id)} id={e.id} className="bi bi-heart"></i>
-                          }
-                      </li>
                       <div className="cart-img-sec">
                         <Link
                           onClick={() => wishlistData(e.id)}
                           className="addtofav"
                         >
-
+                          <li className="youMayLikeHeart">
+                            {heartFilled === e.id ? (
+                              <i
+                                style={{ color: "#fe9e2d" }}
+                                class="bi bi-heart-fill"
+                              ></i>
+                            ) : (
+                              <i className="bi bi-heart"></i>
+                            )}
+                          </li>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>
@@ -174,9 +162,9 @@ const YouMayLike = () => {
                         <div className="headingCard pt-3">
                           <span>{e.name}</span>
                         </div>
-                        <div>
+                        {/* <div>
                           <span className="packof">(Pack of 2)</span>
-                        </div>
+                        </div> */}
                         <div className="price-sec">
                           <div className="col-4" style={{ textAlign: "end" }}>
                             <span className="sp">₹{e.selling_price}</span>
@@ -189,19 +177,16 @@ const YouMayLike = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          <div className="btn_atc">
-                            <Link>
-                              <li
-                                className="bi bi-cart"
-                                onClick={() => {
-                                  addToCart(e);
-                                }}
-                                id={e.id}
-                                style={{ cursor: "pointer" }}
-                              >
-                                Add to Cart
-                              </li>
-                            </Link>
+                          <div
+                            className="btn_atc"
+                            onClick={() => {
+                              addToCart(e);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <li className="bi bi-cart" id={e.id}>
+                              Add to Cart
+                            </li>
                           </div>
                         </div>
                       </div>

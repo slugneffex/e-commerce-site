@@ -5,7 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
-import "./product.css"
+import "./product.css";
 import axios from "axios";
 import {
   addCartProduct,
@@ -78,14 +78,14 @@ const Product = () => {
                   centerMode={false}
                   infiniteLoop={true}
                   showArrows={false}
-
                 >
-                  <div className="item big-img" data-hash="one" key={combos.id} style={{ border: "1px solid #464646" }}>
-                    <img
-                      src={combos.meta_img?.url}
-                      alt={combos.name}
-
-                    />
+                  <div
+                    className="item big-img"
+                    data-hash="one"
+                    key={combos.id}
+                    style={{ border: "1px solid #464646" }}
+                  >
+                    <img src={combos.meta_img?.url} alt={combos.name} />
                   </div>
 
                   {comboproduct.map((e) => (
@@ -125,7 +125,9 @@ const Product = () => {
                 <i className="bi bi-star-fill"></i>
                 <i className="bi bi-star"></i>
                 <i className="bi bi-star"></i>
-                <span style={{ fontSize: "15px", marginLeft: "1rem" }}>8 Reviews</span>
+                <span style={{ fontSize: "15px", marginLeft: "1rem" }}>
+                  8 Reviews
+                </span>
               </div>
               <div className="location">
                 <span>
@@ -137,7 +139,9 @@ const Product = () => {
               </div>
               <div className="basic-details">
                 <span>Sold By:</span>
-                <span className="sold-by" style={{ marginLeft: ".5rem" }}>XYZ Pvt. Ltd.</span>
+                <span className="sold-by" style={{ marginLeft: ".5rem" }}>
+                  XYZ Pvt. Ltd.
+                </span>
                 <br />
                 <div style={{ marginTop: ".3rem" }}>
                   <span>MRP:</span>
@@ -155,8 +159,11 @@ const Product = () => {
                   </span>
                 </div>
 
-                <div style={{ marginTop: ".5rem" }}>
+
                   <span className="priceinc" >Price inclusive of all taxes</span>
+
+               
+
                 </div>
               </div>
               <div className="cart">
@@ -197,8 +204,28 @@ const Product = () => {
                   </div>
                 </div>
 
+
+                <div className="addCart" id={combos.id}>
+                  <Link
+                    to=""
+                    className="btn_1"
+                    onClick={() => {
+                      addToCart(combos);
+                    }}
+                  >
+                    <i
+                      className="bi bi-cart"
+                      style={{ marginRight: ".5rem" }}
+                    ></i>
+                    Add To Cart
+                  </Link>
+                </div>
+
                 <div className="wishlist-sec">
-                  <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
+                  <i
+                    className="bi bi-heart"
+                    style={{ marginRight: ".5rem" }}
+                  ></i>
                   <Link to="#" className="wishlist">
                     Add To Wishlist
                   </Link>

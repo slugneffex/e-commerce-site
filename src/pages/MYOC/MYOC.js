@@ -38,6 +38,10 @@ const MYOC = () => {
     }
   };
 
+ 
+
+  
+
   return (
     <>
       <HomeLayout>
@@ -76,7 +80,7 @@ const MYOC = () => {
                       </div>
                     </div>
                     <div className="card-btn-sec ">
-                      <Link className="btnC">
+                      <div className="btn_atc">
                         <li
                           className="bi bi-cart"
                           id={e.id}
@@ -84,7 +88,7 @@ const MYOC = () => {
                         >
                           Add to Cart
                         </li>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -111,16 +115,7 @@ const MYOC = () => {
                   <span className="page-link">{page}</span>
                 </li>
               ))}
-              {/* <li className="page-item">
-                <Link className="page-link" to="/">
-                  3
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link className="page-link" to="/">
-                  4
-                </Link>
-              </li> */}
+             
               <li className="page-item" onClick={nextPage}>
                 <span className="page-link" rel="next" aria-label="Next »">
                   ›
