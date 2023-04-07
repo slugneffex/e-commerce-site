@@ -159,15 +159,11 @@ const Product = () => {
                   </span>
                 </div>
 
-
-                  <span className="priceinc" >Price inclusive of all taxes</span>
-
-               
-
-                </div>
+                <span className="priceinc">Price inclusive of all taxes</span>
               </div>
-              <div className="cart">
-                {/* <div className="d-flex" style={{ alignItems: "center" }}>
+            </div>
+            <div className="cart">
+              {/* <div className="d-flex" style={{ alignItems: "center" }}>
                   <div className="" style={{ marginRight: "2rem" }}>
                     <span className="quant">Quantity:</span>
                   </div>
@@ -189,88 +185,72 @@ const Product = () => {
                   </div>
                 </div> */}
 
-                <div className="addCart col-md-4" id={combos.id}>
-                  <div className="btn_atc">
-                    <Link
-                      to=""
-                      onClick={() => {
-                        addToCart(combos);
-                      }}
-                    >
-                      <div className="btn_atc">
-                        <i className="bi bi-cart" style={{ marginRight: ".5rem" }}></i>Add To Cart
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-
-
-                <div className="addCart" id={combos.id}>
+              <div className="addCart col-md-4" id={combos.id}>
+                <div className="btn_atc">
                   <Link
                     to=""
-                    className="btn_1"
                     onClick={() => {
                       addToCart(combos);
                     }}
                   >
-                    <i
-                      className="bi bi-cart"
-                      style={{ marginRight: ".5rem" }}
-                    ></i>
-                    Add To Cart
+                    <div className="btn_atc">
+                      <i
+                        className="bi bi-cart"
+                        style={{ marginRight: ".5rem" }}
+                      ></i>
+                      Add To Cart
+                    </div>
                   </Link>
                 </div>
+              </div>
 
-                <div className="wishlist-sec">
+              <div className="addCart" id={combos.id}>
+                <Link
+                  to=""
+                  className="btn_1"
+                  onClick={() => {
+                    addToCart(combos);
+                  }}
+                >
                   <i
-                    className="bi bi-heart"
+                    className="bi bi-cart"
                     style={{ marginRight: ".5rem" }}
                   ></i>
-                  <Link to="#" className="wishlist">
-                    Add To Wishlist
-                  </Link>
-                </div>
+                  Add To Cart
+                </Link>
               </div>
 
-              <div class="coupon-sec text-center mb-3">
-                <img src="../assets/img/usps.svg" alt="img-fluid" class="img-fluid" />
+              <div className="wishlist-sec">
+                <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
+                <Link to="#" className="wishlist">
+                  Add To Wishlist
+                </Link>
               </div>
-
-              {/* <div className="coupon-sec text-center">
-                <div className="coupon-card">
-                  <div className="card-head">
-                    <div className="tag">
-                      <i className="bi bi-tag-fill"></i>
-                    </div>
-                    <div className="det">
-                      <span className="use">Use Code</span>
-                      <br />
-                      <span className="code">COMBO50</span>
-                    </div>
-                  </div>
-                  <div className="vl"></div>
-                  <div className="card-body" style={{ margin: "auto" }}>
-                    <div className="offer">
-                      <span>Get it for</span>{" "}
-                      <span className="price">₹ 299</span>
-                    </div>
-                    <div className="terms">
-                      <p>Get Upto ₹50 Off on XXX and above Max Discount ₹XX</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="more-card my-3">
-                  <Link to="">+ 10 More</Link>
-                </div>
-              </div> */}
             </div>
-            <div class="row pb-3">
-              <div class="col-md-6">
-                <img src="../assets/img/slabs-freebies.png" alt="img-fluid" class="img-fluid" />
-              </div>
-              <div class="col-md-6">
-                <img src="../assets/img/slabs-tnc.png" alt="img-fluid" class="img-fluid" />
-              </div>
+
+            <div class="coupon-sec text-center mb-3">
+              <img
+                src="../assets/img/usps.svg"
+                alt="img-fluid"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col-md-6">
+              <img
+                src="../assets/img/slabs-freebies.png"
+                alt="img-fluid"
+                class="img-fluid"
+              />
+            </div>
+            <div class="col-md-6">
+              <img
+                src="../assets/img/slabs-tnc.png"
+                alt="img-fluid"
+                class="img-fluid"
+              />
             </div>
           </div>
 
