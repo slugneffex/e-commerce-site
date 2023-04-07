@@ -24,55 +24,60 @@ const Address = () => {
   return (
     <>
       <HomeLayout>
-      <section className="section pt-5 pb-5">
+        <section className="section pt-5 pb-5">
           <div className="container">
             <div className="row">
               <div className="col-md-3 first">
                 <Sidebar />
               </div>
               <div className="col-md-9 ">
-                <div className="row">
-                  <div className="col-md-9">
+                <div className="row d-flex" >
+                  <div className="col-md-9" id="address-bar">
                     <h4>MY ADDRESSES</h4>
                   </div>
-                  <div className="col-md-3">
-                    <a href="#/" className="add-address">
+                  <div className="col-md-3" id="add-address">
+                    <a href="#/"  >
                       <h6>+ ADD A NEW ADDRESS</h6>
                     </a>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-10">
-                        <h6>Mayank Rawat</h6>
-                        <p>ABC Apartment, 1007,
-                          Flat No-5,<br /> Sector-21A
-                          Faridabad, Haryana, 212001 India
-                        </p>
-                        <p>Phone Number:000000000</p>
-                      </div>
-                      <div class="col-md-2 d-flex">
-                        <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-10">
-                        <h6>Mayank Rawat</h6>
-                        <p>ABC Apartment, 1007,
-                          Flat No-5,<br /> Sector-21A
-                          Faridabad, Haryana, 212001 India
-                        </p>
-                        <p>Phone Number:000000000</p>
-                      </div>
-                      <div class="col-md-2 d-flex">
-                        <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
+                  
+                    <div class="col-md-6">
+                    <div class="card" id="addresscard">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <h6>Reema Gahtori</h6>
+                          <p>ABC Apartment, 1007,
+                            Flat No-5,<br /> Sector-21A
+                            Faridabad, Haryana, 212001 India
+                          </p>
+                          <p>Phone Number:000000000</p>
+                        </div>
+                        <div class="col-md-2 d-flex">
+                          <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
+                        </div>
                       </div>
                     </div>
                   </div>
-
+                  
+                    <div class="col-md-6">
+                    <div class="card" id="addresscard">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <h6>Reema Gahtori</h6>
+                          <p>ABC Apartment, 1007,
+                            Flat No-5,<br /> Sector-21A
+                            Faridabad, Haryana, 212001 India
+                          </p>
+                          <p>Phone Number:000000000</p>
+                        </div>
+                        <div class="col-md-2 d-flex">
+                          <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>

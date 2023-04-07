@@ -5,18 +5,24 @@ import HomeLayout from '../../layouts/HomeLayout'
 const Thanks = () => {
   return (
     <>
-    <HomeLayout>
+      <HomeLayout>
         <section>
-            <div className='container'style={{justifyContent:'center',display:'flex'}}>
-               <div className='row pt-5 pb-5'>
-                <img src='./assets/img/accountImg/THANKS.png' style={{width:"60%"}} alt='....'/>
-                <h5 style={{color:'green'}}>THANK YOU</h5>
-
-
-               </div>
+          <div className='container' >
+          <div class="shadow p-3 mb-5 bg-body rounded">
+            <div className='row'style={{textAlign:"center",justifyContent:"center"
+          }}>
+          <div class="card text-center" style={{width: "28rem", height:"18rem",color:"#fe9e2d", margin:"2rem"}}>
+            <div class="card-body">
+            <img src='./assets/img/accountImg/THANKS.png' style={{ width: "50%" }} alt='....' />
+                <h5 style={{ color: 'green' }}>THANK YOU</h5>
+              
             </div>
+          </div>
+          </div>
+          </div>
+          </div>
         </section>
-    </HomeLayout>
+      </HomeLayout>
     </>
   )
 }
