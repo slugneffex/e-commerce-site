@@ -74,7 +74,7 @@ const sidebar = () => {
             </div>
           </div>
 
-          <div class="mobile">
+          {/*<div class="mobile">
             <div id="mySidenav" class="sidenav">
               <Link
                 to="javascript:void(0)"
@@ -98,7 +98,7 @@ const sidebar = () => {
                 &#9776;
               </span>
             </div>
-          </div>
+              </div>*/}
         </div>
       </section>
     </>

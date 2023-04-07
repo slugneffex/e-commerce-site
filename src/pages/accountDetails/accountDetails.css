@@ -237,6 +237,9 @@ a:link{
         margin: 10px;
         padding: 10px;
     }
+    #add-address{
+        width: 50%;
+    }
     
 }
 /*for mobiles (SIDEBAR)*/

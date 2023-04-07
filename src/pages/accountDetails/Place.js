@@ -31,12 +31,12 @@ const Address = () => {
                 <Sidebar />
               </div>
               <div className="col-md-9 ">
-                <div className="row" >
+                <div className="row d-flex" >
                   <div className="col-md-9" id="address-bar">
                     <h4>MY ADDRESSES</h4>
                   </div>
-                  <div className="col-md-3">
-                    <a href="#/" className="add-address">
+                  <div className="col-md-3" id="add-address">
+                    <a href="#/"  >
                       <h6>+ ADD A NEW ADDRESS</h6>
                     </a>
                   </div>
@@ -47,7 +47,7 @@ const Address = () => {
                     <div class="card" id="addresscard">
                       <div class="row">
                         <div class="col-md-10">
-                          <h6>Mayank Rawat</h6>
+                          <h6>Reema Gahtori</h6>
                           <p>ABC Apartment, 1007,
                             Flat No-5,<br /> Sector-21A
                             Faridabad, Haryana, 212001 India
@@ -65,7 +65,7 @@ const Address = () => {
                     <div class="card" id="addresscard">
                       <div class="row">
                         <div class="col-md-10">
-                          <h6>Mayank Rawat</h6>
+                          <h6>Reema Gahtori</h6>
                           <p>ABC Apartment, 1007,
                             Flat No-5,<br /> Sector-21A
                             Faridabad, Haryana, 212001 India
