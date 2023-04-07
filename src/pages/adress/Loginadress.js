@@ -7,111 +7,132 @@ import { useSelector } from "react-redux";
 
 const Loginadress = () => {
   // Card Pricing details
-  // Single Product Cart
+ // Single Product Cart
 
-  const { singletotalCount } = useSelector((statee) => statee.SingleCart);
+ const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
-  const { singlesubAmount, singletotalAmount, singletotalDiscount } =
-    useSelector((statee) => statee.SingleCart);
+ const { singlesubAmount, singletotalAmount, singletotalDiscount } =
+   useSelector((statee) => statee.SingleCart);
 
-  // Combo Product Cart
+ // Combo Product Cart
 
-  const { totalCount } = useSelector((state) => state.cart);
-  const { subAmount, totalAmount, totalDiscount,cartItems } = useSelector(
-    (state) => state.cart
-  );
+ const { totalCount } = useSelector((state) => state.cart);
+ const { subAmount, totalAmount, totalDiscount,cartItems } = useSelector(
+   (state) => state.cart
+ );
 
-  // Freebies cart section
-  const { freebiesCount } = useSelector((state) => state.freebies);
-  const { freebiestotalAmount } = useSelector((state) => state.freebies);
+ // Freebies cart section
+ const { freebiesCount } = useSelector((state) => state.freebies);
+ const { freebiestotalAmount } = useSelector((state) => state.freebies);
 
-  const totalCartCount = totalCount + singletotalCount;
+ const totalCartCount = totalCount + singletotalCount;
 
-  let discount = 0;
-  switch (true) {
-    case singlesubAmount >= 1000 && singlesubAmount < 3000:
-      discount = (singlesubAmount * 20) / 100;
-      break;
-    case singlesubAmount >= 3000 && singlesubAmount < 5000:
-      discount = (singlesubAmount * 30) / 100;
-      break;
-    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
-      discount = (singlesubAmount * 40) / 100;
-      break;
-    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
-      discount = (singlesubAmount * 50) / 100;
-      break;
-    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
-      discount = (singlesubAmount * 60) / 100;
-      break;
-    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
-      discount = (singlesubAmount * 100) / 100;
-      break;
-    default:
-      discount = 0;
-      break;
-  }
+ let discount = 0;
+ switch (true) {
+   case singlesubAmount >= 1000 && singlesubAmount < 3000:
+     discount = (singlesubAmount * 20) / 100;
+     break;
+   case singlesubAmount >= 3000 && singlesubAmount < 5000:
+     discount = (singlesubAmount * 30) / 100;
+     break;
+   case singlesubAmount >= 5000 && singlesubAmount <= 10000:
+     discount = (singlesubAmount * 40) / 100;
+     break;
+   case singlesubAmount >= 10000 && singlesubAmount <= 15000:
+     discount = (singlesubAmount * 50) / 100;
+     break;
+   case singlesubAmount >= 15000 && singlesubAmount <= 20000:
+     discount = (singlesubAmount * 60) / 100;
+     break;
+   case singlesubAmount >= 20000 && singlesubAmount <= 100000:
+     discount = (singlesubAmount * 100) / 100;
+     break;
+   default:
+     discount = 0;
+     break;
+ }
 
-  // Total Pricing of products
-  let ExtraFreebiesAmount = freebiestotalAmount - discount;
-  const shippingAmount = 50;
+ // Total Pricing of products
+ const ExtraFreebiesAmount = freebiestotalAmount - discount;
+ let ExtraFreebiesAmountt = 0;
+ if (ExtraFreebiesAmount > 0) {
+   ExtraFreebiesAmountt = ExtraFreebiesAmount;
+ } else if (ExtraFreebiesAmount < 0) {
+   ExtraFreebiesAmountt = 0;
+ }
 
-  const totalCartAmount = totalAmount + singletotalAmount;
-  const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
-  const totalCartSubAmount =
-    subAmount + singlesubAmount + ExtraFreebiesAmount + shippingAmount;
+ let shippingAmount = 50;
 
-  // Extra freebies amount
+ const totalCartAmount = totalAmount + singletotalAmount;
+ const totalCartDiscount = totalDiscount + singletotalDiscount;
+ let totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmountt;
+ // Extra freebies amount
 
-  let ExtraFreebiesAmountSection = null;
-  if (freebiestotalAmount > discount) {
-    ExtraFreebiesAmountSection = (
-      <li className="price-type">
-        <p>Extra Freebie Amount</p>
-        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
-      </li>
-    );
-  }
+ let ExtraFreebiesAmountSection = null;
+ if (freebiestotalAmount > discount) {
+   ExtraFreebiesAmountSection = (
+     <li className="price-type">
+       <p>Extra Freebie Amount</p>
+       <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+     </li>
+   );
+ }
 
-  // if discount is 0 then hide the section
+ // if discount is 0 then hide the section
 
-  let discountSection = null;
-  if (totalCartDiscount > 0) {
-    discountSection = (
-      <li className="price-type">
-        <p>Total Discount</p>
-        <span style={{ color: "#009444" }}>
-          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
-        </span>
-      </li>
-    );
-  }
+ let discountSection = null;
+ if (totalCartDiscount > 0) {
+   discountSection = (
+     <li className="price-type">
+       <p>Total Discount</p>
+       <span style={{ color: "#009444" }}>
+         - ₹{parseFloat(totalCartDiscount).toFixed(0)}
+       </span>
+     </li>
+   );
+ }
 
-  // Hurry discount section
+ // Hurry discount section
 
-  let hurrryDiscountSection = null;
-  if (totalCartDiscount > 0) {
-    hurrryDiscountSection = (
-      <span>
-        Hurray! You Saved{" "}
-        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
-        Order
-      </span>
-    );
-  }
+ let hurrryDiscountSection = null;
+ if (totalCartDiscount > 0) {
+   hurrryDiscountSection = (
+     <span>
+       Hurray! You Saved{" "}
+       <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
+       Order
+     </span>
+   );
+ }
 
-  // Shipping amount less than 499
+ // Shipping amount less than 499
 
-  let shippingAmountSection = null;
+ let shippingAmountSection = null;
 
-  if (totalCartSubAmount < 499) {
-    shippingAmountSection = (
-      <li className="price-type">
-        <p>Shipping</p>
-        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
-      </li>
-    );
-  }
+ if (totalCartSubAmount < 499) {
+   totalCartSubAmount += 50;
+   shippingAmountSection = (
+     <li className="price-type">
+       <p>Shipping</p>
+       <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+     </li>
+   );
+ } else {
+   shippingAmount = 0;
+ }
+
+ let FreebiesCartDiscountSection = null;
+ if (discount > 0) {
+   FreebiesCartDiscountSection = (
+     <li className="price-type">
+       <p>Freebies Discount</p>
+       <span style={{ color: "#009444" }}>
+         - ₹{parseFloat(discount).toFixed(0)}
+       </span>
+     </li>
+   );
+ }
+
 
   const navigate = useNavigate();
 
@@ -459,6 +480,7 @@ const Loginadress = () => {
                       </li>
                       {ExtraFreebiesAmountSection}
                       {discountSection}
+                      {FreebiesCartDiscountSection}
                       {shippingAmountSection}
                       <li className="price-type">
                         <p>Subtotal</p>
@@ -559,6 +581,7 @@ const Loginadress = () => {
                       </li>
                       {ExtraFreebiesAmountSection}
                       {discountSection}
+                      {FreebiesCartDiscountSection}
                       {shippingAmountSection}
                       <li className="price-type">
                         <p>Subtotal</p>
