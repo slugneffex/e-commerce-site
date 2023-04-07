@@ -21,7 +21,7 @@ const Categories = () => {
         },
       };
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/categories`,
+        `https://combonationbusiness.in/frontend/api/categories`,
         options
       );
       setCategory(response.data);
