@@ -1,8 +1,11 @@
 .heading h1 {
-    color: #969696;
     font-weight: 400;
     font-size: 40px;
     
+}
+
+h1 span {
+    font-size: 35px;
 }
 
 .heading h1 span {
@@ -37,6 +40,12 @@
 .cart {
     margin-top: 2rem;
     margin-bottom: 3.5rem;
+}
+
+
+
+.card .card-body h4 {
+    text-align: center;
 }
 
 .cart .cardBody {
@@ -153,4 +162,47 @@
 
 .colum {
     margin-bottom: 1rem;
+}
+
+
+@media (max-width: 720px) {
+  
+
+    .row .overviewMobile {
+        width: 100%;
+    }
+
+    /* .row {
+        justify-content: space-evenly;
+    } */
+
+   
+
+    .card .nfm {
+        width: 45%;
+        margin-top: 6px;
+    }
+
+    .col-direction {
+        flex-direction: column;
+    }
+
+    .sffm {
+        width: 100%;
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+
+    .roow {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+  
+
+    .brand img {
+        width: 80%;
+    }
 }

@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axiosRetry from "axios-retry";
 import "./Brand.css"
+import {Link} from "react-router-dom"
 
 const responsive = {
   superLargeDesktop: {
@@ -59,19 +60,21 @@ const Brands = () => {
           swipeable={false}
           autoPlay
           arrows={false}
+          centerMode
+          infinite
           >
           
             {Array.isArray(fliterData) &&
               fliterData.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
-                    <a href="/#">
+                    <Link to={`/brand/${e.id}`}>
                     <img
                       src={e.image?.original_url}
                       width="80%"
                       alt={e.name}
                     ></img>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}

@@ -6,7 +6,7 @@ const BottomBar = () => {
   return (
     <div>
       <section className="bottomBar">
-        <ul className="nav  bg-light" style={{ display: "flex", flexDirection: "row", textAlign: "center" }}>
+        <ul className="nav  bg-light" style={{ display: "flex", flexDirection: "row", textAlign: "center",width: "100%" }}>
           <li className="nav-item bottomListItem" >
             <Link className="nav-link active" aria-current="page" to="/">
               <i className="bi bi-house-door-fill"></i>

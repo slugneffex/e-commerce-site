@@ -34,33 +34,25 @@ const useCartSlice = createSlice({
       let cartCount = state.cartItems.reduce((total, item) => {
         return item.quantity + total;
       }, 0);
+
       state.totalCount = cartCount;
     },
     getSubTotal: (state, action) => {
-      state.subAmount = state.cartItems.reduce(
-        (acc, item) => {
-          return acc + item.price * item.quantity;
-        },
-        0
-      );
+      state.subAmount = state.cartItems.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0);
     },
 
     getTotalAmount: (state, action) => {
-      state.totalAmount = state.cartItems.reduce(
-        (acc, item) => {
-          return acc + item.mrp * item.quantity;
-        },
-        0
-      );
+      state.totalAmount = state.cartItems.reduce((acc, item) => {
+        return acc + item.mrp * item.quantity;
+      }, 0);
     },
 
     getTotalDiscount: (state, action) => {
-      state.totalDiscount = state.cartItems.reduce(
-        (acc, item) => {
-          return acc + (item.mrp - item.price) * item.quantity;
-        },
-        0
-      );
+      state.totalDiscount = state.cartItems.reduce((acc, item) => {
+        return acc + (item.mrp - item.price) * item.quantity;
+      }, 0);
     },
 
     removeCartItem: (state, action) => {
@@ -104,9 +96,5 @@ export const {
   calculateTax,
   getTotalAmount,
   getTotalDiscount,
-
-  // Single Product
 } = useCartSlice.actions;
 export default useCartSlice.reducer;
-
-// Single Cart Slice

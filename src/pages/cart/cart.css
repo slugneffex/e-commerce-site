@@ -28,6 +28,8 @@
 .cart-card {
     background-color: #FFF4E3;
     padding: 2rem;
+    box-shadow: 1px 1px 10px #DDDDDD;
+    margin-bottom: 1.5rem;
 }
 
 .cartCard .cart-type {
@@ -599,6 +601,81 @@ a {
     text-decoration: none !important;
     color: #000000;
     
+}
+
+/* For Freebies Banner Section */
+.signalCart {
+    background-color: #fff4e3;
+    padding: 1rem;
+    border: 0.8rem;
+    display: flex;
+    border: 1px solid #FE9E2D;
+    border-radius: 10px;
+}
+
+.signalCart span {
+    font-weight: bold;
+    color: #FE9E2D;
+}
+
+.btn_1 {
+    border: none;
+    background: #FE9E2D;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 12px 25px;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    font-size: 0.875rem;
+    transition: all 0.3s ease-in-out;
+    border-radius: 3px;
+    line-height: normal;
+}
+
+.btn_1 i {
+    font-weight: 600;
+    font-style: italic;
+}
+
+
+/* freebies Section */
+
+
+.cart-item a .freebieFreeImg {
+    position: absolute;
+    width: 50px;
+    height: 25px;
+    margin-left: 1.5rem;
+}
+
+.cart-item .det {
+    padding-left: 1rem;
+}
+
+.cart-item .price-sec {
+    display: flex;
+}
+
+.cart-item .price-sec .sp {
+    color: #009444;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 0.3rem;
+}
+
+.editFreebie a {
+    color: #464646;
+    background-color: #EFEFEF;
+    padding: 0.5rem;
+}
+
+.cart-card .actions i {
+    font-size: 26px;
+    font-weight: 200;
+    margin-left: 0.4rem;
+    color: #464646
 }
 
 /* For Logged In User end */

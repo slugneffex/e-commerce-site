@@ -1,10 +1,126 @@
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./adress.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Loginadress = () => {
+  // Card Pricing details
+  // Single Product Cart
+
+  const { singletotalCount } = useSelector((statee) => statee.SingleCart);
+
+  const { singlesubAmount, singletotalAmount, singletotalDiscount } =
+    useSelector((statee) => statee.SingleCart);
+
+  // Combo Product Cart
+
+  const { totalCount } = useSelector((state) => state.cart);
+  const { subAmount, totalAmount, totalDiscount,cartItems } = useSelector(
+    (state) => state.cart
+  );
+
+  // Freebies cart section
+  const { freebiesCount } = useSelector((state) => state.freebies);
+  const { freebiestotalAmount } = useSelector((state) => state.freebies);
+
+  const totalCartCount = totalCount + singletotalCount;
+
+  let discount = 0;
+  switch (true) {
+    case singlesubAmount >= 1000 && singlesubAmount < 3000:
+      discount = (singlesubAmount * 20) / 100;
+      break;
+    case singlesubAmount >= 3000 && singlesubAmount < 5000:
+      discount = (singlesubAmount * 30) / 100;
+      break;
+    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
+      discount = (singlesubAmount * 40) / 100;
+      break;
+    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
+      discount = (singlesubAmount * 50) / 100;
+      break;
+    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
+      discount = (singlesubAmount * 60) / 100;
+      break;
+    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
+      discount = (singlesubAmount * 100) / 100;
+      break;
+    default:
+      discount = 0;
+      break;
+  }
+
+  // Total Pricing of products
+  let ExtraFreebiesAmount = freebiestotalAmount - discount;
+  const shippingAmount = 50;
+
+  const totalCartAmount = totalAmount + singletotalAmount;
+  const totalCartDiscount = totalDiscount + singletotalDiscount + discount;
+  const totalCartSubAmount =
+    subAmount + singlesubAmount + ExtraFreebiesAmount + shippingAmount;
+
+  // Extra freebies amount
+
+  let ExtraFreebiesAmountSection = null;
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountSection = (
+      <li className="price-type">
+        <p>Extra Freebie Amount</p>
+        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+      </li>
+    );
+  }
+
+  // if discount is 0 then hide the section
+
+  let discountSection = null;
+  if (totalCartDiscount > 0) {
+    discountSection = (
+      <li className="price-type">
+        <p>Total Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
+
+  // Hurry discount section
+
+  let hurrryDiscountSection = null;
+  if (totalCartDiscount > 0) {
+    hurrryDiscountSection = (
+      <span>
+        Hurray! You Saved{" "}
+        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
+        Order
+      </span>
+    );
+  }
+
+  // Shipping amount less than 499
+
+  let shippingAmountSection = null;
+
+  if (totalCartSubAmount < 499) {
+    shippingAmountSection = (
+      <li className="price-type">
+        <p>Shipping</p>
+        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+      </li>
+    );
+  }
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/Address");
+    }
+  });
+
   const [state, setState] = useState([]);
   const [selectedState, setSelectedState] = useState("");
 
@@ -63,6 +179,10 @@ const Loginadress = () => {
     address: "",
     city_id: "",
     address_id: "",
+    email: "",
+    name: "",
+    postal_code: "",
+    phone: "",
   });
 
   const sendData = () => {
@@ -109,20 +229,6 @@ const Loginadress = () => {
 
   // delete the address
 
-  // const deleteData = () => {
-  //   axios
-  //     .post(`/deleteAddress/33`, {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       alert(res.data.message);
-  //     });
-
-  // };
-
   function deleteData(id) {
     axios
       .post(`/deleteAddress/${id}`, {
@@ -137,13 +243,55 @@ const Loginadress = () => {
       });
   }
 
+  // Order Validate
+
+  const transaction_id = localStorage.getItem("transaction_id");
+  const email = localStorage.getItem("email");
+  const password = localStorage.getItem("password");
+  console.log(token)
+
+  const sendOrder = () => {
+    axios
+      .post(
+        "/order-validate",
+        {
+          city_id: formData.city_id,
+          address: formData.address,
+          state_id: state_id,
+          name: formData.name,
+          postal_code: formData.postal_code,
+          transaction_id: transaction_id,
+          payment_type: "prepaid",
+          payment_method: "prepaid",
+          email: email,
+          password: password,
+          phone: formData.phone,
+          subtotal: "1000",
+          grand_total: `${totalCartSubAmount}`,
+          tax: "600",
+          lname:"tiwari",
+          cartItems:cartItems
+        },
+        {
+          headers: {
+            "X-Authorization":
+              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        alert(res.data.message);
+      });
+  };
+
   return (
     <>
       <HomeLayout>
         <section className="address">
           <div className="container">
-            <div className="row text-center py-5" id="progessbarRow">
-              <ul className="" id="progressbarrr">
+            <div className="row text-center pb-5" id="progessbarRow">
+              <ul className="mt-5" id="progressbarrr">
                 <div className="col-md-4 col-sm-4">
                   <Link to="/Cart" className="bagLink">
                     <li id="bag">Bag</li>
@@ -179,6 +327,10 @@ const Loginadress = () => {
                         placeholder="Name*"
                         required
                         className="form-control"
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                       />
                       <input
                         type="number"
@@ -187,12 +339,20 @@ const Loginadress = () => {
                         max="10"
                         min="10"
                         className="form-control"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
                       />
                       <input
                         type="email"
                         placeholder="Email*"
                         required
                         className="form-control"
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                       />
                     </div>
                   </div>
@@ -207,6 +367,13 @@ const Loginadress = () => {
                         required
                         placeholder="Pin Code*"
                         className="form-control"
+                        value={formData.postal_code}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            postal_code: e.target.value,
+                          })
+                        }
                       />
                       <input
                         type="text"
@@ -275,45 +442,48 @@ const Loginadress = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 mt-5">
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>
                   </div>
                   <div className="overview-card-body">
-                    <h6>Bill Details (6 Items)</h6>
+                    <h6>
+                      Bill Details {totalCartCount} Items ({freebiesCount} Free)
+                    </h6>
 
                     <ul className="price-breakup">
                       <li className="price-type">
                         <p>Total Price (Incl Taxes)</p>
-                        <span>₹ 899</span>
+                        <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
                       </li>
+                      {ExtraFreebiesAmountSection}
+                      {discountSection}
+                      {shippingAmountSection}
                       <li className="price-type">
-                        <p>Total Discount</p>
-                        <span style={{ color: "#009444" }}>- ₹ 899</span>
-                      </li>
-                      <li className="price-type">
-                        <p>Coupon Discount (COUPON-CODE)</p>
-                        <span style={{ color: "#009444" }}>- ₹ 899</span>
-                      </li>
-                      <li className="price-type">
-                        <p>Shipping</p>
-                        <span style={{ color: "#009444" }}>₹ 50</span>
+                        <p>Subtotal</p>
+                        <span>
+                          ₹{parseFloat(totalCartSubAmount).toFixed(0)}
+                        </span>
                       </li>
                     </ul>
-                    <span>
-                      Hurray! You Saved <strong>₹ 650</strong> On This Order
-                    </span>
+                    {hurrryDiscountSection}
                   </div>
                   <hr />
                   <div className="overview-card-footer">
                     <div className="total-sec">
                       <p className="total">Total</p>
-                      <span className="total">₹ 650</span>
+                      <span className="total">
+                        ₹{parseFloat(totalCartSubAmount).toFixed(0)}
+                      </span>
                     </div>
                     <div className="extras">
-                      <p> 3 Item | ₹ 650</p>
-                      <Link to="/" className="btn">
+                      <p>
+                        {" "}
+                        {totalCartCount} Item ({freebiesCount} Free) | ₹
+                        {parseFloat(totalCartSubAmount).toFixed(0)}
+                      </p>
+                      <Link onClick={sendOrder} className="btn">
                         Proceed To Pay
                       </Link>
                     </div>
@@ -371,118 +541,49 @@ const Loginadress = () => {
                     </div>
                   </div>
                 ))}
-                {/* <div className="userAddress-card">
-                  <div className="row">
-                    <div className="col-2 text-center">
-                      <div className="card-head">
-                        <i className="bi bi-geo-alt"></i>
-                      </div>
-                    </div>
-                    <div className="col-7">
-                      <div className="card-body">
-                        <h6>Rohit Manchanda</h6>
-                        <p>
-                          ABC Apartment, 1007, Flat No-5, Sector-21A Faridabad,
-                          Haryana, 121001, India
-                        </p>
-                        <p>Phone Number :- XXXXX56789</p>
-                      </div>
-                    </div>
-                    <div className="col-3">
-                      <div className="card-footer">
-                        <div className="actions">
-                          <i className="bi bi-pencil-square"></i>
-                          <i className="bi bi-trash3"></i>
-                        </div>
-                        <div className="form-group mt-5">
-                          <input
-                            type="radio"
-                            name="default"
-                            id=""
-                            className="form-checkbox-input"
-                          />
-                          <label for="">Make Default</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-                {/* <div className="userAddress-card">
-                  <div className="row">
-                    <div className="col-2 text-center">
-                      <div className="card-head">
-                        <i className="bi bi-geo-alt"></i>
-                      </div>
-                    </div>
-                    <div className="col-7">
-                      <div className="card-body">
-                        <h6>Rohit Manchanda</h6>
-                        <p>
-                          ABC Apartment, 1007, Flat No-5, Sector-21A Faridabad,
-                          Haryana, 121001, India
-                        </p>
-                        <p>Phone Number :- XXXXX56789</p>
-                      </div>
-                    </div>
-                    <div className="col-3">
-                      <div className="card-footer">
-                        <div className="actions">
-                          <i className="bi bi-pencil-square"></i>
-                          <i className="bi bi-trash3"></i>
-                        </div>
-                        <div className="form-group mt-5">
-                          <input
-                            type="radio"
-                            name="default"
-                            id=""
-                            className="form-checkbox-input"
-                          />
-                          <label for="">Make Default</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 mt-5 mb-5">
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>
                   </div>
                   <div className="overview-card-body">
-                    <h6>Bill Details (6 Items)</h6>
+                    <h6>
+                      Bill Details {totalCartCount} Items ({freebiesCount} Free)
+                    </h6>
 
                     <ul className="price-breakup">
                       <li className="price-type">
                         <p>Total Price (Incl Taxes)</p>
-                        <span>₹ 899</span>
+                        <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
                       </li>
+                      {ExtraFreebiesAmountSection}
+                      {discountSection}
+                      {shippingAmountSection}
                       <li className="price-type">
-                        <p>Total Discount</p>
-                        <span style={{ color: "#009444" }}>- ₹ 899</span>
-                      </li>
-                      <li className="price-type">
-                        <p>Coupon Discount (COUPON-CODE)</p>
-                        <span style={{ color: "#009444" }}>- ₹ 899</span>
-                      </li>
-                      <li className="price-type">
-                        <p>Shipping</p>
-                        <span style={{ color: "#009444" }}>₹ 50</span>
+                        <p>Subtotal</p>
+                        <span>
+                          ₹{parseFloat(totalCartSubAmount).toFixed(0)}
+                        </span>
                       </li>
                     </ul>
-                    <span>
-                      Hurray! You Saved <strong>₹ 650</strong> On This Order
-                    </span>
+                    {hurrryDiscountSection}
                   </div>
                   <hr />
                   <div className="overview-card-footer">
                     <div className="total-sec">
                       <p className="total">Total</p>
-                      <span className="total">₹ 650</span>
+                      <span className="total">
+                        ₹{parseFloat(totalCartSubAmount).toFixed(0)}
+                      </span>
                     </div>
                     <div className="extras">
-                      <p> 3 Item | ₹ 650</p>
-                      <Link to="/" className="btn">
+                      <p>
+                        {" "}
+                        {totalCartCount} Item ({freebiesCount} Free) | ₹
+                        {parseFloat(totalCartSubAmount).toFixed(0)}
+                      </p>
+                      <Link to="/Adress" className="btn">
                         Proceed To Pay
                       </Link>
                     </div>

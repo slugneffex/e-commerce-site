@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./accountDetails.css";
 import Sidebar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Wishlist = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      alert("login please");
+      navigate("/Signin");
+    }
+  });
+  const token = localStorage.getItem("token");
+
+  const [wishlist, setWishlist] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const options = {
+        headers: {
+          "X-Authorization":
+            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get("/get-wishlists", options);
+      setWishlist(response.data.wishlists);
+    }
+    fetchData();
+  }, [token]);
+
   return (
     <>
       <HomeLayout>
@@ -20,154 +48,70 @@ const Wishlist = () => {
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-4">
-                    <div class="card" style={{ width: "18rem" }}>
-                      <img
-                        src="./assets/img/wishlist.png"
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <div class="card-body">
-                        <h5 class="card-title">Cleanse and Shine Combo</h5>
+                <div class="row" id="card-secction">
+                  {wishlist.map((e) => (
+                    <div class="col-4" key={e.id}>
+                      <div
+                        class="card"
+                        
+                      >
+                        {e.product?.thumbnail_img?.original_url ? (
+                          <img
+                            src={e.product?.thumbnail_img?.original_url}
+                            class="card-img-top"
+                            alt="..."
+                          />
+                        ) : (
+                          <img
+                            src={e.combo?.meta_img?.url}
+                            class="card-img-top"
+                            alt="..."
+                          />
+                        )}
+
+                        {e.product?.name.substring(0, 40) ? (
+                          <h5 className="card-title">
+                            {e.product?.name.substring(0, 40)}
+                          </h5>
+                        ) : (
+                          <h5 class="card-title">{e.combo?.name}</h5>
+                        )}
+
                         <div class="d-flex">
-                          <p
-                            class="card-text rupee"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            ₹530
-                            <h5> ₹190</h5>
-                          </p>
+                          {e.product?.mrp ? (
+                            <p
+                              class="card-text"
+                              style={{ textDecoration: "line-through" }}
+                            >
+                              ₹{e.product?.mrp}{" "}
+                            </p>
+                          ) : (
+                            <p
+                              class="card-text"
+                              style={{ textDecoration: "line-through" }}
+                            >
+                              ₹{e.combo?.mrp}{" "}
+                            </p>
+                          )}
+
+                          {e.product?.selling_price ? (
+                            <h5 class="rupee" style={{ marginLeft: 20 }}>
+                              {" "}
+                              ₹{e.product?.selling_price}
+                            </h5>
+                          ) : (
+                            <h5 class="rupee" style={{ marginLeft: 20 }}>
+                              {" "}
+                              ₹{e.combo?.selling_price}
+                            </h5>
+                          )}
                         </div>
-                        <a href="#" class="btn btn-primary move-to-cart">
+                        <a href="#/" class="btn btn-primary move-to-cart">
                           Move to Cart
                         </a>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="card" style={{ width: "18rem" }}>
-                      <img
-                        src="./assets/img/wishlist.png"
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <div class="card-body">
-                        <h5 class="card-title">Cleanse and Shine Combo</h5>
-                        <div class="d-flex">
-                          <p
-                            class="card-text rupee"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            ₹530
-                            <h5> ₹190</h5>
-                          </p>
-                        </div>
-                        <a href="#" class="btn btn-primary move-to-cart">
-                          Move to Cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="card" style={{ width: "18rem" }}>
-                      <img
-                        src="./assets/img/wishlist.png"
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <div class="card-body">
-                        <h5 class="card-title">Cleanse and Shine Combo</h5>
-                        <div class="d-flex">
-                          <p
-                            class="card-text rupee"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            ₹530
-                            <h5> ₹190</h5>
-                          </p>
-                        </div>
-                        <a href="#" class="btn btn-primary move-to-cart">
-                          Move to Cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row ">
-                  <div class="col-4 pt-2">
-                    <div class="card" style={{ width: "18rem" }}>
-                      <img
-                        src="./assets/img/wishlist.png"
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <div class="card-body">
-                        <h5 class="card-title">Cleanse and Shine Combo</h5>
-                        <div class="d-flex">
-                          <p
-                            class="card-text rupee"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            ₹530
-                            <h5> ₹190</h5>
-                          </p>
-                        </div>
-                        <a href="#" class="btn btn-primary move-to-cart">
-                          Move to Cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 pt-2">
-                    <div class="card" style={{ width: "18rem" }}>
-                      <img
-                        src="./assets/img/wishlist.png"
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <div class="card-body">
-                        <h5 class="card-title">Cleanse and Shine Combo</h5>
-                        <div class="d-flex">
-                          <p
-                            class="card-text rupee"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            ₹530
-                            <h5> ₹190</h5>
-                          </p>
-                        </div>
-                        <a href="#" class="btn btn-primary move-to-cart">
-                          Move to Cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4 pt-2">
-                    <div class="card" style={{ width: "18rem" }}>
-                      <img
-                        src="./assets/img/wishlist.png"
-                        class="card-img-top"
-                        alt="..."
-                      />
-                      <div class="card-body" style={{ alignContent: "center" }}>
-                        <h5 class="card-title">Cleanse and Shine Combo</h5>
-                        <div class="d-flex">
-                          <p
-                            class="card-text rupee"
-                            style={{ textDecoration: "line-through" }}
-                          >
-                            {" "}
-                            ₹530
-                            <h5> ₹190</h5>
-                          </p>
-                        </div>
-                        <a href="#" class="btn btn-primary move-to-cart">
-                          Move to Cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

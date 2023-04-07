@@ -44,50 +44,50 @@ const SimilarProduct = (props) => {
   }, [id]);
 
   return (
-    <div>
-      <section>
-        <div className="container my-5">
-          <div className="row">
-            <Carousel
-              responsive={responsive}
-              showDots={true}
-              infinite={true}
-              draggable={true}
-              swipeable={true}
-              removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
-              className=""
-            >
-              {related.map((e) => (
-                <div className="item" key={e.id}>
-                  <div className="newComboCart">
-                    <div className="cart-img-sec">
-                      <Link className="addtofav">
-                        <li className="bi bi-heart"></li>
-                      </Link>
-                      <Link to={`/combo/${e.id}`}>
-                        <img src={e.meta_img?.url} alt="img"></img>
-                      </Link>
-                    </div>
+    <>
+      <div className="container mt-2 mb-5">
+        <div className="row">
+          <Carousel
+            responsive={responsive}
+            showDots={false}
+            infinite={true}
+            draggable={true}
+            swipeable={true}
+            removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
+            className=""
+          >
+            {related.map((e) => (
+              <div className="item" key={e.id} style={{ marginRight: "20px" }}>
+                <div className="newComboCart">
+                  <div className="cart-img-sec mr-3" style={{ position: "relative" }}>
+                    <Link className="addtofav">
+                      <li className="bi bi-heart" style={{ position: "absolute", top: ".3rem", right: ".8rem" }}></li>
+                    </Link>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img"></img>
+                    </Link>
+                  </div>
 
-                    <div className="card-det-sec">
-                      <div className="headingCard pt-3">
-                        <span>{e.name}</span>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+                    </div>
+                    <div>
+                      <span className="packof">(Pack of 2)</span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
                       </div>
-                      <div>
-                        <span className="packof">(Pack of 2)</span>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
                       </div>
-                      <div className="price-sec">
-                        <div className="col-4" style={{ textAlign: "end" }}>
-                          <span className="sp">₹{e.selling_price}</span>
-                        </div>
-                        <div className="col-4">
-                          <del className="mrp">₹{e.mrp}</del>
-                        </div>
-                        <div className="col-4">
-                          <span className="discount">{e.discount}% OFF</span>
-                        </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
                       </div>
-                      <div className="card-btn-sec ">
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc">
                         <Link className="btnC">
                           <li
                             className="bi bi-cart"
@@ -101,12 +101,13 @@ const SimilarProduct = (props) => {
                     </div>
                   </div>
                 </div>
-              ))}
-            </Carousel>
-          </div>
+              </div>
+            ))}
+          </Carousel>
         </div>
-      </section>
-    </div>
+      </div>
+
+    </>
   );
 };
 

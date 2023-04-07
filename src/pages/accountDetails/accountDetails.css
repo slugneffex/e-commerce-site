@@ -21,8 +21,12 @@
     border: 1px solid white;
    
 }
+.col-4{
+    padding-bottom: 50px;
+}
 .wallet{
     align-items: center;
+    justify-content: center;
 }
 .cardbox{
    padding: 2rem;
@@ -38,8 +42,11 @@
 }
 .red{
     color: #B53800;
-    padding-left: 10rem;
+  
     
+}
+.reds{
+    margin-left: auto;
 }
 .notes{
     font-size: 12px;
@@ -73,9 +80,10 @@ a:link{
 .button{
     align-items: center;
 }
-.container{
-    margin: left 20px;
-}
+/* .container{
+    margin-left:  20px;
+} */
+
 .first{
     flex: auto;
     
@@ -87,7 +95,8 @@ a:link{
 
 .green{
     color: #009444;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    text-align: center;
 }
 .section{
     background-color: #efefee;
@@ -137,7 +146,13 @@ a:link{
 .accountAddress {
     margin-bottom: 1rem;
 
+    
 }
+
+.rupee{
+    margin-right:10px;
+    display: flex;
+ }
 
 
 .order-card  {
@@ -163,26 +178,29 @@ a:link{
     border: 1px solid black;
 }
 
+
+
 @media(max-width: 720px) {
     /*for mobiles (ACCOUNT)*/
     *{
         font-size: small;
        
     }
-    .card{
-        padding-left: 3rem;
+    .edits{
+        margin-left: 0rem;
+        align-items: center;
     }
+    .edit{
+        margin-left: 0rem;
+        
+         
+    }
+  
     .changePassword{
         font-size: medium;
         
     }
-    .edits{
-        padding-left: 30px;
-        margin-right: 40px;
-    }
-    .edit{
-        padding-left: 30px;
-    }
+    
     .red{
         font-size: medium;
        margin-left: 45px;
@@ -193,11 +211,33 @@ a:link{
        margin-right: 5px;
     }  }
      
+ /*for mobiles (wishlist)*/
+ @media(max-width: 720px){
+    .col-4{
+        width: 50%;
+        padding-bottom: 30px;
+    }
+   
+ }
+
+
+
+
+
+
   /*for mobiles (ADDRESS)*/
   @media(max-width: 720px){
     .pencils{
        padding-left: 240px;
     }
+    #address-bar{
+        width:50%
+    }
+    #addresscard{
+        margin: 10px;
+        padding: 10px;
+    }
+    
 }
 /*for mobiles (SIDEBAR)*/
 @media (max-width:720px){

@@ -15,7 +15,10 @@ import {
 import {
   singleaddCartProduct,
   getsingleCartCount,
-} from "../../components/features/SingleCartSlice"
+  getsingleSubTotal,
+  getsingleTotalAmount,
+  getsingleTotalDiscount,
+} from "../../components/features/SingleCartSlice";
 import { useDispatch } from "react-redux";
 
 const Category = () => {
@@ -86,17 +89,16 @@ const Category = () => {
     dispatch(getTotalDiscount());
   };
 
-
   // add to cart single product
 
-  let SingleproductObj ={
-    id:"",
+  let SingleproductObj = {
+    id: "",
     title: "",
     price: "",
     image: "",
     mrp: "",
     discount: "",
-  }
+  };
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
@@ -110,6 +112,9 @@ const Category = () => {
 
     dispatch(singleaddCartProduct(SingleproductObj));
     dispatch(getsingleCartCount());
+    dispatch(getsingleSubTotal());
+    dispatch(getsingleTotalAmount());
+    dispatch(getsingleTotalDiscount());
   };
 
   // ADd To wishlist combo
@@ -136,6 +141,7 @@ const Category = () => {
   }
 
   // Add to wishlist For product
+  const [heartFilled, setHeartFilled] = useState(null);
 
   function wishlistProductData(id) {
     const data = {
@@ -152,8 +158,86 @@ const Category = () => {
         },
       })
       .then((res) => {
-        alert(res.data.message);
+        if (res.data.status === true) {
+          setHeartFilled(id);
+          setTimeout(() => setHeartFilled(null), 4000);
+        } else {
+          alert(res.data.message);
+        }
       });
+  }
+
+  // if there is no combo hide the section of combos
+
+  let section = null;
+  if (category.length >= 1) {
+    section = (
+      <>
+        {/* section content */}
+        <hr />
+        <div className="pre">
+          <h3>Precurated Combo</h3>
+        </div>
+        <hr />
+        {category.map((e) => (
+          <div className="col-md-4 " key={e.id}>
+            <div className="newComboCart">
+              <div className="cart-img-sec" style={{ position: "relative" }}>
+                <Link
+                  onClick={() => wishlistData(e.id)}
+                  className="addtofavCategory"
+                >
+                  <li
+                    className="bi bi-heart"
+                    style={{
+                      position: "absolute",
+                      right: "1rem",
+                      top: ".8rem",
+                    }}
+                  ></li>
+                </Link>
+                <Link to={`/combo/${e.id}`}>
+                  <img src={e.meta_img?.url} alt="img"></img>
+                </Link>
+              </div>
+
+              <div className="card-det-sec">
+                <div className="headingCard pt-3">
+                  <span>{e.name}</span>
+                </div>
+                <div>
+                  <span className="packof">(Pack of 2)</span>
+                </div>
+                <div className="price-sec">
+                  <div className="col-4" style={{ textAlign: "end" }}>
+                    <span className="sp">₹{e.selling_price}</span>
+                  </div>
+                  <div className="col-4">
+                    <del className="mrp">₹{e.mrp}</del>
+                  </div>
+                  <div className="col-4">
+                    <span className="discount">{e.discount}% OFF</span>
+                  </div>
+                </div>
+                <div className="card-btn-sec ">
+                  <div
+                    className="btn_atc"
+                    onClick={() => {
+                      addToCart(e);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <li className="bi bi-cart" id={e.id}>
+                      Add to Cart
+                    </li>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    );
   }
 
   return (
@@ -161,7 +245,7 @@ const Category = () => {
       <HomeLayout>
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 desktop">
               <div className="card">
                 <div
                   className="accordion accordion-flush accc"
@@ -187,7 +271,7 @@ const Category = () => {
               </div>
             </div>
 
-            <div className="col-md-9">
+            <div className="col-md-9 mt-2">
               <div className="banner" key={banner.id}>
                 <img src={banner.banner?.url} width="100%" alt="" />
               </div>
@@ -213,124 +297,39 @@ const Category = () => {
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="col-md-5">
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant=""
-                          id="dropdown-basic"
-                          style={{
-                            border: "1px solid",
-                            marginLeft: "3rem",
-                            width: "120px",
-                          }}
-                        >
-                          Sort by
-                        </Dropdown.Toggle>
+                <div className="col-md-6" style={{ textAlign: "end" }}>
+                  <div className="" style={{}}>
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant=""
+                        id="dropdown-basic"
+                        style={{
+                          border: "1px solid",
+                          marginLeft: "3rem",
+                          width: "120px",
+                        }}
+                      >
+                        Sort by
+                      </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">
-                            Action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Another action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Something else
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </div>
-                    <div className="col-md-5">
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant=""
-                          id="dropdown-basic"
-                          style={{
-                            border: "1px solid",
-                            marginLeft: "2rem",
-                            width: "120px",
-                          }}
-                        >
-                          Filter by
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">
-                            Action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Another action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Something else
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </div>
+                      <Dropdown.Menu>
+                        <Dropdown.Item>Low to High</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">
+                          Another action
+                        </Dropdown.Item>
+                        {/* <Dropdown.Item href="#/action-3">
+                          Something else
+                        </Dropdown.Item> */}
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
                 </div>
               </div>
-              <hr />
-              <div className="pre">
-                <h3>Precurated Combo</h3>
-              </div>
-              <hr />
+
               <div className="row" style={{ marginTop: "1rem" }}>
                 {/* Combo products */}
+                {section}
 
-                {category.map((e) => (
-                  <div className=" col-md-4" key={e.id}>
-                    <div className="newComboCart">
-                      <div className="cart-img-sec">
-                        <Link
-                          onClick={() => wishlistData(e.id)}
-                          className="addtofavCategory"
-                        >
-                          <li className="bi bi-heart"></li>
-                        </Link>
-                        <Link to={`/combo/${e.id}`}>
-                          <img src={e.meta_img?.url} alt="img"></img>
-                        </Link>
-                      </div>
-
-                      <div className="card-det-sec">
-                        <div className="headingCard pt-3">
-                          <span>{e.name}</span>
-                        </div>
-                        <div>
-                          <span className="packof">(Pack of 2)</span>
-                        </div>
-                        <div className="price-sec">
-                          <div className="col-4" style={{ textAlign: "end" }}>
-                            <span className="sp">₹{e.selling_price}</span>
-                          </div>
-                          <div className="col-4">
-                            <del className="mrp">₹{e.mrp}</del>
-                          </div>
-                          <div className="col-4">
-                            <span className="discount">{e.discount}% OFF</span>
-                          </div>
-                        </div>
-                        <div className="card-btn-sec ">
-                          <Link className="btnC">
-                            <li
-                              className="bi bi-cart"
-                              onClick={() => {
-                                addToCart(e);
-                              }}
-                              id={e.id}
-                              style={{ cursor: "pointer" }}
-                            >
-                              Add to Cart
-                            </li>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
                 <hr />
                 <div className="byocc">
                   <h3>Bulid Your Own Combo</h3>
@@ -343,12 +342,24 @@ const Category = () => {
                 {product.map((p) => (
                   <div className="col-md-4" key={p.id}>
                     <div className="newComboCart">
-                      <div className="cart-img-sec">
+                      <div
+                        className="cart-img-sec"
+                        style={{ position: "relative" }}
+                      >
                         <Link
                           onClick={() => wishlistProductData(p.id)}
                           className="addtofavCategory"
                         >
-                          <li className="bi bi-heart"></li>
+                          <li className="youMayLikeHeart">
+                            {heartFilled === p.id ? (
+                              <i
+                                style={{ color: "#fe9e2d" }}
+                                class="bi bi-heart-fill"
+                              ></i>
+                            ) : (
+                              <i className="bi bi-heart"></i>
+                            )}
+                          </li>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img
@@ -378,18 +389,17 @@ const Category = () => {
                           </div> */}
                         </div>
                         <div className="card-btn-sec ">
-                          <Link className="btnC">
-                            <li
-                              className="bi bi-cart"
-                              onClick={() => {
-                                addToSingleCart(p);
-                              }}
-                              id={p.id}
-                              style={{ cursor: "pointer" }}
-                            >
+                          <div
+                            className="btn_atc"
+                            onClick={() => {
+                              addToSingleCart(p);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <li className="bi bi-cart" id={p.id}>
                               Add to Cart
                             </li>
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

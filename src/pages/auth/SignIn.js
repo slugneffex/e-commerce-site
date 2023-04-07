@@ -5,7 +5,6 @@ import HomeLayout from "../../layouts/HomeLayout";
 import "./login.css";
 import Features from "../../components/inc/Fetures";
 
-
 const SignIn = () => {
   const navigate = useNavigate();
 
@@ -20,6 +19,8 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+
+  localStorage.setItem("password", data.password);
 
   function submit(e) {
     e.preventDefault();
@@ -58,7 +59,6 @@ const SignIn = () => {
     const newdata = { ...data };
     newdata[e.target.id] = e.target.value;
     setData(newdata);
-    console.log(newdata);
   }
 
   return (

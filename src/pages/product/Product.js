@@ -5,7 +5,16 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
+import "./product.css";
 import axios from "axios";
+import {
+  addCartProduct,
+  getCartCount,
+  getSubTotal,
+  getTotalAmount,
+  getTotalDiscount,
+} from "../../components/features/useCartSlice";
+import { useDispatch } from "react-redux";
 
 const Product = () => {
   // Combos Product
@@ -23,45 +32,65 @@ const Product = () => {
       };
       const response = await axios.get(`/combo/${id}`, options);
       setCombos(response.data.combo);
-      setComboproduct(response.data.combo.gallery)
+      setComboproduct(response.data.combo.gallery);
     }
     fetchData();
   }, [id]);
 
-  
+  // add to cart for combo
+
+  const dispatch = useDispatch();
+  let productObj = {
+    id: "",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
+  };
+  const addToCart = (e) => {
+    productObj = {
+      id: e.id,
+      title: e.name,
+      price: e.selling_price,
+      image: e.meta_img?.url,
+      mrp: e.mrp,
+      discount: e.discount,
+    };
+
+    dispatch(addCartProduct(productObj));
+    dispatch(getCartCount());
+    dispatch(getSubTotal());
+    dispatch(getTotalAmount());
+    dispatch(getTotalDiscount());
+  };
 
   return (
     <>
       <HomeLayout>
-        <div className="byoc" style={{ marginTop: "5rem" }}>
-          <img src="assets/img/byoc.png" className="img-fluid" alt="super-deal" />
-        </div>
-
         <div className="container">
-          <div className="row my-5">
+          <div className="row mt-3 ">
             <div className="col-md-6">
               <div className="product-car">
                 <Carousel
                   className="big-img-carousel "
+                  swipeable={true}
                   centerMode={false}
                   infiniteLoop={true}
                   showArrows={false}
                 >
-                  <div className="item big-img" data-hash="one" key={combos.id}>
-                    <img
-                      src={combos.meta_img?.url}
-                      alt={combos.name}
-                      className=""
-                    />
+                  <div
+                    className="item big-img"
+                    data-hash="one"
+                    key={combos.id}
+                    style={{ border: "1px solid #464646" }}
+                  >
+                    <img src={combos.meta_img?.url} alt={combos.name} />
                   </div>
 
                   {comboproduct.map((e) => (
                     <div className="item big-img" data-hash="two" key={e.id}>
-                      <img
-                        src={e.original_url}
-                        alt="name"
-                        className=""
-                      />
+                      <img src={e.original_url} alt="name" />
                     </div>
                   ))}
                 </Carousel>
@@ -69,9 +98,9 @@ const Product = () => {
             </div>
 
             <div className="col-md-6" key={combos.id}>
-              <div className="breadcrumb">
+              <div className="breadcrumb" style={{ marginTop: "0" }}>
                 <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb">
+                  <ol className="breadcrumb" style={{ margin: "0" }}>
                     <li className="breadcrumb-item">
                       <Link to="/">Home</Link>
                     </li>
@@ -84,7 +113,7 @@ const Product = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="heading">
+              <div className="heading" style={{ padding: "0" }}>
                 <h1>{combos.name}</h1>
               </div>
               <div className="quantity">
@@ -96,7 +125,9 @@ const Product = () => {
                 <i className="bi bi-star-fill"></i>
                 <i className="bi bi-star"></i>
                 <i className="bi bi-star"></i>
-                <span>8 Reviews</span>
+                <span style={{ fontSize: "15px", marginLeft: "1rem" }}>
+                  8 Reviews
+                </span>
               </div>
               <div className="location">
                 <span>
@@ -108,23 +139,31 @@ const Product = () => {
               </div>
               <div className="basic-details">
                 <span>Sold By:</span>
-                <span className="sold-by">XYZ Pvt. Ltd.</span>
-                <br />
-                <span>MRP:</span>
-                <del className="mrp">₹{combos.mrp}</del>
-                <br />
-                <span>Deal Price:</span>
-                <span className="sp">₹{combos.selling_price}</span>
-                <br />
-                <span>You Save:</span>
-                <span className="youSave">
-                  ₹150 <strong>({combos.discount}%)</strong>
+                <span className="sold-by" style={{ marginLeft: ".5rem" }}>
+                  XYZ Pvt. Ltd.
                 </span>
                 <br />
+                <div style={{ marginTop: ".3rem" }}>
+                  <span>MRP:</span>
+                  <del className="mrp">₹{combos.mrp}</del>
+                </div>
+
+                <div style={{ marginTop: ".5rem" }}>
+                  <span>Deal Price:</span>
+                  <span className="sp">₹{combos.selling_price}</span>
+                </div>
+                <div style={{ marginTop: ".5rem" }}>
+                  <span>You Save:</span>
+                  <span className="youSave">
+                    ₹150 <strong>({combos.discount}%)</strong>
+                  </span>
+                </div>
+
                 <span className="priceinc">Price inclusive of all taxes</span>
               </div>
-              <div className="cart">
-                <div className="d-flex">
+            </div>
+            <div className="cart">
+              {/* <div className="d-flex" style={{ alignItems: "center" }}>
                   <div className="" style={{ marginRight: "2rem" }}>
                     <span className="quant">Quantity:</span>
                   </div>
@@ -144,53 +183,79 @@ const Product = () => {
                       <button className="bi bi-plus-lg"></button>
                     </form>
                   </div>
-                </div>
-                <br />
-                <div className="addCart" id={combos.id}>
-                  <Link to="" className="btn_1">
-                    <i className="bi bi-cart"></i>Add To Cart
-                  </Link>
-                </div>
-                <br />
-                <div className="wishlist-sec">
-                  <i className="bi bi-heart"></i>
-                  <Link to="#" className="wishlist">
-                    Add To Wishlist
+                </div> */}
+
+              <div className="addCart col-md-4" id={combos.id}>
+                <div className="btn_atc">
+                  <Link
+                    to=""
+                    onClick={() => {
+                      addToCart(combos);
+                    }}
+                  >
+                    <div className="btn_atc">
+                      <i
+                        className="bi bi-cart"
+                        style={{ marginRight: ".5rem" }}
+                      ></i>
+                      Add To Cart
+                    </div>
                   </Link>
                 </div>
               </div>
-              <div className="coupon-sec text-center">
-                <div className="coupon-card">
-                  <div className="card-head">
-                    <div className="tag">
-                      <i className="bi bi-tag-fill"></i>
-                    </div>
-                    <div className="det">
-                      <span className="use">Use Code</span>
-                      <br />
-                      <span className="code">COMBO50</span>
-                    </div>
-                  </div>
-                  <div className="vl"></div>
-                  <div className="card-body">
-                    <div className="offer">
-                      <span>Get it for</span>{" "}
-                      <span className="price">₹ 299</span>
-                    </div>
-                    <div className="terms">
-                      <p>Get Upto ₹50 Off on XXX and above Max Discount ₹XX</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="more-card my-5">
-                  <Link to="">+ 10 More</Link>
-                </div>
+
+              <div className="addCart" id={combos.id}>
+                <Link
+                  to=""
+                  className="btn_1"
+                  onClick={() => {
+                    addToCart(combos);
+                  }}
+                >
+                  <i
+                    className="bi bi-cart"
+                    style={{ marginRight: ".5rem" }}
+                  ></i>
+                  Add To Cart
+                </Link>
               </div>
+
+              <div className="wishlist-sec">
+                <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
+                <Link to="#" className="wishlist">
+                  Add To Wishlist
+                </Link>
+              </div>
+            </div>
+
+            <div class="coupon-sec text-center mb-3">
+              <img
+                src="../assets/img/usps.svg"
+                alt="img-fluid"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col-md-6">
+              <img
+                src="../assets/img/slabs-freebies.png"
+                alt="img-fluid"
+                class="img-fluid"
+              />
+            </div>
+            <div class="col-md-6">
+              <img
+                src="../assets/img/slabs-tnc.png"
+                alt="img-fluid"
+                class="img-fluid"
+              />
             </div>
           </div>
 
           <div className="row">
-            <div className="desc-sec my-5">
+            <div className="desc-sec mt-3 mb-2 ">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
                   <button
@@ -380,15 +445,15 @@ const Product = () => {
               </div>
             </div>
           </div>
-          <div className="row my-5">
+          <div className="row">
             <div className="top-trending">
               <div className="top-trending-head text-center">
                 <h3 className="hr-line-head">
                   Explore more from Across the Store
                 </h3>
-                <Link to="#" className="btn_view_all">
+                {/* <Link to="#" className="btn_view_all">
                   View All <i className="bi bi-arrow-right"></i>
-                </Link>
+                </Link> */}
               </div>
             </div>
 

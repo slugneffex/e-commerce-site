@@ -30,8 +30,8 @@ const Singleproduct = () => {
   return (
     <div>
       <HomeLayout>
-        <div className="container" style={{ marginTop: "8rem" }}>
-          <div className="row my-5">
+        <div className="container" >
+          <div className="row mt-5">
             <div className="col-md-6">
               <div className="product-car">
                 <Carousel
@@ -63,7 +63,7 @@ const Singleproduct = () => {
             </div>
 
             <div className="col-md-6" key={product.id}>
-              <div className="breadcrumb">
+              <div className="breadcrumb mt-0">
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
@@ -118,7 +118,7 @@ const Singleproduct = () => {
                 <span className="priceinc">Price inclusive of all taxes</span>
               </div>
               <div className="cart">
-                <div className="d-flex">
+                {/* <div className="d-flex">
                   <div className="" style={{ marginRight: "2rem" }}>
                     <span className="quant">Quantity:</span>
                   </div>
@@ -139,13 +139,15 @@ const Singleproduct = () => {
                     </form>
                   </div>
                 </div>
-                <br />
-                <div className="addCart" id={product.id}>
-                  <Link to="" className="btn_1">
-                    <i className="bi bi-cart"></i>Add To Cart
+                <br /> */}
+                <div className="addCart col-4" id={product.id}>
+                  <Link to="">
+                    <div className="btn_atc">
+                      <i className="bi bi-cart"></i>Add To Cart
+                    </div>
                   </Link>
                 </div>
-                <br />
+                {/* <br /> */}
                 <div className="wishlist-sec">
                   <i className="bi bi-heart"></i>
                   <Link to="#" className="wishlist">
@@ -153,7 +155,11 @@ const Singleproduct = () => {
                   </Link>
                 </div>
               </div>
-              <div className="coupon-sec text-center">
+
+              <div class="coupon-sec text-center mb-3">
+                <img src="../assets/img/usps.svg" alt="img-fluid" class="img-fluid" />
+              </div>
+              {/* <div className="coupon-sec text-center">
                 <div className="coupon-card">
                   <div className="card-head">
                     <div className="tag">
@@ -179,6 +185,14 @@ const Singleproduct = () => {
                 <div className="more-card my-5">
                   <Link to="">+ 10 More</Link>
                 </div>
+              </div> */}
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <img src="../assets/img/slabs-freebies.png" alt="img-fluid" class="img-fluid" />
+              </div>
+              <div class="col-md-6">
+                <img src="../assets/img/slabs-tnc.png" alt="img-fluid" class="img-fluid" />
               </div>
             </div>
           </div>
@@ -374,15 +388,15 @@ const Singleproduct = () => {
               </div>
             </div>
           </div>
-          <div className="row my-5">
+          <div className="row ">
             <div className="top-trending">
               <div className="top-trending-head text-center">
                 <h3 className="hr-line-head">
                   Explore more from Across the Store
                 </h3>
-                <Link to="#" className="btn_view_all">
+                {/* <Link to="#" className="btn_view_all">
                   View All <i className="bi bi-arrow-right"></i>
-                </Link>
+                </Link> */}
               </div>
             </div>
 
