@@ -17,7 +17,7 @@ const Hero = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get('/mobile-banners', options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/mobile-banners`, options);
       setBanner(response.data);
     }
     fetchData();

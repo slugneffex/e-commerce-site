@@ -38,7 +38,7 @@ const ForHer = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get('/for-her', options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/for-her`, options);
       setForher(response.data);
     }
     fetchData();

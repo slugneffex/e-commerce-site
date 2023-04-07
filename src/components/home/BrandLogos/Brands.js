@@ -40,7 +40,7 @@ const Brands = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get('/brands', options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brands`, options);
       setBrand(response.data);
     }
     fetchData();

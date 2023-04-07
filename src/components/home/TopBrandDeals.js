@@ -38,7 +38,7 @@ const TopBrandDeals = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get(`/comboDeals`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/comboDeals`, options);
       setCdeal(response.data);
     }
     fetchData();

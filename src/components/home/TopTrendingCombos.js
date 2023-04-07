@@ -18,7 +18,7 @@ const TopTrendingCombos = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get(`/topPicks`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/topPicks`, options);
       setPicks(response.data);
     }
     fetchData();

@@ -36,7 +36,7 @@ const Category = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(`/category/${id}`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/category/${id}`, options);
       setBanner(response.data.category);
       setCategory(response.data.data.combos.data);
       setProduct(response.data.data.products.data);
@@ -55,7 +55,7 @@ const Category = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(`/categories`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/categories`, options);
       setCategories(response.data);
     }
     fetchData();

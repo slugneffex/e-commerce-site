@@ -47,7 +47,7 @@ const BrandProducts = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get("/latestPros", options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/latestPros`, options);
       setBrandProduct(response.data);
     }
     fetchData();
@@ -94,7 +94,7 @@ const BrandProducts = () => {
     };
 
     axios
-      .post("/addWishlist", data, {
+      .post(`${process.env.REACT_APP_BASE_URL}/addWishlist`, data, {
         headers: {
           "X-Authorization":
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
