@@ -50,7 +50,7 @@ const YouMayLike = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get(`/combos`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combos`, options);
       setFeature(response.data.data);
     }
     fetchData();
@@ -95,7 +95,7 @@ const YouMayLike = () => {
       user_id: user_id,
     };
     axios
-      .post("/addWishlist", data, {
+      .post(`${process.env.REACT_APP_BASE_URL}/addWishlist`, data, {
         headers: {
           "X-Authorization":
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",

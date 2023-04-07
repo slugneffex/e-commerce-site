@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": " http://localhost:3000",
-  "proxy": "https://combonationbusiness.in/frontend/api",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
