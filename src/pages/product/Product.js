@@ -182,17 +182,19 @@ const Product = () => {
                   </div>
                 </div> */}
 
-                <div className="addCart" id={combos.id}>
-                  <Link
-                    to=""
-                    onClick={() => {
-                      addToCart(combos);
-                    }}
-                  >
-                    <div className="btn_atc">
-                      <i className="bi bi-cart" style={{ marginRight: ".5rem" }}></i>Add To Cart
-                    </div>
-                  </Link>
+                <div className="addCart col-md-4" id={combos.id}>
+                  <div className="btn_atc">
+                    <Link
+                      to=""
+                      onClick={() => {
+                        addToCart(combos);
+                      }}
+                    >
+                      <div className="btn_atc">
+                        <i className="bi bi-cart" style={{ marginRight: ".5rem" }}></i>Add To Cart
+                      </div>
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="wishlist-sec">
