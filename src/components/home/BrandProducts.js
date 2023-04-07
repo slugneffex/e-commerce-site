@@ -151,9 +151,9 @@ const BrandProducts = () => {
                       <div className="headingCard pt-3">
                         <span>{e.name.substring(0, 40)}</span>
                       </div>
-                      <div>
+                      {/* <div>
                         <span className="packof">(Pack of 2)</span>
-                      </div>
+                      </div> */}
                       <div className="price-sec">
                         <div className="col-4" style={{ textAlign: "end" }}>
                           <span className="sp">₹{e.selling_price}</span>

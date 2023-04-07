@@ -17,7 +17,7 @@ const Loginadress = () => {
   // Combo Product Cart
 
   const { totalCount } = useSelector((state) => state.cart);
-  const { subAmount, totalAmount, totalDiscount } = useSelector(
+  const { subAmount, totalAmount, totalDiscount,cartItems } = useSelector(
     (state) => state.cart
   );
 
@@ -246,7 +246,9 @@ const Loginadress = () => {
   // Order Validate
 
   const transaction_id = localStorage.getItem("transaction_id");
-  console.log(token);
+  const email = localStorage.getItem("email");
+  const password = localStorage.getItem("password");
+  console.log(token)
 
   const sendOrder = () => {
     axios
@@ -261,11 +263,14 @@ const Loginadress = () => {
           transaction_id: transaction_id,
           payment_type: "prepaid",
           payment_method: "prepaid",
-
+          email: email,
+          password: password,
           phone: formData.phone,
           subtotal: "1000",
-          grand_total: "2000",
+          grand_total: `${totalCartSubAmount}`,
           tax: "600",
+          lname:"tiwari",
+          cartItems:cartItems
         },
         {
           headers: {
@@ -285,8 +290,8 @@ const Loginadress = () => {
       <HomeLayout>
         <section className="address">
           <div className="container">
-            <div className="row text-center py-5" id="progessbarRow">
-              <ul className="" id="progressbarrr">
+            <div className="row text-center pb-5" id="progessbarRow">
+              <ul className="mt-5" id="progressbarrr">
                 <div className="col-md-4 col-sm-4">
                   <Link to="/Cart" className="bagLink">
                     <li id="bag">Bag</li>
@@ -537,7 +542,7 @@ const Loginadress = () => {
                   </div>
                 ))}
               </div>
-              <div className="col-md-4 mt-5">
+              <div className="col-md-4 mt-5 mb-5">
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>

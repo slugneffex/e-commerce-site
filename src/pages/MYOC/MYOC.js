@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./myoc.css"
+import "./myoc.css";
 
 const MYOC = () => {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     async function fetchData() {
       const options = {
@@ -14,11 +15,32 @@ const MYOC = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(`/view-all-products`, options);
+      const response = await axios.get(
+        `/view-all-products?page=${currentPage}`,
+        options
+      );
       setProducts(response.data.data);
     }
     fetchData();
-  }, []);
+  }, [currentPage]);
+
+  const goToPage = (page) => {
+    setCurrentPage(page);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+ 
+
+  
 
   return (
     <>
@@ -52,11 +74,13 @@ const MYOC = () => {
                     </div>
                     <div className="price-sec">
                       <div className="col-4" style={{ textAlign: "end" }}>
-                        <span className="spSingleProduct">₹{e.selling_price}</span>
+                        <span className="spSingleProduct">
+                          ₹{e.selling_price}
+                        </span>
                       </div>
                     </div>
                     <div className="card-btn-sec ">
-                      <Link className="btnC">
+                      <div className="btn_atc">
                         <li
                           className="bi bi-cart"
                           id={e.id}
@@ -64,13 +88,41 @@ const MYOC = () => {
                         >
                           Add to Cart
                         </li>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+          {/* number button */}
+          <nav>
+            <ul className="pagination">
+              <li className="page-item disabled" onClick={prevPage}>
+                <span className="page-link" aria-hidden="true">
+                  ‹
+                </span>
+              </li>
+              {/* <li className="page-item active" aria-current="page">
+                <span className="page-link">1</span>
+              </li> */}
+              {[1, 2, 3, 4, 5,6,7].map((page) => (
+                <li
+                  className="page-item "
+                  key={page}
+                  onClick={() => goToPage(page)}
+                >
+                  <span className="page-link">{page}</span>
+                </li>
+              ))}
+             
+              <li className="page-item" onClick={nextPage}>
+                <span className="page-link" rel="next" aria-label="Next »">
+                  ›
+                </span>
+              </li>
+            </ul>
+          </nav>
         </div>
       </HomeLayout>
     </>

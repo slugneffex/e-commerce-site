@@ -46,6 +46,8 @@ const Cart = () => {
     dispatch(getTotalDiscount());
   }, [dispatch]);
 
+  
+
   // Single Product Cart
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
@@ -130,11 +132,11 @@ const Cart = () => {
                       <br />
                       <div className="form-group">
                         <select name="" id="">
-                          {/* Qty
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option> */}
+                          Qty
+                          <option value="1">{product.quantity}</option>
+                          {/* <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option> */}
                         </select>
                         {/* <span>Only 2 Left</span> */}
                       </div>
@@ -399,13 +401,14 @@ const Cart = () => {
     );
   }
 
+  console.log(singleCartItems);
+
   //  Freebies Section
 
   let freebiesDiscountSection = null;
 
   if (singlesubAmount >= 1000) {
     freebiesDiscountSection = (
-
       <li style={{ padding: "1rem" }}>
         {/*  desktop */}
         <div className="desktop">
@@ -429,7 +432,6 @@ const Cart = () => {
             </div>
           </div>
         </div>
-
 
         {/*  mobile */}
         <div className="mobile">
@@ -583,10 +585,8 @@ const Cart = () => {
                       <div className="form-group">
                         <select name="" id="">
                           Qty
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
+                          <option value="1">{products.quantity}</option>
+                         
                         </select>
                         {/* <span>Only 2 Left</span> */}
                       </div>
