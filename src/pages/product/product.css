@@ -171,7 +171,7 @@ a {
     font-weight: 400;
 }
 
-.coupon-card {
+/* .coupon-card {
     display: flex;
     background-color: #FFF4E3;
     border: 1px dotted #F1A248;
@@ -199,6 +199,11 @@ a {
     margin-left: 1rem;
     margin-right: 1rem;
     border-left: 2px dotted #707070;
+    height: auto;
+} */
+
+.img-fluid {
+    max-width: 100%;
     height: auto;
 }
 
