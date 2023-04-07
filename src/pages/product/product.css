@@ -2,6 +2,10 @@
  body {
     font-family: 'Poppins', sans-serif;
     color: #A2A2A2;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
  }
 
 
@@ -298,5 +302,36 @@ a {
     .product-car .small-img img {
         width: 50px;
         height: auto;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .col-md-6  {
+       min-width: 360px;
+       margin: auto;
+        /* margin: auto; */
+    }
+
+    .col-md-6  img {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+
+    .thumbs-wrapper li {
+        width: 50px;
+    }
+
+    .cart {
+        /* display: flex;
+        flex-direction: column; */
+        text-align: center;
+        margin: auto;
+        /* align-items: center; */
+    }
+
+    .row .desc-sec .nav .nav-item button {
+        font-size: 10px;
     }
 }
