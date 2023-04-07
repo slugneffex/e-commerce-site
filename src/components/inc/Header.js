@@ -435,6 +435,7 @@ const Header = () => {
                     <span>Wishlist</span>
                   </Link>
                 </li>
+                
                 <li className="nav-item">
                   <Link
                     to="/Cart"
@@ -462,6 +463,19 @@ const Header = () => {
                     </strong>
                   </Link>
                 </li>
+                <div className="mobile">
+                <li className="nav-item"><Link to="/Acccount" className="nav-link">My Profile</Link></li>
+                <li className="nav-item"> <Link to="/Place" className="nav-link">My Address</Link></li>
+                <li className="nav-item"><Link to="/Wishlist"className="nav-link">My whishlist</Link></li>
+                <li className="nav-item"><Link to="/Orders" className="nav-link">My Orders</Link></li>
+                <li className="nav-item"><Link to="/Wallet" className="nav-link">My Wallet</Link></li>
+                <li className="nav-item"><Link to="" className="nav-link">Logout</Link></li>
+                </div>
+             
+              
+              
+              
+              
               </ul>
             </div>
           </div>

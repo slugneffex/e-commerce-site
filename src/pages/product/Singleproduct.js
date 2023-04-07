@@ -63,7 +63,7 @@ const Singleproduct = () => {
             </div>
 
             <div className="col-md-6" key={product.id}>
-              <div className="breadcrumb mt-0">
+              <div className="breadcrumb mt-0 mb-0">
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">

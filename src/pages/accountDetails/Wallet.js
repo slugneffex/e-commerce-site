@@ -19,14 +19,13 @@ const Wallet = () => {
 
                             <div class="card">
                                 <div class="seccard">
-                                    <div class="row">
-                                        <div class="col-md-8 d-flex wallet">
+                                    <div class="row" id="wallet">
+                                        <div class=" d-flex ">
                                             <img src='./assets/img/wallet.png' width="57.74px" height="50.53px" />
                                             <h5> Your Wallet Balance</h5>
-                                        </div>
-                                        <div class="col-md-4">
                                             <h4 class="reds p-2"><span class="red">₹230</span></h4>
                                         </div>
+                                       
 
                                     </div>
                                     <div class="row p-2 button">

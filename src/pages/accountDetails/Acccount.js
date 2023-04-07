@@ -24,7 +24,7 @@ const Account = () => {
               <div class="col-md-9">
                 <div class="card">
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="edit-button">
                       <img
                         src="./assets/img/accountImg/Group_2388.png"
                         style={{ width: "200px", height: "200px" }}

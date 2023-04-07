@@ -48,12 +48,12 @@ const Wishlist = () => {
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="row" id="card-secction">
                   {wishlist.map((e) => (
                     <div class="col-4" key={e.id}>
                       <div
                         class="card"
-                        style={{ width: "18rem", margin: "1rem" }}
+                        
                       >
                         {e.product?.thumbnail_img?.original_url ? (
                           <img
