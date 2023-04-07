@@ -65,8 +65,11 @@ const Product = () => {
     dispatch(getTotalDiscount());
   };
 
+  // const desc_product = document.getElementById("product_desc");
+  // desc_product.innerHTML = combos.desc;
+
   return (
-    <>
+    <div className="product_div">
       <HomeLayout>
         <div className="container">
           <div className="row mt-3 ">
@@ -161,32 +164,31 @@ const Product = () => {
 
                 <span className="priceinc">Price inclusive of all taxes</span>
               </div>
-            </div>
-            <div className="cart">
-              {/* <div className="d-flex" style={{ alignItems: "center" }}>
+              <div className="cart col-md-4">
+                {/* <div className="d-flex" style={{ alignItems: "center" }}>
                   <div className="" style={{ marginRight: "2rem" }}>
-                    <span className="quant">Quantity:</span>
+                  <span className="quant">Quantity:</span>
                   </div>
                   <div className="mod-cart d-flex">
-                    <form action="" method="POST">
+                  <form action="" method="POST">
                       <button className="bi bi-trash-fill"></button>
-                    </form>
-                    <input
+                      </form>
+                      <input
                       type="number"
                       value="1"
                       min="1"
                       max="10"
                       name="quantity"
                       className="cart-quant"
-                    />
-                    <form>
+                      />
+                      <form>
                       <button className="bi bi-plus-lg"></button>
-                    </form>
-                  </div>
-                </div> */}
+                      </form>
+                      </div>
+                    </div> */}
 
-              <div className="addCart col-md-4" id={combos.id}>
-                <div className="btn_atc">
+                <div className="addCart" id={combos.id}>
+
                   <Link
                     to=""
                     onClick={() => {
@@ -202,38 +204,22 @@ const Product = () => {
                     </div>
                   </Link>
                 </div>
+
+                <div className="wishlist-sec">
+                  <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
+                  <Link to="#" className="wishlist">
+                    Add To Wishlist
+                  </Link>
+                </div>
               </div>
 
-              <div className="addCart" id={combos.id}>
-                <Link
-                  to=""
-                  className="btn_1"
-                  onClick={() => {
-                    addToCart(combos);
-                  }}
-                >
-                  <i
-                    className="bi bi-cart"
-                    style={{ marginRight: ".5rem" }}
-                  ></i>
-                  Add To Cart
-                </Link>
+              <div class="coupon-sec text-center mb-3">
+                <img
+                  src="../assets/img/usps.svg"
+                  alt="img-fluid"
+                  class="img-fluid"
+                />
               </div>
-
-              <div className="wishlist-sec">
-                <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
-                <Link to="#" className="wishlist">
-                  Add To Wishlist
-                </Link>
-              </div>
-            </div>
-
-            <div class="coupon-sec text-center mb-3">
-              <img
-                src="../assets/img/usps.svg"
-                alt="img-fluid"
-                class="img-fluid"
-              />
             </div>
           </div>
 
@@ -309,12 +295,12 @@ const Product = () => {
                   tabindex="0"
                 >
                   <ul className="combo-product">
-                    <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
+                    <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li>
                   </ul>
                   <div>
-                    <p>{combos.desc}</p>
+                    {/* <p id="product_desc">{desc_product}</p> */}
                   </div>
                 </div>
                 <div
@@ -461,7 +447,7 @@ const Product = () => {
           </div>
         </div>
       </HomeLayout>
-    </>
+    </div>
   );
 };
 

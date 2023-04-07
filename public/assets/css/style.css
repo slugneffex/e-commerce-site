@@ -331,10 +331,10 @@ a {
   margin-top: 67px;
 }
 
-.youMayLikeHeart {
+.youMayLikeHeart i {
   position: absolute;
   right: 1rem;
-  top: .8rem
+  top: .6rem
 }
 
 .notAdded {
