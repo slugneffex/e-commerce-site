@@ -81,6 +81,9 @@ h1 h2 h3 h4 h5 h6 p {
         margin: auto;
     }
 
+    .features .row {
+        flex-direction: row;
+    }
     
       
    
@@ -129,11 +132,9 @@ h1 h2 h3 h4 h5 h6 p {
 
 
 @media(max-width: 720px) {
-    .col-md-3 {
+    .row .col {
         width: 50%;
     }
-    
-
 
     #values .col-md-6 {
         width: 50%;

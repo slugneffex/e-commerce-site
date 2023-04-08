@@ -71,7 +71,7 @@ const TopTrendingCombos = () => {
       </section>
 
       {/* mobile */}
-      <div className="mobile">
+      <div className="mobile" style={{ maxWidth: "100vw" }}>
         <div className="top-trending container">
           <div className="top-trending-head" style={{ marginTop: "2rem", marginBottom: "2rem" }}>
             <h3>Top Picks For You...</h3>
