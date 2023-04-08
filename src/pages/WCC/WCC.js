@@ -5,9 +5,7 @@ import axios from "axios";
 import axiosRetry from "axios-retry";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Link } from "react-router-dom"
-
-
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -32,7 +30,6 @@ const WCC = () => {
   const [brand, setBrand] = useState([]);
   axiosRetry(axios, { retries: 3 });
 
-
   useEffect(() => {
     async function fetchData() {
       const options = {
@@ -43,16 +40,18 @@ const WCC = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get('/brands', options);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/brands`,
+        options
+      );
       setBrand(response.data);
     }
     fetchData();
   }, []);
 
   const fliterData = brand.filter((brand) => {
-    return (brand.focused === "on")
-})
-
+    return brand.focused === "on";
+  });
 
   return (
     <>
@@ -61,13 +60,25 @@ const WCC = () => {
           <div className="container">
             <div className="row col-direction" style={{ marginTop: "2rem" }}>
               <div className="col-md-6 sffm">
-                <div className="heading" style={{ display: "flex", flexDirection: "column" }}>
+                <div
+                  className="heading"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
                   <h1>
                     We Are <br />
                     <span>COMBONATION!</span>
                   </h1>
                   <p style={{ marginTop: "1rem" }}>
-                    Combonation is a one-stop solution to shop for your daily lifestyle needs. We offer a hassle-free curation of pre-curated bundles & wide assortment of top brands to build your own combos. Our expertise in sourcing top-branded products and bringing bundle shopping under one roof is one of our core USPs Pre-curated bundles let the shopper avail highest discounts on top products. Whereas Building your own combo is more fun. Loaded with additional benefits of freebies on your BYOC purchase. Users can avail off up to 100% of the purchased value. Happy Shopping
+                    Combonation is a one-stop solution to shop for your daily
+                    lifestyle needs. We offer a hassle-free curation of
+                    pre-curated bundles & wide assortment of top brands to build
+                    your own combos. Our expertise in sourcing top-branded
+                    products and bringing bundle shopping under one roof is one
+                    of our core USPs Pre-curated bundles let the shopper avail
+                    highest discounts on top products. Whereas Building your own
+                    combo is more fun. Loaded with additional benefits of
+                    freebies on your BYOC purchase. Users can avail off up to
+                    100% of the purchased value. Happy Shopping
                   </p>
                 </div>
               </div>
@@ -217,8 +228,6 @@ const WCC = () => {
                 <img src="./assets/img/wcc/Group_2591.png" alt="img" />
               </div>
 
-
-
               <div className="BYOC">
                 <h1>
                   How to add products through <span>BYOC</span>
@@ -232,17 +241,16 @@ const WCC = () => {
                 </h1>
               </div>
 
-
               <div className="container py-10 mt-5 ">
-
-                <Carousel responsive={responsive} className="py-14"
+                <Carousel
+                  responsive={responsive}
+                  className="py-14"
                   swipeable={false}
                   autoPlay
                   arrows={false}
                   centerMode
                   infinite
                 >
-
                   {Array.isArray(fliterData) &&
                     fliterData.map((e) => (
                       <div key={e.id} className="logoBox">
@@ -257,13 +265,8 @@ const WCC = () => {
                         </div>
                       </div>
                     ))}
-
                 </Carousel>
-
               </div>
-
-
-
 
               {/* <div className="brand-sections">
                 <div className="row">
