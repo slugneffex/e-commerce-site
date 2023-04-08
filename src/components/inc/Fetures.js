@@ -39,7 +39,7 @@ const Fetures = () => {
       </section>
 
       {/* mobile */}
-      <section className="features mobile">
+      <section className="features mobile mt-2">
         <div className="container">
           <div className="row" style={{margin: "auto",justifyContent: "space-evenly" }}>
             <div className="col">

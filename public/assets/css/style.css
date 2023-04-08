@@ -1,6 +1,10 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* background-color: #ADADAD; */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 a {
@@ -1048,6 +1052,9 @@ ul.additional_links li:after {
     width: 100%;
   }
 
+  .price-sec .col-4 {
+    width: 30%;
+  }
 
 }
 
@@ -1092,8 +1099,6 @@ ul.additional_links li:after {
   padding-right: 2rem;
   padding-left: 2rem;
 }
-
-
 
 .btn_atc {
   border: 1px solid #FE9E2D;
@@ -1142,5 +1147,9 @@ a {
    /* carousel */
   .carouselItemCard {
     margin-right: 1.2rem;
+  }
+
+  .react-multi-carousel-list .react-multi-carousel-track {
+    margin: -3px;
   }
 }
