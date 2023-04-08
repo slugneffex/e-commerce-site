@@ -22,7 +22,7 @@ const Orders = () => {
                                     </div>
                                 </div>
 
-                                <div class="order-card ">
+                                <div class="card " id='order-card'>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <img src='./assets/img/wishlist.png' class="order" width="100px" height="100px" />
@@ -58,8 +58,8 @@ const Orders = () => {
                                 </div>
 
 
-                                <div class="order-card ">
-                                    <div class="row">
+                                <div class="card " id="order-card">
+                                    <div class="row" id="order-body">
                                         <div class="col-md-2">
                                             <img src='./assets/img/wishlist.png' class="order" width="100px" height="100px" />
                                         </div>
@@ -74,7 +74,7 @@ const Orders = () => {
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" >
                                         <div class="col-md-2">
                                             <p style={{ FontSize: "14px" }}>Saffron-Scrub <br />
                                                 Combo - QTY 1</p>

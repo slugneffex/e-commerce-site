@@ -12,6 +12,15 @@ const SignUp = () => {
     password: "",
   });
 
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = () => {
+  setPasswordShown(!passwordShown);
+  };
+
+
+
+
+
   function submit(e) {
     e.preventDefault();
     axios
@@ -96,12 +105,12 @@ const SignUp = () => {
                               value={data.password} />
                           </div>
                           <div className="form-group mb-3">
-                            <input type="password" name="password_confirmation" placeholder="Confirm Password" className="form-control password" onChange={(e) => handle(e)}
+                            <input type={passwordShown ? "text" : "password"} name="password_confirmation" placeholder="Confirm Password" className="form-control password" onChange={(e) => handle(e)}
                             />
                           </div>
                         </div>
                         <div className="form-group mb-2" style={{ textAlign: 'left' }}>
-                          <input type="checkbox" name="hide" onclick="hideShowPass()" />
+                          <input type="checkbox" name="hide"  onClick={togglePassword} />
                           <label htmlFor="hide">Show Password</label>
                         </div>
                         <button  type="submit" className="btn">Proceed To log In</button>

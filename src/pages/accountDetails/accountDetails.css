@@ -155,10 +155,8 @@ a:link{
  }
 
 
-.order-card  {
-    background-color: white;
-    padding: 1rem; 
-    margin-top: 1rem; 
+#order-card  {
+ margin-bottom: 20px;
     
 }
 .desktop{
@@ -290,3 +288,11 @@ a:link{
       }
       
     }
+    
+@media(max-width: 720px) {
+    /*for mobiles (orders)*/
+    #order-body{
+      
+        font-size: 10px;
+    }
+}
