@@ -15,12 +15,16 @@ const SignIn = () => {
     }
   });
 
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
   setPasswordShown(!passwordShown);
   };
 
   const url = "/login-email";
+
+  const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -159,7 +163,7 @@ const SignIn = () => {
                         <div className="d-flex my-5">
                           <div className="col-4">
                             <a
-                              href="https://www.combonation.in/login/google"
+                              href="#/"
                               style={{ boxShadow: "none" }}
                             >
                               <img
@@ -170,7 +174,7 @@ const SignIn = () => {
                           </div>
                           <div className="col-4">
                             <a
-                              href="https://www.combonation.in/login/facebook"
+                              href="#/"
                               style={{ boxShadow: "none" }}
                             >
                               <img
@@ -181,7 +185,7 @@ const SignIn = () => {
                           </div>
                           <div className="col-4">
                             <a
-                              href="https://www.combonation.in/login"
+                              href="#/"
                               style={{ boxShadow: "none" }}
                             >
                               <img

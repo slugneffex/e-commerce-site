@@ -83,7 +83,7 @@ const Categories = () => {
           >
             {category.map((e) => (
               <div className="my-auto">
-                <Link to={`/category/${e.id}`} key={e.id}>
+                <Link to={`${process.env.REACT_APP_BASE_URL}/category/${e.id}`} key={e.id}>
                   {e.name}
                 </Link>
               </div>

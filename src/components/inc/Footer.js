@@ -17,7 +17,7 @@ const Footer = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get(`/categories`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/categories`, options);
       setCategories(response.data);
     }
     fetchData();

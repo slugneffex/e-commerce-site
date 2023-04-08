@@ -45,19 +45,10 @@ const App = () => {
       <Route path="/Login" element={<Login />} />
       <Route path="/category/:id" element={<Category />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />
-      <Route path="/VerifyOtp" element={<VerifyOtp />} />
-
-      
-      <Route path="/Thanks" element={<Thanks />} />
-
-      
-      
-
-
-
+      <Route path="/VerifyOtp" element={<VerifyOtp />} />     
+      <Route path="/Thanks" element={<Thanks />} /> 
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
-
       <Route path="/view-all-products" element={<MYOC />} />
       <Route path ="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />

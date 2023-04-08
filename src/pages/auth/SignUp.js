@@ -5,7 +5,7 @@ import axios from "axios";
 import {Link} from "react-router-dom"
 
 const SignUp = () => {
-  const url = `/register`;
+  const url = `${process.env.REACT_APP_BASE_URL}/register`;
   const [data, setData] = useState({
     name: "",
     email: "",

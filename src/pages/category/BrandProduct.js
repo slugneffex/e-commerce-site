@@ -29,7 +29,7 @@ const BrandProduct = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get(`/brand/${brand_id}`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`, options);
       setBrandProduct(response.data.products.data);
       setBrandName(response.data.brand);
     }
@@ -50,7 +50,7 @@ const BrandProduct = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get("/brands", options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brands`, options);
       setBrand(response.data);
     }
     fetchData();

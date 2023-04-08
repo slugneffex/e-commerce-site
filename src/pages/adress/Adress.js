@@ -27,7 +27,7 @@ const Adress = () => {
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
-      const response = await axios.get("getState", options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/getState`, options);
       setState(response.data);
     }
     fetchData();
@@ -38,7 +38,7 @@ const Adress = () => {
     const selectedID = event.target.value;
     setSelectedState(selectedID);
 
-    const url = "/get-city-by-state";
+    const url = `${process.env.REACT_APP_BASE_URL}/get-city-by-state`;
 
     axios
       .post(

@@ -20,7 +20,7 @@ const Header = () => {
     e.preventDefault();
     axios
       .post(
-        "/search",
+        `${process.env.REACT_APP_BASE_URL}/search`,
         {
           term: data.search,
         },
@@ -33,7 +33,7 @@ const Header = () => {
       )
       .then((res) => {
         setSearchResult(res.data);
-        navigate("/search", { state: res.data });
+        navigate('/search', { state: res.data });
         console.log(searchResult);
       });
   }
@@ -58,7 +58,7 @@ const Header = () => {
         },
       };
 
-      const response = await axios.get(`/categories`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/categories`, options);
       setCategories(response.data);
     }
 
@@ -82,7 +82,7 @@ const Header = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get(`/settings`, options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/settings`, options);
       setLogo(response.data);
     }
     fetchData();
@@ -105,7 +105,7 @@ const Header = () => {
             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
         },
       };
-      const response = await axios.get("/stores", options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/stores`, options);
       setStore(response.data);
     }
     fetchData();
@@ -126,7 +126,7 @@ const Header = () => {
           credentials: "include",
         },
       };
-      const response = await axios.get("/brands", options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brands`, options);
       setBrand(response.data);
     }
     fetchData();

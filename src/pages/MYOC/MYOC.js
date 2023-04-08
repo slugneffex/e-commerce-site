@@ -16,7 +16,7 @@ const MYOC = () => {
         },
       };
       const response = await axios.get(
-        `/view-all-products?page=${currentPage}`,
+        `${process.env.REACT_APP_BASE_URL}/view-all-products?page=${currentPage}`,
         options
       );
       setProducts(response.data.data);
@@ -99,7 +99,7 @@ const MYOC = () => {
           <nav>
             <ul className="pagination">
               <li className="page-item disabled" onClick={prevPage}>
-                <span className="page-link" aria-hidden="true">
+                <span className="page-link" aria-hidden="true" style={{color:"#fe9e2d"}}>
                   ‹
                 </span>
               </li>
@@ -112,12 +112,12 @@ const MYOC = () => {
                   key={page}
                   onClick={() => goToPage(page)}
                 >
-                  <span className="page-link">{page}</span>
+                  <span className="page-link" style={{color:"#fe9e2d"}}>{page}</span>
                 </li>
               ))}
              
               <li className="page-item" onClick={nextPage}>
-                <span className="page-link" rel="next" aria-label="Next »">
+                <span className="page-link" rel="next" aria-label="Next »" style={{color:"#fe9e2d"}}>
                   ›
                 </span>
               </li>
