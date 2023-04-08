@@ -32,6 +32,7 @@ import Searchedpage from "./pages/SearchedPage/Searchedpage";
 import Adress from "./pages/adress/Adress";
 import Freebies from "./pages/FreebiePage/Freebies";
 import Thanks from "./pages/thankyou/Thanks";
+import OrderHistory from "./pages/OrderHistory/OrderHistory";
 
 
 
@@ -85,6 +86,9 @@ const App = () => {
       {/* Route for Freebies */}
       <Route path="/freebies" element={<Freebies />} />
 
+      {/* Oreder History */}
+      <Route path="/orderhistory" element={<OrderHistory />} />
+      
 
 
 
