@@ -5,6 +5,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import "./login.css";
 import Features from "../../components/inc/Fetures";
 
+
 const SignIn = () => {
   const navigate = useNavigate();
 
@@ -14,7 +15,16 @@ const SignIn = () => {
     }
   });
 
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = () => {
+  setPasswordShown(!passwordShown);
+  };
+
+  const url = "/login-email";
+
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -122,7 +132,7 @@ const SignIn = () => {
                           </div>
                           <div className="form-group mb-3">
                             <input
-                              type="password"
+                               type={passwordShown ? "text" : "password"}
                               name="password"
                               placeholder="Enter Your Password"
                               className="form-control"
@@ -139,9 +149,10 @@ const SignIn = () => {
                           <input
                             type="checkbox"
                             name="hide"
-                            onclick="hideShowPass()"
+                            onClick={togglePassword}
                           />
-                          <label htmlFor="hide">Show Password</label>
+                           
+                          <label  htmlFor="hide">Show Password</label>
                         </div>
                         <button type="submit" className="btn">
                           Proceed To log In
