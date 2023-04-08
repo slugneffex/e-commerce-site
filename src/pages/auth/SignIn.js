@@ -21,7 +21,7 @@ const SignIn = () => {
   setPasswordShown(!passwordShown);
   };
 
-  const url = "/login-email";
+  
 
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
 
