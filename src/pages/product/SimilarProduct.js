@@ -28,20 +28,38 @@ const SimilarProduct = (props) => {
   // Related Product
   const id = props.id;
   const [related, setRelated] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       const options = {
         headers: {
           "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combo/${id}`, options);
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combo/${id}`, options);
       setRelated(response.data.related);
+        
+      }catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
+      
     }
     fetchData();
   }, [id]);
+
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <>

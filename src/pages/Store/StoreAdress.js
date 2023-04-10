@@ -5,30 +5,46 @@ import axios from "axios";
 const StoreAdress = () => {
   const { id } = useParams();
 
-  const [storeAddress,setStoreAddress] = useState([])
+  const [storeAddress, setStoreAddress] = useState([]);
+  const [error, setError] = useState(null);
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/store/${id}`, options);
-      
-      setStoreAddress(response.data)
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/store/${id}`,
+          options
+        );
+        setStoreAddress(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [id]);
 
+  if (error) {
+    console.log(error)
+  }
+
   return (
     <>
       <div className="col">
-        <div className="storeAddressSection" >
+        <div className="storeAddressSection">
           <h2 className="text-center">Store Address :</h2>
-          <p className="text-center">
-            {storeAddress.full_address}
-          </p>
+          <p className="text-center">{storeAddress.full_address}</p>
           <p className="text-center">Mobile : {storeAddress.phone}</p>
         </div>
       </div>

@@ -7,19 +7,31 @@ import "./myoc.css";
 const MYOC = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState(null);
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/view-all-products?page=${currentPage}`,
-        options
-      );
-      setProducts(response.data.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/view-all-products?page=${currentPage}`,
+          options
+        );
+        setProducts(response.data.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [currentPage]);
@@ -38,9 +50,9 @@ const MYOC = () => {
     }
   };
 
- 
-
-  
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <>
@@ -99,25 +111,36 @@ const MYOC = () => {
           <nav>
             <ul className="pagination">
               <li className="page-item disabled" onClick={prevPage}>
-                <span className="page-link" aria-hidden="true" style={{color:"#fe9e2d"}}>
+                <span
+                  className="page-link"
+                  aria-hidden="true"
+                  style={{ color: "#fe9e2d" }}
+                >
                   ‹
                 </span>
               </li>
               {/* <li className="page-item active" aria-current="page">
                 <span className="page-link">1</span>
               </li> */}
-              {[1, 2, 3, 4, 5,6,7].map((page) => (
+              {[1, 2, 3, 4, 5, 6, 7].map((page) => (
                 <li
                   className="page-item "
                   key={page}
                   onClick={() => goToPage(page)}
                 >
-                  <span className="page-link" style={{color:"#fe9e2d"}}>{page}</span>
+                  <span className="page-link" style={{ color: "#fe9e2d" }}>
+                    {page}
+                  </span>
                 </li>
               ))}
-             
+
               <li className="page-item" onClick={nextPage}>
-                <span className="page-link" rel="next" aria-label="Next »" style={{color:"#fe9e2d"}}>
+                <span
+                  className="page-link"
+                  rel="next"
+                  aria-label="Next »"
+                  style={{ color: "#fe9e2d" }}
+                >
                   ›
                 </span>
               </li>

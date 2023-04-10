@@ -30,19 +30,34 @@ const Category = () => {
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
   const [banner, setBanner] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/category/${id}`, options);
-      setBanner(response.data.category);
-      setCategory(response.data.data.combos.data);
-      setProduct(response.data.data.products.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/category/${id}`,
+          options
+        );
+        setBanner(response.data.category);
+        setCategory(response.data.data.combos.data);
+        setProduct(response.data.data.products.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [id]);
@@ -52,14 +67,28 @@ const Category = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/categories`, options);
-      setCategories(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/categories`,
+          options
+        );
+        setCategories(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
@@ -133,8 +162,7 @@ const Category = () => {
     axios
       .post("/addWishlist", data, {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       })
@@ -155,8 +183,7 @@ const Category = () => {
     axios
       .post("/addWishlist", data, {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       })
@@ -170,6 +197,10 @@ const Category = () => {
       });
   }
 
+
+  if (error) {
+    console.log(error)
+  }
 
 
   // if there is no combo hide the section of combos
@@ -358,7 +389,6 @@ const Category = () => {
                           <li className="youMayLikeHeart">
                             {heartFilled === p.id ? (
                               <i
-                                
                                 style={{ color: "#fe9e2d" }}
                                 class="bi bi-heart-fill"
                               ></i>

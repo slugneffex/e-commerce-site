@@ -35,23 +35,41 @@ const responsive = {
 const BrandProducts = () => {
   // brands Product Get API
   const [brandProduct, setBrandProduct] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
+      
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/latestPros`, options);
-      setBrandProduct(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/latestPros`,
+          options
+        );
+        setBrandProduct(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
+
+  
 
   // add to cart single product
   const dispatch = useDispatch();
@@ -86,7 +104,6 @@ const BrandProducts = () => {
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
 
-
   function wishlistProductData(id) {
     const data = {
       user_id: user_id,
@@ -96,8 +113,7 @@ const BrandProducts = () => {
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/addWishlist`, data, {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       })
@@ -105,7 +121,11 @@ const BrandProducts = () => {
         alert(res.data.message);
       });
   }
-
+  if (error) {
+    return (
+      console.log(error)
+    )
+  }
 
   return (
     <>
@@ -167,18 +187,18 @@ const BrandProducts = () => {
                       </div>
                       <div className="card-btn-sec ">
                         <div className="btn_atc">
-                        <Link >
-                          <li
-                            className="bi bi-cart"
-                            onClick={() => {
-                              addToSingleCart(e);
-                            }}
-                            id={e.id}
-                            style={{ cursor: "pointer" }}
-                          >
-                            Add to Cart
-                          </li>
-                        </Link>
+                          <Link>
+                            <li
+                              className="bi bi-cart"
+                              onClick={() => {
+                                addToSingleCart(e);
+                              }}
+                              id={e.id}
+                              style={{ cursor: "pointer" }}
+                            >
+                              Add to Cart
+                            </li>
+                          </Link>
                         </div>
                       </div>
                     </div>

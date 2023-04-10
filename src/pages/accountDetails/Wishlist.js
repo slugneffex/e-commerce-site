@@ -16,21 +16,39 @@ const Wishlist = () => {
   const token = localStorage.getItem("token");
 
   const [wishlist, setWishlist] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/get-wishlists`, options);
-      setWishlist(response.data.wishlists);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/get-wishlists`,
+          options
+        );
+        setWishlist(response.data.wishlists);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [token]);
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <>
@@ -51,10 +69,7 @@ const Wishlist = () => {
                 <div class="row" id="card-secction">
                   {wishlist.map((e) => (
                     <div class="col-4" key={e.id}>
-                      <div
-                        class="card"
-                        
-                      >
+                      <div class="card">
                         {e.product?.thumbnail_img?.original_url ? (
                           <img
                             src={e.product?.thumbnail_img?.original_url}

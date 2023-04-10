@@ -11,13 +11,15 @@ const Categories = () => {
       setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/settings`, options);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/settings`,
+          options
+        );
         setMyoc(response.data);
       } catch (error) {
         if (error.response && error.response.status === 429) {
@@ -34,7 +36,7 @@ const Categories = () => {
   }, []);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    console.log(error)
   }
 
   return (

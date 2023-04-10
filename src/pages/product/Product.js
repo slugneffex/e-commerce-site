@@ -21,18 +21,33 @@ const Product = () => {
   const { id } = useParams();
   const [combos, setCombos] = useState([]);
   const [comboproduct, setComboproduct] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combo/${id}`, options);
-      setCombos(response.data.combo);
-      setComboproduct(response.data.combo.gallery);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/combo/${id}`,
+          options
+        );
+        setCombos(response.data.combo);
+        setComboproduct(response.data.combo.gallery);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [id]);
@@ -65,8 +80,9 @@ const Product = () => {
     dispatch(getTotalDiscount());
   };
 
-  // const desc_product = document.getElementById("product_desc");
-  // desc_product.innerHTML = combos.desc;
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <div className="product_div">
@@ -188,7 +204,6 @@ const Product = () => {
                     </div> */}
 
                 <div className="addCart" id={combos.id}>
-
                   <Link
                     to=""
                     onClick={() => {
@@ -206,7 +221,10 @@ const Product = () => {
                 </div>
 
                 <div className="wishlist-sec">
-                  <i className="bi bi-heart" style={{ marginRight: ".5rem" }}></i>
+                  <i
+                    className="bi bi-heart"
+                    style={{ marginRight: ".5rem" }}
+                  ></i>
                   <Link to="#" className="wishlist">
                     Add To Wishlist
                   </Link>
@@ -299,9 +317,7 @@ const Product = () => {
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li>
                   </ul>
-                  <div>
-                    {/* <p id="product_desc">{desc_product}</p> */}
-                  </div>
+                  <div>{/* <p id="product_desc">{desc_product}</p> */}</div>
                 </div>
                 <div
                   className="tab-pane fade"

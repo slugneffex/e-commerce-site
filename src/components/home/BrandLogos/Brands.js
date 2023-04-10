@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import axiosRetry from "axios-retry";
-import "./Brand.css"
-import {Link} from "react-router-dom"
+import "./Brand.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -27,60 +26,77 @@ const responsive = {
 
 const Brands = () => {
   const [brand, setBrand] = useState([]);
-  axiosRetry(axios, { retries: 3 });
-
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization": `CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs`,
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brands`, options);
-      setBrand(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/brands`,
+          options
+        );
+        setBrand(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
+  if (error) {
+    console.log(error)
+  }
 
   const fliterData = brand.filter((brand) => {
-      return (brand.focused === "on")
-  })
+    return brand.focused === "on";
+  });
 
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 style={{ marginTop: "67px", marginBottom: "47px"}}>Build Your Combo From Top Brands</h3>
+        <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
+          Build Your Combo From Top Brands
+        </h3>
         <div className="container py-12">
-          
-          <Carousel responsive={responsive} className="py-14"
-          swipeable={false}
-          autoPlay
-          arrows={false}
-          centerMode
-          infinite
+          <Carousel
+            responsive={responsive}
+            className="py-14"
+            swipeable={false}
+            autoPlay
+            arrows={false}
+            centerMode
+            infinite
           >
-          
             {Array.isArray(fliterData) &&
               fliterData.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
                     <Link to={`/brand/${e.id}`}>
-                    <img
-                      src={e.image?.original_url}
-                      width="80%"
-                      alt={e.name}
-                    ></img>
+                      <img
+                        src={e.image?.original_url}
+                        width="80%"
+                        alt={e.name}
+                      ></img>
                     </Link>
                   </div>
                 </div>
               ))}
-              
           </Carousel>
-          
         </div>
       </div>
     </>

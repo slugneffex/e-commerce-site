@@ -7,28 +7,44 @@ import Carousel from "react-multi-carousel";
 
 const Categories = () => {
   const [category, setCategory] = useState([]);
-  const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/categories`,
-        options
-      );
-      setCategory(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/categories`,
+          options
+        );
+        setCategory(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
-    setLoading(true);
+   
     fetchData();
   }, []);
+
+  if (error) {
+    console.log(error)
+  }
 
   const responsive = {
     superLargeDesktop: {
@@ -83,7 +99,10 @@ const Categories = () => {
           >
             {category.map((e) => (
               <div className="my-auto">
-                <Link to={`${process.env.REACT_APP_BASE_URL}/category/${e.id}`} key={e.id}>
+                <Link
+                  to={`/category/${e.id}`}
+                  key={e.id}
+                >
                   {e.name}
                 </Link>
               </div>

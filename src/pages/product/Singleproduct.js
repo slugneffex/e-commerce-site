@@ -11,26 +11,45 @@ const Singleproduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [productimg, setProductimg] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/product/${id}`, options);
-      setProduct(response.data.products);
-      setProductimg(response.data.products.photos);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/product/${id}`,
+          options
+        );
+        setProduct(response.data.products);
+        setProductimg(response.data.products.photos);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [id]);
 
+  if (error) {
+    console.log(error);
+  }
+
   return (
     <div>
       <HomeLayout>
-        <div className="container" >
+        <div className="container">
           <div className="row mt-5">
             <div className="col-md-6">
               <div className="product-car">
@@ -157,7 +176,11 @@ const Singleproduct = () => {
               </div>
 
               <div class="coupon-sec text-center mb-3">
-                <img src="../assets/img/usps.svg" alt="img-fluid" class="img-fluid" />
+                <img
+                  src="../assets/img/usps.svg"
+                  alt="img-fluid"
+                  class="img-fluid"
+                />
               </div>
               {/* <div className="coupon-sec text-center">
                 <div className="coupon-card">
@@ -189,10 +212,18 @@ const Singleproduct = () => {
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
-                <img src="../assets/img/slabs-freebies.png" alt="img-fluid" class="img-fluid" />
+                <img
+                  src="../assets/img/slabs-freebies.png"
+                  alt="img-fluid"
+                  class="img-fluid"
+                />
               </div>
               <div class="col-md-6">
-                <img src="../assets/img/slabs-tnc.png" alt="img-fluid" class="img-fluid" />
+                <img
+                  src="../assets/img/slabs-tnc.png"
+                  alt="img-fluid"
+                  class="img-fluid"
+                />
               </div>
             </div>
           </div>
