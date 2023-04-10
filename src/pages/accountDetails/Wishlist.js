@@ -26,7 +26,7 @@ const Wishlist = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get("/get-wishlists", options);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/get-wishlists`, options);
       setWishlist(response.data.wishlists);
     }
     fetchData();
