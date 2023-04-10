@@ -39,11 +39,13 @@ const YouMayLike = () => {
 
   // Featured combos
   const [feature, setFeature] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
       async function fetchData() {
+        setError(null);
         const options = {
           headers: {
             "X-Authorization":
@@ -53,16 +55,33 @@ const YouMayLike = () => {
             credentials: "include",
           },
         };
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/combos`,
-          options
-        );
-        setFeature(response.data.data);
-        setLoading(false);
+
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/combos`,
+            options
+          );
+          setFeature(response.data.data);
+        } catch (error) {
+          if (error.response && error.response.status === 429) {
+            const retryAfter = parseInt(error.response.headers["retry-after"]);
+            setTimeout(() => {
+              fetchData();
+            }, retryAfter * 1000);
+          } else {
+            setError(error.message);
+          }
+        }
+
+       
+
       }
       fetchData();
     }, 4000);
   }, []);
+  if (error) {
+    console.log(error);
+  }
 
   // add to cart
 
@@ -106,8 +125,7 @@ const YouMayLike = () => {
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/addWishlist`, data, {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       })
@@ -120,6 +138,7 @@ const YouMayLike = () => {
         }
       });
   }
+
 
   return (
     <div>

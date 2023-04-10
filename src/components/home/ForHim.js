@@ -25,33 +25,56 @@ const responsive = {
 
 const ForHim = () => {
   const [forhim, setForhim] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization": 'CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs',
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/for-him`, options);
-      setForhim(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/for-him`,
+          options
+        );
+        setForhim(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
 
+  if (error) {
+    console.log(error);
+  }
+
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 style={{ marginTop: "67px", marginBottom: "47px"}}>Top Picks For Him</h3>
+        <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
+          Top Picks For Him
+        </h3>
         <div className="container">
-          <Carousel responsive={responsive}
-          arrows={false}
-          infinite
-          centerMode
-          dotListClass="custom-dot-list-style"
+          <Carousel
+            responsive={responsive}
+            arrows={false}
+            infinite
+            centerMode
+            dotListClass="custom-dot-list-style"
           >
             {Array.isArray(forhim) &&
               forhim.map((e) => (

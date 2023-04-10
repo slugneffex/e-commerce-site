@@ -7,132 +7,131 @@ import { useSelector } from "react-redux";
 
 const Loginadress = () => {
   // Card Pricing details
- // Single Product Cart
+  // Single Product Cart
 
- const { singletotalCount } = useSelector((statee) => statee.SingleCart);
+  const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
- const { singlesubAmount, singletotalAmount, singletotalDiscount } =
-   useSelector((statee) => statee.SingleCart);
+  const { singlesubAmount, singletotalAmount, singletotalDiscount } =
+    useSelector((statee) => statee.SingleCart);
 
- // Combo Product Cart
+  // Combo Product Cart
 
- const { totalCount } = useSelector((state) => state.cart);
- const { subAmount, totalAmount, totalDiscount,cartItems } = useSelector(
-   (state) => state.cart
- );
+  const { totalCount } = useSelector((state) => state.cart);
+  const { subAmount, totalAmount, totalDiscount, cartItems } = useSelector(
+    (state) => state.cart
+  );
 
- // Freebies cart section
- const { freebiesCount } = useSelector((state) => state.freebies);
- const { freebiestotalAmount } = useSelector((state) => state.freebies);
+  // Freebies cart section
+  const { freebiesCount } = useSelector((state) => state.freebies);
+  const { freebiestotalAmount } = useSelector((state) => state.freebies);
 
- const totalCartCount = totalCount + singletotalCount;
+  const totalCartCount = totalCount + singletotalCount;
 
- let discount = 0;
- switch (true) {
-   case singlesubAmount >= 1000 && singlesubAmount < 3000:
-     discount = (singlesubAmount * 20) / 100;
-     break;
-   case singlesubAmount >= 3000 && singlesubAmount < 5000:
-     discount = (singlesubAmount * 30) / 100;
-     break;
-   case singlesubAmount >= 5000 && singlesubAmount <= 10000:
-     discount = (singlesubAmount * 40) / 100;
-     break;
-   case singlesubAmount >= 10000 && singlesubAmount <= 15000:
-     discount = (singlesubAmount * 50) / 100;
-     break;
-   case singlesubAmount >= 15000 && singlesubAmount <= 20000:
-     discount = (singlesubAmount * 60) / 100;
-     break;
-   case singlesubAmount >= 20000 && singlesubAmount <= 100000:
-     discount = (singlesubAmount * 100) / 100;
-     break;
-   default:
-     discount = 0;
-     break;
- }
+  let discount = 0;
+  switch (true) {
+    case singlesubAmount >= 1000 && singlesubAmount < 3000:
+      discount = (singlesubAmount * 20) / 100;
+      break;
+    case singlesubAmount >= 3000 && singlesubAmount < 5000:
+      discount = (singlesubAmount * 30) / 100;
+      break;
+    case singlesubAmount >= 5000 && singlesubAmount <= 10000:
+      discount = (singlesubAmount * 40) / 100;
+      break;
+    case singlesubAmount >= 10000 && singlesubAmount <= 15000:
+      discount = (singlesubAmount * 50) / 100;
+      break;
+    case singlesubAmount >= 15000 && singlesubAmount <= 20000:
+      discount = (singlesubAmount * 60) / 100;
+      break;
+    case singlesubAmount >= 20000 && singlesubAmount <= 100000:
+      discount = (singlesubAmount * 100) / 100;
+      break;
+    default:
+      discount = 0;
+      break;
+  }
 
- // Total Pricing of products
- const ExtraFreebiesAmount = freebiestotalAmount - discount;
- let ExtraFreebiesAmountt = 0;
- if (ExtraFreebiesAmount > 0) {
-   ExtraFreebiesAmountt = ExtraFreebiesAmount;
- } else if (ExtraFreebiesAmount < 0) {
-   ExtraFreebiesAmountt = 0;
- }
+  // Total Pricing of products
+  const ExtraFreebiesAmount = freebiestotalAmount - discount;
+  let ExtraFreebiesAmountt = 0;
+  if (ExtraFreebiesAmount > 0) {
+    ExtraFreebiesAmountt = ExtraFreebiesAmount;
+  } else if (ExtraFreebiesAmount < 0) {
+    ExtraFreebiesAmountt = 0;
+  }
 
- let shippingAmount = 50;
+  let shippingAmount = 50;
 
- const totalCartAmount = totalAmount + singletotalAmount;
- const totalCartDiscount = totalDiscount + singletotalDiscount;
- let totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmountt;
- // Extra freebies amount
+  const totalCartAmount = totalAmount + singletotalAmount;
+  const totalCartDiscount = totalDiscount + singletotalDiscount;
+  let totalCartSubAmount = subAmount + singlesubAmount + ExtraFreebiesAmountt;
+  // Extra freebies amount
 
- let ExtraFreebiesAmountSection = null;
- if (freebiestotalAmount > discount) {
-   ExtraFreebiesAmountSection = (
-     <li className="price-type">
-       <p>Extra Freebie Amount</p>
-       <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
-     </li>
-   );
- }
+  let ExtraFreebiesAmountSection = null;
+  if (freebiestotalAmount > discount) {
+    ExtraFreebiesAmountSection = (
+      <li className="price-type">
+        <p>Extra Freebie Amount</p>
+        <span>₹{parseFloat(ExtraFreebiesAmount).toFixed(0)}</span>
+      </li>
+    );
+  }
 
- // if discount is 0 then hide the section
+  // if discount is 0 then hide the section
 
- let discountSection = null;
- if (totalCartDiscount > 0) {
-   discountSection = (
-     <li className="price-type">
-       <p>Total Discount</p>
-       <span style={{ color: "#009444" }}>
-         - ₹{parseFloat(totalCartDiscount).toFixed(0)}
-       </span>
-     </li>
-   );
- }
+  let discountSection = null;
+  if (totalCartDiscount > 0) {
+    discountSection = (
+      <li className="price-type">
+        <p>Total Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(totalCartDiscount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
 
- // Hurry discount section
+  // Hurry discount section
 
- let hurrryDiscountSection = null;
- if (totalCartDiscount > 0) {
-   hurrryDiscountSection = (
-     <span>
-       Hurray! You Saved{" "}
-       <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
-       Order
-     </span>
-   );
- }
+  let hurrryDiscountSection = null;
+  if (totalCartDiscount > 0) {
+    hurrryDiscountSection = (
+      <span>
+        Hurray! You Saved{" "}
+        <strong>₹{parseFloat(totalCartDiscount).toFixed(0)}</strong> On This
+        Order
+      </span>
+    );
+  }
 
- // Shipping amount less than 499
+  // Shipping amount less than 499
 
- let shippingAmountSection = null;
+  let shippingAmountSection = null;
 
- if (totalCartSubAmount < 499) {
-   totalCartSubAmount += 50;
-   shippingAmountSection = (
-     <li className="price-type">
-       <p>Shipping</p>
-       <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
-     </li>
-   );
- } else {
-   shippingAmount = 0;
- }
+  if (totalCartSubAmount < 499) {
+    totalCartSubAmount += 50;
+    shippingAmountSection = (
+      <li className="price-type">
+        <p>Shipping</p>
+        <span style={{ color: "#009444" }}>₹ {shippingAmount}</span>
+      </li>
+    );
+  } else {
+    shippingAmount = 0;
+  }
 
- let FreebiesCartDiscountSection = null;
- if (discount > 0) {
-   FreebiesCartDiscountSection = (
-     <li className="price-type">
-       <p>Freebies Discount</p>
-       <span style={{ color: "#009444" }}>
-         - ₹{parseFloat(discount).toFixed(0)}
-       </span>
-     </li>
-   );
- }
-
+  let FreebiesCartDiscountSection = null;
+  if (discount > 0) {
+    FreebiesCartDiscountSection = (
+      <li className="price-type">
+        <p>Freebies Discount</p>
+        <span style={{ color: "#009444" }}>
+          - ₹{parseFloat(discount).toFixed(0)}
+        </span>
+      </li>
+    );
+  }
 
   const navigate = useNavigate();
 
@@ -144,20 +143,36 @@ const Loginadress = () => {
 
   const [state, setState] = useState([]);
   const [selectedState, setSelectedState] = useState("");
+  const [error, setError] = useState(null);
 
   const [cities, setCities] = useState([]);
 
   // get all state
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/getState`, options);
-      setState(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/getState`,
+          options
+        );
+        setState(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
@@ -180,8 +195,7 @@ const Loginadress = () => {
         },
         {
           headers: {
-            "X-Authorization":
-              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           },
         }
       )
@@ -209,7 +223,7 @@ const Loginadress = () => {
   const sendData = () => {
     axios
       .post(
-        "/save-address",
+        `${process.env.REACT_APP_BASE_URL}/save-address`,
         {
           city_id: formData.city_id,
           address: formData.address,
@@ -218,8 +232,7 @@ const Loginadress = () => {
         },
         {
           headers: {
-            "X-Authorization":
-              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
             Authorization: `Bearer ${token}`,
           },
         }
@@ -236,14 +249,29 @@ const Loginadress = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/getAddress`, options);
-      setAddress(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/getAddress`,
+          options
+        );
+        setAddress(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [token]);
@@ -254,8 +282,7 @@ const Loginadress = () => {
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/deleteAddress/${id}`, {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
         },
       })
@@ -269,7 +296,6 @@ const Loginadress = () => {
   const transaction_id = localStorage.getItem("transaction_id");
   const email = localStorage.getItem("email");
   const password = localStorage.getItem("password");
-  console.log(token)
 
   const sendOrder = () => {
     axios
@@ -290,13 +316,12 @@ const Loginadress = () => {
           subtotal: "1000",
           grand_total: `${totalCartSubAmount}`,
           tax: "600",
-          lname:"tiwari",
-          cartItems:cartItems
+          lname: "tiwari",
+          cartItems: cartItems,
         },
         {
           headers: {
-            "X-Authorization":
-              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
             Authorization: `Bearer ${token}`,
           },
         }
@@ -305,6 +330,10 @@ const Loginadress = () => {
         alert(res.data.message);
       });
   };
+
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <>

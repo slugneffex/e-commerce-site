@@ -17,21 +17,35 @@ import { useDispatch } from "react-redux";
 const BrandProduct = () => {
   // Brand products api
   const { brand_id } = useParams();
-
+  const [error, setError] = useState(null);
   const [brandProduct, setBrandProduct] = useState([]);
   const [brandName, setBrandName] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`, options);
-      setBrandProduct(response.data.products.data);
-      setBrandName(response.data.brand);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`,
+          options
+        );
+        setBrandProduct(response.data.products.data);
+        setBrandName(response.data.brand);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, [brand_id]);
@@ -41,17 +55,31 @@ const BrandProduct = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brands`, options);
-      setBrand(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/brands`,
+          options
+        );
+        setBrand(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
@@ -87,6 +115,10 @@ const BrandProduct = () => {
     dispatch(getsingleTotalAmount());
     dispatch(getsingleTotalDiscount());
   };
+
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <div>

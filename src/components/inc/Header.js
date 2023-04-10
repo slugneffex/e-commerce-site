@@ -26,14 +26,13 @@ const Header = () => {
         },
         {
           headers: {
-            "X-Authorization":
-              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           },
         }
       )
       .then((res) => {
         setSearchResult(res.data);
-        navigate('/search', { state: res.data });
+        navigate("/search", { state: res.data });
         console.log(searchResult);
       });
   }
@@ -47,25 +46,37 @@ const Header = () => {
   //for categories
 
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
         },
       };
-
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/categories`, options);
-      setCategories(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/categories`,
+          options
+        );
+        setCategories(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
 
     fetchData();
   }, []);
-
- 
 
   // For logo
 
@@ -73,17 +84,31 @@ const Header = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/settings`, options);
-      setLogo(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/settings`,
+          options
+        );
+        setLogo(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
@@ -99,14 +124,28 @@ const Header = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/stores`, options);
-      setStore(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/stores`,
+          options
+        );
+        setStore(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
@@ -117,20 +156,38 @@ const Header = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/brands`, options);
-      setBrand(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/brands`,
+          options
+        );
+        setBrand(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
+
+  if (error) {
+    console.log(error)
+  }
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
@@ -184,7 +241,7 @@ const Header = () => {
                   </g>
                 </svg>
 
-                <Link className="text-white text-align: left; getApp" to='/'>
+                <Link className="text-white text-align: left; getApp" to="/">
                   Get App
                 </Link>
               </div>
@@ -435,7 +492,7 @@ const Header = () => {
                     <span>Wishlist</span>
                   </Link>
                 </li>
-                
+
                 <li className="nav-item">
                   <Link
                     to="/Cart"
@@ -464,18 +521,38 @@ const Header = () => {
                   </Link>
                 </li>
                 <div className="mobile">
-                <li className="nav-item"><Link to="/Acccount" className="nav-link">My Profile</Link></li>
-                <li className="nav-item"> <Link to="/Place" className="nav-link">My Address</Link></li>
-                <li className="nav-item"><Link to="/Wishlist"className="nav-link">My whishlist</Link></li>
-                <li className="nav-item"><Link to="/Orders" className="nav-link">My Orders</Link></li>
-                <li className="nav-item"><Link to="/Wallet" className="nav-link">My Wallet</Link></li>
-                <li className="nav-item"><Link to="" className="nav-link">Logout</Link></li>
+                  <li className="nav-item">
+                    <Link to="/Acccount" className="nav-link">
+                      My Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    {" "}
+                    <Link to="/Place" className="nav-link">
+                      My Address
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/Wishlist" className="nav-link">
+                      My whishlist
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/Orders" className="nav-link">
+                      My Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/Wallet" className="nav-link">
+                      My Wallet
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="" className="nav-link">
+                      Logout
+                    </Link>
+                  </li>
                 </div>
-             
-              
-              
-              
-              
               </ul>
             </div>
           </div>

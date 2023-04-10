@@ -16,7 +16,10 @@ const Address = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.get("/getAddress", options);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/getAddress`,
+        options
+      );
       setAddress(response.data);
     }
     fetchData();
@@ -31,55 +34,53 @@ const Address = () => {
                 <Sidebar />
               </div>
               <div className="col-md-9 ">
-                <div className="row d-flex" >
+                <div className="row d-flex">
                   <div className="col-md-9" id="address-bar">
                     <h4>MY ADDRESSES</h4>
                   </div>
                   <div className="col-md-3" id="add-address">
-                    <a href="#/"  >
+                    <a href="#/">
                       <h6>+ ADD A NEW ADDRESS</h6>
                     </a>
                   </div>
                 </div>
                 <div class="row">
-                  
-                    <div class="col-md-6">
-                    <div class="card" id="addresscard">
-                      <div class="row">
-                        <div class="col-md-10">
-                          <h6>Reema Gahtori</h6>
-                          <p>ABC Apartment, 1007,
-                            Flat No-5,<br /> Sector-21A
-                            Faridabad, Haryana, 212001 India
-                          </p>
-                          <p>Phone Number:000000000</p>
-                        </div>
-                        <div class="col-md-2 d-flex">
-                          <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                    <div class="col-md-6">
-                    <div class="card" id="addresscard">
-                      <div class="row">
-                        <div class="col-md-10">
-                          <h6>Reema Gahtori</h6>
-                          <p>ABC Apartment, 1007,
-                            Flat No-5,<br /> Sector-21A
-                            Faridabad, Haryana, 212001 India
-                          </p>
-                          <p>Phone Number:000000000</p>
-                        </div>
-                        <div class="col-md-2 d-flex">
-                          <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
+                  {address.map((e) => (
+                    <div class="col-md-6" key={e.id}>
+                      <div class="card" id="addresscard">
+                        <div class="row">
+                          <div class="col-md-10">
+                            <h6>{e.user?.name}</h6>
+                            <p>{e.address}</p>
+                            <p>Phone Number:000000000</p>
+                          </div>
+                          <div class="col-md-2 d-flex">
+                            <i class="bi bi-pencil-square pencils"></i>
+                            <i class="bi bi-trash3-fill"></i>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  ))}
 
+                  {/* <div class="col-md-6">
+                    <div class="card" id="addresscard">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <h6>Reema Gahtori</h6>
+                          <p>ABC Apartment, 1007,
+                            Flat No-5,<br /> Sector-21A
+                            Faridabad, Haryana, 212001 India
+                          </p>
+                          <p>Phone Number:000000000</p>
+                        </div>
+                        <div class="col-md-2 d-flex">
+                          <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
+                </div>
               </div>
             </div>
           </div>

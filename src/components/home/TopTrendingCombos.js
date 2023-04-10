@@ -6,24 +6,41 @@ import "react-multi-carousel/lib/styles.css";
 
 const TopTrendingCombos = () => {
   const [picks, setPicks] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/topPicks`, options);
-      setPicks(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/topPicks`,
+          options
+        );
+        setPicks(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
-
+  if (error) {
+    console.log(error);
+  }
 
   // Carousel Responsive
 
@@ -39,7 +56,7 @@ const TopTrendingCombos = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-    }
+    },
   };
 
   return (
@@ -73,7 +90,10 @@ const TopTrendingCombos = () => {
       {/* mobile */}
       <div className="mobile" style={{ maxWidth: "100vw" }}>
         <div className="top-trending container">
-          <div className="top-trending-head" style={{ marginTop: "2rem", marginBottom: "2rem" }}>
+          <div
+            className="top-trending-head"
+            style={{ marginTop: "2rem", marginBottom: "2rem" }}
+          >
             <h3>Top Picks For You...</h3>
           </div>
         </div>
@@ -85,12 +105,10 @@ const TopTrendingCombos = () => {
           arrows={false}
           centerMode
         >
-
-
           {Array.isArray(picks) &&
             picks.map((e) => (
-              <div key={e.id} style={{ width: "100%", }}>
-                <div >
+              <div key={e.id} style={{ width: "100%" }}>
+                <div>
                   <Link to={`/brand/${e.id}`}>
                     <img
                       src={e.thumbnail?.original_url}
@@ -101,7 +119,6 @@ const TopTrendingCombos = () => {
                 </div>
               </div>
             ))}
-
         </Carousel>
       </div>
     </>

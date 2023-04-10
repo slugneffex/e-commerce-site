@@ -14,20 +14,32 @@ import FreebiesCart from "./FreebiesCart";
 const Freebies = () => {
   // freebies product Api
   const [freebies, setFreebies] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
+      setError(null);
       const options = {
         headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get("/freebies", options);
-      setFreebies(response.data.products);
+      try {
+        const response = await axios.get("/freebies", options);
+        setFreebies(response.data.products);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
     }
     fetchData();
   }, []);
@@ -101,7 +113,11 @@ const Freebies = () => {
   }
 
   const sendData = () => {
-    alert("Your Freebies Amount Limit Exceeded")
+    alert("Your Freebies Amount Limit Exceeded");
+  };
+
+  if (error) {
+    console.log(error)
   }
 
   return (
@@ -143,10 +159,7 @@ const Freebies = () => {
                   <i className="bi bi-arrow-left" />
                   Back To Cart
                 </Link>
-                <Link
-                  to='/payment'
-                  className="btn_1"
-                >
+                <Link to="/payment" className="btn_1">
                   Proceed To Checkout <i className="bi bi-arrow-right" />
                 </Link>
               </div>
@@ -207,7 +220,10 @@ const Freebies = () => {
                               </span>
                               {freebiestotalAmount > discount ? (
                                 <div className="btn-sec">
-                                  <div className="freebie_btn" onClick={sendData}>
+                                  <div
+                                    className="freebie_btn"
+                                    onClick={sendData}
+                                  >
                                     <i className="bi bi-gift-fill" /> Limit
                                     Exceeded
                                   </div>
