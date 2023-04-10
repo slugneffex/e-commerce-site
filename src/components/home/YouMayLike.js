@@ -38,22 +38,29 @@ const YouMayLike = () => {
 
   // Featured combos
   const [feature, setFeature] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
-      const options = {
-        headers: {
-          "X-Authorization":
-            "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combos`, options);
-      setFeature(response.data.data);
-    }
-    fetchData();
+    setTimeout(() => {
+      async function fetchData() {
+        const options = {
+          headers: {
+            "X-Authorization":
+              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            mode: "cors",
+            credentials: "include",
+          },
+        };
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/combos`,
+          options
+        );
+        setFeature(response.data.data);
+        setIsLoading(false);
+      }
+      fetchData();
+    }, 2000);
   }, []);
 
   // add to cart
@@ -110,6 +117,21 @@ const YouMayLike = () => {
           alert(res.data.message);
         }
       });
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <Carousel
+          responsive={responsive}
+          showDots={false}
+          infinite={true}
+          arrows={false}
+        >
+       
+        </Carousel>
+      </>
+    );
   }
 
   return (
