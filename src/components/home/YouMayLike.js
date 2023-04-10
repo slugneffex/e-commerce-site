@@ -122,14 +122,7 @@ const YouMayLike = () => {
   if (isLoading) {
     return (
       <>
-        <Carousel
-          responsive={responsive}
-          showDots={false}
-          infinite={true}
-          arrows={false}
-        >
-       
-        </Carousel>
+        <h1>Loading...</h1>
       </>
     );
   }
