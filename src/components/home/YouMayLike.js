@@ -12,6 +12,7 @@ import {
   getTotalDiscount,
 } from "../features/useCartSlice";
 import { useDispatch } from "react-redux";
+import { Skeleton } from "@mui/material";
 
 const responsive = {
   superLargeDesktop: {
@@ -54,6 +55,7 @@ const YouMayLike = () => {
             credentials: "include",
           },
         };
+
         try {
           const response = await axios.get(
             `${process.env.REACT_APP_BASE_URL}/combos`,
@@ -70,9 +72,12 @@ const YouMayLike = () => {
             setError(error.message);
           }
         }
+
+       
+
       }
       fetchData();
-    }, 2000);
+    }, 4000);
   }, []);
   if (error) {
     console.log(error);
@@ -110,6 +115,7 @@ const YouMayLike = () => {
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
   const [heartFilled, setHeartFilled] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   function wishlistData(id) {
     const data = {
@@ -133,7 +139,6 @@ const YouMayLike = () => {
       });
   }
 
- 
 
   return (
     <div>
@@ -152,7 +157,20 @@ const YouMayLike = () => {
               infinite={true}
               arrows={false}
             >
-              {Array.isArray(feature) &&
+              
+              {loading ? (
+                <div
+                  className="item carouselItemCard"
+                  style={{ marginRight: ".8rem" }}
+                >
+                  <Skeleton
+                    variant="rect"
+                    width={250}
+                    height={300}
+                    animation="wave"
+                  />
+                </div>
+              ) : ( Array.isArray(feature) &&
                 feature.map((e) => (
                   <div
                     className="item carouselItemCard"
@@ -189,6 +207,7 @@ const YouMayLike = () => {
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
                         <div className="price-sec">
+                        
                           <div className="col-4" style={{ textAlign: "end" }}>
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
@@ -215,7 +234,8 @@ const YouMayLike = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              )}
             </Carousel>
           </div>
         </div>
