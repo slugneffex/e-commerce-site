@@ -79,10 +79,10 @@ const SimilarProduct = (props) => {
                 <div className="newComboCart">
                   <div className="cart-img-sec mr-3" style={{ position: "relative" }}>
                     <Link className="addtofav">
-                      <li className="bi bi-heart" style={{ position: "absolute", top: ".3rem", right: ".8rem" }}></li>
+                      <i className="bi bi-heart" style={{ position: "absolute", top: ".3rem", right: ".8rem" }}></i>
                     </Link>
                     <Link to={`/combo/${e.id}`}>
-                      <img src={e.meta_img?.url} alt="img"></img>
+                      <img src={e.meta_img?.url} alt="img" width='100%'></img>
                     </Link>
                   </div>
 
@@ -107,13 +107,13 @@ const SimilarProduct = (props) => {
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
                         <Link className="btnC">
-                          <li
+                          <i
                             className="bi bi-cart"
                             id={e.id}
                             style={{ cursor: "pointer" }}
                           >
                             Add to Cart
-                          </li>
+                          </i>
                         </Link>
                       </div>
                     </div>

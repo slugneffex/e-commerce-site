@@ -117,7 +117,7 @@ const BrandProduct = () => {
   };
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
 
   return (
@@ -244,19 +244,20 @@ const BrandProduct = () => {
                         style={{ position: "relative" }}
                       >
                         <Link className="addtofavCategory">
-                          <li
+                          <i
                             className="bi bi-heart"
                             style={{
                               position: "absolute",
                               right: "0.8rem",
                               top: "0.5rem",
                             }}
-                          ></li>
+                          ></i>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img
                             src={p.thumbnail_img?.original_url}
                             alt="img"
+                            width="100%"
                           ></img>
                         </Link>
                       </div>
@@ -285,11 +286,17 @@ const BrandProduct = () => {
                             onClick={() => {
                               addToSingleCart(p);
                             }}
-                            style={{ cursor: "pointer" }}
+                            style={{
+                              cursor: "pointer",
+                            }}
                           >
-                            <li className="bi bi-cart" id={p.id}>
+                            <i
+                              className="bi bi-cart"
+                              id={p.id}
+                              style={{ color: "#fe9e2d" }}
+                            >
                               Add to Cart
-                            </li>
+                            </i>
                           </div>
                         </div>
                       </div>

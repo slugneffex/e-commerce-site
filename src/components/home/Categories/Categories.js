@@ -38,12 +38,12 @@ const Categories = () => {
         }
       }
     }
-   
+
     fetchData();
   }, []);
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
 
   const responsive = {
@@ -79,9 +79,9 @@ const Categories = () => {
           </div>
         </div>
       </div>
-      {/* <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+      {/* <div className="d-flex justify-content-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div> */}
 
@@ -98,13 +98,8 @@ const Categories = () => {
             className="carouselResponsive"
           >
             {category.map((e) => (
-              <div className="my-auto">
-                <Link
-                  to={`/category/${e.id}`}
-                  key={e.id}
-                >
-                  {e.name}
-                </Link>
+              <div className="my-auto" key={e.id}>
+                <Link to={`/category/${e.id}`}>{e.name}</Link>
               </div>
             ))}
           </Carousel>

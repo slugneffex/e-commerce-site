@@ -14,40 +14,40 @@ const Account = () => {
   return (
     <>
       <HomeLayout>
-        <section class="section pb-5 pt-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3 first">
+        <section className="section pb-5 pt-5">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-3 first">
                 <Sidebar />
               </div>
 
-              <div class="col-md-9">
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-3" id="edit-button">
+              <div className="col-md-9">
+                <div className="card">
+                  <div className="row">
+                    <div className="col-md-3" id="edit-button">
                       <img
                         src="./assets/img/accountImg/Group_2388.png"
                         style={{ width: "200px", height: "200px" }}
                         alt='imgg'
                       />
                     </div>
-                    <div class="col-md-6 second">
-                      <h5 class="changePassword">{name}</h5>
+                    <div className="col-md-6 second">
+                      <h5 className="changePassword">{name}</h5>
                       <p>Email: {email}</p>
                       <p>Phone: {phone}</p>
-                      <div class="changePassword" id="changePass">
+                      <div className="changePassword" id="changePass">
                         <i className="bi bi-lock-fill"></i>
                         <h6>Change Password</h6>
                       </div>
                     </div>
-                    <div class="col-md-3 ">
-                      <div class=" edits d-flex">
+                    <div className="col-md-3 ">
+                      <div className=" edits d-flex">
                         <h6>
-                          Edit <i class="bi bi-pen"></i>{" "}
+                          Edit <i className="bi bi-pen"></i>{" "}
                         </h6>
                       </div>
-                      <h6 class="edit d-flex">
-                        <span class="green">Verified</span>
+                      <h6 className="edit d-flex">
+                        <span className="green">Verified</span>
                         <img
                           src="./assets/img/verified.png"
                           width="25px"

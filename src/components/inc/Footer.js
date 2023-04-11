@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./incAll.css"
+import "./incAll.css";
 
 const Footer = () => {
   const [categories, setCategories] = useState([]);
@@ -10,14 +10,16 @@ const Footer = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization":
-          `${process.env.REACT_APP_HEADER}`,
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/categories`, options);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/categories`,
+        options
+      );
       setCategories(response.data);
     }
     fetchData();
@@ -25,7 +27,7 @@ const Footer = () => {
 
   return (
     <div>
-      <footer style={{ maxWidth: "100vw",overflowX: "hidden" }}>
+      <footer style={{ maxWidth: "100vw", overflowX: "hidden" }}>
         <div className="container">
           <div className="row" id="collapseFooter">
             <div className="col-lg-3 col-md-6">
@@ -51,17 +53,13 @@ const Footer = () => {
               <h3 data-target="#collapse_2">Categories</h3>
               <div className="collapse dont-collapse-sm links" id="collapse_2">
                 <ul>
-                  {Array.isArray(categories) &&
-                    categories.map((e) => (
-                      <li key={e.id}>
-                        <Link
-                          className="dropdown-item"
-                          to={`/category/${e.id}`}
-                        >
-                          {e.name}
-                        </Link>
-                      </li>
-                    ))}
+                  {categories.map((e) => (
+                    <li key={e.id}>
+                      <Link className="dropdown-item" to={`/category/${e.id}`}>
+                        {e.name}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -73,21 +71,27 @@ const Footer = () => {
               >
                 <ul>
                   <li className="row">
-                    <i className="bi bi-phone-fill" style={{marginTop: ".5rem"}}></i>
-                    <p>Mobile: 9910722205 <br></br>
+                    <i
+                      className="bi bi-phone-fill"
+                      style={{ marginTop: ".5rem" }}
+                    ></i>
+                    <p>
+                      Mobile: 9910722205 <br></br>
                       Whatsapp: 9910722205
                     </p>
                   </li>
                   <li>
-                    <i class="bi bi-envelope-fill"></i>
+                    <i className="bi bi-envelope-fill"></i>
                     <Link to="#0">customercare@combonation.in</Link>
                   </li>
                   <li>
-                    <i class="bi bi-geo-alt"></i>301-303, 3rd Floor,<br />
-                    Good Earth Business Bay,<br />
-                    Sector - 58,<br />
+                    <i className="bi bi-geo-alt"></i>301-303, 3rd Floor,
+                    <br />
+                    Good Earth Business Bay,
+                    <br />
+                    Sector - 58,
+                    <br />
                     Gurugram, Haryana - 122098 <br />
-
                   </li>
                 </ul>
               </div>
@@ -96,7 +100,7 @@ const Footer = () => {
               <h3 data-target="#collapse_4">Keep in touch</h3>
               <div className="collapse dont-collapse-sm" id="collapse_4">
                 <div id="newsletter">
-                  <form action="" method="POST">
+                  <form>
                     <div className="form-group">
                       <input
                         type="email"
@@ -158,9 +162,12 @@ const Footer = () => {
           </div>
         </div>
         <hr />
-        <section id="footer-secondary" >
-          <div className="container" >
-            <div className="row add_bottom_25 p-5" style={{ alignItems: "baseline", position: "relative" }}>
+        <section id="footer-secondary">
+          <div className="container">
+            <div
+              className="row add_bottom_25 p-5"
+              style={{ alignItems: "baseline", position: "relative" }}
+            >
               <div className="col-lg-6 col-md-12">
                 <h3>Working Hours:</h3>
                 <span>Mon-Fri: 10:00AM - 06:30PM | Sat-Sun Closed</span>
@@ -182,8 +189,8 @@ const Footer = () => {
                   </li>
                   <li>
                     <span>
-                      © 2020-22 Combonation.in. <br /> Powered By Born Unicorn Tech
-                      Prise Pvt. Ltd.
+                      © 2020-22 Combonation.in. <br /> Powered By Born Unicorn
+                      Tech Prise Pvt. Ltd.
                     </span>
                   </li>
                 </ul>
@@ -201,7 +208,15 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-6 desktop" style={{ width: "450px", position: "absolute", right: "2.2rem", bottom: "52px" }}>
+              <div
+                className="col-md-6 desktop"
+                style={{
+                  width: "450px",
+                  position: "absolute",
+                  right: "2.2rem",
+                  bottom: "52px",
+                }}
+              >
                 <div className="how-we-help">
                   <i className="bi bi-headset"></i>
                   <h2>How may we help you</h2>

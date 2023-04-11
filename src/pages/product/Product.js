@@ -104,12 +104,12 @@ const Product = () => {
                     key={combos.id}
                     style={{ border: "1px solid #464646" }}
                   >
-                    <img src={combos.meta_img?.url} alt={combos.name} />
+                    <img src={combos.meta_img?.url} alt={combos.name} width='100%' />
                   </div>
 
                   {comboproduct.map((e) => (
                     <div className="item big-img" data-hash="two" key={e.id}>
-                      <img src={e.original_url} alt="name" />
+                      <img src={e.original_url} alt="name"  width='100%'/>
                     </div>
                   ))}
                 </Carousel>
@@ -231,29 +231,32 @@ const Product = () => {
                 </div>
               </div>
 
-              <div class="coupon-sec text-center mb-3">
+              <div className="coupon-sec text-center mb-3">
                 <img
                   src="../assets/img/usps.svg"
                   alt="img-fluid"
-                  class="img-fluid"
+                  className="img-fluid"
+                  width='100%'
                 />
               </div>
             </div>
           </div>
 
-          <div class="row pb-3">
-            <div class="col-md-6">
+          <div className="row pb-3">
+            <div className="col-md-6">
               <img
                 src="../assets/img/slabs-freebies.png"
                 alt="img-fluid"
-                class="img-fluid"
+                className="img-fluid"
+                width='100%'
               />
             </div>
-            <div class="col-md-6">
+            <div className="col-md-6">
               <img
                 src="../assets/img/slabs-tnc.png"
                 alt="img-fluid"
-                class="img-fluid"
+                className="img-fluid"
+                width='100%'
               />
             </div>
           </div>
@@ -310,7 +313,7 @@ const Product = () => {
                   id="home-tab-pane"
                   role="tabpanel"
                   aria-labelledby="home-tab"
-                  tabindex="0"
+                  tabIndex="0"
                 >
                   <ul className="combo-product">
                     <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3g</li>
@@ -324,7 +327,7 @@ const Product = () => {
                   id="profile-tab-pane"
                   role="tabpanel"
                   aria-labelledby="profile-tab"
-                  tabindex="0"
+                  tabIndex="0"
                 >
                   <div className="row">
                     <div className="col-6">
@@ -389,14 +392,14 @@ const Product = () => {
                   id="contact-tab-pane"
                   role="tabpanel"
                   aria-labelledby="contact-tab"
-                  tabindex="0"
+                  tabIndex="0"
                 >
                   <h2>
                     Reviews <i className="bi bi-chevron-down"></i>
                   </h2>
                   <div className="review-card d-flex">
                     <div className="img-sec text-center d-grid">
-                      <img src="assets/img/product/small.png" alt="" />
+                      <img src="assets/img/product/small.png" alt=""width='100%' />
                       <span>Gwalesh Singh</span>
                     </div>
                     <div className="card-body text-left">
@@ -424,10 +427,10 @@ const Product = () => {
                         temporibus ducimus.
                       </p>
                       <div className="rev-img-sec">
-                        <img src="./assets/img/review-img.png" alt="" />
-                        <img src="./assets/img/review-img.png" alt="" />
-                        <img src="./assets/img/review-img.png" alt="" />
-                        <img src="./assets/img/review-img.png" alt="" />
+                        <img src="./assets/img/review-img.png" alt="" width='100%' />
+                        <img src="./assets/img/review-img.png" alt="" width='100%' />
+                        <img src="./assets/img/review-img.png" alt="" width='100%' />
+                        <img src="./assets/img/review-img.png" alt="" width='100%' />
                       </div>
                       <div className="likes my-3">
                         <i className="bi bi-hand-thumbs-up"></i> 5

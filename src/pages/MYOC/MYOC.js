@@ -70,7 +70,7 @@ const MYOC = () => {
                 <div className="newComboCart">
                   <div className="cart-img-sec">
                     <Link className="addtofavCategory">
-                      <li className="bi bi-heart"></li>
+                      <i className="bi bi-heart"></i>
                     </Link>
                     <Link to={`/product/${e.id}`}>
                       <img src={e.thumbnail_img?.original_url} alt="img"></img>
@@ -93,13 +93,13 @@ const MYOC = () => {
                     </div>
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
-                        <li
+                        <i
                           className="bi bi-cart"
                           id={e.id}
                           style={{ cursor: "pointer" }}
                         >
                           Add to Cart
-                        </li>
+                        </i>
                       </div>
                     </div>
                   </div>

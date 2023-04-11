@@ -44,29 +44,29 @@ const Address = () => {
                     </a>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   {address.map((e) => (
-                    <div class="col-md-6" key={e.id}>
-                      <div class="card" id="addresscard">
-                        <div class="row">
-                          <div class="col-md-10">
+                    <div className="col-md-6" key={e.id}>
+                      <div className="card" id="addresscard">
+                        <div className="row">
+                          <div className="col-md-10">
                             <h6>{e.user?.name}</h6>
                             <p>{e.address}</p>
                             <p>Phone Number:000000000</p>
                           </div>
-                          <div class="col-md-2 d-flex">
-                            <i class="bi bi-pencil-square pencils"></i>
-                            <i class="bi bi-trash3-fill"></i>
+                          <div className="col-md-2 d-flex">
+                            <i className="bi bi-pencil-square pencils"></i>
+                            <i className="bi bi-trash3-fill"></i>
                           </div>
                         </div>
                       </div>
                     </div>
                   ))}
 
-                  {/* <div class="col-md-6">
-                    <div class="card" id="addresscard">
-                      <div class="row">
-                        <div class="col-md-10">
+                  {/* <div className="col-md-6">
+                    <div className="card" id="addresscard">
+                      <div className="row">
+                        <div className="col-md-10">
                           <h6>Reema Gahtori</h6>
                           <p>ABC Apartment, 1007,
                             Flat No-5,<br /> Sector-21A
@@ -74,8 +74,8 @@ const Address = () => {
                           </p>
                           <p>Phone Number:000000000</p>
                         </div>
-                        <div class="col-md-2 d-flex">
-                          <i class="bi bi-pencil-square pencils"></i><i class="bi bi-trash3-fill"></i>
+                        <div className="col-md-2 d-flex">
+                          <i className="bi bi-pencil-square pencils"></i><i className="bi bi-trash3-fill"></i>
                         </div>
                       </div>
                     </div>

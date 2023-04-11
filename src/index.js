@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import store from "./app/Store";
 import App from "./App";
+import "./css/style.css"
 
 let persistor = persistStore(store);
 
