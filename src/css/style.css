@@ -1039,6 +1039,10 @@ ul.additional_links li:after {
     font-weight: bold;
   }
 
+  .btn-atc i {
+    color: #FE9E2D;
+  }
+
   .mobile {
     display: block;
   }

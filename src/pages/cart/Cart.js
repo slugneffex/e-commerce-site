@@ -707,7 +707,7 @@ const Cart = () => {
                       <img src={e.image} alt="freebiesImg" />
                     </Link>
                   </div>
-                  <div class="col-6">
+                  <div className="col-6">
                     <div className="det">
                       <Link to="/freebies">
                         <h6>{e.title.substring(0, 40)}...</h6>
@@ -715,16 +715,16 @@ const Cart = () => {
                       <br />
 
                       <div className="price-sec">
-                        <del class="sp">₹ {e.price}</del>
-                        <span class="sp">Free</span>
+                        <del className="sp">₹ {e.price}</del>
+                        <span className="sp">Free</span>
                       </div>
                     </div>
                   </div>
-                  <div class="col-3">
-                    <div class="actions">
-                      <div class="editFreebie">
+                  <div className="col-3">
+                    <div className="actions">
+                      <div className="editFreebie">
                         <Link to="/freebies">
-                          <i class="bi bi-pencil-square"></i>
+                          <i className="bi bi-pencil-square"></i>
                         </Link>
                       </div>
                     </div>

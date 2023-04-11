@@ -1,104 +1,147 @@
-import React from 'react'
-import HomeLayout from '../../layouts/HomeLayout';
-import './accountDetails.css';
-import Sidebar from "./Sidebar"
-
+import React from "react";
+import HomeLayout from "../../layouts/HomeLayout";
+import "./accountDetails.css";
+import Sidebar from "./Sidebar";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
-    return (
-        <>
-            <HomeLayout>
-                <section class="section pt-5 pb-5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 first">
-                                <Sidebar />
-                            </div>
+  return (
+    <>
+      <HomeLayout>
+        <section className="section pt-5 pb-5">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-3 first">
+                <Sidebar />
+              </div>
 
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>MY ORDERS</h4>
-                                    </div>
-                                </div>
+              <div className="col-md-9">
+                <div className="row">
+                  <div className="col-md-12">
+                    <h4>MY ORDERS</h4>
+                  </div>
+                </div>
 
-                                <div class="card " id='order-card'>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <img src='./assets/img/wishlist.png' class="order" width="100px" height="100px" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h6>ORDER NUMBER</h6>
-                                            <p>CN-112229518-5498583<br />
-                                                1 Item(s) Delivered</p>
-                                        </div>
-                                        <div class="col-md-4 order-button-div">
-                                            <a href="#" class=" btn-sm order-button" type="button"> Order Details<i
-                                                class="bi bi-chevron-compact-right "></i></a>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <p style={{ FontSize: "14px" }}>Saffron-Scrub <br />
-                                                Combo - QTY 1</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Package delivered On <br />
-                                                <span style={{ color: "green", FontSize: " small" }}>
-                                                    Sun, 3 Nov 2022</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a href="#" class="feedback"><span class="feedback">Share your experience <i
-                                                class="bi bi-arrow-right"></i></span></a>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="card " id="order-card">
-                                    <div class="row" id="order-body">
-                                        <div class="col-md-2">
-                                            <img src='./assets/img/wishlist.png' class="order" width="100px" height="100px" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h6>ORDER NUMBER</h6>
-                                            <p>CN-112229518-5498583<br />
-                                                1 Item(s) Delivered</p>
-                                        </div>
-                                        <div class="col-md-4 order-button-div">
-                                            <a href="#" class=" btn-sm order-button" type="button"> Order Details<i
-                                                class="bi bi-chevron-compact-right "></i></a>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" >
-                                        <div class="col-md-2">
-                                            <p style={{ FontSize: "14px" }}>Saffron-Scrub <br />
-                                                Combo - QTY 1</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Package delivered On <br />
-                                                <span style={{ color: "green", FontSize: " small" }}>
-                                                    Sun, 3 Nov 2022</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a href="#" class="feedback"><span class="feedback">Share your experience <i
-                                                class="bi bi-arrow-right"></i></span></a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                <div className="card " id="order-card">
+                  <div className="row">
+                    <div className="col-md-2">
+                      <img
+                        src="./assets/img/wishlist.png"
+                        className="order"
+                        width="100px"
+                        height="100px"
+                        alt="img"
+                      />
                     </div>
-                </section>
-            </HomeLayout>
-        </>
-    )
-}
+                    <div className="col-md-6">
+                      <h6>ORDER NUMBER</h6>
+                      <p>
+                        CN-112229518-5498583
+                        <br />1 Item(s) Delivered
+                      </p>
+                    </div>
+                    <div className="col-md-4 order-button-div">
+                      <Link
+                        to="/"
+                        className=" btn-sm order-button"
+                        type="button"
+                      >
+                        {" "}
+                        Order Details
+                        <i className="bi bi-chevron-compact-right "></i>
+                      </Link>
+                    </div>
+                  </div>
 
-export default Orders
+                  <div className="row">
+                    <div className="col-md-2">
+                      <p style={{ FontSize: "14px" }}>
+                        Saffron-Scrub <br />
+                        Combo - QTY 1
+                      </p>
+                    </div>
+                    <div className="col-md-6">
+                      <p>
+                        Package delivered On <br />
+                        <span style={{ color: "green", FontSize: " small" }}>
+                          Sun, 3 Nov 2022
+                        </span>
+                      </p>
+                    </div>
+                    <div className="col-md-4">
+                      <Link to="/" className="feedback">
+                        <span className="feedback">
+                          Share your experience{" "}
+                          <i className="bi bi-arrow-right"></i>
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="card " id="order-card">
+                  <div className="row" id="order-body">
+                    <div className="col-md-2">
+                      <img
+                        src="./assets/img/wishlist.png"
+                        className="order"
+                        width="100px"
+                        height="100px"
+                        alt="imgg"
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <h6>ORDER NUMBER</h6>
+                      <p>
+                        CN-112229518-5498583
+                        <br />1 Item(s) Delivered
+                      </p>
+                    </div>
+                    <div className="col-md-4 order-button-div">
+                      <Link
+                        to="/"
+                        className=" btn-sm order-button"
+                        type="button"
+                      >
+                        {" "}
+                        Order Details
+                        <i className="bi bi-chevron-compact-right "></i>
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-2">
+                      <p style={{ FontSize: "14px" }}>
+                        Saffron-Scrub <br />
+                        Combo - QTY 1
+                      </p>
+                    </div>
+                    <div className="col-md-6">
+                      <p>
+                        Package delivered On <br />
+                        <span style={{ color: "green", FontSize: " small" }}>
+                          Sun, 3 Nov 2022
+                        </span>
+                      </p>
+                    </div>
+                    <div className="col-md-4">
+                      <Link to="/" className="feedback">
+                        <span className="feedback">
+                          Share your experience{" "}
+                          <i className="bi bi-arrow-right"></i>
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </HomeLayout>
+    </>
+  );
+};
+
+export default Orders;

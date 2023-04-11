@@ -224,9 +224,9 @@ const Header = () => {
                       data-name="Path 1699"
                       d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z"
                       stroke="#fff"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                     />
                     <line
                       id="Line_116"
@@ -235,8 +235,8 @@ const Header = () => {
                       transform="translate(12.5 27)"
                       fill="none"
                       stroke="#fff"
-                      stroke-linecap="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeWidth="2"
                     />
                   </g>
                 </svg>
@@ -314,9 +314,9 @@ const Header = () => {
                         data-name="Path 1699"
                         d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z"
                         stroke="#fff"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                       />
                       <line
                         id="Line_116"
@@ -325,8 +325,8 @@ const Header = () => {
                         transform="translate(12.5 27)"
                         fill="none"
                         stroke="#fff"
-                        stroke-linecap="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeWidth="2"
                       />
                     </g>
                   </svg>
@@ -381,7 +381,7 @@ const Header = () => {
             {Array.isArray(logo) &&
               logo.map((e) => (
                 <Link className="navbar-brand" to="/" key={e.id}>
-                  <img src={e.logo?.original_url} alt="logo-combonation"></img>
+                  <img src={e.logo?.original_url} alt="logo-combonation" style={{width:"130px",height:"60px"}}></img>
                 </Link>
               ))}
             <button

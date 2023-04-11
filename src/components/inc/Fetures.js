@@ -30,7 +30,7 @@ const Fetures = () => {
             </div>
             <div className="col-md-3 col-sm-6" >
               <div className="feat-item">
-                <i class="bi bi-hand-thumbs-up"></i>
+                <i className="bi bi-hand-thumbs-up"></i>
                 <span>Assured Quality</span>
               </div>
             </div>
@@ -64,7 +64,7 @@ const Fetures = () => {
             </div>
             <div className="col" >
               <div className="feat-item">
-                <i class="bi bi-hand-thumbs-up"></i>
+                <i className="bi bi-hand-thumbs-up"></i>
                 <span>Assured Quality</span>
               </div>
             </div>

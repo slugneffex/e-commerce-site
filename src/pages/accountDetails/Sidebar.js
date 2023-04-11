@@ -11,47 +11,47 @@ const sidebar = () => {
 
   return (
     <>
-      <section class="section  ">
-        <div class="container">
-          <div class="row">
-            <div class=" first desktop">
-              <div class="card">
-                <div class="account d-flex">
+      <section className="section  ">
+        <div className="container">
+          <div className="row">
+            <div className=" first desktop">
+              <div className="card">
+                <div className="account d-flex">
                   <NavLink to="/Acccount" className={"user"}>
                     My Profile
                   </NavLink>
-                  <i class="bi bi-caret-right-fill bii"></i>
+                  <i className="bi bi-caret-right-fill bii"></i>
                 </div>
-                <hr class="hr" />
-                <div class="account d-flex">
+                <hr className="hr" />
+                <div className="account d-flex">
                   <NavLink to="/Place" className={"user"} type="button">
                     My Addresses
                   </NavLink>
-                  <i class="bi bi-caret-right-fill bii"></i>
+                  <i className="bi bi-caret-right-fill bii"></i>
                 </div>
-                <hr class="hr" />
-                <div class="account d-flex">
+                <hr className="hr" />
+                <div className="account d-flex">
                   <NavLink to="/Wishlist" className={"user"} type="button">
                     My Wishlist
                   </NavLink>
-                  <i class="bi bi-caret-right-fill bii"></i>
+                  <i className="bi bi-caret-right-fill bii"></i>
                 </div>
-                <hr class="hr" />
-                <div class="account d-flex">
+                <hr className="hr" />
+                <div className="account d-flex">
                   <NavLink to="/Orders" className={"user"} type="button">
                     My Orders
                   </NavLink>
-                  <i class="bi bi-caret-right-fill bii"></i>
+                  <i className="bi bi-caret-right-fill bii"></i>
                 </div>
-                <hr class="hr" />
-                <div class="account d-flex">
+                <hr className="hr" />
+                <div className="account d-flex">
                   <NavLink to="/Wallet" className={"user"} type="button">
                     Saved Cards/payments
                   </NavLink>
-                  <i class="bi bi-caret-right-fill bii"></i>
+                  <i className="bi bi-caret-right-fill bii"></i>
                 </div>
-                <hr class="hr" />
-                {/* <div class="account d-flex">
+                <hr className="hr" />
+                {/* <div className="account d-flex">
                   <button
                     to=" "
                     className={"user"}
@@ -68,17 +68,17 @@ const sidebar = () => {
                   >
                     Logout
                   </button>
-                  <i class="bi bi-caret-right-fill bii"></i>
+                  <i className="bi bi-caret-right-fill bii"></i>
                 </div> */}
               </div>
             </div>
           </div>
 
-          {/*<div class="mobile">
-            <div id="mySidenav" class="sidenav">
+          {/*<div className="mobile">
+            <div id="mySidenav" className="sidenav">
               <Link
                 to="javascript:void(0)"
-                class="closebtn"
+                className="closebtn"
                 onclick="closeNav()"
               >
                 &times;

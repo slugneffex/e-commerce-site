@@ -197,11 +197,9 @@ const Category = () => {
       });
   }
 
-
   if (error) {
-    console.log(error)
+    console.log(error);
   }
-
 
   // if there is no combo hide the section of combos
 
@@ -219,21 +217,21 @@ const Category = () => {
           <div className="col-md-4 " key={e.id}>
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
-                <Link
+                <div
                   onClick={() => wishlistData(e.id)}
                   className="addtofavCategory"
                 >
-                  <li
+                  <i
                     className="bi bi-heart"
                     style={{
                       position: "absolute",
                       right: "1rem",
                       top: ".8rem",
                     }}
-                  ></li>
-                </Link>
+                  ></i>
+                </div>
                 <Link to={`/combo/${e.id}`}>
-                  <img src={e.meta_img?.url} alt="img"></img>
+                  <img src={e.meta_img?.url} alt="img" width='100%'></img>
                 </Link>
               </div>
 
@@ -263,9 +261,9 @@ const Category = () => {
                     }}
                     style={{ cursor: "pointer" }}
                   >
-                    <li className="bi bi-cart" id={e.id}>
+                    <i className="bi bi-cart" id={e.id}>
                       Add to Cart
-                    </li>
+                    </i>
                   </div>
                 </div>
               </div>
@@ -309,7 +307,7 @@ const Category = () => {
 
             <div className="col-md-9 mt-2">
               <div className="banner" key={banner.id}>
-                <img src={banner.banner?.url} width="100%" alt="" />
+                <img src={banner.banner?.url} width="100%" alt="baner" />
               </div>
 
               <div className="row">
@@ -386,21 +384,24 @@ const Category = () => {
                           onClick={() => wishlistProductData(p.id)}
                           className="addtofavCategory"
                         >
-                          <li className="youMayLikeHeart">
-                            {heartFilled === p.id ? (
-                              <i
-                                style={{ color: "#fe9e2d" }}
-                                class="bi bi-heart-fill"
-                              ></i>
-                            ) : (
-                              <i className="bi bi-heart"></i>
-                            )}
-                          </li>
+                          <ul>
+                            <li className="youMayLikeHeart">
+                              {heartFilled === p.id ? (
+                                <i
+                                  style={{ color: "#fe9e2d" }}
+                                  className="bi bi-heart-fill"
+                                ></i>
+                              ) : (
+                                <i className="bi bi-heart"></i>
+                              )}
+                            </li>
+                          </ul>
                         </Link>
                         <Link to={`/product/${p.id}`}>
                           <img
                             src={p.thumbnail_img?.original_url}
                             alt={p.name}
+                            width='100%'
                           ></img>
                         </Link>
                       </div>
@@ -432,9 +433,9 @@ const Category = () => {
                             }}
                             style={{ cursor: "pointer" }}
                           >
-                            <li className="bi bi-cart" id={p.id}>
+                            <i className="bi bi-cart" id={p.id}>
                               Add to Cart
-                            </li>
+                            </i>
                           </div>
                         </div>
                       </div>

@@ -68,9 +68,9 @@ const VerifyOtp = () => {
             </form>
           </div>
         </div>
-        {/* <input type="text" aria-label="Last name" class="form-control" />
-          <input type="text" aria-label="First name" class="form-control" />
-          <input type="text" aria-label="Last name" class="form-control" /> */}
+        {/* <input type="text" aria-label="Last name" className="form-control" />
+          <input type="text" aria-label="First name" className="form-control" />
+          <input type="text" aria-label="Last name" className="form-control" /> */}
       </div>
 
       <section className="features">

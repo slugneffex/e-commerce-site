@@ -21,14 +21,14 @@ const FreebiesCart = () => {
     <>
       <div className="row">
         {freebiescartItems.map((e, index) => (
-          <div class="col-2" key={e.id}>
+          <div className="col-2" key={e.id}>
             <div
-              class="card small-card"
+              className="card small-card"
               style={{ marginTop: "1rem", marginBottom: "1rem" }}
             >
               <div>
                 <i
-                  class="bi bi-x-lg"
+                  className="bi bi-x-lg"
                   style={{
                     position: "absolute",
                     marginLeft: "85%",
@@ -43,10 +43,10 @@ const FreebiesCart = () => {
                 ></i>
               </div>
 
-              <div class="card-body">
+              <div className="card-body">
                 <img
                   src={e.image}
-                  class="freebie-img"
+                  className="freebie-img"
                   alt="savlon-mask-pack-of-1-grey-earloop-in-new1"
                   width="100px"
                   height="auto"

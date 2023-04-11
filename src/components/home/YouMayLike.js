@@ -72,9 +72,6 @@ const YouMayLike = () => {
             setError(error.message);
           }
         }
-
-       
-
       }
       fetchData();
     }, 4000);
@@ -139,7 +136,6 @@ const YouMayLike = () => {
       });
   }
 
-
   return (
     <div>
       <section>
@@ -157,7 +153,6 @@ const YouMayLike = () => {
               infinite={true}
               arrows={false}
             >
-              
               {loading ? (
                 <div
                   className="item carouselItemCard"
@@ -170,7 +165,8 @@ const YouMayLike = () => {
                     animation="wave"
                   />
                 </div>
-              ) : ( Array.isArray(feature) &&
+              ) : (
+                Array.isArray(feature) &&
                 feature.map((e) => (
                   <div
                     className="item carouselItemCard"
@@ -183,16 +179,18 @@ const YouMayLike = () => {
                           onClick={() => wishlistData(e.id)}
                           className="addtofav"
                         >
-                          <li className="youMayLikeHeart">
-                            {heartFilled === e.id ? (
-                              <i
-                                style={{ color: "#fe9e2d" }}
-                                class="bi bi-heart-fill"
-                              ></i>
-                            ) : (
-                              <i className="bi bi-heart"></i>
-                            )}
-                          </li>
+                          <ul>
+                            <li className="youMayLikeHeart">
+                              {heartFilled === e.id ? (
+                                <i
+                                  style={{ color: "#fe9e2d" }}
+                                  className="bi bi-heart-fill"
+                                ></i>
+                              ) : (
+                                <i className="bi bi-heart"></i>
+                              )}
+                            </li>
+                          </ul>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
                           <img src={e.meta_img?.url} alt="img"></img>
@@ -207,7 +205,6 @@ const YouMayLike = () => {
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
                         <div className="price-sec">
-                        
                           <div className="col-4" style={{ textAlign: "end" }}>
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
@@ -226,9 +223,9 @@ const YouMayLike = () => {
                             }}
                             style={{ cursor: "pointer" }}
                           >
-                            <li className="bi bi-cart" id={e.id}>
+                            <i className="bi bi-cart" id={e.id}>
                               Add to Cart
-                            </li>
+                            </i>
                           </div>
                         </div>
                       </div>

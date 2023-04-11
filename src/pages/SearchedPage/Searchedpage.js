@@ -19,7 +19,7 @@ const Searchedpage = () => {
                 <div className="newComboCart">
                   <div className="cart-img-sec">
                     <Link className="addtofavCategory">
-                      <li className="bi bi-heart"></li>
+                      <i className="bi bi-heart"></i>
                     </Link>
                     <Link to={`/combo/${e.id}`}>
                       <img src={e.meta_img?.original_url} alt="img"></img>
@@ -43,13 +43,13 @@ const Searchedpage = () => {
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
                         <Link>
-                          <li
+                          <i
                             className="bi bi-cart"
                             id={e.id}
                             style={{ cursor: "pointer" }}
                           >
                             Add to Cart
-                          </li>
+                          </i>
                         </Link>
                       </div>
                     </div>
@@ -66,7 +66,7 @@ const Searchedpage = () => {
                 <div className="newComboCart">
                   <div className="cart-img-sec">
                     <Link className="addtofavCategory">
-                      <li className="bi bi-heart"></li>
+                      <i className="bi bi-heart"></i>
                     </Link>
                     <Link to={`/products/${e.id}`}>
                       <img src={e.thumbnail_img?.original_url} alt="img"></img>
@@ -89,13 +89,13 @@ const Searchedpage = () => {
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
                         <Link>
-                          <li
+                          <i
                             className="bi bi-cart"
                             id={e.id}
                             style={{ cursor: "pointer" }}
                           >
                             Add to Cart
-                          </li>
+                          </i>
                         </Link>
                       </div>
                     </div>

@@ -40,7 +40,7 @@ const BrandProducts = () => {
   useEffect(() => {
     async function fetchData() {
       setError(null);
-      
+
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -68,8 +68,6 @@ const BrandProducts = () => {
     }
     fetchData();
   }, []);
-
-  
 
   // add to cart single product
   const dispatch = useDispatch();
@@ -122,9 +120,7 @@ const BrandProducts = () => {
       });
   }
   if (error) {
-    return (
-      console.log(error)
-    )
+    return console.log(error);
   }
 
   return (
@@ -151,9 +147,11 @@ const BrandProducts = () => {
                   style={{ marginRight: ".8rem" }}
                 >
                   <div className="newComboCart">
-                    <li className="youMayLikeHeart">
-                      <i className="bi bi-heart"></i>
-                    </li>
+                    <ul>
+                      <li className="youMayLikeHeart">
+                        <i className="bi bi-heart"></i>
+                      </li>
+                    </ul>
                     <div className="cart-img-sec">
                       <Link
                         onClick={() => wishlistProductData(e.id)}
@@ -187,18 +185,16 @@ const BrandProducts = () => {
                       </div>
                       <div className="card-btn-sec ">
                         <div className="btn_atc">
-                          <Link>
-                            <li
-                              className="bi bi-cart"
-                              onClick={() => {
-                                addToSingleCart(e);
-                              }}
-                              id={e.id}
-                              style={{ cursor: "pointer" }}
-                            >
-                              Add to Cart
-                            </li>
-                          </Link>
+                          <i
+                            className="bi bi-cart"
+                            onClick={() => {
+                              addToSingleCart(e);
+                            }}
+                            id={e.id}
+                            style={{ cursor: "pointer" }}
+                          >
+                            Add to Cart
+                          </i>
                         </div>
                       </div>
                     </div>
