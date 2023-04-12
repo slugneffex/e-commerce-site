@@ -4,10 +4,40 @@ import { useNavigate, Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./login.css";
 import Features from "../../components/inc/Fetures";
-
+import jwtDecode from "jwt-decode";
 
 const SignIn = () => {
   const navigate = useNavigate();
+
+  // const [user, setUser] = useState({});
+
+  // function handleCallbackResponse(response) {
+  //   // console.log("encoded jwt: " + response.credential);
+  //   // const userObject = jwtDecode(response.credential);
+  //   // console.log(userObject);
+  //   // setUser(userObject);
+  //   document.getElementById("signInDiv").hidden = true;
+  // }
+
+  // function Signout(e) {
+  //   setUser({});
+  //   document.getElementById("signInDiv").hidden = false;
+  // }
+
+  // useEffect(() => {
+  //   /* global google */
+
+  //   google.accounts.id.initialize({
+  //     client_id:
+  //       "757796482669-p1u5phdv1ddn0gpmo2q7j13h21vk7bg8.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse,
+  //   });
+
+  //   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+  //     theme: "outline",
+  //     size: "large",
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -15,13 +45,10 @@ const SignIn = () => {
     }
   });
 
-
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
-  setPasswordShown(!passwordShown);
+    setPasswordShown(!passwordShown);
   };
-
-  
 
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
 
@@ -43,8 +70,7 @@ const SignIn = () => {
         },
         {
           headers: {
-            "X-Authorization":
-            `${process.env.REACT_APP_HEADER}`,
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           },
         }
       )
@@ -132,7 +158,7 @@ const SignIn = () => {
                           </div>
                           <div className="form-group mb-3">
                             <input
-                               type={passwordShown ? "text" : "password"}
+                              type={passwordShown ? "text" : "password"}
                               name="password"
                               placeholder="Enter Your Password"
                               className="form-control"
@@ -151,8 +177,8 @@ const SignIn = () => {
                             name="hide"
                             onClick={togglePassword}
                           />
-                           
-                          <label  htmlFor="hide">Show Password</label>
+
+                          <label htmlFor="hide">Show Password</label>
                         </div>
                         <button type="submit" className="btn">
                           Proceed To log In
@@ -162,21 +188,18 @@ const SignIn = () => {
                         <span>or Login Via</span>
                         <div className="d-flex my-5">
                           <div className="col-4">
-                            <a
-                              href="#/"
-                              style={{ boxShadow: "none" }}
-                            >
+                            <div style={{ boxShadow: "none" }}>
+                            
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt=""
+                                alt="google"
+                               
+                                
                               />
-                            </a>
+                            </div>
                           </div>
                           <div className="col-4">
-                            <a
-                              href="#/"
-                              style={{ boxShadow: "none" }}
-                            >
+                            <a href="#/" style={{ boxShadow: "none" }}>
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/facebook.png"
                                 alt=""
@@ -184,10 +207,7 @@ const SignIn = () => {
                             </a>
                           </div>
                           <div className="col-4">
-                            <a
-                              href="#/"
-                              style={{ boxShadow: "none" }}
-                            >
+                            <a href="#/" style={{ boxShadow: "none" }}>
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/email.png"
                                 alt=""
