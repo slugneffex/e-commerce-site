@@ -304,10 +304,6 @@ a {
         height: auto;
     }
 
-    .row {
-        flex-direction: column;
-    }
-
     .col-md-6  {
        min-width: 360px;
        margin: auto;
