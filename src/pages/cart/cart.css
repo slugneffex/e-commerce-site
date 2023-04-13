@@ -25,9 +25,9 @@
 }
 /* Coupon Card End */
 /* Cart Type */
-.cart-card {
+.cartCard .cart-card {
     background-color: #FFF4E3;
-    padding: 2rem;
+    padding: 2rem 0 2rem 0  ;
     box-shadow: 1px 1px 10px #DDDDDD;
     margin-bottom: 1.5rem;
 }
@@ -43,6 +43,7 @@
 .cart-list {
     list-style: none;
     background-color: #FFFFFF;
+    padding-left: 0;
 }
 
 .cart-item {
@@ -189,10 +190,6 @@
         font-size: 16px;
     }
 
-    .cartCard  span {
-        font-size: 10px;
-    }
-
     .cart-card .cart-list .cart-item img {
         width: 50px;
         height: auto;
@@ -213,6 +210,8 @@
     .price-breakup .price-type {
         font-size: 14px;
     }
+
+
  }
 
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500&display=swap');
@@ -613,8 +612,9 @@ a {
     border-radius: 10px;
 }
 
-.signalCart span {
+.mobile .signalCart span {
     font-weight: bold;
+    font-size: 13px;
     color: #FE9E2D;
 }
 

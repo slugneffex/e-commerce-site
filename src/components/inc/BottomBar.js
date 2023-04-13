@@ -15,7 +15,7 @@ const BottomBar = () => {
             </Link>
           </li>
           <li className="nav-item bottomListItem">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/" style={{ paddingLeft: "0"}}>
               <i className="bi bi-ui-checks-grid"></i>
               <br />
               <span>Categories</span>
@@ -29,14 +29,14 @@ const BottomBar = () => {
             </Link>
           </li>
           <li className="nav-item bottomListItem">
-            <Link className="nav-link disabled">
+            <Link className="nav-link disabled" to="/Cart">
               <i className="bi bi-cart-check-fill"></i>
               <br />
               <span>Cart</span>
             </Link>
           </li>
           <li className="nav-item bottomListItem">
-            <Link className="nav-link disabled">
+            <Link className="nav-link disabled" to="/Acccount">
               <i className="bi bi-person-circle"></i>
               <br />
               <span>Account</span>

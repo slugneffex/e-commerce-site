@@ -148,7 +148,7 @@ const Cart = () => {
     ExtraFreebiesAmountt = 0;
   }
 
-  
+
   let shippingAmount = 50;
 
   const totalCartAmount = totalAmount + singletotalAmount;
@@ -281,13 +281,15 @@ const Cart = () => {
         {/*  mobile */}
         <div className="mobile">
           <div className="signalCart">
-            <div className="col-4">
+            <div className="col-2">
               <img
                 src="./assets/img/percent-star.png"
                 alt="discountImg"
                 width="75px"
                 height="75px"
               />
+            </div>
+            <div className="col-2">
             </div>
             <div className="col-8">
               <h3>
@@ -311,6 +313,9 @@ const Cart = () => {
   if (singlesubAmount < 1000) {
     freebiesUptoSection = (
       <li style={{ padding: "1rem" }}>
+
+        {/* desktop */}
+        <div className="desktop">
         <div className="signalCart">
           <div className="col-2">
             <img
@@ -327,6 +332,32 @@ const Cart = () => {
             </h3>
           </div>
         </div>
+        </div>
+
+        {/*  mobile */}
+        <div className="mobile">
+          <div className="signalCart">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-2">
+            </div>
+            <div className="col-8">
+              <h3>
+                <strong>Add More Products For More Savings !</strong> And Get{" "}
+                <span>Upto 70% OFF</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
       </li>
     );
   }
@@ -339,7 +370,7 @@ const Cart = () => {
       <>
         <div className="row">
           <div
-            className="col-md-6"
+            className="col-6"
             style={{
               textAlign: "left",
               fontWeight: "bold",
@@ -350,7 +381,7 @@ const Cart = () => {
             <span className="term">BYOC Discount :-</span>
           </div>
           <div
-            className="col-md-6"
+            className="col-6"
             style={{
               textAlign: "right",
               fontWeight: "bold",
@@ -500,7 +531,7 @@ const Cart = () => {
             <div className="pt-3">
               <div className="row">
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "left",
                     fontWeight: "bold",
@@ -511,7 +542,7 @@ const Cart = () => {
                   <span className="term">Precurated Total :-</span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "right",
                     fontWeight: "bold",
@@ -522,7 +553,7 @@ const Cart = () => {
                   <span>₹ {parseFloat(totalAmount).toFixed(0)}</span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "left",
                     fontWeight: "bold",
@@ -535,7 +566,7 @@ const Cart = () => {
                   </span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "right",
                     fontWeight: "bold",
@@ -548,7 +579,7 @@ const Cart = () => {
                   </span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "left",
                     fontWeight: "bold",
@@ -559,7 +590,7 @@ const Cart = () => {
                   <span className="term">Payble Amount :-</span>
                 </div>
                 <div
-                  className="col-md-6"
+                  className="col-6"
                   style={{
                     textAlign: "right",
                     fontWeight: "bold",
