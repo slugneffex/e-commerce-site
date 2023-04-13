@@ -58,7 +58,6 @@ const Singleproduct = () => {
                   centerMode={false}
                   infiniteLoop={true}
                   showArrows={false}
-                  width={460}
                 >
                   <div
                     className="item big-img"

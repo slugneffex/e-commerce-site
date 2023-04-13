@@ -376,6 +376,9 @@ const Header = () => {
           </div>
         </section>
         {/*wcc end */}
+
+
+        {/* navbar Start */}
         <nav className="navbar navbar-expand-lg bg-light">
           <div className="container">
             {Array.isArray(logo) &&
