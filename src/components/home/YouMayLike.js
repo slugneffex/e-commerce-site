@@ -12,7 +12,7 @@ import {
   getTotalDiscount,
 } from "../features/useCartSlice";
 import { useDispatch } from "react-redux";
-import { Skeleton } from "@mui/material";
+
 
 const responsive = {
   superLargeDesktop: {
@@ -112,7 +112,11 @@ const YouMayLike = () => {
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
   const [heartFilled, setHeartFilled] = useState(null);
+
   // const [loading, setLoading] = useState(true);
+=======
+  
+
 
   function wishlistData(id) {
     const data = {
@@ -145,20 +149,6 @@ const YouMayLike = () => {
           </div>
         </div>
 
-        {/* {loading? (
-                <div
-                  className="item carouselItemCard"
-                  style={{ marginRight: ".8rem" }}
-                >
-                  <Skeleton
-                    variant="rect"
-                    width={250}
-                    height={300}
-                    animation="wave"
-                  />
-                </div>
-              ) : ( */}
-
         <div className="container ">
           <div className="row">
             <Carousel
@@ -166,8 +156,12 @@ const YouMayLike = () => {
               showDots={false}
               infinite={true}
               arrows={false}
+
             > 
-               { Array.isArray(feature) &&
+              
+
+              {Array.isArray(feature) &&
+
                 feature.map((e) => (
                   <div
                     className="item carouselItemCard"
@@ -232,8 +226,12 @@ const YouMayLike = () => {
                       </div>
                     </div>
                   </div>
+
                 ))
                           }
+
+                ))}
+
             </Carousel>
           </div>
         </div>

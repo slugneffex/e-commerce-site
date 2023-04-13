@@ -48,6 +48,7 @@ const SignIn = () => {
   });
 
   const [passwordShown, setPasswordShown] = useState(false);
+
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
@@ -98,6 +99,8 @@ const SignIn = () => {
     newdata[e.target.id] = e.target.value;
     setData(newdata);
   }
+
+  
 
   return (
     <>
@@ -190,9 +193,18 @@ const SignIn = () => {
                         <span>or Login Via</span>
                         <div className="d-flex my-5">
                           <div className="col-4">
+
                              <div>
                               <div id="signInDiv"></div>
                               </div>
+=======
+
+                            <div>
+                            
+                            </div>
+                            
+
+
                             <div style={{ boxShadow: "none" }}>
                              
                             
@@ -201,7 +213,12 @@ const SignIn = () => {
                                 alt="google"
                                
                                 
+
                               /> */}
+=======
+
+                              />
+
                             </div>
                           </div>
                           <div className="col-4">
