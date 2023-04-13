@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link } from "react-router-dom";
 import "./payment.css";
@@ -19,6 +19,12 @@ function loadScript(src) {
 }
 
 const Payment = () => {
+  // Hide and show button
+  const [showButton, setShowButton] = useState(false);
+
+  const handleClick = () => {
+    setShowButton(true);
+  };
   // Single Product Cart
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
@@ -159,7 +165,7 @@ const Payment = () => {
 
     const options = {
       key: "rzp_test_7Ynqg7Kwiuxr5Z",
-      amount: `${totalCartSubAmount}` * 100,
+      amount: Number(totalCartSubAmount) * 100,
       currency: "INR",
       name: "Combonation",
       description: "Test payment",
@@ -167,10 +173,11 @@ const Payment = () => {
         alert("Payment Successful!");
         alert(response.razorpay_payment_id);
         localStorage.setItem("transaction_id", response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature);
+        setShowButton(true);
       },
     };
+    // alert(response.razorpay_order_id);
+    // alert(response.razorpay_signature);
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
@@ -244,6 +251,7 @@ const Payment = () => {
                           name="payment_type"
                           id
                           className="form-check-input"
+                          onClick={handleClick}
                         />
                         <label
                           htmlFor="payment_type"
@@ -279,14 +287,14 @@ const Payment = () => {
                       </Link>
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     className="col-md-6"
                     style={{ position: "absolute", right: "0" }}
                   >
                     <a href className="btn_1">
                       Proceed To Pay
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -332,9 +340,11 @@ const Payment = () => {
                         {totalCartCount} Item ({freebiesCount} Free) | ₹
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
-                      <Link to="/Adress" className="btn">
-                        Proceed To Pay
-                      </Link>
+                      {showButton && (
+                        <Link to="/Adress" className="btn">
+                          Proceed To Pay
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
