@@ -9,35 +9,37 @@ import jwtDecode from "jwt-decode";
 const SignIn = () => {
   const navigate = useNavigate();
 
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
 
-  // function handleCallbackResponse(response) {
-  //   // console.log("encoded jwt: " + response.credential);
-  //   // const userObject = jwtDecode(response.credential);
-  //   // console.log(userObject);
-  //   // setUser(userObject);
-  //   document.getElementById("signInDiv").hidden = true;
-  // }
+  function handleCallbackResponse(response) {  //make this onclick function instead of line 36 dont make line 36 to the onclick function 
+    console.log("encoded jwt: " + response.credential);
+    const userObject = jwtDecode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    document.getElementById("signInDiv")
+  }
 
   // function Signout(e) {
   //   setUser({});
   //   document.getElementById("signInDiv").hidden = false;
   // }
 
-  // useEffect(() => {
-  //   /* global google */
+  useEffect(() => {
+    /* global google */
 
-  //   google.accounts.id.initialize({
-  //     client_id:
-  //       "757796482669-p1u5phdv1ddn0gpmo2q7j13h21vk7bg8.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse,
-  //   });
+    google.accounts.id.initialize({
+      client_id:
+        "757796482669-p1u5phdv1ddn0gpmo2q7j13h21vk7bg8.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
 
-  //   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-  //     theme: "outline",
-  //     size: "large",
-  //   });
-  // }, []);
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      type: "icon",
+      // size: "large",
+      shape:"circle",
+      width: "400px",
+    });
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -192,20 +194,31 @@ const SignIn = () => {
                         <div className="d-flex my-5">
                           <div className="col-4">
 
+                             <div>
+                              <div id="signInDiv"></div>
+                              </div>
+=======
+
                             <div>
                             
                             </div>
                             
 
+
                             <div style={{ boxShadow: "none" }}>
+                             
                             
-                              <img
+                              {/* <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
                                 alt="google"
                                
                                 
 
+                              /> */}
+=======
+
                               />
+
                             </div>
                           </div>
                           <div className="col-4">
