@@ -13,7 +13,6 @@ import {
 } from "../features/useCartSlice";
 import { useDispatch } from "react-redux";
 
-
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -114,9 +113,6 @@ const YouMayLike = () => {
   const [heartFilled, setHeartFilled] = useState(null);
 
   // const [loading, setLoading] = useState(true);
-=======
-  
-
 
   function wishlistData(id) {
     const data = {
@@ -156,12 +152,8 @@ const YouMayLike = () => {
               showDots={false}
               infinite={true}
               arrows={false}
-
-            > 
-              
-
+            >
               {Array.isArray(feature) &&
-
                 feature.map((e) => (
                   <div
                     className="item carouselItemCard"
@@ -226,12 +218,7 @@ const YouMayLike = () => {
                       </div>
                     </div>
                   </div>
-
-                ))
-                          }
-
                 ))}
-
             </Carousel>
           </div>
         </div>
