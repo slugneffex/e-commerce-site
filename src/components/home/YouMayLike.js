@@ -74,7 +74,7 @@ const YouMayLike = () => {
         }
       }
       fetchData();
-    }, 4000);
+    }, 2000);
   }, []);
   if (error) {
     console.log(error);
@@ -112,7 +112,7 @@ const YouMayLike = () => {
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
   const [heartFilled, setHeartFilled] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   function wishlistData(id) {
     const data = {
@@ -145,15 +145,7 @@ const YouMayLike = () => {
           </div>
         </div>
 
-        <div className="container ">
-          <div className="row">
-            <Carousel
-              responsive={responsive}
-              showDots={false}
-              infinite={true}
-              arrows={false}
-            >
-              {loading ? (
+        {/* {loading? (
                 <div
                   className="item carouselItemCard"
                   style={{ marginRight: ".8rem" }}
@@ -165,8 +157,17 @@ const YouMayLike = () => {
                     animation="wave"
                   />
                 </div>
-              ) : (
-                Array.isArray(feature) &&
+              ) : ( */}
+
+        <div className="container ">
+          <div className="row">
+            <Carousel
+              responsive={responsive}
+              showDots={false}
+              infinite={true}
+              arrows={false}
+            > 
+               { Array.isArray(feature) &&
                 feature.map((e) => (
                   <div
                     className="item carouselItemCard"
@@ -232,7 +233,7 @@ const YouMayLike = () => {
                     </div>
                   </div>
                 ))
-              )}
+                          }
             </Carousel>
           </div>
         </div>
