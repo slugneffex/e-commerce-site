@@ -15,13 +15,11 @@ const SignIn = () => {
     }
   });
 
-
   const [passwordShown, setPasswordShown] = useState(false);
-  const togglePassword = () => {
-  setPasswordShown(!passwordShown);
-  };
 
-  
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
 
@@ -43,8 +41,7 @@ const SignIn = () => {
         },
         {
           headers: {
-            "X-Authorization":
-            `${process.env.REACT_APP_HEADER}`,
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           },
         }
       )
@@ -70,6 +67,8 @@ const SignIn = () => {
     newdata[e.target.id] = e.target.value;
     setData(newdata);
   }
+
+  
 
   return (
     <>
@@ -132,7 +131,7 @@ const SignIn = () => {
                           </div>
                           <div className="form-group mb-3">
                             <input
-                               type={passwordShown ? "text" : "password"}
+                              type={passwordShown ? "text" : "password"}
                               name="password"
                               placeholder="Enter Your Password"
                               className="form-control"
@@ -151,8 +150,8 @@ const SignIn = () => {
                             name="hide"
                             onClick={togglePassword}
                           />
-                           
-                          <label  htmlFor="hide">Show Password</label>
+
+                          <label htmlFor="hide">Show Password</label>
                         </div>
                         <button type="submit" className="btn">
                           Proceed To log In
@@ -162,21 +161,19 @@ const SignIn = () => {
                         <span>or Login Via</span>
                         <div className="d-flex my-5">
                           <div className="col-4">
-                            <a
-                              href="#/"
-                              style={{ boxShadow: "none" }}
-                            >
+                            <div>
+                            
+                            </div>
+                            <div style={{ boxShadow: "none" }}>
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt=""
+                                alt="google-img"
+                                style={{ cursor: "pointer" }}
                               />
-                            </a>
+                            </div>
                           </div>
                           <div className="col-4">
-                            <a
-                              href="#/"
-                              style={{ boxShadow: "none" }}
-                            >
+                            <a href="#/" style={{ boxShadow: "none" }}>
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/facebook.png"
                                 alt=""
@@ -184,10 +181,7 @@ const SignIn = () => {
                             </a>
                           </div>
                           <div className="col-4">
-                            <a
-                              href="#/"
-                              style={{ boxShadow: "none" }}
-                            >
+                            <a href="#/" style={{ boxShadow: "none" }}>
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/email.png"
                                 alt=""

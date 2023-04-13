@@ -5,8 +5,6 @@ import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
-// import * as ReactBootStrap from 'react-bootstrap'
-// const[loading,setLoading]=useState(false)
 
 import {
   addCartProduct,
@@ -61,6 +59,22 @@ const Category = () => {
     }
     fetchData();
   }, [id]);
+
+  // Filter low to high
+
+  const [sortDirection, setSortDirection] = useState("asc");
+
+  const handleSortClick = () => {
+
+    const sortedProducts = [...category].sort((a, b) => {
+      return sortDirection === "asc"
+        ? a.selling_price - b.selling_price
+        : b.selling_price - a.selling_price;
+    });
+    setCategory(sortedProducts);
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+  };
+
 
   // Categories
   const [categoris, setCategories] = useState([]);
@@ -231,7 +245,7 @@ const Category = () => {
                   ></i>
                 </div>
                 <Link to={`/combo/${e.id}`}>
-                  <img src={e.meta_img?.url} alt="img" width='100%'></img>
+                  <img src={e.meta_img?.url} alt="img" width="100%"></img>
                 </Link>
               </div>
 
@@ -347,10 +361,10 @@ const Category = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item>Low to High</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                          Another action
+                        <Dropdown.Item onClick={handleSortClick}>
+                          {sortDirection === "asc" ? "low to high" : "high to low"}
                         </Dropdown.Item>
+                        {/* <Dropdown.Item>Another action</Dropdown.Item> */}
                         {/* <Dropdown.Item href="#/action-3">
                           Something else
                         </Dropdown.Item> */}
@@ -362,6 +376,7 @@ const Category = () => {
 
               <div className="row" style={{ marginTop: "1rem" }}>
                 {/* Combo products */}
+
                 {section}
 
                 <hr />
@@ -401,7 +416,7 @@ const Category = () => {
                           <img
                             src={p.thumbnail_img?.original_url}
                             alt={p.name}
-                            width='100%'
+                            width="100%"
                           ></img>
                         </Link>
                       </div>
