@@ -58,6 +58,62 @@ h1 h2 h3 h4 h5 h6 p {
     display: none;
 }
 
+.bi-search{
+    position: absolute;
+    padding-top: .5rem;
+    padding-left: .5rem;
+    padding-left: 1rem;
+}
+
+
+
+#stores-menu a:hover{
+    
+    color:#fe9e2d;
+    
+} 
+#stores-menu a{
+    text-decoration: none;
+    color: #434343;
+    
+   
+}
+.row a{
+    text-decoration: none;
+    color: #434343;
+
+}
+.row a:hover{
+    
+    color:#fe9e2d;
+    
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+padding: 1rem;}
+
+
+
+.dropdowns {
+    
+    color: black;
+    margin-left: 2rem;
+}
+
+.small-gutters{
+    display: flex;
+    padding: 2rem;
+}
+.menu-wrapper{
+    width: 890px;
+}
+.form-control{
+    padding-left: 2.5rem;
+}
+.small-gutters {
+    margin-right: -5px !important;
+    margin-left: -5px !important;
+}
 
 
 @media (max-width: 720px) {

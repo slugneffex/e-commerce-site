@@ -61,8 +61,7 @@ const App = () => {
 
       <Route path="/store/:id" element={<Store />} />
 
-      <Route path="/
-      " element={<Acccount />} />
+      <Route path="/Acccount" element={<Acccount />} />
       <Route path="/Place" element={<Place />} />
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/Wallet" element={<Wallet />} />

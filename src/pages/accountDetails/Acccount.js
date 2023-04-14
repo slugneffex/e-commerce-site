@@ -2,10 +2,10 @@ import React from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./accountDetails.css";
 import Sidebar from "./Sidebar";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const Account = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
@@ -56,7 +56,7 @@ const Account = () => {
                         />
                       </h6>
                     </div>
-                    <div>
+                 {/*   <div>
                       <button
                         style={{ marginTop: "2rem" }}
                         onClick={() => {
@@ -71,7 +71,7 @@ const Account = () => {
                       >
                         logout
                       </button>
-                    </div>
+                      </div>*/}
                   </div>
                 </div>
               </div>
