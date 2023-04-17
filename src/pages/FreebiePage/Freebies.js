@@ -28,7 +28,7 @@ const Freebies = () => {
         },
       };
       try {
-        const response = await axios.get("/freebies", options);
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/freebies`, options);
         setFreebies(response.data.products);
       } catch (error) {
         if (error.response && error.response.status === 429) {
