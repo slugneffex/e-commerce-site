@@ -76,7 +76,7 @@ const Brands = () => {
           <Carousel
             responsive={responsive}
             className="py-14"
-            swipeable={false}
+            swipeable={true}
             autoPlay
             arrows={false}
             centerMode

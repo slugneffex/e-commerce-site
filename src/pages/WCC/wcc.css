@@ -1,7 +1,7 @@
 .heading h1 {
     font-weight: 400;
     font-size: 40px;
-    
+
 }
 
 h1 span {
@@ -42,6 +42,14 @@ h1 span {
     margin-bottom: 3.5rem;
 }
 
+.cardd .card img {
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+
 
 
 .card .card-body h4 {
@@ -50,7 +58,7 @@ h1 span {
 
 .cart .cardBody {
     display: flex;
-} 
+}
 
 .cart .cardBody i {
     font-size: 28px;
@@ -126,7 +134,7 @@ h1 span {
     width: 90%;
     padding-left: 3rem;
     padding-top: 2rem;
-    margin-bottom: 5rem;    
+    margin-bottom: 5rem;
 }
 
 
@@ -150,6 +158,13 @@ h1 span {
 
 }
 
+.col-6 .secure {
+    padding-top: 0;
+    padding-bottom: 0;
+
+}
+
+
 
 
 .card .card-body h4 {
@@ -160,13 +175,23 @@ h1 span {
     margin-left: auto;
 }
 
+.card img {
+    margin-top: 2rem;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+
 .colum {
     margin-bottom: 1rem;
 }
 
 
+
+
 @media (max-width: 720px) {
-  
+
 
     .row .overviewMobile {
         width: 100%;
@@ -176,11 +201,31 @@ h1 span {
         justify-content: space-evenly;
     } */
 
-   
 
-    .card .nfm {
+
+    .col-6 .card .nfm {
         width: 45%;
-        margin-top: 6px;
+        margin-top: 2rem;
+    }
+
+
+
+    .card {
+        padding: 2rem;
+    }
+
+    
+
+    .col-6 .secure {
+        padding: 2rem;
+    
+    }
+
+    .col-6 .secure img {
+        margin-left: auto;
+        margin-right: auto;
+        width: 55%;
+    
     }
 
     .col-direction {
@@ -200,9 +245,11 @@ h1 span {
         margin-right: 0;
     }
 
-  
+
 
     .brand img {
         width: 80%;
     }
 }
+
+

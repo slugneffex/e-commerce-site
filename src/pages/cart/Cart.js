@@ -352,9 +352,6 @@ const Cart = () => {
                 <strong>Add More Products For More Savings !</strong> And Get{" "}
                 <span>Upto 70% OFF</span>
               </h3>
-              <Link to="/freebies" className="btn_1">
-                Add Freebies Now <i className="bi bi-arrow-right"></i>
-              </Link>
             </div>
           </div>
         </div>
@@ -674,7 +671,7 @@ const Cart = () => {
 
             <hr />
 
-            <div className="pt-3">
+            <div className="pt-3 px-3">
               <div className="row">
                 <div
                   className="col-6"
