@@ -19,8 +19,6 @@ import Loginadress from "./pages/adress/Loginadress";
 import WCC from "./pages/WCC/WCC.js";
 import Store from "./pages/Store/Store";
 
-
-
 import Place from "./pages/accountDetails/Place";
 import Wishlist from "./pages/accountDetails/Wishlist";
 import Wallet from "./pages/accountDetails/Wallet";
@@ -34,8 +32,6 @@ import Freebies from "./pages/FreebiePage/Freebies";
 import Thanks from "./pages/thankyou/Thanks";
 import OrderHistory from "./pages/OrderHistory/OrderHistory";
 
-
-
 const App = () => {
   return (
     <Routes>
@@ -46,14 +42,13 @@ const App = () => {
       <Route path="/Login" element={<Login />} />
       <Route path="/category/:id" element={<Category />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />
-      <Route path="/VerifyOtp" element={<VerifyOtp />} />     
-      <Route path="/Thanks" element={<Thanks />} /> 
+      <Route path="/VerifyOtp" element={<VerifyOtp />} />
+      <Route path="/Thanks" element={<Thanks />} />
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       <Route path="/view-all-products" element={<MYOC />} />
-      <Route path ="/EmptyCart" element={<Emptycart />} />
+      <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
-
 
       <Route path="/address" element={<Loginadress />} />
       <Route path="/Adress" element={<Adress />} />
@@ -61,27 +56,24 @@ const App = () => {
 
       <Route path="/store/:id" element={<Store />} />
 
+
       <Route path="/Acccount" element={<Acccount />} />
+
       <Route path="/Place" element={<Place />} />
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/Wallet" element={<Wallet />} />
       <Route path="/Orders" element={<Orders />} />
 
-
       <Route path="/brandlogolist" element={<BrandLogosList />} />
 
-
       {/* Route for search */}
-      <Route path="/search" element={<Searchedpage/>}/>
+      <Route path="/search" element={<Searchedpage />} />
 
       {/* Route for Freebies */}
       <Route path="/freebies" element={<Freebies />} />
 
       {/* Oreder History */}
       <Route path="/orderhistory" element={<OrderHistory />} />
-      
-
-
 
       <Route path="*" render={() => <Navigate to="/" />} />
     </Routes>
