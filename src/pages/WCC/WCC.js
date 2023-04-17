@@ -22,7 +22,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 2,
   },
 };
 
@@ -245,7 +245,7 @@ const WCC = () => {
                 <Carousel
                   responsive={responsive}
                   className="py-14"
-                  swipeable={false}
+                  swipeable={true}
                   autoPlay
                   arrows={false}
                   centerMode
@@ -292,12 +292,10 @@ const WCC = () => {
               </div>
 
               <div className="row roow">
-                <div className="col-md-6 colum">
+                <div className="col-6 colum">
                   <div
                     className="card cardd"
                     style={{
-                      // width: "100%",
-                      // height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
                     }}
@@ -315,14 +313,10 @@ const WCC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-6">
                   <div
-                    className="card"
+                    className="card secure"
                     style={{
-                      paddingTop: "0",
-                      paddingBottom: "0",
-                      // width: "100%",
-                      // height: "16rem",
                       backgroundColor: "#fcfcfc",
                       border: ".5px solid #464646",
                     }}
@@ -343,7 +337,7 @@ const WCC = () => {
               </div>
 
               <div className="row roow">
-                <div className="col-md-6 colum">
+                <div className="col-6 colum">
                   <div
                     className="card cardd"
                     style={{
@@ -368,7 +362,7 @@ const WCC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-6">
                   <div
                     className="card"
                     style={{
