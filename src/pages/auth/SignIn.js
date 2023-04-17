@@ -11,12 +11,13 @@ const SignIn = () => {
 
   const [user, setUser] = useState({});
 
-  function handleCallbackResponse(response) {  //make this onclick function instead of line 36 dont make line 36 to the onclick function 
+  function handleCallbackResponse(response) {
+    //make this onclick function instead of line 36 dont make line 36 to the onclick function
     console.log("encoded jwt: " + response.credential);
     const userObject = jwtDecode(response.credential);
     console.log(userObject);
     setUser(userObject);
-    document.getElementById("signInDiv")
+    document.getElementById("signInDiv");
   }
 
   // function Signout(e) {
@@ -34,9 +35,10 @@ const SignIn = () => {
     });
 
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      // theme: "filled_blue",
       type: "icon",
-      // size: "large",
-      shape:"circle",
+      size: "large",
+      shape: "circle",
       width: "400px",
     });
   }, []);
@@ -99,8 +101,6 @@ const SignIn = () => {
     newdata[e.target.id] = e.target.value;
     setData(newdata);
   }
-
-  
 
   return (
     <>
@@ -193,21 +193,12 @@ const SignIn = () => {
                         <span>or Login Via</span>
                         <div className="d-flex my-5">
                           <div className="col-4">
-
-                             <div>
-                              <div id="signInDiv"></div>
-                              </div>
-=======
-
                             <div>
-                            
+                              <div id="signInDiv"></div>
                             </div>
-                            
 
-
+                            <div></div>
                             <div style={{ boxShadow: "none" }}>
-                             
-                            
                               {/* <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
                                 alt="google"
@@ -215,8 +206,6 @@ const SignIn = () => {
                                 
 
                               /> */}
-
-
                             </div>
                           </div>
                           <div className="col-4">
@@ -230,6 +219,11 @@ const SignIn = () => {
                           <div className="col-4">
                             <a href="#/" style={{ boxShadow: "none" }}>
                               <img
+                                // style={{
+                                //   height: "47px",
+                                //   border: "2.5px solid",
+                                //   borderRadius: "100%",
+                                // }}
                                 src="https://www.combonation.in/assets_new/img/social/email.png"
                                 alt=""
                               />
