@@ -62,7 +62,7 @@ const Categories = () => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2,
+      items: 6,
     },
   };
 
@@ -86,20 +86,21 @@ const Categories = () => {
       </div> */}
 
       {/* for mobile */}
-      <div className="categoriesMobileDiv">
+      <div className="categoriesMobileDiv" style={{ marginTop: "1rem" }}>
         <div className="container">
           <Carousel
             responsive={responsive}
             arrows={false}
             swipeable={true}
-            autoPlay
-            centerMode
+            // autoPlay
             infinite
             className="carouselResponsive"
           >
             {category.map((e) => (
               <div className="my-auto" key={e.id}>
-                <Link to={`/category/${e.id}`}>{e.name}</Link>
+                <img src={e.image?.original_url} alt="" width="70%"/>
+                <br />
+                <Link style={{ fontSize: '12px' }} to={`/category/${e.id}`}>{e.name.slice(0,9)}</Link>
               </div>
             ))}
           </Carousel>

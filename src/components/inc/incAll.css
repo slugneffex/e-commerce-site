@@ -6,6 +6,16 @@ h1 h2 h3 h4 h5 h6 p {
     font-family: 'Poppins';
 }
 
+.row ul li {
+    /* color: #FFF; */
+    margin-top: 1rem;
+    line-height: 2;
+}
+
+.row ul li a {
+    color: #FFF;
+}
+
 .heading h1 {
     color: #969696;
     font-weight: 400;
@@ -41,6 +51,7 @@ h1 h2 h3 h4 h5 h6 p {
 .heading-two h1 span {
     color: #fe9e2d;
 }
+
 
 .top-banner {
     background-image: linear-gradient(to left,#FF5E00,#FD8A03);
@@ -186,6 +197,43 @@ padding: 1rem;}
     margin-right: 6px;
 }
 
+.styled-select {
+    width: 100%;
+    overflow: hidden;
+    height: 30px;
+    line-height: 32px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
+    padding-right: 35px;
+    position: relative;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.styled-select select {
+    background: transparent;
+    width: 110%;
+    padding-left: 10px;
+    border: 0;
+    box-shadow: none;
+    height: 30px;
+    color: #ccc;
+    font-size: 0.75rem;
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+}
+
+option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2rem;
+    padding: 0px 2px 1px;
+}
+
 
 @media(max-width: 720px) {
     .row .col {
@@ -252,7 +300,30 @@ padding: 1rem;}
 
 
 
-/* Brand Dropdown */
+@media (max-width: 767px) {
+    footer h3:after {
+        width: 20px;
+        display: block;
+        float: right;
+    }
+
+    footer {
+        background-color: #000;
+    }
+
+    footer .link ul {
+        margin-top: 15px;
+    }
+
+    footer .link ul li {
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+}
+
+
+
+
 
 
 

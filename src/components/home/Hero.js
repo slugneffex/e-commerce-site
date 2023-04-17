@@ -89,13 +89,12 @@ const Hero = () => {
           showDots={false}
           responsive={responsive}
           infinite={true}
-          autoPlay
+          // autoPlay
           arrows={false}
         >
           {Array.isArray(banner) &&
             banner.map((e) => (
-              <div key={e.mobile_banner?.id} style={{ width: "100%" }}>
-                <div>
+              <div key={e.mobile_banner?.id} style={{ width: "378px" }}>
                   <Link to="/">
                     <img
                       src={e.mobile_banner?.original_url}
@@ -103,7 +102,6 @@ const Hero = () => {
                       width="100%"
                     />
                   </Link>
-                </div>
               </div>
             ))}
         </Carousel>
