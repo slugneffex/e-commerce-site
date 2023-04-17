@@ -1,13 +1,14 @@
 import React from "react";
 import "./accountDetails.css";
-
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const sidebar = () => {
 
-    // const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  
+  const navigate = useNavigate();
+
 
   return (
     <>
@@ -69,12 +70,28 @@ const sidebar = () => {
                     Logout
                   </button>
                   <i className="bi bi-caret-right-fill bii"></i>
-                </div> */}
+                </div> 
+                 <div>
+                      <NavLink
+                        style={{ marginTop: "2rem" }}
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          localStorage.removeItem("id");
+                          localStorage.removeItem("name");
+                          localStorage.removeItem("phone");
+                          localStorage.removeItem("email");
+                          alert("Logout Successfull");
+                          navigate("/");
+                        }}
+                      >
+                        logout
+                      </NavLink>
+                    </div>
               </div>
             </div>
           </div>
 
-          {/*<div className="mobile">
+            <div className="mobile">
             <div id="mySidenav" className="sidenav">
               <Link
                 to="javascript:void(0)"
@@ -99,10 +116,29 @@ const sidebar = () => {
               </span>
             </div>
               </div>*/}
-        </div>
+              <div>
+                      <NavLink
+                        style={{ marginTop: "2rem" }}
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          localStorage.removeItem("id");
+                          localStorage.removeItem("name");
+                          localStorage.removeItem("phone");
+                          localStorage.removeItem("email");
+                          alert("Logout Successfull");
+                          navigate("/");
+                        }}
+                      >
+                        logout
+                      </NavLink>
+                    </div>
+              </div>
+              </div>
+              </div>
+              </div>
       </section>
-    </>
-  );
+          </>
+          );
 };
 
-export default sidebar;
+          export default sidebar;
