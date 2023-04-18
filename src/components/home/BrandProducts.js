@@ -189,6 +189,7 @@ const BrandProducts = () => {
                             className="bi bi-cart"
                             onClick={() => {
                               addToSingleCart(e);
+                              alert("product added to cart successfully")
                             }}
                             id={e.id}
                             style={{ cursor: "pointer" }}

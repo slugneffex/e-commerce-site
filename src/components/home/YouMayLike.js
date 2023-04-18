@@ -207,6 +207,7 @@ const YouMayLike = () => {
                             className="btn_atc"
                             onClick={() => {
                               addToCart(e);
+                              alert("product added to cart successfully")
                             }}
                             style={{ cursor: "pointer" }}
                           >
