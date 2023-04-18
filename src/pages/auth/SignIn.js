@@ -6,6 +6,9 @@ import "./login.css";
 import Features from "../../components/inc/Fetures";
 import jwtDecode from "jwt-decode";
 
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
+
 const SignIn = () => {
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
@@ -21,10 +24,17 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
+
+  const [facebook, setFaceboook] = useState(null);
+  // const [accessToken, setAccessToken] = useState('');
+
+  //FOR GOOGLE LOGIN
+
   // function Signout(e) {
   //   setUser({});
   //   document.getElementById("signInDiv").hidden = false;
   // }
+
 
   const handleCallbackResponse = useCallback((response) => {
     console.log("encoded jwt: " + response.credential);
@@ -36,7 +46,14 @@ const SignIn = () => {
 
     document.getElementById("signInDiv");
 
+
+  // function Signout(e) {
+  //   setUser({});
+  //   document.getElementById("signInDiv").hidden = false;
+  // }
+
   }, []);
+
 
   useEffect(() => {
     /* global google */
@@ -54,7 +71,19 @@ const SignIn = () => {
       shape: "circle",
       width: "400px",
     });
+
+  }, []);
+
+  //FOR FACEBOOK LOGIN
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/Acccount");
+    }
+  });
+
   }, [handleCallbackResponse]);
+
 
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -210,25 +239,50 @@ const SignIn = () => {
                           <div className="col-4">
                             <div>
                               <div id="signInDiv"></div>
+                              {accessToken&&
+                              <div>
+                                <h3>{accessToken}</h3>
+                              </div>
+                              }
                             </div>
 
                             <div></div>
                             <div style={{ boxShadow: "none" }}>
                               {/* <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt="google"
-                               
-                                
-
+                                alt="google"                                                             
                               /> */}
                             </div>
                           </div>
                           <div className="col-4">
                             <a href="#/" style={{ boxShadow: "none" }}>
-                              <img
+                              <LoginSocialFacebook
+                                appId="1727203981032521"
+                                autoLoad={false}
+                                onResolve={(response) => {
+                                  console.log(response);
+                                  setFaceboook(response.data);
+                                }}
+                                onReject={(error) => {
+                                  console.log(error);
+                                }}
+                                
+                              >
+                                <img
                                 src="https://www.combonation.in/assets_new/img/social/facebook.png"
                                 alt=""
                               />
+                              
+                              </LoginSocialFacebook>
+                              {/* {user ? (
+                                <div>
+                                  <h1>{user.name}</h1>
+                                  <img src="{user.picture.data.url}" />
+                                </div>
+                              ) : (
+                                ""
+                              )} */}
+                              
                             </a>
                           </div>
                           <div className="col-4">
