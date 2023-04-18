@@ -93,14 +93,16 @@ const Categories = () => {
             arrows={false}
             swipeable={true}
             // autoPlay
+            centerMode
             infinite
             className="carouselResponsive"
           >
             {category.map((e) => (
               <div className="my-auto" key={e.id}>
+                <Link to={`/category/${e.id}`}>
                 <img src={e.image?.original_url} alt="" width="70%"/>
                 <br />
-                <Link style={{ fontSize: '12px' }} to={`/category/${e.id}`}>{e.name.slice(0,9)}</Link>
+                <a style={{ fontSize: '12px' }} >{e.name.slice(0,9)}</a></Link>
               </div>
             ))}
           </Carousel>

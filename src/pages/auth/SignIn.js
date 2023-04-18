@@ -62,6 +62,7 @@ const SignIn = () => {
     }
   });
 
+
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
@@ -208,8 +209,10 @@ const SignIn = () => {
                           <div className="col-4">
                             <div>
                               <div id="signInDiv"></div>
+
                               {user&&localStorage.setItem("name",user.name )}
-                              {/* {user&&
+                             
+
                               <div>
                                 <h3>{user.name}</h3>
                               </div>

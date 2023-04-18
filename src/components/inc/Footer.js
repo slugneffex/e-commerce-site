@@ -267,10 +267,10 @@ const Footer = () => {
               <Collapse in={isOpen1}>
                 <div id="collapseExample">
                   <ul>
-                    <li><a href="/page/about-us">About us</a></li>
-                    <li><a href="/help">Help</a></li>
-                    <li><a href="/user/home">My account</a></li>
-                    <li><a href="/contact-us">Contacts</a></li>
+                    <li style={{ color: "#fff" }}><a href="/page/about-us">About us</a></li>
+                    <li style={{ color: "#fff" }}><a href="/help">Help</a></li>
+                    <li style={{ color: "#fff" }}><a href="/user/home">My account</a></li>
+                    <li style={{ color: "#fff" }}><a href="/contact-us">Contacts</a></li>
                   </ul>
                 </div>
               </Collapse>
@@ -285,12 +285,12 @@ const Footer = () => {
               <Collapse in={isOpen2}>
                 <div id="collapseExample">
                   <ul>
-                    <li><a href="https://www.combonation.in/category/baby-care-new">Baby Care</a></li>
-                    <li><a href="https://www.combonation.in/category/beauty">Beauty</a></li>
-                    <li><a href="https://www.combonation.in/category/gifts-new">Gifts</a></li>
-                    <li><a href="https://www.combonation.in/category/health-and-wellness-new">Health &amp; Wellness</a></li>
-                    <li><a href="https://www.combonation.in/category/home-and-kitchen-new">Home &amp; Kitchen</a></li>
-                    <li><a href="https://www.combonation.in/category/personal-care-new">Personal Care</a></li>
+                    <li style={{ color: "#fff" }}><a href="https://www.combonation.in/category/baby-care-new">Baby Care</a></li>
+                    <li style={{ color: "#fff" }}><a href="https://www.combonation.in/category/beauty">Beauty</a></li>
+                    <li style={{ color: "#fff" }}><a href="https://www.combonation.in/category/gifts-new">Gifts</a></li>
+                    <li style={{ color: "#fff" }}><a href="https://www.combonation.in/category/health-and-wellness-new">Health &amp; Wellness</a></li>
+                    <li style={{ color: "#fff" }}><a href="https://www.combonation.in/category/home-and-kitchen-new">Home &amp; Kitchen</a></li>
+                    <li style={{ color: "#fff" }}><a href="https://www.combonation.in/category/personal-care-new">Personal Care</a></li>
                   </ul>
                 </div>
               </Collapse>
@@ -304,9 +304,9 @@ const Footer = () => {
               <Collapse in={isOpen3}>
                 <div id="collapseExample" style={{ color: "#fff" }}>
                   <ul>
-                    <li><FiHome /><a style={{ marginLeft: "1rem"}}>Suite No 301, Third Floor, Good Earth Business Bay, Sector 58, Gurugram Haryana (122011)</a></li>
-                    <li><FiHeadphones /><a style={{ marginLeft: "1rem"}} href="tel:+919910722205">9910722205</a></li>
-                    <li><HiOutlineMail /><a style={{ marginLeft: "1rem"}} href="mailto:customercare@combonation.in">customercare@combonation.in</a></li>
+                    <li style={{ color: "#fff" }}><FiHome /><a style={{ marginLeft: "1rem"}}>Suite No 301, Third Floor, Good Earth Business Bay, Sector 58, Gurugram Haryana (122011)</a></li>
+                    <li style={{ color: "#fff" }}><FiHeadphones /><a style={{ marginLeft: "1rem"}} href="tel:+919910722205">9910722205</a></li>
+                    <li style={{ color: "#fff" }}><HiOutlineMail /><a style={{ marginLeft: "1rem"}} href="mailto:customercare@combonation.in">customercare@combonation.in</a></li>
                   </ul>
                 </div>
               </Collapse>
