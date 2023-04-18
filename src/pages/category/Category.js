@@ -30,6 +30,28 @@ const Category = () => {
   const [banner, setBanner] = useState([]);
   const [error, setError] = useState(null);
 
+  const sortData = () => {
+    const sortedData = [...category].sort(
+      (a, b) => b.selling_price - a.selling_price
+    );
+    const sortedDataProduct = [...product].sort(
+      (a, b) => b.selling_price - a.selling_price
+    );
+    setCategory(sortedData);
+    setProduct(sortedDataProduct);
+  };
+
+  const lowtoHigh = () => {
+    const sortedData = [...category].sort(
+      (a, b) => a.selling_price - b.selling_price
+    );
+    const sortedDataProducts = [...product].sort(
+      (a, b) => a.selling_price - b.selling_price
+    );
+    setCategory(sortedData);
+    setProduct(sortedDataProducts)
+  };
+
   useEffect(() => {
     async function fetchData() {
       setError(null);
@@ -62,19 +84,17 @@ const Category = () => {
 
   // Filter low to high
 
-  const [sortDirection, setSortDirection] = useState("asc");
+  // const [sortDirection, setSortDirection] = useState("asc");
 
-  const handleSortClick = () => {
-
-    const sortedProducts = [...category].sort((a, b) => {
-      return sortDirection === "asc"
-        ? a.selling_price - b.selling_price
-        : b.selling_price - a.selling_price;
-    });
-    setCategory(sortedProducts);
-    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-  };
-
+  // const handleSortClick = () => {
+  //   const sortedProducts = [...category].sort((a, b) => {
+  //     return sortDirection === "asc"
+  //       ? a.selling_price - b.selling_price
+  //       : b.selling_price - a.selling_price;
+  //   });
+  //   setCategory(sortedProducts);
+  //   setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+  // };
 
   // Categories
   const [categoris, setCategories] = useState([]);
@@ -361,10 +381,17 @@ const Category = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item onClick={handleSortClick}>
-                          {sortDirection === "asc" ? "low to high" : "high to low"}
+                        {/* <Dropdown.Item onClick={handleSortClick}>
+                          {sortDirection === "asc"
+                            ? "low to high"
+                            : "high to low"}
+                        </Dropdown.Item> */}
+                        <Dropdown.Item onClick={lowtoHigh}>
+                          low to High
                         </Dropdown.Item>
-                        {/* <Dropdown.Item>Another action</Dropdown.Item> */}
+                        <Dropdown.Item onClick={sortData}>
+                          High to low
+                        </Dropdown.Item>
                         {/* <Dropdown.Item href="#/action-3">
                           Something else
                         </Dropdown.Item> */}
