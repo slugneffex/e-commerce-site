@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
@@ -6,24 +6,54 @@ import "./login.css";
 import Features from "../../components/inc/Fetures";
 import jwtDecode from "jwt-decode";
 
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
+
 const SignIn = () => {
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const gmailToken = localStorage.getItem("gmaiToken");
+
+  //   if (token) {
+  //     navigate("/Acccount");
+  //   } else if (gmailToken) {
+  //     navigate("/Acccount");
+  //   }
+  // }, []);
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
 
-  function handleCallbackResponse(response) {
-    //make this onclick function instead of line 36 dont make line 36 to the onclick function
-    console.log("encoded jwt: " + response.credential);
-    const userObject = jwtDecode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
-    document.getElementById("signInDiv");
-  }
+  const [facebook, setFaceboook] = useState(null);
+  // const [accessToken, setAccessToken] = useState('');
+
+  //FOR GOOGLE LOGIN
 
   // function Signout(e) {
   //   setUser({});
   //   document.getElementById("signInDiv").hidden = false;
   // }
+
+
+  const handleCallbackResponse = useCallback((response) => {
+    console.log("encoded jwt: " + response.credential);
+    const userObject = jwtDecode(response.credential);
+    localStorage.setItem("gmailToken", response.credential);
+
+    console.log(userObject);
+    setUser(userObject);
+
+    document.getElementById("signInDiv");
+
+
+  // function Signout(e) {
+  //   setUser({});
+  //   document.getElementById("signInDiv").hidden = false;
+  // }
+
+  }, []);
+
 
   useEffect(() => {
     /* global google */
@@ -41,7 +71,10 @@ const SignIn = () => {
       shape: "circle",
       width: "400px",
     });
+
   }, []);
+
+  //FOR FACEBOOK LOGIN
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -49,11 +82,16 @@ const SignIn = () => {
     }
   });
 
+  }, [handleCallbackResponse]);
+
+
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+
+  console.log(user.name)
 
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
 
@@ -91,10 +129,16 @@ const SignIn = () => {
           localStorage.setItem("phone", res.data.user?.phone);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.user?.id);
-          navigate("/");
+          // navigate("/");
         }
       });
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/Acccount");
+    }
+  });
 
   function handle(e) {
     const newdata = { ...data };
@@ -195,25 +239,50 @@ const SignIn = () => {
                           <div className="col-4">
                             <div>
                               <div id="signInDiv"></div>
+                              {accessToken&&
+                              <div>
+                                <h3>{accessToken}</h3>
+                              </div>
+                              }
                             </div>
 
                             <div></div>
                             <div style={{ boxShadow: "none" }}>
                               {/* <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt="google"
-                               
-                                
-
+                                alt="google"                                                             
                               /> */}
                             </div>
                           </div>
                           <div className="col-4">
                             <a href="#/" style={{ boxShadow: "none" }}>
-                              <img
+                              <LoginSocialFacebook
+                                appId="1727203981032521"
+                                autoLoad={false}
+                                onResolve={(response) => {
+                                  console.log(response);
+                                  setFaceboook(response.data);
+                                }}
+                                onReject={(error) => {
+                                  console.log(error);
+                                }}
+                                
+                              >
+                                <img
                                 src="https://www.combonation.in/assets_new/img/social/facebook.png"
                                 alt=""
                               />
+                              
+                              </LoginSocialFacebook>
+                              {/* {user ? (
+                                <div>
+                                  <h1>{user.name}</h1>
+                                  <img src="{user.picture.data.url}" />
+                                </div>
+                              ) : (
+                                ""
+                              )} */}
+                              
                             </a>
                           </div>
                           <div className="col-4">

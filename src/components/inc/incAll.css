@@ -116,7 +116,7 @@ padding: 1rem;}
     padding: 2rem;
 }
 .menu-wrapper{
-    width: 890px;
+    width: 1110px;
 }
 .form-control{
     padding-left: 2.5rem;
@@ -244,9 +244,7 @@ option {
         width: 50%;
     }
 
-    #mainTitle {
-        /* display: inline; */
-    }
+   
 
     #mainTitle p {
         font-size: 9px;
@@ -320,6 +318,9 @@ option {
         line-height: 1.2;
     }
 }
+
+
+/* categories Dropdown */
 
 
 

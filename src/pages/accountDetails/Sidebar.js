@@ -1,23 +1,26 @@
 import React from "react";
 import "./accountDetails.css";
 
+
+
 import { NavLink, useNavigate } from "react-router-dom";
+
 
 const Sidebar = () => {
   // const navigate = useNavigate();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
  
-  function handleClick() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("name");
-    localStorage.removeItem("phone");
-    localStorage.removeItem("email");
-    alert("Logout Successfull");
-    navigate("/");
+  // function handleClick() {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("id");
+  //   localStorage.removeItem("name");
+  //   localStorage.removeItem("phone");
+  //   localStorage.removeItem("email");
+  //   alert("Logout Successfull");
+  //   navigate("/");
    
-  }
+  // }
 
   return (
     <>
@@ -126,21 +129,21 @@ const Sidebar = () => {
             </div>
               </div>*/}
                 <div>
-                  <NavLink
+                  {/* <NavLink
                     style={{ marginTop: "2rem" }}
-                    // onClick={() => {
-                    //   localStorage.removeItem("token");
-                    //   localStorage.removeItem("id");
-                    //   localStorage.removeItem("name");
-                    //   localStorage.removeItem("phone");
-                    //   localStorage.removeItem("email");
-                    //   alert("Logout Successfull");
-                    //   navigate("/");
-                    // }}
-                    onClick={handleClick}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("id");
+                      localStorage.removeItem("name");
+                      localStorage.removeItem("phone");
+                      localStorage.removeItem("email");
+                      alert("Logout Successfull");
+                      navigate("/");
+                    }}
+                   
                   >
                     logout
-                  </NavLink>
+                  </NavLink> */}
                 </div>
               </div>
             </div>
@@ -151,4 +154,7 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+
+          export default Sidebar;
+
+
