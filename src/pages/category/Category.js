@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams } from "react-router-dom";
 import "./category.css";
@@ -28,6 +28,10 @@ const Category = () => {
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
   const [banner, setBanner] = useState([]);
+  // filteration state
+  const [originalCategory, setOriginalCategory] = useState([]);
+  const [originalProduct, setOriginalProduct] = useState([]);
+  // filteration state end
   const [error, setError] = useState(null);
 
   const sortData = () => {
@@ -52,17 +56,6 @@ const Category = () => {
     setProduct(sortedDataProducts);
   };
 
-  const filterProductOne = () => {
-    const filteredProducts = category.filter((product) => {
-      return product.selling_price >= 500 && product.selling_price <= 1000;
-    });
-    const filteredSingleProducts = product.filter((product) => {
-      return product.selling_price >= 500 && product.selling_price <= 1000;
-    });
-    setCategory(filteredProducts);
-    setProduct(filteredSingleProducts)
-  };
-
   useEffect(() => {
     async function fetchData() {
       setError(null);
@@ -79,6 +72,8 @@ const Category = () => {
         setBanner(response.data.category);
         setCategory(response.data.data.combos.data);
         setProduct(response.data.data.products.data);
+        setOriginalCategory(response.data.data.combos.data);
+        setOriginalProduct(response.data.data.products.data);
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -93,19 +88,24 @@ const Category = () => {
     fetchData();
   }, [id]);
 
-  // Filter low to high
+  // filteration
 
-  // const [sortDirection, setSortDirection] = useState("asc");
+  const filterProducts = (minPrice, maxPrice) => {
+    const filteredProducts = originalProduct.filter((product) => {
+      return (
+        product.selling_price >= minPrice && product.selling_price <= maxPrice
+      );
+    });
+    const filteredSingleProducts = originalCategory.filter((product) => {
+      return (
+        product.selling_price >= minPrice && product.selling_price <= maxPrice
+      );
+    });
+    setProduct(filteredProducts);
+    setCategory(filteredSingleProducts);
+  };
 
-  // const handleSortClick = () => {
-  //   const sortedProducts = [...category].sort((a, b) => {
-  //     return sortDirection === "asc"
-  //       ? a.selling_price - b.selling_price
-  //       : b.selling_price - a.selling_price;
-  //   });
-  //   setCategory(sortedProducts);
-  //   setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-  // };
+  
 
   // Categories
   const [categoris, setCategories] = useState([]);
@@ -392,19 +392,32 @@ const Category = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        {/* <Dropdown.Item onClick={handleSortClick}>
-                          {sortDirection === "asc"
-                            ? "low to high"
-                            : "high to low"}
-                        </Dropdown.Item> */}
                         <Dropdown.Item onClick={lowtoHigh}>
                           low to High
                         </Dropdown.Item>
                         <Dropdown.Item onClick={sortData}>
                           High to low
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={filterProductOne}>
-                          500 to 1000
+                        <Dropdown.Item onClick={() => filterProducts(50, 499)}>
+                          50 to 490
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => filterProducts(500, 999)}>
+                          500 to 999
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => filterProducts(1000, 1999)}
+                        >
+                          1000 to 1999
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => filterProducts(2000, 4999)}
+                        >
+                          2000 to 4999
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => filterProducts(5000, 50000)}
+                        >
+                          5000 and above
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
