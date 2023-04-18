@@ -3,7 +3,7 @@ import "./accountDetails.css";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-const sidebar = () => {
+const Sidebar = () => {
 
   // const navigate = useNavigate();
 
@@ -141,4 +141,4 @@ const sidebar = () => {
           );
 };
 
-          export default sidebar;
+          export default Sidebar;
