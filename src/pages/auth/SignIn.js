@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
@@ -10,51 +10,32 @@ import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 
 const SignIn = () => {
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const gmailToken = localStorage.getItem("gmaiToken");
-
-  //   if (token) {
-  //     navigate("/Acccount");
-  //   } else if (gmailToken) {
-  //     navigate("/Acccount");
-  //   }
-  // }, []);
-
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
-
   const [facebook, setFaceboook] = useState(null);
   // const [accessToken, setAccessToken] = useState('');
 
+  
+
   //FOR GOOGLE LOGIN
+  
 
-  // function Signout(e) {
-  //   setUser({});
-  //   document.getElementById("signInDiv").hidden = false;
-  // }
-
-
-  const handleCallbackResponse = useCallback((response) => {
+  function handleCallbackResponse(response) {
     console.log("encoded jwt: " + response.credential);
     const userObject = jwtDecode(response.credential);
-    localStorage.setItem("gmailToken", response.credential);
-
     console.log(userObject);
     setUser(userObject);
-
+    localStorage.setItem("gmail-token",response.credential )
+   
     document.getElementById("signInDiv");
+  }
 
-
+  
   // function Signout(e) {
   //   setUser({});
   //   document.getElementById("signInDiv").hidden = false;
   // }
-
-  }, []);
-
-
   useEffect(() => {
     /* global google */
 
@@ -71,7 +52,6 @@ const SignIn = () => {
       shape: "circle",
       width: "400px",
     });
-
   }, []);
 
   //FOR FACEBOOK LOGIN
@@ -82,16 +62,11 @@ const SignIn = () => {
     }
   });
 
-  }, [handleCallbackResponse]);
-
-
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
-
-  console.log(user.name)
 
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
 
@@ -129,16 +104,10 @@ const SignIn = () => {
           localStorage.setItem("phone", res.data.user?.phone);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.user?.id);
-          // navigate("/");
+          navigate("/");
         }
       });
   }
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/Acccount");
-    }
-  });
 
   function handle(e) {
     const newdata = { ...data };
@@ -239,11 +208,12 @@ const SignIn = () => {
                           <div className="col-4">
                             <div>
                               <div id="signInDiv"></div>
-                              {accessToken&&
+                              {user&&localStorage.setItem("name",user.name )}
+                              {/* {user&&
                               <div>
-                                <h3>{accessToken}</h3>
+                                <h3>{user.name}</h3>
                               </div>
-                              }
+                              } */}
                             </div>
 
                             <div></div>
@@ -262,6 +232,8 @@ const SignIn = () => {
                                 onResolve={(response) => {
                                   console.log(response);
                                   setFaceboook(response.data);
+                                  localStorage.setItem("facebook",response.data.accessToken )
+                                  
                                 }}
                                 onReject={(error) => {
                                   console.log(error);
