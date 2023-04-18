@@ -205,7 +205,7 @@ const Header = () => {
                   to="/why-choose-combonation"
                   className="whyChooseCombonation"
                 >
-                  <p className="my-auto">Why Choose Combonation?</p>
+                  <p className="my-auto text-white blink">Why Choose Combonation?</p>
                 </Link>
               </div>
               <div className="col-md-2 getAppSection">
