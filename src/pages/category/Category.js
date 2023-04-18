@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams } from "react-router-dom";
 import "./category.css";
@@ -21,6 +21,8 @@ import {
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
 import { useDispatch } from "react-redux";
+import { Collapse } from "react-bootstrap";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Category = () => {
   // Categories products combo & single Products
@@ -104,8 +106,6 @@ const Category = () => {
     setProduct(filteredProducts);
     setCategory(filteredSingleProducts);
   };
-
-  
 
   // Categories
   const [categoris, setCategories] = useState([]);
@@ -246,6 +246,65 @@ const Category = () => {
     console.log(error);
   }
 
+  // total brands
+  const [brand, setBrand] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      setError(null);
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/brands`,
+          options
+        );
+        setBrand(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
+    }
+    fetchData();
+  }, []);
+
+  const filterbrandsApi = brand.filter((e) => e.focused === "on");
+
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpen3, setIsOpen3] = useState(false);
+
+  const handleToggle1 = () => {
+    setIsOpen1(!isOpen1);
+  };
+
+  const handleToggle2 = () => {
+    setIsOpen2(!isOpen2);
+  };
+  const handleToggle3 = () => {
+    setIsOpen3(!isOpen3);
+  };
+
+  function handleClick(categoryId) {
+    window.location.href = `/category/${categoryId}`;
+  }
+
+  function handleClickbrand(brandId) {
+    window.location.href = `/brand/${brandId}`;
+  }
+
   // if there is no combo hide the section of combos
 
   let section = null;
@@ -303,6 +362,7 @@ const Category = () => {
                     className="btn_atc"
                     onClick={() => {
                       addToCart(e);
+                      alert("product added to cart successfully");
                     }}
                     style={{ cursor: "pointer" }}
                   >
@@ -325,7 +385,7 @@ const Category = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
-              <div className="card">
+              {/* <div className="card">
                 <div
                   className="accordion accordion-flush accc"
                   id="accordionFlushExample"
@@ -346,6 +406,275 @@ const Category = () => {
                       </div>
                     </Link>
                   ))}
+                </div>
+              </div> */}
+              <div className="card">
+                <div className="card-header">Filter By</div>
+                <div className="card-body">
+                  <div id="accordionExample">
+                    <div className="accordion-item mb-2">
+                      <div
+                        className="row align-items-center"
+                        variant="primary"
+                        onClick={handleToggle1}
+                        aria-controls="collapseExample"
+                        aria-expanded={isOpen1}
+                      >
+                        <h4
+                          className="col-9 mb-0 px-0"
+                          style={{ backgroundColor: "#FFF", textAlign: "left" }}
+                        >
+                          Categories
+                        </h4>
+
+                        <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "50px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />
+                      </div>
+
+                      <Collapse in={isOpen1}>
+                        <div id="collapseExample">
+                          <input
+                            type="hidden"
+                            name="_token"
+                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                          />{" "}
+                          {categoris.map((e) => (
+                            <div className="form-check" key={e.id}>
+                              <Link
+                                to={`/category/${e.id}`}
+                                className="form-check-input"
+                              >
+                                <input
+                                  type="radio"
+                                  name="category_id"
+                                  // id={`category_id${category.id}`}
+                                  // defaultValue={category.id}
+                                  className="form-check-input"
+                                />
+                              </Link>
+
+                              <label className="form-check-label" htmlFor={103}>
+                                {e.name} (106)
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </Collapse>
+                    </div>
+
+                    <div className="accordion-item mb-2">
+                      <div
+                        className="row align-items-center"
+                        variant="primary"
+                        onClick={handleToggle2}
+                        aria-controls="collapseExample"
+                        aria-expanded={isOpen2}
+                      >
+                        <h4
+                          className="col-9 mb-0 px-0"
+                          style={{ backgroundColor: "#FFF", textAlign: "left" }}
+                        >
+                          Brand
+                        </h4>
+
+                        <RiArrowDropDownLine
+                          className="col-3 text-end"
+                          style={{
+                            fontSize: "50px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />
+                      </div>
+
+                      <Collapse in={isOpen2}>
+                        <div id="collapseExample">
+                          {filterbrandsApi.map((e) => (
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id="category_id103"
+                                defaultValue={103}
+                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                                className="form-check-input"
+                                onClick={() => handleClickbrand(e.id)}
+                              />
+                              <label className="form-check-label" htmlFor={103}>
+                                {e.name} (51)
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </Collapse>
+                    </div>
+
+                    <div className="accordion-item mb-2">
+                      <div
+                        className="row align-items-center"
+                        variant="primary"
+                        onClick={handleToggle3}
+                        aria-controls="collapseExample"
+                        aria-expanded={isOpen3}
+                      >
+                        <h4
+                          className="col-9 mb-0 px-0"
+                          style={{ backgroundColor: "#FFF", textAlign: "left" }}
+                        >
+                          Price
+                        </h4>
+
+                        <RiArrowDropDownLine
+                          className="col-3"
+                          style={{
+                            fontSize: "50px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />
+                      </div>
+
+                      <Collapse in={isOpen3}>
+                        <div id="collapseExample">
+                          <form
+                            action="https://www.combonation.in/getFilterProduct"
+                            method="GET"
+                            id="filterForm103"
+                          >
+                            <input
+                              type="hidden"
+                              name="_token"
+                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                            />{" "}
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id="category_id103"
+                                defaultValue={103}
+                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                                className="form-check-input"
+                                onClick={() => filterProducts(50, 499)}
+                              />
+                              <label className="form-check-label" htmlFor={103}>
+                                From ₹ 50 To ₹ 499
+                              </label>
+                            </div>
+                          </form>
+
+                          <form
+                            action="https://www.combonation.in/getFilterProduct"
+                            method="GET"
+                            id="filterForm103"
+                          >
+                            <input
+                              type="hidden"
+                              name="_token"
+                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                            />{" "}
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id="category_id103"
+                                defaultValue={103}
+                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                                className="form-check-input"
+                                onClick={() => filterProducts(500, 999)}
+                              />
+                              <label className="form-check-label" htmlFor={103}>
+                                From ₹ 500 To ₹ 999
+                              </label>
+                            </div>
+                          </form>
+
+                          <form
+                            action="https://www.combonation.in/getFilterProduct"
+                            method="GET"
+                            id="filterForm103"
+                          >
+                            <input
+                              type="hidden"
+                              name="_token"
+                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                            />{" "}
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id="category_id103"
+                                defaultValue={103}
+                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                                className="form-check-input"
+                                onClick={() => filterProducts(1000, 1999)}
+                              />
+                              <label className="form-check-label" htmlFor={103}>
+                                From ₹ 1000 To ₹ 1999
+                              </label>
+                            </div>
+                          </form>
+
+                          <form
+                            action="https://www.combonation.in/getFilterProduct"
+                            method="GET"
+                            id="filterForm103"
+                          >
+                            <input
+                              type="hidden"
+                              name="_token"
+                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                            />{" "}
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id="category_id103"
+                                defaultValue={103}
+                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                                className="form-check-input"
+                                onClick={() => filterProducts(2000, 4999)}
+                              />
+                              <label className="form-check-label" htmlFor={103}>
+                                From ₹ 2000 To ₹ 4999
+                              </label>
+                            </div>
+                          </form>
+
+                          <form
+                            action="https://www.combonation.in/getFilterProduct"
+                            method="GET"
+                            id="filterForm103"
+                          >
+                            <input
+                              type="hidden"
+                              name="_token"
+                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                            />{" "}
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id="category_id103"
+                                defaultValue={103}
+                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                                className="form-check-input"
+                                onClick={() => filterProducts(5000, 50000)}
+                              />
+                              <label className="form-check-label" htmlFor={103}>
+                                From ₹ 5000 And Above
+                              </label>
+                            </div>
+                          </form>
+                        </div>
+                      </Collapse>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -398,7 +727,7 @@ const Category = () => {
                         <Dropdown.Item onClick={sortData}>
                           High to low
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => filterProducts(50, 499)}>
+                        {/* <Dropdown.Item onClick={() => filterProducts(50, 499)}>
                           50 to 490
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => filterProducts(500, 999)}>
@@ -418,7 +747,7 @@ const Category = () => {
                           onClick={() => filterProducts(5000, 50000)}
                         >
                           5000 and above
-                        </Dropdown.Item>
+                        </Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
@@ -496,6 +825,7 @@ const Category = () => {
                             className="btn_atc"
                             onClick={() => {
                               addToSingleCart(p);
+                              alert("product added to cart successfully");
                             }}
                             style={{ cursor: "pointer" }}
                           >
