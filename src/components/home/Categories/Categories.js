@@ -72,7 +72,7 @@ const Categories = () => {
         <div className="container">
           <div className="my-auto categoriesDiv">
             {category.map((e) => (
-              <Link to={`/category/${e.id}`} key={e.id}>
+              <Link to={`/category/${e.id}`} key={e.id} >
                 {e.name}
               </Link>
             ))}
@@ -99,7 +99,7 @@ const Categories = () => {
           >
             {category.map((e) => (
               <div className="my-auto" key={e.id}>
-                <Link to={`/category/${e.id}`}>
+                <Link to={`/category/${e.id}`} style={{ color: "#464646" }}>
                 <img src={e.image?.original_url} alt="" width="70%"/>
                 <br />
                 <a style={{ fontSize: '12px' }} >{e.name.slice(0,9)}</a></Link>
