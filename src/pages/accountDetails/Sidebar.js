@@ -1,14 +1,26 @@
 import React from "react";
 import "./accountDetails.css";
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+
+
+
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 const Sidebar = () => {
-
+  // const navigate = useNavigate();
   // const navigate = useNavigate();
 
-  const navigate = useNavigate();
-
+ 
+  // function handleClick() {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("id");
+  //   localStorage.removeItem("name");
+  //   localStorage.removeItem("phone");
+  //   localStorage.removeItem("email");
+  //   alert("Logout Successfull");
+  //   navigate("/");
+   
+  // }
 
   return (
     <>
@@ -116,29 +128,33 @@ const Sidebar = () => {
               </span>
             </div>
               </div>*/}
-              <div>
-                      <NavLink
-                        style={{ marginTop: "2rem" }}
-                        onClick={() => {
-                          localStorage.removeItem("token");
-                          localStorage.removeItem("id");
-                          localStorage.removeItem("name");
-                          localStorage.removeItem("phone");
-                          localStorage.removeItem("email");
-                          alert("Logout Successfull");
-                          navigate("/");
-                        }}
-                      >
-                        logout
-                      </NavLink>
-                    </div>
+                <div>
+                  {/* <NavLink
+                    style={{ marginTop: "2rem" }}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("id");
+                      localStorage.removeItem("name");
+                      localStorage.removeItem("phone");
+                      localStorage.removeItem("email");
+                      alert("Logout Successfull");
+                      navigate("/");
+                    }}
+                   
+                  >
+                    logout
+                  </NavLink> */}
+                </div>
               </div>
-              </div>
-              </div>
-              </div>
+            </div>
+          </div>
+        </div>
       </section>
-          </>
-          );
+    </>
+  );
 };
 
+
           export default Sidebar;
+
+

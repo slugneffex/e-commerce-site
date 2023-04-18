@@ -2,14 +2,18 @@ import React from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./accountDetails.css";
 import Sidebar from "./Sidebar";
-//import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const Account = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
+  
 
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const phone = localStorage.getItem("phone");
+
+ 
+ 
 
   return (
     <>
@@ -28,12 +32,17 @@ const Account = () => {
                       <img
                         src="./assets/img/accountImg/Group_2388.png"
                         style={{ width: "200px", height: "200px" }}
-                        alt='imgg'
+                        alt="imgg"
                       />
                     </div>
                     <div className="col-md-6 second">
                       <h5 className="changePassword">{name}</h5>
-                      <p>Email: {email}</p>
+                      {email ? (
+                        <p>Email: {email}</p>
+                      ) : (
+                        <p>lwra</p>
+                      )}
+
                       <p>Phone: {phone}</p>
                       <div className="changePassword" id="changePass">
                         <i className="bi bi-lock-fill"></i>
@@ -52,15 +61,16 @@ const Account = () => {
                           src="./assets/img/verified.png"
                           width="25px"
                           height="25px"
-                          alt='imgg'
+                          alt="imgg"
                         />
                       </h6>
                     </div>
-                 {/*   <div>
+                    <div>
                       <button
                         style={{ marginTop: "2rem" }}
                         onClick={() => {
                           localStorage.removeItem("token");
+
                           localStorage.removeItem("id");
                           localStorage.removeItem("name");
                           localStorage.removeItem("phone");
@@ -71,7 +81,7 @@ const Account = () => {
                       >
                         logout
                       </button>
-                      </div>*/}
+                    </div>
                   </div>
                 </div>
               </div>

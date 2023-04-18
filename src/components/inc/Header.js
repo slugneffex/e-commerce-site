@@ -186,10 +186,12 @@ const Header = () => {
   }, []);
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
+  const sliceFilterData = filterbrandsApi.slice(0,11)
+  
 
   return (
     <div>
@@ -377,14 +379,17 @@ const Header = () => {
         </section>
         {/*wcc end */}
 
-
         {/* navbar Start */}
         <nav className="navbar navbar-expand-lg bg-light">
           <div className="container">
             {Array.isArray(logo) &&
               logo.map((e) => (
                 <Link className="navbar-brand" to="/" key={e.id}>
-                  <img src={e.logo?.original_url} alt="logo-combonation" style={{width:"130px",height:"60px"}}></img>
+                  <img
+                    src={e.logo?.original_url}
+                    alt="logo-combonation"
+                    style={{ width: "130px", height: "60px" }}
+                  ></img>
                 </Link>
               ))}
             <button
@@ -399,7 +404,6 @@ const Header = () => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <form className="d-flex search" onSubmit={(e) => submit(e)}>
-           
               <input
                 id="search"
                 className="form-control me-2"
@@ -410,207 +414,112 @@ const Header = () => {
                 value={data.search}
                 onChange={(e) => handle(e)}
               ></input>
-              
             </form>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                        <li class="nav-item dropdown">
-                            <Link class="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                CATEGORIES
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    CATEGORIES
+                  </Link>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                    style={{ marginLeft: "-277px" }}
+                  >
+                    <div className="menu-wrapper">
+                      <div className="row small-gutters">
+                        {categories.map((e) => (
+                          <div className="col-lg-3 col-50 text-center" key={e.id}>
+                            <Link to={`/category/${e.id}`}>
+                              <h6>{e.name}</h6>
+                              <img
+                                src={e.image?.url}
+                                alt={e.slug}
+                                style={{ width: "100px", height: "auto" }}
+                              />
                             </Link>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </ul>
+                </li>
 
-                                <div class="menu-wrapper">
-                                    <div class="row small-gutters">
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>Baby Care</h6>
-                                                <img src="https://www.combonation.in/storage/5904/63986364d618b_Category_icons-04.png"
-                                                    alt="baby-care-new" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>Beauty</h6>
-                                                <img src="https://www.combonation.in/storage/5870/63981b3602f2b_Beauty.png"
-                                                    alt="beauty" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>Gifts</h6>
-                                                <img src="https://www.combonation.in/storage/5876/6398249da1fc9_Category_icons-12.png"
-                                                    alt="gifts-new" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>Health &amp; Wellness</h6>
-                                                <img src="https://www.combonation.in/storage/5914/639873854fa97_HEALTH-&amp;-WELLNESS-1.png"
-                                                    alt="health-and-wellness-new" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>Home &amp; Kitchen</h6>
-                                                <img src="https://www.combonation.in/storage/5875/639823745cbe1_Category_icons-08.png"
-                                                    alt="home-and-kitchen-new" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>Personal Care</h6>
-                                                <img src="https://www.combonation.in/storage/8890/63b7eb6c68e6f_Body-care.png"
-                                                    alt="personal-care-new" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <h6>New Launch</h6>
-                                                <img src="https://www.combonation.in/storage/8892/63b7ec2b3d786_SKINCARE.png"
-                                                    alt="New_Launch" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="h#">
-                                                <h6>Weddding</h6>
-                                                <img src="https://www.combonation.in/storage/8891/63b7ec091652e_WEDDING.png"
-                                                    alt="wedding-season" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                    </div>
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="javascript:void(0)"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    BRANDS
+                  </Link>
 
-                                </div>
+                  {/* brand dropdown */}
 
-
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <Link class="nav-link dropdown-toggle" to="javascript:void(0)" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                BRANDS
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                    style={{ marginLeft: "-377px" }}
+                  >
+                    <div className="menu-wrapper">
+                      <div className="row small-gutters">
+                        {sliceFilterData.map((e) => (
+                          <div className="col-lg-3 col-50 text-center" key={e.id}>
+                            <Link to={`/brand/${e.id}`}>
+                              <img
+                                src={e.image?.original_url}
+                                alt={e.name}
+                                style={{ width: "100px", height: "auto" }}
+                              />
                             </Link>
-
-                       {/* brand dropdown */}
-
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <div class="menu-wrapper">
-                                    <div class="row small-gutters">
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-
-                                                <img src="https://www.combonation.in/storage/13573/63f8a413896ff_ARMAF-LOGO.png"
-                                                    alt="armaf" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-
-                                                <img src="https://www.combonation.in/storage/9079/63c52d555a3f4_Ayouth-Veda.png"
-                                                    alt="ayouthveda" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-
-                                                <img src="https://www.combonation.in/storage/13574/63f8a46b2b43b_Bare-Anatomy.png"
-                                                    alt="bare-anatomy" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-
-                                                <img src="https://www.combonation.in/storage/8851/63b42302ee14c_logo-resize-04.png"
-                                                    alt="bblunt" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-
-                                                <img src="https://www.combonation.in/storage/8850/63b422e2ebeb1_logo-resize-03.png"
-                                                    alt="beardo" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-															
-                                                <img src="https://www.combonation.in/storage/13497/63f8827d5cc5f_Beautisoul.png" alt="beautisoul" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-															
-                                                <img src="https://www.combonation.in/storage/10835/63e0da1c14983_bella-vita-logo.png" alt="bella-vita" style={{width: "100px", height: "auto"}}/>
-                                            </Link>  
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-															
-                                                <img src="https://www.combonation.in/storage/14946/6405b8f525767_Bie-logo.png" alt="beauty-in-everything" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                
-                                                <img src="https://www.combonation.in/storage/9081/63c52e04d63a4_BHPC.png" alt="bhpc-sports" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                
-                                                <img src="https://www.combonation.in/storage/8852/63b42326a3d6e_logo-resize-05.png" alt="bioderma" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                
-                                                <img src="https://www.combonation.in/storage/11359/63e78192c5227_biotique-logo.png" alt="biotique" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                        
-                                        <div class="col-lg-3 col-50 text-center">
-                                            <Link to="#">
-                                                <img src="https://www.combonation.in/assets_new/img/viewall.png" alt="view-all-brands" style={{width: "100px", height: "auto"}}/>
-                                            </Link>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-geo-alt"></i> LOCATE MY STORES
-                            </a>
-                            <ul class="dropdown-menu" id="stores-menu">
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/airia-mall-store">AIRIA Mall Store</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/akshardham-store">Akshardham Store</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/amritsar-store">Amritsar Store</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/faridabad">Faridabad</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/gk-m-block">GK M Block</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/kanpur-store">Kanpur Store</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/lajpat-nagar">Lajpat Nagar</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/mgf-metropolitan-store">MGF Metropolitan Store</Link></li>
-                                <li style={{ marginTop:"0.5rem"}}><Link to="https://www.combonation.in/store/punjabi-bagh">Punjabi Bagh</Link></li>
-                        </ul>
-                        </li>
-
-                    </ul>
-
-                </div>
+                          </div>
+                        ))}
+                        <div className="col-lg-3 col-50 text-center">
+                          <Link to='/brandlogolist'>
+                          <img src="https://www.combonation.in/assets_new/img/viewall.png" alt="view-all" style={{ width: "100px", height: "auto" }} />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </li>
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i className="bi bi-geo-alt"></i> LOCATE MY STORES
+                  </Link>
+                  <ul className="dropdown-menu" id="stores-menu">
+                    {store.map((e) => (
+                      <li style={{ marginTop: "0.5rem" }} key={e.id}>
+                        <Link to={`/store/${e.id}`}>{e.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+            </div>
 
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-            {/* { <ul className="navbar-nav me-auto mb-2">
+              {/* { <ul className="navbar-nav me-auto mb-2">
                 <li className="nav-item dropdown">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -620,7 +529,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     Brands
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
 
 
                   </Link>
@@ -680,7 +589,7 @@ const Header = () => {
                   </ul>
                 </li>
               </ul>}  */}
-              <ul className="navbar-nav ml-auto" id="navbar-right">
+              <ul className="navbar-nav ml-auto" id="navbar-right" style={{marginLeft:"auto"}}>
                 <li className="nav-item">
                   <Link to="/signin" className="nav-link">
                     <i className="bi bi-person-circle"></i>

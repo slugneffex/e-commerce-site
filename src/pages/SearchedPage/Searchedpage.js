@@ -17,9 +17,9 @@ const Searchedpage = () => {
             {data.combos.map((e) => (
               <div className="col-lg-3 col-md-3" key={e.id}>
                 <div className="newComboCart">
-                  <div className="cart-img-sec">
+                  <div className="cart-img-sec" style={{position: "relative" }}>
                     <Link className="addtofavCategory">
-                      <i className="bi bi-heart"></i>
+                      <i className="bi bi-heart" style={{ position: "absolute" , right: ".8rem", top: ".5rem" }}></i>
                     </Link>
                     <Link to={`/combo/${e.id}`}>
                       <img src={e.meta_img?.original_url} alt="img"></img>
