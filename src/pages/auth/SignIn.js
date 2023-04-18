@@ -27,15 +27,21 @@ const SignIn = () => {
     console.log(userObject);
     setUser(userObject);
     localStorage.setItem("gmail-token",response.credential )
-   
+    localStorage.setItem("name",userObject.name )
+    localStorage.setItem("email",userObject.email )
+    localStorage.setItem("img",userObject.picture )
+
+
+    // user?localStorage.setItem("gmailname",user.name ):""
     document.getElementById("signInDiv");
   }
 
+  // useEffect(()=>{
+  //   user?localStorage.setItem("gmailname",user.name ):""
+    
+
+  // })
   
-  // function Signout(e) {
-  //   setUser({});
-  //   document.getElementById("signInDiv").hidden = false;
-  // }
   useEffect(() => {
     /* global google */
 
@@ -115,6 +121,8 @@ const SignIn = () => {
     newdata[e.target.id] = e.target.value;
     setData(newdata);
   }
+  const gmailname = localStorage.getItem("name")
+  console.log(gmailname)
 
   return (
     <>
@@ -210,13 +218,13 @@ const SignIn = () => {
                             <div>
                               <div id="signInDiv"></div>
 
-                              {user&&localStorage.setItem("name",user.name )}
+                              {/* {user?localStorage.setItem("gmailname",user.name ):""} */}
                              
 
-                              <div>
+                              {/* <div>
                                 <h3>{user.name}</h3>
-                              </div>
-                              } */}
+                              </div> */}
+                             
                             </div>
 
                             <div></div>
@@ -236,6 +244,8 @@ const SignIn = () => {
                                   console.log(response);
                                   setFaceboook(response.data);
                                   localStorage.setItem("facebook",response.data.accessToken )
+                                  localStorage.setItem("Fname",response.data.name )
+                                  localStorage.setItem("Fimg",response.data.picture.data.url )
                                   
                                 }}
                                 onReject={(error) => {
