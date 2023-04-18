@@ -7,7 +7,7 @@ h1 h2 h3 h4 h5 h6 p {
 }
 
 .row ul li {
-    /* color: #FFF; */
+    color: #FFF;
     margin-top: 1rem;
     line-height: 2;
 }
