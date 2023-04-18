@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
@@ -7,23 +7,36 @@ import Features from "../../components/inc/Fetures";
 import jwtDecode from "jwt-decode";
 
 const SignIn = () => {
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const gmailToken = localStorage.getItem("gmaiToken");
+
+  //   if (token) {
+  //     navigate("/Acccount");
+  //   } else if (gmailToken) {
+  //     navigate("/Acccount");
+  //   }
+  // }, []);
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
-
-  function handleCallbackResponse(response) {
-    //make this onclick function instead of line 36 dont make line 36 to the onclick function
-    console.log("encoded jwt: " + response.credential);
-    const userObject = jwtDecode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
-    document.getElementById("signInDiv");
-  }
-
   // function Signout(e) {
   //   setUser({});
   //   document.getElementById("signInDiv").hidden = false;
   // }
+
+  const handleCallbackResponse = useCallback((response) => {
+    console.log("encoded jwt: " + response.credential);
+    const userObject = jwtDecode(response.credential);
+    localStorage.setItem("gmailToken", response.credential);
+
+    console.log(userObject);
+    setUser(userObject);
+
+    document.getElementById("signInDiv");
+
+  }, []);
 
   useEffect(() => {
     /* global google */
@@ -41,19 +54,15 @@ const SignIn = () => {
       shape: "circle",
       width: "400px",
     });
-  }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/Acccount");
-    }
-  });
+  }, [handleCallbackResponse]);
 
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+
+  console.log(user.name)
 
   const url = `${process.env.REACT_APP_BASE_URL}/login-email`;
 
@@ -91,10 +100,16 @@ const SignIn = () => {
           localStorage.setItem("phone", res.data.user?.phone);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("id", res.data.user?.id);
-          navigate("/");
+          // navigate("/");
         }
       });
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/Acccount");
+    }
+  });
 
   function handle(e) {
     const newdata = { ...data };
