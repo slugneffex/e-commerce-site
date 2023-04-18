@@ -49,7 +49,18 @@ const Category = () => {
       (a, b) => a.selling_price - b.selling_price
     );
     setCategory(sortedData);
-    setProduct(sortedDataProducts)
+    setProduct(sortedDataProducts);
+  };
+
+  const filterProductOne = () => {
+    const filteredProducts = category.filter((product) => {
+      return product.selling_price >= 500 && product.selling_price <= 1000;
+    });
+    const filteredSingleProducts = product.filter((product) => {
+      return product.selling_price >= 500 && product.selling_price <= 1000;
+    });
+    setCategory(filteredProducts);
+    setProduct(filteredSingleProducts)
   };
 
   useEffect(() => {
@@ -392,9 +403,9 @@ const Category = () => {
                         <Dropdown.Item onClick={sortData}>
                           High to low
                         </Dropdown.Item>
-                        {/* <Dropdown.Item href="#/action-3">
-                          Something else
-                        </Dropdown.Item> */}
+                        <Dropdown.Item onClick={filterProductOne}>
+                          500 to 1000
+                        </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
