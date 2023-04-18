@@ -12,6 +12,8 @@ const Account = () => {
   const email = localStorage.getItem("email");
   const phone = localStorage.getItem("phone");
 
+
+  
  
  
 
