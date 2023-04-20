@@ -2,20 +2,25 @@ import React from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./accountDetails.css";
 import Sidebar from "./Sidebar";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Account = () => {
   const navigate = useNavigate();
-  
 
+  // Noraml Login
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const phone = localStorage.getItem("phone");
 
+  // Gmail Login
+  const gmailName = localStorage.getItem("gmailname");
+  const gmailemail = localStorage.getItem("gmailemail");
+  const gmailimg = localStorage.getItem("gmailimg");
 
-  
- 
- 
+  // facebook login
+  const facebookName = localStorage.getItem("Facebook-name");
+  const facebookImg = localStorage.getItem("Facebook-img");
+  const facebookEmail = localStorage.getItem("Facebook-email");
 
   return (
     <>
@@ -31,18 +36,35 @@ const Account = () => {
                 <div className="card">
                   <div className="row">
                     <div className="col-md-3" id="edit-button">
-                      <img
-                        src="./assets/img/accountImg/Group_2388.png"
-                        style={{ width: "200px", height: "200px" }}
-                        alt="imgg"
-                      />
+                      {gmailimg ? (
+                        <img
+                          src={gmailimg}
+                          style={{ width: "200px", height: "200px",borderRadius:"100%" }}
+                          alt="imgg"
+                        />
+                      ) : (
+                        <img
+                          src={facebookImg}
+                          style={{ width: "200px", height: "200px",borderRadius:"100%" }}
+                          alt="imgg"
+                        />
+                      )}
                     </div>
                     <div className="col-md-6 second">
-                      <h5 className="changePassword">{name}</h5>
+                      {name ? (
+                        <h5 className="changePassword">{name}</h5>
+                      ) : gmailName ? (
+                        <h5 className="changePassword">{gmailName}</h5>
+                      ) : (
+                        <h5 className="changePassword">{facebookName}</h5>
+                      )}
+
                       {email ? (
                         <p>Email: {email}</p>
+                      ) : gmailemail ? (
+                        <p>{gmailemail}</p>
                       ) : (
-                        <p>lwra</p>
+                        <p>{facebookEmail}</p>
                       )}
 
                       <p>Phone: {phone}</p>
@@ -72,7 +94,14 @@ const Account = () => {
                         style={{ marginTop: "2rem" }}
                         onClick={() => {
                           localStorage.removeItem("token");
-
+                          localStorage.removeItem("gmail-token");
+                          localStorage.removeItem("gmailName");
+                          localStorage.removeItem("gmailemail");
+                          localStorage.removeItem("gmailimg");
+                          localStorage.removeItem("facebook-token");
+                          localStorage.removeItem("Facebook-name");
+                          localStorage.removeItem("Facebook-email");
+                          localStorage.removeItem("Facebook-img");
                           localStorage.removeItem("id");
                           localStorage.removeItem("name");
                           localStorage.removeItem("phone");
