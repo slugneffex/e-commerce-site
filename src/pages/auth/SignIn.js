@@ -36,11 +36,7 @@ const SignIn = () => {
     document.getElementById("signInDiv");
   }
 
-  // useEffect(()=>{
-  //   user?localStorage.setItem("gmailname",user.name ):""
-    
-
-  // })
+ 
   
   useEffect(() => {
     /* global google */

@@ -380,7 +380,7 @@ const Header = () => {
         {/*wcc end */}
 
         {/* navbar Start */}
-        <nav className="navbar navbar-expand-lg bg-light">
+        <nav className="navbar navbar-expand-lg bg-light ">
           <div className="container">
             {Array.isArray(logo) &&
               logo.map((e) => (
