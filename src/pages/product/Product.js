@@ -180,7 +180,7 @@ const Product = () => {
 
                 <span className="priceinc">Price inclusive of all taxes</span>
               </div>
-              <div className="cart col-md-4">
+              <div className="cart">
                 {/* <div className="d-flex" style={{ alignItems: "center" }}>
                   <div className="" style={{ marginRight: "2rem" }}>
                   <span className="quant">Quantity:</span>

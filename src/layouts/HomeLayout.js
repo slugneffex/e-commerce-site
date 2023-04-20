@@ -7,7 +7,7 @@ import BottomBar from '../components/inc/BottomBar';
 const HomeLayout = ({children}) => {
   
   return (
-    <div>
+    <div style={{ width: "100vw"}}>
         <main>
             <Header></Header>
                 {children}

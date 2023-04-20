@@ -16,6 +16,9 @@
 .bii{
     margin-left: auto;
 }
+
+
+
 .card{
     padding: 2rem;
     border: 1px solid white;
@@ -296,3 +299,4 @@ a:link{
         font-size: 10px;
     }
 }
+
