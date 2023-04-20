@@ -25,11 +25,11 @@ const BrandProduct = () => {
   const [brandName, setBrandName] = useState([]);
   // filteration state
   const [filterBrand, setFilterBrand] = useState([]);
-  // const [selectedFilters, setSelectedFilters] = useState([]);
-  // const [filteredBrandProduct, setFilteredBrandProduct] = useState([]);
+
   const [filterPrice, setFilterPrice] = useState([]);
 
-  
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [checkedFilters, setCheckedFilters] = useState({});
 
   // filteration state end
 
@@ -65,25 +65,61 @@ const BrandProduct = () => {
 
   // filteration
 
-  const filterProducts = (minPrice, maxPrice) => {
-    const filteredProducts = filterBrand.filter((product) => {
-      return (
-        product.selling_price >= minPrice && product.selling_price <= maxPrice
-      );
-    });
-    setBrandProduct(filteredProducts);
-  };
+  // const filterProducts = (minPrice, maxPrice) => {
+  //   const filteredProducts = filterBrand.filter((product) => {
+  //     return (
+  //       product.selling_price >= minPrice && product.selling_price <= maxPrice
+  //     );
+  //   });
+  //   setBrandProduct(filteredProducts);
+  // };
 
-  const handleFilterPrice = (minPrice, maxPrice) => {
-    const filteredProducts = brandProduct.filter((product) => {
-      return (
-        product.selling_price >= minPrice && product.selling_price <= maxPrice
-      );
-    });
-    setFilterPrice(filteredProducts);
-  };
+  // const handleFilter = (minPrice, maxPrice) => {
+  //   const filtered = brandProduct.filter(product => {
+  //     const price = product.selling_price;
+  //     return (price >= minPrice && price <= maxPrice);
+  //   });
 
- 
+  //   setFilteredProducts(prevFilteredProducts => [
+  //     ...prevFilteredProducts,
+  //     ...filtered
+  //   ]);
+  // };
+
+  // const handleReset = () => {
+  //   setFilteredProducts([]);
+  // };
+
+  const handleFilter = (minPrice, maxPrice) => {
+    const key = `${minPrice}-${maxPrice}`;
+
+    if (checkedFilters[key]) {
+      // If the filter is already checked, remove it
+      const newFilters = { ...checkedFilters };
+      delete newFilters[key];
+      setCheckedFilters(newFilters);
+
+      // Update the filtered products list
+      const newFilteredProducts = filteredProducts.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilteredProducts(newFilteredProducts);
+    } else {
+      // If the filter is not checked, add it
+      setCheckedFilters({ ...checkedFilters, [key]: true });
+
+      // Update the filtered products list
+      const filtered = brandProduct.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+      setFilteredProducts((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered,
+      ]);
+    }
+  };
 
   // total brands
   const [brand, setBrand] = useState([]);
@@ -352,14 +388,58 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="form-check">
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={checkedFilters["50-499"]}
+                              onChange={() => handleFilter(50, 499)}
+                            />
+                            50-499
+                          </label>
+                          <br />
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={checkedFilters["500-999"]}
+                              onChange={() => handleFilter(500, 999)}
+                            />
+                            500-999
+                          </label>
+                          <br />
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={checkedFilters["1000-1999"]}
+                              onChange={() => handleFilter(1000, 1999)}
+                            />
+                            1000-1999
+                          </label>
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={checkedFilters["2000-4999"]}
+                              onChange={() => handleFilter(2000, 4999)}
+                            />
+                            2000-4999
+                          </label>
+                          <br />
+                          <label>
+                            <input
+                              type="checkbox"
+                              checked={checkedFilters["5000-500000"]}
+                              onChange={() => handleFilter(5000, 500000)}
+                            />
+                            5000 & Above
+                          </label>
+                          {/* <div className="form-check">
                             <input
                               type="radio"
                               name="priceFilter"
                               value="50-499"
                               className="form-check-input"
+                              onClick={() => handleFilter(50, 499)}
                               
-                              onClick={() =>  handleFilterPrice(50,499)}
+                              
                             />
                             <label className="form-check-label">
                               From ₹ 50 To ₹ 499
@@ -371,13 +451,13 @@ const BrandProduct = () => {
                               name="priceFilter"
                               value="500-999"
                               className="form-check-input"
-                              onClick={() =>  handleFilterPrice(500,999)}
-                             
+                              
+                              onClick={() => handleFilter(500, 999)}
                             />
                             <label className="form-check-label">
                               From ₹ 500 To ₹ 999
                             </label>
-                          </div>
+                          </div> */}
                           {/* <div className="form-check">
                             <input
                               type="radio"
@@ -506,76 +586,149 @@ const BrandProduct = () => {
               </div>
 
               <div className="row" style={{ marginTop: "1rem" }}>
-                {filterPrice.length > 0?filterPrice.map((e) =>(
-                  <div key={e.id}>{e.name}</div>
-                ) ):
-                brandProduct.map((p) => (
-                  <div className="col-md-4 " key={p.id}>
-                    <div className="newComboCart">
-                      <div
-                        className="cart-img-sec"
-                        style={{ position: "relative" }}
-                      >
-                        <Link className="addtofavCategory">
-                          <i
-                            className="bi bi-heart"
-                            style={{
-                              position: "absolute",
-                              right: "0.8rem",
-                              top: "0.5rem",
-                            }}
-                          ></i>
-                        </Link>
-                        <Link to={`/product/${p.id}`}>
-                          <img
-                            src={p.thumbnail_img?.original_url}
-                            alt="img"
-                            width="100%"
-                          ></img>
-                        </Link>
-                      </div>
+                {filteredProducts.length > 0
+                  ? filteredProducts.map((p) =>  <div className="col-md-4 " key={p.id}>
+                  <div className="newComboCart">
+                    <div
+                      className="cart-img-sec"
+                      style={{ position: "relative" }}
+                    >
+                      <Link className="addtofavCategory">
+                        <i
+                          className="bi bi-heart"
+                          style={{
+                            position: "absolute",
+                            right: "0.8rem",
+                            top: "0.5rem",
+                          }}
+                        ></i>
+                      </Link>
+                      <Link to={`/product/${p.id}`}>
+                        <img
+                          src={p.thumbnail_img?.original_url}
+                          alt="img"
+                          width="100%"
+                        ></img>
+                      </Link>
+                    </div>
 
-                      <div className="card-det-sec">
-                        <div className="headingCard pt-3">
-                          <span>{p.name.substring(0, 40)}</span>
+                    <div className="card-det-sec">
+                      <div className="headingCard pt-3">
+                        <span>{p.name.substring(0, 40)}</span>
+                      </div>
+                      {/* <div>
+                    <span className="packof">(Pack of 2)</span>
+                  </div> */}
+                      <div className="price-sec">
+                        <div
+                          className="col-4"
+                          style={{ textAlign: "end" }}
+                        >
+                          <span className="sp">₹{p.selling_price}</span>
                         </div>
-                        {/* <div>
-                          <span className="packof">(Pack of 2)</span>
-                        </div> */}
-                        <div className="price-sec">
-                          <div className="col-4" style={{ textAlign: "end" }}>
-                            <span className="sp">₹{p.selling_price}</span>
-                          </div>
-                          <div className="col-4">
-                            <del className="mrp">₹{p.mrp}</del>
-                          </div>
-                          <div className="col-4">
-                            <span className="discount">{p.discount}% OFF</span>
-                          </div>
+                        <div className="col-4">
+                          <del className="mrp">₹{p.mrp}</del>
                         </div>
-                        <div className="card-btn-sec ">
-                          <div
-                            className="btn_atc"
-                            onClick={() => {
-                              addToSingleCart(p);
-                            }}
-                            style={{
-                              cursor: "pointer",
-                            }}
+                        <div className="col-4">
+                          <span className="discount">
+                            {p.discount}% OFF
+                          </span>
+                        </div>
+                      </div>
+                      <div className="card-btn-sec ">
+                        <div
+                          className="btn_atc"
+                          onClick={() => {
+                            addToSingleCart(p);
+                          }}
+                          style={{
+                            cursor: "pointer",
+                          }}
+                        >
+                          <i
+                            className="bi bi-cart"
+                            id={p.id}
+                            style={{ color: "#fe9e2d" }}
                           >
-                            <i
-                              className="bi bi-cart"
-                              id={p.id}
-                              style={{ color: "#fe9e2d" }}
-                            >
-                              Add to Cart
-                            </i>
-                          </div>
+                            Add to Cart
+                          </i>
                         </div>
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>)
+                  : brandProduct.map((p) => (
+                      <div className="col-md-4 " key={p.id}>
+                        <div className="newComboCart">
+                          <div
+                            className="cart-img-sec"
+                            style={{ position: "relative" }}
+                          >
+                            <Link className="addtofavCategory">
+                              <i
+                                className="bi bi-heart"
+                                style={{
+                                  position: "absolute",
+                                  right: "0.8rem",
+                                  top: "0.5rem",
+                                }}
+                              ></i>
+                            </Link>
+                            <Link to={`/product/${p.id}`}>
+                              <img
+                                src={p.thumbnail_img?.original_url}
+                                alt="img"
+                                width="100%"
+                              ></img>
+                            </Link>
+                          </div>
+
+                          <div className="card-det-sec">
+                            <div className="headingCard pt-3">
+                              <span>{p.name.substring(0, 40)}</span>
+                            </div>
+                            {/* <div>
+                          <span className="packof">(Pack of 2)</span>
+                        </div> */}
+                            <div className="price-sec">
+                              <div
+                                className="col-4"
+                                style={{ textAlign: "end" }}
+                              >
+                                <span className="sp">₹{p.selling_price}</span>
+                              </div>
+                              <div className="col-4">
+                                <del className="mrp">₹{p.mrp}</del>
+                              </div>
+                              <div className="col-4">
+                                <span className="discount">
+                                  {p.discount}% OFF
+                                </span>
+                              </div>
+                            </div>
+                            <div className="card-btn-sec ">
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                }}
+                                style={{
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <i
+                                  className="bi bi-cart"
+                                  id={p.id}
+                                  style={{ color: "#fe9e2d" }}
+                                >
+                                  Add to Cart
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
               </div>
             </div>
           </div>
