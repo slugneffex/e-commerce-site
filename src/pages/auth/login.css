@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500&display=swap');
- body {
+
+body {
     font-family: 'Poppins', sans-serif;
     color: #464646;
- }
+}
 
 #loginBg {
     background-color: #fff1db;
@@ -32,6 +33,7 @@
 .loginCard .loginCard-head .off-coup {
     margin-top: 1rem;
 }
+
 .loginCard .loginCard-head .off-coup .coup-ex {
     padding: 0.5rem;
     border: 3px dotted #FE9E2D;
@@ -52,6 +54,7 @@
 .loginCard-body .form-control {
     padding: 0.6rem;
 }
+
 .loginCard-body .form-control::placeholder {
     color: #A7A7A7;
 }
@@ -80,6 +83,12 @@
     color: #A2A2A2;
 }
 
+#signInDiv .S9gUrf-YoZ4jf {
+    margin-left: 4.2rem;
+    margin-top: 1.5rem;
+}
+
+
 @media(max-width: 720px) {
     .loginCard .loginCard-head .off-det h1 {
         font-size: 16px;
@@ -103,10 +112,19 @@
         margin-right: 2rem;
     }
 
-    .social-login  img {
+    .social-login img {
         width: 60px;
         height: 60px;
         margin-left: -20px;
+    }
+
+    .social-login .d-flex .col-4 {
+        width: 33.333%;
+    }
+
+    #signInDiv .S9gUrf-YoZ4jf {
+        margin-left: 1.2rem;
+        margin-top: -1.5rem;
     }
 
 }
@@ -116,5 +134,3 @@
     color: #ffffff;
     padding: 0.6rem;
 }
-
-
