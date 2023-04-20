@@ -97,6 +97,11 @@ li {
   color: #FE9E2D;
 }
 
+input[type=checkbox]:checked {
+  background-color: #FE9E2D;
+  border: none;
+}
+
 @media (max-width: 720px) {
   .catcart {
     width: 50%;
