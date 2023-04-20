@@ -254,7 +254,7 @@ const Footer = () => {
       </footer>
 
       {/* Mobile Footer */}
-      <footer className="mobile" style={{ maxWidth: "100vw", overflowX: "hidden", paddingBottom: "15px" }}>
+      <footer className="mobile" style={{ maxWidth: "100vw", overflowX: "hidden", paddingBottom: "15px",backgroundColor: "#000" }}>
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-md-6">

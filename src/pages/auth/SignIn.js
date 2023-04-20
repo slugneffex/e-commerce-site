@@ -7,6 +7,11 @@ import Features from "../../components/inc/Fetures";
 import jwtDecode from "jwt-decode";
 import { LoginSocialFacebook } from "reactjs-social-login";
 
+import { FacebookLoginButton } from "react-social-login-buttons";
+import zIndex from "@mui/material/styles/zIndex";
+
+
+
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -142,7 +147,7 @@ const SignIn = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="loginCard-body py-5">
+                  <div className="loginCard-body pt-5">
                     <div className="row text-center">
                       <div className="d-flex">
                         <p>
@@ -199,10 +204,14 @@ const SignIn = () => {
                       </form>
                       <div className="social-login mt-3">
                         <span>or Login Via</span>
-                        <div className="d-flex my-5">
-                          <div className="col-4">
-                            <div>
-                              <div id="signInDiv"></div>
+                        <div className="d-flex mt-5 align-items-center justify-center">
+                          <div className="col-4" style={{position: "relative"}}>
+                            
+                              <div id="signInDiv" style={{opacity: "0",zIndex: 1,marginRight: " 1rem", position: "absolute", left: "0"}}></div>
+                              <img style={{}}
+                                src="https://www.combonation.in/assets_new/img/social/google.png"
+                                alt="google" width="100px"                                                         
+                              />
 
                               {/* {user?localStorage.setItem("gmailname",user.name ):""} */}
 
@@ -210,15 +219,17 @@ const SignIn = () => {
                                 <h3>{user.name}</h3>
 
                               </div> */}
+
                             </div>
 
-                            <div></div>
+
+                            {/* <div></div>
                             <div style={{ boxShadow: "none" }}>
-                              {/* <img
+                              <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
                                 alt="google"                                                             
-                              /> */}
-                            </div>
+                              />
+                            </div> */}
                           </div>
                           <div className="col-4">
                             <div  style={{ boxShadow: "none" }}>

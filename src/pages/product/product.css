@@ -298,6 +298,12 @@ a {
     font-size: 26px;
     font-weight: bold;
 }
+
+.cart .addCart {
+    width: 30%;
+}
+
+
 /* Review Card End */
 
 @media(max-width: 720px) {
@@ -332,4 +338,14 @@ a {
     .row .desc-sec .nav .nav-item button {
         font-size: 10px;
     }
+
+    .cart .addCart {
+        width: 100%;
+    }
+
+    .addCart {
+        width: 100%;
+    }
+
+   
 }
