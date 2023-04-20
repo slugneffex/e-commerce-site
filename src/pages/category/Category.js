@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -26,6 +26,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Category = () => {
   // Categories products combo & single Products
+  const navigate = useNavigate();
   const { id } = useParams();
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
@@ -33,6 +34,7 @@ const Category = () => {
   // filteration state
   const [originalCategory, setOriginalCategory] = useState([]);
   const [originalProduct, setOriginalProduct] = useState([]);
+
   // filteration state end
   const [error, setError] = useState(null);
 
@@ -106,6 +108,7 @@ const Category = () => {
     setProduct(filteredProducts);
     setCategory(filteredSingleProducts);
   };
+
 
   // Categories
   const [categoris, setCategories] = useState([]);
@@ -298,11 +301,11 @@ const Category = () => {
   };
 
   function handleClick(categoryId) {
-    window.location.href = `/category/${categoryId}`;
+    navigate(`/category/${categoryId}`);
   }
 
   function handleClickbrand(brandId) {
-    window.location.href = `/brand/${brandId}`;
+    navigate(`/brand/${brandId}`);
   }
 
   // if there is no combo hide the section of combos
@@ -385,29 +388,6 @@ const Category = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
-              {/* <div className="card">
-                <div
-                  className="accordion accordion-flush accc"
-                  id="accordionFlushExample"
-                >
-                  {categoris.map((e) => (
-                    <Link to={`/category/${e.id}`} key={e.id}>
-                      <div className="accordion-item">
-                        <button
-                          className="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseThree"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseThree"
-                        >
-                          {e.name}
-                        </button>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div> */}
               <div className="card">
                 <div className="card-header">Filter By</div>
                 <div className="card-body">
@@ -446,18 +426,14 @@ const Category = () => {
                           />{" "}
                           {categoris.map((e) => (
                             <div className="form-check" key={e.id}>
-                              <Link
-                                to={`/category/${e.id}`}
+                              <input
+                                type="radio"
+                                name="category_id"
+                                // id={`category_id${category.id}`}
+                                // defaultValue={category.id}
                                 className="form-check-input"
-                              >
-                                <input
-                                  type="radio"
-                                  name="category_id"
-                                  // id={`category_id${category.id}`}
-                                  // defaultValue={category.id}
-                                  className="form-check-input"
-                                />
-                              </Link>
+                                onClick={() => handleClick(e.id)}
+                              />
 
                               <label className="form-check-label" htmlFor={103}>
                                 {e.name} (106)
@@ -542,135 +518,70 @@ const Category = () => {
 
                       <Collapse in={isOpen3}>
                         <div id="collapseExample">
-                          <form
-                            action="https://www.combonation.in/getFilterProduct"
-                            method="GET"
-                            id="filterForm103"
-                          >
+                          <input
+                            type="hidden"
+                            name="_token"
+                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                          />{" "}
+                          <div className="form-check">
                             <input
-                              type="hidden"
-                              name="_token"
-                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
-                            />{" "}
-                            <div className="form-check">
-                              <input
-                                type="radio"
-                                name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
-                                className="form-check-input"
-                                onClick={() => filterProducts(50, 499)}
-                              />
-                              <label className="form-check-label" htmlFor={103}>
-                                From ₹ 50 To ₹ 499
-                              </label>
-                            </div>
-                          </form>
-
-                          <form
-                            action="https://www.combonation.in/getFilterProduct"
-                            method="GET"
-                            id="filterForm103"
-                          >
+                              type="radio"
+                              name="priceFilter"
+                              value="0-499"
+                              className="form-check-input"
+                              onClick={() => filterProducts(50, 499)}
+                            />
+                            <label className="form-check-label">
+                              From ₹ 50 To ₹ 499
+                            </label>
+                          </div>
+                          <div className="form-check">
                             <input
-                              type="hidden"
-                              name="_token"
-                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
-                            />{" "}
-                            <div className="form-check">
-                              <input
-                                type="radio"
-                                name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
-                                className="form-check-input"
-                                onClick={() => filterProducts(500, 999)}
-                              />
-                              <label className="form-check-label" htmlFor={103}>
-                                From ₹ 500 To ₹ 999
-                              </label>
-                            </div>
-                          </form>
-
-                          <form
-                            action="https://www.combonation.in/getFilterProduct"
-                            method="GET"
-                            id="filterForm103"
-                          >
+                              type="radio"
+                              name="priceFilter"
+                              value="500-999"
+                              className="form-check-input"
+                              onClick={() => filterProducts(500, 999)}
+                            />
+                            <label className="form-check-label">
+                              From ₹ 500 To ₹ 999
+                            </label>
+                          </div>
+                          <div className="form-check">
                             <input
-                              type="hidden"
-                              name="_token"
-                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
-                            />{" "}
-                            <div className="form-check">
-                              <input
-                                type="radio"
-                                name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
-                                className="form-check-input"
-                                onClick={() => filterProducts(1000, 1999)}
-                              />
-                              <label className="form-check-label" htmlFor={103}>
-                                From ₹ 1000 To ₹ 1999
-                              </label>
-                            </div>
-                          </form>
-
-                          <form
-                            action="https://www.combonation.in/getFilterProduct"
-                            method="GET"
-                            id="filterForm103"
-                          >
+                              type="radio"
+                              name="priceFilter"
+                              value="1000-1999"
+                              className="form-check-input"
+                              onClick={() => filterProducts(1000, 1999)}
+                            />
+                            <label className="form-check-label">
+                              From ₹ 1000 To ₹ 1999
+                            </label>
+                          </div>
+                          <div className="form-check">
                             <input
-                              type="hidden"
-                              name="_token"
-                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
-                            />{" "}
-                            <div className="form-check">
-                              <input
-                                type="radio"
-                                name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
-                                className="form-check-input"
-                                onClick={() => filterProducts(2000, 4999)}
-                              />
-                              <label className="form-check-label" htmlFor={103}>
-                                From ₹ 2000 To ₹ 4999
-                              </label>
-                            </div>
-                          </form>
-
-                          <form
-                            action="https://www.combonation.in/getFilterProduct"
-                            method="GET"
-                            id="filterForm103"
-                          >
+                              type="radio"
+                              name="priceFilter"
+                              value="2000-4999"
+                              className="form-check-input"
+                              onClick={() => filterProducts(2000, 4999)}
+                            />
+                            <label className="form-check-label">
+                              From ₹ 2000 To ₹ 4999
+                            </label>
+                          </div>
+                          <div className="form-check">
                             <input
-                              type="hidden"
-                              name="_token"
-                              defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
-                            />{" "}
-                            <div className="form-check">
-                              <input
-                                type="radio"
-                                name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
-                                className="form-check-input"
-                                onClick={() => filterProducts(5000, 50000)}
-                              />
-                              <label className="form-check-label" htmlFor={103}>
-                                From ₹ 5000 And Above
-                              </label>
-                            </div>
-                          </form>
+                              type="radio"
+                              name="priceFilter"
+                              className="form-check-input"
+                              onClick={() => filterProducts(5000, 50000)}
+                            />
+                            <label className="form-check-label">
+                              From ₹ 5000 & Above
+                            </label>
+                          </div>
                         </div>
                       </Collapse>
                     </div>
