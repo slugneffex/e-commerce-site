@@ -24,9 +24,6 @@ const BrandProduct = () => {
   const [brandProduct, setBrandProduct] = useState([]);
   const [brandName, setBrandName] = useState([]);
   // filteration state
-  const [filterBrand, setFilterBrand] = useState([]);
-
-  const [filterPrice, setFilterPrice] = useState([]);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
@@ -47,7 +44,6 @@ const BrandProduct = () => {
           options
         );
         setBrandProduct(response.data.products.data);
-        setFilterBrand(response.data.products.data);
         setBrandName(response.data.brand);
       } catch (error) {
         if (error.response && error.response.status === 429) {
@@ -64,31 +60,6 @@ const BrandProduct = () => {
   }, [brand_id]);
 
   // filteration
-
-  // const filterProducts = (minPrice, maxPrice) => {
-  //   const filteredProducts = filterBrand.filter((product) => {
-  //     return (
-  //       product.selling_price >= minPrice && product.selling_price <= maxPrice
-  //     );
-  //   });
-  //   setBrandProduct(filteredProducts);
-  // };
-
-  // const handleFilter = (minPrice, maxPrice) => {
-  //   const filtered = brandProduct.filter(product => {
-  //     const price = product.selling_price;
-  //     return (price >= minPrice && price <= maxPrice);
-  //   });
-
-  //   setFilteredProducts(prevFilteredProducts => [
-  //     ...prevFilteredProducts,
-  //     ...filtered
-  //   ]);
-  // };
-
-  // const handleReset = () => {
-  //   setFilteredProducts([]);
-  // };
 
   const handleFilter = (minPrice, maxPrice) => {
     const key = `${minPrice}-${maxPrice}`;
@@ -120,6 +91,8 @@ const BrandProduct = () => {
       ]);
     }
   };
+
+  // Filterration end
 
   // total brands
   const [brand, setBrand] = useState([]);
@@ -238,11 +211,17 @@ const BrandProduct = () => {
   };
 
   function handleClick(categoryId) {
+    setFilteredProducts([]);
+    setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
+    // window.location.reload(`/category/${categoryId}`)
   }
 
   function handleClickbrand(brandId) {
+    setFilteredProducts([]);
+    setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
+    // window.location.reload(`/brand/${brandId}`)
   }
 
   return (
@@ -388,111 +367,91 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <label>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              50-499
+                            </label>
                             <input
+                              style={{ marginLeft: "7rem" }}
+                              class="form-check-input"
                               type="checkbox"
+                              value=""
                               checked={checkedFilters["50-499"]}
                               onChange={() => handleFilter(50, 499)}
+                              id="flexCheckDefault"
                             />
-                            50-499
-                          </label>
-                          <br />
-                          <label>
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              500-999
+                            </label>
                             <input
+                              style={{ marginLeft: "6.45rem" }}
+                              class="form-check-input"
                               type="checkbox"
+                              value=""
                               checked={checkedFilters["500-999"]}
                               onChange={() => handleFilter(500, 999)}
+                              id="flexCheckDefault"
                             />
-                            500-999
-                          </label>
-                          <br />
-                          <label>
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              1000-1999
+                            </label>
                             <input
+                              style={{ marginLeft: "5.88rem" }}
+                              class="form-check-input"
                               type="checkbox"
+                              value=""
                               checked={checkedFilters["1000-1999"]}
                               onChange={() => handleFilter(1000, 1999)}
+                              id="flexCheckDefault"
                             />
-                            1000-1999
-                          </label>
-                          <label>
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              2000-4999
+                            </label>
                             <input
+                              style={{ marginLeft: "5.34rem" }}
+                              class="form-check-input"
                               type="checkbox"
+                              value=""
                               checked={checkedFilters["2000-4999"]}
                               onChange={() => handleFilter(2000, 4999)}
+                              id="flexCheckDefault"
                             />
-                            2000-4999
-                          </label>
-                          <br />
-                          <label>
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              5000 & Above
+                            </label>
                             <input
+                              style={{ marginLeft: "3.963rem" }}
+                              class="form-check-input"
                               type="checkbox"
+                              value=""
                               checked={checkedFilters["5000-500000"]}
                               onChange={() => handleFilter(5000, 500000)}
+                              id="flexCheckDefault"
                             />
-                            5000 & Above
-                          </label>
-                          {/* <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="50-499"
-                              className="form-check-input"
-                              onClick={() => handleFilter(50, 499)}
-                              
-                              
-                            />
-                            <label className="form-check-label">
-                              From ₹ 50 To ₹ 499
-                            </label>
                           </div>
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="500-999"
-                              className="form-check-input"
-                              
-                              onClick={() => handleFilter(500, 999)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 500 To ₹ 999
-                            </label>
-                          </div> */}
-                          {/* <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="1000-1999"
-                              className="form-check-input"
-                             
-                            />
-                            <label className="form-check-label">
-                              From ₹ 1000 To ₹ 1999
-                            </label>
-                          </div> */}
-                          {/* <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="2000-4999"
-                              className="form-check-input"
-                              onClick={() => filterProducts(2000, 4999)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 2000 To ₹ 4999
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="category_id"
-                              className="form-check-input"
-                              onClick={() => filterProducts(5000, 50000)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 5000 & Above
-                            </label>
-                          </div> */}
                         </div>
                       </Collapse>
                     </div>
@@ -587,76 +546,78 @@ const BrandProduct = () => {
 
               <div className="row" style={{ marginTop: "1rem" }}>
                 {filteredProducts.length > 0
-                  ? filteredProducts.map((p) =>  <div className="col-md-4 " key={p.id}>
-                  <div className="newComboCart">
-                    <div
-                      className="cart-img-sec"
-                      style={{ position: "relative" }}
-                    >
-                      <Link className="addtofavCategory">
-                        <i
-                          className="bi bi-heart"
-                          style={{
-                            position: "absolute",
-                            right: "0.8rem",
-                            top: "0.5rem",
-                          }}
-                        ></i>
-                      </Link>
-                      <Link to={`/product/${p.id}`}>
-                        <img
-                          src={p.thumbnail_img?.original_url}
-                          alt="img"
-                          width="100%"
-                        ></img>
-                      </Link>
-                    </div>
+                  ? filteredProducts.map((p) => (
+                      <div className="col-md-4 " key={p.id}>
+                        <div className="newComboCart">
+                          <div
+                            className="cart-img-sec"
+                            style={{ position: "relative" }}
+                          >
+                            <Link className="addtofavCategory">
+                              <i
+                                className="bi bi-heart"
+                                style={{
+                                  position: "absolute",
+                                  right: "0.8rem",
+                                  top: "0.5rem",
+                                }}
+                              ></i>
+                            </Link>
+                            <Link to={`/product/${p.id}`}>
+                              <img
+                                src={p.thumbnail_img?.original_url}
+                                alt="img"
+                                width="100%"
+                              ></img>
+                            </Link>
+                          </div>
 
-                    <div className="card-det-sec">
-                      <div className="headingCard pt-3">
-                        <span>{p.name.substring(0, 40)}</span>
-                      </div>
-                      {/* <div>
+                          <div className="card-det-sec">
+                            <div className="headingCard pt-3">
+                              <span>{p.name.substring(0, 40)}</span>
+                            </div>
+                            {/* <div>
                     <span className="packof">(Pack of 2)</span>
                   </div> */}
-                      <div className="price-sec">
-                        <div
-                          className="col-4"
-                          style={{ textAlign: "end" }}
-                        >
-                          <span className="sp">₹{p.selling_price}</span>
-                        </div>
-                        <div className="col-4">
-                          <del className="mrp">₹{p.mrp}</del>
-                        </div>
-                        <div className="col-4">
-                          <span className="discount">
-                            {p.discount}% OFF
-                          </span>
+                            <div className="price-sec">
+                              <div
+                                className="col-4"
+                                style={{ textAlign: "end" }}
+                              >
+                                <span className="sp">₹{p.selling_price}</span>
+                              </div>
+                              <div className="col-4">
+                                <del className="mrp">₹{p.mrp}</del>
+                              </div>
+                              <div className="col-4">
+                                <span className="discount">
+                                  {p.discount}% OFF
+                                </span>
+                              </div>
+                            </div>
+                            <div className="card-btn-sec ">
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                }}
+                                style={{
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <i
+                                  className="bi bi-cart"
+                                  id={p.id}
+                                  style={{ color: "#fe9e2d" }}
+                                >
+                                  Add to Cart
+                                </i>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="card-btn-sec ">
-                        <div
-                          className="btn_atc"
-                          onClick={() => {
-                            addToSingleCart(p);
-                          }}
-                          style={{
-                            cursor: "pointer",
-                          }}
-                        >
-                          <i
-                            className="bi bi-cart"
-                            id={p.id}
-                            style={{ color: "#fe9e2d" }}
-                          >
-                            Add to Cart
-                          </i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>)
+                    ))
                   : brandProduct.map((p) => (
                       <div className="col-md-4 " key={p.id}>
                         <div className="newComboCart">
