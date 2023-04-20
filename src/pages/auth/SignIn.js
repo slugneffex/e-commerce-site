@@ -5,44 +5,33 @@ import HomeLayout from "../../layouts/HomeLayout";
 import "./login.css";
 import Features from "../../components/inc/Fetures";
 import jwtDecode from "jwt-decode";
-
 import { LoginSocialFacebook } from "reactjs-social-login";
+
 import { FacebookLoginButton } from "react-social-login-buttons";
 import zIndex from "@mui/material/styles/zIndex";
+
+
+
 
 const SignIn = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({});
   const [facebook, setFaceboook] = useState(null);
-  // const [accessToken, setAccessToken] = useState('');
-
-  
 
   //FOR GOOGLE LOGIN
-  
-
   function handleCallbackResponse(response) {
     console.log("encoded jwt: " + response.credential);
     const userObject = jwtDecode(response.credential);
     console.log(userObject);
     setUser(userObject);
-    localStorage.setItem("gmail-token",response.credential )
-    localStorage.setItem("name",userObject.name )
-    localStorage.setItem("email",userObject.email )
-    localStorage.setItem("img",userObject.picture )
-
-
-    // user?localStorage.setItem("gmailname",user.name ):""
+    localStorage.setItem("gmail-token", response.credential);
+    localStorage.setItem("gmailname", userObject.name);
+    localStorage.setItem("gmailemail", userObject.email);
+    localStorage.setItem("gmailimg", userObject.picture);
     document.getElementById("signInDiv");
   }
 
-  // useEffect(()=>{
-  //   user?localStorage.setItem("gmailname",user.name ):""
-    
-
-  // })
-  
   useEffect(() => {
     /* global google */
 
@@ -66,9 +55,12 @@ const SignIn = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/Acccount");
+    } else if (localStorage.getItem("gmail-token")) {
+      navigate("/Acccount");
+    } else if (localStorage.getItem("facebook-token")) {
+      navigate("/Acccount");
     }
   });
-
 
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -122,8 +114,6 @@ const SignIn = () => {
     newdata[e.target.id] = e.target.value;
     setData(newdata);
   }
-  const gmailname = localStorage.getItem("name")
-  console.log(gmailname)
 
   return (
     <>
@@ -224,12 +214,13 @@ const SignIn = () => {
                               />
 
                               {/* {user?localStorage.setItem("gmailname",user.name ):""} */}
-                             
 
                               {/* <div>
                                 <h3>{user.name}</h3>
 
                               </div> */}
+
+                            </div>
 
 
                             {/* <div></div>
@@ -241,28 +232,38 @@ const SignIn = () => {
                             </div> */}
                           </div>
                           <div className="col-4">
-                            <a href="#/" style={{ boxShadow: "none" }}>
+                            <div  style={{ boxShadow: "none" }}>
                               <LoginSocialFacebook
                                 appId="1727203981032521"
                                 autoLoad={false}
                                 onResolve={(response) => {
                                   console.log(response);
                                   setFaceboook(response.data);
-                                  localStorage.setItem("facebook",response.data.accessToken )
-                                  localStorage.setItem("Fname",response.data.name )
-                                  localStorage.setItem("Fimg",response.data.picture.data.url )
-                                  
+                                  localStorage.setItem(
+                                    "facebook-token",
+                                    response.data.accessToken
+                                  );
+                                  localStorage.setItem(
+                                    "Facebook-name",
+                                    response.data.name
+                                  );
+                                  localStorage.setItem(
+                                    "Facebook-email",
+                                    response.data.email
+                                  );
+                                  localStorage.setItem(
+                                    "Facebook-img",
+                                    response.data.picture.data.url
+                                  );
                                 }}
                                 onReject={(error) => {
                                   console.log(error);
                                 }}
-                                
                               >
                                 <img
-                                src="https://www.combonation.in/assets_new/img/social/facebook.png"
-                                alt=""
-                              />
-                              
+                                  src="https://www.combonation.in/assets_new/img/social/facebook.png"
+                                  alt=""
+                                />
                               </LoginSocialFacebook>
                               {/* {user ? (
                                 <div>
@@ -272,8 +273,7 @@ const SignIn = () => {
                               ) : (
                                 ""
                               )} */}
-                              
-                            </a>
+                            </div>
                           </div>
                           <div className="col-4">
                             <a href="#/" style={{ boxShadow: "none" }}>
