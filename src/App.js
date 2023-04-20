@@ -32,6 +32,13 @@ import Freebies from "./pages/FreebiePage/Freebies";
 import Thanks from "./pages/thankyou/Thanks";
 import OrderHistory from "./pages/OrderHistory/OrderHistory";
 
+import Error from "./pages/ErrorPages/Error";
+import Noresult from "./pages/ErrorPages/Noresult";
+import ServerError from "./pages/ErrorPages/ServerError";
+import Expired from "./pages/ErrorPages/Expired";
+
+
+
 const App = () => {
   return (
     <Routes>
@@ -76,6 +83,11 @@ const App = () => {
       <Route path="/orderhistory" element={<OrderHistory />} />
 
       <Route path="*" render={() => <Navigate to="/" />} />
+
+      <Route path="/Error" element={<Error/>}/>
+      <Route path="/Noresult" element={<Noresult/>}/>
+      <Route path="/ServerError" element={<ServerError/>}/>
+      <Route path="/Expired" element={<Expired/>}/>
     </Routes>
   );
 };

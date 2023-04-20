@@ -795,7 +795,41 @@ const Cart = () => {
                 {ComboSection}
                 {SingleCartSection}
               </div>
-              <div className="col-md-4 mt-5 overviewMobile">
+              
+              <div className="col-md-4 mt-5  overviewMobile">
+                <div class="coupon-sec mb-3 text-center">
+                  <div class="coupon-card" style={{border:"5px dotted  ", borderColor:"#fe9e2d"}}>
+                    <div class="card-head">
+                      <div class="tag">
+                        <i class="bi bi-tag-fill"></i>
+                      </div>
+                      <div class="det">
+                        <span class="use">Use Code</span>
+                        <br/>
+                          <span >SIGNUP10</span>
+                      </div>
+                    </div>
+                    <div class="vl"></div>
+                    <div class="card-body text-center">
+                      <div class="terms">
+                        <p>SIGNUP10</p>
+                      </div>
+                     {/* <div class="offer">
+                         <div class="form-group">
+                        <form action="https://www.combonation.in/apply-coupon" method="POST">
+                        <input type="hidden" name="_token" value="SszM7yPk6R7lrPkjriFCbqypf6GA3Y8v0XD5q55J" />  
+                            <input type="text" name="code" value="" required="" hidden=""/>*/}
+                              <button role="button" type="submit" >Apply Code <i class="bi bi-arrow-right"></i></button>
+                          {/*</form>
+                        </div>
+
+                      </div>*/}
+                    </div>
+                  </div>
+                </div>
+
+
+
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>
