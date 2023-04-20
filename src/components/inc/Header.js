@@ -190,14 +190,34 @@ const Header = () => {
   }
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
-  const sliceFilterData = filterbrandsApi.slice(0,11)
-  
+  const sliceFilterData = filterbrandsApi.slice(0, 11);
+
+  const [navbarSticky, setNavbarSticky] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const sectionElement = document.getElementById("section");
+      const sectionOffset = sectionElement.offsetTop;
+      const sectionHeight = sectionElement.offsetHeight;
+
+      if (scrollPosition > sectionOffset + sectionHeight) {
+        setNavbarSticky(true);
+      } else {
+        setNavbarSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div>
       <header className="my-auto">
         {/* wcc for desktop */}
-        <section className="top-bar-blink top-banner wcc desktop">
+        <section className="top-bar-blink top-banner wcc desktop" id="section">
           <div className="container text-white">
             <div className="row py-1">
               <div className="col-md-6 py-2" id="mainTitle">
@@ -205,7 +225,9 @@ const Header = () => {
                   to="/why-choose-combonation"
                   className="whyChooseCombonation"
                 >
-                  <p className="my-auto text-white blink">Why Choose Combonation?</p>
+                  <p className="my-auto text-white blink">
+                    Why Choose Combonation?
+                  </p>
                 </Link>
               </div>
               <div className="col-md-2 getAppSection">
@@ -380,146 +402,160 @@ const Header = () => {
         {/*wcc end */}
 
         {/* navbar Start */}
-        <nav className="navbar navbar-expand-lg bg-light ">
-          <div className="container">
-            {Array.isArray(logo) &&
-              logo.map((e) => (
-                <Link className="navbar-brand" to="/" key={e.id}>
-                  <img
-                    src={e.logo?.original_url}
-                    alt="logo-combonation"
-                    style={{ width: "130px", height: "60px" }}
-                  ></img>
-                </Link>
-              ))}
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <form className="d-flex search" onSubmit={(e) => submit(e)}>
-              <input
-                id="search"
-                className="form-control me-2"
-                type="search"
-                name="search"
-                placeholder="Search "
-                aria-label="Search"
-                value={data.search}
-                onChange={(e) => handle(e)}
-              ></input>
-            </form>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    CATEGORIES
+        <div id="navSec" className={navbarSticky ? "fixed-top" : ""}>
+          <nav className="navbar navbar-expand-lg bg-light ">
+            <div className="container">
+              {Array.isArray(logo) &&
+                logo.map((e) => (
+                  <Link className="navbar-brand" to="/" key={e.id}>
+                    <img
+                      src={e.logo?.original_url}
+                      alt="logo-combonation"
+                      style={{ width: "130px", height: "60px" }}
+                    ></img>
                   </Link>
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                    style={{ marginLeft: "-277px" }}
-                  >
-                    <div className="menu-wrapper">
-                      <div className="row small-gutters">
-                        {categories.map((e) => (
-                          <div className="col-lg-3 col-50 text-center" key={e.id}>
-                            <Link to={`/category/${e.id}`}>
-                              <h6>{e.name}</h6>
-                              <img
-                                src={e.image?.url}
-                                alt={e.slug}
-                                style={{ width: "100px", height: "auto" }}
-                              />
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </ul>
-                </li>
-
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="javascript:void(0)"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    BRANDS
-                  </Link>
-
-                  {/* brand dropdown */}
-
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                    style={{ marginLeft: "-377px" }}
-                  >
-                    <div className="menu-wrapper">
-                      <div className="row small-gutters">
-                        {sliceFilterData.map((e) => (
-                          <div className="col-lg-3 col-50 text-center" key={e.id}>
-                            <Link to={`/brand/${e.id}`}>
-                              <img
-                                src={e.image?.original_url}
-                                alt={e.name}
-                                style={{ width: "100px", height: "auto" }}
-                              />
-                            </Link>
-                          </div>
-                        ))}
-                        <div className="col-lg-3 col-50 text-center">
-                          <Link to='/brandlogolist'>
-                          <img src="https://www.combonation.in/assets_new/img/viewall.png" alt="view-all" style={{ width: "100px", height: "auto" }} />
-                          </Link>
+                ))}
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <form className="d-flex search" onSubmit={(e) => submit(e)}>
+                <input
+                  id="search"
+                  className="form-control me-2"
+                  type="search"
+                  name="search"
+                  placeholder="Search "
+                  aria-label="Search"
+                  value={data.search}
+                  onChange={(e) => handle(e)}
+                ></input>
+              </form>
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link dropdown-toggle"
+                      to="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      CATEGORIES
+                    </Link>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                      style={{ marginLeft: "-277px" }}
+                    >
+                      <div className="menu-wrapper">
+                        <div className="row small-gutters">
+                          {categories.map((e) => (
+                            <div
+                              className="col-lg-3 col-50 text-center"
+                              key={e.id}
+                            >
+                              <Link to={`/category/${e.id}`}>
+                                <h6>{e.name}</h6>
+                                <img
+                                  src={e.image?.url}
+                                  alt={e.slug}
+                                  style={{ width: "100px", height: "auto" }}
+                                />
+                              </Link>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                    </div>
-                  </ul>
-                </li>
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i className="bi bi-geo-alt"></i> LOCATE MY STORES
-                  </Link>
-                  <ul className="dropdown-menu" id="stores-menu">
-                    {store.map((e) => (
-                      <li style={{ marginTop: "0.5rem" }} key={e.id}>
-                        <Link to={`/store/${e.id}`}>{e.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              </ul>
-            </div>
+                    </ul>
+                  </li>
 
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              {/* { <ul className="navbar-nav me-auto mb-2">
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link dropdown-toggle"
+                      to="javascript:void(0)"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      BRANDS
+                    </Link>
+
+                    {/* brand dropdown */}
+
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                      style={{ marginLeft: "-377px" }}
+                    >
+                      <div className="menu-wrapper">
+                        <div className="row small-gutters">
+                          {sliceFilterData.map((e) => (
+                            <div
+                              className="col-lg-3 col-50 text-center"
+                              key={e.id}
+                            >
+                              <Link to={`/brand/${e.id}`}>
+                                <img
+                                  src={e.image?.original_url}
+                                  alt={e.name}
+                                  style={{ width: "100px", height: "auto" }}
+                                />
+                              </Link>
+                            </div>
+                          ))}
+                          <div className="col-lg-3 col-50 text-center">
+                            <Link to="/brandlogolist">
+                              <img
+                                src="https://www.combonation.in/assets_new/img/viewall.png"
+                                alt="view-all"
+                                style={{ width: "100px", height: "auto" }}
+                              />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link dropdown-toggle"
+                      to="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="bi bi-geo-alt"></i> LOCATE MY STORES
+                    </Link>
+                    <ul className="dropdown-menu" id="stores-menu">
+                      {store.map((e) => (
+                        <li style={{ marginTop: "0.5rem" }} key={e.id}>
+                          <Link to={`/store/${e.id}`}>{e.name}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                {/* { <ul className="navbar-nav me-auto mb-2">
                 <li className="nav-item dropdown">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -589,84 +625,89 @@ const Header = () => {
                   </ul>
                 </li>
               </ul>}  */}
-              <ul className="navbar-nav ml-auto" id="navbar-right" style={{marginLeft:"auto"}}>
-                <li className="nav-item">
-                  <Link to="/signin" className="nav-link">
-                    <i className="bi bi-person-circle"></i>
-                    <span>Account</span>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/Wishlist" className="nav-link">
-                    <i className="bi bi-heart"></i>
-                    <span>Wishlist</span>
-                  </Link>
-                </li>
-
-                <li className="nav-item">
-                  <Link
-                    to="/Cart"
-                    className="nav-link"
-                    style={{ position: "relative" }}
-                  >
-                    <i className="bi bi-cart-fill"></i>
-                    <span>Cart</span>
-                    <strong
-                      className="desktop"
-                      style={{
-                        position: "absolute",
-                        right: ".3rem",
-                        bottom: "3rem",
-                        zInd: "2",
-                        fontSize: "10px",
-                        color: "white",
-                        backgroundColor: "#FE9E2D",
-                        borderRadius: "50%",
-                        width: "15px",
-                        textAlign: "center",
-                      }}
-                    >
-                      {totalCartCount}
-                    </strong>
-                  </Link>
-                </li>
-                <div className="mobile">
+                <ul
+                  className="navbar-nav ml-auto"
+                  id="navbar-right"
+                  style={{ marginLeft: "auto" }}
+                >
                   <li className="nav-item">
-                    <Link to="/Acccount" className="nav-link">
-                      My Profile
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    {" "}
-                    <Link to="/Place" className="nav-link">
-                      My Address
+                    <Link to="/signin" className="nav-link">
+                      <i className="bi bi-person-circle"></i>
+                      <span>Account</span>
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/Wishlist" className="nav-link">
-                      My whishlist
+                      <i className="bi bi-heart"></i>
+                      <span>Wishlist</span>
                     </Link>
                   </li>
+
                   <li className="nav-item">
-                    <Link to="/Orders" className="nav-link">
-                      My Orders
+                    <Link
+                      to="/Cart"
+                      className="nav-link"
+                      style={{ position: "relative" }}
+                    >
+                      <i className="bi bi-cart-fill"></i>
+                      <span>Cart</span>
+                      <strong
+                        className="desktop"
+                        style={{
+                          position: "absolute",
+                          right: ".3rem",
+                          bottom: "3rem",
+                          zInd: "2",
+                          fontSize: "10px",
+                          color: "white",
+                          backgroundColor: "#FE9E2D",
+                          borderRadius: "50%",
+                          width: "15px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {totalCartCount}
+                      </strong>
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/Wallet" className="nav-link">
-                      My Wallet
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="" className="nav-link">
-                      Logout
-                    </Link>
-                  </li>
-                </div>
-              </ul>
+                  <div className="mobile">
+                    <li className="nav-item">
+                      <Link to="/Acccount" className="nav-link">
+                        My Profile
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      {" "}
+                      <Link to="/Place" className="nav-link">
+                        My Address
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/Wishlist" className="nav-link">
+                        My whishlist
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/Orders" className="nav-link">
+                        My Orders
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/Wallet" className="nav-link">
+                        My Wallet
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="" className="nav-link">
+                        Logout
+                      </Link>
+                    </li>
+                  </div>
+                </ul>
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </header>
     </div>
   );
