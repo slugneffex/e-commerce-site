@@ -32,8 +32,11 @@ const Category = () => {
   const [product, setProduct] = useState([]);
   const [banner, setBanner] = useState([]);
   // filteration state
-  const [originalCategory, setOriginalCategory] = useState([]);
-  const [originalProduct, setOriginalProduct] = useState([]);
+  // const [originalCategory, setOriginalCategory] = useState([]);
+  // const [originalProduct, setOriginalProduct] = useState([]);
+  const [filterCombo, setFilterCombo] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [checkedFilters, setCheckedFilters] = useState({});
 
   // filteration state end
   const [error, setError] = useState(null);
@@ -76,8 +79,7 @@ const Category = () => {
         setBanner(response.data.category);
         setCategory(response.data.data.combos.data);
         setProduct(response.data.data.products.data);
-        setOriginalCategory(response.data.data.combos.data);
-        setOriginalProduct(response.data.data.products.data);
+       
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -94,21 +96,66 @@ const Category = () => {
 
   // filteration
 
-  const filterProducts = (minPrice, maxPrice) => {
-    const filteredProducts = originalProduct.filter((product) => {
-      return (
-        product.selling_price >= minPrice && product.selling_price <= maxPrice
-      );
-    });
-    const filteredSingleProducts = originalCategory.filter((product) => {
-      return (
-        product.selling_price >= minPrice && product.selling_price <= maxPrice
-      );
-    });
-    setProduct(filteredProducts);
-    setCategory(filteredSingleProducts);
-  };
+  // const filterProducts = (minPrice, maxPrice) => {
+  //   const filteredProducts = originalProduct.filter((product) => {
+  //     return (
+  //       product.selling_price >= minPrice && product.selling_price <= maxPrice
+  //     );
+  //   });
+  //   const filteredSingleProducts = originalCategory.filter((product) => {
+  //     return (
+  //       product.selling_price >= minPrice && product.selling_price <= maxPrice
+  //     );
+  //   });
+  //   setProduct(filteredProducts);
+  //   setCategory(filteredSingleProducts);
+  // };
 
+  const handleFilter = (minPrice, maxPrice) => {
+    const key = `${minPrice}-${maxPrice}`;
+
+    if (checkedFilters[key]) {
+      // If the filter is already checked, remove it
+      const newFilters = { ...checkedFilters };
+      delete newFilters[key];
+      setCheckedFilters(newFilters);
+
+      // Update the filtered products lists
+      const newFilteredProducts1 = filterCombo.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilterCombo(newFilteredProducts1);
+
+      const newFilteredProducts2 = filteredProducts.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilteredProducts(newFilteredProducts2);
+    } else {
+      // If the filter is not checked, add it
+      setCheckedFilters({ ...checkedFilters, [key]: true });
+
+      // Update the filtered products lists
+      const filtered1 = category.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+      setFilterCombo((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered1,
+      ]);
+
+      const filtered2 = product.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+      setFilteredProducts((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered2,
+      ]);
+    }
+  };
 
   // Categories
   const [categoris, setCategories] = useState([]);
@@ -208,7 +255,7 @@ const Category = () => {
     };
 
     axios
-      .post("/addWishlist", data, {
+      .post(`${process.env.REACT_APP_BASE_URL}/addWishlist`, data, {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
@@ -229,7 +276,7 @@ const Category = () => {
     };
 
     axios
-      .post("/addWishlist", data, {
+      .post(`${process.env.REACT_APP_BASE_URL}/addWishlist`, data, {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           Authorization: `Bearer ${token}`,
@@ -301,10 +348,16 @@ const Category = () => {
   };
 
   function handleClick(categoryId) {
+    setFilteredProducts([]);
+    setFilterCombo([])
+    setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
   }
 
   function handleClickbrand(brandId) {
+    setFilteredProducts([]);
+    setFilterCombo([])
+    setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
   }
 
@@ -320,64 +373,129 @@ const Category = () => {
           <h3>Precurated Combo</h3>
         </div>
         <hr />
-        {category.map((e) => (
-          <div className="col-md-4 " key={e.id}>
-            <div className="newComboCart">
-              <div className="cart-img-sec" style={{ position: "relative" }}>
-                <div
-                  onClick={() => wishlistData(e.id)}
-                  className="addtofavCategory"
-                >
-                  <i
-                    className="bi bi-heart"
-                    style={{
-                      position: "absolute",
-                      right: "1rem",
-                      top: ".8rem",
-                    }}
-                  ></i>
-                </div>
-                <Link to={`/combo/${e.id}`}>
-                  <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                </Link>
-              </div>
-
-              <div className="card-det-sec">
-                <div className="headingCard pt-3">
-                  <span>{e.name}</span>
-                </div>
-                <div>
-                  <span className="packof">(Pack of 2)</span>
-                </div>
-                <div className="price-sec">
-                  <div className="col-4" style={{ textAlign: "end" }}>
-                    <span className="sp">₹{e.selling_price}</span>
-                  </div>
-                  <div className="col-4">
-                    <del className="mrp">₹{e.mrp}</del>
-                  </div>
-                  <div className="col-4">
-                    <span className="discount">{e.discount}% OFF</span>
-                  </div>
-                </div>
-                <div className="card-btn-sec ">
+        {filterCombo.length > 0
+          ? filterCombo.map((e) => (
+              <div className="col-md-4 " key={e.id}>
+                <div className="newComboCart">
                   <div
-                    className="btn_atc"
-                    onClick={() => {
-                      addToCart(e);
-                      alert("product added to cart successfully");
-                    }}
-                    style={{ cursor: "pointer" }}
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
                   >
-                    <i className="bi bi-cart" id={e.id}>
-                      Add to Cart
-                    </i>
+                    <div
+                      onClick={() => wishlistData(e.id)}
+                      className="addtofavCategory"
+                    >
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: "1rem",
+                          top: ".8rem",
+                        }}
+                      ></i>
+                    </div>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                    </Link>
+                  </div>
+
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+                    </div>
+                    <div>
+                      <span className="packof">(Pack of 2)</span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div
+                        className="btn_atc"
+                        onClick={() => {
+                          addToCart(e);
+                          alert("product added to cart successfully");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <i className="bi bi-cart" id={e.id}>
+                          Add to Cart
+                        </i>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))
+          : category.map((e) => (
+              <div className="col-md-4 " key={e.id}>
+                <div className="newComboCart">
+                  <div
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
+                  >
+                    <div
+                      onClick={() => wishlistData(e.id)}
+                      className="addtofavCategory"
+                    >
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: "1rem",
+                          top: ".8rem",
+                        }}
+                      ></i>
+                    </div>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                    </Link>
+                  </div>
+
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+                    </div>
+                    <div>
+                      <span className="packof">(Pack of 2)</span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div
+                        className="btn_atc"
+                        onClick={() => {
+                          addToCart(e);
+                          alert("product added to cart successfully");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <i className="bi bi-cart" id={e.id}>
+                          Add to Cart
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
       </>
     );
   }
@@ -388,6 +506,107 @@ const Category = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
+              <div style={{ marginTop: "2rem" }}>
+                <div class="card" style={{ padding: "0" }}>
+                  <div class="card-body">
+                    Sort By:{" "}
+                    <span style={{ color: "#FE9E2D" }}>Popularity</span>
+                  </div>
+                </div>
+                <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
+                  <div className="sortBy">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Popularity
+                    </label>
+                    <input
+                      style={{ marginLeft: "11.95rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Discount
+                    </label>
+                    <input
+                      style={{ marginLeft: "12.6rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Name
+                    </label>
+                    <input
+                      style={{ marginLeft: "13.9rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Customer Top Rated
+                    </label>
+                    <input
+                      style={{ marginLeft: "6.6rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      New Arrivals
+                    </label>
+                    <input
+                      style={{ marginLeft: "10.8rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Price: High to Low
+                    </label>
+                    <input
+                      style={{ marginLeft: "8.3rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Price: Low to High
+                    </label>
+                    <input
+                      style={{ marginLeft: "8.3rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="card">
                 <div className="card-header">Filter By</div>
                 <div className="card-body">
@@ -523,6 +742,98 @@ const Category = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              50-499
+                            </label>
+                            <input
+                              style={{ marginLeft: "7rem" }}
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={checkedFilters["50-499"]}
+                              onChange={() => handleFilter(50, 499)}
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              500-999
+                            </label>
+                            <input
+                              style={{ marginLeft: "6.45rem" }}
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={checkedFilters["500-999"]}
+                              onChange={() => handleFilter(500, 999)}
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              1000-1999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.88rem" }}
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={checkedFilters["1000-1999"]}
+                              onChange={() => handleFilter(1000, 1999)}
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              2000-4999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.34rem" }}
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={checkedFilters["2000-4999"]}
+                              onChange={() => handleFilter(2000, 4999)}
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              class="form-check-label"
+                              for="flexCheckDefault"
+                            >
+                              5000 & Above
+                            </label>
+                            <input
+                              style={{ marginLeft: "3.963rem" }}
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={checkedFilters["5000-500000"]}
+                              onChange={() => handleFilter(5000, 500000)}
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                        </div>
+                        {/* <div id="collapseExample">
+                          <input
+                            type="hidden"
+                            name="_token"
+                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                          />{" "}
                           <div className="form-check">
                             <input
                               type="radio"
@@ -582,7 +893,7 @@ const Category = () => {
                               From ₹ 5000 & Above
                             </label>
                           </div>
-                        </div>
+                        </div> */}
                       </Collapse>
                     </div>
                   </div>
@@ -638,27 +949,6 @@ const Category = () => {
                         <Dropdown.Item onClick={sortData}>
                           High to low
                         </Dropdown.Item>
-                        {/* <Dropdown.Item onClick={() => filterProducts(50, 499)}>
-                          50 to 490
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => filterProducts(500, 999)}>
-                          500 to 999
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => filterProducts(1000, 1999)}
-                        >
-                          1000 to 1999
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => filterProducts(2000, 4999)}
-                        >
-                          2000 to 4999
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => filterProducts(5000, 50000)}
-                        >
-                          5000 and above
-                        </Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
@@ -678,77 +968,147 @@ const Category = () => {
                 <hr />
 
                 {/* Single Products */}
+                {filteredProducts.length > 0
+                  ? filteredProducts.map((p) => (
+                      <div className="col-md-4" key={p.id}>
+                        <div className="newComboCart">
+                          <div
+                            className="cart-img-sec"
+                            style={{ position: "relative" }}
+                          >
+                            <Link
+                              onClick={() => wishlistProductData(p.id)}
+                              className="addtofavCategory"
+                            >
+                              <ul>
+                                <li className="youMayLikeHeart">
+                                  {heartFilled === p.id ? (
+                                    <i
+                                      style={{ color: "#fe9e2d" }}
+                                      className="bi bi-heart-fill"
+                                    ></i>
+                                  ) : (
+                                    <i className="bi bi-heart"></i>
+                                  )}
+                                </li>
+                              </ul>
+                            </Link>
+                            <Link to={`/product/${p.id}`}>
+                              <img
+                                src={p.thumbnail_img?.original_url}
+                                alt={p.name}
+                                width="100%"
+                              ></img>
+                            </Link>
+                          </div>
 
-                {product.map((p) => (
-                  <div className="col-md-4" key={p.id}>
-                    <div className="newComboCart">
-                      <div
-                        className="cart-img-sec"
-                        style={{ position: "relative" }}
-                      >
-                        <Link
-                          onClick={() => wishlistProductData(p.id)}
-                          className="addtofavCategory"
-                        >
-                          <ul>
-                            <li className="youMayLikeHeart">
-                              {heartFilled === p.id ? (
-                                <i
-                                  style={{ color: "#fe9e2d" }}
-                                  className="bi bi-heart-fill"
-                                ></i>
-                              ) : (
-                                <i className="bi bi-heart"></i>
-                              )}
-                            </li>
-                          </ul>
-                        </Link>
-                        <Link to={`/product/${p.id}`}>
-                          <img
-                            src={p.thumbnail_img?.original_url}
-                            alt={p.name}
-                            width="100%"
-                          ></img>
-                        </Link>
-                      </div>
+                          <div className="card-det-sec">
+                            <div className="headingCard pt-3 ">
+                              <span>{p.name.substring(0, 40)}</span>
+                            </div>
+                            <div>
+                              <span className="packof">(Pack of 2)</span>
+                            </div>
+                            <div className="price-sec">
+                              <span className="spSingleProduct">
+                                ₹{p.selling_price}
+                              </span>
 
-                      <div className="card-det-sec">
-                        <div className="headingCard pt-3 ">
-                          <span>{p.name.substring(0, 40)}</span>
-                        </div>
-                        <div>
-                          <span className="packof">(Pack of 2)</span>
-                        </div>
-                        <div className="price-sec">
-                          <span className="spSingleProduct">
-                            ₹{p.selling_price}
-                          </span>
-
-                          {/* <div className="col-4">
+                              {/* <div className="col-4">
                             <del className="mrp">₹{e.mrp}</del>
                           </div> */}
-                          {/* <div className="col-4">
+                              {/* <div className="col-4">
                             <span className="discount">{p.discount}% OFF</span>
                           </div> */}
-                        </div>
-                        <div className="card-btn-sec ">
-                          <div
-                            className="btn_atc"
-                            onClick={() => {
-                              addToSingleCart(p);
-                              alert("product added to cart successfully");
-                            }}
-                            style={{ cursor: "pointer" }}
-                          >
-                            <i className="bi bi-cart" id={p.id}>
-                              Add to Cart
-                            </i>
+                            </div>
+                            <div className="card-btn-sec ">
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                  alert("product added to cart successfully");
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="bi bi-cart" id={p.id}>
+                                  Add to Cart
+                                </i>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    ))
+                  : product.map((p) => (
+                      <div className="col-md-4" key={p.id}>
+                        <div className="newComboCart">
+                          <div
+                            className="cart-img-sec"
+                            style={{ position: "relative" }}
+                          >
+                            <Link
+                              onClick={() => wishlistProductData(p.id)}
+                              className="addtofavCategory"
+                            >
+                              <ul>
+                                <li className="youMayLikeHeart">
+                                  {heartFilled === p.id ? (
+                                    <i
+                                      style={{ color: "#fe9e2d" }}
+                                      className="bi bi-heart-fill"
+                                    ></i>
+                                  ) : (
+                                    <i className="bi bi-heart"></i>
+                                  )}
+                                </li>
+                              </ul>
+                            </Link>
+                            <Link to={`/product/${p.id}`}>
+                              <img
+                                src={p.thumbnail_img?.original_url}
+                                alt={p.name}
+                                width="100%"
+                              ></img>
+                            </Link>
+                          </div>
+
+                          <div className="card-det-sec">
+                            <div className="headingCard pt-3 ">
+                              <span>{p.name.substring(0, 40)}</span>
+                            </div>
+                            <div>
+                              <span className="packof">(Pack of 2)</span>
+                            </div>
+                            <div className="price-sec">
+                              <span className="spSingleProduct">
+                                ₹{p.selling_price}
+                              </span>
+
+                              {/* <div className="col-4">
+                            <del className="mrp">₹{e.mrp}</del>
+                          </div> */}
+                              {/* <div className="col-4">
+                            <span className="discount">{p.discount}% OFF</span>
+                          </div> */}
+                            </div>
+                            <div className="card-btn-sec ">
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                  alert("product added to cart successfully");
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="bi bi-cart" id={p.id}>
+                                  Add to Cart
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
               </div>
             </div>
           </div>
