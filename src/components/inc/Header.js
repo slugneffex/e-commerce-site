@@ -432,7 +432,7 @@ const Header = () => {
                   className="form-control me-2"
                   type="search"
                   name="search"
-                  placeholder="Search "
+                  placeholder="Search over 4,000+ Products"
                   aria-label="Search"
                   value={data.search}
                   onChange={(e) => handle(e)}
