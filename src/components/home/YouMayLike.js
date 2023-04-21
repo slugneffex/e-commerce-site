@@ -192,7 +192,7 @@ const YouMayLike = () => {
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
                         <div className="price-sec">
-                          <div className="col-4" style={{ textAlign: "end" }}>
+                          <div className="col-4">
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
                           <div className="col-4">
