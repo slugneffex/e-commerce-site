@@ -230,6 +230,106 @@ const BrandProduct = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
+            <div style={{ marginTop: "2rem" }}>
+                <div class="card" style={{ padding: "0" }}>
+                  <div class="card-body">
+                    Sort By:{" "}
+                    <span style={{ color: "#FE9E2D" }}>Popularity</span>
+                  </div>
+                </div>
+                <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
+                  <div className="sortBy">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Popularity
+                    </label>
+                    <input
+                      style={{ marginLeft: "11.95rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Discount
+                    </label>
+                    <input
+                      style={{ marginLeft: "12.6rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Name
+                    </label>
+                    <input
+                      style={{ marginLeft: "13.9rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Customer Top Rated
+                    </label>
+                    <input
+                      style={{ marginLeft: "6.6rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      New Arrivals
+                    </label>
+                    <input
+                      style={{ marginLeft: "10.8rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Price: High to Low
+                    </label>
+                    <input
+                      style={{ marginLeft: "8.3rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Price: Low to High
+                    </label>
+                    <input
+                      style={{ marginLeft: "8.3rem" }}
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                  </div>
+                </div>
+              </div>
               {/* Filter  */}
               <div className="card">
                 <div className="card-header">Filter By</div>
