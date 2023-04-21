@@ -155,13 +155,19 @@ const Freebies = () => {
                   Availed Freebie Amount = <span>₹ {freebiestotalAmount}</span>
                 </h3>
                 {ExtraFreebiesAmountSection}
-                <Link to="/cart" className="btn_1">
-                  <i className="bi bi-arrow-left" />
-                  Back To Cart
-                </Link>
-                <Link to="/payment" className="btn_1">
-                  Proceed To Checkout <i className="bi bi-arrow-right" />
-                </Link>
+                <div className="d-flex">
+                  <div className="col-5">
+                  <Link to="/cart" className="btn_1">
+                    <i className="bi bi-arrow-left" />
+                    Back To Cart
+                  </Link>
+                  </div>
+                  <div className="col-7">
+                  <Link to="/payment" className="btn_1">
+                    Proceed To Checkout <i className="bi bi-arrow-right" />
+                  </Link>
+                  </div>
+                </div>
               </div>
             </div>
             <hr />
@@ -203,7 +209,7 @@ const Freebies = () => {
                             style={{ padding: "0rem" }}
                           >
                             <div className="img-sec">
-                              <img
+                              <img width="100%"
                                 src={e.thumbnail_img?.original_url}
                                 alt="manestream-fenusmooth-frizzy-hair-treatment-&-hair-shine-kit-300-ml"
                               />
