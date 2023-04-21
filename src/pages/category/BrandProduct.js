@@ -90,6 +90,9 @@ const BrandProduct = () => {
         ...filtered,
       ]);
     }
+    if (Object.keys(checkedFilters).length === 0) {
+      setFilteredProducts(brandProduct);
+    }
   };
 
   // Filterration end
@@ -230,7 +233,7 @@ const BrandProduct = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
-            <div style={{ marginTop: "2rem" }}>
+              <div style={{ marginTop: "2rem" }}>
                 <div class="card" style={{ padding: "0" }}>
                   <div class="card-body">
                     Sort By:{" "}
@@ -613,38 +616,85 @@ const BrandProduct = () => {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-                    {/* <div className="col-md-5">
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant=""
-                          id="dropdown-basic"
-                          style={{
-                            border: "1px solid",
-                            marginLeft: "2rem",
-                            width: "120px",
-                          }}
-                        >
-                          Filter by
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">
-                            Action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Another action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Something else
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </div> */}
                   </div>
                 </div>
               </div>
+              {filteredProducts.length > 0 ? (
+                <div className="row">
+                  {filteredProducts.map((p) => (
+                    // render each product here
+                    <div className="col-md-4 " key={p.id}>
+                      <div className="newComboCart">
+                        <div
+                          className="cart-img-sec"
+                          style={{ position: "relative" }}
+                        >
+                          <Link className="addtofavCategory">
+                            <i
+                              className="bi bi-heart"
+                              style={{
+                                position: "absolute",
+                                right: "0.8rem",
+                                top: "0.5rem",
+                              }}
+                            ></i>
+                          </Link>
+                          <Link to={`/product/${p.id}`}>
+                            <img
+                              src={p.thumbnail_img?.original_url}
+                              alt="img"
+                              width="100%"
+                            ></img>
+                          </Link>
+                        </div>
 
-              <div className="row" style={{ marginTop: "1rem" }}>
+                        <div className="card-det-sec">
+                          <div className="headingCard pt-3">
+                            <span>{p.name.substring(0, 40)}</span>
+                          </div>
+
+                          <div className="price-sec">
+                            <div className="col-4" style={{ textAlign: "end" }}>
+                              <span className="sp">₹{p.selling_price}</span>
+                            </div>
+                            <div className="col-4">
+                              <del className="mrp">₹{p.mrp}</del>
+                            </div>
+                            <div className="col-4">
+                              <span className="discount">
+                                {p.discount}% OFF
+                              </span>
+                            </div>
+                          </div>
+                          <div className="card-btn-sec ">
+                            <div
+                              className="btn_atc"
+                              onClick={() => {
+                                addToSingleCart(p);
+                              }}
+                              style={{
+                                cursor: "pointer",
+                              }}
+                            >
+                              <i
+                                className="bi bi-cart"
+                                id={p.id}
+                                style={{ color: "#fe9e2d" }}
+                              >
+                                Add to Cart
+                              </i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="no-results">No products found.</div>
+              )}
+
+              {/* <div className="row" style={{ marginTop: "1rem" }}>
                 {filteredProducts.length > 0
                   ? filteredProducts.map((p) => (
                       <div className="col-md-4 " key={p.id}>
@@ -676,9 +726,7 @@ const BrandProduct = () => {
                             <div className="headingCard pt-3">
                               <span>{p.name.substring(0, 40)}</span>
                             </div>
-                            {/* <div>
-                    <span className="packof">(Pack of 2)</span>
-                  </div> */}
+
                             <div className="price-sec">
                               <div
                                 className="col-4"
@@ -748,9 +796,7 @@ const BrandProduct = () => {
                             <div className="headingCard pt-3">
                               <span>{p.name.substring(0, 40)}</span>
                             </div>
-                            {/* <div>
-                          <span className="packof">(Pack of 2)</span>
-                        </div> */}
+
                             <div className="price-sec">
                               <div
                                 className="col-4"
@@ -790,7 +836,7 @@ const BrandProduct = () => {
                         </div>
                       </div>
                     ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
