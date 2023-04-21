@@ -50,6 +50,12 @@ const Cart = () => {
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
+  // const currentCartType = useSelector(
+  //   (statee) => statee.SingleCart.singleCartItems[index].cartType
+  // );
+
+  // console.log(currentCartType);
+
   const {
     singleCartItems,
     singlesubAmount,
@@ -147,7 +153,6 @@ const Cart = () => {
   } else if (ExtraFreebiesAmount < 0) {
     ExtraFreebiesAmountt = 0;
   }
-
 
   let shippingAmount = 50;
 
@@ -289,8 +294,7 @@ const Cart = () => {
                 height="75px"
               />
             </div>
-            <div className="col-2">
-            </div>
+            <div className="col-2"></div>
             <div className="col-8">
               <h3>
                 <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
@@ -313,25 +317,24 @@ const Cart = () => {
   if (singlesubAmount < 1000) {
     freebiesUptoSection = (
       <li style={{ padding: "1rem" }}>
-
         {/* desktop */}
         <div className="desktop">
-        <div className="signalCart">
-          <div className="col-2">
-            <img
-              src="./assets/img/percent-star.png"
-              alt="discountImg"
-              width="75px"
-              height="75px"
-            />
+          <div className="signalCart">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-10">
+              <h3>
+                <strong>Add More Products For More Savings !</strong> And Get{" "}
+                <span>Upto 70% OFF</span>
+              </h3>
+            </div>
           </div>
-          <div className="col-10">
-            <h3>
-              <strong>Add More Products For More Savings !</strong> And Get{" "}
-              <span>Upto 70% OFF</span>
-            </h3>
-          </div>
-        </div>
         </div>
 
         {/*  mobile */}
@@ -345,8 +348,7 @@ const Cart = () => {
                 height="75px"
               />
             </div>
-            <div className="col-2">
-            </div>
+            <div className="col-2"></div>
             <div className="col-8">
               <h3>
                 <strong>Add More Products For More Savings !</strong> And Get{" "}
@@ -766,6 +768,18 @@ const Cart = () => {
     );
   }
 
+  // const totalcartItems = [
+  //   ...cartItems,
+  //   ...singleCartItems,
+  //   ...freebiescartItems,
+  // ];
+
+  
+  
+
+  
+ 
+
   return (
     <>
       <HomeLayout>
@@ -795,18 +809,21 @@ const Cart = () => {
                 {ComboSection}
                 {SingleCartSection}
               </div>
-              
+
               <div className="col-md-4 mt-5  overviewMobile">
                 <div class="coupon-sec mb-3 text-center">
-                  <div class="coupon-card" style={{border:"5px dotted  ", borderColor:"#fe9e2d"}}>
+                  <div
+                    class="coupon-card"
+                    style={{ border: "5px dotted  ", borderColor: "#fe9e2d" }}
+                  >
                     <div class="card-head">
                       <div class="tag">
                         <i class="bi bi-tag-fill"></i>
                       </div>
                       <div class="det">
                         <span class="use">Use Code</span>
-                        <br/>
-                          <span >SIGNUP10</span>
+                        <br />
+                        <span>SIGNUP10</span>
                       </div>
                     </div>
                     <div class="vl"></div>
@@ -814,21 +831,21 @@ const Cart = () => {
                       <div class="terms">
                         <p>SIGNUP10</p>
                       </div>
-                     {/* <div class="offer">
+                      {/* <div class="offer">
                          <div class="form-group">
                         <form action="https://www.combonation.in/apply-coupon" method="POST">
                         <input type="hidden" name="_token" value="SszM7yPk6R7lrPkjriFCbqypf6GA3Y8v0XD5q55J" />  
                             <input type="text" name="code" value="" required="" hidden=""/>*/}
-                              <button role="button" type="submit" >Apply Code <i class="bi bi-arrow-right"></i></button>
-                          {/*</form>
+                      <button role="button" type="submit">
+                        Apply Code <i class="bi bi-arrow-right"></i>
+                      </button>
+                      {/*</form>
                         </div>
 
                       </div>*/}
                     </div>
                   </div>
                 </div>
-
-
 
                 <div className="overview-card">
                   <div className="overview-card-head">

@@ -11,8 +11,12 @@ const Loginadress = () => {
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
-  const { singlesubAmount, singletotalAmount, singletotalDiscount } =
-    useSelector((statee) => statee.SingleCart);
+  const {
+    singlesubAmount,
+    singletotalAmount,
+    singletotalDiscount,
+    singleCartItems,
+  } = useSelector((statee) => statee.SingleCart);
 
   // Combo Product Cart
 
@@ -23,7 +27,9 @@ const Loginadress = () => {
 
   // Freebies cart section
   const { freebiesCount } = useSelector((state) => state.freebies);
-  const { freebiestotalAmount } = useSelector((state) => state.freebies);
+  const { freebiestotalAmount, freebiescartItems } = useSelector(
+    (state) => state.freebies
+  );
 
   const totalCartCount = totalCount + singletotalCount;
 
@@ -291,6 +297,16 @@ const Loginadress = () => {
       });
   }
 
+  
+
+  const totalcartItems = {
+    cartItems: [...cartItems,{cartType:"normal"}],
+    singleCartItems: [...singleCartItems,{cartType:"custom"}],
+    freebiescartItems: [...freebiescartItems,{cartType:"freebies"}]
+  };
+
+  
+
   // Order Validate
 
   const transaction_id = localStorage.getItem("transaction_id");
@@ -317,7 +333,7 @@ const Loginadress = () => {
           grand_total: `${totalCartSubAmount}`,
           tax: "600",
           lname: "tiwari",
-          cartItems: cartItems,
+          cart: totalcartItems,
         },
         {
           headers: {
@@ -332,7 +348,7 @@ const Loginadress = () => {
   };
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
 
   return (

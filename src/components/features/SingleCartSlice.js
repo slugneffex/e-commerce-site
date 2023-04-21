@@ -9,6 +9,7 @@ const useSingleCartSlicer = createSlice({
     singlesubAmount: 0,
     singletotalAmount: 0,
     singletotalDiscount: 0,
+    cartType:"custom"
   },
 
   reducers: {
