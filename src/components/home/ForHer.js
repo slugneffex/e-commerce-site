@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -59,7 +59,7 @@ const ForHer = () => {
     fetchData();
   }, []);
   if (error) {
-    console.log(error)
+    console.log(error);
   }
 
   return (
@@ -73,11 +73,58 @@ const ForHer = () => {
             {Array.isArray(forher) &&
               forher.map((e) => (
                 <div key={e.banner?.id}>
-                  <img
-                    src={e.banner?.original_url}
-                    width="80%"
-                    alt={e.name}
-                  ></img>
+                  {e.brand_id && (
+                    <Link to={`/brand/${e.brand_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="80%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.product_id && (
+                    <Link to={`/product/${e.product_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="80%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.combo_id && (
+                    <Link to={`/combo/${e.combo_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="80%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.page_id && (
+                    <Link to={`/page/${e.page_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="80%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.category_id && (
+                    <Link to={`/category/${e.category_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="80%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {/* <Link to={`/brand/${e.brand_id}`}>
+                    <img
+                      src={e.banner?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    ></img>
+                  </Link> */}
                 </div>
               ))}
           </Carousel>

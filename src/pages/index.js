@@ -14,6 +14,8 @@ import ForHim from "../components/home/ForHim";
 import Brands from "../components/home/BrandLogos/Brands";
 import BYOC from "../components/home/BYOC";
 import BrandProducts from "../components/home/BrandProducts";
+import JustLaunchedBrands from "../components/home/JustLaunchedBrands";
+import ComboDeals from "../components/home/ComboDeals";
 
 const Home = () => {
   return (
@@ -24,11 +26,13 @@ const Home = () => {
           <BYOC></BYOC>
           <Hero></Hero>
           <YouMayLike></YouMayLike>
+          <JustLaunchedBrands></JustLaunchedBrands>
           <TopTrendingCombos></TopTrendingCombos>
           {/* <HotDeals></HotDeals> */}
           {/* <TopBrandDeals></TopBrandDeals> */}
           <ForHer />
           <BrandProducts />
+          <ComboDeals />
           <ForHim />
           <Brands />
           <Testimonials></Testimonials>
