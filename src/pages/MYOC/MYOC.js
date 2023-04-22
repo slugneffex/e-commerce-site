@@ -10,6 +10,43 @@ const MYOC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
+
+  // Myoc banner
+  const [myocBanner, setMyocBanner] = useState([]);
+  const [myocError, setMyocError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
+          options
+        );
+        setMyocBanner(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setMyocError(error.message);
+        }
+      }
+    }
+    fetchData();
+  }, []);
+
+
+
   const fetchData = useCallback(async (pageNumber) => {
     const options = {
       headers: {
@@ -63,9 +100,56 @@ const MYOC = () => {
   return (
     <>
       <HomeLayout>
-        <div className="container my-5">
+
+        {/* Myoc Banner */}
+
+        <div className="container mt-2">
+          {/* desktop  */}
+          <div className="desktop">
+            {Array.isArray(myocBanner) &&
+              myocBanner.map((e) => (
+                <div key={e.banner?.id}>
+                  <Link to={`/view-all-products`}>
+                    <img
+                      src={e.banner?.original_url}
+                      className="img-fluid mx-auto"
+                      alt="super-deal"
+                      width="100%"
+                    // style={{}}
+
+                    />
+                  </Link>
+                </div>
+              ))}
+          </div>
+
+          {/* mobile */}
+          <div className="mobile">
+            {Array.isArray(myocBanner) &&
+              myocBanner.map((e) => (
+                <div className="byoc" key={e.mobile_banner?.id}>
+                  <Link to={`/view-all-products`}>
+                    <img
+                      src={e.mobile_banner?.original_url}
+                      className="img-fluid"
+                      width="100%"
+                      alt="super-deal"
+                    />
+                  </Link>
+                </div>
+              ))}
+          </div>
+          <div className='mb-1 mt-3 text-center'>
+            <img src="assets/img/mobikwik.png" alt="mobikwik-Logo" width="80%" height="auto" />
+          </div>
+          <div className="byocc mt-4 text-center">
+            <img src="/assets/img/byoc.png" alt="byoc-img" />
+          </div>
+          <hr />
+        </div>
+        <div className="container mt-0 mb-5">
           <div className="row">
-            <div className=" col-md-6" style={{ marginTop: "4rem" }}>
+            <div className=" col-md-6" style={{ marginTop: "1rem" }}>
               <h1>Build Your Combo From Products Below</h1>
             </div>
             <div className="col-md-6"></div>
@@ -76,7 +160,7 @@ const MYOC = () => {
                 <div className="newComboCart">
                   <div className="cart-img-sec" style={{ position: "relative" }}>
                     <Link className="addtofavCategory">
-                      <i className="bi bi-heart" style={{ position: "absolute" , right: ".8rem", top: ".5rem" }}></i>
+                      <i className="bi bi-heart" style={{ position: "absolute", right: ".8rem", top: ".5rem" }}></i>
                     </Link>
                     <Link to={`/product/${e.id}`}>
                       <img src={e.thumbnail_img?.original_url} alt="img"></img>
