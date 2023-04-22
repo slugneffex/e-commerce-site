@@ -24,8 +24,8 @@ const responsive = {
   },
 };
 
-const ForHim = () => {
-  const [forhim, setForhim] = useState([]);
+const ComboDeals = () => {
+  const [combo, setCombo] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -41,10 +41,11 @@ const ForHim = () => {
       };
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/for-him`,
+          `${process.env.REACT_APP_BASE_URL}/comboDeals`,
           options
         );
-        setForhim(response.data);
+        setCombo(response.data);
+        console.log(response.data.name);
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -62,12 +63,11 @@ const ForHim = () => {
   if (error) {
     console.log(error);
   }
-
   return (
     <>
       <div className="top-brand-deals container">
         <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
-          Top Picks For Him
+          Top Combo Deals For You
         </h3>
         <div className="container">
           <Carousel
@@ -77,64 +77,59 @@ const ForHim = () => {
             centerMode
             dotListClass="custom-dot-list-style"
           >
-            {Array.isArray(forhim) &&
-              forhim.map((e) => (
-                <div key={e.banner?.id}>
-                  {e.brand_id && (
-                    <Link to={`/brand/${e.brand_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.product_id && (
-                    <Link to={`/product/${e.product_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.combo_id && (
-                    <Link to={`/combo/${e.combo_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.page_id && (
-                    <Link to={`/page/${e.page_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.category_id && (
-                    <Link to={`/category/${e.category_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
+            {combo.map((e) => (
+              <div key={e.thumbnail?.id}>
+                {e.brand_id && (
+                  <Link to={`/brand/${e.brand_id}`}>
+                    <img src={e.thumbnail?.url} width="80%" alt={e.name} />
+                  </Link>
+                )}
+                {e.product_id && (
+                  <Link to={`/product/${e.product_id}`}>
+                    <img
+                      src={e.thumbnail?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    />
+                  </Link>
+                )}
+                {e.combo_id && (
+                  <Link to={`/combo/${e.combo_id}`}>
+                    <img
+                      src={e.thumbnail?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    />
+                  </Link>
+                )}
+                {e.page_id && (
+                  <Link to={`/page/${e.page_id}`}>
+                    <img
+                      src={e.thumbnail?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    />
+                  </Link>
+                )}
+                {e.category_id && (
+                  <Link to={`/category/${e.category_id}`}>
+                    <img
+                      src={e.thumbnail?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    />
+                  </Link>
+                )}
 
-                  {/* <Link to={`/brand/${e.brand_id}`}>
+                {/* <Link to={`/brand/${e.brand_id}`}>
                   <img
                     src={e.banner?.original_url}
                     width="80%"
                     alt={e.name}
                   ></img>
                   </Link> */}
-                </div>
-              ))}
+              </div>
+            ))}
           </Carousel>
         </div>
       </div>
@@ -142,4 +137,4 @@ const ForHim = () => {
   );
 };
 
-export default ForHim;
+export default ComboDeals;

@@ -40,9 +40,8 @@ const Hero = () => {
   }, []);
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
-
 
   // Responsive
 
@@ -74,9 +73,54 @@ const Hero = () => {
             banner.map((e) => (
               <div key={e.banner?.id} style={{ width: "100%" }}>
                 <div>
-                  <Link to="/">
+                  {e.brand_id && (
+                    <Link to={`/brand/${e.brand_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="100%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.page_id && (
+                    <Link to={`/page/${e.page_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="100%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.category_id && (
+                    <Link to={`/category/${e.category_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="100%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.product_id && (
+                    <Link to={`/product/${e.product_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="100%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.combo_id && (
+                    <Link to={`/combo/${e.combo_id}`}>
+                      <img
+                        src={e.banner?.original_url}
+                        width="100%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {/* <Link to="/">
                     <img src={e.banner?.original_url} alt="name" width="100%" />
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             ))}
@@ -95,13 +139,13 @@ const Hero = () => {
           {Array.isArray(banner) &&
             banner.map((e) => (
               <div key={e.mobile_banner?.id} style={{ width: "100vw" }}>
-                  <Link to="/">
-                    <img
-                      src={e.mobile_banner?.original_url}
-                      alt="name"
-                      width="100%"
-                    />
-                  </Link>
+                <Link to="/">
+                  <img
+                    src={e.mobile_banner?.original_url}
+                    alt="name"
+                    width="100%"
+                  />
+                </Link>
               </div>
             ))}
         </Carousel>

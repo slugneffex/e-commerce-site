@@ -90,9 +90,7 @@ const BrandProduct = () => {
         ...filtered,
       ]);
     }
-    if (Object.keys(checkedFilters).length === 0) {
-      setFilteredProducts(brandProduct);
-    }
+   
   };
 
   // Filterration end
@@ -619,7 +617,7 @@ const BrandProduct = () => {
                   </div>
                 </div>
               </div>
-              {brandProduct.length > 0 ? (
+              {/* {brandProduct.length > 0 ? (
                 <div className="row">
                   {brandProduct.map((p) => (
                     // render each product here
@@ -692,9 +690,9 @@ const BrandProduct = () => {
                 </div>
               ) : (
                 <div className="no-results">No products found.</div>
-              )}
+              )} */}
 
-              {/* <div className="row" style={{ marginTop: "1rem" }}>
+              <div className="row" style={{ marginTop: "1rem" }}>
                 {filteredProducts.length > 0
                   ? filteredProducts.map((p) => (
                       <div className="col-md-4 " key={p.id}>
@@ -836,7 +834,7 @@ const BrandProduct = () => {
                         </div>
                       </div>
                     ))}
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
