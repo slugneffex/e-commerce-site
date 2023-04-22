@@ -9,7 +9,7 @@
   
 }
 
-nav {
+/* nav {
   background-color: #fff;
   height: 50px;
   position: relative;
@@ -26,12 +26,12 @@ nav {
 
 .fixed-top:active {
   top: -100px;
-}
+} */
 
 
 
 
-/* 
+
 header .fixed-top {
   transition: all 10s ease-in-out;
 }
@@ -51,7 +51,7 @@ nav.sticky {
   z-index: 1;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   transition-duration: 3s;
-} */
+}
 
 .my-facebook-button {
   display: inline-block;
