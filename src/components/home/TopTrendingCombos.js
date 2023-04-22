@@ -73,13 +73,58 @@ const TopTrendingCombos = () => {
               picks.map((e) => (
                 <div className="col-md-6" key={e.id}>
                   <div className="top-picks-img">
-                    <Link to={`/brand/${e.id}`}>
+                    {e.brand_id && (
+                      <Link to={`/brand/${e.brand_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.product_id && (
+                      <Link to={`/product/${e.product_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.combo_id && (
+                      <Link to={`/combo/${e.combo_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.page_id && (
+                      <Link to={`/page/${e.page_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.category_id && (
+                      <Link to={`/category/${e.category_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {/* <Link to={`/brand/${e.brand_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="100%"
                         alt="manish"
                       ></img>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               ))}
@@ -109,13 +154,58 @@ const TopTrendingCombos = () => {
             picks.map((e) => (
               <div key={e.id} style={{ width: "100%" }}>
                 <div>
-                  <Link to={`/brand/${e.id}`}>
+                  {e.brand_id && (
+                    <Link to={`/brand/${e.brand_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.product_id && (
+                    <Link to={`/product/${e.product_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.combo_id && (
+                    <Link to={`/combo/${e.combo_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.page_id && (
+                    <Link to={`/page/${e.page_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.category_id && (
+                    <Link to={`/category/${e.category_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {/* <Link to={`/brand/${e.brand_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
                       width="95%"
                       alt="manish"
                     ></img>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             ))}
