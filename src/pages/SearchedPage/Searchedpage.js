@@ -42,7 +42,15 @@ const Searchedpage = () => {
                     </div>
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
-                        <Link>
+                        {/* <Link> */}
+                        <div
+                            className="btn_atc"
+                            // onClick={() => {
+                            //   addToCart(e);
+                            //   alert("product added to cart successfully")
+                            // }}
+                            style={{ cursor: "pointer" }}
+                          >
                           <i
                             className="bi bi-cart"
                             id={e.id}
@@ -50,7 +58,9 @@ const Searchedpage = () => {
                           >
                             Add to Cart
                           </i>
-                        </Link>
+                          </div>
+
+                        {/* </Link> */}
                       </div>
                     </div>
                   </div>

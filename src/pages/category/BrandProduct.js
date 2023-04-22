@@ -743,7 +743,7 @@ const BrandProduct = () => {
                                 </span>
                               </div>
                             </div>
-                            <div className="card-btn-sec ">
+                            <div className="card-btn-sec">
                               <div
                                 className="btn_atc"
                                 onClick={() => {
