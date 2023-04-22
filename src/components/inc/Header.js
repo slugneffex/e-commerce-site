@@ -402,7 +402,7 @@ const Header = () => {
         {/*wcc end */}
 
         {/* navbar Start */}
-        <div id="navSec" className={navbarSticky ? "fixed-top" : ""}>
+        <div id="navSec" className={navbarSticky ? "fixed-top " : ""}>
           <nav className="navbar navbar-expand-lg bg-light ">
             <div className="container">
               {Array.isArray(logo) &&
