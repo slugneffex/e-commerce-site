@@ -619,9 +619,9 @@ const BrandProduct = () => {
                   </div>
                 </div>
               </div>
-              {filteredProducts.length > 0 ? (
+              {brandProduct.length > 0 ? (
                 <div className="row">
-                  {filteredProducts.map((p) => (
+                  {brandProduct.map((p) => (
                     // render each product here
                     <div className="col-md-4 " key={p.id}>
                       <div className="newComboCart">
