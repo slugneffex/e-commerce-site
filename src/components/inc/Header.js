@@ -890,7 +890,7 @@ const Header = () => {
                 <div className="col">
                   <i className="bi bi-search pt-0" />
 
-                  <form className="d-flex search" onSubmit={(e) => submit(e)}>
+                  {/* <form className="d-flex search" onSubmit={(e) => submit(e)}>
                     <input
                       id="search"
                       className="form-control me-2"
@@ -901,7 +901,7 @@ const Header = () => {
                       value={data.search}
                       onChange={(e) => handle(e)}
                     ></input>
-                  </form>
+                  </form> */}
                 </div>
                 <div className="col" style={{ paddingRight: "0" }}>
                   <i className="bi bi-heart" />
