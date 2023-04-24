@@ -36,6 +36,7 @@ import Error from "./pages/ErrorPages/Error";
 import Noresult from "./pages/ErrorPages/Noresult";
 import ServerError from "./pages/ErrorPages/ServerError";
 import Expired from "./pages/ErrorPages/Expired";
+import CustomPage from "./pages/category/CustomPage";
 
 
 
@@ -48,6 +49,7 @@ const App = () => {
       <Route path="/product/:id" element={<Singleproduct />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/category/:id" element={<Category />} />
+      <Route path="/page/:id" element={<CustomPage />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
       <Route path="/Thanks" element={<Thanks />} />

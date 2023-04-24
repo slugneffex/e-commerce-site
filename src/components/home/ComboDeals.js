@@ -45,7 +45,7 @@ const ComboDeals = () => {
           options
         );
         setCombo(response.data);
-        console.log(response.data.name);
+        console.log(response.data);
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -78,7 +78,7 @@ const ComboDeals = () => {
             dotListClass="custom-dot-list-style"
           >
             {combo.map((e) => (
-              <div key={e.thumbnail?.id}>
+              <div key={e.id}>
                 {e.brand_id && (
                   <Link to={`/brand/${e.brand_id}`}>
                     <img src={e.thumbnail?.url} width="80%" alt={e.name} />
@@ -93,8 +93,8 @@ const ComboDeals = () => {
                     />
                   </Link>
                 )}
-                {e.combo_id && (
-                  <Link to={`/combo/${e.combo_id}`}>
+                {e.com_id && (
+                  <Link to={`/combo/${e.com_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"
@@ -102,6 +102,7 @@ const ComboDeals = () => {
                     />
                   </Link>
                 )}
+
                 {e.page_id && (
                   <Link to={`/page/${e.page_id}`}>
                     <img
@@ -120,6 +121,12 @@ const ComboDeals = () => {
                     />
                   </Link>
                 )}
+                {/* <div>{e.name}</div>
+                <div> <img
+                      src={e.thumbnail?.original_url}
+                      width="80%"
+                      alt={e.name}
+                    /></div> */}
 
                 {/* <Link to={`/brand/${e.brand_id}`}>
                   <img

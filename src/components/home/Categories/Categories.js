@@ -7,6 +7,7 @@ import Carousel from "react-multi-carousel";
 
 const Categories = () => {
   const [category, setCategory] = useState([]);
+  const [pageCategories, setPageCategories] = useState([]);
 
   const [error, setError] = useState(null);
 
@@ -42,6 +43,43 @@ const Categories = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      setError(null);
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/pages`,
+          options
+        );
+        setPageCategories(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const filterCategories = pageCategories.filter((pageCategories) => {
+    return pageCategories.show_with_category === "on";
+  });
+  console.log(filterCategories);
+
   if (error) {
     console.log(error);
   }
@@ -72,7 +110,12 @@ const Categories = () => {
         <div className="container">
           <div className="my-auto categoriesDiv">
             {category.map((e) => (
-              <Link to={`/category/${e.id}`} key={e.id} >
+              <Link to={`/category/${e.id}`} key={e.id}>
+                {e.name}
+              </Link>
+            ))}
+            {filterCategories.map((e) => (
+              <Link to={`/page/${e.id}`} key={e.id}>
                 {e.name}
               </Link>
             ))}
@@ -100,9 +143,19 @@ const Categories = () => {
             {category.map((e) => (
               <div className="my-auto" key={e.id}>
                 <Link to={`/category/${e.id}`} style={{ color: "#464646" }}>
-                <img src={e.image?.original_url} alt="" width="70%"/>
-                <br />
-                <a style={{ fontSize: '12px' }} >{e.name.slice(0,9)}</a></Link>
+                  <img src={e.image?.original_url} alt="" width="70%" />
+                  <br />
+                  <span style={{ fontSize: "12px" }}>{e.name.slice(0, 9)}</span>
+                </Link>
+              </div>
+            ))}
+            {filterCategories.map((e) => (
+              <div className="my-auto" key={e.id}>
+                <Link to={`/category/${e.id}`} style={{ color: "#464646" }}>
+                  <img src={e.icon?.original_url} alt="" width="70%" />
+                  <br />
+                  <span style={{ fontSize: "12px" }}>{e.name.slice(0, 9)}</span>
+                </Link>
               </div>
             ))}
           </Carousel>

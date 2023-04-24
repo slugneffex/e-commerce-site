@@ -10,15 +10,12 @@ const MYOC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-
-
   // Myoc banner
   const [myocBanner, setMyocBanner] = useState([]);
   const [myocError, setMyocError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -44,8 +41,6 @@ const MYOC = () => {
     }
     fetchData();
   }, []);
-
-
 
   const fetchData = useCallback(async (pageNumber) => {
     const options = {
@@ -100,7 +95,6 @@ const MYOC = () => {
   return (
     <>
       <HomeLayout>
-
         {/* Myoc Banner */}
 
         <div className="container mt-2">
@@ -115,8 +109,6 @@ const MYOC = () => {
                       className="img-fluid mx-auto"
                       alt="super-deal"
                       width="100%"
-                    // style={{}}
-
                     />
                   </Link>
                 </div>
@@ -139,8 +131,13 @@ const MYOC = () => {
                 </div>
               ))}
           </div>
-          <div className='mb-1 mt-3 text-center'>
-            <img src="assets/img/mobikwik.png" alt="mobikwik-Logo" width="80%" height="auto" />
+          <div className="mb-1 mt-3 text-center">
+            <img
+              src="assets/img/mobikwik.png"
+              alt="mobikwik-Logo"
+              width="80%"
+              height="auto"
+            />
           </div>
           <div className="byocc mt-4 text-center">
             <img src="/assets/img/byoc.png" alt="byoc-img" />
@@ -158,9 +155,19 @@ const MYOC = () => {
             {products.map((e) => (
               <div className="col-lg-3 col-md-3" key={e.id}>
                 <div className="newComboCart">
-                  <div className="cart-img-sec" style={{ position: "relative" }}>
+                  <div
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
+                  >
                     <Link className="addtofavCategory">
-                      <i className="bi bi-heart" style={{ position: "absolute", right: ".8rem", top: ".5rem" }}></i>
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: ".8rem",
+                          top: ".5rem",
+                        }}
+                      ></i>
                     </Link>
                     <Link to={`/product/${e.id}`}>
                       <img src={e.thumbnail_img?.original_url} alt="img"></img>
