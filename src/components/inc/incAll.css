@@ -139,6 +139,15 @@ h1 h2 h3 h4 h5 h6 p {
     margin-left: 2rem;
 }
 
+
+.navbar .navbar-toggler {
+    border: none;
+}
+
+.navbar .navbar-toggler:focus  {
+    box-shadow: none;
+}
+
 .small-gutters {
     display: flex;
     padding: 2rem;
@@ -165,6 +174,10 @@ footer h3::after {
     float: right;
 }
 
+.offcanvas-body ul li a {
+    color: #464646;
+}
+
 
 @media (max-width: 720px) {
 
@@ -189,6 +202,18 @@ footer h3::after {
 
     .features .row {
         flex-direction: row;
+    }
+
+    .row .col-50 {
+        width: 50%;
+    }
+
+    #newsletter .form-group button {
+        display: none;
+    }
+
+    .offcanvas-body a {
+        font-weight: bold;
     }
 
 
