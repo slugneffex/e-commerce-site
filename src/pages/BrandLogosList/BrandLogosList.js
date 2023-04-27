@@ -64,13 +64,12 @@ const BrandLogosList = () => {
           </div>
           <div className="row">
             {fliterData.map((e) => (
-              <div className="col-lg-3 col-md-6" key={e.id}>
-                <Link to={`/brand/${e.id}`}>
-                  <a
-                    className="box_topic"
-                    style={{ transition: "all 0.3s ease-in-out" }}
-                    href="https://www.combonation.in/brand/armaf"
-                  >
+              <div className="col-lg-3 col-50" key={e.id}>
+                <div>
+                <Link to={`/brand/${e.id}`}
+                className="box_topic"
+                style={{ transition: "all 0.3s ease-in-out" }}
+                >
                     <div className="img-sec">
                       <img
                         src={e.image?.original_url}
@@ -81,8 +80,8 @@ const BrandLogosList = () => {
                     <div className="title text-center my-3">
                       <h3 style={{ fontSize: "1.125rem" }}>{e.name}</h3>
                     </div>
-                  </a>
-                </Link>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

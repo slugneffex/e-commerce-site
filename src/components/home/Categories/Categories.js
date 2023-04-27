@@ -135,7 +135,7 @@ const Categories = () => {
             responsive={responsive}
             arrows={false}
             swipeable={true}
-            // autoPlay
+            autoPlay
             centerMode
             infinite
             className="carouselResponsive"

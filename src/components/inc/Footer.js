@@ -347,14 +347,14 @@ const Footer = () => {
                 <li>
                   <div className="styled-select lang-selector">
                     <select>
-                      <option value="English" selected>English</option>
+                      <option defaultValue="English">English</option>
                     </select>
                   </div>
                 </li>
                 <li>
                   <div className="styled-select currency-selector">
                     <select>
-                      <option value="US Dollars" selected>Indian Rupees</option>
+                      <option defaultValue="US Dollars">Indian Rupees</option>
                     </select>
                   </div>
                 </li>
