@@ -974,74 +974,82 @@ const CustomPage = () => {
                         </div>
                       </div>
                     ))
-                  : brandProduct.map((p) => (
-                      <div className="col-md-4" key={p.id}>
-                        
-                          <div className="newComboCart">
-                            <div
-                              className="cart-img-sec"
-                              style={{ position: "relative" }}
-                            >
-                              <Link
-                                onClick={() => wishlistProductData(p.id)}
-                                className="addtofavCategory"
-                              >
-                                <ul>
-                                  <li className="youMayLikeHeart">
-                                    {heartFilled === p.id ? (
-                                      <i
-                                        style={{ color: "#fe9e2d" }}
-                                        className="bi bi-heart-fill"
-                                      ></i>
-                                    ) : (
-                                      <i className="bi bi-heart"></i>
-                                    )}
-                                  </li>
-                                </ul>
-                              </Link>
-                              <Link to={`/product/${p.id}`}>
-                                <img
-                                  src={p.thumbnail_img?.original_url}
-                                  alt={p.name}
-                                  width="100%"
-                                ></img>
-                              </Link>
-                            </div>
-
-                            <div className="card-det-sec">
-                              <div className="headingCard pt-3 ">
-                                {/* <span>{p.name.substring(0, 40)}</span> */}
-                                {p.name && (
-                                  <span>{p.name.substring(0, 40)}</span>
-                                )}
-                              </div>
-                              <div>
-                                <span className="packof">(Pack of 2)</span>
-                              </div>
-                              <div className="price-sec">
-                                <span className="spSingleProduct">
-                                  ₹{p.selling_price}
-                                </span>
-                              </div>
-                              <div className="card-btn-sec ">
+                  : brandProduct.map((subArray) => {
+                      if (subArray.length > 0) {
+                        return (
+                          <div className="col-md-4" key={subArray[0].id}>
+                            {subArray.map((p) => (
+                              <div className="newComboCart">
                                 <div
-                                  className="btn_atc"
-                                  onClick={() => {
-                                    addToSingleCart(p);
-                                    alert("product added to cart successfully");
-                                  }}
-                                  style={{ cursor: "pointer" }}
+                                  className="cart-img-sec"
+                                  style={{ position: "relative" }}
                                 >
-                                  <i className="bi bi-cart" id={p.id}>
-                                    Add to Cart
-                                  </i>
+                                  <Link
+                                    onClick={() => wishlistProductData(p.id)}
+                                    className="addtofavCategory"
+                                  >
+                                    <ul>
+                                      <li className="youMayLikeHeart">
+                                        {heartFilled === p.id ? (
+                                          <i
+                                            style={{ color: "#fe9e2d" }}
+                                            className="bi bi-heart-fill"
+                                          ></i>
+                                        ) : (
+                                          <i className="bi bi-heart"></i>
+                                        )}
+                                      </li>
+                                    </ul>
+                                  </Link>
+                                  <Link to={`/product/${p.id}`}>
+                                    <img
+                                      src={p.thumbnail_img?.original_url}
+                                      alt={p.name}
+                                      width="100%"
+                                    ></img>
+                                  </Link>
+                                </div>
+
+                                <div className="card-det-sec">
+                                  <div className="headingCard pt-3 ">
+                                    {/* <span>{p.name.substring(0, 40)}</span> */}
+                                    {p.name && (
+                                      <span>{p.name.substring(0, 40)}</span>
+                                    )}
+                                  </div>
+                                  <div>
+                                    <span className="packof">(Pack of 2)</span>
+                                  </div>
+                                  <div className="price-sec">
+                                    <span className="spSingleProduct">
+                                      ₹{p.selling_price}
+                                    </span>
+                                  </div>
+                                  <div className="card-btn-sec ">
+                                    <div
+                                      className="btn_atc"
+                                      onClick={() => {
+                                        addToSingleCart(p);
+                                        alert(
+                                          "product added to cart successfully"
+                                        );
+                                      }}
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="bi bi-cart" id={p.id}>
+                                        Add to Cart
+                                      </i>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
+                            ))}
                           </div>
-                     
-                      </div>
-                    ))}
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
               </div>
             </div>
           </div>
