@@ -515,7 +515,7 @@ const Category = () => {
                 </div>
                 <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
                   <div className="sortBy">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       Popularity
                     </label>
                     <input
@@ -528,7 +528,7 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       Discount
                     </label>
                     <input
@@ -541,7 +541,7 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       Name
                     </label>
                     <input
@@ -554,7 +554,7 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       Customer Top Rated
                     </label>
                     <input
@@ -567,7 +567,7 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       New Arrivals
                     </label>
                     <input
@@ -580,7 +580,7 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       Price: High to Low
                     </label>
                     <input
@@ -593,7 +593,7 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" htmlFor="flexCheckDefault">
                       Price: Low to High
                     </label>
                     <input
@@ -745,7 +745,7 @@ const Category = () => {
                           <div className="sortBy">
                             <label
                               class="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="flexCheckDefault"
                             >
                               50-499
                             </label>
@@ -779,7 +779,7 @@ const Category = () => {
                           <div className="sortBy">
                             <label
                               class="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="flexCheckDefault"
                             >
                               1000-1999
                             </label>
@@ -796,7 +796,7 @@ const Category = () => {
                           <div className="sortBy">
                             <label
                               class="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="flexCheckDefault"
                             >
                               2000-4999
                             </label>
@@ -813,7 +813,7 @@ const Category = () => {
                           <div className="sortBy">
                             <label
                               class="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="flexCheckDefault"
                             >
                               5000 & Above
                             </label>

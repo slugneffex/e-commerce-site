@@ -13,3 +13,9 @@ a.box_topic {
     margin-bottom: 30px;
     overflow: hidden;
 }
+
+@media (max-width: 720px) {
+    .row .col-50 {
+        width: 50%;
+    }
+}

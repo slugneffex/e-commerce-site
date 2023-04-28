@@ -4,7 +4,7 @@ import React from "react";
 import Home from "./pages/index";
 import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
-import Login from "./pages/auth/Login";
+// import Login from "./pages/auth/Login";
 import Category from "./pages/category/Category";
 import VerifyOtp from "./pages/auth/VerifyOtp";
 import SignUp from "./pages/auth/SignUp";
@@ -47,7 +47,7 @@ const App = () => {
       <Route path="/Cart" element={<Cart />} />
       <Route path="/combo/:id" element={<Product />} />
       <Route path="/product/:id" element={<Singleproduct />} />
-      <Route path="/Login" element={<Login />} />
+      {/* <Route path="/Login" element={<Login />} /> */}
       <Route path="/category/:id" element={<Category />} />
       <Route path="/page/:id" element={<CustomPage />} />
       <Route path="/brand/:brand_id" element={<BrandProduct />} />

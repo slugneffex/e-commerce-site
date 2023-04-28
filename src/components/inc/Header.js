@@ -717,7 +717,7 @@ const Header = () => {
               <nav
                 className="navbar navbar-light"
                 data-bs-toggle="offcanvas"
-                href="#offcanvasExample"
+                data-bs-target="#offcanvasExample"
                 role="button"
                 aria-controls="offcanvasExample"
               >
@@ -773,22 +773,27 @@ const Header = () => {
 
                     {/* Home Link */}
                     <li>
-                      <a href="#">Home</a>
+                      <Link to="/">Home</Link>
                       <hr />
                     </li>
 
                     {/* Category Part */}
 
 
-                    <li data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                      <a>
-                        CATEGORIES
-                      </a>
+                    <li
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      <link />
+                      CATEGORIES
                       <hr />
                     </li>
 
-                    <div class="collapse" id="collapseExample">
-                      <div class="row">
+                    <div className="collapse" id="collapseExample">
+                      <div className="row">
                         {categories.map((e) => (
                           <div
                             className="col-lg-3 col-50 text-center"
@@ -809,15 +814,20 @@ const Header = () => {
 
                     {/* Brand Part */}
 
-                    <li data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-                      <a >
-                        BRANDS
-                      </a>
+                    <li
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample2"
+                      role="button"
+                      // aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      <link />
+                      BRANDS
                       <hr />
                     </li>
 
-                    <div class="collapse" id="collapseExample2">
-                      <div class="row">
+                    <div className="collapse" id="collapseExample2">
+                      <div className="row">
                         {sliceFilterData.map((e) => (
                           <div
                             className="col-lg-3 col-50 text-center"
@@ -846,15 +856,20 @@ const Header = () => {
 
                     {/* Store Location */}
 
-                    <li data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-                      <a>
-                        STORES
-                      </a>
+                    <li
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample3"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      <link />
+                      STORES
                       <hr />
                     </li>
 
-                    <div class="collapse" id="collapseExample3">
-                      <div class="card card-body">
+                    <div className="collapse" id="collapseExample3">
+                      <div className="card card-body">
                         {store.map((e) => (
                           <li style={{ marginTop: "0.5rem" }} key={e.id}>
                             <Link to={`/store/${e.id}`}>{e.name}</Link>
