@@ -752,7 +752,7 @@ const Header = () => {
                   </button>
                 </nav>
                 <div
-                  className="offcanvas offcanvas-start"
+                  className="offcanvas offcanvas-bottom"
                   tabIndex={-1}
                   id="offcanvasExample"
                   aria-labelledby="offcanvasExampleLabel"
