@@ -518,7 +518,8 @@ const Header = () => {
                             <div className="col-lg-3 col-50 text-center">
                               <Link to="/brandlogolist">
                                 <img
-                                  src="https://www.combonation.in/assets_new/img/viewall.png"
+                                  src="assets/QR/onelinkto_add7up.png"
+                                  // src="https://www.combonation.in/assets_new/img/viewall.png"
                                   alt="view-all"
                                   style={{ width: "100px", height: "auto" }}
                                 />
@@ -710,202 +711,215 @@ const Header = () => {
         </div>
 
 
+        {/* Mobile Header */}
+
         <div className="mobile">
-          <div className="row" style={{ alignItems: "center", width: "100vw" }}>
-            {/* button */}
-            <div className="col" style={{ paddingRight: "0" }}>
-              <nav
-                className="navbar navbar-light"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasExample"
-                role="button"
-                aria-controls="offcanvasExample"
-              >
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarToggleExternalContent"
-                  aria-controls="navbarToggleExternalContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
+          <div className={navbarSticky ? "fixed-top" : ""}>
+            <div className="row mx-0 py-2   bg-light" style={{ alignItems: "center", width: "100vw", overflow: "hidden" }}>
+              {/* button */}
+              <div className="col" style={{ paddingRight: "0", paddingLeft: "0" }}>
+                <nav
+                  className="navbar navbar-light"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasExample"
+                  role="button"
+                  aria-controls="offcanvasExample"
                 >
-                  <span className="navbar-toggler-icon" />
-                </button>
-              </nav>
-              <div
-                className="offcanvas offcanvas-bottom"
-                tabIndex={-1}
-                id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel"
-                style={{ height: "90vh" }}
-              >
+                  <button
+                    style={{ fontSize: "15px" }}
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent"
+                    aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <span className="navbar-toggler-icon" />
+                  </button>
+                </nav>
+                <div
+                  className="offcanvas offcanvas-bottom"
+                  tabIndex={-1}
+                  id="offcanvasExample"
+                  aria-labelledby="offcanvasExampleLabel"
+                  style={{ height: "90vh" }}
+                >
 
-                <div className="relative">
-                  <div className="offcanvas-header pt-6 px-auto">
+                  <div className="relative">
+                    <div className="offcanvas-header pt-6 px-auto">
 
-                    {Array.isArray(logo) &&
-                      logo.map((e) => (
-                        <Link className="navbar-brand mx-auto" to="/" key={e.id} style={{ marginTop: "20px" }}>
-                          <img
-                            className="mt-3"
-                            src={e.logo?.original_url}
-                            alt="logo-combonation"
-                            style={{ width: "100%", height: "50px" }}
-                          ></img>
-                        </Link>
-                      ))}
-
-                    <button
-                      type="button"
-                      className="btn-close text-reset"
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                      style={{ position: "absolute", right: "2rem", top: "2rem" }}
-                    />
-
-                  </div>
-                </div>
-
-
-                <div className="offcanvas-body">
-                  <ul style={{ paddingLeft: "0" }}>
-
-                    {/* Home Link */}
-                    <li>
-                      <Link to="/">Home</Link>
-                      <hr />
-                    </li>
-
-                    {/* Category Part */}
-
-
-                    <li
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseExample"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      <link />
-                      CATEGORIES
-                      <hr />
-                    </li>
-
-                    <div className="collapse" id="collapseExample">
-                      <div className="row">
-                        {categories.map((e) => (
-                          <div
-                            className="col-lg-3 col-50 text-center"
-                            key={e.id}
-                          >
-                            <Link to={`/category/${e.id}`}>
-                              <h6>{e.name}</h6>
-                              <img
-                                src={e.image?.url}
-                                alt={e.slug}
-                                style={{ width: "100px", height: "auto", marginTop: "0" }}
-                              />
-                            </Link>
-                          </div>
+                      {Array.isArray(logo) &&
+                        logo.map((e) => (
+                          <Link className="navbar-brand mx-auto" to="/" key={e.id} style={{ marginTop: "20px" }}>
+                            <img
+                              className="mt-3"
+                              src={e.logo?.original_url}
+                              alt="logo-combonation"
+                              style={{ width: "100%", height: "50px" }}
+                            ></img>
+                          </Link>
                         ))}
-                      </div>
+
+                      <button
+                        type="button"
+                        className="btn-close text-reset"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                        style={{ position: "absolute", right: "2rem", top: "2rem" }}
+                      />
+
                     </div>
+                  </div>
 
-                    {/* Brand Part */}
 
-                    <li
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseExample2"
-                      role="button"
-                      // aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      <link />
-                      BRANDS
-                      <hr />
-                    </li>
+                  <div className="offcanvas-body">
+                    <ul style={{ paddingLeft: "0" }}>
 
-                    <div className="collapse" id="collapseExample2">
-                      <div className="row">
-                        {sliceFilterData.map((e) => (
-                          <div
-                            className="col-lg-3 col-50 text-center"
-                            key={e.id}
-                          >
-                            <Link to={`/brand/${e.id}`}>
+                      {/* Home Link */}
+                      <li>
+                        <Link to="/">Home</Link>
+                        <hr />
+                      </li>
+
+                      {/* Category Part */}
+
+
+                      <li
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                      >
+
+                        <Link>CATEGORIES</Link>
+                        <hr />
+                      </li>
+
+                      <div className="collapse" id="collapseExample">
+                        <div className="row">
+                          {categories.map((e) => (
+                            <div
+                              className="col-lg-3 col-50 text-center"
+                              key={e.id}
+                            >
+                              <Link to={`/category/${e.id}`}>
+                                <h6>{e.name}</h6>
+                                <img
+                                  src={e.image?.url}
+                                  alt={e.slug}
+                                  style={{ width: "100px", height: "auto", marginTop: "0" }}
+                                />
+                              </Link>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Brand Part */}
+
+                      <li
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample2"
+                        role="button"
+                        // aria-expanded="false"
+                        aria-controls="collapseExample"
+                      >
+                        <Link>
+                          BRANDS
+                        </Link>
+                        <hr />
+                      </li>
+
+                      <div className="collapse" id="collapseExample2">
+                        <div className="row">
+                          {sliceFilterData.map((e) => (
+                            <div
+                              className="col-lg-3 col-50 text-center"
+                              key={e.id}
+                            >
+                              <Link to={`/brand/${e.id}`}>
+                                <img
+                                  src={e.image?.original_url}
+                                  alt={e.name}
+                                  style={{ width: "100px", height: "auto" }}
+                                />
+                              </Link>
+                            </div>
+                          ))}
+                          <div className="col-lg-3 col-50 text-center">
+                            <Link to="/brandlogolist">
                               <img
-                                src={e.image?.original_url}
-                                alt={e.name}
+                                src="assets/QR/onelinkto_add7up.png"
+                                // src="https://www.combonation.in/assets_new/img/viewall.png"
+                                alt="view-all"
                                 style={{ width: "100px", height: "auto" }}
                               />
                             </Link>
                           </div>
-                        ))}
-                        <div className="col-lg-3 col-50 text-center">
-                          <Link to="/brandlogolist">
-                            <img
-                              src="https://www.combonation.in/assets_new/img/viewall.png"
-                              alt="view-all"
-                              style={{ width: "100px", height: "auto" }}
-                            />
-                          </Link>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Store Location */}
+                      {/* Store Location */}
 
-                    <li
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseExample3"
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      <link />
-                      STORES
-                      <hr />
-                    </li>
+                      <li
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample3"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                      >
+                        <Link>STORES</Link>
 
-                    <div className="collapse" id="collapseExample3">
-                      <div className="card card-body">
-                        {store.map((e) => (
-                          <li style={{ marginTop: "0.5rem" }} key={e.id}>
-                            <Link to={`/store/${e.id}`}>{e.name}</Link>
-                          </li>
-                        ))}
+                        <hr />
+                      </li>
+
+                      <div className="collapse" id="collapseExample3">
+                        <div className="card card-body">
+                          {store.map((e) => (
+                            <li style={{ marginTop: "0.5rem" }} key={e.id}>
+                              <Link to={`/store/${e.id}`}>{e.name}</Link>
+                            </li>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </ul>
+                    </ul>
+                  </div>
+
+
+
                 </div>
-
-
-
               </div>
-            </div>
-            {/* Offcanvas for navbar */}
-            {/* logo */}
-            <div className="col">
-              {Array.isArray(logo) &&
-                logo.map((e) => (
-                  <Link className="navbar-brand" to="/" key={e.id}>
-                    <img
-                      src={e.logo?.original_url}
-                      alt="logo-combonation"
-                      style={{ width: "100%", height: "50px" }}
-                    ></img>
-                  </Link>
-                ))}
-            </div>
+              {/* Offcanvas for navbar */}
+              {/* logo */}
+              <div className="col" style={{ paddingLeft: "0", marginLeft: "-20px" }}>
+                {Array.isArray(logo) &&
+                  logo.map((e) => (
+                    <Link className="navbar-brand" to="/" key={e.id}>
+                      <img
+                        src={e.logo?.original_url}
+                        alt="logo-combonation"
+                        style={{ width: "100%", height: "50px" }}
+                      ></img>
+                    </Link>
+                  ))}
+              </div>
 
-            {/* icons */}
-            <div className="col" style={{ paddingTop: "8.5px", paddingRight: "0" }}>
-              <div className="row" style={{ justifyContent: "space-between" }}>
-                <div className="col">
-                  <i className="bi bi-search pt-0" />
+              {/* icons */}
+              <div className="col" style={{ paddingTop: "8.5px", paddingRight: "0" }}>
+                <div className="row" style={{ justifyContent: "space-between" }}>
+                  <div className="col"
+                    style={{ textAlign: "start" }}
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample4"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
+                    <i className="bi bi-search pt-0" style={{ fontSize: "15px" }} />
 
-                  {/* <form className="d-flex search" onSubmit={(e) => submit(e)}>
+                    {/* <form className="d-flex search" onSubmit={(e) => submit(e)}>
                     <input
                       id="search"
                       className="form-control me-2"
@@ -917,16 +931,37 @@ const Header = () => {
                       onChange={(e) => handle(e)}
                     ></input>
                   </form> */}
+                  </div>
+                  <div className="col" style={{ paddingRight: "0", textAlign: "start" }} >
+                    <i className="bi bi-heart" style={{ fontSize: "15px" }} />
+                  </div>
+                  <div className="col" style={{ textAlign: "start", overflow: "hidden", paddingRight: "0" }}>
+                    <i className="bi bi-cart" style={{ fontSize: "15px" }} />
+                  </div>
                 </div>
-                <div className="col" style={{ paddingRight: "0" }}>
-                  <i className="bi bi-heart" />
-                </div>
-                <div className="col">
-                  <i className="bi bi-cart" />
-                </div>
+              </div>
+
+
+
+              {/* Mobile Search */}
+
+              <div className="collapse mt-3" id="collapseExample4">
+                <form className="d-flex search mx-auto" style={{ width: "95vw" }} onSubmit={(e) => submit(e)}>
+                  <input
+                    id="search"
+                    className="form-control"
+                    type="search"
+                    name="search"
+                    placeholder="Search over 4,000+ Products"
+                    aria-label="Search"
+                    value={data.search}
+                    onChange={(e) => handle(e)}
+                  ></input>
+                </form>
               </div>
             </div>
           </div>
+
         </div>
       </header>
     </div>

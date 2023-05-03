@@ -216,6 +216,14 @@ footer h3::after {
         font-weight: bold;
     }
 
+    #search {
+        margin-right: 0;
+    }
+
+    #collapseExample4 .search {
+        margin-right: 0;
+    }
+
 
 
 

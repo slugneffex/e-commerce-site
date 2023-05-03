@@ -762,7 +762,7 @@ const Category = () => {
                           <div className="sortBy">
                             <label
                               class="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="flexCheckDefault"
                             >
                               500-999
                             </label>
@@ -922,12 +922,12 @@ const Category = () => {
                 </nav>
               </div>
               <div className="row" style={{ marginTop: "3rem" }}>
-                <div className="col-md-6">
+                <div className="col-6">
                   <h4>
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-md-6" style={{ textAlign: "end" }}>
+                <div className="col-6" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
