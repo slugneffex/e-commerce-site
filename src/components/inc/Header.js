@@ -2,21 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./incAll.css";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 import { useSelector } from "react-redux";
 
 const Header = () => {
-
   // set a cookie with SameSite=None and Secure attributes
-  Cookies.set('myCookie', 'cookieValue', { sameSite: 'none', secure: true });
+  Cookies.set("myCookie", "cookieValue", { sameSite: "none", secure: true });
 
   // set a cookie with SameSite=Strict attribute
-  Cookies.set('myCookie', 'cookieValue', { sameSite: 'strict' });
+  Cookies.set("myCookie", "cookieValue", { sameSite: "strict" });
 
   // set a cookie with SameSite=Lax attribute
-  Cookies.set('myCookie', 'cookieValue', { sameSite: 'lax' });
-
+  Cookies.set("myCookie", "cookieValue", { sameSite: "lax" });
 
   const navigate = useNavigate();
 
@@ -88,6 +86,15 @@ const Header = () => {
     }
 
     fetchData();
+  }, []);
+
+  // scroll fixes
+
+  useEffect(() => {
+    document.body.classList.add("custom-scroll");
+    return () => {
+      document.body.classList.remove("custom-scroll");
+    };
   }, []);
 
   // For logo
@@ -728,9 +735,19 @@ const Header = () => {
         {/* Mobile Navbar */}
         <div className="">
           <div className={navbarSticky ? "fixed-top" : ""}>
-            <div className="row mx-0 py-2   bg-light" style={{ alignItems: "center", width: "100vw", overflow: "hidden" }}>
+            <div
+              className="row mx-0 py-2   bg-light"
+              style={{
+                alignItems: "center",
+                width: "100vw",
+                overflow: "hidden",
+              }}
+            >
               {/* button */}
-              <div className="col" style={{ paddingRight: "0", paddingLeft: "0" }}>
+              <div
+                className="col"
+                style={{ paddingRight: "0", paddingLeft: "0" }}
+              >
                 <nav
                   className="navbar navbar-light"
                   data-bs-toggle="offcanvas"
@@ -758,13 +775,16 @@ const Header = () => {
                   aria-labelledby="offcanvasExampleLabel"
                   style={{ height: "90vh" }}
                 >
-
                   <div className="relative">
                     <div className="offcanvas-header pt-6 px-auto">
-
                       {Array.isArray(logo) &&
                         logo.map((e) => (
-                          <Link className="navbar-brand mx-auto" to="/" key={e.id} style={{ marginTop: "20px" }}>
+                          <Link
+                            className="navbar-brand mx-auto"
+                            to="/"
+                            key={e.id}
+                            style={{ marginTop: "20px" }}
+                          >
                             <img
                               className="mt-3"
                               src={e.logo?.original_url}
@@ -779,16 +799,17 @@ const Header = () => {
                         className="btn-close text-reset"
                         data-bs-dismiss="offcanvas"
                         aria-label="Close"
-                        style={{ position: "absolute", right: "2rem", top: "2rem" }}
+                        style={{
+                          position: "absolute",
+                          right: "2rem",
+                          top: "2rem",
+                        }}
                       />
-
                     </div>
                   </div>
 
-
                   <div className="offcanvas-body">
                     <ul style={{ paddingLeft: "0" }}>
-
                       {/* Home Link */}
                       <li>
                         <Link to="/">Home</Link>
@@ -797,7 +818,6 @@ const Header = () => {
 
                       {/* Category Part */}
 
-
                       <li
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseExample"
@@ -805,7 +825,6 @@ const Header = () => {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-
                         <Link>CATEGORIES</Link>
                         <hr />
                       </li>
@@ -822,7 +841,11 @@ const Header = () => {
                                 <img
                                   src={e.image?.url}
                                   alt={e.slug}
-                                  style={{ width: "100px", height: "auto", marginTop: "0" }}
+                                  style={{
+                                    width: "100px",
+                                    height: "auto",
+                                    marginTop: "0",
+                                  }}
                                 />
                               </Link>
                             </div>
@@ -839,9 +862,7 @@ const Header = () => {
                         // aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                       
-                          BRANDS
-                        
+                        BRANDS
                         <hr />
                       </li>
 
@@ -899,14 +920,14 @@ const Header = () => {
                       </div>
                     </ul>
                   </div>
-
-
-
                 </div>
               </div>
               {/* Offcanvas for navbar */}
               {/* logo */}
-              <div className="col" style={{ paddingLeft: "0", marginLeft: "-20px" }}>
+              <div
+                className="col"
+                style={{ paddingLeft: "0", marginLeft: "-20px" }}
+              >
                 {Array.isArray(logo) &&
                   logo.map((e) => (
                     <Link className="navbar-brand" to="/" key={e.id}>
@@ -920,9 +941,16 @@ const Header = () => {
               </div>
 
               {/* icons */}
-              <div className="col" style={{ paddingTop: "8.5px", paddingRight: "0" }}>
-                <div className="row" style={{ justifyContent: "space-between" }}>
-                  <div className="col"
+              <div
+                className="col"
+                style={{ paddingTop: "8.5px", paddingRight: "0" }}
+              >
+                <div
+                  className="row"
+                  style={{ justifyContent: "space-between" }}
+                >
+                  <div
+                    className="col"
                     style={{ textAlign: "start" }}
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseExample4"
@@ -930,7 +958,10 @@ const Header = () => {
                     aria-expanded="false"
                     aria-controls="collapseExample"
                   >
-                    <i className="bi bi-search pt-0" style={{ fontSize: "15px" }} />
+                    <i
+                      className="bi bi-search pt-0"
+                      style={{ fontSize: "15px" }}
+                    />
 
                     {/* <form className="d-flex search" onSubmit={(e) => submit(e)}>
                     <input
@@ -945,21 +976,35 @@ const Header = () => {
                     ></input>
                   </form> */}
                   </div>
-                  <div className="col" style={{ paddingRight: "0", textAlign: "start" }} >
+                  <div
+                    className="col"
+                    style={{ paddingRight: "0", textAlign: "start" }}
+                  >
                     <i className="bi bi-heart" style={{ fontSize: "15px" }} />
                   </div>
-                  <div className="col" style={{ textAlign: "start", overflow: "hidden", paddingRight: "0" }}>
-                    <i className="bi bi-cart" style={{ fontSize: "15px" }} />
+                  <div
+                    className="col"
+                    style={{
+                      textAlign: "start",
+                      overflow: "hidden",
+                      paddingRight: "0",
+                    }}
+                  >
+                    <Link to='/Cart'>
+                      <i className="bi bi-cart" style={{ fontSize: "15px" }} />
+                    </Link>
                   </div>
                 </div>
               </div>
 
-
-
               {/* Mobile Search */}
 
               <div className="collapse mt-3" id="collapseExample4">
-                <form className="d-flex search mx-auto" style={{ width: "95vw" }} onSubmit={(e) => submit(e)}>
+                <form
+                  className="d-flex search mx-auto"
+                  style={{ width: "95vw" }}
+                  onSubmit={(e) => submit(e)}
+                >
                   <input
                     id="search"
                     className="form-control"
@@ -974,7 +1019,6 @@ const Header = () => {
               </div>
             </div>
           </div>
-
         </div>
         {/* navbar ends */}
       </header>

@@ -629,11 +629,16 @@ const Cart = () => {
               <li className="cart-item" key={products.id}>
                 <div className="row">
                   <div className="col-3">
-                    <img src={products.image} alt="W" />
+                    <Link to={`/product/${products.id}`}>
+                      <img src={products.image} alt="W" />
+                    </Link>
                   </div>
+
                   <div className="col-6">
                     <div className="det">
-                      <h6>{products.title}</h6>
+                      <Link to={`/product/${products.id}`}>
+                        <h6>{products.title}</h6>
+                      </Link>
                       <br />
                       <div className="form-group">
                         <select name="" id="">
@@ -774,12 +779,6 @@ const Cart = () => {
   //   ...freebiescartItems,
   // ];
 
-  
-  
-
-  
- 
-
   return (
     <>
       <HomeLayout>
@@ -836,7 +835,7 @@ const Cart = () => {
                         <form action="https://www.combonation.in/apply-coupon" method="POST">
                         <input type="hidden" name="_token" value="SszM7yPk6R7lrPkjriFCbqypf6GA3Y8v0XD5q55J" />  
                             <input type="text" name="code" value="" required="" hidden=""/>*/}
-                      <button role="button" type="submit">
+                      <button type="submit">
                         Apply Code <i class="bi bi-arrow-right"></i>
                       </button>
                       {/*</form>
