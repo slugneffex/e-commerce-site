@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
-.S9gUrf-YoZ4jf, .S9gUrf-YoZ4jf * {
+.S9gUrf-YoZ4jf,
+.S9gUrf-YoZ4jf * {
   border: none;
   margin: 0;
   padding: 0;
   margin-left: 69px;
   margin-top: 26px;
-  
+
+}
+
+html body.custom-scroll {
+  overflow: scroll !important;
 }
 
 /* nav {
@@ -38,12 +43,12 @@ header .fixed-top {
 
 #navSec {
   width: 100%;
-  background-color:yellow;
+  background-color: yellow;
   border-bottom: 3px solid #eee;
   transition: all 0.5s ease-in-out 0.5s;
   scroll-behavior: smooth;
   border-radius: 3px;
-  
+
 }
 
 nav.sticky {
@@ -991,8 +996,8 @@ ul.additional_links li:after {
     padding: 1rem;
   }
 
-  
-  
+
+
   .testCard .heading {
     overflow: hidden;
   }
@@ -1193,8 +1198,8 @@ ul.additional_links li:after {
 }
 
 .btn_atc:hover {
-    color: #FFF;
-    background-color: #FF9800;
+  color: #FFF;
+  background-color: #FF9800;
 }
 
 .btn_atc:hover li {
@@ -1214,14 +1219,15 @@ a {
   .btn_atc {
     padding: 10px;
   }
+
   .btn_atc li {
     font-size: 10px;
   }
 
-   /* carousel */
+  /* carousel */
   .carouselItemCard {
     margin-right: 1.2rem;
   }
 
- 
+
 }

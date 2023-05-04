@@ -47,6 +47,15 @@ const BrandLogosList = () => {
     console.log(error)
   }
 
+  // scroll fixes
+
+  useEffect(() => {
+    document.body.classList.add("custom-scroll");
+    return () => {
+      document.body.classList.remove("custom-scroll");
+    };
+  }, []);
+
   return (
     <>
       <HomeLayout>
