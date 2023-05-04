@@ -316,15 +316,15 @@ const BrandProduct = () => {
           <div className="row">
             <div className="col-md-3 desktop">
               <div style={{ marginTop: "2rem" }}>
-                <div class="card" style={{ padding: "0" }}>
-                  <div class="card-body">
+                <div className="card" style={{ padding: "0" }}>
+                  <div className="card-body">
                     Sort By:{" "}
                     <span style={{ color: "#FE9E2D" }}>Popularity</span>
                   </div>
                 </div>
                 <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
                   <div className="sortBy">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       Popularity
                     </label>
                     <input
