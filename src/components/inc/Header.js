@@ -839,9 +839,9 @@ const Header = () => {
                         // aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>
+                       
                           BRANDS
-                        </Link>
+                        
                         <hr />
                       </li>
 
@@ -883,7 +883,7 @@ const Header = () => {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>STORES</Link>
+                        STORES
 
                         <hr />
                       </li>
