@@ -27,6 +27,7 @@ const BrandProduct = () => {
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
+  const [noProduct, setNoProduct] = useState(false);
 
   // filteration state end
 
@@ -76,6 +77,7 @@ const BrandProduct = () => {
         return !(price >= minPrice && price <= maxPrice);
       });
       setFilteredProducts(newFilteredProducts);
+      setNoProduct(false);
     } else {
       // If the filter is not checked, add it
       setCheckedFilters({ ...checkedFilters, [key]: true });
@@ -85,12 +87,24 @@ const BrandProduct = () => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
+      // setFilteredProducts((prevFilteredProducts) => [
+      //   ...prevFilteredProducts,
+      //   ...filtered,
+      // ]);
+
+      if (filtered.length > 0) {
+        setNoProduct(false); // hide message
+      } else {
+        setNoProduct(true); // show message
+        alert("Item not found in this price range");
+        window.location.reload();
+      }
+
       setFilteredProducts((prevFilteredProducts) => [
         ...prevFilteredProducts,
         ...filtered,
       ]);
     }
-   
   };
 
   // Filterration end
@@ -223,6 +237,76 @@ const BrandProduct = () => {
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
     // window.location.reload(`/brand/${brandId}`)
+  }
+
+  let singlebrandProduct = null;
+  if (brandProduct.length >= 1) {
+    singlebrandProduct = (
+      <>
+        {brandProduct.map((p) => (
+          <div className="col-md-4 " key={p.id}>
+            <div className="newComboCart">
+              <div className="cart-img-sec" style={{ position: "relative" }}>
+                <Link className="addtofavCategory">
+                  <i
+                    className="bi bi-heart"
+                    style={{
+                      position: "absolute",
+                      right: "0.8rem",
+                      top: "0.5rem",
+                    }}
+                  ></i>
+                </Link>
+                <Link to={`/product/${p.id}`}>
+                  <img
+                    src={p.thumbnail_img?.original_url}
+                    alt="img"
+                    width="100%"
+                  ></img>
+                </Link>
+              </div>
+
+              <div className="card-det-sec">
+                <div className="headingCard pt-3">
+                  <span>{p.name.substring(0, 40)}</span>
+                </div>
+
+                <div className="price-sec">
+                  <div className="col-4" style={{ textAlign: "end" }}>
+                    <span className="sp">₹{p.selling_price}</span>
+                  </div>
+                  <div className="col-4">
+                    <del className="mrp">₹{p.mrp}</del>
+                  </div>
+                  <div className="col-4">
+                    <span className="discount">{p.discount}% OFF</span>
+                  </div>
+                </div>
+                <div className="card-btn-sec ">
+                  <div
+                    className="btn_atc"
+                    onClick={() => {
+                      addToSingleCart(p);
+                    }}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    <i
+                      className="bi bi-cart"
+                      id={p.id}
+                      style={{ color: "#fe9e2d" }}
+                    >
+                      Add to Cart
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    );
   }
 
   return (
@@ -423,7 +507,6 @@ const BrandProduct = () => {
                                 name="category_id"
                                 id="category_id103"
                                 defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
@@ -480,7 +563,7 @@ const BrandProduct = () => {
                               class="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["50-499"]}
+                              checked={!!checkedFilters["50-499"]}
                               onChange={() => handleFilter(50, 499)}
                               id="flexCheckDefault"
                             />
@@ -497,7 +580,7 @@ const BrandProduct = () => {
                               class="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["500-999"]}
+                              checked={!!checkedFilters["500-999"]}
                               onChange={() => handleFilter(500, 999)}
                               id="flexCheckDefault"
                             />
@@ -514,7 +597,7 @@ const BrandProduct = () => {
                               class="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["1000-1999"]}
+                              checked={!!checkedFilters["1000-1999"]}
                               onChange={() => handleFilter(1000, 1999)}
                               id="flexCheckDefault"
                             />
@@ -531,7 +614,7 @@ const BrandProduct = () => {
                               class="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["2000-4999"]}
+                              checked={!!checkedFilters["2000-4999"]}
                               onChange={() => handleFilter(2000, 4999)}
                               id="flexCheckDefault"
                             />
@@ -548,7 +631,7 @@ const BrandProduct = () => {
                               class="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["5000-500000"]}
+                              checked={!!checkedFilters["5000-500000"]}
                               onChange={() => handleFilter(5000, 500000)}
                               id="flexCheckDefault"
                             />
@@ -617,10 +700,11 @@ const BrandProduct = () => {
                   </div>
                 </div>
               </div>
-              {/* {brandProduct.length > 0 ? (
-                <div className="row">
-                  {brandProduct.map((p) => (
-                    // render each product here
+
+              <div className="row" style={{ marginTop: "1rem" }}>
+                {/* {noProduct && <p>No product in this price range</p>} */}
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map((p) => (
                     <div className="col-md-4 " key={p.id}>
                       <div className="newComboCart">
                         <div
@@ -664,7 +748,7 @@ const BrandProduct = () => {
                               </span>
                             </div>
                           </div>
-                          <div className="card-btn-sec ">
+                          <div className="card-btn-sec">
                             <div
                               className="btn_atc"
                               onClick={() => {
@@ -686,154 +770,10 @@ const BrandProduct = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="no-results">No products found.</div>
-              )} */}
-
-              <div className="row" style={{ marginTop: "1rem" }}>
-                {filteredProducts.length > 0
-                  ? filteredProducts.map((p) => (
-                      <div className="col-md-4 " key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link className="addtofavCategory">
-                              <i
-                                className="bi bi-heart"
-                                style={{
-                                  position: "absolute",
-                                  right: "0.8rem",
-                                  top: "0.5rem",
-                                }}
-                              ></i>
-                            </Link>
-                            <Link to={`/product/${p.id}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt="img"
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3">
-                              <span>{p.name.substring(0, 40)}</span>
-                            </div>
-
-                            <div className="price-sec">
-                              <div
-                                className="col-4"
-                                style={{ textAlign: "end" }}
-                              >
-                                <span className="sp">₹{p.selling_price}</span>
-                              </div>
-                              <div className="col-4">
-                                <del className="mrp">₹{p.mrp}</del>
-                              </div>
-                              <div className="col-4">
-                                <span className="discount">
-                                  {p.discount}% OFF
-                                </span>
-                              </div>
-                            </div>
-                            <div className="card-btn-sec">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                }}
-                                style={{
-                                  cursor: "pointer",
-                                }}
-                              >
-                                <i
-                                  className="bi bi-cart"
-                                  id={p.id}
-                                  style={{ color: "#fe9e2d" }}
-                                >
-                                  Add to Cart
-                                </i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  : brandProduct.map((p) => (
-                      <div className="col-md-4 " key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link className="addtofavCategory">
-                              <i
-                                className="bi bi-heart"
-                                style={{
-                                  position: "absolute",
-                                  right: "0.8rem",
-                                  top: "0.5rem",
-                                }}
-                              ></i>
-                            </Link>
-                            <Link to={`/product/${p.id}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt="img"
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3">
-                              <span>{p.name.substring(0, 40)}</span>
-                            </div>
-
-                            <div className="price-sec">
-                              <div
-                                className="col-4"
-                                style={{ textAlign: "end" }}
-                              >
-                                <span className="sp">₹{p.selling_price}</span>
-                              </div>
-                              <div className="col-4">
-                                <del className="mrp">₹{p.mrp}</del>
-                              </div>
-                              <div className="col-4">
-                                <span className="discount">
-                                  {p.discount}% OFF
-                                </span>
-                              </div>
-                            </div>
-                            <div className="card-btn-sec ">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                }}
-                                style={{
-                                  cursor: "pointer",
-                                }}
-                              >
-                                <i
-                                  className="bi bi-cart"
-                                  id={p.id}
-                                  style={{ color: "#fe9e2d" }}
-                                >
-                                  Add to Cart
-                                </i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                  ))
+                ) : (
+                  <>{singlebrandProduct}</>
+                )}
               </div>
             </div>
           </div>
