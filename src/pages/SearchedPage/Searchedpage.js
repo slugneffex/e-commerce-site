@@ -44,7 +44,6 @@ const Searchedpage = () => {
                       <div className="btn_atc">
                         {/* <Link> */}
                         <div
-                            className="btn_atc"
                             // onClick={() => {
                             //   addToCart(e);
                             //   alert("product added to cart successfully")
@@ -74,9 +73,9 @@ const Searchedpage = () => {
             {data.products.data.map((e) => (
               <div className="col-lg-3 col-md-3" key={e.id}>
                 <div className="newComboCart">
-                  <div className="cart-img-sec">
+                  <div className="cart-img-sec" style={{position: "relative" }}>
                     <Link className="addtofavCategory">
-                      <i className="bi bi-heart"></i>
+                      <i className="bi bi-heart" style={{ position: "absolute" , right: ".8rem", top: ".5rem" }}></i>
                     </Link>
                     <Link to={`/products/${e.id}`}>
                       <img src={e.thumbnail_img?.original_url} alt="img"></img>
@@ -98,7 +97,7 @@ const Searchedpage = () => {
                     </div>
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
-                        <Link>
+                        {/* <Link> */}
                           <i
                             className="bi bi-cart"
                             id={e.id}
@@ -106,7 +105,7 @@ const Searchedpage = () => {
                           >
                             Add to Cart
                           </i>
-                        </Link>
+                        {/* </Link> */}
                       </div>
                     </div>
                   </div>
