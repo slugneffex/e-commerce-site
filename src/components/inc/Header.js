@@ -862,7 +862,7 @@ const Header = () => {
                         // aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>BRANDS</Link>
+                        BRANDS
                         <hr />
                       </li>
 
@@ -904,7 +904,7 @@ const Header = () => {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>STORES</Link>
+                        STORES
 
                         <hr />
                       </li>
@@ -991,7 +991,7 @@ const Header = () => {
                     }}
                   >
                     <Link to='/Cart'>
-                    <i className="bi bi-cart" style={{ fontSize: "15px" }} />
+                      <i className="bi bi-cart" style={{ fontSize: "15px" }} />
                     </Link>
                   </div>
                 </div>
