@@ -507,20 +507,20 @@ const Category = () => {
           <div className="row">
             <div className="col-md-3 desktop">
               <div style={{ marginTop: "2rem" }}>
-                <div class="card" style={{ padding: "0" }}>
-                  <div class="card-body">
+                <div className="card" style={{ padding: "0" }}>
+                  <div className="card-body">
                     Sort By:{" "}
                     <span style={{ color: "#FE9E2D" }}>Popularity</span>
                   </div>
                 </div>
                 <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
                   <div className="sortBy">
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       Popularity
                     </label>
                     <input
                       style={{ marginLeft: "11.95rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -528,12 +528,12 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       Discount
                     </label>
                     <input
                       style={{ marginLeft: "12.6rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -541,12 +541,12 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       Name
                     </label>
                     <input
                       style={{ marginLeft: "13.9rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -554,12 +554,12 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       Customer Top Rated
                     </label>
                     <input
                       style={{ marginLeft: "6.6rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -567,12 +567,12 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       New Arrivals
                     </label>
                     <input
                       style={{ marginLeft: "10.8rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -580,12 +580,12 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       Price: High to Low
                     </label>
                     <input
                       style={{ marginLeft: "8.3rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -593,12 +593,12 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="flexCheckDefault">
                       Price: Low to High
                     </label>
                     <input
                       style={{ marginLeft: "8.3rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -691,13 +691,13 @@ const Category = () => {
                       <Collapse in={isOpen2}>
                         <div id="collapseExample">
                           {filterbrandsApi.map((e) => (
-                            <div className="form-check">
+                            <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
                                 id="category_id103"
                                 defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                             
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
@@ -744,14 +744,14 @@ const Category = () => {
                           />{" "}
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               htmlFor="flexCheckDefault"
                             >
                               50-499
                             </label>
                             <input
                               style={{ marginLeft: "7rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={checkedFilters["50-499"]}
@@ -761,14 +761,14 @@ const Category = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               htmlFor="flexCheckDefault"
                             >
                               500-999
                             </label>
                             <input
                               style={{ marginLeft: "6.45rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={checkedFilters["500-999"]}
@@ -778,14 +778,14 @@ const Category = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               htmlFor="flexCheckDefault"
                             >
                               1000-1999
                             </label>
                             <input
                               style={{ marginLeft: "5.88rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={checkedFilters["1000-1999"]}
@@ -795,14 +795,14 @@ const Category = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               htmlFor="flexCheckDefault"
                             >
                               2000-4999
                             </label>
                             <input
                               style={{ marginLeft: "5.34rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={checkedFilters["2000-4999"]}
@@ -812,14 +812,14 @@ const Category = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               htmlFor="flexCheckDefault"
                             >
                               5000 & Above
                             </label>
                             <input
                               style={{ marginLeft: "3.963rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={checkedFilters["5000-500000"]}

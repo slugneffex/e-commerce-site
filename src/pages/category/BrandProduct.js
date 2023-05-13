@@ -329,7 +329,7 @@ const BrandProduct = () => {
                     </label>
                     <input
                       style={{ marginLeft: "11.95rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -337,12 +337,12 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       Discount
                     </label>
                     <input
                       style={{ marginLeft: "12.6rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -350,12 +350,12 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       Name
                     </label>
                     <input
                       style={{ marginLeft: "13.9rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -363,12 +363,12 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       Customer Top Rated
                     </label>
                     <input
                       style={{ marginLeft: "6.6rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -376,12 +376,12 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       New Arrivals
                     </label>
                     <input
                       style={{ marginLeft: "10.8rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -389,12 +389,12 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       Price: High to Low
                     </label>
                     <input
                       style={{ marginLeft: "8.3rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -402,12 +402,12 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="flexCheckDefault">
                       Price: Low to High
                     </label>
                     <input
                       style={{ marginLeft: "8.3rem" }}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
@@ -459,7 +459,7 @@ const BrandProduct = () => {
                                 name="category_id"
                                 id="category_id103"
                                 defaultValue={103}
-                                onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
+                            
                                 className="form-check-input"
                                 onClick={() => handleClick(e.id)}
                               />
@@ -553,14 +553,14 @@ const BrandProduct = () => {
                           />{" "}
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               for="flexCheckDefault"
                             >
                               50-499
                             </label>
                             <input
                               style={{ marginLeft: "7rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={!!checkedFilters["50-499"]}
@@ -570,14 +570,14 @@ const BrandProduct = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               for="flexCheckDefault"
                             >
                               500-999
                             </label>
                             <input
                               style={{ marginLeft: "6.45rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={!!checkedFilters["500-999"]}
@@ -587,14 +587,14 @@ const BrandProduct = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               for="flexCheckDefault"
                             >
                               1000-1999
                             </label>
                             <input
                               style={{ marginLeft: "5.88rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={!!checkedFilters["1000-1999"]}
@@ -604,14 +604,14 @@ const BrandProduct = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               for="flexCheckDefault"
                             >
                               2000-4999
                             </label>
                             <input
                               style={{ marginLeft: "5.34rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={!!checkedFilters["2000-4999"]}
@@ -621,14 +621,14 @@ const BrandProduct = () => {
                           </div>
                           <div className="sortBy">
                             <label
-                              class="form-check-label"
+                              className="form-check-label"
                               for="flexCheckDefault"
                             >
                               5000 & Above
                             </label>
                             <input
                               style={{ marginLeft: "3.963rem" }}
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value=""
                               checked={!!checkedFilters["5000-500000"]}

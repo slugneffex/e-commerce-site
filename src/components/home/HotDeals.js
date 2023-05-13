@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HotDeals = () => {
   const [flash, setFlash] = useState([]);
@@ -9,13 +9,16 @@ const HotDeals = () => {
     async function fetchData() {
       const options = {
         headers: {
-          "X-Authorization": 'CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs',
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
           "Cache-Control": "no-cache, no-store, must-revalidate",
           mode: "cors",
           credentials: "include",
         },
       };
-      const response = await axios.get('/superFlashDeals', options);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
+        options
+      );
       setFlash(response.data);
     }
     fetchData();
@@ -27,18 +30,19 @@ const HotDeals = () => {
         <div className="hot-deals text-center">
           <h3>Super Flash Deals For You</h3>
         </div>
-        <Carousel touch={true} interval="2000">
-          {Array.isArray(flash) &&
-            flash.map((e) => (
-              <Carousel.Item key={e.banner?.id}>
+
+        {Array.isArray(flash) &&
+          flash.map((e) => (
+            <div key={e.banner?.id}>
+              <Link to="/view-all-products">
                 <img
                   src={e.banner?.original_url}
                   width="100%"
                   alt="super-flash-Deal"
-                ></img>
-              </Carousel.Item>
-            ))}
-        </Carousel>
+                />
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );
