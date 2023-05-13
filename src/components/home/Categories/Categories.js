@@ -12,6 +12,8 @@ const Categories = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
+    let timer;
     async function fetchData() {
       setError(null);
       const options = {
@@ -27,7 +29,10 @@ const Categories = () => {
           `${process.env.REACT_APP_BASE_URL}/categories`,
           options
         );
-        setCategory(response.data);
+        if (isMounted) {
+          setCategory(response.data);
+        }
+        timer = setTimeout(fetchData, 500);
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -41,6 +46,10 @@ const Categories = () => {
     }
 
     fetchData();
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -78,7 +87,7 @@ const Categories = () => {
   const filterCategories = pageCategories.filter((pageCategories) => {
     return pageCategories.show_with_category === "on";
   });
-  console.log(filterCategories);
+ 
 
   if (error) {
     console.log(error);

@@ -297,15 +297,11 @@ const Loginadress = () => {
       });
   }
 
-  
-
   const totalcartItems = {
-    cartItems: [...cartItems,{cartType:"normal"}],
-    singleCartItems: [...singleCartItems,{cartType:"custom"}],
-    freebiescartItems: [...freebiescartItems,{cartType:"freebies"}]
+    cartItems: [{ cartType: "normal" }, ...cartItems],
+    singleCartItems: [{ cartType: "custom" }, ...singleCartItems],
+    freebiescartItems: [{ cartType: "freebies" }, ...freebiescartItems],
   };
-
-  
 
   // Order Validate
 

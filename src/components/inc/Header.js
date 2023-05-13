@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 
 const Header = () => {
+  const [pageCategories, setPageCategories] = useState([]);
   // set a cookie with SameSite=None and Secure attributes
   Cookies.set("myCookie", "cookieValue", { sameSite: "none", secure: true });
 
@@ -232,6 +233,42 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      setError(null);
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          mode: "cors",
+          credentials: "include",
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/pages`,
+          options
+        );
+        setPageCategories(response.data);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const filterCategories = pageCategories.filter((pageCategories) => {
+    return pageCategories.show_with_category === "on";
+  });
+
   return (
     <div>
       <header className="my-auto desktop">
@@ -394,6 +431,21 @@ const Header = () => {
                                 </Link>
                               </div>
                             ))}
+                             {filterCategories.map((e) => (
+                              <div
+                                className="col-lg-3 col-50 text-center"
+                                key={e.id}
+                              >
+                                <Link to={`/page/${e.id}`}>
+                                  <h6>{e.name}</h6>
+                                  <img
+                                    src={e.icon?.original_url}
+                                    alt={e.slug}
+                                    style={{ width: "100px", height: "auto" }}
+                                  />
+                                </Link>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </ul>
@@ -436,8 +488,8 @@ const Header = () => {
                             <div className="col-lg-3 col-50 text-center">
                               <Link to="/brandlogolist">
                                 <img
-                                  src="assets/QR/onelinkto_add7up.png"
-                                  // src="https://www.combonation.in/assets_new/img/viewall.png"
+                                 
+                                  src="https://www.combonation.in/assets_new/img/viewall.png"
                                   alt="view-all"
                                   style={{ width: "100px", height: "auto" }}
                                 />
