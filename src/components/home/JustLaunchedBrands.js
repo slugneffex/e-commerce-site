@@ -3,6 +3,8 @@ import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const responsive = {
   superLargeDesktop: {
@@ -27,35 +29,42 @@ const responsive = {
 const JustLaunchedBrands = () => {
   const [brand, setBrand] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/productDeals`,
-          options
-        );
-        setBrand(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
+    setTimeout(() => {
+      async function fetchData() {
+        setError(null);
+        setLoading(true);
+        const options = {
+          headers: {
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            mode: "cors",
+            credentials: "include",
+          },
+        };
+
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/productDeals`,
+            options
+          );
+          setBrand(response.data);
+          setLoading(false);
+        } catch (error) {
+          if (error.response && error.response.status === 429) {
+            const retryAfter = parseInt(error.response.headers["retry-after"]);
+            setTimeout(() => {
+              fetchData();
+            }, retryAfter * 1000);
+          } else {
+            setError(error.message);
+          }
         }
       }
-    }
-    fetchData();
+      fetchData();
+    }, 5000);
   }, []);
 
   if (error) {
@@ -67,66 +76,91 @@ const JustLaunchedBrands = () => {
         <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
           Just Launched Brands
         </h3>
-        <div className="container">
-          <Carousel
-            responsive={responsive}
-            arrows={false}
-            infinite
-            centerMode
-            dotListClass="custom-dot-list-style"
-          >
-            {Array.isArray(brand) &&
-              brand.map((e) => (
-                <div key={e.id}>
-                  {e.brand_id && (
-                    <Link to={`/brand/${e.brand_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.product_id && (
-                    <Link to={`/product/${e.product_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.combo_id && (
-                    <Link to={`/combo/${e.combo_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.page_id && (
-                    <Link to={`/page/${e.page_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.category_id && (
-                    <Link to={`/category/${e.category_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                </div>
-              ))}
-          </Carousel>
-        </div>
+        {loading ? (
+          <div className="container">
+            <Carousel
+              responsive={responsive}
+              arrows={false}
+              infinite
+              centerMode
+              dotListClass="custom-dot-list-style"
+            >
+              <div>
+                <Skeleton baseColor="#ededed" width="80%" height="300px" />
+              </div>
+              <div>
+                <Skeleton baseColor="#ededed" width="80%" height="300px" />
+              </div>
+              <div>
+                <Skeleton baseColor="#ededed" width="80%" height="300px" />
+              </div>
+              <div>
+                <Skeleton baseColor="#ededed" width="80%" height="300px" />
+              </div>
+            </Carousel>
+          </div>
+        ) : (
+          <div className="container">
+            <Carousel
+              responsive={responsive}
+              arrows={false}
+              infinite
+              centerMode
+              dotListClass="custom-dot-list-style"
+            >
+              {Array.isArray(brand) &&
+                brand.map((e) => (
+                  <div key={e.id}>
+                    {e.brand_id && (
+                      <Link to={`/brand/${e.brand_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="80%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.product_id && (
+                      <Link to={`/product/${e.product_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="80%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.combo_id && (
+                      <Link to={`/combo/${e.combo_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="80%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.page_id && (
+                      <Link to={`/page/${e.page_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="80%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.category_id && (
+                      <Link to={`/category/${e.category_id}`}>
+                        <img
+                          src={e.thumbnail?.original_url}
+                          width="80%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                  </div>
+                ))}
+            </Carousel>
+          </div>
+        )}
       </div>
     </>
   );

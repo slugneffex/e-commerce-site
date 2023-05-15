@@ -12,6 +12,8 @@ import {
   getTotalDiscount,
 } from "../features/useCartSlice";
 import { useDispatch } from "react-redux";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,13 +40,14 @@ const YouMayLike = () => {
 
   // Featured combos
   const [feature, setFeature] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
       async function fetchData() {
         setError(null);
+        setLoading(true);
         const options = {
           headers: {
             "X-Authorization":
@@ -61,6 +64,7 @@ const YouMayLike = () => {
             options
           );
           setFeature(response.data.data);
+          setLoading(false);
         } catch (error) {
           if (error.response && error.response.status === 429) {
             const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -144,85 +148,480 @@ const YouMayLike = () => {
             <h3>You May Like...</h3>
           </div>
         </div>
-
-        <div className="container ">
-          <div className="row">
-            <Carousel
-              responsive={responsive}
-              showDots={false}
-              infinite={true}
-              arrows={false}
-            >
-              {Array.isArray(feature) &&
-                feature.map((e) => (
-                  <div
-                    className="item carouselItemCard"
-                    key={e.id}
-                    style={{ marginRight: ".8rem" }}
-                  >
-                    <div className="newComboCart">
-                      <div className="cart-img-sec">
-                        <Link
-                          onClick={() => wishlistData(e.id)}
-                          className="addtofav"
-                        >
-                          <ul>
-                            <li className="youMayLikeHeart">
-                              {heartFilled === e.id ? (
-                                <i
-                                  style={{ color: "#fe9e2d" }}
-                                  className="bi bi-heart-fill"
-                                ></i>
-                              ) : (
-                                <i className="bi bi-heart"></i>
-                              )}
-                            </li>
-                          </ul>
-                        </Link>
-                        <Link to={`/combo/${e.id}`}>
-                          <img src={e.meta_img?.url} alt="img" width='100%'></img>
-                        </Link>
+        {loading ? (
+          <div className="container">
+            <div className="row">
+              <Carousel
+                responsive={responsive}
+                showDots={false}
+                infinite={true}
+                arrows={false}
+              >
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
                       </div>
-
-                      <div className="card-det-sec">
-                        <div className="headingCard pt-3">
-                          <span>{e.name}</span>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="item carouselItemCard"  style={{ marginRight: ".8rem" }}>
+                  <div className="newComboCart">
+                    <div className="cart-img-sec">
+                      <div className="addtofav">
+                        <ul className="mb-5">
+                          <li className="youMayLikeHeart">
+                            <i className="bi bi-heart"></i>
+                          </li>
+                        </ul>
+                        <Skeleton
+                          width="100%"
+                          baseColor="#ededed"
+                          height="200px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>
+                        <Skeleton />
+                      </span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4">
+                        <span className="sp">
+                          <Skeleton />
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">
+                          <Skeleton />
+                        </del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">
+                          <Skeleton />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div className="btn_atc" style={{ cursor: "pointer" }}>
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Carousel>
+            </div>
+          </div>
+        ) : (
+          <div className="container ">
+            <div className="row">
+              <Carousel
+                responsive={responsive}
+                showDots={false}
+                infinite={true}
+                arrows={false}
+              >
+                {Array.isArray(feature) &&
+                  feature.map((e) => (
+                    <div
+                      className="item carouselItemCard"
+                      key={e.id}
+                      style={{ marginRight: ".8rem" }}
+                    >
+                      <div className="newComboCart">
+                        <div className="cart-img-sec">
+                          <Link
+                            onClick={() => wishlistData(e.id)}
+                            className="addtofav"
+                          >
+                            <ul>
+                              <li className="youMayLikeHeart">
+                                {heartFilled === e.id ? (
+                                  <i
+                                    style={{ color: "#fe9e2d" }}
+                                    className="bi bi-heart-fill"
+                                  ></i>
+                                ) : (
+                                  <i className="bi bi-heart"></i>
+                                )}
+                              </li>
+                            </ul>
+                          </Link>
+                          <Link to={`/combo/${e.id}`}>
+                            <img
+                              src={e.meta_img?.url}
+                              alt="img"
+                              width="100%"
+                            ></img>
+                          </Link>
                         </div>
-                        {/* <div>
+
+                        <div className="card-det-sec">
+                          <div className="headingCard pt-3">
+                            <span>{e.name}</span>
+                          </div>
+                          {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-                        <div className="price-sec">
-                          <div className="col-4">
-                            <span className="sp">₹{e.selling_price}</span>
+                          <div className="price-sec">
+                            <div className="col-4">
+                              <span className="sp">₹{e.selling_price}</span>
+                            </div>
+                            <div className="col-4">
+                              <del className="mrp">₹{e.mrp}</del>
+                            </div>
+                            <div className="col-4">
+                              <span className="discount">
+                                {e.discount}% OFF
+                              </span>
+                            </div>
                           </div>
-                          <div className="col-4">
-                            <del className="mrp">₹{e.mrp}</del>
-                          </div>
-                          <div className="col-4">
-                            <span className="discount">{e.discount}% OFF</span>
-                          </div>
-                        </div>
-                        <div className="card-btn-sec ">
-                          <div
-                            className="btn_atc"
-                            onClick={() => {
-                              addToCart(e);
-                              alert("product added to cart successfully")
-                            }}
-                            style={{ cursor: "pointer" }}
-                          >
-                            <i className="bi bi-cart" id={e.id}>
-                              Add to Cart
-                            </i>
+                          <div className="card-btn-sec ">
+                            <div
+                              className="btn_atc"
+                              onClick={() => {
+                                addToCart(e);
+                                alert("product added to cart successfully");
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="bi bi-cart" id={e.id}>
+                                Add to Cart
+                              </i>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-            </Carousel>
+                  ))}
+              </Carousel>
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </div>
   );

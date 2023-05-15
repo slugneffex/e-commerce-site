@@ -5,6 +5,8 @@ import useCartReducer from "../components/features/useCartSlice";
 import useSingleCartReducer from "../components/features/SingleCartSlice";
 import freebiesCartReducer from "../components/features/freebiesCartSlice";
 import storage from "redux-persist/lib/storage";
+import categoriesReducer from "../components/features/reducers/categoriesReducer";
+
 import {
   persistReducer,
   FLUSH,
@@ -22,6 +24,7 @@ export const rootReducers = combineReducers({
   cart: useCartReducer,
   SingleCart: useSingleCartReducer,
   freebies: freebiesCartReducer,
+  categories: categoriesReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({

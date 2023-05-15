@@ -1281,8 +1281,8 @@ const CustomPage = () => {
                       }
                     })}
 
-                    {/* Categories single Product */}
-                    {categoriesProductSection}
+                {/* Categories single Product */}
+                {categoriesProductSection}
               </div>
             </div>
           </div>

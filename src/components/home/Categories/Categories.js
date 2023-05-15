@@ -2,22 +2,23 @@ import React, { useState, useEffect } from "react";
 import "./categories.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 
 const Categories = () => {
   const [category, setCategory] = useState([]);
   const [pageCategories, setPageCategories] = useState([]);
-
   const [error, setError] = useState(null);
 
-  
 
   useEffect(() => {
     let isMounted = true;
     let timer;
+ 
     async function fetchData() {
       setError(null);
+     
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -33,6 +34,7 @@ const Categories = () => {
         );
         if (isMounted) {
           setCategory(response.data);
+         
         }
         timer = setTimeout(fetchData, 500);
       } catch (error) {
@@ -52,11 +54,13 @@ const Categories = () => {
       isMounted = false;
       clearTimeout(timer);
     };
+ 
   }, []);
 
   useEffect(() => {
     async function fetchData() {
       setError(null);
+    
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -71,6 +75,7 @@ const Categories = () => {
           options
         );
         setPageCategories(response.data);
+       
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -116,6 +121,7 @@ const Categories = () => {
 
   return (
     <>
+   
       <div className="categoriesMainDiv">
         <div className="container">
           <div className="my-auto categoriesDiv">
@@ -132,6 +138,9 @@ const Categories = () => {
           </div>
         </div>
       </div>
+
+  
+      
       {/* <div className="d-flex justify-content-center">
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>

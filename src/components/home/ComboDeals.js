@@ -45,7 +45,7 @@ const ComboDeals = () => {
           options
         );
         setCombo(response.data);
-        console.log(response.data);
+       
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
