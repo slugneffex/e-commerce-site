@@ -180,7 +180,7 @@ const YouMayLike = () => {
                           </ul>
                         </Link>
                         <Link to={`/combo/${e.id}`}>
-                          <img src={e.meta_img?.url} alt="img"></img>
+                          <img src={e.meta_img?.url} alt="img" width='100%'></img>
                         </Link>
                       </div>
 
