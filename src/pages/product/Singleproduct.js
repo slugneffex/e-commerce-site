@@ -285,13 +285,14 @@ const Singleproduct = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                    <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
+                  <div dangerouslySetInnerHTML={{ __html:product.desc }} />
+                    {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
-                    <li>Organic Harvest Diamond Shine</li>
+                    <li>Organic Harvest Diamond Shine</li> */}
                   </ul>
-                  <div>
+                  {/* <div>
                     <p>{product.desc}</p>
-                  </div>
+                  </div> */}
                 </div>
                 <div
                   className="tab-pane fade"

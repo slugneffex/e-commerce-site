@@ -11,6 +11,8 @@ const Categories = () => {
 
   const [error, setError] = useState(null);
 
+  
+
   useEffect(() => {
     let isMounted = true;
     let timer;
@@ -38,7 +40,7 @@ const Categories = () => {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
           setTimeout(() => {
             fetchData();
-          }, retryAfter * 1000);
+          }, retryAfter * 500);
         } else {
           setError(error.message);
         }
@@ -87,7 +89,6 @@ const Categories = () => {
   const filterCategories = pageCategories.filter((pageCategories) => {
     return pageCategories.show_with_category === "on";
   });
- 
 
   if (error) {
     console.log(error);
