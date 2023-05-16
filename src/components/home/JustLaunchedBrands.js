@@ -64,7 +64,7 @@ const JustLaunchedBrands = () => {
         }
       }
       fetchData();
-    }, 5000);
+    }, 2000);
   }, []);
 
   if (error) {
@@ -88,6 +88,7 @@ const JustLaunchedBrands = () => {
               <div>
                 <Skeleton baseColor="#ededed" width="80%" height="300px" />
               </div>
+
               <div>
                 <Skeleton baseColor="#ededed" width="80%" height="300px" />
               </div>

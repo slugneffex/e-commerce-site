@@ -31,6 +31,7 @@ const BrandProduct = () => {
 
   // filteration state end
 
+
   useEffect(() => {
     async function fetchData() {
       setError(null);
@@ -44,6 +45,7 @@ const BrandProduct = () => {
           `${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`,
           options
         );
+       
         setBrandProduct(response.data.products.data);
         setBrandName(response.data.brand);
       } catch (error) {
@@ -57,7 +59,10 @@ const BrandProduct = () => {
         }
       }
     }
-    fetchData();
+
+    
+      fetchData();
+   
   }, [brand_id]);
 
   // filteration
@@ -236,8 +241,10 @@ const BrandProduct = () => {
     setFilteredProducts([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-    // window.location.reload(`/brand/${brandId}`)
+
   }
+
+  
 
   let singlebrandProduct = null;
   if (brandProduct.length >= 1) {
@@ -459,13 +466,12 @@ const BrandProduct = () => {
                                 name="category_id"
                                 id="category_id103"
                                 defaultValue={103}
-                            
                                 className="form-check-input"
                                 onClick={() => handleClick(e.id)}
                               />
 
                               <label className="form-check-label" htmlFor={103}>
-                                {e.name} (106)
+                                {e.name}
                               </label>
                             </div>
                           ))}
@@ -501,7 +507,25 @@ const BrandProduct = () => {
                       <Collapse in={isOpen2}>
                         <div id="collapseExample">
                           {filterbrandsApi.map((e) => (
-                            <div className="form-check">
+                            // <div className="sortBy" key={e.id}>
+                            //   <label
+                            //     className="form-check-label"
+                            
+                            //     htmlFor={`brand_${brand.id}`}
+                            //   >
+                            //     {e.name}
+                            //   </label>
+                            //   <input
+                            //     type="checkbox"
+                            //     name="brand"
+                            //     id={`brand_${brand.id}`}
+                            //     value={brand.id}
+                            //     className="form-check-input"
+                            //     checked={selectedBrands.includes(brand.id)}
+                            //     onChange={() => handleClickBrand(brand.id)}
+                            //   />
+                            // </div>
+                            <div className="form-check" key={e.div}>
                               <input
                                 type="radio"
                                 name="category_id"
@@ -511,7 +535,7 @@ const BrandProduct = () => {
                                 onClick={() => handleClickbrand(e.id)}
                               />
                               <label className="form-check-label" htmlFor={103}>
-                                {e.name} (51)
+                                {e.name}
                               </label>
                             </div>
                           ))}

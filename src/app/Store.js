@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
+// import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import useCartReducer from "../components/features/useCartSlice";
 import useSingleCartReducer from "../components/features/SingleCartSlice";
 import freebiesCartReducer from "../components/features/freebiesCartSlice";
@@ -20,6 +20,7 @@ const persistConfig = {
   key: "root",
   storage: storage,
 };
+
 export const rootReducers = combineReducers({
   cart: useCartReducer,
   SingleCart: useSingleCartReducer,
