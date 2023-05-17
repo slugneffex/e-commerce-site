@@ -1,49 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Categories = () => {
   const [myoc, setMyoc] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   // myoc Poster
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/settings`,
-          options
-        );
-        setMyoc(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
+    setTimeout(() => {
+      async function fetchData() {
+        setError(null);
+        setLoading(true);
+        const options = {
+          headers: {
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+          },
+        };
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/settings`,
+            options
+          );
+          setMyoc(response.data);
+          setLoading(false);
+        } catch (error) {
+          if (error.response && error.response.status === 429) {
+            const retryAfter = parseInt(error.response.headers["retry-after"]);
+            setTimeout(() => {
+              fetchData();
+            }, retryAfter * 1000);
+          } else {
+            setError(error.message);
+          }
         }
       }
-    }
-    fetchData();
+      fetchData();
+    }, 2000);
   }, []);
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
 
   return (
     <div>
       {/* desktop  */}
       <div className="desktop">
-        {Array.isArray(myoc) &&
+       
+          {Array.isArray(myoc) &&
           myoc.map((e) => (
             <div className="byoc" key={e.myoc_banner?.id}>
               <Link to={`/view-all-products`}>
@@ -55,6 +63,7 @@ const Categories = () => {
               </Link>
             </div>
           ))}
+     
       </div>
 
       {/* mobile */}

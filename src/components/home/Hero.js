@@ -3,40 +3,47 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Hero = () => {
   const [banner, setBanner] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/mobile-banners`,
-          options
-        );
-        setBanner(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
+    setTimeout(() => {
+      async function fetchData() {
+        setError(null);
+        setLoading(true);
+        const options = {
+          headers: {
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            mode: "cors",
+            credentials: "include",
+          },
+        };
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/mobile-banners`,
+            options
+          );
+          setBanner(response.data);
+          setLoading(false);
+        } catch (error) {
+          if (error.response && error.response.status === 429) {
+            const retryAfter = parseInt(error.response.headers["retry-after"]);
+            setTimeout(() => {
+              fetchData();
+            }, retryAfter * 1000);
+          } else {
+            setError(error.message);
+          }
         }
       }
-    }
-    fetchData();
+      fetchData();
+    }, 2000);
   }, []);
 
   if (error) {
@@ -63,65 +70,67 @@ const Hero = () => {
   return (
     <>
       <div className="desktop">
-        <Carousel
-          showDots={false}
-          responsive={responsive}
-          infinite={true}
-          autoPlay
-        >
-          {Array.isArray(banner) &&
-            banner.map((e) => (
-              <div key={e.banner?.id} style={{ width: "100%" }}>
-                <div>
-                  {e.brand_id && (
-                    <Link to={`/brand/${e.brand_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.page_id && (
-                    <Link to={`/page/${e.page_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.category_id && (
-                    <Link to={`/category/${e.category_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.product_id && (
-                    <Link to={`/product/${e.product_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.combo_id && (
-                    <Link to={`/combo/${e.combo_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
+       
+          <Carousel
+            showDots={false}
+            responsive={responsive}
+            infinite={true}
+            autoPlay
+          >
+            {Array.isArray(banner) &&
+              banner.map((e) => (
+                <div key={e.banner?.id} style={{ width: "100%" }}>
+                  <div>
+                    {e.brand_id && (
+                      <Link to={`/brand/${e.brand_id}`}>
+                        <img
+                          src={e.banner?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.page_id && (
+                      <Link to={`/page/${e.page_id}`}>
+                        <img
+                          src={e.banner?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.category_id && (
+                      <Link to={`/category/${e.category_id}`}>
+                        <img
+                          src={e.banner?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.product_id && (
+                      <Link to={`/product/${e.product_id}`}>
+                        <img
+                          src={e.banner?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                    {e.combo_id && (
+                      <Link to={`/combo/${e.combo_id}`}>
+                        <img
+                          src={e.banner?.original_url}
+                          width="100%"
+                          alt={e.name}
+                        />
+                      </Link>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-        </Carousel>
+              ))}
+          </Carousel>
+       
       </div>
 
       {/* mobile */}
@@ -136,7 +145,7 @@ const Hero = () => {
           {Array.isArray(banner) &&
             banner.map((e) => (
               <div key={e.mobile_banner?.id} style={{ width: "100vw" }}>
-                 <div>
+                <div>
                   {e.brand_id && (
                     <Link to={`/brand/${e.brand_id}`}>
                       <img

@@ -20,15 +20,17 @@ import {
   getsingleTotalAmount,
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { fetchCategory } from "../../components/features/actions/categoryActions";
 
 const Category = () => {
+  const dispatch = useDispatch(); 
   // Categories products combo & single Products
   const navigate = useNavigate();
   const { id } = useParams();
-  const [category, setCategory] = useState([]);
+  // const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
   const [banner, setBanner] = useState([]);
   // filteration state
@@ -37,18 +39,29 @@ const Category = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
+  const {  category } = useSelector((state) => state.category);
 
   // filteration state end
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    dispatch(fetchCategory(id));
+  }, [dispatch,id]);
+
+
+  
+  
+
   const sortData = () => {
     const sortedData = [...category].sort(
-      (a, b) => b.selling_price - a.selling_price
+      (a, b) => b.selling_price - a.selling_price 
     );
     const sortedDataProduct = [...product].sort(
       (a, b) => b.selling_price - a.selling_price
     );
-    setCategory(sortedData);
+    // setCategory(sortedData);
+    // category(sortedData)
+  
     setProduct(sortedDataProduct);
   };
 
@@ -59,7 +72,9 @@ const Category = () => {
     const sortedDataProducts = [...product].sort(
       (a, b) => a.selling_price - b.selling_price
     );
-    setCategory(sortedData);
+    dispatch({ type: 'SET_CATEGORY', category: sortedData });
+    // setCategory(sortedData);
+    // category(sortedData)
     setProduct(sortedDataProducts);
   };
 
@@ -77,7 +92,7 @@ const Category = () => {
           options
         );
         setBanner(response.data.category);
-        setCategory(response.data.data.combos.data);
+        // setCategory(response.data.data.combos.data);
         setProduct(response.data.data.products.data);
        
       } catch (error) {
@@ -190,7 +205,7 @@ const Category = () => {
 
   // add to cart for combo
 
-  const dispatch = useDispatch();
+  
   let productObj = {
     id: "",
     title: "",
