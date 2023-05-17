@@ -1,24 +1,31 @@
+import {
+  FETCH_CATEGORIES_FAILURE,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_REQUEST,
+} from "../actions/categoriesActions";
+
+
 const initialState = {
-    categories: [],
     loading: false,
+    categories: [],
     error: null,
   };
-  
-  const categoriesReducer = (state = initialState, action) => {
+
+const categoriesReducer =(state = initialState, action) => {
     switch (action.type) {
-      case 'FETCH_CATEGORIES_REQUEST':
+      case FETCH_CATEGORIES_REQUEST:
         return {
           ...state,
           loading: true,
           error: null,
         };
-      case 'FETCH_CATEGORIES_SUCCESS':
+      case FETCH_CATEGORIES_SUCCESS:
         return {
           ...state,
           loading: false,
-          todos: action.payload,
+          categories: action.payload,
         };
-      case 'FETCH_CATEGORIES_FAILURE':
+      case FETCH_CATEGORIES_FAILURE:
         return {
           ...state,
           loading: false,
@@ -28,6 +35,5 @@ const initialState = {
         return state;
     }
   };
-  
+
   export default categoriesReducer;
-  

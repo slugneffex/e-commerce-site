@@ -1,21 +1,13 @@
-// import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
+// import { setupListeners } from "@reduxjs/toolkit/query";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import useCartReducer from "../components/features/useCartSlice";
 import useSingleCartReducer from "../components/features/SingleCartSlice";
 import freebiesCartReducer from "../components/features/freebiesCartSlice";
 import storage from "redux-persist/lib/storage";
-import categoriesReducer from "../components/features/reducers/categoriesReducer";
-
-import {
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import thunk from "redux-thunk";
+import categoriesReducer from "../components/features/reducer/categoriesReducer";
+import categoryReducer from "../components/features/reducer/categoryReducer";
+import { persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root",
   storage: storage,
@@ -26,16 +18,21 @@ export const rootReducers = combineReducers({
   SingleCart: useSingleCartReducer,
   freebies: freebiesCartReducer,
   categories: categoriesReducer,
+  category:categoryReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
-setupListeners(store.dispatch);
+// const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//       },
+//     }),
+// });
+// setupListeners(store.dispatch);
 export default store;

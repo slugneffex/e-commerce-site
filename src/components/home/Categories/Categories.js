@@ -4,63 +4,68 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../../features/actions/categoriesActions";
 
 const Categories = () => {
-  const [category, setCategory] = useState([]);
+  // const [category, setCategory] = useState([]);
   const [pageCategories, setPageCategories] = useState([]);
   const [error, setError] = useState(null);
 
+  const dispatch = useDispatch();
+  const {  categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    let isMounted = true;
-    let timer;
- 
-    async function fetchData() {
-      setError(null);
-     
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/categories`,
-          options
-        );
-        if (isMounted) {
-          setCategory(response.data);
-         
-        }
-        timer = setTimeout(fetchData, 500);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 500);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
-    fetchData();
-    return () => {
-      isMounted = false;
-      clearTimeout(timer);
-    };
- 
-  }, []);
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   let timer;
+
+  //   async function fetchData() {
+  //     setError(null);
+
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/categories`,
+  //         options
+  //       );
+  //       if (isMounted) {
+  //         setCategory(response.data);
+  //       }
+  //       timer = setTimeout(fetchData, 500);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 500);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+
+  //   fetchData();
+  //   return () => {
+  //     isMounted = false;
+  //     clearTimeout(timer);
+  //   };
+  // }, []);
 
   useEffect(() => {
     async function fetchData() {
       setError(null);
-    
+
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -75,7 +80,6 @@ const Categories = () => {
           options
         );
         setPageCategories(response.data);
-       
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -121,11 +125,10 @@ const Categories = () => {
 
   return (
     <>
-   
       <div className="categoriesMainDiv">
         <div className="container">
           <div className="my-auto categoriesDiv">
-            {category.map((e) => (
+            {categories.map((e) => (
               <Link to={`/category/${e.id}`} key={e.id}>
                 {e.name}
               </Link>
@@ -139,8 +142,6 @@ const Categories = () => {
         </div>
       </div>
 
-  
-      
       {/* <div className="d-flex justify-content-center">
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -159,7 +160,7 @@ const Categories = () => {
             infinite
             className="carouselResponsive"
           >
-            {category.map((e) => (
+            {categories.map((e) => (
               <div className="my-auto" key={e.id}>
                 <Link to={`/category/${e.id}`} style={{ color: "#464646" }}>
                   <img src={e.image?.original_url} alt="" width="70%" />

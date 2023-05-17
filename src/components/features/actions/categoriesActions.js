@@ -1,25 +1,25 @@
 import axios from "axios";
 
-const FETCH_CATEGORIES_REQUEST = "FETCH_CATEGORIES_REQUEST";
-const FETCH_CATEGORIES_SUCCESS = "FETCH_CATEGORIES_SUCCESS";
-const FETCH_CATEGORIES_FAILURE = "FETCH_CATEGORIES_FAILURE";
+export const FETCH_CATEGORIES_REQUEST = "FETCH_CATEGORIES_REQUEST";
+export const FETCH_CATEGORIES_SUCCESS = "FETCH_CATEGORIES_SUCCESS";
+export const FETCH_CATEGORIES_FAILURE = "FETCH_CATEGORIES_FAILURE";
 
-const fetchCategoriesRequest = () => ({
+export const fetchCategoriesRequest = () => ({
   type: FETCH_CATEGORIES_REQUEST,
 });
 
-const fetchCategoriesSuccess = (categories) => ({
+export const fetchCategoriesSuccess = (categories) => ({
   type: FETCH_CATEGORIES_SUCCESS,
   payload: categories,
 });
 
-const fetchCategoriesFailure = (error) => ({
+export const fetchCategoriesFailure = (error) => ({
   type: FETCH_CATEGORIES_FAILURE,
   payload: error,
 });
 
 export const fetchCategories = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchCategoriesRequest());
     const options = {
       headers: {
@@ -29,14 +29,16 @@ export const fetchCategories = () => {
         credentials: "include",
       },
     };
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/categories`, options)
-      .then((response) => {
-        const categories = response.data;
-        dispatch(fetchCategoriesSuccess(categories));
-      })
-      .catch((error) => {
-        dispatch(fetchCategoriesFailure(error.message));
-      });
+
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/categories`,
+        options
+      );
+      dispatch(fetchCategoriesSuccess(response.data));
+      console.log(response.data);
+    } catch (error) {
+      dispatch(fetchCategoriesFailure(error.message));
+    }
   };
 };

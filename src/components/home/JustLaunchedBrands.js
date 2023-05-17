@@ -51,7 +51,7 @@ const JustLaunchedBrands = () => {
             options
           );
           setBrand(response.data);
-          setLoading(false);
+          setLoading(true);
         } catch (error) {
           if (error.response && error.response.status === 429) {
             const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -76,31 +76,7 @@ const JustLaunchedBrands = () => {
         <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
           Just Launched Brands
         </h3>
-        {loading ? (
-          <div className="container">
-            <Carousel
-              responsive={responsive}
-              arrows={false}
-              infinite
-              centerMode
-              dotListClass="custom-dot-list-style"
-            >
-              <div>
-                <Skeleton baseColor="#ededed" width="80%" height="300px" />
-              </div>
-
-              <div>
-                <Skeleton baseColor="#ededed" width="80%" height="300px" />
-              </div>
-              <div>
-                <Skeleton baseColor="#ededed" width="80%" height="300px" />
-              </div>
-              <div>
-                <Skeleton baseColor="#ededed" width="80%" height="300px" />
-              </div>
-            </Carousel>
-          </div>
-        ) : (
+      
           <div className="container">
             <Carousel
               responsive={responsive}
@@ -161,7 +137,7 @@ const JustLaunchedBrands = () => {
                 ))}
             </Carousel>
           </div>
-        )}
+        
       </div>
     </>
   );
