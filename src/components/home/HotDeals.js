@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchhotdeal } from "../features/actions/hotdealActions";
 
 const HotDeals = () => {
-  const [flash, setFlash] = useState([]);
-
+  const dispatch = useDispatch();
+  const {  hotdeal } = useSelector((state) => state.hotdeal);
   useEffect(() => {
-    async function fetchData() {
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
-        options
-      );
-      setFlash(response.data);
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchhotdeal());
+  }, [dispatch]);
+  // const [flash, setFlash] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
+  //       options
+  //     );
+  //     setFlash(response.data);
+  //   }
+  //   fetchData();
+  // }, []);
 
   return (
     <div>
@@ -31,8 +38,8 @@ const HotDeals = () => {
           <h3>Super Flash Deals For You</h3>
         </div>
 
-        {Array.isArray(flash) &&
-          flash.map((e) => (
+        {Array.isArray(hotdeal) &&
+          hotdeal.map((e) => (
             <div key={e.banner?.id}>
               <Link to="/view-all-products">
                 <img
