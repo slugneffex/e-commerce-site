@@ -1091,7 +1091,7 @@ const CustomPage = () => {
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-md-6" style={{ textAlign: "end" }}>
+                {/* <div className="col-md-6" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -1116,7 +1116,7 @@ const CustomPage = () => {
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="row" style={{ marginTop: "1rem" }}>

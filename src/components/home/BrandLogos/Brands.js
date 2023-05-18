@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -22,7 +22,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
+    items: 3,
   },
 };
 
@@ -75,6 +75,22 @@ const Brands = () => {
     return brand.focused === "on";
   });
 
+  const [isCenterMode, setIsCenterMode] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCenterMode(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="top-brand-deals container">
@@ -88,7 +104,7 @@ const Brands = () => {
             swipeable={true}
             autoPlay
             arrows={false}
-            centerMode
+            centerMode={isCenterMode}
             infinite
           >
             {Array.isArray(fliterData) &&

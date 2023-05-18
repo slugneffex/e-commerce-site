@@ -63,6 +63,23 @@ const ComboDeals = () => {
   if (error) {
     console.log(error);
   }
+
+  const [isCenterMode, setIsCenterMode] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCenterMode(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="top-brand-deals container">
@@ -74,7 +91,7 @@ const ComboDeals = () => {
             responsive={responsive}
             arrows={false}
             infinite
-            centerMode
+            centerMode={isCenterMode}
             dotListClass="custom-dot-list-style"
           >
             {combo.map((e) => (

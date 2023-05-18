@@ -78,9 +78,34 @@ const JustLaunchedBrands = () => {
   //   }, 2000);
   // }, []);
 
+
+  if (error) {
+    console.log(error);
+  }
+
+
+  const [isCenterMode, setIsCenterMode] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCenterMode(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+
   // if (error) {
   //   console.log(error);
   // }
+
   return (
     <>
       <div className="top-brand-deals container">
@@ -93,7 +118,7 @@ const JustLaunchedBrands = () => {
               responsive={responsive}
               arrows={false}
               infinite
-              centerMode
+              centerMode={isCenterMode}
               dotListClass="custom-dot-list-style"
             >
               {jbrands.map((e) => ( 

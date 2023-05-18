@@ -952,7 +952,7 @@ const Category = () => {
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-6" style={{ textAlign: "end" }}>
+                {/* <div className="col-6" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -977,7 +977,7 @@ const Category = () => {
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="row" style={{ marginTop: "1rem" }}>
