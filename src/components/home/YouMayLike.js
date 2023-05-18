@@ -11,9 +11,10 @@ import {
   getTotalAmount,
   getTotalDiscount,
 } from "../features/useCartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { fetchYoumaylike } from "../features/actions/youmaylikeActions";
 
 const responsive = {
   superLargeDesktop: {
@@ -36,56 +37,64 @@ const responsive = {
 };
 
 const YouMayLike = () => {
+  const dispatch = useDispatch();
+  const {  youmaylike } = useSelector((state) => state.youmaylike);
+  
+
+  useEffect(() => {
+    dispatch(fetchYoumaylike());
+  }, [dispatch]);
+  
   // changing wl btn
 
   // Featured combos
-  const [feature, setFeature] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [feature, setFeature] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      async function fetchData() {
-        setError(null);
-        setLoading(true);
-        const options = {
-          headers: {
-            "X-Authorization":
-              "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            mode: "cors",
-            credentials: "include",
-          },
-        };
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     async function fetchData() {
+  //       setError(null);
+  //       setLoading(true);
+  //       const options = {
+  //         headers: {
+  //           "X-Authorization":
+  //             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
+  //           "Cache-Control": "no-cache, no-store, must-revalidate",
+  //           mode: "cors",
+  //           credentials: "include",
+  //         },
+  //       };
 
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/combos`,
-            options
-          );
-          setFeature(response.data.data);
-          setLoading(false);
-        } catch (error) {
-          if (error.response && error.response.status === 429) {
-            const retryAfter = parseInt(error.response.headers["retry-after"]);
-            setTimeout(() => {
-              fetchData();
-            }, retryAfter * 1000);
-          } else {
-            setError(error.message);
-          }
-        }
-      }
-      fetchData();
-    }, 2000);
-  }, []);
-  if (error) {
-    console.log(error);
-  }
+  //       try {
+  //         const response = await axios.get(
+  //           `${process.env.REACT_APP_BASE_URL}/combos`,
+  //           options
+  //         );
+  //         setFeature(response.data.data);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         if (error.response && error.response.status === 429) {
+  //           const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //           setTimeout(() => {
+  //             fetchData();
+  //           }, retryAfter * 1000);
+  //         } else {
+  //           setError(error.message);
+  //         }
+  //       }
+  //     }
+  //     fetchData();
+  //   }, 2000);
+  // }, []);
+  // if (error) {
+  //   console.log(error);
+  // }
 
   // add to cart
 
-  const dispatch = useDispatch();
+
   let productObj = {
     id: "",
     title: "",
@@ -157,8 +166,8 @@ const YouMayLike = () => {
                 infinite={true}
                 arrows={false}
               >
-                {Array.isArray(feature) &&
-                  feature.map((e) => (
+                {Array.isArray(youmaylike) &&
+                  youmaylike.map((e) => (
                     <div
                       className="item carouselItemCard"
                       key={e.id}

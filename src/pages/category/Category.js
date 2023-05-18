@@ -24,6 +24,8 @@ import { useDispatch,useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { fetchCategory } from "../../components/features/actions/categoryActions";
+import { fetchCategories } from "../../components/features/actions/categoriesActions";
+import { fetchBrand } from "../../components/features/actions/brandActions";
 
 const Category = () => {
   const dispatch = useDispatch(); 
@@ -44,9 +46,18 @@ const Category = () => {
   // filteration state end
   const [error, setError] = useState(null);
 
+  // categories api fetching
   useEffect(() => {
     dispatch(fetchCategory(id));
   }, [dispatch,id]);
+
+
+
+
+  
+
+
+  
 
 
   
@@ -72,7 +83,7 @@ const Category = () => {
     const sortedDataProducts = [...product].sort(
       (a, b) => a.selling_price - b.selling_price
     );
-    dispatch({ type: 'SET_CATEGORY', category: sortedData });
+   
     // setCategory(sortedData);
     // category(sortedData)
     setProduct(sortedDataProducts);
@@ -111,20 +122,6 @@ const Category = () => {
 
   // filteration
 
-  // const filterProducts = (minPrice, maxPrice) => {
-  //   const filteredProducts = originalProduct.filter((product) => {
-  //     return (
-  //       product.selling_price >= minPrice && product.selling_price <= maxPrice
-  //     );
-  //   });
-  //   const filteredSingleProducts = originalCategory.filter((product) => {
-  //     return (
-  //       product.selling_price >= minPrice && product.selling_price <= maxPrice
-  //     );
-  //   });
-  //   setProduct(filteredProducts);
-  //   setCategory(filteredSingleProducts);
-  // };
 
   const handleFilter = (minPrice, maxPrice) => {
     const key = `${minPrice}-${maxPrice}`;
@@ -173,35 +170,43 @@ const Category = () => {
   };
 
   // Categories
-  const [categoris, setCategories] = useState([]);
+
+  const {  categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/categories`,
-          options
-        );
-        setCategories(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  // const [categoris, setCategories] = useState([]);
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/categories`,
+  //         options
+  //       );
+  //       setCategories(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   // add to cart for combo
 
@@ -312,38 +317,43 @@ const Category = () => {
   }
 
   // total brands
-  const [brand, setBrand] = useState([]);
+  const {  brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/brands`,
-          options
-        );
-        setBrand(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchBrand());
+  }, [dispatch]);
+  // const [brand, setBrand] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/brands`,
+  //         options
+  //       );
+  //       setBrand(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
@@ -658,7 +668,7 @@ const Category = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          {categoris.map((e) => (
+                          {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"

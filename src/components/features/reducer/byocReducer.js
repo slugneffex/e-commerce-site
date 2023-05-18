@@ -1,31 +1,30 @@
 import {
-  FETCH_CATEGORY_FAILURE,
-  FETCH_CATEGORY_REQUEST,
-  FETCH_CATEGORY_SUCCESS,
-} from "../actions/categoryActions";
+  FETCH_BYOC_FAILURE,
+  FETCH_BYOC_REQUEST,
+  FETCH_BYOC_SUCCESS,
+} from "../actions/byocActions";
 
 const initialState = {
   loading: false,
-  category: [],
+  byoc: [],
   error: null,
 };
 
-const categoryReducer = (state = initialState, action) => {
+const byocReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_CATEGORY_REQUEST:
+    case FETCH_BYOC_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-  
-    case FETCH_CATEGORY_SUCCESS:
+    case FETCH_BYOC_SUCCESS:
       return {
         ...state,
         loading: false,
-        category: action.payload,
+        byoc: action.payload,
       };
-    case FETCH_CATEGORY_FAILURE:
+    case FETCH_BYOC_FAILURE:
       return {
         ...state,
         loading: false,
@@ -36,4 +35,4 @@ const categoryReducer = (state = initialState, action) => {
   }
 };
 
-export default categoryReducer;
+export default byocReducer;

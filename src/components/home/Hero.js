@@ -1,54 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 
+import { Link } from "react-router-dom";
+// import Skeleton from "react-loading-skeleton";
+// import "react-loading-skeleton/dist/skeleton.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHero } from "../features/actions/heroActions";
 const Hero = () => {
-  const [banner, setBanner] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const {  hero } = useSelector((state) => state.hero);
+
 
   useEffect(() => {
-    setTimeout(() => {
-      async function fetchData() {
-        setError(null);
-        setLoading(true);
-        const options = {
-          headers: {
-            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            mode: "cors",
-            credentials: "include",
-          },
-        };
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/mobile-banners`,
-            options
-          );
-          setBanner(response.data);
-          setLoading(false);
-        } catch (error) {
-          if (error.response && error.response.status === 429) {
-            const retryAfter = parseInt(error.response.headers["retry-after"]);
-            setTimeout(() => {
-              fetchData();
-            }, retryAfter * 1000);
-          } else {
-            setError(error.message);
-          }
-        }
-      }
-      fetchData();
-    }, 2000);
-  }, []);
+    dispatch(fetchHero());
+  }, [dispatch]);
+  // const [banner, setBanner] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(true);
 
-  if (error) {
-    console.log(error);
-  }
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     async function fetchData() {
+  //       setError(null);
+  //       setLoading(true);
+  //       const options = {
+  //         headers: {
+  //           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //           "Cache-Control": "no-cache, no-store, must-revalidate",
+  //           mode: "cors",
+  //           credentials: "include",
+  //         },
+  //       };
+  //       try {
+  //         const response = await axios.get(
+  //           `${process.env.REACT_APP_BASE_URL}/mobile-banners`,
+  //           options
+  //         );
+  //         setBanner(response.data);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         if (error.response && error.response.status === 429) {
+  //           const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //           setTimeout(() => {
+  //             fetchData();
+  //           }, retryAfter * 1000);
+  //         } else {
+  //           setError(error.message);
+  //         }
+  //       }
+  //     }
+  //     fetchData();
+  //   }, 2000);
+  // }, []);
+
+  // if (error) {
+  //   console.log(error);
+  // }
 
   // Responsive
 
@@ -77,8 +85,8 @@ const Hero = () => {
             infinite={true}
             autoPlay
           >
-            {Array.isArray(banner) &&
-              banner.map((e) => (
+            {Array.isArray(hero) &&
+              hero.map((e) => (
                 <div key={e.banner?.id} style={{ width: "100%" }}>
                   <div>
                     {e.brand_id && (
@@ -142,8 +150,8 @@ const Hero = () => {
           // autoPlay
           arrows={false}
         >
-          {Array.isArray(banner) &&
-            banner.map((e) => (
+          {Array.isArray(hero) &&
+            hero.map((e) => (
               <div key={e.mobile_banner?.id} style={{ width: "100vw" }}>
                 <div>
                   {e.brand_id && (

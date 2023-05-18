@@ -4,6 +4,8 @@ import axios from "axios";
 import "./incAll.css";
 import Cookies from "js-cookie";
 import { fetchCategories } from "../features/actions/categoriesActions";
+import { fetchBrand } from "../features/actions/brandActions";
+import { fetchByoc } from "../features/actions/byocActions";
 import { useSelector,useDispatch } from "react-redux";
 
 const Header = () => {
@@ -108,38 +110,44 @@ const Header = () => {
 
   // For logo
 
-  const [logo, setLogo] = useState([]);
+  const {  byoc } = useSelector((state) => state.byoc);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/settings`,
-          options
-        );
-        setLogo(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchByoc());
+  }, [dispatch]);
+
+  // const [logo, setLogo] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/settings`,
+  //         options
+  //       );
+  //       setLogo(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const { totalCount } = useSelector((state) => state.cart);
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
@@ -180,38 +188,45 @@ const Header = () => {
 
   // For brands
 
-  const [brand, setBrand] = useState([]);
+  const {  brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/brands`,
-          options
-        );
-        setBrand(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchBrand());
+  }, [dispatch]);
+
+
+  // const [brand, setBrand] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/brands`,
+  //         options
+  //       );
+  //       setBrand(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   if (error) {
     console.log(error);
@@ -369,8 +384,8 @@ const Header = () => {
           <div id="navSec" className={navbarSticky ? "fixed-top " : ""}>
             <nav className="navbar navbar-expand-lg bg-light ">
               <div className="container">
-                {Array.isArray(logo) &&
-                  logo.map((e) => (
+                {Array.isArray(byoc) &&
+                  byoc.map((e) => (
                     <Link className="navbar-brand" to="/" key={e.id}>
                       <img
                         src={e.logo?.original_url}
@@ -837,8 +852,8 @@ const Header = () => {
                 >
                   <div className="relative">
                     <div className="offcanvas-header pt-6 px-auto">
-                      {Array.isArray(logo) &&
-                        logo.map((e) => (
+                      {Array.isArray(byoc) &&
+                        byoc.map((e) => (
                           <Link
                             className="navbar-brand mx-auto"
                             to="/"
@@ -988,8 +1003,8 @@ const Header = () => {
                 className="col"
                 style={{ paddingLeft: "0", marginLeft: "-20px" }}
               >
-                {Array.isArray(logo) &&
-                  logo.map((e) => (
+                {Array.isArray(byoc) &&
+                  byoc.map((e) => (
                     <Link className="navbar-brand" to="/" key={e.id}>
                       <img
                         src={e.logo?.original_url}

@@ -7,6 +7,10 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import categoriesReducer from "../components/features/reducer/categoriesReducer";
 import categoryReducer from "../components/features/reducer/categoryReducer";
+import byocReducer from "../components/features/reducer/byocReducer";
+import heroReducer from "../components/features/reducer/heroReducer";
+import youmaylikeReducer from "../components/features/reducer/youmaylikeReducer";
+import brandReducer from "../components/features/reducer/brandReducer";
 import { persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root",
@@ -18,7 +22,11 @@ export const rootReducers = combineReducers({
   SingleCart: useSingleCartReducer,
   freebies: freebiesCartReducer,
   categories: categoriesReducer,
-  category:categoryReducer,
+  category: categoryReducer,
+  byoc: byocReducer,
+  hero: heroReducer,
+  youmaylike: youmaylikeReducer,
+  brand: brandReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({
