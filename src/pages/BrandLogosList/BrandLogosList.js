@@ -1,51 +1,60 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, {  useEffect } from "react";
+
 import HomeLayout from "../../layouts/HomeLayout";
 import "./BrandLogoList.css";
 import { Link } from "react-router-dom";
-
+import { useSelector,useDispatch } from "react-redux";
+import { fetchBrand } from "../../components/features/actions/brandActions";
 const BrandLogosList = () => {
-  const [brand, setBrand] = useState([]);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
+
+  const {  brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/brands`,
-          options
-        );
-        setBrand(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchBrand());
+  }, [dispatch]);
+  // const [brand, setBrand] = useState([]);
+  // const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/brands`,
+  //         options
+  //       );
+  //       setBrand(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const fliterData = brand.filter((brand) => {
     return brand.focused === "on";
   });
 
-  if (error) {
-    console.log(error)
-  }
+  // if (error) {
+  //   console.log(error)
+  // }
 
   // scroll fixes
 

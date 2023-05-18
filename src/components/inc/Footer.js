@@ -5,28 +5,38 @@ import "./incAll.css";
 import { Collapse } from "react-bootstrap";
 import { FiHome, FiHeadphones } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../features/actions/categoriesActions";
 
 const Footer = () => {
-  const [categories, setCategories] = useState([]);
+
+  const dispatch = useDispatch();
+  const {  categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    async function fetchData() {
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/categories`,
-        options
-      );
-      setCategories(response.data);
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  // const [categories, setCategories] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_BASE_URL}/categories`,
+  //       options
+  //     );
+  //     setCategories(response.data);
+  //   }
+  //   fetchData();
+  // }, []);
 
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
