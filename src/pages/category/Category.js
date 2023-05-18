@@ -3,7 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Dropdown from "react-bootstrap/Dropdown";
+// import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
 import {
@@ -20,7 +20,7 @@ import {
   getsingleTotalAmount,
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { fetchCategory } from "../../components/features/actions/categoryActions";
@@ -28,7 +28,7 @@ import { fetchCategories } from "../../components/features/actions/categoriesAct
 import { fetchBrand } from "../../components/features/actions/brandActions";
 
 const Category = () => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   // Categories products combo & single Products
   const navigate = useNavigate();
   const { id } = useParams();
@@ -41,7 +41,7 @@ const Category = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const {  category } = useSelector((state) => state.category);
+  const { category } = useSelector((state) => state.category);
 
   // filteration state end
   const [error, setError] = useState(null);
@@ -49,30 +49,18 @@ const Category = () => {
   // categories api fetching
   useEffect(() => {
     dispatch(fetchCategory(id));
-  }, [dispatch,id]);
-
-
-
-
-  
-
-
-  
-
-
-  
-  
+  }, [dispatch, id]);
 
   const sortData = () => {
     const sortedData = [...category].sort(
-      (a, b) => b.selling_price - a.selling_price 
+      (a, b) => b.selling_price - a.selling_price
     );
     const sortedDataProduct = [...product].sort(
       (a, b) => b.selling_price - a.selling_price
     );
     // setCategory(sortedData);
     // category(sortedData)
-  
+
     setProduct(sortedDataProduct);
   };
 
@@ -83,7 +71,7 @@ const Category = () => {
     const sortedDataProducts = [...product].sort(
       (a, b) => a.selling_price - b.selling_price
     );
-   
+
     // setCategory(sortedData);
     // category(sortedData)
     setProduct(sortedDataProducts);
@@ -105,7 +93,6 @@ const Category = () => {
         setBanner(response.data.category);
         // setCategory(response.data.data.combos.data);
         setProduct(response.data.data.products.data);
-       
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -121,7 +108,6 @@ const Category = () => {
   }, [id]);
 
   // filteration
-
 
   const handleFilter = (minPrice, maxPrice) => {
     const key = `${minPrice}-${maxPrice}`;
@@ -171,14 +157,13 @@ const Category = () => {
 
   // Categories
 
-  const {  categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
   // const [categoris, setCategories] = useState([]);
-
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -210,7 +195,6 @@ const Category = () => {
 
   // add to cart for combo
 
-  
   let productObj = {
     id: "",
     title: "",
@@ -317,7 +301,7 @@ const Category = () => {
   }
 
   // total brands
-  const {  brand } = useSelector((state) => state.brand);
+  const { brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
     dispatch(fetchBrand());
@@ -374,14 +358,14 @@ const Category = () => {
 
   function handleClick(categoryId) {
     setFilteredProducts([]);
-    setFilterCombo([])
+    setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
   }
 
   function handleClickbrand(brandId) {
     setFilteredProducts([]);
-    setFilterCombo([])
+    setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
   }
@@ -579,7 +563,10 @@ const Category = () => {
                   </div>
 
                   <div className="sortBy">
-                    <label className="form-check-label" htmlFor="CustomerTopRated">
+                    <label
+                      className="form-check-label"
+                      htmlFor="CustomerTopRated"
+                    >
                       Customer Top Rated
                     </label>
                     <input
@@ -605,7 +592,10 @@ const Category = () => {
                   </div>
 
                   <div className="sortBy">
-                    <label className="form-check-label" htmlFor="PriceHighToLow">
+                    <label
+                      className="form-check-label"
+                      htmlFor="PriceHighToLow"
+                    >
                       Price: High to Low
                     </label>
                     <input
@@ -618,7 +608,10 @@ const Category = () => {
                   </div>
 
                   <div className="sortBy">
-                    <label className="form-check-label" htmlFor="PriceLowToHigh">
+                    <label
+                      className="form-check-label"
+                      htmlFor="PriceLowToHigh"
+                    >
                       Price: Low to High
                     </label>
                     <input
@@ -722,7 +715,6 @@ const Category = () => {
                                 name="category_id"
                                 id="category_id103"
                                 defaultValue={103}
-                             
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />

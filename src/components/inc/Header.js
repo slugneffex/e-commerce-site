@@ -7,6 +7,7 @@ import { fetchCategories } from "../features/actions/categoriesActions";
 import { fetchBrand } from "../features/actions/brandActions";
 import { fetchByoc } from "../features/actions/byocActions";
 import { useSelector,useDispatch } from "react-redux";
+import { fetchStore } from "../features/actions/storeAction";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -156,35 +157,40 @@ const Header = () => {
 
   // For stores
 
-  const [store, setStore] = useState([]);
-
+  const {  store } = useSelector((state) => state.store);
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/stores`,
-          options
-        );
-        setStore(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchStore());
+  }, [dispatch]);
+
+  // const [store, setStore] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/stores`,
+  //         options
+  //       );
+  //       setStore(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   // For brands
 
