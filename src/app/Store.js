@@ -14,8 +14,13 @@ import brandReducer from "../components/features/reducer/brandReducer";
 import jbrandsReducer from "../components/features/reducer/jbrandsReducer"
 import toppicksReducer from "../components/features/reducer/toppicksReducer";
 import forherReducer from "../components/features/reducer/forherReducer";
+
+import forhimReducer from "../components/features/reducer/forhimReducer";
+import hotdealReducer from "../components/features/reducer/hotdealReducer";
+
 import combodealReducer from "../components/features/reducer/combodealReducer";
 import storeReducer from "../components/features/reducer/storeReducer";
+
 import { persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root",
@@ -35,8 +40,13 @@ export const rootReducers = combineReducers({
   jbrands:jbrandsReducer,
   toppicks: toppicksReducer,
   forher: forherReducer,
+
+  forhim:forhimReducer,
+  hotdeal:hotdealReducer,
+
   combodeal:combodealReducer,
   store:storeReducer
+
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({

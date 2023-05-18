@@ -3,6 +3,8 @@ import HomeLayout from "../../layouts/HomeLayout";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./myoc.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchhotdeal } from "../../components/features/actions/hotdealActions";
 
 const MYOC = () => {
   const [products, setProducts] = useState([]);
@@ -11,36 +13,43 @@ const MYOC = () => {
   const [error, setError] = useState(null);
 
   // Myoc banner
-  const [myocBanner, setMyocBanner] = useState([]);
-  const [myocError, setMyocError] = useState(null);
-
+  const dispatch = useDispatch();
+  const {  hotdeal } = useSelector((state) => state.hotdeal);
   useEffect(() => {
-    async function fetchData() {
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
-          options
-        );
-        setMyocBanner(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setMyocError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchhotdeal());
+  }, [dispatch]);
+
+
+  // const [myocBanner, setMyocBanner] = useState([]);
+  // const [myocError, setMyocError] = useState(null);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
+  //         options
+  //       );
+  //       setMyocBanner(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setMyocError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   const fetchData = useCallback(async (pageNumber) => {
     const options = {
@@ -100,8 +109,8 @@ const MYOC = () => {
         <div className="container mt-2">
           {/* desktop  */}
           <div className="desktop">
-            {Array.isArray(myocBanner) &&
-              myocBanner.map((e) => (
+            {Array.isArray(hotdeal) &&
+              hotdeal.map((e) => (
                 <div key={e.banner?.id}>
                   <Link to={`/view-all-products`}>
                     <img
@@ -117,8 +126,8 @@ const MYOC = () => {
 
           {/* mobile */}
           <div className="mobile">
-            {Array.isArray(myocBanner) &&
-              myocBanner.map((e) => (
+            {Array.isArray(hotdeal) &&
+              hotdeal.map((e) => (
                 <div className="byoc" key={e.mobile_banner?.id}>
                   <Link to={`/view-all-products`}>
                     <img
