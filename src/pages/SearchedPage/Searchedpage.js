@@ -13,6 +13,11 @@ const Searchedpage = () => {
     <>
       <HomeLayout>
         <div className="container">
+
+          {/* <div>
+            <h3>Search Result For: </h3>
+            <span></span>
+          </div> */}
           <div className="row">
             {data.combos.map((e) => (
               <div className="col-lg-3 col-md-3" key={e.id}>
