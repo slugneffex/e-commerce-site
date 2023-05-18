@@ -19,6 +19,8 @@ const Categories = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+ 
+
   // useEffect(() => {
   //   let isMounted = true;
   //   let timer;

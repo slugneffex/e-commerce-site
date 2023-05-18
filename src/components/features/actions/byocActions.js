@@ -36,7 +36,7 @@ export const fetchByoc = () => {
         options
       );
       dispatch(fetchByocSuccess(response.data));
-      console.log(response.data);
+ 
     } catch (error) {
       dispatch(fetchByocFailure(error.message));
     }

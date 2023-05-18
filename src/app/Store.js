@@ -11,6 +11,9 @@ import byocReducer from "../components/features/reducer/byocReducer";
 import heroReducer from "../components/features/reducer/heroReducer";
 import youmaylikeReducer from "../components/features/reducer/youmaylikeReducer";
 import brandReducer from "../components/features/reducer/brandReducer";
+import jbrandsReducer from "../components/features/reducer/jbrandsReducer"
+import toppicksReducer from "../components/features/reducer/toppicksReducer";
+import forherReducer from "../components/features/reducer/forherReducer";
 import { persistReducer } from "redux-persist";
 const persistConfig = {
   key: "root",
@@ -27,12 +30,24 @@ export const rootReducers = combineReducers({
   hero: heroReducer,
   youmaylike: youmaylikeReducer,
   brand: brandReducer,
+  jbrands:jbrandsReducer,
+  toppicks: toppicksReducer,
+  forher: forherReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(thunk),
 });
+
+// const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+// });
 // const store = configureStore({
 //   reducer: persistedReducer,
 //   middleware: (getDefaultMiddleware) =>
