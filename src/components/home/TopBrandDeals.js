@@ -1,8 +1,10 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCombodeal } from "../features/actions/combodealActions";
 
 const responsive = {
   superLargeDesktop: {
@@ -25,43 +27,49 @@ const responsive = {
 };
 
 const TopBrandDeals = () => {
-  const [cdeal, setCdeal] = useState([]);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const {  combodeal } = useSelector((state) => state.combodeal);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/comboDeals`,
-          options
-        );
-        setCdeal(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchCombodeal());
+  }, [dispatch]);
+  // const [cdeal, setCdeal] = useState([]);
+  // const [error, setError] = useState(null);
 
-  if (error) {
-    console.log(error)
-  }
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/comboDeals`,
+  //         options
+  //       );
+  //       setCdeal(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+
+  // if (error) {
+  //   console.log(error)
+  // }
 
 
   const [isCenterMode, setIsCenterMode] = useState(false);
@@ -92,8 +100,8 @@ const TopBrandDeals = () => {
           infinite
           centerMode={isCenterMode}
           >
-            {Array.isArray(cdeal) &&
-              cdeal.map((e) => (
+            {Array.isArray(combodeal) &&
+              combodeal.map((e) => (
                 <div key={e.id}>
                   <Link>
                     <img
