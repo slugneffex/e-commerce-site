@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, {  useEffect } from "react";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+// import Skeleton from "react-loading-skeleton";
+// import "react-loading-skeleton/dist/skeleton.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchJbrands } from "../features/actions/jbrandsActions";
 
 const responsive = {
   superLargeDesktop: {
@@ -27,45 +29,55 @@ const responsive = {
 };
 
 const JustLaunchedBrands = () => {
-  const [brand, setBrand] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  const {jbrands} = useSelector((state) =>state.jbrands )
 
   useEffect(() => {
-    setTimeout(() => {
-      async function fetchData() {
-        setError(null);
-        setLoading(true);
-        const options = {
-          headers: {
-            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            mode: "cors",
-            credentials: "include",
-          },
-        };
+    dispatch(fetchJbrands());
+  }, [dispatch]);
 
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/productDeals`,
-            options
-          );
-          setBrand(response.data);
-          setLoading(true);
-        } catch (error) {
-          if (error.response && error.response.status === 429) {
-            const retryAfter = parseInt(error.response.headers["retry-after"]);
-            setTimeout(() => {
-              fetchData();
-            }, retryAfter * 1000);
-          } else {
-            setError(error.message);
-          }
-        }
-      }
-      fetchData();
-    }, 2000);
-  }, []);
+  
+  // const [brand, setBrand] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     async function fetchData() {
+  //       setError(null);
+  //       setLoading(true);
+  //       const options = {
+  //         headers: {
+  //           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //           "Cache-Control": "no-cache, no-store, must-revalidate",
+  //           mode: "cors",
+  //           credentials: "include",
+  //         },
+  //       };
+
+  //       try {
+  //         const response = await axios.get(
+  //           `${process.env.REACT_APP_BASE_URL}/productDeals`,
+  //           options
+  //         );
+  //         setBrand(response.data);
+  //         setLoading(true);
+  //       } catch (error) {
+  //         if (error.response && error.response.status === 429) {
+  //           const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //           setTimeout(() => {
+  //             fetchData();
+  //           }, retryAfter * 1000);
+  //         } else {
+  //           setError(error.message);
+  //         }
+  //       }
+  //     }
+  //     fetchData();
+  //   }, 2000);
+  // }, []);
+
 
   if (error) {
     console.log(error);
@@ -89,6 +101,11 @@ const JustLaunchedBrands = () => {
   }, []);
 
 
+
+  // if (error) {
+  //   console.log(error);
+  // }
+
   return (
     <>
       <div className="top-brand-deals container">
@@ -104,8 +121,7 @@ const JustLaunchedBrands = () => {
               centerMode={isCenterMode}
               dotListClass="custom-dot-list-style"
             >
-              {Array.isArray(brand) &&
-                brand.map((e) => (
+              {jbrands.map((e) => ( 
                   <div key={e.id}>
                     {e.brand_id && (
                       <Link to={`/brand/${e.brand_id}`}>
