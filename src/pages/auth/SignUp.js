@@ -110,7 +110,7 @@ const SignUp = () => {
                           </div>
                         </div>
                         <div className="form-group mb-2" style={{ textAlign: 'left' }}>
-                          <input type="checkbox" name="hide"  onClick={togglePassword} />
+                          <input type="checkbox" name="hide" id="hide"  onClick={togglePassword} />
                           <label htmlFor="hide">Show Password</label>
                         </div>
                         <button  type="submit" className="btn">Proceed To log In</button>
