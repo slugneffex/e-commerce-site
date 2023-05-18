@@ -1,3 +1,18 @@
+.sortBy {
+  position: relative;
+}
+
+.sortBy input {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.desktop .card {
+  padding: 1rem;
+}
+
+
 .banner img {
   width: 100%;
   height: auto;

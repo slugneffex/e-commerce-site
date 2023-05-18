@@ -793,10 +793,10 @@ const Header = () => {
         {/*wcc end */}
 
         {/* Mobile Navbar */}
-        <div className="">
+        <div className="bg-light">
           <div className={navbarSticky ? "fixed-top" : ""}>
             <div
-              className="row mx-0 py-2   bg-light"
+              className="row mx-0 py-2 bg-light"
               style={{
                 alignItems: "center",
                 width: "100vw",

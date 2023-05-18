@@ -530,7 +530,7 @@ const Category = () => {
                 </div>
                 <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
                   <div className="sortBy">
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="Popularity">
                       Popularity
                     </label>
                     <input
@@ -538,12 +538,12 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="Popularity"
                     />
                   </div>
 
-                  <div>
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                  <div className="sortBy">
+                    <label className="form-check-label" htmlFor="Discount">
                       Discount
                     </label>
                     <input
@@ -551,12 +551,12 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="Discount"
                     />
                   </div>
 
-                  <div>
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                  <div className="sortBy">
+                    <label className="form-check-label" htmlFor="Name">
                       Name
                     </label>
                     <input
@@ -564,12 +564,12 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="Name"
                     />
                   </div>
 
-                  <div>
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                  <div className="sortBy">
+                    <label className="form-check-label" htmlFor="CustomerTopRated">
                       Customer Top Rated
                     </label>
                     <input
@@ -577,12 +577,12 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="CustomerTopRated"
                     />
                   </div>
 
-                  <div>
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                  <div className="sortBy">
+                    <label className="form-check-label" htmlFor="NewArrivals">
                       New Arrivals
                     </label>
                     <input
@@ -590,12 +590,12 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="NewArrivals"
                     />
                   </div>
 
-                  <div>
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                  <div className="sortBy">
+                    <label className="form-check-label" htmlFor="PriceHighToLow">
                       Price: High to Low
                     </label>
                     <input
@@ -603,12 +603,12 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="PriceHighToLow"
                     />
                   </div>
 
-                  <div>
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                  <div className="sortBy">
+                    <label className="form-check-label" htmlFor="PriceLowToHigh">
                       Price: Low to High
                     </label>
                     <input
@@ -616,7 +616,7 @@ const Category = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="PriceLowToHigh"
                     />
                   </div>
                 </div>
@@ -760,7 +760,7 @@ const Category = () => {
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              htmlFor="flexCheckDefault"
+                              htmlFor="50-499"
                             >
                               50-499
                             </label>
@@ -771,13 +771,13 @@ const Category = () => {
                               value=""
                               checked={checkedFilters["50-499"]}
                               onChange={() => handleFilter(50, 499)}
-                              id="flexCheckDefault"
+                              id="50-499"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              htmlFor="flexCheckDefault"
+                              htmlFor="500-999"
                             >
                               500-999
                             </label>
@@ -788,13 +788,13 @@ const Category = () => {
                               value=""
                               checked={checkedFilters["500-999"]}
                               onChange={() => handleFilter(500, 999)}
-                              id="flexCheckDefault"
+                              id="500-999"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              htmlFor="flexCheckDefault"
+                              htmlFor="1000-1999"
                             >
                               1000-1999
                             </label>
@@ -805,13 +805,13 @@ const Category = () => {
                               value=""
                               checked={checkedFilters["1000-1999"]}
                               onChange={() => handleFilter(1000, 1999)}
-                              id="flexCheckDefault"
+                              id="1000-1999"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              htmlFor="flexCheckDefault"
+                              htmlFor="2000-4999"
                             >
                               2000-4999
                             </label>
@@ -822,13 +822,13 @@ const Category = () => {
                               value=""
                               checked={checkedFilters["2000-4999"]}
                               onChange={() => handleFilter(2000, 4999)}
-                              id="flexCheckDefault"
+                              id="2000-4999"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              htmlFor="flexCheckDefault"
+                              htmlFor="5000&Above"
                             >
                               5000 & Above
                             </label>
@@ -839,7 +839,7 @@ const Category = () => {
                               value=""
                               checked={checkedFilters["5000-500000"]}
                               onChange={() => handleFilter(5000, 500000)}
-                              id="flexCheckDefault"
+                              id="5000&Above"
                             />
                           </div>
                         </div>

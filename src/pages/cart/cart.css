@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500&display=swap');
- body {
+
+body {
     font-family: 'Poppins', sans-serif;
     color: #464646;
- }
+}
 
 /* #progessbarRow {
     background-image: url('/assets/img/dots.png');
@@ -23,11 +24,12 @@
 .coupon-card .card-body p {
     font-size: 12px;
 }
+
 /* Coupon Card End */
 /* Cart Type */
 .cartCard .cart-card {
     background-color: #FFF4E3;
-    padding: 2rem 0 2rem 0  ;
+    padding: 2rem 0 2rem 0;
     box-shadow: 1px 1px 10px #DDDDDD;
     margin-bottom: 1.5rem;
 }
@@ -65,7 +67,11 @@
 
 .cart-item .price-sec {
     display: flex;
+    margin-top: .5rem;
+    align-items: center;
+
 }
+
 .cart-item .price-sec del {
     color: #ADADAD;
     font-size: 22px;
@@ -92,6 +98,7 @@
     margin-left: 0.4rem;
     color: #464646;
 }
+
 /* Cart Type End */
 
 /* Cart Overview */
@@ -104,6 +111,7 @@
     padding: 1rem;
     background-color: #FFF1DB;
 }
+
 .overview-card .overview-card-body {
     padding: 1rem;
 }
@@ -112,7 +120,7 @@
     list-style: none;
 }
 
-.overview-card .overview-card-body span > strong {
+.overview-card .overview-card-body span>strong {
     color: #FE9E2D;
 }
 
@@ -162,11 +170,16 @@
 .overview-card-footer .extras a {
     margin-left: auto;
 }
+
 /* Cart Overview End */
 
- @media(max-width: 720px) {
+@media(max-width: 720px) {
     .col-sm-4 {
         width: 33.33%;
+    }
+
+    .container .row .col-md-4 {
+        width: 100%;
     }
 
     .cart .coupon-sec .coupon-card {
@@ -195,12 +208,31 @@
         height: auto;
     }
 
-    .cart-item .price-sec del {
-        font-size: 16px;
+    .det .price-sec {
+        margin-top: .5rem;
+        align-items: center;
+
     }
 
-    .cart-item .price-sec .sp {
-        font-size: 16px;
+    .cart-item .det .price-sec .dis {
+        margin: 0;
+        padding: 0;
+        align-items: center;
+
+    }
+
+    .det .price-sec .mrp {
+        font-size: 12px;
+    }
+
+    .col-6 .det .price-sec .sp {
+        font-size: 12px;
+    }
+
+    .col-6 .det .price-sec span {
+        font-size: 9px;
+        margin: .2rem;
+
     }
 
     .cart-item .price-sec .youSave {
@@ -208,25 +240,26 @@
     }
 
     .price-breakup .price-type {
-        font-size: 14px;
+        font-size: 12px;
     }
 
 
- }
+}
 
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500&display=swap');
- body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500&display=swap');
+
+body {
     font-family: 'Poppins', sans-serif;
     color: #A2A2A2;
- }
+}
 
- 
- .product-car .big-img img {
+
+.product-car .big-img img {
     width: 100%;
     height: auto;
 }
-    
-    
+
+
 .product-car .small-img img {
     width: 90px;
     height: auto;
@@ -283,6 +316,7 @@ a {
     color: #0071BA;
     font-weight: 300;
 }
+
 .location a i {
     font-weight: 100;
     color: #000000;
@@ -446,14 +480,21 @@ a {
 .desc-sec .combo-product ul {
     list-style: none;
 }
+
 .desc-sec .combo-product li::before {
     list-style: square;
-    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-    color: #FE9E2D; /* Change the color */
-    font-weight: bold; /* If you want it to be bold */
-    display: inline-block; /* Needed to add space between the bullet and the text */
-    width: 1em; /* Also needed for space (tweak if needed) */
-    margin-left: -1em; /* Also needed for space (tweak if needed) */
+    content: "\2022";
+    /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #FE9E2D;
+    /* Change the color */
+    font-weight: bold;
+    /* If you want it to be bold */
+    display: inline-block;
+    /* Needed to add space between the bullet and the text */
+    width: 1em;
+    /* Also needed for space (tweak if needed) */
+    margin-left: -1em;
+    /* Also needed for space (tweak if needed) */
 }
 
 /* Review Card */
@@ -484,6 +525,7 @@ a {
     font-weight: 12px;
     font-weight: 300;
 }
+
 .review-card .card-body .ratings .rat {
     color: #FFE200;
 }
@@ -497,6 +539,7 @@ a {
     font-size: 26px;
     font-weight: bold;
 }
+
 /* Review Card End */
 
 @media(max-width: 720px) {
@@ -599,7 +642,7 @@ a {
 .det a {
     text-decoration: none !important;
     color: #000000 !important;
-    
+
 }
 
 /* For Freebies Banner Section */
@@ -665,6 +708,17 @@ a {
     margin-left: 0.3rem;
 }
 
+
+.cart-item .price-sec .dis {
+    margin: 1rem;
+    padding: 0.4rem;
+    color: #009444;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 0.3rem;
+}
+
+
 .editFreebie a {
     color: #464646;
     background-color: #EFEFEF;
@@ -679,3 +733,5 @@ a {
 }
 
 /* For Logged In User end */
+
+@media (max) {}

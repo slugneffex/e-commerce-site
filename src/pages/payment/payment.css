@@ -9,3 +9,11 @@
     font-weight: bold;
     color: #FE9E2D;
 }
+
+@media(max-width: 720px) { 
+    .card .row .col-md-4 {
+        width: 50%;
+    }
+
+    
+}
