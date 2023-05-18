@@ -36,7 +36,7 @@ export const fetchCategories = () => {
         options
       );
       dispatch(fetchCategoriesSuccess(response.data));
-      console.log(response.data);
+      
     } catch (error) {
       dispatch(fetchCategoriesFailure(error.message));
     }

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, {useState,  useEffect } from "react";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchForher } from "../features/actions/forherActions";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -26,42 +27,48 @@ const responsive = {
 };
 
 const ForHer = () => {
-  const [forher, setForher] = useState([]);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const {  forher } = useSelector((state) => state.forher);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/for-her`,
-          options
-        );
-        setForher(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
-  if (error) {
-    console.log(error);
-  }
+    dispatch(fetchForher());
+  }, [dispatch]);
+  // const [forher, setForher] = useState([]);
+  // const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/for-her`,
+  //         options
+  //       );
+  //       setForher(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+  // if (error) {
+  //   console.log(error);
+  // }
 
 
   const [isCenterMode, setIsCenterMode] = useState(false);
