@@ -525,7 +525,7 @@ const BrandProduct = () => {
                             //     onChange={() => handleClickBrand(brand.id)}
                             //   />
                             // </div>
-                            <div className="form-check" key={e.div}>
+                            <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"

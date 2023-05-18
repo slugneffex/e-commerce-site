@@ -39,7 +39,7 @@ export const fetchCategory = (id) => {
         options
       );
       dispatch(fetchCategorySuccess(response.data.data.combos.data));
-      console.log(response.data.data.combos.data);
+    
     } catch (error) {
       dispatch(fetchCategoryFailure(error.message));
     }

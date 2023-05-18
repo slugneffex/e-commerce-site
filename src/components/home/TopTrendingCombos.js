@@ -1,46 +1,54 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchToppicks } from "../features/actions/toppicksActions";
 
 const TopTrendingCombos = () => {
-  const [picks, setPicks] = useState([]);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
+  const {  toppicks } = useSelector((state) => state.toppicks);
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/topPicks`,
-          options
-        );
-        setPicks(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
-  if (error) {
-    console.log(error);
-  }
+    dispatch(fetchToppicks());
+  }, [dispatch]);
+  // const [picks, setPicks] = useState([]);
+  // const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         "Cache-Control": "no-cache, no-store, must-revalidate",
+  //         mode: "cors",
+  //         credentials: "include",
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/topPicks`,
+  //         options
+  //       );
+  //       setPicks(response.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+  // if (error) {
+  //   console.log(error);
+  // }
 
   // Carousel Responsive
 
@@ -69,8 +77,8 @@ const TopTrendingCombos = () => {
         </div>
         <div className="container" style={{ marginTop: "48px" }}>
           <div className="row">
-            {Array.isArray(picks) &&
-              picks.map((e) => (
+            {Array.isArray(toppicks) &&
+              toppicks.map((e) => (
                 <div className="col-md-6" key={e.id}>
                   <div className="top-picks-img">
                     {e.brand_id && (
@@ -150,8 +158,8 @@ const TopTrendingCombos = () => {
           arrows={false}
           centerMode
         >
-          {Array.isArray(picks) &&
-            picks.map((e) => (
+          {Array.isArray(toppicks) &&
+            toppicks.map((e) => (
               <div key={e.id} style={{ width: "100%" }}>
                 <div>
                   {e.brand_id && (
