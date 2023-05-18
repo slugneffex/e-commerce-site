@@ -487,12 +487,10 @@ const Cart = () => {
                       <div className="price-sec">
                         <del className="mrp">₹{product.mrp}</del>
                         <span className="sp">₹{product.price}</span>
-                        <div
+                        <div className="dis"
                           style={{
-                            marginLeft: "1rem",
                             backgroundColor: "#fe9e2d",
                             color: "#ffffff",
-                            padding: "0.4rem",
                             fontSize: "1rem",
                             fontWeight: "normal",
                           }}
@@ -846,7 +844,7 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <div className="overview-card">
+                <div className="overview-card mb-3">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>
                   </div>

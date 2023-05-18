@@ -106,7 +106,7 @@ const SimilarProduct = (props) => {
                     </div>
                     <div className="card-btn-sec ">
                       <div className="btn_atc">
-                        <Link className="btnC">
+                        
                           <i
                             className="bi bi-cart"
                             id={e.id}
@@ -114,7 +114,6 @@ const SimilarProduct = (props) => {
                           >
                             Add to Cart
                           </i>
-                        </Link>
                       </div>
                     </div>
                   </div>

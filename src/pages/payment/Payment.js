@@ -237,14 +237,14 @@ const Payment = () => {
                         height="20%"
                       />
                     </div>
-                    <div className="col-md-4 text-center">
+                    <div className="col-md-4 text-center desktop">
                       <i className="bi bi-arrow-right" />
                     </div>
                   </div>
                 </div>
                 <div className="card" style={{ marginTop: "1rem" }}>
-                  <div className="row" style={{ position: "relative" }}>
-                    <div className="col-md-6">
+                  <div className="row" style={{ position: "relative", alignItems: "center" }}>
+                    <div className="col-6">
                       <div className="form-group">
                         <input
                           type="radio"
@@ -266,19 +266,19 @@ const Payment = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="col-2 text-center">
+                    <div className="col-2">
                       <img
                         src="./assets/img/PaymentSection/Group_2286.png"
                         alt="cashImg"
                         style={{ border: ".1px solid #507C50" }}
                       />
                     </div>
-                    <div className="col-4 text-center">
+                    <div className="col-4 text-center pb-0 desktop">
                       <i className="bi bi-arrow-right" />
                     </div>
                   </div>
                 </div>
-                <div className="row my-5">
+                {/* <div className="row my-5">
                   <div className="col-md-6">
                     <div className="go-back">
                       <Link to="/Cart">
@@ -287,15 +287,8 @@ const Payment = () => {
                       </Link>
                     </div>
                   </div>
-                  {/* <div
-                    className="col-md-6"
-                    style={{ position: "absolute", right: "0" }}
-                  >
-                    <a href className="btn_1">
-                      Proceed To Pay
-                    </a>
-                  </div> */}
-                </div>
+                  
+                </div> */}
               </div>
 
               <div className="col-md-4 mt-5">

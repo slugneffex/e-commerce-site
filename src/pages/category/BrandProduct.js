@@ -302,7 +302,6 @@ const BrandProduct = () => {
                     <i
                       className="bi bi-cart"
                       id={p.id}
-                      style={{ color: "#fe9e2d" }}
                     >
                       Add to Cart
                     </i>
@@ -785,7 +784,6 @@ const BrandProduct = () => {
                               <i
                                 className="bi bi-cart"
                                 id={p.id}
-                                style={{ color: "#fe9e2d" }}
                               >
                                 Add to Cart
                               </i>
