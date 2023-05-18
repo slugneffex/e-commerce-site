@@ -63,6 +63,22 @@ const ForHer = () => {
     console.log(error);
   }
 
+
+  const [isCenterMode, setIsCenterMode] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCenterMode(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <>
       <div className="top-brand-deals container">
@@ -70,7 +86,10 @@ const ForHer = () => {
           Top Picks For Her
         </h3>
         <div className="container">
-          <Carousel responsive={responsive} arrows={false} infinite centerMode>
+          <Carousel responsive={responsive} arrows={false} infinite
+           
+    centerMode={isCenterMode}
+          >
             {Array.isArray(forher) &&
               forher.map((e) => (
                 <div key={e.banner?.id}>

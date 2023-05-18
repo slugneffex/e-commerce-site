@@ -91,15 +91,15 @@ const Testimonials = () => {
 
       {/* Mobile */}
 
-      <div className="mobile p-5">
+      <div className="mobile p-6">
         <Carousel
           arrows={false}
           responsive={responsive}
           infinite={true}
-          autoPlay
+          // autoPlay
         >
           <div style={{ marginRight: "10px", width: "100%" }}>
-            <div className="text-center textCard" style={{ padding: "2rem", boxShadow: "3px 3px 5px 5px #F6F6F6", border: "none" }}>
+            <div className="text-center textCard" style={{ padding: "2rem", boxShadow: "3px 10px 8px 10px #F6F6F6", border: "none" }}>
               <div className="col">
                 <FontAwesomeIcon icon={faStar} color="gold" />
                 <FontAwesomeIcon icon={faStar} color="gold" />

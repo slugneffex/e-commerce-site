@@ -11,8 +11,8 @@
 }
 
 html body.custom-scroll {
-  overflow: scroll !important;
-
+  overflow-y: scroll !important;
+  overflow-x: hidden; 
 }
 
 /* nav {
@@ -550,6 +550,8 @@ a {
     height: auto !important;
     visibility: visible !important;
   }
+
+
 }
 
 footer {
@@ -1136,7 +1138,7 @@ ul.additional_links li:after {
   }
 
   .price-sec .col-4 {
-    width: 30%;
+    width: 33%;
   }
 
 }

@@ -11,7 +11,7 @@ import { fetchCategories } from "../features/actions/categoriesActions";
 const Footer = () => {
 
   const dispatch = useDispatch();
-  const {  categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -151,46 +151,9 @@ const Footer = () => {
                 <div className="follow_us">
                   <h5>Follow Us</h5>
                   <ul>
-                    <li>
-                      <Link to="/">
-                        <img
-                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                          data-src="assets/img/twitter_icon.svg"
-                          alt="combonation-twitter"
-                          className="lazy"
-                        />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/">
-                        <img
-                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                          data-src="assets/img/facebook_icon.svg"
-                          alt="combonation-facebook"
-                          className="lazy"
-                        />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/">
-                        <img
-                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                          data-src="assets/img/instagram_icon.svg"
-                          alt="combonation-instagram"
-                          className="lazy"
-                        />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/">
-                        <img
-                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                          data-src="assets/img/youtube_icon.svg"
-                          alt="combonation-youtube"
-                          className="lazy"
-                        />
-                      </Link>
-                    </li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313"><i class="bi bi-facebook" style={{ fontSize: "30px" }}></i></a></li>
+                    <li><a href="https://instagram.com/combonation_in"><i class="bi bi-instagram" style={{ fontSize: "30px" }}></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany"><i class="bi bi-linkedin" style={{ fontSize: "30px" }}></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -424,36 +387,10 @@ const Footer = () => {
                   <div className="follow_us">
                     <h5>Follow Us</h5>
                     <ul>
-                      <li>
-                        <a href="https://www.facebook.com/profile.php?id=100078539967313">
-                          <img
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                            data-src="https://www.combonation.in/assets/img/facebook_icon.svg"
-                            alt="combonation-facebook"
-                            className="lazy"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="https://instagram.com/combonation_in">
-                          <img
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                            data-src="https://www.combonation.in/assets/img/instagram_icon.svg"
-                            alt="combonation-instagram"
-                            className="lazy"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a href="https://www.linkedin.com/company/combo-nation/mycompany">
-                          <img
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-                            data-src="https://www.combonation.in/assets_new/img/linkedin.png"
-                            alt="combonation-linkedin"
-                            className="lazy"
-                          />
-                        </a>
-                      </li>
+                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313"><i class="bi bi-facebook" style={{ fontSize: "20px" }}></i></a></li>
+                      <li><a href="https://instagram.com/combonation_in"><i class="bi bi-instagram" style={{ fontSize: "20px" }}></i></a></li>
+                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany"><i class="bi bi-linkedin" style={{ fontSize: "20px" }}></i></a></li>
+
                     </ul>
                   </div>
                 </div>

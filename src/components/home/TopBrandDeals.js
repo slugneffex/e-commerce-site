@@ -63,12 +63,35 @@ const TopBrandDeals = () => {
     console.log(error)
   }
 
+
+  const [isCenterMode, setIsCenterMode] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCenterMode(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+
   return (
     <div>
       <div className="top-brand-deals">
         <h3 className="text-center">Top Combo Deals For You</h3>
         <div className="container">
-          <Carousel responsive={responsive}>
+          <Carousel responsive={responsive}
+          arrows={false}
+          infinite
+          centerMode={isCenterMode}
+          >
             {Array.isArray(cdeal) &&
               cdeal.map((e) => (
                 <div key={e.id}>

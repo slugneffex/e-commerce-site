@@ -691,7 +691,7 @@ const BrandProduct = () => {
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <div>
                     <div style={{ textAlign: "end" }}>
                       <Dropdown>
@@ -721,7 +721,7 @@ const BrandProduct = () => {
                       </Dropdown>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="row" style={{ marginTop: "1rem" }}>
