@@ -7,6 +7,7 @@ import {
 const initialState = {
     loading: false,
     brandproduct: [],
+    brandname:[],
     error: null,
   };
 
@@ -22,7 +23,8 @@ const brandproductReducer = (state = initialState, action) => {
         return {
           ...state,
           loading: false,
-          brandproduct: action.payload,
+          brandproduct: action.payload.products.data,
+          brandname: action.payload.brand,
         };
       case FETCH_BRANDPRODUCT_FAILURE:
         return {
