@@ -198,7 +198,10 @@ const BrandProduct = () => {
   }
 
   let singlebrandProduct = null;
-  if (brandproduct.length >= 1) {
+  if (loading) {
+    singlebrandProduct = <div><Loader /></div>
+  } 
+  else if (brandproduct.length >= 1) {
     singlebrandProduct = (
       <>
         {brandproduct.map((p) => (
@@ -265,9 +268,7 @@ const BrandProduct = () => {
 
   return (
     <div>
-      {loading ? (
-        <div><Loader /></div>
-        ) : (
+      
         <HomeLayout>
           <div className="container">
             <div className="row">
@@ -761,7 +762,7 @@ const BrandProduct = () => {
             </div>
           </div>
         </HomeLayout>
-      )}
+      
     </div>
   );
 };
