@@ -830,8 +830,9 @@ const Category = () => {
                 </div>
               </div>
             </div>
+            
             {loading ? (
-              <div>
+              <div className="col-md-9" style={{margin: "auto"}}>
                 <Loader />
               </div>
             ) : (
