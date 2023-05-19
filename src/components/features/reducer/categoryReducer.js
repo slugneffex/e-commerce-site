@@ -6,8 +6,9 @@ import {
 
 const initialState = {
   loading: false,
-  category: [],
-
+  banner: [],
+  combo:[],
+  product:[],
   error: null,
 };
 
@@ -24,7 +25,10 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        category: action.payload,
+        banner: action.payload.category,
+        combo: action.payload.data.combos.data,
+        product: action.payload.data.products.data,
+        
       };
   
     case FETCH_CATEGORY_FAILURE:

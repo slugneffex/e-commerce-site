@@ -10,9 +10,10 @@ export const fetchCategoryRequest = () => ({
   type: FETCH_CATEGORY_REQUEST,
 });
 
-export const fetchCategorySuccess = (category) => ({
+export const fetchCategorySuccess = (data) => ({
   type: FETCH_CATEGORY_SUCCESS,
-  payload: category,
+  // payload: category,
+  payload: data,
 
 });
 
@@ -43,9 +44,9 @@ export const fetchCategory = (id) => {
           `${process.env.REACT_APP_BASE_URL}/category/${id}`,
           options
         );
-        dispatch(fetchCategorySuccess(response.data.data.combos.data));
+        dispatch(fetchCategorySuccess(response.data));
       
-      }, 2000); 
+      }, 1000); 
     
     } catch (error) {
       dispatch(fetchCategoryFailure(error.message));

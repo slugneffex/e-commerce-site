@@ -33,17 +33,17 @@ const Category = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   // const [category, setCategory] = useState([]);
-  const [product, setProduct] = useState([]);
-  const [banner, setBanner] = useState([]);
+  // const [product, setProduct] = useState([]);
+  // const [banner, setBanner] = useState([]);
   // filteration state
   // const [originalCategory, setOriginalCategory] = useState([]);
   // const [originalProduct, setOriginalProduct] = useState([]);
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const { category, loading } = useSelector((state) => state.category);
+  const { combo,product,banner, loading } = useSelector((state) => state.data);
  
-  
+  console.log(combo)
 
 
   // filteration state end
@@ -56,7 +56,7 @@ const Category = () => {
 
 
   const sortData = () => {
-    const sortedData = [...category].sort(
+    const sortedData = [...combo].sort(
       (a, b) => b.selling_price - a.selling_price
     );
     const sortedDataProduct = [...product].sort(
@@ -69,7 +69,7 @@ const Category = () => {
   };
 
   const lowtoHigh = () => {
-    const sortedData = [...category].sort(
+    const sortedData = [...combo].sort(
       (a, b) => a.selling_price - b.selling_price
     );
     const sortedDataProducts = [...product].sort(
@@ -81,35 +81,35 @@ const Category = () => {
     // setProduct(sortedDataProducts);
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/category/${id}`,
-          options
-        );
-        setBanner(response.data.category);
-        // setCategory(response.data.data.combos.data);
-        setProduct(response.data.data.products.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, [id]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/category/${id}`,
+  //         options
+  //       );
+  //       setBanner(response.data.category);
+  //       setCategory(response.data.data.combos.data);
+  //       setProduct(response.data.data.products.data);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [id]);
 
   // filteration
 
@@ -139,7 +139,7 @@ const Category = () => {
       setCheckedFilters({ ...checkedFilters, [key]: true });
 
       // Update the filtered products lists
-      const filtered1 = category.filter((product) => {
+      const filtered1 = combo.filter((product) => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
@@ -379,7 +379,7 @@ const Category = () => {
   let section = null;
   if (loading) {
     section = <div>Loading...</div>;
-  } else if (category.length >= 1) {
+  } else if (combo.length >= 1) {
     section = (
       <>
         {/* section content */}
@@ -450,7 +450,7 @@ const Category = () => {
                 </div>
               </div>
             ))
-          : category.map((e) => (
+          : combo.map((e) => (
               <div className="col-md-4 " key={e.id}>
                 <div className="newComboCart">
                   <div
