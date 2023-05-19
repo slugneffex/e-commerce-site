@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./Freebies.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import {
   freebiesaddCartProduct,
   getfreebiesTotalAmount,
@@ -10,42 +9,20 @@ import {
 } from "../../components/features/freebiesCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import FreebiesCart from "./FreebiesCart";
+import { fetchFreebies } from "../../components/features/actions/freebiesActions";
 
 const Freebies = () => {
+  const dispatch = useDispatch();
   // freebies product Api
-  const [freebies, setFreebies] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/freebies`, options);
-        setFreebies(response.data.products);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+  const {  freeebies } = useSelector((state) => state.freeebies);
+  
+    useEffect(() => {
+      dispatch(fetchFreebies());
+    }, [dispatch]);
+ 
 
   // ADD to Cart freebies product
-  const dispatch = useDispatch();
+ 
   let productObj = {
     id: "",
     title: "",
@@ -116,9 +93,7 @@ const Freebies = () => {
     alert("Your Freebies Amount Limit Exceeded");
   };
 
-  if (error) {
-    console.log(error)
-  }
+  
 
   return (
     <>
@@ -197,7 +172,7 @@ const Freebies = () => {
                   </div>
                 </div>
                 <div className="row" id="freebieRow">
-                  {freebies.map((e) => (
+                  {freeebies.map((e) => (
                     <div className="col-md-4" key={e.id}>
                       <div>
                         <div
@@ -252,7 +227,7 @@ const Freebies = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> 
                   ))}
 
                   {/* back to home */}

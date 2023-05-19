@@ -14,11 +14,11 @@ import brandReducer from "../components/features/reducer/brandReducer";
 import jbrandsReducer from "../components/features/reducer/jbrandsReducer";
 import toppicksReducer from "../components/features/reducer/toppicksReducer";
 import forherReducer from "../components/features/reducer/forherReducer";
-
+import freebiesReducer from "../components/features/reducer/freebiesReducer";
 import forhimReducer from "../components/features/reducer/forhimReducer";
 import hotdealReducer from "../components/features/reducer/hotdealReducer";
 import brandproductReducer from "../components/features/reducer/brandproductReducer";
-
+import pageReducer from "../components/features/reducer/pageReducer";
 import combodealReducer from "../components/features/reducer/combodealReducer";
 import storeReducer from "../components/features/reducer/storeReducer";
 
@@ -42,10 +42,10 @@ export const rootReducers = combineReducers({
   jbrands: jbrandsReducer,
   toppicks: toppicksReducer,
   forher: forherReducer,
-
+  freeebies: freebiesReducer,
   forhim: forhimReducer,
   hotdeal: hotdealReducer,
-
+  page: pageReducer,
   combodeal: combodealReducer,
   store: storeReducer,
 });

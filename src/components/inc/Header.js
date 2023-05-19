@@ -6,14 +6,13 @@ import Cookies from "js-cookie";
 import { fetchCategories } from "../features/actions/categoriesActions";
 import { fetchBrand } from "../features/actions/brandActions";
 import { fetchByoc } from "../features/actions/byocActions";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchStore } from "../features/actions/storeAction";
+import { fetchPage } from "../features/actions/pageActions";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [pageCategories, setPageCategories] = useState([]);
-  // categories api fetching
-  const {  categories } = useSelector((state) => state.categories);
+
   // set a cookie with SameSite=None and Secure attributes
   Cookies.set("myCookie", "cookieValue", { sameSite: "none", secure: true });
 
@@ -62,43 +61,11 @@ const Header = () => {
 
   //for categories
 
-  // const [categories, setCategories] = useState([]);
-  const [error, setError] = useState(null);
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/categories`,
-  //         options
-  //       );
-  //       setCategories(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-
-  //   fetchData();
-  // }, []);
 
   // scroll fixes
 
@@ -111,44 +78,11 @@ const Header = () => {
 
   // For logo
 
-  const {  byoc } = useSelector((state) => state.byoc);
+  const { byoc } = useSelector((state) => state.byoc);
 
   useEffect(() => {
     dispatch(fetchByoc());
   }, [dispatch]);
-
-  // const [logo, setLogo] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/settings`,
-  //         options
-  //       );
-  //       setLogo(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
 
   const { totalCount } = useSelector((state) => state.cart);
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
@@ -157,86 +91,18 @@ const Header = () => {
 
   // For stores
 
-  const {  store } = useSelector((state) => state.store);
+  const { store } = useSelector((state) => state.store);
   useEffect(() => {
     dispatch(fetchStore());
   }, [dispatch]);
 
-  // const [store, setStore] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/stores`,
-  //         options
-  //       );
-  //       setStore(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-
   // For brands
 
-  const {  brand } = useSelector((state) => state.brand);
+  const { brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
     dispatch(fetchBrand());
   }, [dispatch]);
-
-
-  // const [brand, setBrand] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/brands`,
-  //         options
-  //       );
-  //       setBrand(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-
-  if (error) {
-    console.log(error);
-  }
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
   const sliceFilterData = filterbrandsApi.slice(0, 11);
@@ -262,39 +128,14 @@ const Header = () => {
     };
   }, []);
 
+  // page categories api
+  const { page } = useSelector((state) => state.page);
+
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/pages`,
-          options
-        );
-        setPageCategories(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
+    dispatch(fetchPage());
+  }, [dispatch]);
 
-    fetchData();
-  }, []);
-
-  const filterCategories = pageCategories.filter((pageCategories) => {
+  const filterCategories = page.filter((pageCategories) => {
     return pageCategories.show_with_category === "on";
   });
 
@@ -460,7 +301,7 @@ const Header = () => {
                                 </Link>
                               </div>
                             ))}
-                             {filterCategories.map((e) => (
+                            {filterCategories.map((e) => (
                               <div
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
@@ -517,7 +358,6 @@ const Header = () => {
                             <div className="col-lg-3 col-50 text-center">
                               <Link to="/brandlogolist">
                                 <img
-                                 
                                   src="https://www.combonation.in/assets_new/img/viewall.png"
                                   alt="view-all"
                                   style={{ width: "100px", height: "auto" }}
@@ -985,7 +825,6 @@ const Header = () => {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        
                         <Link>STORES</Link>
                         <hr />
                       </li>
@@ -1022,12 +861,13 @@ const Header = () => {
               </div>
 
               {/* icons */}
-              <div
-                className="col"
-              >
+              <div className="col">
                 <div
                   className="row"
-                  style={{ justifyContent: "space-between", alignItems: "flex-start" }}
+                  style={{
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                  }}
                 >
                   <div
                     className="col"
@@ -1069,29 +909,28 @@ const Header = () => {
                       // overflow: "hidden",
                       paddingRight: "0",
                       paddingLeft: "0",
-                      position: "relative"
+                      position: "relative",
                     }}
                   >
-                    <Link to='/Cart'>
+                    <Link to="/Cart">
                       <i className="bi bi-cart" style={{ fontSize: "15px" }} />
                     </Link>
                     <strong
-                          
-                          style={{
-                            position: "absolute",
-                            right: ".8rem",
-                            bottom: "1.2rem",
-                            zInd: "2",
-                            fontSize: "10px",
-                            color: "white",
-                            backgroundColor: "#FE9E2D",
-                            borderRadius: "50%",
-                            width: "15px",
-                            textAlign: "center",
-                          }}
-                        >
-                          {totalCartCount}
-                        </strong>
+                      style={{
+                        position: "absolute",
+                        right: ".8rem",
+                        bottom: "1.2rem",
+                        zInd: "2",
+                        fontSize: "10px",
+                        color: "white",
+                        backgroundColor: "#FE9E2D",
+                        borderRadius: "50%",
+                        width: "15px",
+                        textAlign: "center",
+                      }}
+                    >
+                      {totalCartCount}
+                    </strong>
                   </div>
                 </div>
               </div>
