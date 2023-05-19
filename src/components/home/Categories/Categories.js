@@ -1,109 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./categories.css";
-import axios from "axios";
+
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../features/actions/categoriesActions";
+import { fetchPage } from "../../features/actions/pageActions";
 
 const Categories = () => {
-  // const [category, setCategory] = useState([]);
-  const [pageCategories, setPageCategories] = useState([]);
-  const [error, setError] = useState(null);
-
   const dispatch = useDispatch();
-  const {  categories } = useSelector((state) => state.categories);
+
+  // categories api
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
- 
-
-  // useEffect(() => {
-  //   let isMounted = true;
-  //   let timer;
-
-  //   async function fetchData() {
-  //     setError(null);
-
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/categories`,
-  //         options
-  //       );
-  //       if (isMounted) {
-  //         setCategory(response.data);
-  //       }
-  //       timer = setTimeout(fetchData, 500);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 500);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-
-  //   fetchData();
-  //   return () => {
-  //     isMounted = false;
-  //     clearTimeout(timer);
-  //   };
-  // }, []);
+  // page categories api
+  const { page } = useSelector((state) => state.page);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
+    dispatch(fetchPage());
+  }, [dispatch]);
 
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/pages`,
-          options
-        );
-        setPageCategories(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  const filterCategories = pageCategories.filter((pageCategories) => {
+  const filterCategories = page.filter((pageCategories) => {
     return pageCategories.show_with_category === "on";
   });
-
-  if (error) {
-    console.log(error);
-  }
 
   const responsive = {
     superLargeDesktop: {
