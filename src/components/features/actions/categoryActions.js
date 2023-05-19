@@ -5,6 +5,7 @@ export const FETCH_CATEGORY_SUCCESS = "FETCH_CATEGORY_SUCCESS";
 export const FETCH_CATEGORY_FAILURE = "FETCH_CATEGORY_FAILURE";
 
 
+
 export const fetchCategoryRequest = () => ({
   type: FETCH_CATEGORY_REQUEST,
 });
@@ -12,7 +13,10 @@ export const fetchCategoryRequest = () => ({
 export const fetchCategorySuccess = (category) => ({
   type: FETCH_CATEGORY_SUCCESS,
   payload: category,
+
 });
+
+
 
 export const fetchCategoryFailure = (error) => ({
   type: FETCH_CATEGORY_FAILURE,
@@ -34,14 +38,18 @@ export const fetchCategory = (id) => {
     };
 
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/category/${id}`,
-        options
-      );
-      dispatch(fetchCategorySuccess(response.data.data.combos.data));
+      setTimeout(async () => {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/category/${id}`,
+          options
+        );
+        dispatch(fetchCategorySuccess(response.data.data.combos.data));
+      
+      }, 2000); 
     
     } catch (error) {
       dispatch(fetchCategoryFailure(error.message));
     }
+ 
   };
 };

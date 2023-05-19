@@ -12,16 +12,20 @@ import {
   getsingleTotalAmount,
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { fetchBrandproduct } from "../../components/features/actions/brandproductActions";
+import { fetchBrand } from "../../components/features/actions/brandActions";
+import { fetchCategories } from "../../components/features/actions/categoriesActions";
 
 const BrandProduct = () => {
   // Brand products api
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { brand_id } = useParams();
   const [error, setError] = useState(null);
-  const [brandProduct, setBrandProduct] = useState([]);
+  // const [brandProduct, setBrandProduct] = useState([]);
   const [brandName, setBrandName] = useState([]);
   // filteration state
 
@@ -31,7 +35,10 @@ const BrandProduct = () => {
 
   // filteration state end
 
-
+  const { brandproduct, loading } = useSelector((state) => state.brandproduct);
+  useEffect(() => {
+    dispatch(fetchBrandproduct(brand_id));
+  }, [dispatch, brand_id]);
   useEffect(() => {
     async function fetchData() {
       setError(null);
@@ -45,8 +52,8 @@ const BrandProduct = () => {
           `${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`,
           options
         );
-       
-        setBrandProduct(response.data.products.data);
+
+        // setBrandProduct(response.data.products.data);
         setBrandName(response.data.brand);
       } catch (error) {
         if (error.response && error.response.status === 429) {
@@ -60,9 +67,7 @@ const BrandProduct = () => {
       }
     }
 
-    
-      fetchData();
-   
+    fetchData();
   }, [brand_id]);
 
   // filteration
@@ -88,7 +93,7 @@ const BrandProduct = () => {
       setCheckedFilters({ ...checkedFilters, [key]: true });
 
       // Update the filtered products list
-      const filtered = brandProduct.filter((product) => {
+      const filtered = brandproduct.filter((product) => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
@@ -115,75 +120,23 @@ const BrandProduct = () => {
   // Filterration end
 
   // total brands
-  const [brand, setBrand] = useState([]);
+
+  const { brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/brands`,
-          options
-        );
-        setBrand(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchBrand());
+  }, [dispatch]);
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
-  // Categories
-  const [categoris, setCategories] = useState([]);
+  // Categories api fetching
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/categories`,
-          options
-        );
-        setCategories(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   // Add to cart single brand products
-
-  const dispatch = useDispatch();
 
   let SingleproductObj = {
     id: "",
@@ -241,16 +194,15 @@ const BrandProduct = () => {
     setFilteredProducts([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-
   }
 
-  
-
   let singlebrandProduct = null;
-  if (brandProduct.length >= 1) {
+  if (loading) {
+    singlebrandProduct = <div>Loading...</div>;
+  } else if (brandproduct.length >= 1) {
     singlebrandProduct = (
       <>
-        {brandProduct.map((p) => (
+        {brandproduct.map((p) => (
           <div className="col-md-4 " key={p.id}>
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
@@ -299,10 +251,7 @@ const BrandProduct = () => {
                       cursor: "pointer",
                     }}
                   >
-                    <i
-                      className="bi bi-cart"
-                      id={p.id}
-                    >
+                    <i className="bi bi-cart" id={p.id}>
                       Add to Cart
                     </i>
                   </div>
@@ -458,7 +407,7 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          {categoris.map((e) => (
+                          {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
@@ -509,7 +458,7 @@ const BrandProduct = () => {
                             // <div className="sortBy" key={e.id}>
                             //   <label
                             //     className="form-check-label"
-                            
+
                             //     htmlFor={`brand_${brand.id}`}
                             //   >
                             //     {e.name}
@@ -781,10 +730,7 @@ const BrandProduct = () => {
                                 cursor: "pointer",
                               }}
                             >
-                              <i
-                                className="bi bi-cart"
-                                id={p.id}
-                              >
+                              <i className="bi bi-cart" id={p.id}>
                                 Add to Cart
                               </i>
                             </div>
