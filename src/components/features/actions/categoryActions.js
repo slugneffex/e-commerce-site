@@ -39,14 +39,14 @@ export const fetchCategory = (id) => {
     };
 
     try {
-      setTimeout(async () => {
+     
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/category/${id}`,
           options
         );
         dispatch(fetchCategorySuccess(response.data));
       
-      }, 1000); 
+     
     
     } catch (error) {
       dispatch(fetchCategoryFailure(error.message));

@@ -34,7 +34,7 @@ export const rootReducers = combineReducers({
   freebies: freebiesCartReducer,
   categories: categoriesReducer,
   data: categoryReducer,
-  brandproduct: brandproductReducer,
+  branddata: brandproductReducer,
   byoc: byocReducer,
   hero: heroReducer,
   youmaylike: youmaylikeReducer,

@@ -26,25 +26,25 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { fetchCategory } from "../../components/features/actions/categoryActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
+import Loader from "../../components/home/Loader/Loader";
 
 const Category = () => {
   const dispatch = useDispatch();
   // Categories products combo & single Products
   const navigate = useNavigate();
   const { id } = useParams();
-  // const [category, setCategory] = useState([]);
-  // const [product, setProduct] = useState([]);
-  // const [banner, setBanner] = useState([]);
+
   // filteration state
   // const [originalCategory, setOriginalCategory] = useState([]);
   // const [originalProduct, setOriginalProduct] = useState([]);
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const { combo,product,banner, loading } = useSelector((state) => state.data);
- 
-  console.log(combo)
+  const { combo, product, banner, loading } = useSelector(
+    (state) => state.data
+  );
 
+  console.log(combo);
 
   // filteration state end
   const [error, setError] = useState(null);
@@ -53,7 +53,6 @@ const Category = () => {
   useEffect(() => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
-
 
   const sortData = () => {
     const sortedData = [...combo].sort(
@@ -80,36 +79,6 @@ const Category = () => {
     // category(sortedData)
     // setProduct(sortedDataProducts);
   };
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/category/${id}`,
-  //         options
-  //       );
-  //       setBanner(response.data.category);
-  //       setCategory(response.data.data.combos.data);
-  //       setProduct(response.data.data.products.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, [id]);
 
   // filteration
 
@@ -159,43 +128,13 @@ const Category = () => {
     }
   };
 
-  // Categories
+  // Categories api
 
   const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-
-  // const [categoris, setCategories] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/categories`,
-  //         options
-  //       );
-  //       setCategories(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
 
   // add to cart for combo
 
@@ -310,38 +249,6 @@ const Category = () => {
   useEffect(() => {
     dispatch(fetchBrand());
   }, [dispatch]);
-  // const [brand, setBrand] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/brands`,
-  //         options
-  //       );
-  //       setBrand(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
@@ -923,34 +830,38 @@ const Category = () => {
                 </div>
               </div>
             </div>
-
-            <div className="col-md-9 mt-2">
-              <div className="banner" key={banner.id}>
-                <img src={banner.banner?.url} width="100%" alt="baner" />
+            {loading ? (
+              <div>
+                <Loader />
               </div>
-
-              <div className="row">
-                <nav>
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link>Categories</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link className="categoriesName">{banner.name}</Link>
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-              <div className="row" style={{ marginTop: "3rem" }}>
-                <div className="col-6">
-                  <h4>
-                    <strong>Top Trending</strong>
-                  </h4>
+            ) : (
+              <div className="col-md-9 mt-2">
+                <div className="banner" key={banner.id}>
+                  <img src={banner.banner?.url} width="100%" alt="baner" />
                 </div>
-                {/* <div className="col-6" style={{ textAlign: "end" }}>
+
+                <div className="row">
+                  <nav>
+                    <ol className="breadcrumb">
+                      <li className="breadcrumb-item">
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li className="breadcrumb-item">
+                        <Link>Categories</Link>
+                      </li>
+                      <li className="breadcrumb-item">
+                        <Link className="categoriesName">{banner.name}</Link>
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+                <div className="row" style={{ marginTop: "3rem" }}>
+                  <div className="col-6">
+                    <h4>
+                      <strong>Top Trending</strong>
+                    </h4>
+                  </div>
+                  {/* <div className="col-6" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -976,164 +887,165 @@ const Category = () => {
                     </Dropdown>
                   </div>
                 </div> */}
-              </div>
-
-              <div className="row" style={{ marginTop: "1rem" }}>
-                {/* Combo products */}
-
-                {section}
-
-                <hr />
-                <div className="byocc">
-                  <h3>Bulid Your Own Combo</h3>
-                  <img src="/assets/img/byoc.png" alt="byoc-img" />
                 </div>
-                <hr />
 
-                {/* Single Products */}
-                {filteredProducts.length > 0
-                  ? filteredProducts.map((p) => (
-                      <div className="col-md-4" key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link
-                              onClick={() => wishlistProductData(p.id)}
-                              className="addtofavCategory"
+                <div className="row" style={{ marginTop: "1rem" }}>
+                  {/* Combo products */}
+
+                  {section}
+
+                  <hr />
+                  <div className="byocc">
+                    <h3>Bulid Your Own Combo</h3>
+                    <img src="/assets/img/byoc.png" alt="byoc-img" />
+                  </div>
+                  <hr />
+
+                  {/* Single Products */}
+                  {filteredProducts.length > 0
+                    ? filteredProducts.map((p) => (
+                        <div className="col-md-4" key={p.id}>
+                          <div className="newComboCart">
+                            <div
+                              className="cart-img-sec"
+                              style={{ position: "relative" }}
                             >
-                              <ul>
-                                <li className="youMayLikeHeart">
-                                  {heartFilled === p.id ? (
-                                    <i
-                                      style={{ color: "#fe9e2d" }}
-                                      className="bi bi-heart-fill"
-                                    ></i>
-                                  ) : (
-                                    <i className="bi bi-heart"></i>
-                                  )}
-                                </li>
-                              </ul>
-                            </Link>
-                            <Link to={`/product/${p.id}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt={p.name}
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <Link
+                                onClick={() => wishlistProductData(p.id)}
+                                className="addtofavCategory"
+                              >
+                                <ul>
+                                  <li className="youMayLikeHeart">
+                                    {heartFilled === p.id ? (
+                                      <i
+                                        style={{ color: "#fe9e2d" }}
+                                        className="bi bi-heart-fill"
+                                      ></i>
+                                    ) : (
+                                      <i className="bi bi-heart"></i>
+                                    )}
+                                  </li>
+                                </ul>
+                              </Link>
+                              <Link to={`/product/${p.id}`}>
+                                <img
+                                  src={p.thumbnail_img?.original_url}
+                                  alt={p.name}
+                                  width="100%"
+                                ></img>
+                              </Link>
                             </div>
-                            <div>
-                              <span className="packof">(Pack of 2)</span>
-                            </div>
-                            <div className="price-sec">
-                              <span className="spSingleProduct">
-                                ₹{p.selling_price}
-                              </span>
 
-                              {/* <div className="col-4">
+                            <div className="card-det-sec">
+                              <div className="headingCard pt-3 ">
+                                <span>{p.name.substring(0, 40)}</span>
+                              </div>
+                              <div>
+                                <span className="packof">(Pack of 2)</span>
+                              </div>
+                              <div className="price-sec">
+                                <span className="spSingleProduct">
+                                  ₹{p.selling_price}
+                                </span>
+
+                                {/* <div className="col-4">
                             <del className="mrp">₹{e.mrp}</del>
                           </div> */}
-                              {/* <div className="col-4">
+                                {/* <div className="col-4">
                             <span className="discount">{p.discount}% OFF</span>
                           </div> */}
-                            </div>
-                            <div className="card-btn-sec ">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                  alert("product added to cart successfully");
-                                }}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <i className="bi bi-cart" id={p.id}>
-                                  Add to Cart
-                                </i>
+                              </div>
+                              <div className="card-btn-sec ">
+                                <div
+                                  className="btn_atc"
+                                  onClick={() => {
+                                    addToSingleCart(p);
+                                    alert("product added to cart successfully");
+                                  }}
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="bi bi-cart" id={p.id}>
+                                    Add to Cart
+                                  </i>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))
-                  : product.map((p) => (
-                      <div className="col-md-4" key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link
-                              onClick={() => wishlistProductData(p.id)}
-                              className="addtofavCategory"
+                      ))
+                    : product.map((p) => (
+                        <div className="col-md-4" key={p.id}>
+                          <div className="newComboCart">
+                            <div
+                              className="cart-img-sec"
+                              style={{ position: "relative" }}
                             >
-                              <ul>
-                                <li className="youMayLikeHeart">
-                                  {heartFilled === p.id ? (
-                                    <i
-                                      style={{ color: "#fe9e2d" }}
-                                      className="bi bi-heart-fill"
-                                    ></i>
-                                  ) : (
-                                    <i className="bi bi-heart"></i>
-                                  )}
-                                </li>
-                              </ul>
-                            </Link>
-                            <Link to={`/product/${p.id}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt={p.name}
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <Link
+                                onClick={() => wishlistProductData(p.id)}
+                                className="addtofavCategory"
+                              >
+                                <ul>
+                                  <li className="youMayLikeHeart">
+                                    {heartFilled === p.id ? (
+                                      <i
+                                        style={{ color: "#fe9e2d" }}
+                                        className="bi bi-heart-fill"
+                                      ></i>
+                                    ) : (
+                                      <i className="bi bi-heart"></i>
+                                    )}
+                                  </li>
+                                </ul>
+                              </Link>
+                              <Link to={`/product/${p.id}`}>
+                                <img
+                                  src={p.thumbnail_img?.original_url}
+                                  alt={p.name}
+                                  width="100%"
+                                ></img>
+                              </Link>
                             </div>
-                            <div>
-                              <span className="packof">(Pack of 2)</span>
-                            </div>
-                            <div className="price-sec">
-                              <span className="spSingleProduct">
-                                ₹{p.selling_price}
-                              </span>
 
-                              {/* <div className="col-4">
+                            <div className="card-det-sec">
+                              <div className="headingCard pt-3 ">
+                                <span>{p.name.substring(0, 40)}</span>
+                              </div>
+                              <div>
+                                <span className="packof">(Pack of 2)</span>
+                              </div>
+                              <div className="price-sec">
+                                <span className="spSingleProduct">
+                                  ₹{p.selling_price}
+                                </span>
+
+                                {/* <div className="col-4">
                             <del className="mrp">₹{e.mrp}</del>
                           </div> */}
-                              {/* <div className="col-4">
+                                {/* <div className="col-4">
                             <span className="discount">{p.discount}% OFF</span>
                           </div> */}
-                            </div>
-                            <div className="card-btn-sec ">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                  alert("product added to cart successfully");
-                                }}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <i className="bi bi-cart" id={p.id}>
-                                  Add to Cart
-                                </i>
+                              </div>
+                              <div className="card-btn-sec ">
+                                <div
+                                  className="btn_atc"
+                                  onClick={() => {
+                                    addToSingleCart(p);
+                                    alert("product added to cart successfully");
+                                  }}
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="bi bi-cart" id={p.id}>
+                                    Add to Cart
+                                  </i>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </HomeLayout>

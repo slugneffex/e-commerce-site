@@ -8,9 +8,9 @@ export const fetchBrandproductRequest = () => ({
   type: FETCH_BRANDPRODUCT_REQUEST,
 });
 
-export const fetchBrandproductSuccess = (brandproduct) => ({
+export const fetchBrandproductSuccess = (branddata) => ({
   type: FETCH_BRANDPRODUCT_SUCCESS,
-  payload: brandproduct,
+  payload: branddata,
 });
 
 export const fetchBrandproductFailure = (error) => ({
@@ -35,7 +35,7 @@ export const fetchBrandproduct = (brand_id) => {
         `${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`,
         options
       );
-      dispatch(fetchBrandproductSuccess(response.data.products.data));
+      dispatch(fetchBrandproductSuccess(response.data));
  
     } catch (error) {
       dispatch(fetchBrandproductFailure(error.message));
