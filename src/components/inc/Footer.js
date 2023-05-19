@@ -7,6 +7,7 @@ import { FiHome, FiHeadphones } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../features/actions/categoriesActions";
+import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
 const Footer = () => {
 
@@ -57,12 +58,13 @@ const Footer = () => {
     setIsOpen4(!isOpen4);
   };
 
+
   return (
     <div>
       {/* Desktop Footer */}
       <footer
         className="desktop"
-        style={{ maxWidth: "100vw", overflowX: "hidden" }}
+        style={{ maxWidth: "100vw", overflowX: "hidden", background: "#000" }}
       >
         <div className="container">
           <div className="row" id="collapseFooter">
@@ -151,16 +153,16 @@ const Footer = () => {
                 <div className="follow_us">
                   <h5>Follow Us</h5>
                   <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank"><i class="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
-                    <li><a href="https://instagram.com/combonation_in" target="_blank"><i class="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
-                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank"><i class="bi bi-linkedin"  style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i class="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i class="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"  style={{fontSize: "30px"}}></i></a></li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <hr />
+        
         <section id="footer-secondary">
           <div className="container">
             <div
@@ -246,7 +248,10 @@ const Footer = () => {
                 aria-expanded={isOpen1}
               >
                 Quick Links
+
+                {isOpen1 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
               </h3>
+              
 
               <Collapse in={isOpen1}>
                 <div id="collapseExample">
@@ -275,6 +280,8 @@ const Footer = () => {
                 aria-expanded={isOpen2}
               >
                 Categories
+
+                {isOpen2 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
               </h3>
 
               <Collapse in={isOpen2}>
@@ -322,6 +329,8 @@ const Footer = () => {
                 aria-expanded={isOpen3}
               >
                 Contacts
+
+                {isOpen3 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
               </h3>
 
               <Collapse in={isOpen3}>
@@ -364,6 +373,8 @@ const Footer = () => {
                 aria-expanded={isOpen4}
               >
                 Keep In Touch
+
+                {isOpen4 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
               </h3>
 
               <Collapse in={isOpen4}>
@@ -387,9 +398,9 @@ const Footer = () => {
                   <div className="follow_us">
                     <h5>Follow Us</h5>
                     <ul>
-                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank"><i class="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
-                      <li><a href="https://instagram.com/combonation_in" target="_blank"><i class="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
-                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank"><i class="bi bi-linkedin" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i class="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i class="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i class="bi bi-linkedin" style={{fontSize: "30px"}}></i></a></li>
                     </ul>
                   </div>
                 </div>

@@ -967,8 +967,7 @@ const Header = () => {
                           <div className="col-lg-3 col-50 text-center">
                             <Link to="/brandlogolist">
                               <img
-                                src="assets/QR/onelinkto_add7up.png"
-                                // src="https://www.combonation.in/assets_new/img/viewall.png"
+                                src="https://www.combonation.in/assets_new/img/viewall.png"
                                 alt="view-all"
                                 style={{ width: "100px", height: "auto" }}
                               />
@@ -1025,11 +1024,10 @@ const Header = () => {
               {/* icons */}
               <div
                 className="col"
-                style={{ paddingTop: "8.5px", paddingRight: "0" }}
               >
                 <div
                   className="row"
-                  style={{ justifyContent: "space-between" }}
+                  style={{ justifyContent: "space-between", alignItems: "flex-start" }}
                 >
                   <div
                     className="col"
@@ -1068,13 +1066,32 @@ const Header = () => {
                     className="col"
                     style={{
                       textAlign: "start",
-                      overflow: "hidden",
+                      // overflow: "hidden",
                       paddingRight: "0",
+                      paddingLeft: "0",
+                      position: "relative"
                     }}
                   >
                     <Link to='/Cart'>
                       <i className="bi bi-cart" style={{ fontSize: "15px" }} />
                     </Link>
+                    <strong
+                          
+                          style={{
+                            position: "absolute",
+                            right: ".8rem",
+                            bottom: "1.2rem",
+                            zInd: "2",
+                            fontSize: "10px",
+                            color: "white",
+                            backgroundColor: "#FE9E2D",
+                            borderRadius: "50%",
+                            width: "15px",
+                            textAlign: "center",
+                          }}
+                        >
+                          {totalCartCount}
+                        </strong>
                   </div>
                 </div>
               </div>
