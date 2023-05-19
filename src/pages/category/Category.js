@@ -41,7 +41,10 @@ const Category = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const { category } = useSelector((state) => state.category);
+  const { category, loading } = useSelector((state) => state.category);
+ 
+  
+
 
   // filteration state end
   const [error, setError] = useState(null);
@@ -50,6 +53,7 @@ const Category = () => {
   useEffect(() => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
+
 
   const sortData = () => {
     const sortedData = [...category].sort(
@@ -61,7 +65,7 @@ const Category = () => {
     // setCategory(sortedData);
     // category(sortedData)
 
-    setProduct(sortedDataProduct);
+    // setProduct(sortedDataProduct);
   };
 
   const lowtoHigh = () => {
@@ -74,7 +78,7 @@ const Category = () => {
 
     // setCategory(sortedData);
     // category(sortedData)
-    setProduct(sortedDataProducts);
+    // setProduct(sortedDataProducts);
   };
 
   useEffect(() => {
@@ -373,7 +377,9 @@ const Category = () => {
   // if there is no combo hide the section of combos
 
   let section = null;
-  if (category.length >= 1) {
+  if (loading) {
+    section = <div>Loading...</div>;
+  } else if (category.length >= 1) {
     section = (
       <>
         {/* section content */}

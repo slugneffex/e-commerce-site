@@ -11,12 +11,13 @@ import byocReducer from "../components/features/reducer/byocReducer";
 import heroReducer from "../components/features/reducer/heroReducer";
 import youmaylikeReducer from "../components/features/reducer/youmaylikeReducer";
 import brandReducer from "../components/features/reducer/brandReducer";
-import jbrandsReducer from "../components/features/reducer/jbrandsReducer"
+import jbrandsReducer from "../components/features/reducer/jbrandsReducer";
 import toppicksReducer from "../components/features/reducer/toppicksReducer";
 import forherReducer from "../components/features/reducer/forherReducer";
 
 import forhimReducer from "../components/features/reducer/forhimReducer";
 import hotdealReducer from "../components/features/reducer/hotdealReducer";
+import brandproductReducer from "../components/features/reducer/brandproductReducer";
 
 import combodealReducer from "../components/features/reducer/combodealReducer";
 import storeReducer from "../components/features/reducer/storeReducer";
@@ -33,20 +34,20 @@ export const rootReducers = combineReducers({
   freebies: freebiesCartReducer,
   categories: categoriesReducer,
   category: categoryReducer,
+  brandproduct: brandproductReducer,
   byoc: byocReducer,
   hero: heroReducer,
   youmaylike: youmaylikeReducer,
   brand: brandReducer,
-  jbrands:jbrandsReducer,
+  jbrands: jbrandsReducer,
   toppicks: toppicksReducer,
   forher: forherReducer,
 
-  forhim:forhimReducer,
-  hotdeal:hotdealReducer,
+  forhim: forhimReducer,
+  hotdeal: hotdealReducer,
 
-  combodeal:combodealReducer,
-  store:storeReducer
-
+  combodeal: combodealReducer,
+  store: storeReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({

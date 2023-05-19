@@ -7,6 +7,7 @@ import {
 const initialState = {
   loading: false,
   category: [],
+
   error: null,
 };
 
@@ -18,13 +19,14 @@ const categoryReducer = (state = initialState, action) => {
         loading: true,
         error: null,
       };
-  
+
     case FETCH_CATEGORY_SUCCESS:
       return {
         ...state,
         loading: false,
         category: action.payload,
       };
+  
     case FETCH_CATEGORY_FAILURE:
       return {
         ...state,
