@@ -18,6 +18,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { fetchBrandproduct } from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
+import Loader from "../../components/home/Loader/Loader"
 
 const BrandProduct = () => {
   // Brand products api
@@ -198,7 +199,7 @@ const BrandProduct = () => {
 
   let singlebrandProduct = null;
   if (loading) {
-    singlebrandProduct = <div>Loading...</div>;
+    singlebrandProduct = <div><Loader /></div>;
   } else if (brandproduct.length >= 1) {
     singlebrandProduct = (
       <>
