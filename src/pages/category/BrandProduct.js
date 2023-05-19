@@ -616,6 +616,18 @@ const BrandProduct = () => {
                 </div>
               </div>
             </div>
+
+            {/* mobile filter */}
+            {/* <div className="bottom-bar mobile">
+              <ul className="nav justify-content-center bg-white fixed-bottom">
+                <li className="nav-item" style={{ borderRight: "1px solid #434343"}}></li>
+              </ul>
+            </div> */}
+
+
+
+
+            {/* end mobile filter */}
             <div className="col-md-9">
               <div className="row">
                 <nav>
