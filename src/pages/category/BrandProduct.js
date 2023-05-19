@@ -589,7 +589,7 @@ const BrandProduct = () => {
 
             {/* end mobile filter */}
             {loading ? (
-              <div>
+              <div className="col-md-9" style={{ margin: "auto" }}>
                 <Loader />
               </div>
             ) : (
