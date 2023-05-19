@@ -166,13 +166,13 @@ h1 h2 h3 h4 h5 h6 p {
     margin-left: -5px !important;
 }
 
-footer h3::after {
+/* footer h3::after {
     font-family: 'themify';
     content: "\e61a";
     width: 20px;
     display: block;
     float: right;
-}
+} */
 
 .offcanvas-body ul li a {
     color: #464646;
