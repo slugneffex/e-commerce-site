@@ -811,11 +811,11 @@ const Cart = () => {
                 <div class="coupon-sec mb-3 text-center">
                   <div
                     class="coupon-card"
-                    style={{ border: "5px dotted  ", borderColor: "#fe9e2d" }}
+                    style={{ border: "5px dotted ",width:"100%",display: "flex", borderColor: "#fe9e2d" }}
                   >
                     <div class="card-head">
                       <div class="tag">
-                        <i class="bi bi-tag-fill"></i>
+                        <i class="bi bi-tag-fill" style={{fontSize: "30px"}}></i>
                       </div>
                       <div class="det">
                         <span class="use">Use Code</span>

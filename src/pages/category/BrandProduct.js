@@ -616,6 +616,38 @@ const BrandProduct = () => {
                 </div>
               </div>
             </div>
+
+
+            {/* mobile filter */}
+            {/* <div className="bottom-bar mobile">
+              <ul className="nav justify-content-center bg-white fixed-bottom">
+                <li className="nav-item" style={{ borderRight: "1px solid #434343"}}></li>
+              </ul>
+            </div> */}
+
+
+
+
+            {/* end mobile filter */}
+            <div className="col-md-9">
+              <div className="row">
+                <nav>
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link>Brand</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link className="categoriesName">{brandName.name}</Link>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+              <div className="byoccBrand">
+                <img src="/assets/img/byoc.png" alt="byoc-img" />
+
           </div>
           <div className="col-md-9">
             <div className="row">
@@ -641,6 +673,7 @@ const BrandProduct = () => {
                 <h4>
                   <strong>Top Trending</strong>
                 </h4>
+
               </div>
               {/* <div className="col-md-6">
                 <div>

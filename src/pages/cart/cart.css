@@ -547,6 +547,10 @@ a {
         width: 50px;
         height: auto;
     }
+
+    .cart .container .row .col-md-4 {
+        width: 100%;
+    }
 }
 
 .head-h1 {
