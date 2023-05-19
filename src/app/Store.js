@@ -33,7 +33,7 @@ export const rootReducers = combineReducers({
   SingleCart: useSingleCartReducer,
   freebies: freebiesCartReducer,
   categories: categoriesReducer,
-  category: categoryReducer,
+  data: categoryReducer,
   brandproduct: brandproductReducer,
   byoc: byocReducer,
   hero: heroReducer,
