@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import HomeLayout from "../../layouts/HomeLayout";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -22,77 +22,86 @@ import {
   getsingleTotalAmount,
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
+import { fetchPageproduct } from "../../components/features/actions/pageproductActions";
+import Loader from "../../components/home/Loader/Loader";
 
 const CustomPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [banner, setBanner] = useState([]);
-  const [combo, setCombo] = useState([]);
-  const [product, setProduct] = useState([]);
+  // const [banner, setBanner] = useState([]);
+  // const [combo, setCombo] = useState([]);
+  // const [product, setProduct] = useState([]);
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
   const [error, setError] = useState(null);
-  const [brandId, setBrandId] = useState([]);
-  const [categoriesId, setCategoriesId] = useState([]);
+  // const [brandId, setBrandId] = useState([]);
+  // const [categoriesId, setCategoriesId] = useState([]);
+
+  const {  banner ,combo,product,brandId,categoriesId,loading} = useSelector((state) => state.pagedata);
+
+  useEffect(() => {
+    dispatch(fetchPageproduct(id));
+  }, [dispatch,id]);
 
   // sort by low to high and high to low
 
-  const sortData = () => {
-    const sortedData = [...combo].sort(
-      (a, b) => b.selling_price - a.selling_price
-    );
-    const sortedDataProduct = [...product].sort(
-      (a, b) => b.selling_price - a.selling_price
-    );
-    setCombo(sortedData);
-    setBrandProduct(sortedDataProduct);
-  };
+  // const sortData = () => {
+  //   const sortedData = [...combo].sort(
+  //     (a, b) => b.selling_price - a.selling_price
+  //   );
+  //   const sortedDataProduct = [...product].sort(
+  //     (a, b) => b.selling_price - a.selling_price
+  //   );
+  //   setCombo(sortedData);
+  //   setBrandProduct(sortedDataProduct);
+  // };
 
-  const lowtoHigh = () => {
-    const sortedData = [...combo].sort(
-      (a, b) => a.selling_price - b.selling_price
-    );
-    const sortedDataProducts = [...brandProduct].sort(
-      (a, b) => a.selling_price - b.selling_price
-    );
-    setCombo(sortedData);
-    setBrandProduct(sortedDataProducts);
-  };
+  // const lowtoHigh = () => {
+  //   const sortedData = [...combo].sort(
+  //     (a, b) => a.selling_price - b.selling_price
+  //   );
+  //   const sortedDataProducts = [...brandProduct].sort(
+  //     (a, b) => a.selling_price - b.selling_price
+  //   );
+  //   setCombo(sortedData);
+  //   setBrandProduct(sortedDataProducts);
+  // };
 
   // API of custom page
 
-  useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/page/${id}`,
-          options
-        );
-        setBanner(response.data);
-        setCombo(response.data.combos);
-        setProduct(response.data.product);
-        setBrandId(response.data.brands);
-        setCategoriesId(response.data.categories);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, [id]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setError(null);
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/page/${id}`,
+  //         options
+  //       );
+  //       setBanner(response.data);
+  //       setCombo(response.data.combos);
+  //       setProduct(response.data.product);
+  //       setBrandId(response.data.brands);
+  //       setCategoriesId(response.data.categories);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       } else {
+  //         setError(error.message);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [id]);
 
   // Filteration
 
@@ -144,7 +153,7 @@ const CustomPage = () => {
 
   // add to cart for combo
 
-  const dispatch = useDispatch();
+
   let productObj = {
     id: "",
     title: "",
@@ -1064,227 +1073,232 @@ const CustomPage = () => {
                 </div>
               </div>
             </div>
+          {loading ? (
+            <div><Loader /></div>
 
-            <div className="col-md-9 mt-2">
-              <div className="banner" key={banner.id}>
-                <img src={banner.thumbnail?.url} width="100%" alt="baner" />
-              </div>
+          ):(
+            <div className="col-md-9 " >
+            <div className="banner" key={banner.id}>
+              <img src={banner.thumbnail?.url} width="100%" alt="baner" />
+            </div>
 
-              <div className="row">
-                <nav>
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link>Categories</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link className="categoriesName">{banner.name}</Link>
-                    </li>
-                  </ol>
-                </nav>
+            <div className="row">
+              <nav>
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link>Categories</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="categoriesName">{banner.name}</Link>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+            <div className="row" style={{ marginTop: "3rem" }}>
+              <div className="col-md-6">
+                <h4>
+                  <strong>Top Trending</strong>
+                </h4>
               </div>
-              <div className="row" style={{ marginTop: "3rem" }}>
-                <div className="col-md-6">
-                  <h4>
-                    <strong>Top Trending</strong>
-                  </h4>
+              {/* <div className="col-md-6" style={{ textAlign: "end" }}>
+                <div className="" style={{}}>
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant=""
+                      id="dropdown-basic"
+                      style={{
+                        border: "1px solid",
+                        marginLeft: "3rem",
+                        width: "120px",
+                      }}
+                    >
+                      Sort by
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={lowtoHigh}>
+                        low to High
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={sortData}>
+                        High to low
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
-                {/* <div className="col-md-6" style={{ textAlign: "end" }}>
-                  <div className="" style={{}}>
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant=""
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid",
-                          marginLeft: "3rem",
-                          width: "120px",
-                        }}
-                      >
-                        Sort by
-                      </Dropdown.Toggle>
+              </div> */}
+            </div>
 
-                      <Dropdown.Menu>
-                        <Dropdown.Item onClick={lowtoHigh}>
-                          low to High
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={sortData}>
-                          High to low
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </div>
-                </div> */}
+            <div className="row" style={{ marginTop: "1rem" }}>
+              {/* Combo products */}
+
+              {section}
+
+              {/* Categories combo secetion */}
+              {categoriesComboSection}
+
+              <hr />
+              <div className="byocc">
+                <h3>Bulid Your Own Combo</h3>
+                <img src="/assets/img/byoc.png" alt="byoc-img" />
               </div>
+              <hr />
 
-              <div className="row" style={{ marginTop: "1rem" }}>
-                {/* Combo products */}
-
-                {section}
-
-                {/* Categories combo secetion */}
-                {categoriesComboSection}
-
-                <hr />
-                <div className="byocc">
-                  <h3>Bulid Your Own Combo</h3>
-                  <img src="/assets/img/byoc.png" alt="byoc-img" />
-                </div>
-                <hr />
-
-                {/* Single Products */}
-                {filteredProducts.length > 0
-                  ? filteredProducts.map((p) => (
-                      <div className="col-md-4" key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
+              {/* Single Products */}
+              {filteredProducts.length > 0
+                ? filteredProducts.map((p) => (
+                    <div className="col-md-4" key={p.id}>
+                      <div className="newComboCart">
+                        <div
+                          className="cart-img-sec"
+                          style={{ position: "relative" }}
+                        >
+                          <Link
+                            onClick={() => wishlistProductData(p.id)}
+                            className="addtofavCategory"
                           >
-                            <Link
-                              onClick={() => wishlistProductData(p.id)}
-                              className="addtofavCategory"
-                            >
-                              <ul>
-                                <li className="youMayLikeHeart">
-                                  {heartFilled === p.id ? (
-                                    <i
-                                      style={{ color: "#fe9e2d" }}
-                                      className="bi bi-heart-fill"
-                                    ></i>
-                                  ) : (
-                                    <i className="bi bi-heart"></i>
-                                  )}
-                                </li>
-                              </ul>
-                            </Link>
-                            <Link to={`/product/${p.id}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt={p.name}
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
+                            <ul>
+                              <li className="youMayLikeHeart">
+                                {heartFilled === p.id ? (
+                                  <i
+                                    style={{ color: "#fe9e2d" }}
+                                    className="bi bi-heart-fill"
+                                  ></i>
+                                ) : (
+                                  <i className="bi bi-heart"></i>
+                                )}
+                              </li>
+                            </ul>
+                          </Link>
+                          <Link to={`/product/${p.id}`}>
+                            <img
+                              src={p.thumbnail_img?.original_url}
+                              alt={p.name}
+                              width="100%"
+                            ></img>
+                          </Link>
+                        </div>
 
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
-                            </div>
-                            <div>
-                              <span className="packof">(Pack of 2)</span>
-                            </div>
-                            <div className="price-sec">
-                              <span className="spSingleProduct">
-                                ₹{p.selling_price}
-                              </span>
-                            </div>
-                            <div className="card-btn-sec ">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                  alert("product added to cart successfully");
-                                }}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <i className="bi bi-cart" id={p.id}>
-                                  Add to Cart
-                                </i>
-                                {/* key={subArray[0].id} */}
-                              </div>
+                        <div className="card-det-sec">
+                          <div className="headingCard pt-3 ">
+                            <span>{p.name.substring(0, 40)}</span>
+                          </div>
+                          <div>
+                            <span className="packof">(Pack of 2)</span>
+                          </div>
+                          <div className="price-sec">
+                            <span className="spSingleProduct">
+                              ₹{p.selling_price}
+                            </span>
+                          </div>
+                          <div className="card-btn-sec ">
+                            <div
+                              className="btn_atc"
+                              onClick={() => {
+                                addToSingleCart(p);
+                                alert("product added to cart successfully");
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="bi bi-cart" id={p.id}>
+                                Add to Cart
+                              </i>
+                              {/* key={subArray[0].id} */}
                             </div>
                           </div>
                         </div>
                       </div>
-                    ))
-                  : brandProduct.map((subArray) => {
-                      if (subArray.length > 0) {
-                        return (
-                          <>
-                            {subArray.map((p) => (
-                              <div className="col-md-4" key={p.id}>
-                                <div className="newComboCart">
-                                  <div
-                                    className="cart-img-sec"
-                                    style={{ position: "relative" }}
+                    </div>
+                  ))
+                : brandProduct.map((subArray) => {
+                    if (subArray.length > 0) {
+                      return (
+                        <>
+                          {subArray.map((p) => (
+                            <div className="col-md-4" key={p.id}>
+                              <div className="newComboCart">
+                                <div
+                                  className="cart-img-sec"
+                                  style={{ position: "relative" }}
+                                >
+                                  <Link
+                                    onClick={() => wishlistProductData(p.id)}
+                                    className="addtofavCategory"
                                   >
-                                    <Link
-                                      onClick={() => wishlistProductData(p.id)}
-                                      className="addtofavCategory"
-                                    >
-                                      <ul>
-                                        <li className="youMayLikeHeart">
-                                          {heartFilled === p.id ? (
-                                            <i
-                                              style={{ color: "#fe9e2d" }}
-                                              className="bi bi-heart-fill"
-                                            ></i>
-                                          ) : (
-                                            <i className="bi bi-heart"></i>
-                                          )}
-                                        </li>
-                                      </ul>
-                                    </Link>
-                                    <Link to={`/product/${p.id}`}>
-                                      <img
-                                        src={p.thumbnail_img?.original_url}
-                                        alt={p.name}
-                                        width="100%"
-                                      ></img>
-                                    </Link>
-                                  </div>
+                                    <ul>
+                                      <li className="youMayLikeHeart">
+                                        {heartFilled === p.id ? (
+                                          <i
+                                            style={{ color: "#fe9e2d" }}
+                                            className="bi bi-heart-fill"
+                                          ></i>
+                                        ) : (
+                                          <i className="bi bi-heart"></i>
+                                        )}
+                                      </li>
+                                    </ul>
+                                  </Link>
+                                  <Link to={`/product/${p.id}`}>
+                                    <img
+                                      src={p.thumbnail_img?.original_url}
+                                      alt={p.name}
+                                      width="100%"
+                                    ></img>
+                                  </Link>
+                                </div>
 
-                                  <div className="card-det-sec">
-                                    <div className="headingCard pt-3 ">
-                                      {/* <span>{p.name.substring(0, 40)}</span> */}
-                                      {p.name && (
-                                        <span>{p.name.substring(0, 40)}</span>
-                                      )}
-                                    </div>
-                                    <div>
-                                      <span className="packof">
-                                        (Pack of 2)
-                                      </span>
-                                    </div>
-                                    <div className="price-sec">
-                                      <span className="spSingleProduct">
-                                        ₹{p.selling_price}
-                                      </span>
-                                    </div>
-                                    <div className="card-btn-sec ">
-                                      <div
-                                        className="btn_atc"
-                                        onClick={() => {
-                                          addToSingleCart(p);
-                                          alert(
-                                            "product added to cart successfully"
-                                          );
-                                        }}
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <i className="bi bi-cart" id={p.id}>
-                                          Add to Cart
-                                        </i>
-                                      </div>
+                                <div className="card-det-sec">
+                                  <div className="headingCard pt-3 ">
+                                    {/* <span>{p.name.substring(0, 40)}</span> */}
+                                    {p.name && (
+                                      <span>{p.name.substring(0, 40)}</span>
+                                    )}
+                                  </div>
+                                  <div>
+                                    <span className="packof">
+                                      (Pack of 2)
+                                    </span>
+                                  </div>
+                                  <div className="price-sec">
+                                    <span className="spSingleProduct">
+                                      ₹{p.selling_price}
+                                    </span>
+                                  </div>
+                                  <div className="card-btn-sec ">
+                                    <div
+                                      className="btn_atc"
+                                      onClick={() => {
+                                        addToSingleCart(p);
+                                        alert(
+                                          "product added to cart successfully"
+                                        );
+                                      }}
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <i className="bi bi-cart" id={p.id}>
+                                        Add to Cart
+                                      </i>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            ))}
-                          </>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
+                            </div>
+                          ))}
+                        </>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
 
-                {/* Categories single Product */}
-                {categoriesProductSection}
-              </div>
+              {/* Categories single Product */}
+              {categoriesProductSection}
             </div>
+          </div>
+          )}
+          
           </div>
         </div>
       </HomeLayout>

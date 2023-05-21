@@ -77,7 +77,8 @@ const BrandProduct = () => {
       } else {
         setNoProduct(true); // show message
         alert("Item not found in this price range");
-        window.location.reload();
+        // setCheckedFilters(false)
+        setCheckedFilters({ ...checkedFilters, [key]: false });
       }
 
       setFilteredProducts((prevFilteredProducts) => [

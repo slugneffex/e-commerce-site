@@ -21,6 +21,7 @@ import brandproductReducer from "../components/features/reducer/brandproductRedu
 import pageReducer from "../components/features/reducer/pageReducer";
 import combodealReducer from "../components/features/reducer/combodealReducer";
 import storeReducer from "../components/features/reducer/storeReducer";
+import pageproductReducer from "../components/features/reducer/pageproductReducer";
 
 import { persistReducer } from "redux-persist";
 const persistConfig = {
@@ -48,6 +49,7 @@ export const rootReducers = combineReducers({
   page: pageReducer,
   combodeal: combodealReducer,
   store: storeReducer,
+  pagedata:pageproductReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = configureStore({

@@ -40,6 +40,7 @@ const Category = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
+  const [noProduct, setNoProduct] = useState(false);
   const { combo, product, banner, loading } = useSelector(
     (state) => state.data
   );
@@ -49,7 +50,7 @@ const Category = () => {
   // filteration state end
   const [error, setError] = useState(null);
 
-  // categories api fetching
+  // category api fetching
   useEffect(() => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
@@ -112,6 +113,14 @@ const Category = () => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
+      // if (filtered1.length > 0) {
+      //   setNoProduct(false); // hide message
+      // } else {
+      //   setNoProduct(true); // show message
+      //   alert("Item not found in this price range");
+      
+      //   setCheckedFilters({ ...checkedFilters, [key]: false });
+      // }
       setFilterCombo((prevFilteredProducts) => [
         ...prevFilteredProducts,
         ...filtered1,
@@ -121,6 +130,14 @@ const Category = () => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
+      // if (filtered2.length > 0) {
+      //   setNoProduct(false); // hide message
+      // } else {  
+      //   setNoProduct(true); // show message
+      //   alert("Item not found in this price range");
+       
+      //   setCheckedFilters({ ...checkedFilters, [key]: false });
+      // }
       setFilteredProducts((prevFilteredProducts) => [
         ...prevFilteredProducts,
         ...filtered2,
