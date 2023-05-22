@@ -5,6 +5,9 @@ import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
+import { CgSortAz } from "react-icons/cg"
+import { BiFilterAlt } from "react-icons/bi"
+import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
 import {
   addCartProduct,
@@ -134,7 +137,7 @@ const Category = () => {
       // } else {
       //   setNoProduct(true); // show message
       //   alert("Item not found in this price range");
-      
+
       //   setCheckedFilters({ ...checkedFilters, [key]: false });
       // }
       setFilterCombo((prevFilteredProducts) => [
@@ -151,7 +154,7 @@ const Category = () => {
       // } else {  
       //   setNoProduct(true); // show message
       //   alert("Item not found in this price range");
-       
+
       //   setCheckedFilters({ ...checkedFilters, [key]: false });
       // }
       setFilteredProducts((prevFilteredProducts) => [
@@ -300,6 +303,16 @@ const Category = () => {
     setIsOpen3(!isOpen3);
   };
 
+  const [isOpen4, setIsOpen4] = useState(false);
+  const handleToggle4 = () => {
+    setIsOpen4(!isOpen4);
+  };
+
+  const [isOpen5, setIsOpen5] = useState(false);
+  const handleToggle5 = () => {
+    setIsOpen5(!isOpen5);
+  };
+
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setFilterCombo([]);
@@ -330,127 +343,127 @@ const Category = () => {
         <hr />
         {filterCombo.length > 0
           ? filterCombo.map((e) => (
-              <div className="col-md-4 " key={e.id}>
-                <div className="newComboCart">
+            <div className="col-md-4 " key={e.id}>
+              <div className="newComboCart">
+                <div
+                  className="cart-img-sec"
+                  style={{ position: "relative" }}
+                >
                   <div
-                    className="cart-img-sec"
-                    style={{ position: "relative" }}
+                    onClick={() => wishlistData(e.id)}
+                    className="addtofavCategory"
                   >
-                    <div
-                      onClick={() => wishlistData(e.id)}
-                      className="addtofavCategory"
-                    >
-                      <i
-                        className="bi bi-heart"
-                        style={{
-                          position: "absolute",
-                          right: "1rem",
-                          top: ".8rem",
-                        }}
-                      ></i>
-                    </div>
-                    <Link to={`/combo/${e.id}`}>
-                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                    </Link>
+                    <i
+                      className="bi bi-heart"
+                      style={{
+                        position: "absolute",
+                        right: "1rem",
+                        top: ".8rem",
+                      }}
+                    ></i>
                   </div>
+                  <Link to={`/combo/${e.id}`}>
+                    <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                  </Link>
+                </div>
 
-                  <div className="card-det-sec">
-                    <div className="headingCard pt-3">
-                      <span>{e.name}</span>
+                <div className="card-det-sec">
+                  <div className="headingCard pt-3">
+                    <span>{e.name}</span>
+                  </div>
+                  <div>
+                    <span className="packof">(Pack of 2)</span>
+                  </div>
+                  <div className="price-sec">
+                    <div className="col-4" style={{ textAlign: "end" }}>
+                      <span className="sp">₹{e.selling_price}</span>
                     </div>
-                    <div>
-                      <span className="packof">(Pack of 2)</span>
+                    <div className="col-4">
+                      <del className="mrp">₹{e.mrp}</del>
                     </div>
-                    <div className="price-sec">
-                      <div className="col-4" style={{ textAlign: "end" }}>
-                        <span className="sp">₹{e.selling_price}</span>
-                      </div>
-                      <div className="col-4">
-                        <del className="mrp">₹{e.mrp}</del>
-                      </div>
-                      <div className="col-4">
-                        <span className="discount">{e.discount}% OFF</span>
-                      </div>
+                    <div className="col-4">
+                      <span className="discount">{e.discount}% OFF</span>
                     </div>
-                    <div className="card-btn-sec ">
-                      <div
-                        className="btn_atc"
-                        onClick={() => {
-                          addToCart(e);
-                          alert("product added to cart successfully");
-                        }}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <i className="bi bi-cart" id={e.id}>
-                          Add to Cart
-                        </i>
-                      </div>
+                  </div>
+                  <div className="card-btn-sec ">
+                    <div
+                      className="btn_atc"
+                      onClick={() => {
+                        addToCart(e);
+                        alert("product added to cart successfully");
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <i className="bi bi-cart" id={e.id}>
+                        Add to Cart
+                      </i>
                     </div>
                   </div>
                 </div>
               </div>
-            ))
+            </div>
+          ))
           : combo.map((e) => (
-              <div className="col-md-4 " key={e.id}>
-                <div className="newComboCart">
+            <div className="col-md-4 " key={e.id}>
+              <div className="newComboCart">
+                <div
+                  className="cart-img-sec"
+                  style={{ position: "relative" }}
+                >
                   <div
-                    className="cart-img-sec"
-                    style={{ position: "relative" }}
+                    onClick={() => wishlistData(e.id)}
+                    className="addtofavCategory"
                   >
-                    <div
-                      onClick={() => wishlistData(e.id)}
-                      className="addtofavCategory"
-                    >
-                      <i
-                        className="bi bi-heart"
-                        style={{
-                          position: "absolute",
-                          right: "1rem",
-                          top: ".8rem",
-                        }}
-                      ></i>
-                    </div>
-                    <Link to={`/combo/${e.id}`}>
-                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                    </Link>
+                    <i
+                      className="bi bi-heart"
+                      style={{
+                        position: "absolute",
+                        right: "1rem",
+                        top: ".8rem",
+                      }}
+                    ></i>
                   </div>
+                  <Link to={`/combo/${e.id}`}>
+                    <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                  </Link>
+                </div>
 
-                  <div className="card-det-sec">
-                    <div className="headingCard pt-3">
-                      <span>{e.name}</span>
+                <div className="card-det-sec">
+                  <div className="headingCard pt-3">
+                    <span>{e.name}</span>
+                  </div>
+                  <div>
+                    <span className="packof">(Pack of 2)</span>
+                  </div>
+                  <div className="price-sec">
+                    <div className="col-4" style={{ textAlign: "end" }}>
+                      <span className="sp">₹{e.selling_price}</span>
                     </div>
-                    <div>
-                      <span className="packof">(Pack of 2)</span>
+                    <div className="col-4">
+                      <del className="mrp">₹{e.mrp}</del>
                     </div>
-                    <div className="price-sec">
-                      <div className="col-4" style={{ textAlign: "end" }}>
-                        <span className="sp">₹{e.selling_price}</span>
-                      </div>
-                      <div className="col-4">
-                        <del className="mrp">₹{e.mrp}</del>
-                      </div>
-                      <div className="col-4">
-                        <span className="discount">{e.discount}% OFF</span>
-                      </div>
+                    <div className="col-4">
+                      <span className="discount">{e.discount}% OFF</span>
                     </div>
-                    <div className="card-btn-sec ">
-                      <div
-                        className="btn_atc"
-                        onClick={() => {
-                          addToCart(e);
-                          alert("product added to cart successfully");
-                        }}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <i className="bi bi-cart" id={e.id}>
-                          Add to Cart
-                        </i>
-                      </div>
+                  </div>
+                  <div className="card-btn-sec ">
+                    <div
+                      className="btn_atc"
+                      onClick={() => {
+                        addToCart(e);
+                        alert("product added to cart successfully");
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <i className="bi bi-cart" id={e.id}>
+                        Add to Cart
+                      </i>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
       </>
     );
   }
@@ -458,6 +471,198 @@ const Category = () => {
   return (
     <>
       <HomeLayout>
+
+        <div className="mobile">
+          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
+            <div className="col-6" style={{ borderRight: "1px solid #464646", color: "#FE9E2D" }}>
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
+
+              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+                <div class="offcanvas-header">
+                  <h1 id="offcanvasLeftLabel">Sort By</h1>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div class="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                  <ul>
+                    <li>Name</li>
+                    <li>Category</li>
+                    <li>MRP</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-6" style={{ color: "#FE9E2D" }}>
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
+
+              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+                <div class="offcanvas-header">
+                  <h1 id="offcanvasRightLabel">Filter</h1>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div class="offcanvas-body" style={{ textAlign: "left" }}>
+
+
+                  <div>
+                    <h3
+                      variant="primary"
+                      onClick={handleToggle4}
+                      aria-controls="collapseExample"
+                      aria-expanded={isOpen4}
+                    >
+                      Category
+
+                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h3>
+
+
+                    <Collapse in={isOpen4}>
+                      <div id="collapseExample">
+                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                          {categories.map((e) => (
+                            <div className="form-check" key={e.id}>
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id={e.name}
+                                className="form-check-input"
+                                onClick={() => handleClick(e.id)}
+                              />
+
+                              <label className="form-check-label" htmlFor={e.name}>
+                                {e.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Collapse>
+                  </div>
+
+                  <div>
+                    <h3
+                      variant="primary"
+                      onClick={handleToggle5}
+                      aria-controls="collapseExample"
+                      aria-expanded={isOpen5}
+                    >
+                      Price
+
+                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h3>
+
+
+                    <Collapse in={isOpen5}>
+                      <div id="collapseExample">
+                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                          <input
+                            type="hidden"
+                            name="_token"
+                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                          />{" "}
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="50-499"
+                            >
+                              50-499
+                            </label>
+                            <input
+                              style={{ marginLeft: "7rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["50-499"]}
+                              onChange={() => handleFilter(50, 499)}
+                              id="50-499"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="500-999"
+                            >
+                              500-999
+                            </label>
+                            <input
+                              style={{ marginLeft: "6.45rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["500-999"]}
+                              onChange={() => handleFilter(500, 999)}
+                              id="500-999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="1000-1999"
+                            >
+                              1000-1999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.88rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["1000-1999"]}
+                              onChange={() => handleFilter(1000, 1999)}
+                              id="1000-1999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="2000-4999"
+                            >
+                              2000-4999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.34rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["2000-4999"]}
+                              onChange={() => handleFilter(2000, 4999)}
+                              id="2000-4999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="5000 & Above"
+                            >
+                              5000 & Above
+                            </label>
+                            <input
+                              style={{ marginLeft: "3.963rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["5000-500000"]}
+                              onChange={() => handleFilter(5000, 500000)}
+                              id="5000 & Above"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Collapse>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
@@ -583,17 +788,17 @@ const Category = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen1}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Categories
-                        </h4>
+                        </h6>
 
                         <RiArrowDropDownLine
                           className="col-3 "
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
@@ -618,7 +823,7 @@ const Category = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={103}>
+                              <label className="form-check-label">
                                 {e.name} (106)
                               </label>
                             </div>
@@ -635,17 +840,17 @@ const Category = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen2}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Brand
-                        </h4>
+                        </h6>
 
                         <RiArrowDropDownLine
                           className="col-3 text-end"
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
@@ -653,18 +858,17 @@ const Category = () => {
                       </div>
 
                       <Collapse in={isOpen2}>
-                        <div id="collapseExample">
+                        <div id="collapseExample"  style={{ margin: "10px 20px 20px 5px"}}>
                           {filterbrandsApi.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
+                                id={e.name}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
-                              <label className="form-check-label" htmlFor={103}>
+                              <label className="form-check-label" htmlFor={e.name}>
                                 {e.name} (51)
                               </label>
                             </div>
@@ -681,17 +885,17 @@ const Category = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen3}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Price
-                        </h4>
+                        </h6>
 
                         <RiArrowDropDownLine
                           className="col-3"
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
@@ -699,7 +903,7 @@ const Category = () => {
                       </div>
 
                       <Collapse in={isOpen3}>
-                        <div id="collapseExample">
+                        <div id="collapseExample" style={{ margin: "10px 5px 5x 5px"}}>
                           <input
                             type="hidden"
                             name="_token"
@@ -863,9 +1067,9 @@ const Category = () => {
                 </div>
               </div>
             </div>
-            
+
             {loading ? (
-              <div className="col-md-9" style={{margin: "auto"}}>
+              <div className="col-md-9" style={{ margin: "auto" }}>
                 <Loader />
               </div>
             ) : (
@@ -938,145 +1142,145 @@ const Category = () => {
                   {/* Single Products */}
                   {filteredProducts.length > 0
                     ? filteredProducts.map((p) => (
-                        <div className="col-md-4" key={p.id}>
-                          <div className="newComboCart">
-                            <div
-                              className="cart-img-sec"
-                              style={{ position: "relative" }}
+                      <div className="col-md-4" key={p.id}>
+                        <div className="newComboCart">
+                          <div
+                            className="cart-img-sec"
+                            style={{ position: "relative" }}
+                          >
+                            <Link
+                              onClick={() => wishlistProductData(p.id)}
+                              className="addtofavCategory"
                             >
-                              <Link
-                                onClick={() => wishlistProductData(p.id)}
-                                className="addtofavCategory"
-                              >
-                                <ul>
-                                  <li className="youMayLikeHeart">
-                                    {heartFilled === p.id ? (
-                                      <i
-                                        style={{ color: "#fe9e2d" }}
-                                        className="bi bi-heart-fill"
-                                      ></i>
-                                    ) : (
-                                      <i className="bi bi-heart"></i>
-                                    )}
-                                  </li>
-                                </ul>
-                              </Link>
-                              <Link to={`/product/${p.id}`}>
-                                <img
-                                  src={p.thumbnail_img?.original_url}
-                                  alt={p.name}
-                                  width="100%"
-                                ></img>
-                              </Link>
+                              <ul>
+                                <li className="youMayLikeHeart">
+                                  {heartFilled === p.id ? (
+                                    <i
+                                      style={{ color: "#fe9e2d" }}
+                                      className="bi bi-heart-fill"
+                                    ></i>
+                                  ) : (
+                                    <i className="bi bi-heart"></i>
+                                  )}
+                                </li>
+                              </ul>
+                            </Link>
+                            <Link to={`/product/${p.id}`}>
+                              <img
+                                src={p.thumbnail_img?.original_url}
+                                alt={p.name}
+                                width="100%"
+                              ></img>
+                            </Link>
+                          </div>
+
+                          <div className="card-det-sec">
+                            <div className="headingCard pt-3 ">
+                              <span>{p.name.substring(0, 40)}</span>
                             </div>
+                            <div>
+                              <span className="packof">(Pack of 2)</span>
+                            </div>
+                            <div className="price-sec">
+                              <span className="spSingleProduct">
+                                ₹{p.selling_price}
+                              </span>
 
-                            <div className="card-det-sec">
-                              <div className="headingCard pt-3 ">
-                                <span>{p.name.substring(0, 40)}</span>
-                              </div>
-                              <div>
-                                <span className="packof">(Pack of 2)</span>
-                              </div>
-                              <div className="price-sec">
-                                <span className="spSingleProduct">
-                                  ₹{p.selling_price}
-                                </span>
-
-                                {/* <div className="col-4">
+                              {/* <div className="col-4">
                             <del className="mrp">₹{e.mrp}</del>
                           </div> */}
-                                {/* <div className="col-4">
+                              {/* <div className="col-4">
                             <span className="discount">{p.discount}% OFF</span>
                           </div> */}
-                              </div>
-                              <div className="card-btn-sec ">
-                                <div
-                                  className="btn_atc"
-                                  onClick={() => {
-                                    addToSingleCart(p);
-                                    alert("product added to cart successfully");
-                                  }}
-                                  style={{ cursor: "pointer" }}
-                                >
-                                  <i className="bi bi-cart" id={p.id}>
-                                    Add to Cart
-                                  </i>
-                                </div>
+                            </div>
+                            <div className="card-btn-sec ">
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                  alert("product added to cart successfully");
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="bi bi-cart" id={p.id}>
+                                  Add to Cart
+                                </i>
                               </div>
                             </div>
                           </div>
                         </div>
-                      ))
+                      </div>
+                    ))
                     : product.map((p) => (
-                        <div className="col-md-4" key={p.id}>
-                          <div className="newComboCart">
-                            <div
-                              className="cart-img-sec"
-                              style={{ position: "relative" }}
+                      <div className="col-md-4" key={p.id}>
+                        <div className="newComboCart">
+                          <div
+                            className="cart-img-sec"
+                            style={{ position: "relative" }}
+                          >
+                            <Link
+                              onClick={() => wishlistProductData(p.id)}
+                              className="addtofavCategory"
                             >
-                              <Link
-                                onClick={() => wishlistProductData(p.id)}
-                                className="addtofavCategory"
-                              >
-                                <ul>
-                                  <li className="youMayLikeHeart">
-                                    {heartFilled === p.id ? (
-                                      <i
-                                        style={{ color: "#fe9e2d" }}
-                                        className="bi bi-heart-fill"
-                                      ></i>
-                                    ) : (
-                                      <i className="bi bi-heart"></i>
-                                    )}
-                                  </li>
-                                </ul>
-                              </Link>
-                              <Link to={`/product/${p.id}`}>
-                                <img
-                                  src={p.thumbnail_img?.original_url}
-                                  alt={p.name}
-                                  width="100%"
-                                ></img>
-                              </Link>
+                              <ul>
+                                <li className="youMayLikeHeart">
+                                  {heartFilled === p.id ? (
+                                    <i
+                                      style={{ color: "#fe9e2d" }}
+                                      className="bi bi-heart-fill"
+                                    ></i>
+                                  ) : (
+                                    <i className="bi bi-heart"></i>
+                                  )}
+                                </li>
+                              </ul>
+                            </Link>
+                            <Link to={`/product/${p.id}`}>
+                              <img
+                                src={p.thumbnail_img?.original_url}
+                                alt={p.name}
+                                width="100%"
+                              ></img>
+                            </Link>
+                          </div>
+
+                          <div className="card-det-sec">
+                            <div className="headingCard pt-3 ">
+                              <span>{p.name.substring(0, 40)}</span>
                             </div>
+                            <div>
+                              <span className="packof">(Pack of 2)</span>
+                            </div>
+                            <div className="price-sec">
+                              <span className="spSingleProduct">
+                                ₹{p.selling_price}
+                              </span>
 
-                            <div className="card-det-sec">
-                              <div className="headingCard pt-3 ">
-                                <span>{p.name.substring(0, 40)}</span>
-                              </div>
-                              <div>
-                                <span className="packof">(Pack of 2)</span>
-                              </div>
-                              <div className="price-sec">
-                                <span className="spSingleProduct">
-                                  ₹{p.selling_price}
-                                </span>
-
-                                {/* <div className="col-4">
+                              {/* <div className="col-4">
                             <del className="mrp">₹{e.mrp}</del>
                           </div> */}
-                                {/* <div className="col-4">
+                              {/* <div className="col-4">
                             <span className="discount">{p.discount}% OFF</span>
                           </div> */}
-                              </div>
-                              <div className="card-btn-sec ">
-                                <div
-                                  className="btn_atc"
-                                  onClick={() => {
-                                    addToSingleCart(p);
-                                    alert("product added to cart successfully");
-                                  }}
-                                  style={{ cursor: "pointer" }}
-                                >
-                                  <i className="bi bi-cart" id={p.id}>
-                                    Add to Cart
-                                  </i>
-                                </div>
+                            </div>
+                            <div className="card-btn-sec ">
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToSingleCart(p);
+                                  alert("product added to cart successfully");
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="bi bi-cart" id={p.id}>
+                                  Add to Cart
+                                </i>
                               </div>
                             </div>
                           </div>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                 </div>
               </div>
             )}

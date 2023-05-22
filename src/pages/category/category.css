@@ -126,7 +126,7 @@ input[type=checkbox]:checked {
     width: 50%;
   }
 
-  .container .row .col-md-4 {
+  .container .col-md-9 .row .col-md-4 {
     width: 50%;
   }
 
@@ -148,5 +148,9 @@ input[type=checkbox]:checked {
   .price-sec .mrp {
     color: #999999;
     font-size: 14px;
+  }
+
+  .offcanvas-body ul li {
+    list-style-type: circle;
   }
 }

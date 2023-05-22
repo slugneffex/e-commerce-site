@@ -10,9 +10,13 @@
     color: #FE9E2D;
 }
 
+
 @media(max-width: 720px) { 
-    .card .row .col-md-4 {
+    .row .card .row .col-md-4 {
         width: 50%;
+    }
+    .container .row .col-md-4 {
+        width: 100%;
     }
 
     

@@ -3,6 +3,8 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { CgSortAz } from "react-icons/cg"
+import { BiFilterAlt } from "react-icons/bi"
 
 import {
   singleaddCartProduct,
@@ -18,6 +20,8 @@ import { fetchBrandproduct } from "../../components/features/actions/brandproduc
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import Loader from "../../components/home/Loader/Loader";
+
+import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
 const BrandProduct = () => {
   // Brand products api
@@ -151,6 +155,17 @@ const BrandProduct = () => {
     setIsOpen3(!isOpen3);
   };
 
+
+  const [isOpen4, setIsOpen4] = useState(false);
+  const handleToggle4 = () => {
+    setIsOpen4(!isOpen4);
+  };
+
+  const [isOpen5, setIsOpen5] = useState(false);
+  const handleToggle5 = () => {
+    setIsOpen5(!isOpen5);
+  };
+
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
@@ -231,14 +246,204 @@ const BrandProduct = () => {
   }
 
 
-  
-
 
 
   return (
     <div>
       <HomeLayout>
+
+        <div className="mobile">
+          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
+            <div className="col-6" style={{ borderRight: "1px solid #464646", color: "#FE9E2D" }}>
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
+
+              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+                <div class="offcanvas-header">
+                  <h1 id="offcanvasLeftLabel">Sort By</h1>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div class="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                  <ul>
+                    <li>Name</li>
+                    <li>Category</li>
+                    <li>MRP</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-6" style={{ color: "#FE9E2D" }}>
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
+
+              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+                <div class="offcanvas-header">
+                  <h1 id="offcanvasRightLabel">Filter</h1>
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div class="offcanvas-body" style={{ textAlign: "left" }}>
+
+
+                  <div>
+                    <h3
+                      variant="primary"
+                      onClick={handleToggle4}
+                      aria-controls="collapseExample"
+                      aria-expanded={isOpen4}
+                    >
+                      Category
+
+                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h3>
+
+
+                    <Collapse in={isOpen4}>
+                      <div id="collapseExample">
+                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                          {categories.map((e) => (
+                            <div className="form-check" key={e.id}>
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id={e.name}
+                                className="form-check-input"
+                                onClick={() => handleClick(e.id)}
+                              />
+
+                              <label className="form-check-label" htmlFor={e.name}>
+                                {e.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Collapse>
+                  </div>
+
+                  <div>
+                    <h3
+                      variant="primary"
+                      onClick={handleToggle5}
+                      aria-controls="collapseExample"
+                      aria-expanded={isOpen5}
+                    >
+                      Price
+
+                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h3>
+
+
+                    <Collapse in={isOpen5}>
+                      <div id="collapseExample">
+                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                          <input
+                            type="hidden"
+                            name="_token"
+                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                          />{" "}
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="50-499"
+                            >
+                              50-499
+                            </label>
+                            <input
+                              style={{ marginLeft: "7rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["50-499"]}
+                              onChange={() => handleFilter(50, 499)}
+                              id="50-499"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="500-999"
+                            >
+                              500-999
+                            </label>
+                            <input
+                              style={{ marginLeft: "6.45rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["500-999"]}
+                              onChange={() => handleFilter(500, 999)}
+                              id="500-999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="1000-1999"
+                            >
+                              1000-1999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.88rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["1000-1999"]}
+                              onChange={() => handleFilter(1000, 1999)}
+                              id="1000-1999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="2000-4999"
+                            >
+                              2000-4999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.34rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["2000-4999"]}
+                              onChange={() => handleFilter(2000, 4999)}
+                              id="2000-4999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="5000 & Above"
+                            >
+                              5000 & Above
+                            </label>
+                            <input
+                              style={{ marginLeft: "3.963rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["5000-500000"]}
+                              onChange={() => handleFilter(5000, 500000)}
+                              id="5000 & Above"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Collapse>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className="container">
+
           <div className="row">
             <div className="col-md-3 desktop">
               <div style={{ marginTop: "2rem" }}>
@@ -250,7 +455,7 @@ const BrandProduct = () => {
                 </div>
                 <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
                   <div className="sortBy">
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="Popularity">
                       Popularity
                     </label>
                     <input
@@ -258,12 +463,12 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="Popularity"
                     />
                   </div>
 
                   <div>
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="Discount">
                       Discount
                     </label>
                     <input
@@ -276,7 +481,7 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" htmlFor="Name">
                       Name
                     </label>
                     <input
@@ -284,12 +489,12 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="Name"
                     />
                   </div>
 
                   <div>
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="CustomerTopRated">
                       Customer Top Rated
                     </label>
                     <input
@@ -297,12 +502,12 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="CustomerTopRated"
                     />
                   </div>
 
                   <div>
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="NewArrivals">
                       New Arrivals
                     </label>
                     <input
@@ -310,12 +515,12 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="NewArrivals"
                     />
                   </div>
 
                   <div>
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="PriceHighToLow">
                       Price: High to Low
                     </label>
                     <input
@@ -323,12 +528,12 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="PriceHighToLow"
                     />
                   </div>
 
                   <div>
-                    <label className="form-check-label" for="flexCheckDefault">
+                    <label className="form-check-label" for="PriceLowToHigh">
                       Price: Low to High
                     </label>
                     <input
@@ -336,7 +541,7 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="PriceLowToHigh"
                     />
                   </div>
                 </div>
@@ -498,7 +703,7 @@ const BrandProduct = () => {
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="50-499"
                             >
                               50-499
                             </label>
@@ -509,13 +714,13 @@ const BrandProduct = () => {
                               value=""
                               checked={!!checkedFilters["50-499"]}
                               onChange={() => handleFilter(50, 499)}
-                              id="flexCheckDefault"
+                              id="50-499"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="500-999"
                             >
                               500-999
                             </label>
@@ -526,13 +731,13 @@ const BrandProduct = () => {
                               value=""
                               checked={!!checkedFilters["500-999"]}
                               onChange={() => handleFilter(500, 999)}
-                              id="flexCheckDefault"
+                              id="500-999"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="1000-1999"
                             >
                               1000-1999
                             </label>
@@ -543,13 +748,13 @@ const BrandProduct = () => {
                               value=""
                               checked={!!checkedFilters["1000-1999"]}
                               onChange={() => handleFilter(1000, 1999)}
-                              id="flexCheckDefault"
+                              id="1000-1999"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="2000-4999"
                             >
                               2000-4999
                             </label>
@@ -560,13 +765,13 @@ const BrandProduct = () => {
                               value=""
                               checked={!!checkedFilters["2000-4999"]}
                               onChange={() => handleFilter(2000, 4999)}
-                              id="flexCheckDefault"
+                              id="2000-4999"
                             />
                           </div>
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              for="flexCheckDefault"
+                              htmlFor="5000 & Above"
                             >
                               5000 & Above
                             </label>
@@ -577,7 +782,7 @@ const BrandProduct = () => {
                               value=""
                               checked={!!checkedFilters["5000-500000"]}
                               onChange={() => handleFilter(5000, 500000)}
-                              id="flexCheckDefault"
+                              id="5000 & Above"
                             />
                           </div>
                         </div>
