@@ -40,23 +40,63 @@ const Category = () => {
   // filteration state
   // const [originalCategory, setOriginalCategory] = useState([]);
   // const [originalProduct, setOriginalProduct] = useState([]);
+  const [priceRanges, setPriceRanges] = useState([
+    { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
+    { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
+    { minPrice: 1000, maxPrice: 1999, label: "1000-1999", isVisible: true },
+    { minPrice: 2000, maxPrice: 4999, label: "2000-4999", isVisible: true },
+    { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
+  ]);
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
   const [noProduct, setNoProduct] = useState(false);
+  const [sortOrder, setSortOrder] = useState('asc');
+ 
+ 
+
+
+
+  // filteration state end
+
+
+  // category api fetching
   const { combo, product, banner, loading } = useSelector(
     (state) => state.data
   );
-
-  console.log(combo);
-
-  // filteration state end
-  const [error, setError] = useState(null);
-
-  // category api fetching
   useEffect(() => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
+
+
+  
+  const sortHighToLow = () => {
+    const sortedCombo = [...combo].sort((a, b) => b - a);
+    const sortedProduct = [...product].sort((a, b) => b - a);
+    return { sortedCombo, sortedProduct };
+  };
+
+  const sortLowToHigh = () => {
+    const sortedCombo = [...combo].sort((a, b) => a - b);
+    const sortedProduct = [...product].sort((a, b) => a - b);
+    return { sortedCombo, sortedProduct };
+  };
+
+  const handleHighToLowClick = () => {
+    const { sortedCombo, sortedProduct } = sortHighToLow();
+    // Use sortedCombo and sortedProduct as needed
+    // ...
+    setSortOrder('desc');
+  };
+
+  const handleLowToHighClick = () => {
+    const { sortedCombo, sortedProduct } = sortLowToHigh();
+    // Use sortedCombo and sortedProduct as needed
+    // ...
+    setSortOrder('asc');
+  };
+
+  
 
   // const sortData = () => {
   //   const sortedData = [...combo].sort(
@@ -71,98 +111,94 @@ const Category = () => {
   //   // setProduct(sortedDataProduct);
   // };
 
-  const handleSortClick = () => {
-    const combinedData = [...combo, ...product];
-  
-    const sortedData = [...combinedData].sort((a, b) => b.selling_price - a.selling_price);
-  
-    const sortedCombo = sortedData.filter(item => combo.includes(item));
-    const sortedProduct = sortedData.filter(item => product.includes(item));
-  
-    // Use sortedCombo and sortedProduct arrays for further processing or display
-  
-    // Example of displaying the sorted data
-    console.log("Sorted Combo:", sortedCombo);
-    console.log("Sorted Product:", sortedProduct);
-  };
+ 
   
 
-  const lowtoHigh = () => {
-    const sortedData = [...combo].sort(
-      (a, b) => a.selling_price - b.selling_price
-    );
-    const sortedDataProducts = [...product].sort(
-      (a, b) => a.selling_price - b.selling_price
-    );
+  // const lowtoHigh = () => {
+  //   const sortedData = [...combo].sort(
+  //     (a, b) => a.selling_price - b.selling_price
+  //   );
+  //   const sortedDataProducts = [...product].sort(
+  //     (a, b) => a.selling_price - b.selling_price
+  //   );
 
-    // setCategory(sortedData);
-    // category(sortedData)
-    // setProduct(sortedDataProducts);
-  };
+  //   // setCategory(sortedData);
+  //   // category(sortedData)
+  //   // setProduct(sortedDataProducts);
+  // };
 
   // filteration
 
-  const handleFilter = (minPrice, maxPrice) => {
-    const key = `${minPrice}-${maxPrice}`;
+    const handleFilter = (minPrice, maxPrice) => {
+      const key = `${minPrice}-${maxPrice}`;
 
-    if (checkedFilters[key]) {
-      // If the filter is already checked, remove it
-      const newFilters = { ...checkedFilters };
-      delete newFilters[key];
-      setCheckedFilters(newFilters);
+      if (checkedFilters[key]) {
+        // If the filter is already checked, remove it
+        const newFilters = { ...checkedFilters };
+        delete newFilters[key];
+        setCheckedFilters(newFilters);
 
-      // Update the filtered products lists
-      const newFilteredProducts1 = filterCombo.filter((product) => {
-        const price = product.selling_price;
-        return !(price >= minPrice && price <= maxPrice);
-      });
-      setFilterCombo(newFilteredProducts1);
+        // Update the filtered products lists
+        const newFilteredProducts1 = filterCombo.filter((product) => {
+          const price = product.selling_price;
+          return !(price >= minPrice && price <= maxPrice);
+        });
+        setFilterCombo(newFilteredProducts1);
 
-      const newFilteredProducts2 = filteredProducts.filter((product) => {
-        const price = product.selling_price;
-        return !(price >= minPrice && price <= maxPrice);
-      });
-      setFilteredProducts(newFilteredProducts2);
-    } else {
-      // If the filter is not checked, add it
-      setCheckedFilters({ ...checkedFilters, [key]: true });
+        const newFilteredProducts2 = filteredProducts.filter((product) => {
+          const price = product.selling_price;
+          return !(price >= minPrice && price <= maxPrice);
+        });
+        setFilteredProducts(newFilteredProducts2);
+      } else {
+        // If the filter is not checked, add it
+        setCheckedFilters({ ...checkedFilters, [key]: true });
 
-      // Update the filtered products lists
-      const filtered1 = combo.filter((product) => {
-        const price = product.selling_price;
-        return price >= minPrice && price <= maxPrice;
-      });
-      // if (filtered1.length > 0) {
-      //   setNoProduct(false); // hide message
-      // } else {
-      //   setNoProduct(true); // show message
-      //   alert("Item not found in this price range");
+        // Update the filtered products lists
+        const filtered1 = combo.filter((product) => {
+          const price = product.selling_price;
+          return price >= minPrice && price <= maxPrice;
+        });
+       
+        setFilterCombo((prevFilteredProducts) => [
+          ...prevFilteredProducts,
+          ...filtered1,
+        ]);
 
-      //   setCheckedFilters({ ...checkedFilters, [key]: false });
-      // }
-      setFilterCombo((prevFilteredProducts) => [
-        ...prevFilteredProducts,
-        ...filtered1,
-      ]);
+        const filtered2 = product.filter((product) => {
+          const price = product.selling_price;
+          return price >= minPrice && price <= maxPrice;
+        });
+       
+        setFilteredProducts((prevFilteredProducts) => [
+          ...prevFilteredProducts,
+          ...filtered2,
+        ]);
 
-      const filtered2 = product.filter((product) => {
-        const price = product.selling_price;
-        return price >= minPrice && price <= maxPrice;
-      });
-      // if (filtered2.length > 0) {
-      //   setNoProduct(false); // hide message
-      // } else {  
-      //   setNoProduct(true); // show message
-      //   alert("Item not found in this price range");
+      
+      }
+    };
 
-      //   setCheckedFilters({ ...checkedFilters, [key]: false });
-      // }
-      setFilteredProducts((prevFilteredProducts) => [
-        ...prevFilteredProducts,
-        ...filtered2,
-      ]);
-    }
-  };
+    useEffect(() => {
+      const updatePriceRangeVisibility = () => {
+        const updatedPriceRanges = priceRanges.map((range) => {
+          const { minPrice, maxPrice } = range;
+          const hasComboProductsInRange = combo.some(
+            (product) =>
+              product.selling_price >= minPrice && product.selling_price <= maxPrice
+          );
+          const hasProductInRange = product.some(
+            (product) =>
+              product.selling_price >= minPrice && product.selling_price <= maxPrice
+          );
+          const isVisible = hasComboProductsInRange || hasProductInRange;
+          return { ...range, isVisible };
+        });
+        setPriceRanges(updatedPriceRanges);
+      };
+    
+      updatePriceRangeVisibility();
+    }, [combo, product,priceRanges]);
 
   // Categories api
 
@@ -275,10 +311,7 @@ const Category = () => {
       });
   }
 
-  if (error) {
-    console.log(error);
-  }
-
+ 
   // total brands
   const { brand } = useSelector((state) => state.brand);
 
@@ -909,7 +942,34 @@ const Category = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="sortBy">
+                              {priceRanges.map((range) => {
+                            const { minPrice, maxPrice, label, isVisible } =
+                              range;
+                            const key = `${minPrice}-${maxPrice}`;
+
+                            return isVisible ? (
+                              <div key={key} className="sortBy">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={key}
+                                >
+                                  {label}
+                                </label>
+                                <input
+                                  style={{ marginLeft: "7rem" }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  checked={!!checkedFilters[key]}
+                                  onChange={() =>
+                                    handleFilter(minPrice, maxPrice)
+                                  }
+                                  id={key}
+                                />
+                              </div>
+                            ) : null;
+                          })}
+                          {/* <div className="sortBy">
                             <label
                               className="form-check-label"
                               htmlFor="50-499"
@@ -993,74 +1053,9 @@ const Category = () => {
                               onChange={() => handleFilter(5000, 500000)}
                               id="5000&Above"
                             />
-                          </div>
+                          </div> */}
                         </div>
-                        {/* <div id="collapseExample">
-                          <input
-                            type="hidden"
-                            name="_token"
-                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
-                          />{" "}
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="0-499"
-                              className="form-check-input"
-                              onClick={() => filterProducts(50, 499)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 50 To ₹ 499
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="500-999"
-                              className="form-check-input"
-                              onClick={() => filterProducts(500, 999)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 500 To ₹ 999
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="1000-1999"
-                              className="form-check-input"
-                              onClick={() => filterProducts(1000, 1999)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 1000 To ₹ 1999
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              value="2000-4999"
-                              className="form-check-input"
-                              onClick={() => filterProducts(2000, 4999)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 2000 To ₹ 4999
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              type="radio"
-                              name="priceFilter"
-                              className="form-check-input"
-                              onClick={() => filterProducts(5000, 50000)}
-                            />
-                            <label className="form-check-label">
-                              From ₹ 5000 & Above
-                            </label>
-                          </div>
-                        </div> */}
+                        
                       </Collapse>
                     </div>
                   </div>
@@ -1110,15 +1105,16 @@ const Category = () => {
                           marginLeft: "3rem",
                           width: "120px",
                         }}
+                       
                       >
                         Sort by
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item onClick={lowtoHigh}>
+                        <Dropdown.Item onClick={handleLowToHighClick} >
                           low to High
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={handleSortClick}>
+                        <Dropdown.Item  onClick={handleHighToLowClick}>
                           High to low
                         </Dropdown.Item>
                       </Dropdown.Menu>
