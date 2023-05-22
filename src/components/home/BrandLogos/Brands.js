@@ -90,6 +90,9 @@ const Brands = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  const handleClick = () => {
+    window.scrollTo(0,0);
+  };
 
   return (
     <>
@@ -111,7 +114,7 @@ const Brands = () => {
               fliterData.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
-                    <Link to={`/brand/${e.id}`}>
+                    <Link onClick={handleClick} to={`/brand/${e.id}`}>
                       <img
                         src={e.image?.original_url}
                         width="80%"

@@ -52,6 +52,9 @@ const ComboDeals = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  const handleClick = () => {
+    window.scrollTo(0,0);
+  };
 
   return (
     <>
@@ -70,12 +73,12 @@ const ComboDeals = () => {
             {combodeal.map((e) => (
               <div key={e.id}>
                 {e.brand_id && (
-                  <Link to={`/brand/${e.brand_id}`}>
+                  <Link onClick={handleClick} to={`/brand/${e.brand_id}`}>
                     <img src={e.thumbnail?.url} width="80%" alt={e.name} />
                   </Link>
                 )}
                 {e.product_id && (
-                  <Link to={`/product/${e.product_id}`}>
+                  <Link onClick={handleClick} to={`/product/${e.product_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"
@@ -84,7 +87,7 @@ const ComboDeals = () => {
                   </Link>
                 )}
                 {e.com_id && (
-                  <Link to={`/combo/${e.com_id}`}>
+                  <Link onClick={handleClick} to={`/combo/${e.com_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"
@@ -94,7 +97,7 @@ const ComboDeals = () => {
                 )}
 
                 {e.page_id && (
-                  <Link to={`/page/${e.page_id}`}>
+                  <Link onClick={handleClick} to={`/page/${e.page_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"
@@ -103,7 +106,7 @@ const ComboDeals = () => {
                   </Link>
                 )}
                 {e.category_id && (
-                  <Link to={`/category/${e.category_id}`}>
+                  <Link onClick={handleClick} to={`/category/${e.category_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"
