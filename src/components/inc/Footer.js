@@ -58,6 +58,9 @@ const Footer = () => {
     setIsOpen4(!isOpen4);
   };
 
+  const handleClick = () => {
+    window.scrollTo(0,0);
+  };
 
   return (
     <div>
@@ -93,7 +96,7 @@ const Footer = () => {
                 <ul>
                   {categories.map((e) => (
                     <li key={e.id}>
-                      <Link className="dropdown-item" to={`/category/${e.id}`}>
+                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.id}`}>
                         {e.name}
                       </Link>
                     </li>
@@ -286,7 +289,7 @@ const Footer = () => {
 
               <Collapse in={isOpen2}>
                 <div id="collapseExample">
-                  <ul>
+                  {/* <ul>
                     <li style={{ color: "#fff" }}>
                       <a href="https://www.combonation.in/category/baby-care-new">
                         Baby Care
@@ -317,7 +320,16 @@ const Footer = () => {
                         Personal Care
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
+                  <ul>
+                  {categories.map((e) => (
+                    <li key={e.id}>
+                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.id}`}>
+                        {e.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
                 </div>
               </Collapse>
             </div>

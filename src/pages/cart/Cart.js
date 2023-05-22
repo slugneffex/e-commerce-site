@@ -771,11 +771,7 @@ const Cart = () => {
     );
   }
 
-  // const totalcartItems = [
-  //   ...cartItems,
-  //   ...singleCartItems,
-  //   ...freebiescartItems,
-  // ];
+ 
 
   return (
     <>

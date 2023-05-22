@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CgSortAz } from "react-icons/cg"
-import { BiFilterAlt } from "react-icons/bi"
+import { CgSortAz } from "react-icons/cg";
+import { BiFilterAlt } from "react-icons/bi";
 
 import {
   singleaddCartProduct,
@@ -29,12 +29,18 @@ const BrandProduct = () => {
   const navigate = useNavigate();
   const { brand_id } = useParams();
 
-
   // filteration state
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
   const [noProduct, setNoProduct] = useState(false);
+  const [priceRanges, setPriceRanges] = useState([
+    { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
+    { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
+    { minPrice: 1000, maxPrice: 1999, label: "1000-1999", isVisible: true },
+    { minPrice: 2000, maxPrice: 4999, label: "2000-4999", isVisible: true },
+    { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
+  ]);
 
   // filteration state end
 
@@ -62,7 +68,6 @@ const BrandProduct = () => {
         return !(price >= minPrice && price <= maxPrice);
       });
       setFilteredProducts(newFilteredProducts);
-      setNoProduct(false);
     } else {
       // If the filter is not checked, add it
       setCheckedFilters({ ...checkedFilters, [key]: true });
@@ -72,19 +77,6 @@ const BrandProduct = () => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
-      // setFilteredProducts((prevFilteredProducts) => [
-      //   ...prevFilteredProducts,
-      //   ...filtered,
-      // ]);
-
-      if (filtered.length > 0) {
-        setNoProduct(false); // hide message
-      } else {
-        setNoProduct(true); // show message
-        alert("Item not found in this price range");
-        // setCheckedFilters(false)
-        setCheckedFilters({ ...checkedFilters, [key]: false });
-      }
 
       setFilteredProducts((prevFilteredProducts) => [
         ...prevFilteredProducts,
@@ -92,6 +84,68 @@ const BrandProduct = () => {
       ]);
     }
   };
+
+  useEffect(() => {
+    const updatePriceRangeVisibility = () => {
+      const updatedPriceRanges = priceRanges.map((range) => {
+        const { minPrice, maxPrice } = range;
+        const isVisible = brandproduct.some(
+          (product) =>
+            product.selling_price >= minPrice && product.selling_price <= maxPrice
+        );
+        return { ...range, isVisible };
+      });
+      setPriceRanges(updatedPriceRanges);
+    };
+
+    updatePriceRangeVisibility();
+  }, [brandproduct, priceRanges]);
+
+  // const handleFilter = (minPrice, maxPrice) => {
+  //   const key = `${minPrice}-${maxPrice}`;
+
+  //   if (checkedFilters[key]) {
+  //     // If the filter is already checked, remove it
+  //     const newFilters = { ...checkedFilters };
+  //     delete newFilters[key];
+  //     setCheckedFilters(newFilters);
+
+  //     // Update the filtered products list
+  //     const newFilteredProducts = filteredProducts.filter((product) => {
+  //       const price = product.selling_price;
+  //       return !(price >= minPrice && price <= maxPrice);
+  //     });
+  //     setFilteredProducts(newFilteredProducts);
+  //     setNoProduct(false);
+  //   } else {
+  //     // If the filter is not checked, add it
+  //     setCheckedFilters({ ...checkedFilters, [key]: true });
+
+  //     // Update the filtered products list
+  //     const filtered = brandproduct.filter((product) => {
+  //       const price = product.selling_price;
+  //       return price >= minPrice && price <= maxPrice;
+  //     });
+  //     // setFilteredProducts((prevFilteredProducts) => [
+  //     //   ...prevFilteredProducts,
+  //     //   ...filtered,
+  //     // ]);
+
+  //     if (filtered.length > 0) {
+  //       setNoProduct(false); // hide message
+  //     } else {
+  //       setNoProduct(true); // show message
+  //       alert("Item not found in this price range");
+  //       // setCheckedFilters(false)
+  //       setCheckedFilters({ ...checkedFilters, [key]: false });
+  //     }
+
+  //     setFilteredProducts((prevFilteredProducts) => [
+  //       ...prevFilteredProducts,
+  //       ...filtered,
+  //     ]);
+  //   }
+  // };
 
   // Filterration end
 
@@ -154,7 +208,6 @@ const BrandProduct = () => {
   const handleToggle3 = () => {
     setIsOpen3(!isOpen3);
   };
-
 
   const [isOpen4, setIsOpen4] = useState(false);
   const handleToggle4 = () => {
@@ -245,14 +298,11 @@ const BrandProduct = () => {
     );
   }
 
-
-
-
   return (
     <div>
       <HomeLayout>
-
         <div className="mobile">
+
           <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
             <div className="col-6" style={{ borderRight: "1px solid #464646"}}>
 
@@ -266,6 +316,57 @@ const BrandProduct = () => {
                 <hr />
                 <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
                   <ul className="filterul">
+
+          <div
+            className="d-flex fixed-bottom bg-light"
+            style={{
+              textAlign: "center",
+              fontSize: "16px",
+              height: "40px",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="col-6"
+              style={{ borderRight: "1px solid #464646", color: "#FE9E2D" }}
+            >
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasLeft"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <CgSortAz /> Sort By
+              </div>
+
+              <div
+                class="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasLeft"
+                aria-labelledby="offcanvasLeftLabel"
+                style={{ height: "80%" }}
+              >
+                <div class="offcanvas-header">
+                  <h1 id="offcanvasLeftLabel">Sort By</h1>
+                  <button
+                    type="button"
+                    class="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <hr />
+                <div
+                  class="offcanvas-body"
+                  style={{
+                    textAlign: "left",
+                    lineHeight: "2",
+                    marginTop: "20px",
+                  }}
+                >
+                  <ul>
+
                     <li>Name</li>
                     <li>Category</li>
                     <li>MRP</li>
@@ -273,6 +374,7 @@ const BrandProduct = () => {
                 </div>
               </div>
             </div>
+
 
             <div className="col-6">
 
@@ -287,6 +389,37 @@ const BrandProduct = () => {
                 <div className="offcanvas-body" style={{ textAlign: "left" }}>
 
 
+
+            <div className="col-6" style={{ color: "#FE9E2D" }}>
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <BiFilterAlt /> Filter
+              </div>
+
+              <div
+                class="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel"
+                style={{ height: "80%" }}
+              >
+                <div class="offcanvas-header">
+                  <h1 id="offcanvasRightLabel">Filter</h1>
+                  <button
+                    type="button"
+                    class="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <hr />
+                <div class="offcanvas-body" style={{ textAlign: "left" }}>
+
                   <div>
                     <h3
                       variant="primary"
@@ -295,10 +428,16 @@ const BrandProduct = () => {
                       // aria-expanded={isOpen4}
                     >
                       Category
-
-                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen4 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h3>
-
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
@@ -313,7 +452,10 @@ const BrandProduct = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label
+                                className="form-check-label"
+                                htmlFor={e.name}
+                              >
                                 {e.name}
                               </label>
                             </div>
@@ -331,10 +473,16 @@ const BrandProduct = () => {
                       // aria-expanded={isOpen5}
                     >
                       Price
-
-                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen5 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h3>
-
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
@@ -344,7 +492,35 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="sortBy">
+                         
+                         {priceRanges.map((range) => {
+                            const { minPrice, maxPrice, label, isVisible } =
+                              range;
+                            const key = `${minPrice}-${maxPrice}`;
+
+                            return isVisible ? (
+                              <div key={key} className="sortBy">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={key}
+                                >
+                                  {label}
+                                </label>
+                                <input
+                                  style={{ marginLeft: "7rem" }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  checked={!!checkedFilters[key]}
+                                  onChange={() =>
+                                    handleFilter(minPrice, maxPrice)
+                                  }
+                                  id={key}
+                                />
+                              </div>
+                            ) : null;
+                          })}
+                          {/* <div className="sortBy">
                             <label
                               className="form-check-label"
                               htmlFor="50-499"
@@ -428,22 +604,18 @@ const BrandProduct = () => {
                               onChange={() => handleFilter(5000, 500000)}
                               id="5000 & Above"
                             />
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </Collapse>
                   </div>
-
-
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-
         <div className="container">
-
           <div className="row">
             <div className="col-md-3 desktop">
               <div style={{ marginTop: "2rem" }}>
@@ -727,7 +899,34 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="sortBy">
+                           {priceRanges.map((range) => {
+                            const { minPrice, maxPrice, label, isVisible } =
+                              range;
+                            const key = `${minPrice}-${maxPrice}`;
+
+                            return isVisible ? (
+                              <div key={key} className="sortBy">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={key}
+                                >
+                                  {label}
+                                </label>
+                                <input
+                                  style={{ marginLeft: "7rem" }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  checked={!!checkedFilters[key]}
+                                  onChange={() =>
+                                    handleFilter(minPrice, maxPrice)
+                                  }
+                                  id={key}
+                                />
+                              </div>
+                            ) : null;
+                          })}
+                          {/* <div className="sortBy">
                             <label
                               className="form-check-label"
                               htmlFor="50-499"
@@ -811,7 +1010,7 @@ const BrandProduct = () => {
                               onChange={() => handleFilter(5000, 500000)}
                               id="5000 & Above"
                             />
-                          </div>
+                          </div> */}
                         </div>
                       </Collapse>
                     </div>
