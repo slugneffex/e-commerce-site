@@ -15,11 +15,11 @@ import {
 } from "../../components/features/SingleCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { fetchBrandproduct } from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
-import Loader from "../../components/home/Loader/Loader";
+// import Loader from "../../components/home/Loader/Loader";
 
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
@@ -302,6 +302,21 @@ const BrandProduct = () => {
     <div>
       <HomeLayout>
         <div className="mobile">
+
+          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
+            <div className="col-6" style={{ borderRight: "1px solid #464646"}}>
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
+
+              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+                <div className="offcanvas-header">
+                  <h1 id="offcanvasLeftLabel">Sort By</h1>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                  <ul className="filterul">
+
           <div
             className="d-flex fixed-bottom bg-light"
             style={{
@@ -351,6 +366,7 @@ const BrandProduct = () => {
                   }}
                 >
                   <ul>
+
                     <li>Name</li>
                     <li>Category</li>
                     <li>MRP</li>
@@ -358,6 +374,21 @@ const BrandProduct = () => {
                 </div>
               </div>
             </div>
+
+
+            <div className="col-6">
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
+
+              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+                <div className="offcanvas-header">
+                  <h1 id="offcanvasRightLabel">Filter</h1>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div className="offcanvas-body" style={{ textAlign: "left" }}>
+
+
 
             <div className="col-6" style={{ color: "#FE9E2D" }}>
               <div
@@ -388,12 +419,13 @@ const BrandProduct = () => {
                 </div>
                 <hr />
                 <div class="offcanvas-body" style={{ textAlign: "left" }}>
+
                   <div>
                     <h3
                       variant="primary"
                       onClick={handleToggle4}
                       aria-controls="collapseExample"
-                      aria-expanded={isOpen4}
+                      // aria-expanded={isOpen4}
                     >
                       Category
                       {isOpen4 ? (
@@ -409,7 +441,7 @@ const BrandProduct = () => {
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
-                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                        <div style={{ margin: "10px 5px 5px 5px" }}>
                           {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
@@ -438,7 +470,7 @@ const BrandProduct = () => {
                       variant="primary"
                       onClick={handleToggle5}
                       aria-controls="collapseExample"
-                      aria-expanded={isOpen5}
+                      // aria-expanded={isOpen5}
                     >
                       Price
                       {isOpen5 ? (
@@ -454,7 +486,7 @@ const BrandProduct = () => {
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
-                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                        <div style={{ margin: "10px 5px 5px 5px" }}>
                           <input
                             type="hidden"
                             name="_token"
@@ -616,7 +648,7 @@ const BrandProduct = () => {
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id="flexCheckDefault"
+                      id="Discount"
                     />
                   </div>
 
@@ -699,21 +731,30 @@ const BrandProduct = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen1}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Categories
-                        </h4>
+                        </h6>
 
-                        <RiArrowDropDownLine
+                        {isOpen1 ? <RiArrowDropUpLine 
                           className="col-3 "
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
-                        />
+                        /> 
+                         :
+                          <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "30px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />}
                       </div>
 
                       <Collapse in={isOpen1}>
@@ -751,21 +792,30 @@ const BrandProduct = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen2}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Brand
-                        </h4>
+                        </h6>
 
-                        <RiArrowDropDownLine
-                          className="col-3 text-end"
+                        {isOpen2 ? <RiArrowDropUpLine 
+                          className="col-3 "
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
-                        />
+                        /> 
+                         :
+                          <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "30px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />}
                       </div>
 
                       <Collapse in={isOpen2}>
@@ -816,21 +866,30 @@ const BrandProduct = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen3}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Price
-                        </h4>
+                        </h6>
 
-                        <RiArrowDropDownLine
-                          className="col-3"
+                        {isOpen3 ? <RiArrowDropUpLine 
+                          className="col-3 "
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
-                        />
+                        /> 
+                         :
+                          <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "30px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />}
                       </div>
 
                       <Collapse in={isOpen3}>
@@ -968,12 +1027,12 @@ const BrandProduct = () => {
             </div>
 
             {/* end mobile filter */}
-            {loading ? (
-              <div className="col-md-9" style={{ margin: "auto" }}>
-                <Loader />
-              </div>
-            ) : (
+
               <div className="col-md-9">
+                
+              {loading ? (<div id="cover-spin"></div>) : <div style={{display: "none" }}></div>}
+              {/* <div id="cover-spin"></div> */}
+              <div>
                 <div className="row">
                   <nav>
                     <ol className="breadcrumb">
@@ -1105,7 +1164,8 @@ const BrandProduct = () => {
                   )}
                 </div>
               </div>
-            )}
+              </div>
+              
           </div>
         </div>
       </HomeLayout>
