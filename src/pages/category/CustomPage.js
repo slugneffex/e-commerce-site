@@ -24,6 +24,10 @@ import {
 } from "../../components/features/SingleCartSlice";
 import { fetchPageproduct } from "../../components/features/actions/pageproductActions";
 import Loader from "../../components/home/Loader/Loader";
+// import { fetchPagecategory } from "../../components/features/actions/pagecategoryAction";
+// import { fetchPagebrand } from "../../components/features/actions/pagebrandActions";
+import { fetchCategories } from "../../components/features/actions/categoriesActions";
+import { fetchBrand } from "../../components/features/actions/brandActions";
 
 const CustomPage = () => {
   const dispatch = useDispatch();
@@ -35,7 +39,7 @@ const CustomPage = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const [error, setError] = useState(null);
+ 
   // const [brandId, setBrandId] = useState([]);
   // const [categoriesId, setCategoriesId] = useState([]);
 
@@ -208,36 +212,12 @@ const CustomPage = () => {
   };
 
   // Categories
-  const [categoris, setCategories] = useState([]);
+ 
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/categories`,
-          options
-        );
-        setCategories(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
-
+    dispatch(fetchCategories());
+  }, [dispatch]);
   // ADd To wishlist combo
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
@@ -287,42 +267,23 @@ const CustomPage = () => {
   }
 
   // total brands
-  const [brand, setBrand] = useState([]);
+  const { brand } = useSelector((state) => state.brand);
 
   useEffect(() => {
-    async function fetchData() {
-      setError(null);
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          mode: "cors",
-          credentials: "include",
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/brands`,
-          options
-        );
-        setBrand(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        } else {
-          setError(error.message);
-        }
-      }
-    }
-    fetchData();
-  }, []);
+    dispatch(fetchBrand());
+  }, [dispatch]);
+ 
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
   //  Brand by id
+  // const { brandProduct,loading   } = useSelector(
+  //   (state) => state.pagebrand
+  // );
+
+  // useEffect(() => {
+  //   dispatch(fetchPagebrand(brandId));
+  // }, [dispatch, brandId]);
 
   const [brandProduct, setBrandProduct] = useState([]);
 
@@ -353,7 +314,13 @@ const CustomPage = () => {
   }, [brandId]);
 
   // Categories id
+  // const { categoriesCombo, categoriesProduct   } = useSelector(
+  //   (state) => state.pagecategory
+  // );
 
+  // useEffect(() => {
+  //   dispatch(fetchPagecategory(categoriesId));
+  // }, [dispatch, categoriesId]);
   const [categoriesCombo, setCategoriesCombo] = useState([]);
   const [categoriesProduct, setCategoriesProduct] = useState([]);
   useEffect(() => {
@@ -422,9 +389,6 @@ const CustomPage = () => {
     navigate(`/brand/${brandId}`);
   }
 
-  if (error) {
-    console.log(error);
-  }
 
   let section = null;
   if (combo.length >= 1) {
@@ -882,7 +846,7 @@ const CustomPage = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          {categoris.map((e) => (
+                          {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
