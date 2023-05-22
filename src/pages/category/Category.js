@@ -3,7 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Dropdown from "react-bootstrap/Dropdown";
+import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 import { CgSortAz } from "react-icons/cg"
 import { BiFilterAlt } from "react-icons/bi"
@@ -52,9 +52,7 @@ const Category = () => {
   const [checkedFilters, setCheckedFilters] = useState({});
 
   // const [noProduct, setNoProduct] = useState(false);
-  const { combo, product, banner, loading } = useSelector(
-    (state) => state.data
-  );
+ 
 
   const [noProduct, setNoProduct] = useState(false);
   const [sortOrder, setSortOrder] = useState('asc');

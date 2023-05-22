@@ -301,10 +301,9 @@ const BrandProduct = () => {
   return (
     <div>
       <HomeLayout>
-        <div className="mobile">
-
+      <div className="mobile">
           <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
-            <div className="col-6" style={{ borderRight: "1px solid #464646"}}>
+            <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
 
               <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
 
@@ -315,58 +314,7 @@ const BrandProduct = () => {
                 </div>
                 <hr />
                 <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
-                  <ul className="filterul">
-
-          <div
-            className="d-flex fixed-bottom bg-light"
-            style={{
-              textAlign: "center",
-              fontSize: "16px",
-              height: "40px",
-              alignItems: "center",
-            }}
-          >
-            <div
-              className="col-6"
-              style={{ borderRight: "1px solid #464646", color: "#FE9E2D" }}
-            >
-              <div
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasLeft"
-                aria-controls="offcanvasRight"
-              >
-                {" "}
-                <CgSortAz /> Sort By
-              </div>
-
-              <div
-                class="offcanvas offcanvas-bottom"
-                tabindex="-1"
-                id="offcanvasLeft"
-                aria-labelledby="offcanvasLeftLabel"
-                style={{ height: "80%" }}
-              >
-                <div class="offcanvas-header">
-                  <h1 id="offcanvasLeftLabel">Sort By</h1>
-                  <button
-                    type="button"
-                    class="btn-close text-reset"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <hr />
-                <div
-                  class="offcanvas-body"
-                  style={{
-                    textAlign: "left",
-                    lineHeight: "2",
-                    marginTop: "20px",
-                  }}
-                >
                   <ul>
-
                     <li>Name</li>
                     <li>Category</li>
                     <li>MRP</li>
@@ -374,7 +322,6 @@ const BrandProduct = () => {
                 </div>
               </div>
             </div>
-
 
             <div className="col-6">
 
@@ -389,55 +336,18 @@ const BrandProduct = () => {
                 <div className="offcanvas-body" style={{ textAlign: "left" }}>
 
 
-
-            <div className="col-6" style={{ color: "#FE9E2D" }}>
-              <div
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasRight"
-                aria-controls="offcanvasRight"
-              >
-                {" "}
-                <BiFilterAlt /> Filter
-              </div>
-
-              <div
-                class="offcanvas offcanvas-bottom"
-                tabindex="-1"
-                id="offcanvasRight"
-                aria-labelledby="offcanvasRightLabel"
-                style={{ height: "80%" }}
-              >
-                <div class="offcanvas-header">
-                  <h1 id="offcanvasRightLabel">Filter</h1>
-                  <button
-                    type="button"
-                    class="btn-close text-reset"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <hr />
-                <div class="offcanvas-body" style={{ textAlign: "left" }}>
-
                   <div>
-                    <h3
+                    <h5
                       variant="primary"
                       onClick={handleToggle4}
                       aria-controls="collapseExample"
                       // aria-expanded={isOpen4}
                     >
                       Category
-                      {isOpen4 ? (
-                        <TfiAngleUp
-                          style={{ position: "absolute", right: "1rem" }}
-                        />
-                      ) : (
-                        <TfiAngleDown
-                          style={{ position: "absolute", right: "1rem" }}
-                        />
-                      )}
-                    </h3>
+
+                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h5>
+
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
@@ -452,10 +362,7 @@ const BrandProduct = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label
-                                className="form-check-label"
-                                htmlFor={e.name}
-                              >
+                              <label className="form-check-label" htmlFor={e.name}>
                                 {e.name}
                               </label>
                             </div>
@@ -466,23 +373,17 @@ const BrandProduct = () => {
                   </div>
 
                   <div>
-                    <h3
+                    <h5
                       variant="primary"
                       onClick={handleToggle5}
                       aria-controls="collapseExample"
                       // aria-expanded={isOpen5}
                     >
                       Price
-                      {isOpen5 ? (
-                        <TfiAngleUp
-                          style={{ position: "absolute", right: "1rem" }}
-                        />
-                      ) : (
-                        <TfiAngleDown
-                          style={{ position: "absolute", right: "1rem" }}
-                        />
-                      )}
-                    </h3>
+
+                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h5>
+
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
@@ -492,35 +393,7 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                         
-                         {priceRanges.map((range) => {
-                            const { minPrice, maxPrice, label, isVisible } =
-                              range;
-                            const key = `${minPrice}-${maxPrice}`;
-
-                            return isVisible ? (
-                              <div key={key} className="sortBy">
-                                <label
-                                  className="form-check-label"
-                                  htmlFor={key}
-                                >
-                                  {label}
-                                </label>
-                                <input
-                                  style={{ marginLeft: "7rem" }}
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value=""
-                                  checked={!!checkedFilters[key]}
-                                  onChange={() =>
-                                    handleFilter(minPrice, maxPrice)
-                                  }
-                                  id={key}
-                                />
-                              </div>
-                            ) : null;
-                          })}
-                          {/* <div className="sortBy">
+                          <div className="sortBy">
                             <label
                               className="form-check-label"
                               htmlFor="50-499"
@@ -604,11 +477,13 @@ const BrandProduct = () => {
                               onChange={() => handleFilter(5000, 500000)}
                               id="5000 & Above"
                             />
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                     </Collapse>
                   </div>
+
+
                 </div>
               </div>
             </div>
