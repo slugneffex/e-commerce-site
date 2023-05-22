@@ -19,7 +19,7 @@ import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { fetchBrandproduct } from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
-import Loader from "../../components/home/Loader/Loader";
+// import Loader from "../../components/home/Loader/Loader";
 
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
@@ -597,12 +597,13 @@ const BrandProduct = () => {
                               <input
                                 type="radio"
                                 name="category_id"
-                                id={e.name}
+                                id="category_id103"
+                                defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label className="form-check-label" htmlFor={103}>
                                 {e.name}
                               </label>
                             </div>
@@ -671,11 +672,12 @@ const BrandProduct = () => {
                               <input
                                 type="radio"
                                 name="category_id"
-                                id={e.name}
+                                id="category_id103"
+                                defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label className="form-check-label" htmlFor={103}>
                                 {e.name}
                               </label>
                             </div>
@@ -826,12 +828,12 @@ const BrandProduct = () => {
             </div>
 
             {/* end mobile filter */}
-            {loading ? (
-              <div className="col-md-9" style={{ margin: "auto" }}>
-                <Loader />
-              </div>
-            ) : (
+
               <div className="col-md-9">
+                
+              {loading ? (<div id="cover-spin"></div>) : <div style={{display: "none" }}></div>}
+              {/* <div id="cover-spin"></div> */}
+              <div>
                 <div className="row">
                   <nav>
                     <ol className="breadcrumb">
@@ -963,7 +965,8 @@ const BrandProduct = () => {
                   )}
                 </div>
               </div>
-            )}
+              </div>
+              
           </div>
         </div>
       </HomeLayout>

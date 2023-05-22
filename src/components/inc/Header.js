@@ -13,6 +13,7 @@ import { fetchPage } from "../features/actions/pageActions";
 const Header = () => {
   const dispatch = useDispatch();
 
+
   // set a cookie with SameSite=None and Secure attributes
   Cookies.set("myCookie", "cookieValue", { sameSite: "none", secure: true });
 
