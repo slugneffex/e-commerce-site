@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import "./incAll.css";
 import { Collapse } from "react-bootstrap";
@@ -245,7 +245,7 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle1}
                 aria-controls="collapseExample"
-                aria-expanded={isOpen1}
+                // aria-expanded={isOpen1}
               >
                 Quick Links
 
@@ -277,7 +277,7 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle2}
                 aria-controls="collapseExample"
-                aria-expanded={isOpen2}
+                // aria-expanded={isOpen2}
               >
                 Categories
 
@@ -326,7 +326,7 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle3}
                 aria-controls="collapseExample"
-                aria-expanded={isOpen3}
+                // aria-expanded={isOpen3}
               >
                 Contacts
 
@@ -338,7 +338,7 @@ const Footer = () => {
                   <ul>
                     <li style={{ color: "#fff" }}>
                       <FiHome />
-                      <a style={{ marginLeft: "1rem" }}>
+                      <a href style={{ marginLeft: "1rem" }}>
                         Suite No 301, Third Floor, Good Earth Business Bay,
                         Sector 58, Gurugram Haryana (122011)
                       </a>
@@ -370,7 +370,7 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle4}
                 aria-controls="collapseExample"
-                aria-expanded={isOpen4}
+                // aria-expanded={isOpen4}
               >
                 Keep In Touch
 

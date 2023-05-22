@@ -4,10 +4,14 @@ import { Collapse } from "react-bootstrap";
 import HomeLayout from "../../layouts/HomeLayout";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Dropdown from "react-bootstrap/Dropdown";
+// import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./category.css";
 import axios from "axios";
+import { CgSortAz } from "react-icons/cg"
+import { BiFilterAlt } from "react-icons/bi"
+import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
+
 import {
   addCartProduct,
   getCartCount,
@@ -43,7 +47,7 @@ const CustomPage = () => {
   // const [brandId, setBrandId] = useState([]);
   // const [categoriesId, setCategoriesId] = useState([]);
 
-  const {  banner ,combo,product,brandId,categoriesId,loading} = useSelector((state) => state.pagedata);
+  const {  banner ,combo,brandId,categoriesId,loading} = useSelector((state) => state.pagedata);
 
   useEffect(() => {
     dispatch(fetchPageproduct(id));
@@ -373,6 +377,17 @@ const CustomPage = () => {
   };
   const handleToggle3 = () => {
     setIsOpen3(!isOpen3);
+  };
+
+
+  const [isOpen4, setIsOpen4] = useState(false);
+  const handleToggle4 = () => {
+    setIsOpen4(!isOpen4);
+  };
+
+  const [isOpen5, setIsOpen5] = useState(false);
+  const handleToggle5 = () => {
+    setIsOpen5(!isOpen5);
   };
 
   function handleClick(categoryId) {
@@ -706,6 +721,197 @@ const CustomPage = () => {
   return (
     <>
       <HomeLayout>
+
+      <div className="mobile">
+          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
+            <div className="col-6" style={{ borderRight: "1px solid #464646"}}>
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
+
+              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+                <div className="offcanvas-header">
+                  <h1 id="offcanvasLeftLabel">Sort By</h1>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                  <ul className="filterul">
+                    <li>Name</li>
+                    <li>Category</li>
+                    <li>MRP</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-6">
+
+              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
+
+              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+                <div className="offcanvas-header">
+                  <h1 id="offcanvasRightLabel">Filter</h1>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr />
+                <div className="offcanvas-body" style={{ textAlign: "left" }}>
+
+
+                  <div>
+                    <h5
+                      variant="primary"
+                      onClick={handleToggle4}
+                      aria-controls="collapseExample"
+                      // aria-expanded={isOpen4}
+                    >
+                      Category
+
+                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h5>
+
+
+                    <Collapse in={isOpen4}>
+                      <div id="collapseExample">
+                        <div style={{ margin: "10px 5px 5px 5px" }}>
+                          {categories.map((e) => (
+                            <div className="form-check" key={e.id}>
+                              <input
+                                type="radio"
+                                name="category_id"
+                                id={e.name}
+                                className="form-check-input"
+                                onClick={() => handleClick(e.id)}
+                              />
+
+                              <label className="form-check-label" htmlFor={e.name}>
+                                {e.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Collapse>
+                  </div>
+
+                  <div>
+                    <h5
+                      variant="primary"
+                      onClick={handleToggle5}
+                      aria-controls="collapseExample"
+                      // aria-expanded={isOpen5}
+                    >
+                      Price
+
+                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                    </h5>
+
+
+                    <Collapse in={isOpen5}>
+                      <div id="collapseExample">
+                        <div style={{ margin: "10px 5px 5px 5px" }}>
+                          <input
+                            type="hidden"
+                            name="_token"
+                            defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
+                          />{" "}
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="50-499"
+                            >
+                              50-499
+                            </label>
+                            <input
+                              style={{ marginLeft: "7rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["50-499"]}
+                              onChange={() => handleFilter(50, 499)}
+                              id="50-499"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="500-999"
+                            >
+                              500-999
+                            </label>
+                            <input
+                              style={{ marginLeft: "6.45rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["500-999"]}
+                              onChange={() => handleFilter(500, 999)}
+                              id="500-999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="1000-1999"
+                            >
+                              1000-1999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.88rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["1000-1999"]}
+                              onChange={() => handleFilter(1000, 1999)}
+                              id="1000-1999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="2000-4999"
+                            >
+                              2000-4999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.34rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["2000-4999"]}
+                              onChange={() => handleFilter(2000, 4999)}
+                              id="2000-4999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="5000 & Above"
+                            >
+                              5000 & Above
+                            </label>
+                            <input
+                              style={{ marginLeft: "3.963rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["5000-500000"]}
+                              onChange={() => handleFilter(5000, 500000)}
+                              id="5000 & Above"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Collapse>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
@@ -822,17 +1028,17 @@ const CustomPage = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen1}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Categories
-                        </h4>
+                        </h6>
 
                         <RiArrowDropDownLine
                           className="col-3 "
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
@@ -857,7 +1063,7 @@ const CustomPage = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={103}>
+                              <label className="form-check-label">
                                 {e.name} (106)
                               </label>
                             </div>
@@ -874,17 +1080,17 @@ const CustomPage = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen2}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Brand
-                        </h4>
+                        </h6>
 
                         <RiArrowDropDownLine
                           className="col-3 text-end"
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
@@ -898,13 +1104,12 @@ const CustomPage = () => {
                               <input
                                 type="radio"
                                 name="category_id"
-                                id="category_id103"
-                                defaultValue={103}
+                                id={e.name}
                                 onchange="event.preventDefault(document.getElementById('filterForm103').submit());"
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
-                              <label className="form-check-label" htmlFor={103}>
+                              <label className="form-check-label" htmlFor={e.name}>
                                 {e.name} (51)
                               </label>
                             </div>
@@ -921,17 +1126,17 @@ const CustomPage = () => {
                         aria-controls="collapseExample"
                         aria-expanded={isOpen3}
                       >
-                        <h4
+                        <h6
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
                           Price
-                        </h4>
+                        </h6>
 
                         <RiArrowDropDownLine
                           className="col-3"
                           style={{
-                            fontSize: "50px",
+                            fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}

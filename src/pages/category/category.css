@@ -150,7 +150,7 @@ input[type=checkbox]:checked {
     font-size: 14px;
   }
 
-  .offcanvas-body ul li {
-    list-style-type: circle;
+  .filterul li {
+    list-style-type: circle !important;
   }
 }

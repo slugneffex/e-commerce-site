@@ -3,7 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Dropdown from "react-bootstrap/Dropdown";
+// import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 import { CgSortAz } from "react-icons/cg"
 import { BiFilterAlt } from "react-icons/bi"
@@ -25,7 +25,7 @@ import {
 } from "../../components/features/SingleCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { fetchCategory } from "../../components/features/actions/categoryActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
@@ -43,7 +43,7 @@ const Category = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const [noProduct, setNoProduct] = useState(false);
+  // const [noProduct, setNoProduct] = useState(false);
   const { combo, product, banner, loading } = useSelector(
     (state) => state.data
   );
@@ -51,7 +51,7 @@ const Category = () => {
   console.log(combo);
 
   // filteration state end
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   // category api fetching
   useEffect(() => {
@@ -71,34 +71,34 @@ const Category = () => {
   //   // setProduct(sortedDataProduct);
   // };
 
-  const handleSortClick = () => {
-    const combinedData = [...combo, ...product];
+  // const handleSortClick = () => {
+  //   const combinedData = [...combo, ...product];
   
-    const sortedData = [...combinedData].sort((a, b) => b.selling_price - a.selling_price);
+  //   const sortedData = [...combinedData].sort((a, b) => b.selling_price - a.selling_price);
   
-    const sortedCombo = sortedData.filter(item => combo.includes(item));
-    const sortedProduct = sortedData.filter(item => product.includes(item));
+  //   const sortedCombo = sortedData.filter(item => combo.includes(item));
+  //   const sortedProduct = sortedData.filter(item => product.includes(item));
   
-    // Use sortedCombo and sortedProduct arrays for further processing or display
+  //   // Use sortedCombo and sortedProduct arrays for further processing or display
   
-    // Example of displaying the sorted data
-    console.log("Sorted Combo:", sortedCombo);
-    console.log("Sorted Product:", sortedProduct);
-  };
+  //   // Example of displaying the sorted data
+  //   console.log("Sorted Combo:", sortedCombo);
+  //   console.log("Sorted Product:", sortedProduct);
+  // };
   
 
-  const lowtoHigh = () => {
-    const sortedData = [...combo].sort(
-      (a, b) => a.selling_price - b.selling_price
-    );
-    const sortedDataProducts = [...product].sort(
-      (a, b) => a.selling_price - b.selling_price
-    );
+  // const lowtoHigh = () => {
+  //   const sortedData = [...combo].sort(
+  //     (a, b) => a.selling_price - b.selling_price
+  //   );
+  //   const sortedDataProducts = [...product].sort(
+  //     (a, b) => a.selling_price - b.selling_price
+  //   );
 
-    // setCategory(sortedData);
-    // category(sortedData)
-    // setProduct(sortedDataProducts);
-  };
+  //   // setCategory(sortedData);
+  //   // category(sortedData)
+  //   // setProduct(sortedDataProducts);
+  // };
 
   // filteration
 
@@ -275,9 +275,9 @@ const Category = () => {
       });
   }
 
-  if (error) {
-    console.log(error);
-  }
+  // if (error) {
+  //   console.log(error);
+  // }
 
   // total brands
   const { brand } = useSelector((state) => state.brand);
@@ -474,17 +474,17 @@ const Category = () => {
 
         <div className="mobile">
           <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
-            <div className="col-6" style={{ borderRight: "1px solid #464646", color: "#FE9E2D" }}>
+            <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
 
               <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
 
-              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
-                <div class="offcanvas-header">
+              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+                <div className="offcanvas-header">
                   <h1 id="offcanvasLeftLabel">Sort By</h1>
-                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <hr />
-                <div class="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
                   <ul>
                     <li>Name</li>
                     <li>Category</li>
@@ -494,35 +494,35 @@ const Category = () => {
               </div>
             </div>
 
-            <div className="col-6" style={{ color: "#FE9E2D" }}>
+            <div className="col-6">
 
               <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
 
-              <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
-                <div class="offcanvas-header">
+              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+                <div className="offcanvas-header">
                   <h1 id="offcanvasRightLabel">Filter</h1>
-                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <hr />
-                <div class="offcanvas-body" style={{ textAlign: "left" }}>
+                <div className="offcanvas-body" style={{ textAlign: "left" }}>
 
 
                   <div>
-                    <h3
+                    <h5
                       variant="primary"
                       onClick={handleToggle4}
                       aria-controls="collapseExample"
-                      aria-expanded={isOpen4}
+                      // aria-expanded={isOpen4}
                     >
                       Category
 
                       {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
-                    </h3>
+                    </h5>
 
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
-                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                        <div style={{ margin: "10px 5px 5px 5px" }}>
                           {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
@@ -544,21 +544,21 @@ const Category = () => {
                   </div>
 
                   <div>
-                    <h3
+                    <h5
                       variant="primary"
                       onClick={handleToggle5}
                       aria-controls="collapseExample"
-                      aria-expanded={isOpen5}
+                      // aria-expanded={isOpen5}
                     >
                       Price
 
                       {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
-                    </h3>
+                    </h5>
 
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
-                        <div style={{ margin: "10px 20px 20px 20px" }}>
+                        <div style={{ margin: "10px 5px 5px 5px" }}>
                           <input
                             type="hidden"
                             name="_token"
@@ -795,14 +795,23 @@ const Category = () => {
                           Categories
                         </h6>
 
-                        <RiArrowDropDownLine
+                        {isOpen1 ? <RiArrowDropUpLine 
                           className="col-3 "
                           style={{
                             fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
-                        />
+                        /> 
+                         :
+                          <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "30px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />}
                       </div>
 
                       <Collapse in={isOpen1}>
@@ -847,18 +856,27 @@ const Category = () => {
                           Brand
                         </h6>
 
-                        <RiArrowDropDownLine
-                          className="col-3 text-end"
+                        {isOpen2 ? <RiArrowDropUpLine 
+                          className="col-3 "
                           style={{
                             fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
-                        />
+                        /> 
+                         :
+                          <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "30px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />}
                       </div>
 
                       <Collapse in={isOpen2}>
-                        <div id="collapseExample"  style={{ margin: "10px 20px 20px 5px"}}>
+                        <div id="collapseExample"  style={{ margin: "10px 5px 5px 5px"}}>
                           {filterbrandsApi.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
@@ -892,14 +910,23 @@ const Category = () => {
                           Price
                         </h6>
 
-                        <RiArrowDropDownLine
-                          className="col-3"
+                        {isOpen3 ? <RiArrowDropUpLine 
+                          className="col-3 "
                           style={{
                             fontSize: "30px",
                             backgroundColor: "#FFF",
                             color: "#464646",
                           }}
-                        />
+                        /> 
+                         :
+                          <RiArrowDropDownLine
+                          className="col-3 "
+                          style={{
+                            fontSize: "30px",
+                            backgroundColor: "#FFF",
+                            color: "#464646",
+                          }}
+                        />}
                       </div>
 
                       <Collapse in={isOpen3}>
@@ -1100,30 +1127,7 @@ const Category = () => {
                     </h4>
                   </div>
                   <div className="col-6" style={{ textAlign: "end" }}>
-                  <div className="" style={{}}>
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant=""
-                        id="dropdown-basic"
-                        style={{
-                          border: "1px solid",
-                          marginLeft: "3rem",
-                          width: "120px",
-                        }}
-                      >
-                        Sort by
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item onClick={lowtoHigh}>
-                          low to High
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={handleSortClick}>
-                          High to low
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </div>
+                  
                 </div>
                 </div>
 
