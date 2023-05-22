@@ -29,6 +29,7 @@ const BrandProduct = () => {
   const navigate = useNavigate();
   const { brand_id } = useParams();
 
+
   // filteration state
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -243,6 +244,7 @@ const BrandProduct = () => {
       </>
     );
   }
+
 
 
 
@@ -644,7 +646,8 @@ const BrandProduct = () => {
                             //     value={brand.id}
                             //     className="form-check-input"
                             //     checked={selectedBrands.includes(brand.id)}
-                            //     onChange={() => handleClickBrand(brand.id)}
+                            //     onChange={handleBrandSelection}
+
                             //   />
                             // </div>
                             <div className="form-check" key={e.id}>
