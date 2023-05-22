@@ -25,6 +25,7 @@ const brandproductReducer = (state = initialState, action) => {
           loading: false,
           brandproduct: action.payload.products.data,
           brandname: action.payload.brand,
+          
         };
       case FETCH_BRANDPRODUCT_FAILURE:
         return {

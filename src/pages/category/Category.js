@@ -3,7 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Dropdown from "react-bootstrap/Dropdown";
+import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
 import {
@@ -55,18 +55,34 @@ const Category = () => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
 
-  const sortData = () => {
-    const sortedData = [...combo].sort(
-      (a, b) => b.selling_price - a.selling_price
-    );
-    const sortedDataProduct = [...product].sort(
-      (a, b) => b.selling_price - a.selling_price
-    );
-    // setCategory(sortedData);
-    // category(sortedData)
+  // const sortData = () => {
+  //   const sortedData = [...combo].sort(
+  //     (a, b) => b.selling_price - a.selling_price
+  //   );
+  //   const sortedDataProduct = [...product].sort(
+  //     (a, b) => b.selling_price - a.selling_price
+  //   );
+  //   // setCategory(sortedData);
+  //   // category(sortedData)
 
-    // setProduct(sortedDataProduct);
+  //   // setProduct(sortedDataProduct);
+  // };
+
+  const handleSortClick = () => {
+    const combinedData = [...combo, ...product];
+  
+    const sortedData = [...combinedData].sort((a, b) => b.selling_price - a.selling_price);
+  
+    const sortedCombo = sortedData.filter(item => combo.includes(item));
+    const sortedProduct = sortedData.filter(item => product.includes(item));
+  
+    // Use sortedCombo and sortedProduct arrays for further processing or display
+  
+    // Example of displaying the sorted data
+    console.log("Sorted Combo:", sortedCombo);
+    console.log("Sorted Product:", sortedProduct);
   };
+  
 
   const lowtoHigh = () => {
     const sortedData = [...combo].sort(
@@ -879,7 +895,7 @@ const Category = () => {
                       <strong>Top Trending</strong>
                     </h4>
                   </div>
-                  {/* <div className="col-6" style={{ textAlign: "end" }}>
+                  <div className="col-6" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -898,13 +914,13 @@ const Category = () => {
                         <Dropdown.Item onClick={lowtoHigh}>
                           low to High
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={sortData}>
+                        <Dropdown.Item onClick={handleSortClick}>
                           High to low
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                </div> */}
+                </div>
                 </div>
 
                 <div className="row" style={{ marginTop: "1rem" }}>
