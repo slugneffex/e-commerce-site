@@ -123,6 +123,10 @@ const BrandProducts = () => {
     return console.log(error);
   }
 
+  const handleClick = () => {
+    window.scrollTo(0,0);
+  };
+
   return (
     <>
       <section>
@@ -157,7 +161,7 @@ const BrandProducts = () => {
                         onClick={() => wishlistProductData(e.id)}
                         className="addtofav"
                       ></Link>
-                      <Link to={`/product/${e.id}`}>
+                      <Link onClick={handleClick} to={`/product/${e.id}`}>
                         <img
                           src={e.thumbnail_img?.original_url}
                           alt="img"

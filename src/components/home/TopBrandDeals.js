@@ -88,7 +88,7 @@ const TopBrandDeals = () => {
     };
   }, []);
 
-
+  
 
   return (
     <div>
@@ -104,6 +104,7 @@ const TopBrandDeals = () => {
               combodeal.map((e) => (
                 <div key={e.id}>
                   <Link>
+                  
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"

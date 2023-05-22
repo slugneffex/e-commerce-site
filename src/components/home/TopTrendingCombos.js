@@ -66,6 +66,9 @@ const TopTrendingCombos = () => {
       items: 1,
     },
   };
+  const handleClick = () => {
+    window.scrollTo(0,0);
+  };
 
   return (
     <>
@@ -82,7 +85,7 @@ const TopTrendingCombos = () => {
                 <div className="col-md-6" key={e.id}>
                   <div className="top-picks-img">
                     {e.brand_id && (
-                      <Link to={`/brand/${e.brand_id}`}>
+                      <Link onClick={handleClick} to={`/brand/${e.brand_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="100%"
@@ -91,7 +94,7 @@ const TopTrendingCombos = () => {
                       </Link>
                     )}
                     {e.product_id && (
-                      <Link to={`/product/${e.product_id}`}>
+                      <Link onClick={handleClick} to={`/product/${e.product_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="100%"
@@ -100,7 +103,7 @@ const TopTrendingCombos = () => {
                       </Link>
                     )}
                     {e.combo_id && (
-                      <Link to={`/combo/${e.combo_id}`}>
+                      <Link onClick={handleClick} to={`/combo/${e.combo_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="100%"
@@ -109,7 +112,7 @@ const TopTrendingCombos = () => {
                       </Link>
                     )}
                     {e.page_id && (
-                      <Link to={`/page/${e.page_id}`}>
+                      <Link onClick={handleClick} to={`/page/${e.page_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="100%"
@@ -118,7 +121,7 @@ const TopTrendingCombos = () => {
                       </Link>
                     )}
                     {e.category_id && (
-                      <Link to={`/category/${e.category_id}`}>
+                      <Link onClick={handleClick} to={`/category/${e.category_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="100%"
@@ -163,7 +166,7 @@ const TopTrendingCombos = () => {
               <div key={e.id} style={{ width: "100%" }}>
                 <div>
                   {e.brand_id && (
-                    <Link to={`/brand/${e.brand_id}`}>
+                    <Link onClick={handleClick} to={`/brand/${e.brand_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
@@ -172,7 +175,7 @@ const TopTrendingCombos = () => {
                     </Link>
                   )}
                   {e.product_id && (
-                    <Link to={`/product/${e.product_id}`}>
+                    <Link onClick={handleClick} to={`/product/${e.product_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
@@ -181,7 +184,7 @@ const TopTrendingCombos = () => {
                     </Link>
                   )}
                   {e.combo_id && (
-                    <Link to={`/combo/${e.combo_id}`}>
+                    <Link onClick={handleClick} to={`/combo/${e.combo_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
@@ -190,7 +193,7 @@ const TopTrendingCombos = () => {
                     </Link>
                   )}
                   {e.page_id && (
-                    <Link to={`/page/${e.page_id}`}>
+                    <Link onClick={handleClick} to={`/page/${e.page_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
@@ -199,7 +202,7 @@ const TopTrendingCombos = () => {
                     </Link>
                   )}
                   {e.category_id && (
-                    <Link to={`/category/${e.category_id}`}>
+                    <Link onClick={handleClick} to={`/category/${e.category_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
