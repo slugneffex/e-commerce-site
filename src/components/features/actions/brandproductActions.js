@@ -5,6 +5,7 @@ export const FETCH_BRANDPRODUCT_SUCCESS = "FETCH_BRANDPRODUCT_SUCCESS";
 export const FETCH_BRANDPRODUCT_FAILURE = "FETCH_BRANDPRODUCT_FAILURE";
 export const SORT_BRANDPRODUCT = "SORT_BRANDPRODUCT";
 export const FILTER_BRANDPRODUCT = "FILTER_BRANDPRODUCT";
+export const UPDATE_BRANDPRODUCT = "UPDATE_BRANDPRODUCT";
 
 export const fetchBrandproductRequest = () => ({
   type: FETCH_BRANDPRODUCT_REQUEST,
@@ -28,6 +29,11 @@ export const sortBrandproduct = (sortOrder) => ({
 export const filterBrandproduct = (minPrice, maxPrice) => ({
   type: FILTER_BRANDPRODUCT,
   payload: { minPrice, maxPrice },
+});
+
+export const updateBrandproduct = (brandproduct) => ({
+  type: UPDATE_BRANDPRODUCT,
+  payload: brandproduct,
 });
 
 export const fetchBrandproduct = (brand_id) => {

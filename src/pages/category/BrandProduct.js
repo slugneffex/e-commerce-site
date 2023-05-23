@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { fetchBrandproduct,sortBrandproduct,filterBrandproduct } from "../../components/features/actions/brandproductActions";
+import { fetchBrandproduct,sortBrandproduct} from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 // import Loader from "../../components/home/Loader/Loader";
@@ -31,10 +31,11 @@ const BrandProduct = () => {
   const { brand_id } = useParams();
 
   // filteration state
-
+  // const [noProduct, setNoProduct] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const [noProduct, setNoProduct] = useState(false);
+
+
   const [priceRanges, setPriceRanges] = useState([
     { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
     { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
@@ -57,51 +58,63 @@ const BrandProduct = () => {
   };
 
   
+  
+
+
+  
+
+
+
   useEffect(() => {
     dispatch(fetchBrandproduct(brand_id));
   }, [dispatch, brand_id,]);
 
 
-  const handleFilter = (minPrice, maxPrice) => {
-    dispatch(filterBrandproduct(minPrice, maxPrice));
-  };
+  
+  
+
+  
+  
+  
+  
+  
 
   
   
 
   // filteration
 
-  // const handleFilter = (minPrice, maxPrice) => {
-  //   const key = `${minPrice}-${maxPrice}`;
+  const handleFilter = (minPrice, maxPrice) => {
+    const key = `${minPrice}-${maxPrice}`;
 
-  //   if (checkedFilters[key]) {
-  //     // If the filter is already checked, remove it
-  //     const newFilters = { ...checkedFilters };
-  //     delete newFilters[key];
-  //     setCheckedFilters(newFilters);
+    if (checkedFilters[key]) {
+      // If the filter is already checked, remove it
+      const newFilters = { ...checkedFilters };
+      delete newFilters[key];
+      setCheckedFilters(newFilters);
 
-  //     // Update the filtered products list
-  //     const newFilteredProducts = filteredProducts.filter((product) => {
-  //       const price = product.selling_price;
-  //       return !(price >= minPrice && price <= maxPrice);
-  //     });
-  //     setFilteredProducts(newFilteredProducts);
-  //   } else {
-  //     // If the filter is not checked, add it
-  //     setCheckedFilters({ ...checkedFilters, [key]: true });
+      // Update the filtered products list
+      const newFilteredProducts = filteredProducts.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilteredProducts(newFilteredProducts);
+    } else {
+      // If the filter is not checked, add it
+      setCheckedFilters({ ...checkedFilters, [key]: true });
 
-  //     // Update the filtered products list
-  //     const filtered = brandproduct.filter((product) => {
-  //       const price = product.selling_price;
-  //       return price >= minPrice && price <= maxPrice;
-  //     });
+      // Update the filtered products list
+      const filtered = brandproduct.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
 
-  //     setFilteredProducts((prevFilteredProducts) => [
-  //       ...prevFilteredProducts,
-  //       ...filtered,
-  //     ]);
-  //   }
-  // };
+      setFilteredProducts((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered,
+      ]);
+    }
+  };
 
   useEffect(() => {
     const updatePriceRangeVisibility = () => {
@@ -128,51 +141,7 @@ const BrandProduct = () => {
 
 
 
-  // const handleFilter = (minPrice, maxPrice) => {
-  //   const key = `${minPrice}-${maxPrice}`;
 
-  //   if (checkedFilters[key]) {
-  //     // If the filter is already checked, remove it
-  //     const newFilters = { ...checkedFilters };
-  //     delete newFilters[key];
-  //     setCheckedFilters(newFilters);
-
-  //     // Update the filtered products list
-  //     const newFilteredProducts = filteredProducts.filter((product) => {
-  //       const price = product.selling_price;
-  //       return !(price >= minPrice && price <= maxPrice);
-  //     });
-  //     setFilteredProducts(newFilteredProducts);
-  //     setNoProduct(false);
-  //   } else {
-  //     // If the filter is not checked, add it
-  //     setCheckedFilters({ ...checkedFilters, [key]: true });
-
-  //     // Update the filtered products list
-  //     const filtered = brandproduct.filter((product) => {
-  //       const price = product.selling_price;
-  //       return price >= minPrice && price <= maxPrice;
-  //     });
-  //     // setFilteredProducts((prevFilteredProducts) => [
-  //     //   ...prevFilteredProducts,
-  //     //   ...filtered,
-  //     // ]);
-
-  //     if (filtered.length > 0) {
-  //       setNoProduct(false); // hide message
-  //     } else {
-  //       setNoProduct(true); // show message
-  //       alert("Item not found in this price range");
-  //       // setCheckedFilters(false)
-  //       setCheckedFilters({ ...checkedFilters, [key]: false });
-  //     }
-
-  //     setFilteredProducts((prevFilteredProducts) => [
-  //       ...prevFilteredProducts,
-  //       ...filtered,
-  //     ]);
-  //   }
-  // };
 
   // Filterration end
 
@@ -424,7 +393,34 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="sortBy">
+                          {priceRanges.map((range) => {
+                            const { minPrice, maxPrice, label, isVisible } =
+                              range;
+                            const key = `${minPrice}-${maxPrice}`;
+
+                            return isVisible ? (
+                              <div key={key} className="sortBy">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={key}
+                                >
+                                  {label}
+                                </label>
+                                <input
+                                  style={{ marginLeft: "7rem" }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  checked={!!checkedFilters[key]}
+                                  onChange={() =>
+                                    handleFilter(minPrice, maxPrice)
+                                  }
+                                  id={key}
+                                />
+                              </div>
+                            ) : null;
+                          })}
+                          {/* <div className="sortBy">
                             <label
                               className="form-check-label"
                               htmlFor="50-499"
@@ -508,7 +504,7 @@ const BrandProduct = () => {
                               onChange={() => handleFilter(5000, 500000)}
                               id="5000 & Above"
                             />
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </Collapse>
@@ -805,6 +801,7 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
+              
                            {priceRanges.map((range) => {
                             const { minPrice, maxPrice, label, isVisible } =
                               range;
@@ -1069,7 +1066,7 @@ const BrandProduct = () => {
                     ))
                   ) : (
                     <>{singlebrandProduct}</>
-                  )}
+                  )}  
                 </div>
               </div>
               </div>
