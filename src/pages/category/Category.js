@@ -229,6 +229,8 @@ const Category = () => {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+ 
+  
 
   // add to cart for combo
 
@@ -368,11 +370,17 @@ const Category = () => {
     setIsOpen5(!isOpen5);
   };
 
+  //for scroll
+  const handleScroll = () => {
+    window.scrollTo(0,0);
+  };
+
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
+    handleScroll()
   }
 
   function handleClickbrand(brandId) {
@@ -380,7 +388,10 @@ const Category = () => {
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
+    handleScroll()
   }
+
+  
 
   // if there is no combo hide the section of combos
 
@@ -897,7 +908,7 @@ const Category = () => {
                     </div>
 
                     <div className="accordion-item mb-2">
-                      <div
+                      <div  
                         className="row align-items-center"
                         variant="primary"
                         onClick={handleToggle2}
