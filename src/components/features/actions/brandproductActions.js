@@ -3,6 +3,7 @@ import axios from "axios";
 export const FETCH_BRANDPRODUCT_REQUEST = "FETCH_BRANDPRODUCT_REQUEST";
 export const FETCH_BRANDPRODUCT_SUCCESS = "FETCH_BRANDPRODUCT_SUCCESS";
 export const FETCH_BRANDPRODUCT_FAILURE = "FETCH_BRANDPRODUCT_FAILURE";
+export const SORT_BRANDPRODUCT = "SORT_BRANDPRODUCT";
 
 export const fetchBrandproductRequest = () => ({
   type: FETCH_BRANDPRODUCT_REQUEST,
@@ -16,6 +17,11 @@ export const fetchBrandproductSuccess = (branddata) => ({
 export const fetchBrandproductFailure = (error) => ({
   type: FETCH_BRANDPRODUCT_FAILURE,
   payload: error,
+});
+
+export const sortBrandproduct = (sortOrder) => ({
+  type: SORT_BRANDPRODUCT,
+  payload: sortOrder,
 });
 
 export const fetchBrandproduct = (brand_id) => {
