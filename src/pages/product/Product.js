@@ -15,13 +15,23 @@ import {
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
 import { useDispatch } from "react-redux";
+// import { fetchCombodetails } from "../../components/features/actions/combodetailsActions";
 
 const Product = () => {
   // Combos Product
   const { id } = useParams();
+  const dispatch = useDispatch();
   const [combos, setCombos] = useState([]);
   const [comboproduct, setComboproduct] = useState([]);
   const [error, setError] = useState(null);
+
+  // const {combos, comboproduct,  loading } = useSelector(
+  //   (state) => state.combodetails
+  // );
+  // console.log(combos)
+  // useEffect(() => {
+  //   dispatch(fetchCombodetails(id));
+  // }, [dispatch, id]);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,7 +44,7 @@ const Product = () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/combo/${id}`,
-          options
+          options 
         );
         setCombos(response.data.combo);
         setComboproduct(response.data.combo.gallery);
@@ -54,7 +64,7 @@ const Product = () => {
 
   // add to cart for combo
 
-  const dispatch = useDispatch();
+
   let productObj = {
     id: "",
     title: "",
@@ -80,9 +90,7 @@ const Product = () => {
     dispatch(getTotalDiscount());
   };
 
-  if (error) {
-    console.log(error)
-  }
+ 
 
   return (
     <div className="product_div">
@@ -105,6 +113,8 @@ const Product = () => {
                     style={{ border: "1px solid #464646" }}
                   >
                     <img src={combos.meta_img?.url} alt={combos.name} width='100%' />
+                  
+
                   </div>
 
                   {comboproduct.map((e) => (

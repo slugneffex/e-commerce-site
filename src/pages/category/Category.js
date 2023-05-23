@@ -5,8 +5,8 @@ import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
-import { CgSortAz } from "react-icons/cg"
-import { BiFilterAlt } from "react-icons/bi"
+import { CgSortAz } from "react-icons/cg";
+import { BiFilterAlt } from "react-icons/bi";
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
 import {
@@ -30,7 +30,6 @@ import { fetchCategory } from "../../components/features/actions/categoryActions
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 
-
 const Category = () => {
   const dispatch = useDispatch();
   // Categories products combo & single Products
@@ -52,18 +51,11 @@ const Category = () => {
   const [checkedFilters, setCheckedFilters] = useState({});
 
   // const [noProduct, setNoProduct] = useState(false);
- 
 
   const [noProduct, setNoProduct] = useState(false);
-  const [sortOrder, setSortOrder] = useState('asc');
  
- 
-
-
-
 
   // filteration state end
-
 
   // category api fetching
   const { combo, product, banner, loading } = useSelector(
@@ -73,35 +65,9 @@ const Category = () => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
 
+ 
 
-  
-  const sortHighToLow = () => {
-    const sortedCombo = [...combo].sort((a, b) => b - a);
-    const sortedProduct = [...product].sort((a, b) => b - a);
-    return { sortedCombo, sortedProduct };
-  };
-
-  const sortLowToHigh = () => {
-    const sortedCombo = [...combo].sort((a, b) => a - b);
-    const sortedProduct = [...product].sort((a, b) => a - b);
-    return { sortedCombo, sortedProduct };
-  };
-
-  const handleHighToLowClick = () => {
-    const { sortedCombo, sortedProduct } = sortHighToLow();
-    // Use sortedCombo and sortedProduct as needed
-    // ...
-    setSortOrder('desc');
-  };
-
-  const handleLowToHighClick = () => {
-    const { sortedCombo, sortedProduct } = sortLowToHigh();
-    // Use sortedCombo and sortedProduct as needed
-    // ...
-    setSortOrder('asc');
-  };
-
-  
+ 
 
   // const sortData = () => {
   //   const sortedData = [...combo].sort(
@@ -116,25 +82,20 @@ const Category = () => {
   //   // setProduct(sortedDataProduct);
   // };
 
-
   // const handleSortClick = () => {
   //   const combinedData = [...combo, ...product];
-  
+
   //   const sortedData = [...combinedData].sort((a, b) => b.selling_price - a.selling_price);
-  
+
   //   const sortedCombo = sortedData.filter(item => combo.includes(item));
   //   const sortedProduct = sortedData.filter(item => product.includes(item));
-  
+
   //   // Use sortedCombo and sortedProduct arrays for further processing or display
-  
+
   //   // Example of displaying the sorted data
   //   console.log("Sorted Combo:", sortedCombo);
   //   console.log("Sorted Product:", sortedProduct);
   // };
-
- 
-
-  
 
   // const lowtoHigh = () => {
   //   const sortedData = [...combo].sort(
@@ -151,76 +112,76 @@ const Category = () => {
 
   // filteration
 
-    const handleFilter = (minPrice, maxPrice) => {
-      const key = `${minPrice}-${maxPrice}`;
+  const handleFilter = (minPrice, maxPrice) => {
+    const key = `${minPrice}-${maxPrice}`;
 
-      if (checkedFilters[key]) {
-        // If the filter is already checked, remove it
-        const newFilters = { ...checkedFilters };
-        delete newFilters[key];
-        setCheckedFilters(newFilters);
+    if (checkedFilters[key]) {
+      // If the filter is already checked, remove it
+      const newFilters = { ...checkedFilters };
+      delete newFilters[key];
+      setCheckedFilters(newFilters);
 
-        // Update the filtered products lists
-        const newFilteredProducts1 = filterCombo.filter((product) => {
-          const price = product.selling_price;
-          return !(price >= minPrice && price <= maxPrice);
-        });
-        setFilterCombo(newFilteredProducts1);
+      // Update the filtered products lists
+      const newFilteredProducts1 = filterCombo.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilterCombo(newFilteredProducts1);
 
-        const newFilteredProducts2 = filteredProducts.filter((product) => {
-          const price = product.selling_price;
-          return !(price >= minPrice && price <= maxPrice);
-        });
-        setFilteredProducts(newFilteredProducts2);
-      } else {
-        // If the filter is not checked, add it
-        setCheckedFilters({ ...checkedFilters, [key]: true });
+      const newFilteredProducts2 = filteredProducts.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilteredProducts(newFilteredProducts2);
+    } else {
+      // If the filter is not checked, add it
+      setCheckedFilters({ ...checkedFilters, [key]: true });
 
-        // Update the filtered products lists
-        const filtered1 = combo.filter((product) => {
-          const price = product.selling_price;
-          return price >= minPrice && price <= maxPrice;
-        });
-       
-        setFilterCombo((prevFilteredProducts) => [
-          ...prevFilteredProducts,
-          ...filtered1,
-        ]);
+      // Update the filtered products lists
+      const filtered1 = combo.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
 
-        const filtered2 = product.filter((product) => {
-          const price = product.selling_price;
-          return price >= minPrice && price <= maxPrice;
-        });
-       
-        setFilteredProducts((prevFilteredProducts) => [
-          ...prevFilteredProducts,
-          ...filtered2,
-        ]);
+      setFilterCombo((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered1,
+      ]);
 
-      
-      }
+      const filtered2 = product.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+
+      setFilteredProducts((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered2,
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    const updatePriceRangeVisibility = () => {
+      const updatedPriceRanges = priceRanges.map((range) => {
+        const { minPrice, maxPrice } = range;
+        const hasComboProductsInRange = combo.some(
+          (product) =>
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
+        );
+        const hasProductInRange = product.some(
+          (product) =>
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
+        );
+        const isVisible = hasComboProductsInRange || hasProductInRange;
+        return { ...range, isVisible };
+      });
+      setPriceRanges(updatedPriceRanges);
     };
 
-    useEffect(() => {
-      const updatePriceRangeVisibility = () => {
-        const updatedPriceRanges = priceRanges.map((range) => {
-          const { minPrice, maxPrice } = range;
-          const hasComboProductsInRange = combo.some(
-            (product) =>
-              product.selling_price >= minPrice && product.selling_price <= maxPrice
-          );
-          const hasProductInRange = product.some(
-            (product) =>
-              product.selling_price >= minPrice && product.selling_price <= maxPrice
-          );
-          const isVisible = hasComboProductsInRange || hasProductInRange;
-          return { ...range, isVisible };
-        });
-        setPriceRanges(updatedPriceRanges);
-      };
-    
-      updatePriceRangeVisibility();
-    }, [combo, product,priceRanges]);
+    updatePriceRangeVisibility();
+  }, [combo, product, priceRanges]);
 
   // Categories api
 
@@ -229,8 +190,6 @@ const Category = () => {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
- 
-  
 
   // add to cart for combo
 
@@ -335,7 +294,6 @@ const Category = () => {
       });
   }
 
-
   // total brands
   const { brand } = useSelector((state) => state.brand);
 
@@ -372,7 +330,7 @@ const Category = () => {
 
   //for scroll
   const handleScroll = () => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   };
 
   function handleClick(categoryId) {
@@ -380,7 +338,7 @@ const Category = () => {
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
-    handleScroll()
+    handleScroll();
   }
 
   function handleClickbrand(brandId) {
@@ -388,10 +346,8 @@ const Category = () => {
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-    handleScroll()
+    handleScroll();
   }
-
-  
 
   // if there is no combo hide the section of combos
 
@@ -409,127 +365,127 @@ const Category = () => {
         <hr />
         {filterCombo.length > 0
           ? filterCombo.map((e) => (
-            <div className="col-md-4 " key={e.id}>
-              <div className="newComboCart">
-                <div
-                  className="cart-img-sec"
-                  style={{ position: "relative" }}
-                >
+              <div className="col-md-4 " key={e.id}>
+                <div className="newComboCart">
                   <div
-                    onClick={() => wishlistData(e.id)}
-                    className="addtofavCategory"
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
                   >
-                    <i
-                      className="bi bi-heart"
-                      style={{
-                        position: "absolute",
-                        right: "1rem",
-                        top: ".8rem",
-                      }}
-                    ></i>
-                  </div>
-                  <Link to={`/combo/${e.id}`}>
-                    <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                  </Link>
-                </div>
-
-                <div className="card-det-sec">
-                  <div className="headingCard pt-3">
-                    <span>{e.name}</span>
-                  </div>
-                  <div>
-                    <span className="packof">(Pack of 2)</span>
-                  </div>
-                  <div className="price-sec">
-                    <div className="col-4" style={{ textAlign: "end" }}>
-                      <span className="sp">₹{e.selling_price}</span>
-                    </div>
-                    <div className="col-4">
-                      <del className="mrp">₹{e.mrp}</del>
-                    </div>
-                    <div className="col-4">
-                      <span className="discount">{e.discount}% OFF</span>
-                    </div>
-                  </div>
-                  <div className="card-btn-sec ">
                     <div
-                      className="btn_atc"
-                      onClick={() => {
-                        addToCart(e);
-                        alert("product added to cart successfully");
-                      }}
-                      style={{ cursor: "pointer" }}
+                      onClick={() => wishlistData(e.id)}
+                      className="addtofavCategory"
                     >
-                      <i className="bi bi-cart" id={e.id}>
-                        Add to Cart
-                      </i>
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: "1rem",
+                          top: ".8rem",
+                        }}
+                      ></i>
+                    </div>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                    </Link>
+                  </div>
+
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+                    </div>
+                    <div>
+                      <span className="packof">(Pack of 2)</span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div
+                        className="btn_atc"
+                        onClick={() => {
+                          addToCart(e);
+                          alert("product added to cart successfully");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <i className="bi bi-cart" id={e.id}>
+                          Add to Cart
+                        </i>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))
           : combo.map((e) => (
-            <div className="col-md-4 " key={e.id}>
-              <div className="newComboCart">
-                <div
-                  className="cart-img-sec"
-                  style={{ position: "relative" }}
-                >
+              <div className="col-md-4 " key={e.id}>
+                <div className="newComboCart">
                   <div
-                    onClick={() => wishlistData(e.id)}
-                    className="addtofavCategory"
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
                   >
-                    <i
-                      className="bi bi-heart"
-                      style={{
-                        position: "absolute",
-                        right: "1rem",
-                        top: ".8rem",
-                      }}
-                    ></i>
-                  </div>
-                  <Link to={`/combo/${e.id}`}>
-                    <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                  </Link>
-                </div>
-
-                <div className="card-det-sec">
-                  <div className="headingCard pt-3">
-                    <span>{e.name}</span>
-                  </div>
-                  <div>
-                    <span className="packof">(Pack of 2)</span>
-                  </div>
-                  <div className="price-sec">
-                    <div className="col-4" style={{ textAlign: "end" }}>
-                      <span className="sp">₹{e.selling_price}</span>
-                    </div>
-                    <div className="col-4">
-                      <del className="mrp">₹{e.mrp}</del>
-                    </div>
-                    <div className="col-4">
-                      <span className="discount">{e.discount}% OFF</span>
-                    </div>
-                  </div>
-                  <div className="card-btn-sec ">
                     <div
-                      className="btn_atc"
-                      onClick={() => {
-                        addToCart(e);
-                        alert("product added to cart successfully");
-                      }}
-                      style={{ cursor: "pointer" }}
+                      onClick={() => wishlistData(e.id)}
+                      className="addtofavCategory"
                     >
-                      <i className="bi bi-cart" id={e.id}>
-                        Add to Cart
-                      </i>
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: "1rem",
+                          top: ".8rem",
+                        }}
+                      ></i>
+                    </div>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                    </Link>
+                  </div>
+
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+                    </div>
+                    <div>
+                      <span className="packof">(Pack of 2)</span>
+                    </div>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
+                      </div>
+                    </div>
+                    <div className="card-btn-sec ">
+                      <div
+                        className="btn_atc"
+                        onClick={() => {
+                          addToCart(e);
+                          alert("product added to cart successfully");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <i className="bi bi-cart" id={e.id}>
+                          Add to Cart
+                        </i>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
       </>
     );
   }
@@ -537,20 +493,52 @@ const Category = () => {
   return (
     <>
       <HomeLayout>
-
         <div className="mobile">
-          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
+          <div
+            className="d-flex fixed-bottom bg-light"
+            style={{
+              textAlign: "center",
+              fontSize: "16px",
+              height: "40px",
+              alignItems: "center",
+            }}
+          >
             <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasLeft"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <CgSortAz /> Sort By
+              </div>
 
-              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
-
-              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+              <div
+                className="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasLeft"
+                aria-labelledby="offcanvasLeftLabel"
+                style={{ height: "80%" }}
+              >
                 <div className="offcanvas-header">
                   <h1 id="offcanvasLeftLabel">Sort By</h1>
-                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button
+                    type="button"
+                    className="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <hr />
-                <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                <div
+                  className="offcanvas-body"
+                  style={{
+                    textAlign: "left",
+                    lineHeight: "2",
+                    marginTop: "20px",
+                  }}
+                >
                   <ul>
                     <li>Name</li>
                     <li>Category</li>
@@ -561,18 +549,34 @@ const Category = () => {
             </div>
 
             <div className="col-6">
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <BiFilterAlt /> Filter
+              </div>
 
-              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
-
-              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+              <div
+                className="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel"
+                style={{ height: "80%" }}
+              >
                 <div className="offcanvas-header">
                   <h1 id="offcanvasRightLabel">Filter</h1>
-                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button
+                    type="button"
+                    className="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <hr />
                 <div className="offcanvas-body" style={{ textAlign: "left" }}>
-
-
                   <div>
                     <h5
                       variant="primary"
@@ -581,10 +585,16 @@ const Category = () => {
                       // aria-expanded={isOpen4}
                     >
                       Category
-
-                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen4 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h5>
-
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
@@ -599,7 +609,10 @@ const Category = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label
+                                className="form-check-label"
+                                htmlFor={e.name}
+                              >
                                 {e.name}
                               </label>
                             </div>
@@ -617,10 +630,16 @@ const Category = () => {
                       // aria-expanded={isOpen5}
                     >
                       Price
-
-                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen5 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h5>
-
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
@@ -630,104 +649,42 @@ const Category = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="sortBy">
-                            <label
-                              className="form-check-label"
-                              htmlFor="50-499"
-                            >
-                              50-499
-                            </label>
-                            <input
-                              style={{ marginLeft: "7rem" }}
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              checked={!!checkedFilters["50-499"]}
-                              onChange={() => handleFilter(50, 499)}
-                              id="50-499"
-                            />
-                          </div>
-                          <div className="sortBy">
-                            <label
-                              className="form-check-label"
-                              htmlFor="500-999"
-                            >
-                              500-999
-                            </label>
-                            <input
-                              style={{ marginLeft: "6.45rem" }}
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              checked={!!checkedFilters["500-999"]}
-                              onChange={() => handleFilter(500, 999)}
-                              id="500-999"
-                            />
-                          </div>
-                          <div className="sortBy">
-                            <label
-                              className="form-check-label"
-                              htmlFor="1000-1999"
-                            >
-                              1000-1999
-                            </label>
-                            <input
-                              style={{ marginLeft: "5.88rem" }}
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              checked={!!checkedFilters["1000-1999"]}
-                              onChange={() => handleFilter(1000, 1999)}
-                              id="1000-1999"
-                            />
-                          </div>
-                          <div className="sortBy">
-                            <label
-                              className="form-check-label"
-                              htmlFor="2000-4999"
-                            >
-                              2000-4999
-                            </label>
-                            <input
-                              style={{ marginLeft: "5.34rem" }}
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              checked={!!checkedFilters["2000-4999"]}
-                              onChange={() => handleFilter(2000, 4999)}
-                              id="2000-4999"
-                            />
-                          </div>
-                          <div className="sortBy">
-                            <label
-                              className="form-check-label"
-                              htmlFor="5000 & Above"
-                            >
-                              5000 & Above
-                            </label>
-                            <input
-                              style={{ marginLeft: "3.963rem" }}
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              checked={!!checkedFilters["5000-500000"]}
-                              onChange={() => handleFilter(5000, 500000)}
-                              id="5000 & Above"
-                            />
-                          </div>
+                          {priceRanges.map((range) => {
+                            const { minPrice, maxPrice, label, isVisible } =
+                              range;
+                            const key = `${minPrice}-${maxPrice}`;
+
+                            return isVisible ? (
+                              <div key={key} className="sortBy">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={key}
+                                >
+                                  {label}
+                                </label>
+                                <input
+                                  style={{ marginLeft: "7rem" }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  checked={!!checkedFilters[key]}
+                                  onChange={() =>
+                                    handleFilter(minPrice, maxPrice)
+                                  }
+                                  id={key}
+                                />
+                              </div>
+                            ) : null;
+                          })}
                         </div>
                       </div>
                     </Collapse>
                   </div>
-
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
 
         <div className="container">
           <div className="row">
@@ -861,23 +818,25 @@ const Category = () => {
                           Categories
                         </h6>
 
-                        {isOpen1 ? <RiArrowDropUpLine 
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        /> 
-                         :
+                        {isOpen1 ? (
+                          <RiArrowDropUpLine
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        ) : (
                           <RiArrowDropDownLine
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        />}
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        )}
                       </div>
 
                       <Collapse in={isOpen1}>
@@ -908,7 +867,7 @@ const Category = () => {
                     </div>
 
                     <div className="accordion-item mb-2">
-                      <div  
+                      <div
                         className="row align-items-center"
                         variant="primary"
                         onClick={handleToggle2}
@@ -922,27 +881,32 @@ const Category = () => {
                           Brand
                         </h6>
 
-                        {isOpen2 ? <RiArrowDropUpLine 
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        /> 
-                         :
+                        {isOpen2 ? (
+                          <RiArrowDropUpLine
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        ) : (
                           <RiArrowDropDownLine
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        />}
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        )}
                       </div>
 
                       <Collapse in={isOpen2}>
-                        <div id="collapseExample"  style={{ margin: "10px 5px 5px 5px"}}>
+                        <div
+                          id="collapseExample"
+                          style={{ margin: "10px 5px 5px 5px" }}
+                        >
                           {filterbrandsApi.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
@@ -952,7 +916,10 @@ const Category = () => {
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label
+                                className="form-check-label"
+                                htmlFor={e.name}
+                              >
                                 {e.name} (51)
                               </label>
                             </div>
@@ -976,33 +943,38 @@ const Category = () => {
                           Price
                         </h6>
 
-                        {isOpen3 ? <RiArrowDropUpLine 
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        /> 
-                         :
+                        {isOpen3 ? (
+                          <RiArrowDropUpLine
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        ) : (
                           <RiArrowDropDownLine
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        />}
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        )}
                       </div>
 
                       <Collapse in={isOpen3}>
-                        <div id="collapseExample" style={{ margin: "10px 5px 5x 5px"}}>
+                        <div
+                          id="collapseExample"
+                          style={{ margin: "10px 5px 5x 5px" }}
+                        >
                           <input
                             type="hidden"
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                              {priceRanges.map((range) => {
+                          {priceRanges.map((range) => {
                             const { minPrice, maxPrice, label, isVisible } =
                               range;
                             const key = `${minPrice}-${maxPrice}`;
@@ -1115,7 +1087,6 @@ const Category = () => {
                             />
                           </div> */}
                         </div>
-                        
                       </Collapse>
                     </div>
                   </div>
@@ -1123,38 +1094,38 @@ const Category = () => {
               </div>
             </div>
 
-           
-              <div className="col-md-9 mt-2">
-              {loading ? (<div id="cover-spin"></div>) : <div style={{display: "none" }}></div>}
-                <div className="banner" key={banner.id}>
-                  <img src={banner.banner?.url} width="100%" alt="baner" />
+            <div className="col-md-9 mt-2">
+              {loading ? (
+                <div id="cover-spin"></div>
+              ) : (
+                <div style={{ display: "none" }}></div>
+              )}
+              <div className="banner" key={banner.id}>
+                <img src={banner.banner?.url} width="100%" alt="baner" />
+              </div>
+
+              <div className="row">
+                <nav>
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link>Categories</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link className="categoriesName">{banner.name}</Link>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+              <div className="row" style={{ marginTop: "3rem" }}>
+                <div className="col-6">
+                  <h4>
+                    <strong>Top Trending</strong>
+                  </h4>
                 </div>
-
-                <div className="row">
-                  <nav>
-                    <ol className="breadcrumb">
-                      <li className="breadcrumb-item">
-                        <Link to="/">Home</Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link>Categories</Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link className="categoriesName">{banner.name}</Link>
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-                <div className="row" style={{ marginTop: "3rem" }}>
-                  <div className="col-6">
-                    <h4>
-                      <strong>Top Trending</strong>
-                    </h4>
-                  </div>
-                  <div className="col-6" style={{ textAlign: "end" }}>
-
-                  
-
+                <div className="col-6" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -1165,40 +1136,38 @@ const Category = () => {
                           marginLeft: "3rem",
                           width: "120px",
                         }}
-                       
                       >
                         Sort by
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item onClick={handleLowToHighClick} >
+                        <Dropdown.Item >
                           low to High
                         </Dropdown.Item>
-                        <Dropdown.Item  onClick={handleHighToLowClick}>
+                        <Dropdown.Item >
                           High to low
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-
                 </div>
+              </div>
+
+              <div className="row" style={{ marginTop: "1rem" }}>
+                {/* Combo products */}
+
+                {section}
+
+                <hr />
+                <div className="byocc">
+                  <h3>Bulid Your Own Combo</h3>
+                  <img src="/assets/img/byoc.png" alt="byoc-img" />
                 </div>
+                <hr />
 
-                <div className="row" style={{ marginTop: "1rem" }}>
-                  {/* Combo products */}
-
-                  {section}
-
-                  <hr />
-                  <div className="byocc">
-                    <h3>Bulid Your Own Combo</h3>
-                    <img src="/assets/img/byoc.png" alt="byoc-img" />
-                  </div>
-                  <hr />
-
-                  {/* Single Products */}
-                  {filteredProducts.length > 0
-                    ? filteredProducts.map((p) => (
+                {/* Single Products */}
+                {filteredProducts.length > 0
+                  ? filteredProducts.map((p) => (
                       <div className="col-md-4" key={p.id}>
                         <div className="newComboCart">
                           <div
@@ -1268,7 +1237,7 @@ const Category = () => {
                         </div>
                       </div>
                     ))
-                    : product.map((p) => (
+                  : product.map((p) => (
                       <div className="col-md-4" key={p.id}>
                         <div className="newComboCart">
                           <div
@@ -1338,9 +1307,8 @@ const Category = () => {
                         </div>
                       </div>
                     ))}
-                </div>
               </div>
-     
+            </div>
           </div>
         </div>
       </HomeLayout>

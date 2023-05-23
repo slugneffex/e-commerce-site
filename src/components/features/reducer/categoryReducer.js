@@ -6,9 +6,9 @@ import {
 
 const initialState = {
   loading: false,
-  banner: [],
-  combo:[],
-  product:[],
+  banner:null,
+  combo:null,
+  product:null,
   error: null,
 };
 
