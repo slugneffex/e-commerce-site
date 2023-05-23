@@ -16,9 +16,7 @@ const Categories = () => {
     dispatch(fetchByoc());
   }, [dispatch]);
   
-  const handleClick = () => {
-    window.scrollTo(0,0);
-  };
+ 
 
   return (
     <div>
@@ -28,7 +26,7 @@ const Categories = () => {
           {Array.isArray(byoc) &&
           byoc.map((e) => (
             <div className="byoc" key={e.myoc_banner?.id}>
-              <Link onClick={handleClick} to={`/view-all-products`}>
+              <Link to={`/view-all-products`}>
                 <img
                   src={e.myoc_banner?.original_url}
                   className="img-fluid"
@@ -45,7 +43,7 @@ const Categories = () => {
         {Array.isArray(byoc) &&
           byoc.map((e) => (
             <div className="byoc" key={e.myoc_mobile?.id}>
-              <Link onClick={handleClick} to={`/view-all-products`}>
+              <Link to={`/view-all-products`}>
                 <img
                   src={e.myoc_mobile?.original_url}
                   className="img-fluid"

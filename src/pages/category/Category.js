@@ -329,16 +329,13 @@ const Category = () => {
   };
 
   //for scroll
-  const handleScroll = () => {
-    window.scrollTo(0, 0);
-  };
-
+ 
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
-    handleScroll();
+   
   }
 
   function handleClickbrand(brandId) {
@@ -346,7 +343,7 @@ const Category = () => {
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-    handleScroll();
+  
   }
 
   // if there is no combo hide the section of combos

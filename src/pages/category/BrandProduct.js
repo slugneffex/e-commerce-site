@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { fetchBrandproduct,sortBrandproduct } from "../../components/features/actions/brandproductActions";
+import { fetchBrandproduct,sortBrandproduct,filterBrandproduct } from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 // import Loader from "../../components/home/Loader/Loader";
@@ -43,6 +43,8 @@ const BrandProduct = () => {
     { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
   ]);
 
+
+
   
 
   // filteration state end
@@ -50,47 +52,56 @@ const BrandProduct = () => {
   const { brandproduct, brandname, loading } = useSelector(
     (state) => state.branddata
   );
-
   const handleSort = (sortOrder) => {
     dispatch(sortBrandproduct(sortOrder));
   };
+
+  
   useEffect(() => {
     dispatch(fetchBrandproduct(brand_id));
-  }, [dispatch, brand_id]);
+  }, [dispatch, brand_id,]);
+
+
+  const handleFilter = (minPrice, maxPrice) => {
+    dispatch(filterBrandproduct(minPrice, maxPrice));
+  };
+
+  
+  
 
   // filteration
 
-  const handleFilter = (minPrice, maxPrice) => {
-    const key = `${minPrice}-${maxPrice}`;
+  // const handleFilter = (minPrice, maxPrice) => {
+  //   const key = `${minPrice}-${maxPrice}`;
 
-    if (checkedFilters[key]) {
-      // If the filter is already checked, remove it
-      const newFilters = { ...checkedFilters };
-      delete newFilters[key];
-      setCheckedFilters(newFilters);
+  //   if (checkedFilters[key]) {
+  //     // If the filter is already checked, remove it
+  //     const newFilters = { ...checkedFilters };
+  //     delete newFilters[key];
+  //     setCheckedFilters(newFilters);
 
-      // Update the filtered products list
-      const newFilteredProducts = filteredProducts.filter((product) => {
-        const price = product.selling_price;
-        return !(price >= minPrice && price <= maxPrice);
-      });
-      setFilteredProducts(newFilteredProducts);
-    } else {
-      // If the filter is not checked, add it
-      setCheckedFilters({ ...checkedFilters, [key]: true });
+  //     // Update the filtered products list
+  //     const newFilteredProducts = filteredProducts.filter((product) => {
+  //       const price = product.selling_price;
+  //       return !(price >= minPrice && price <= maxPrice);
+  //     });
+  //     setFilteredProducts(newFilteredProducts);
+  //   } else {
+  //     // If the filter is not checked, add it
+  //     setCheckedFilters({ ...checkedFilters, [key]: true });
 
-      // Update the filtered products list
-      const filtered = brandproduct.filter((product) => {
-        const price = product.selling_price;
-        return price >= minPrice && price <= maxPrice;
-      });
+  //     // Update the filtered products list
+  //     const filtered = brandproduct.filter((product) => {
+  //       const price = product.selling_price;
+  //       return price >= minPrice && price <= maxPrice;
+  //     });
 
-      setFilteredProducts((prevFilteredProducts) => [
-        ...prevFilteredProducts,
-        ...filtered,
-      ]);
-    }
-  };
+  //     setFilteredProducts((prevFilteredProducts) => [
+  //       ...prevFilteredProducts,
+  //       ...filtered,
+  //     ]);
+  //   }
+  // };
 
   useEffect(() => {
     const updatePriceRangeVisibility = () => {
@@ -183,10 +194,7 @@ const BrandProduct = () => {
   }, [dispatch]);
 
   //for scroll
-  const handleScroll = () => {
-    window.scrollTo(0,0);
-  };
-
+ 
   // Add to cart single brand products
 
   let SingleproductObj = {
@@ -245,14 +253,14 @@ const BrandProduct = () => {
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
     // window.location.reload(`/category/${categoryId}`)
-    handleScroll()
+  
   }
 
   function handleClickbrand(brandId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-    handleScroll()
+   
   }
 
   let singlebrandProduct = null;
@@ -263,7 +271,7 @@ const BrandProduct = () => {
           <div className="col-md-4 " key={p.id}>
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
-                <Link onClick={handleScroll} className="addtofavCategory">
+                <Link  className="addtofavCategory">
                   <i
                     className="bi bi-heart"
                     style={{
@@ -273,7 +281,7 @@ const BrandProduct = () => {
                     }}
                   ></i>
                 </Link>
-                <Link onClick={handleScroll} to={`/product/${p.id}`}>
+                <Link  to={`/product/${p.id}`}>
                   <img
                     src={p.thumbnail_img?.original_url}
                     alt="img"
@@ -967,6 +975,7 @@ const BrandProduct = () => {
                             marginLeft: "3rem",
                             width: "120px",
                           }}
+                         
                         >
                           Sort by
                         </Dropdown.Toggle>
@@ -976,10 +985,10 @@ const BrandProduct = () => {
                           {/* <Dropdown.Item href="#/action-1">
                             Action
                           </Dropdown.Item> */}
-                          <Dropdown.Item  onClick={() => handleSort("lowToHigh")}>
+                          <Dropdown.Item onClick={() => handleSort("lowToHigh")}>
                             LOW TO HIGH
                           </Dropdown.Item>
-                          <Dropdown.Item onClick={() => handleSort("highToLow")}>
+                          <Dropdown.Item onClick={() => handleSort("highToLow")} >
                            HIGH TO LOW
                           </Dropdown.Item>
                         </Dropdown.Menu>
