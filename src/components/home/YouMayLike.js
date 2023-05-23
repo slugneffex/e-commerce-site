@@ -149,9 +149,6 @@ const YouMayLike = () => {
       });
   }
 
-  const handleClick = () => {
-    window.scrollTo(0,0);
-  };
 
   return (
     <div>
@@ -196,7 +193,7 @@ const YouMayLike = () => {
                               </li>
                             </ul>
                           </Link>
-                          <Link onClick={handleClick} to={`/combo/${e.id}`}>
+                          <Link  to={`/combo/${e.id}`}>
                             <img
                               src={e.meta_img?.url}
                               alt="img"
