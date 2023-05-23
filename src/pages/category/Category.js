@@ -29,7 +29,7 @@ import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { fetchCategory } from "../../components/features/actions/categoryActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
-import Loader from "../../components/home/Loader/Loader";
+
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -1112,12 +1112,9 @@ const Category = () => {
               </div>
             </div>
 
-            {loading ? (
-              <div className="col-md-9" style={{ margin: "auto" }}>
-                <Loader />
-              </div>
-            ) : (
+           
               <div className="col-md-9 mt-2">
+              {loading ? (<div id="cover-spin"></div>) : <div style={{display: "none" }}></div>}
                 <div className="banner" key={banner.id}>
                   <img src={banner.banner?.url} width="100%" alt="baner" />
                 </div>
@@ -1332,7 +1329,7 @@ const Category = () => {
                     ))}
                 </div>
               </div>
-            )}
+     
           </div>
         </div>
       </HomeLayout>

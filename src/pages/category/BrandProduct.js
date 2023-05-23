@@ -3,6 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Dropdown from "react-bootstrap/Dropdown";
 import { CgSortAz } from "react-icons/cg";
 import { BiFilterAlt } from "react-icons/bi";
 
@@ -16,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { fetchBrandproduct } from "../../components/features/actions/brandproductActions";
+import { fetchBrandproduct,sortBrandproduct } from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 // import Loader from "../../components/home/Loader/Loader";
@@ -42,11 +43,17 @@ const BrandProduct = () => {
     { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
   ]);
 
+  
+
   // filteration state end
 
   const { brandproduct, brandname, loading } = useSelector(
     (state) => state.branddata
   );
+
+  const handleSort = (sortOrder) => {
+    dispatch(sortBrandproduct(sortOrder));
+  };
   useEffect(() => {
     dispatch(fetchBrandproduct(brand_id));
   }, [dispatch, brand_id]);
@@ -100,6 +107,15 @@ const BrandProduct = () => {
 
     updatePriceRangeVisibility();
   }, [brandproduct, priceRanges]);
+
+
+  // shorting
+
+
+
+
+
+
 
   // const handleFilter = (minPrice, maxPrice) => {
   //   const key = `${minPrice}-${maxPrice}`;
@@ -932,7 +948,7 @@ const BrandProduct = () => {
                       <strong>Top Trending</strong>
                     </h4>
                   </div>
-                  {/* <div className="col-md-6">
+                  <div className="col-md-6">
                   <div>
                     <div style={{ textAlign: "end" }}>
                       <Dropdown>
@@ -949,20 +965,21 @@ const BrandProduct = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                          <Dropdown.Item href="#/action-1">
+                     
+                          {/* <Dropdown.Item href="#/action-1">
                             Action
+                          </Dropdown.Item> */}
+                          <Dropdown.Item  onClick={() => handleSort("lowToHigh")}>
+                            LOW TO HIGH
                           </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
-                            Another action
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">
-                            Something else
+                          <Dropdown.Item onClick={() => handleSort("highToLow")}>
+                           HIGH TO LOW
                           </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
                   </div>
-                </div> */}
+                </div>
                 </div>
 
                 <div className="row" style={{ marginTop: "1rem" }}>
