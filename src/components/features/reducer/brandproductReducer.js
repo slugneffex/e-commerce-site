@@ -4,6 +4,7 @@ import {
   FETCH_BRANDPRODUCT_SUCCESS,
   SORT_BRANDPRODUCT,
   FILTER_BRANDPRODUCT,
+  UPDATE_BRANDPRODUCT,  
 } from "../actions/brandproductActions";
 
 const initialState = {
@@ -65,6 +66,11 @@ const brandproductReducer = (state = initialState, action) => {
           ...state,
           brandproduct: filteredBrandproduct,
         };
+        case UPDATE_BRANDPRODUCT:
+          return {
+            ...state,
+            brandproduct: action.payload,
+          };
     default:
       return state;
   }
