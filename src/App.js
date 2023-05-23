@@ -1,5 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import React from "react";
+import { Routes, Route, Navigate,useLocation } from "react-router-dom";
+import React,{useEffect} from "react";
 import Home from "./pages/index";
 import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
@@ -33,11 +33,22 @@ import ServerError from "./pages/ErrorPages/ServerError";
 import Expired from "./pages/ErrorPages/Expired";
 import CustomPage from "./pages/category/CustomPage";
 
+const ScrollToTop = () => {
+  const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+};
 
 const App = () => {
+ 
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+     <Routes>
       <Route exact path="/" element={<Home></Home>}></Route>
       <Route path="/Cart" element={<Cart />} />
       <Route path="/combo/:id" element={<Product />} />
@@ -75,6 +86,8 @@ const App = () => {
       <Route path="/ServerError" element={<ServerError/>}/>
       <Route path="/Expired" element={<Expired/>}/>
     </Routes>
+    </>
+   
   );
 };
 

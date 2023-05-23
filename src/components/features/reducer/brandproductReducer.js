@@ -3,6 +3,7 @@ import {
   FETCH_BRANDPRODUCT_REQUEST,
   FETCH_BRANDPRODUCT_SUCCESS,
   SORT_BRANDPRODUCT,
+  FILTER_BRANDPRODUCT,
 } from "../actions/brandproductActions";
 
 const initialState = {
@@ -41,9 +42,9 @@ const brandproductReducer = (state = initialState, action) => {
 
       sortedBrandproduct.sort((a, b) => {
         if (sortOrder === "highToLow") {
-          return b.price - a.price;
+          return b.selling_price - a.selling_price;
         } else if (sortOrder === "lowToHigh") {
-          return a.price - b.price;
+          return a.selling_price - b.selling_price;
         }
         return 0;
       });
@@ -52,6 +53,18 @@ const brandproductReducer = (state = initialState, action) => {
         ...state,
         brandproduct: sortedBrandproduct,
       };
+      case FILTER_BRANDPRODUCT:
+        const { minPrice, maxPrice } = action.payload;
+  
+        const filteredBrandproduct = state.brandproduct.filter((product) => {
+          const price = product.selling_price;
+          return price >= minPrice && price <= maxPrice;
+        });
+  
+        return {
+          ...state,
+          brandproduct: filteredBrandproduct,
+        };
     default:
       return state;
   }
