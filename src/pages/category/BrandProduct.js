@@ -182,6 +182,11 @@ const BrandProduct = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  //for scroll
+  const handleScroll = () => {
+    window.scrollTo(0,0);
+  };
+
   // Add to cart single brand products
 
   let SingleproductObj = {
@@ -240,12 +245,14 @@ const BrandProduct = () => {
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
     // window.location.reload(`/category/${categoryId}`)
+    handleScroll()
   }
 
   function handleClickbrand(brandId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
+    handleScroll()
   }
 
   let singlebrandProduct = null;
@@ -256,7 +263,7 @@ const BrandProduct = () => {
           <div className="col-md-4 " key={p.id}>
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
-                <Link className="addtofavCategory">
+                <Link onClick={handleScroll} className="addtofavCategory">
                   <i
                     className="bi bi-heart"
                     style={{
@@ -266,7 +273,7 @@ const BrandProduct = () => {
                     }}
                   ></i>
                 </Link>
-                <Link to={`/product/${p.id}`}>
+                <Link onClick={handleScroll} to={`/product/${p.id}`}>
                   <img
                     src={p.thumbnail_img?.original_url}
                     alt="img"
