@@ -36,7 +36,7 @@ export const updateBrandproduct = (brandproduct) => ({
   payload: brandproduct,
 });
 
-export const fetchBrandproduct = (brand_id) => {
+export const fetchBrandproduct = (brand_id,pageNumber) => {
   return async (dispatch) => {
     dispatch(fetchBrandproductRequest());
     const options = {
@@ -50,10 +50,13 @@ export const fetchBrandproduct = (brand_id) => {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/brand/${brand_id}`,
+        `${process.env.REACT_APP_BASE_URL}/brand/${brand_id}?page=${pageNumber}`,
         options
       );
+  
       dispatch(fetchBrandproductSuccess(response.data));
+    
+      
  
     } catch (error) {
       dispatch(fetchBrandproductFailure(error.message));

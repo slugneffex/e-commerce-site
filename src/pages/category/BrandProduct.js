@@ -32,11 +32,13 @@ const BrandProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { brand_id } = useParams();
+ 
 
   // filteration state
   // const [noProduct, setNoProduct] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
+
 
   const [priceRanges, setPriceRanges] = useState([
     { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
@@ -47,17 +49,53 @@ const BrandProduct = () => {
   ]);
 
   // filteration state end
-
-  const { brandproduct, brandname, loading } = useSelector(
-    (state) => state.branddata
-  );
+  const [pageNumber, setPageNumber] = useState(1);
+  const { brandproduct, brandname, loading,  totalPages } =
+    useSelector((state) => state.branddata);
   const handleSort = (sortOrder) => {
     dispatch(sortBrandproduct(sortOrder));
   };
 
   useEffect(() => {
-    dispatch(fetchBrandproduct(brand_id));
-  }, [dispatch, brand_id]);
+    dispatch(fetchBrandproduct(brand_id, pageNumber));
+  }, [dispatch, brand_id, pageNumber]);
+
+
+ 
+
+  const handlePageClick = (page) => {
+    setPageNumber(page)
+    // dispatch(fetchBrandproduct(brand_id, page));
+  };
+
+  const handlePreviousClick = () => {
+    if (pageNumber > 1) {
+      setPageNumber((prevPage) => prevPage - 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber - 1));
+    }
+  };
+
+  const handleNextClick = () => {
+    if (pageNumber < totalPages) {
+      setPageNumber((prevPage) => prevPage + 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber + 1));
+    }
+  };
+
+  const renderPageNumbers = () => {
+    return Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+      <li className="page-item" key={page}>
+        <Link
+          className={`page-link page-number ${pageNumber === page ? "active" : ""}`}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Link>
+      </li>
+    ));
+  };
+
+  console.log(pageNumber);
 
   // filteration
 
@@ -189,6 +227,7 @@ const BrandProduct = () => {
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
+    setPageNumber(1)
     navigate(`/category/${categoryId}`);
     // window.location.reload(`/category/${categoryId}`)
   }
@@ -196,6 +235,7 @@ const BrandProduct = () => {
   function handleClickbrand(brandId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
+    setPageNumber(1)
     navigate(`/brand/${brandId}`);
   }
 
@@ -775,7 +815,7 @@ const BrandProduct = () => {
 
                             //   />
                             // </div>
-                            <div className="form-check" key={e.id}>
+                            <div className="form-check"  key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
@@ -783,6 +823,8 @@ const BrandProduct = () => {
                                 defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
+                             
+                               
                               />
                               <label className="form-check-label" htmlFor={103}>
                                 {e.name}
@@ -1110,6 +1152,68 @@ const BrandProduct = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="container mb-4">
+          <nav
+            aria-label="Page navigation example"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              page {pageNumber} of {totalPages}
+            </div>
+
+            <div>
+              <ul
+                className="pagination"
+                style={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <li className="page-item">
+                  <Link
+                    className="page-link"
+                    tabindex="-1"
+                    onClick={handlePreviousClick}
+                    disabled={pageNumber === 1}
+                  >
+                    Previous
+                  </Link>
+                </li>
+                <div className="numbers">
+                  <li className="page-item" ><Link className="page-number" >{renderPageNumbers()}</Link></li>
+                  {/* {Array.from(
+                    { length: totalPages },
+                    (_, index) => index + 1
+                  ).map((page) => (
+                    <li className="page-item" key={page}>
+                      <Link
+                        className={`page-link page-number ${
+                          pageNumber === page ? "active" : ""
+                        }`}
+                        onClick={() => handlePageClick(page)}
+                      >
+                        {page}
+                      </Link>
+                    </li>
+                  ))} */}
+                  
+                </div>
+                <li className="page-item">
+                  <Link className="page-link" onClick={handleNextClick}>
+                    Next
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div></div>
+          </nav>
         </div>
       </HomeLayout>
     </div>
