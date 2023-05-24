@@ -26,7 +26,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { fetchCategory } from "../../components/features/actions/categoryActions";
+import {
+  fetchCategory,
+  sortHighToLow,
+  sortLowToHigh,
+} from "../../components/features/actions/categoryActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 
@@ -53,7 +57,6 @@ const Category = () => {
   // const [noProduct, setNoProduct] = useState(false);
 
   const [noProduct, setNoProduct] = useState(false);
- 
 
   // filteration state end
 
@@ -65,9 +68,14 @@ const Category = () => {
     dispatch(fetchCategory(id));
   }, [dispatch, id]);
 
- 
+  //  sorting
+  const handleSortHighToLow = () => {
+    dispatch(sortHighToLow());
+  };
 
- 
+  const handleSortLowToHigh = () => {
+    dispatch(sortLowToHigh());
+  };
 
   // const sortData = () => {
   //   const sortedData = [...combo].sort(
@@ -329,13 +337,12 @@ const Category = () => {
   };
 
   //for scroll
- 
+
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
-   
   }
 
   function handleClickbrand(brandId) {
@@ -343,15 +350,12 @@ const Category = () => {
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-  
   }
 
   // if there is no combo hide the section of combos
 
   let section = null;
-  if (loading) {
-    section = <div>Loading...</div>;
-  } else if (combo.length >= 1) {
+  if (combo.length >= 1) {
     section = (
       <>
         {/* section content */}
@@ -772,7 +776,7 @@ const Category = () => {
                     <input
                       style={{ marginLeft: "8.3rem" }}
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
                       value=""
                       id="PriceHighToLow"
                     />
@@ -786,13 +790,16 @@ const Category = () => {
                       Price: Low to High
                     </label>
                     <input
-                      style={{ marginLeft: "8.3rem" }}
+                      type="radio"
+                      name="category_id"
+                    
                       className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="PriceLowToHigh"
+                     
                     />
-                  </div>
+                    
+                
+                  </div> 
+                 
                 </div>
               </div>
 
@@ -1138,10 +1145,10 @@ const Category = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item >
+                        <Dropdown.Item onClick={handleSortLowToHigh}>
                           low to High
                         </Dropdown.Item>
-                        <Dropdown.Item >
+                        <Dropdown.Item onClick={handleSortHighToLow}>
                           High to low
                         </Dropdown.Item>
                       </Dropdown.Menu>
