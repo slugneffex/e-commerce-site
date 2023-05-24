@@ -8,9 +8,12 @@ import { fetchhotdeal } from "../../components/features/actions/hotdealActions";
 
 const MYOC = () => {
   const [products, setProducts] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
+ 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [displayedPages, setDisplayedPages] = useState([]);
 
   // Myoc banner
   const dispatch = useDispatch();
@@ -20,36 +23,7 @@ const MYOC = () => {
   }, [dispatch]);
 
 
-  // const [myocBanner, setMyocBanner] = useState([]);
-  // const [myocError, setMyocError] = useState(null);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
-  //         options
-  //       );
-  //       setMyocBanner(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setMyocError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
 
   const fetchData = useCallback(async (pageNumber) => {
     const options = {
@@ -64,6 +38,7 @@ const MYOC = () => {
       );
       const newData = response.data.data;
       setProducts((prevData) => [...prevData, ...newData]);
+      setTotalPages(response.data.last_page);
       setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 429) {
@@ -81,21 +56,90 @@ const MYOC = () => {
     fetchData(pageNumber);
   }, [fetchData, pageNumber]);
 
-  const handleScroll = useCallback(() => {
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    if (
-      scrollTop + clientHeight >= scrollHeight - 5 &&
-      products.length &&
-      !loading
-    ) {
-      setPageNumber((prevPageNumber) => prevPageNumber + 1);
-    }
-  }, [products.length, loading]);
-
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    const updateDisplayedPages = () => {
+      const minPage = Math.max(1, pageNumber - 4);
+      const maxPage = Math.min(totalPages, pageNumber + 5);
+      const pages = [];
+      for (let i = minPage; i <= maxPage; i++) {
+        pages.push(i);
+      }
+      setDisplayedPages(pages);
+    };
+
+    updateDisplayedPages();
+  }, [pageNumber, totalPages]);
+
+  const handlePageClick = (page) => {
+    setPageNumber(page);
+    setProducts([]);
+    setLoading(true);
+  };
+
+
+  const renderPageNumbers = () => {
+    return displayedPages.map((page) => (
+      <li className="page-item" key={page}>
+        <Link
+          className={`page-link page-number ${pageNumber === page ? "active" : ""}`}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Link>
+      </li>
+    ));
+  };
+
+
+  const handlePreviousClick = () => {
+    if (pageNumber > 1) {
+      setPageNumber((prevPage) => prevPage - 1);
+      setProducts([]);
+      setLoading(true);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (pageNumber < totalPages) {
+      setPageNumber((prevPage) => prevPage + 1);
+      setProducts([]);
+      setLoading(true);
+    }
+  };
+
+  // const generatePageNumbers = () => {
+  //   const pageNumbers = [];
+  //   for (let i = 1; i <= totalPages; i++) {
+  //     pageNumbers.push(
+  //       <li className="page-item" key={i}>
+  //         <Link
+  //           className={`page-link page-number ${pageNumber === i ? "active" : ""}`}
+  //           onClick={() => handlePageClick(i)}
+  //         >
+  //           {i}
+  //         </Link>
+  //       </li>
+  //     );
+  //   }
+  //   return pageNumbers;
+  // };
+
+
+  // const handleScroll = useCallback(() => {
+  //   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+  //   if (
+  //     scrollTop + clientHeight >= scrollHeight - 5 &&
+  //     products.length &&
+  //     !loading
+  //   ) {
+  //     setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  //   }
+  // }, [products.length, loading]);
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [handleScroll]);
 
   if (error) {
     console.log(error);
@@ -212,30 +256,30 @@ const MYOC = () => {
                 </div>
               </div>
             ))}
-            {loading && <div>Loading...</div>}
+           
           </div>
         </div>
         <div className="container mb-4">
           <nav aria-label="Page navigation example" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <div>
-              page 1 of 50
+              page {pageNumber} of {totalPages}
             </div>
 
             <div>
               <ul class="pagination" style={{ justifyContent: "space-between" }}>
                 <li class="page-item">
-                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  <Link class="page-link"  tabindex="-1"    onClick={handlePreviousClick}>Previous</Link>
                 </li>
                 <div className="numbers">
-                  <li class="page-item"><a class="page-link page-number" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link page-number" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
+                  <li class="page-item"><Link class="page-link page-number" > {renderPageNumbers()}</Link></li>
+                  {/* <li class="page-item"><Link class="page-link page-number" >2</Link></li>
+                  <li class="page-item"><Link class="page-link page-number" >3</Link></li>
+                  <li class="page-item"><Link class="page-link page-number" >3</Link></li>
+                  <li class="page-item"><Link class="page-link page-number" >3</Link></li>
+                  <li class="page-item"><Link class="page-link page-number" >3</Link></li> */}
                 </div>
                 <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
+                  <Link class="page-link" onClick={handleNextClick}>Next</Link>
                 </li>
               </ul>
             </div>
