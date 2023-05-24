@@ -12,13 +12,15 @@ const initialState = {
   brandproduct: [],
   brandname: [],
   error: null,
+ 
+  totalPages: 0,
 };
 
 const brandproductReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_BRANDPRODUCT_REQUEST:
       return {
-        ...state,
+        ...state,   
         loading: true,
         error: null,
       };
@@ -28,6 +30,7 @@ const brandproductReducer = (state = initialState, action) => {
         loading: false,
         brandproduct: action.payload.products.data,
         brandname: action.payload.brand,
+        totalPages:action.payload.products.last_page
       };
     case FETCH_BRANDPRODUCT_FAILURE:
       return {
