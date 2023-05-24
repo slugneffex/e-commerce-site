@@ -14,7 +14,7 @@ const MYOC = () => {
 
   // Myoc banner
   const dispatch = useDispatch();
-  const {  hotdeal } = useSelector((state) => state.hotdeal);
+  const { hotdeal } = useSelector((state) => state.hotdeal);
   useEffect(() => {
     dispatch(fetchhotdeal());
   }, [dispatch]);
@@ -214,6 +214,34 @@ const MYOC = () => {
             ))}
             {loading && <div>Loading...</div>}
           </div>
+        </div>
+        <div className="container mb-4">
+          <nav aria-label="Page navigation example" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+              page 1 of 50
+            </div>
+
+            <div>
+              <ul class="pagination" style={{ justifyContent: "space-between" }}>
+                <li class="page-item">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <div className="numbers">
+                  <li class="page-item"><a class="page-link page-number" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link page-number" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link page-number" href="#">3</a></li>
+                </div>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </div>
+
+            <div></div>
+          </nav>
         </div>
       </HomeLayout>
     </>

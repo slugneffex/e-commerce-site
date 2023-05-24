@@ -11,3 +11,20 @@
     padding-top: 2px;
    
   }
+
+  .pagination li a {
+    border: none;
+    color: #444;
+  }
+
+
+  .pagination li .page-number {
+    border-radius: 20%;
+  }
+
+  .pagination li a:hover {
+    /* background-color: #fe9e2d; */
+    border: 1px solid #434343;
+    background-color: white;
+    color: #444;
+  }
