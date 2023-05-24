@@ -23,8 +23,16 @@
   }
 
   .pagination li a:hover {
-    /* background-color: #fe9e2d; */
-    border: 1px solid #434343;
-    background-color: white;
+    background-color: #fe9e2d;
+    /* border: 1px solid #434343; */
+    /* background-color: white; */
     color: #444;
   }
+
+
+  .page-item .active {
+    /* border: none;
+    color: #444; */
+    background-color: #fe9e2d;
+  }
+
