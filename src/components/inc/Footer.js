@@ -156,9 +156,9 @@ const Footer = () => {
                 <div className="follow_us">
                   <h5>Follow Us</h5>
                   <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i class="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
-                    <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i class="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
-                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i class="bi bi-linkedin"  style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin"  style={{fontSize: "30px"}}></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -410,9 +410,9 @@ const Footer = () => {
                   <div className="follow_us">
                     <h5>Follow Us</h5>
                     <ul>
-                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i class="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
-                      <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i class="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
-                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i class="bi bi-linkedin" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{fontSize: "30px"}}></i></a></li>
                     </ul>
                   </div>
                 </div>

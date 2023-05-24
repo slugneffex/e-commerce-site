@@ -58,8 +58,8 @@ const MYOC = () => {
 
   useEffect(() => {
     const updateDisplayedPages = () => {
-      const minPage = Math.max(1, pageNumber - 4);
-      const maxPage = Math.min(totalPages, pageNumber + 5);
+      const minPage = Math.max(pageNumber, pageNumber - 4);
+      const maxPage = Math.min(totalPages, pageNumber + 4);
       const pages = [];
       for (let i = minPage; i <= maxPage; i++) {
         pages.push(i);
@@ -261,7 +261,7 @@ const MYOC = () => {
         </div>
         <div className="container mb-4">
           <nav aria-label="Page navigation example" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
+            <div className="desktop">
               page {pageNumber} of {totalPages}
             </div>
 
@@ -271,7 +271,7 @@ const MYOC = () => {
                   <Link className="page-link"  tabindex="-1"    onClick={handlePreviousClick}>Previous</Link>
                 </li>
                 <div className="numbers">
-                  <li className="page-item"><Link className="page-number" > {renderPageNumbers()}</Link></li>
+                  <li className="page-item"><Link className="page-number" style={{ border: "none" }} > {renderPageNumbers()}</Link></li>
                   {/* <li className="page-item"><Link className="page-link page-number" >2</Link></li>
                   <li className="page-item"><Link className="page-link page-number" >3</Link></li>
                   <li className="page-item"><Link className="page-link page-number" >3</Link></li>

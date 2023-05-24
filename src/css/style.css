@@ -99,8 +99,8 @@ a {
 }
 
 .nav-link {
-  color: #000000;
-  font-weight: bold;
+  color: #444;
+  /* font-weight: bold; */
 }
 
 #navbar-right .nav-link {
