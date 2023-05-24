@@ -43,11 +43,12 @@ const CustomPage = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
  
   // const [brandId, setBrandId] = useState([]);
   // const [categoriesId, setCategoriesId] = useState([]);
 
-  const {  banner ,combo,brandId,categoriesId,loading} = useSelector((state) => state.pagedata);
+  const {  banner ,combo,brandId,categoriesId} = useSelector((state) => state.pagedata);
 
   useEffect(() => {
     dispatch(fetchPageproduct(id));
@@ -307,6 +308,7 @@ const CustomPage = () => {
         );
         const responses = await Promise.all(promises);
         const data = responses.map((response) => response.data.products.data);
+        setIsLoading(false);
 
         setBrandProduct(data);
       } catch (error) {
@@ -355,6 +357,7 @@ const CustomPage = () => {
         setCategoriesProduct(productData);
 
         setCategoriesCombo(data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -1242,10 +1245,11 @@ const CustomPage = () => {
                 </div>
               </div>
             </div>
-          {loading ? (
-            <div><Loader /></div>
-
-          ):(
+            {isLoading ? (
+                <div id="cover-spin"></div>
+              ) : (
+                <div style={{ display: "none" }}></div>
+              )}
             <div className="col-md-9 " >
             <div className="banner" key={banner.id}>
               <img src={banner.thumbnail?.url} width="100%" alt="baner" />
@@ -1466,7 +1470,7 @@ const CustomPage = () => {
               {categoriesProductSection}
             </div>
           </div>
-          )}
+      
           
           </div>
         </div>
