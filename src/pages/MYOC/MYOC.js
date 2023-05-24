@@ -266,20 +266,20 @@ const MYOC = () => {
             </div>
 
             <div>
-              <ul class="pagination" style={{ justifyContent: "space-between" }}>
-                <li class="page-item">
-                  <Link class="page-link"  tabindex="-1"    onClick={handlePreviousClick}>Previous</Link>
+              <ul className="pagination" style={{ justifyContent: "space-between", alignItems: "center" }}>
+                <li className="page-item">
+                  <Link className="page-link"  tabindex="-1"    onClick={handlePreviousClick}>Previous</Link>
                 </li>
                 <div className="numbers">
-                  <li class="page-item"><Link class="page-link page-number" > {renderPageNumbers()}</Link></li>
-                  {/* <li class="page-item"><Link class="page-link page-number" >2</Link></li>
-                  <li class="page-item"><Link class="page-link page-number" >3</Link></li>
-                  <li class="page-item"><Link class="page-link page-number" >3</Link></li>
-                  <li class="page-item"><Link class="page-link page-number" >3</Link></li>
-                  <li class="page-item"><Link class="page-link page-number" >3</Link></li> */}
+                  <li className="page-item"><Link className="page-number" > {renderPageNumbers()}</Link></li>
+                  {/* <li className="page-item"><Link className="page-link page-number" >2</Link></li>
+                  <li className="page-item"><Link className="page-link page-number" >3</Link></li>
+                  <li className="page-item"><Link className="page-link page-number" >3</Link></li>
+                  <li className="page-item"><Link className="page-link page-number" >3</Link></li>
+                  <li className="page-item"><Link className="page-link page-number" >3</Link></li> */}
                 </div>
-                <li class="page-item">
-                  <Link class="page-link" onClick={handleNextClick}>Next</Link>
+                <li className="page-item">
+                  <Link className="page-link" onClick={handleNextClick}>Next</Link>
                 </li>
               </ul>
             </div>

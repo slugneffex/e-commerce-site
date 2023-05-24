@@ -80,8 +80,9 @@ const App = () => {
       <Route path="/freebies" element={<Freebies />} />
       {/* Oreder History */}
       <Route path="/orderhistory" element={<OrderHistory />} />
-      <Route path="*" render={() => <Navigate to="/" />} />
-      <Route path="/Error" element={<Error/>}/>
+      {/* <Route path="*" render={() => <Navigate to="/" />} /> */}
+      <Route path="*" element={<Error />} />
+      {/* <Route path="/Error" element={<Error/>}/> */}
       <Route path="/Noresult" element={<Noresult/>}/>
       <Route path="/ServerError" element={<ServerError/>}/>
       <Route path="/Expired" element={<Expired/>}/>
