@@ -351,7 +351,7 @@ const CustomPage = () => {
         const productData = responses.map(
           (response) => response.data.data.products.data
         );
-        console.log(productData);
+       
         setCategoriesProduct(productData);
 
         setCategoriesCombo(data);
