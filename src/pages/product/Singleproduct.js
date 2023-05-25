@@ -89,7 +89,7 @@ const Singleproduct = () => {
                       <Link to="/">Home</Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
-                      <Link to="#">Combo</Link>
+                      <Link to="#">Product</Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       <Link to="#">{product.name}</Link>
