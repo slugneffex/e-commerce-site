@@ -37,22 +37,23 @@ const CustomPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  // const [banner, setBanner] = useState([]);
-  // const [combo, setCombo] = useState([]);
-  // const [product, setProduct] = useState([]);
+  const [banner, setBanner] = useState([]);
+  const [combo, setCombo] = useState([]);
+  const [product, setProduct] = useState([]);
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
   const [isLoading, setIsLoading] = useState(true);
- 
-  // const [brandId, setBrandId] = useState([]);
-  // const [categoriesId, setCategoriesId] = useState([]);
+  const [error, setError] = useState(null);
 
-  const {  banner ,combo,brandId,categoriesId} = useSelector((state) => state.pagedata);
+  const [brandId, setBrandId] = useState([]);
+  const [categoriesId, setCategoriesId] = useState([]);
 
-  useEffect(() => {
-    dispatch(fetchPageproduct(id));
-  }, [dispatch,id]);
+  // const {  banner ,combo,brandId,categoriesId} = useSelector((state) => state.pagedata);
+
+  // useEffect(() => {
+  //   dispatch(fetchPageproduct(id));
+  // }, [dispatch,id]);
 
   // sort by low to high and high to low
 
@@ -80,37 +81,37 @@ const CustomPage = () => {
 
   // API of custom page
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setError(null);
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/page/${id}`,
-  //         options
-  //       );
-  //       setBanner(response.data);
-  //       setCombo(response.data.combos);
-  //       setProduct(response.data.product);
-  //       setBrandId(response.data.brands);
-  //       setCategoriesId(response.data.categories);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       } else {
-  //         setError(error.message);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, [id]);
+  useEffect(() => {
+    async function fetchData() {
+     
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/page/${id}`,
+          options
+        );
+        setBanner(response.data);
+        setCombo(response.data.combos);
+        setProduct(response.data.product);
+        setBrandId(response.data.brands);
+        setCategoriesId(response.data.categories);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        } else {
+          setError(error.message);
+        }
+      }
+    }
+    fetchData();
+  }, [id]);
 
   // Filteration
 
