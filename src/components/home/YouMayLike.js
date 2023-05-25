@@ -11,7 +11,7 @@ import {
   getTotalAmount,
   getTotalDiscount,
 } from "../features/useCartSlice";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { fetchYoumaylike } from "../features/actions/youmaylikeActions";
@@ -38,13 +38,13 @@ const responsive = {
 
 const YouMayLike = () => {
   const dispatch = useDispatch();
-  const {  youmaylike } = useSelector((state) => state.youmaylike);
-  
+  const { youmaylike } = useSelector((state) => state.youmaylike);
+
 
   useEffect(() => {
     dispatch(fetchYoumaylike());
   }, [dispatch]);
-  
+
   // changing wl btn
 
   // Featured combos
@@ -150,7 +150,7 @@ const YouMayLike = () => {
   }
 
   const handleClick = () => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -161,72 +161,72 @@ const YouMayLike = () => {
             <h3>You May Like...</h3>
           </div>
         </div>
-        
-          <div className="container ">
-            <div className="row">
-              <Carousel
-                responsive={responsive}
-                showDots={false}
-                infinite={true}
-                arrows={false}
-              >
-                {Array.isArray(youmaylike) &&
-                  youmaylike.map((e) => (
-                    <div
-                      className="item carouselItemCard"
-                      key={e.id}
-                      style={{ marginRight: ".8rem" }}
-                    >
-                      <div className="newComboCart">
-                        <div className="cart-img-sec">
-                          <Link
-                            onClick={() => wishlistData(e.id)}
-                            className="addtofav"
-                          >
-                            <ul>
-                              <li className="youMayLikeHeart">
-                                {heartFilled === e.id ? (
-                                  <i
-                                    style={{ color: "#fe9e2d" }}
-                                    className="bi bi-heart-fill"
-                                  ></i>
-                                ) : (
-                                  <i className="bi bi-heart"></i>
-                                )}
-                              </li>
-                            </ul>
-                          </Link>
-                          <Link onClick={handleClick} to={`/combo/${e.id}`}>
-                            <img
-                              src={e.meta_img?.url}
-                              alt="img"
-                              width="100%"
-                            ></img>
-                          </Link>
-                        </div>
 
-                        <div className="card-det-sec">
-                          <div className="headingCard pt-3">
-                            <span>{e.name}</span>
-                          </div>
-                          {/* <div>
+        <div className="container ">
+          <div className="row">
+            <Carousel
+              responsive={responsive}
+              showDots={false}
+              infinite={true}
+              arrows={false}
+            >
+              {Array.isArray(youmaylike) &&
+                youmaylike.map((e) => (
+                  <div
+                    className="item carouselItemCard"
+                    key={e.id}
+                    style={{ marginRight: ".8rem" }}
+                  >
+                    <div className="newComboCart">
+                      <div className="cart-img-sec">
+                        <Link
+                          onClick={() => wishlistData(e.id)}
+                          className="addtofav"
+                        >
+                          <ul>
+                            <li className="youMayLikeHeart">
+                              {heartFilled === e.id ? (
+                                <i
+                                  style={{ color: "#fe9e2d" }}
+                                  className="bi bi-heart-fill"
+                                ></i>
+                              ) : (
+                                <i className="bi bi-heart"></i>
+                              )}
+                            </li>
+                          </ul>
+                        </Link>
+                        <Link onClick={handleClick} to={`/combo/${e.id}`}>
+                          <img
+                            src={e.meta_img?.url}
+                            alt="img"
+                            width="100%"
+                          ></img>
+                        </Link>
+                      </div>
+
+                      <div className="card-det-sec">
+                        <div className="headingCard pt-3">
+                          <span>{e.name}</span>
+                        </div>
+                        {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-                          <div className="price-sec">
-                            <div className="col-4">
-                              <span className="sp">₹{e.selling_price}</span>
-                            </div>
-                            <div className="col-4">
-                              <del className="mrp">₹{e.mrp}</del>
-                            </div>
-                            <div className="col-4">
-                              <span className="discount">
-                                {e.discount}% OFF
-                              </span>
-                            </div>
+                        <div className="price-sec">
+                          <div className="col-4">
+                            <span className="sp">₹{e.selling_price}</span>
                           </div>
-                          <div className="card-btn-sec ">
-                            <div
+                          <div className="col-4">
+                            <del className="mrp">₹{e.mrp}</del>
+                          </div>
+                          <div className="col-4">
+                            <span className="discount">
+                              {e.discount}% OFF
+                            </span>
+                          </div>
+                        </div>
+                        <div className="card-btn-sec ">
+                          {/* <div
                               className="btn_atc"
                               onClick={() => {
                                 addToCart(e);
@@ -237,16 +237,26 @@ const YouMayLike = () => {
                               <i className="bi bi-cart" id={e.id}>
                                 Add to Cart
                               </i>
-                            </div>
+                            </div> */}
+
+                          <div
+                            className="btn_gtc"
+                            style={{ cursor: "pointer" }}
+                          > 
+                            <Link to="/cart" style={{color: "#05A856" }}>Go to Cart</Link>
+                            <i className="bi bi-arrow-right" id={e.id}>
+                              
+                            </i>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
-              </Carousel>
-            </div>
+                  </div>
+                ))}
+            </Carousel>
           </div>
-       
+        </div>
+
       </section>
     </div>
   );
