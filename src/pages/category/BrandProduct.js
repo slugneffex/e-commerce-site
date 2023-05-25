@@ -64,7 +64,10 @@ const BrandProduct = () => {
  
 
   const handlePageClick = (page) => {
+    setFilteredProducts([])
+    setCheckedFilters(false)
     setPageNumber(page)
+   
     // dispatch(fetchBrandproduct(brand_id, page));
   };
 

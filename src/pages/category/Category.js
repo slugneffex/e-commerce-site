@@ -456,7 +456,7 @@ const Category = () => {
                       <span>{e.name}</span>
                     </div>
                     <div>
-                      <span className="packof">(Pack of 2)</span>
+                      <span className="packof">(Pack of {e.packqty})</span>
                     </div>
                     <div className="price-sec">
                       <div className="col-4" style={{ textAlign: "end" }}>
@@ -792,14 +792,9 @@ const Category = () => {
                     <input
                       type="radio"
                       name="category_id"
-                    
                       className="form-check-input"
-                     
                     />
-                    
-                
-                  </div> 
-                 
+                  </div>
                 </div>
               </div>
 
@@ -1208,9 +1203,9 @@ const Category = () => {
                             <div className="headingCard pt-3 ">
                               <span>{p.name.substring(0, 40)}</span>
                             </div>
-                            <div>
+                            {/* <div>
                               <span className="packof">(Pack of 2)</span>
-                            </div>
+                            </div> */}
                             <div className="price-sec">
                               <span className="spSingleProduct">
                                 ₹{p.selling_price}
@@ -1278,20 +1273,22 @@ const Category = () => {
                             <div className="headingCard pt-3 ">
                               <span>{p.name.substring(0, 40)}</span>
                             </div>
-                            <div>
+                            {/* <div>
                               <span className="packof">(Pack of 2)</span>
-                            </div>
+                            </div> */}
                             <div className="price-sec">
                               <span className="spSingleProduct">
                                 ₹{p.selling_price}
                               </span>
 
+                              <div className="col-4">
+                                <del className="mrp">₹{p.mrp}</del>
+                              </div>
                               {/* <div className="col-4">
-                            <del className="mrp">₹{e.mrp}</del>
-                          </div> */}
-                              {/* <div className="col-4">
-                            <span className="discount">{p.discount}% OFF</span>
-                          </div> */}
+                                <span className="discount">
+                                  {p.discount}% OFF
+                                </span>
+                              </div> */}
                             </div>
                             <div className="card-btn-sec ">
                               <div

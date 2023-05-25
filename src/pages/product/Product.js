@@ -146,7 +146,7 @@ const Product = () => {
                 <h1>{combos.name}</h1>
               </div>
               <div className="quantity">
-                <span>()</span>
+                <span>(Pack of {combos.packqty})</span>
               </div>
               <div className="ratings">
                 <i className="bi bi-star-fill"></i>

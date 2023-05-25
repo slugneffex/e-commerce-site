@@ -209,9 +209,9 @@ const YouMayLike = () => {
                           <div className="headingCard pt-3">
                             <span>{e.name}</span>
                           </div>
-                          {/* <div>
-                          <span className="packof">(Pack of 2)</span>
-                        </div> */}
+                          <div>
+                          <span className="packof">(Pack of {e.packqty})</span>
+                        </div>
                           <div className="price-sec">
                             <div className="col-4">
                               <span className="sp">₹{e.selling_price}</span>
