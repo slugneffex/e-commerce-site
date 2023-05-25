@@ -162,7 +162,6 @@ const YouMayLike = () => {
           </div>
         </div>
 
-
         <div className="container ">
           <div className="row">
             <Carousel
@@ -216,27 +215,6 @@ const YouMayLike = () => {
                         <div className="price-sec">
                           <div className="col-4">
                             <span className="sp">₹{e.selling_price}</span>
-
-                        <div className="card-det-sec">
-                          <div className="headingCard pt-3">
-                            <span>{e.name}</span>
-                          </div>
-                          <div>
-                          <span className="packof">(Pack of {e.packqty})</span>
-                        </div>
-                          <div className="price-sec">
-                            <div className="col-4">
-                              <span className="sp">₹{e.selling_price}</span>
-                            </div>
-                            <div className="col-4">
-                              <del className="mrp">₹{e.mrp}</del>
-                            </div>
-                            <div className="col-4">
-                              <span className="discount">
-                                {e.discount}% OFF
-                              </span>
-                            </div>
-
                           </div>
                           <div className="col-4">
                             <del className="mrp">₹{e.mrp}</del>
@@ -265,6 +243,7 @@ const YouMayLike = () => {
                             className="btn_gtc"
                             style={{ cursor: "pointer" }}
                           > 
+                          
                             <Link to="/cart" style={{color: "#05A856" }}>Go to Cart</Link>
                             <i className="bi bi-arrow-right" id={e.id}>
                               
