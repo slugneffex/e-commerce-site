@@ -234,7 +234,7 @@ const Header = () => {
         {/* navbar Start */}
         <div className="">
           <div id="navSec" className={navbarSticky ? "fixed-top " : ""}>
-            <nav className="navbar navbar-expand-lg bg-light ">
+            <nav className="navbar navbar-expand-lg bg-light">
               <div className="container">
                 {Array.isArray(byoc) &&
                   byoc.map((e) => (
