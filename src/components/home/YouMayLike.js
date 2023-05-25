@@ -243,6 +243,7 @@ const YouMayLike = () => {
                             className="btn_gtc"
                             style={{ cursor: "pointer" }}
                           > 
+                          
                             <Link to="/cart" style={{color: "#05A856" }}>Go to Cart</Link>
                             <i className="bi bi-arrow-right" id={e.id}>
                               
