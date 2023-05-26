@@ -35,7 +35,7 @@ export const sortLowToHigh = () => ({
 
 
 
-export const fetchCategory = (id) => {
+export const fetchCategory = (id,pageNumber) => {
   return async (dispatch) => {
     dispatch(fetchCategoryRequest());
     const options = {
@@ -50,7 +50,7 @@ export const fetchCategory = (id) => {
     try {
      
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/category/${id}`,
+          `${process.env.REACT_APP_BASE_URL}/category/${id}?page=${pageNumber}`,
           options
         );
         dispatch(fetchCategorySuccess(response.data));

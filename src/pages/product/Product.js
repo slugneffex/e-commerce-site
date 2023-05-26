@@ -62,6 +62,8 @@ const Product = () => {
     fetchData();
   }, [id]);
 
+
+
   // add to cart for combo
 
 
@@ -168,8 +170,8 @@ const Product = () => {
               </div>
               <div className="basic-details">
                 <span>Sold By:</span>
-                <span className="sold-by" style={{ marginLeft: ".5rem" }}>
-                  XYZ Pvt. Ltd.
+                <span className="sold-by" style={{ marginLeft: ".5rem" }} onClick={sharePage}>
+                  Born Unicorn Tech Prise Pvt. Ltd.
                 </span>
                 <br />
                 <div style={{ marginTop: ".3rem" }}>

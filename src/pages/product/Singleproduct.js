@@ -121,7 +121,7 @@ const Singleproduct = () => {
               </div>
               <div className="basic-details">
                 <span>Sold By:</span>
-                <span className="sold-by">XYZ Pvt. Ltd.</span>
+                <span className="sold-by"> Born Unicorn Tech Prise Pvt. Ltd.</span>
                 <br />
                 <span>MRP:</span>
                 <del className="mrp">₹{product.mrp}</del>

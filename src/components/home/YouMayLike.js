@@ -38,62 +38,15 @@ const responsive = {
 
 const YouMayLike = () => {
   const dispatch = useDispatch();
-  const { youmaylike } = useSelector((state) => state.youmaylike);
+  const [addedToCart, setAddedToCart] = useState(false);
 
+  const { youmaylike } = useSelector((state) => state.youmaylike);
 
   useEffect(() => {
     dispatch(fetchYoumaylike());
   }, [dispatch]);
 
-  // changing wl btn
-
-  // Featured combos
-  // const [feature, setFeature] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     async function fetchData() {
-  //       setError(null);
-  //       setLoading(true);
-  //       const options = {
-  //         headers: {
-  //           "X-Authorization":
-  //             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-  //           "Cache-Control": "no-cache, no-store, must-revalidate",
-  //           mode: "cors",
-  //           credentials: "include",
-  //         },
-  //       };
-
-  //       try {
-  //         const response = await axios.get(
-  //           `${process.env.REACT_APP_BASE_URL}/combos`,
-  //           options
-  //         );
-  //         setFeature(response.data.data);
-  //         setLoading(false);
-  //       } catch (error) {
-  //         if (error.response && error.response.status === 429) {
-  //           const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //           setTimeout(() => {
-  //             fetchData();
-  //           }, retryAfter * 1000);
-  //         } else {
-  //           setError(error.message);
-  //         }
-  //       }
-  //     }
-  //     fetchData();
-  //   }, 2000);
-  // }, []);
-  // if (error) {
-  //   console.log(error);
-  // }
-
   // add to cart
-
 
   let productObj = {
     id: "",
@@ -103,6 +56,7 @@ const YouMayLike = () => {
     mrp: "",
     discount: "",
   };
+
   const addToCart = (e) => {
     productObj = {
       id: e.id,
@@ -118,6 +72,11 @@ const YouMayLike = () => {
     dispatch(calculateTax());
     dispatch(getTotalAmount());
     dispatch(getTotalDiscount());
+    setAddedToCart(true);
+
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 3000);
   };
 
   // add to wishlist
@@ -149,8 +108,19 @@ const YouMayLike = () => {
       });
   }
 
-  const handleClick = () => {
-    window.scrollTo(0, 0);
+  const { cartItems } = useSelector((state) => state.cart);
+
+  console.log(cartItems);
+
+  const goToCart = () => {
+    return (
+      <div className="btn_gtc" style={{ cursor: "pointer" }}>
+        <Link to="/cart" style={{ color: "#05A856" }}>
+          Go to Cart
+        </Link>
+        <i className="bi bi-arrow-right"></i>
+      </div>
+    );
   };
 
   return (
@@ -196,7 +166,7 @@ const YouMayLike = () => {
                             </li>
                           </ul>
                         </Link>
-                        <Link onClick={handleClick} to={`/combo/${e.id}`}>
+                        <Link to={`/combo/${e.id}`}>
                           <img
                             src={e.meta_img?.url}
                             alt="img"
@@ -220,33 +190,21 @@ const YouMayLike = () => {
                             <del className="mrp">₹{e.mrp}</del>
                           </div>
                           <div className="col-4">
-                            <span className="discount">
-                              {e.discount}% OFF
-                            </span>
+                            <span className="discount">{e.discount}% OFF</span>
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          {/* <div
-                              className="btn_atc"
-                              onClick={() => {
-                                addToCart(e);
-                                alert("product added to cart successfully");
-                              }}
-                              style={{ cursor: "pointer" }}
-                            >
-                              <i className="bi bi-cart" id={e.id}>
-                                Add to Cart
-                              </i>
-                            </div> */}
-
                           <div
-                            className="btn_gtc"
+                            className="btn_atc"
+                            onClick={() => {
+                              addToCart(e);
+
+                              alert("product added to cart successfully");
+                            }}
                             style={{ cursor: "pointer" }}
-                          > 
-                          
-                            <Link to="/cart" style={{color: "#05A856" }}>Go to Cart</Link>
-                            <i className="bi bi-arrow-right" id={e.id}>
-                              
+                          >
+                            <i className="bi bi-cart" id={e.id}>
+                              Add to Cart
                             </i>
                           </div>
                         </div>
@@ -257,7 +215,6 @@ const YouMayLike = () => {
             </Carousel>
           </div>
         </div>
-
       </section>
     </div>
   );

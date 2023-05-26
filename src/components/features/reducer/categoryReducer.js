@@ -12,6 +12,7 @@ const initialState = {
   combo: null,
   product: null,
   error: null,
+  totalPages: 0,
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -30,6 +31,7 @@ const categoryReducer = (state = initialState, action) => {
         banner: action.payload.category,
         combo: action.payload.data.combos.data,
         product: action.payload.data.products.data,
+        totalPages:action.payload.data.products.last_page
       };
 
     case SORT_HIGH_TO_LOW:
