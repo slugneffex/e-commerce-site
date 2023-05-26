@@ -7,6 +7,10 @@ import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import "./product.css";
 import axios from "axios";
+
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from 'react-bootstrap/Button';
+
 import {
   addCartProduct,
   getCartCount,
@@ -75,6 +79,12 @@ const Product = () => {
 
   // share page
   const [showShareOption, setShowShareOption] = useState(false);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const ShareOption = () => {
     const pageUrl = `${window.location.origin}/combo/${id}`;
 
@@ -84,21 +94,88 @@ const Product = () => {
     };
 
     return (
-      <div>
-        <FacebookShareButton url={sharingOptions.url}>
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-        <TwitterShareButton url={sharingOptions.url}>
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-        <WhatsappShareButton url={sharingOptions.url}>
-          <WhatsappIcon size={32} round />
-        </WhatsappShareButton>
-        <InstapaperShareButton url={sharingOptions.url}>
+      <>
+        <div className="desktop">
+          <div style={{ backgroundColor: "white", color: "#464646", display: "flex", width: "265px", height: "80px", justifyContent: "", marginTop: "10px", marginLeft: "10px", padding: "5px", paddingTop: "10px", boxShadow: "0 4px 16px 0 rgba(0,0,0,.2)", borderRadius: "10px" }}>
+            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+              <FacebookShareButton url={sharingOptions.url}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <br />
+              <p style={{ fontSize: "12px" }}>FaceBook</p>
+            </div>
 
-        </InstapaperShareButton>
-      
-      </div>  
+
+            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+              <TwitterShareButton url={sharingOptions.url}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <p style={{ fontSize: "12px" }}>Twitter</p>
+            </div>
+
+            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+              <WhatsappShareButton url={sharingOptions.url}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+              <p style={{ fontSize: "12px" }}>WhatsApp</p>
+            </div>
+
+            {/* <InstapaperShareButton url={sharingOptions.url}>
+
+        </InstapaperShareButton> */}
+
+          </div>
+        </div>
+
+        <div className="mobile">
+          <Offcanvas show={show} onHide={handleClose} placement="bottom" style={{ height: "35%" }} >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Share</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div className="row bg-light" style={{ height: "70px", padding: "10px" }}>
+                <div className="col-2" style={{ overflow: "hidden" }}>
+                  <img src={comboproduct[0].original_url} style={{ width: "100%", height: "100%" }} alt="ProductImg" />
+                </div>
+                <div className="col-10">
+                  {combos.name}
+                </div>
+              </div>
+
+              <div className="row" style={{ marginTop: "20px" }}>
+                <div className="col-3" style={{ padding: "0 10px 0 10px", textAlign: "center" }}>
+                  <i class="bi bi-link" style={{ fontSize: "26px" }}></i>
+                  <br />
+                  Copy Link
+                </div>
+
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <FacebookShareButton url={sharingOptions.url}>
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+                  FaceBook
+                </div>
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <TwitterShareButton url={sharingOptions.url}>
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+                  Twitter
+                </div>
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <WhatsappShareButton url={sharingOptions.url}>
+                    <WhatsappIcon size={40} round />
+                  </WhatsappShareButton>
+                  WhatsApp
+                </div>
+              </div>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </div>
+
+
+      </>
+
+
     );
   };
   const handleShareButtonClick = () => {
@@ -207,40 +284,46 @@ const Product = () => {
                 >
                   <div
                     style={{
-                      backgroundColor: "gray",
+                      backgroundColor: "#fe9e2d",
+                      color: "white",
                       borderRadius: "100%",
                       width: "30px",
                       height: "30px",
                       textAlign: "center",
+                      paddingTop: "1px"
                     }}
+                    onClick={handleShow}
                   >
                     <i
                       onClick={handleShareButtonClick}
-                      class="bi bi-upload"
+                      // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
+                      className="bi bi-upload"
                       style={{ fontSize: "18px" }}
                     >
                       {showShareOption && <ShareOption />}
                     </i>
                   </div>
 
+
                   <div
                     style={{
-                      backgroundColor: "gray",
+                      backgroundColor: "#fe9e2d",
+                      color: "white",
                       borderRadius: "100%",
                       width: "30px",
                       height: "30px",
                       marginLeft: "20px",
                       textAlign: "center",
                       textAlignLast: "center",
-                      paddingTop: "3px",
+                      paddingTop: "4px",
                     }}
                   >
                     <i
-                      class="bi bi-heart"
+                      className="bi bi-heart"
                       style={{ margin: "auto", fontSize: "18px" }}
                     ></i>
                   </div>
-                  {/* <i class="bi bi-heart " style={{ marginLeft: "20px"}}></i> */}
+                  {/* <i className="bi bi-heart " style={{ marginLeft: "20px"}}></i> */}
                 </div>
               </div>
               <div className="ratings">
@@ -325,7 +408,7 @@ const Product = () => {
                   </Link>
                 </div>
 
-                <div className="wishlist-sec">
+                {/* <div className="wishlist-sec">
                   <i
                     className="bi bi-heart"
                     style={{ marginRight: ".5rem" }}
@@ -333,7 +416,7 @@ const Product = () => {
                   <Link to="#" className="wishlist">
                     Add To Wishlist
                   </Link>
-                </div>
+                </div> */}
               </div>
 
               <div className="coupon-sec text-center mb-3">
