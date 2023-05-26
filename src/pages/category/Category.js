@@ -63,12 +63,12 @@ const Category = () => {
 
   // category api fetching
   const [pageNumber, setPageNumber] = useState(1);
-  const { combo, product, banner, loading ,totalPages} = useSelector(
+  const { combo, product, banner, loading, totalPages } = useSelector(
     (state) => state.data
   );
   useEffect(() => {
-    dispatch(fetchCategory(id,pageNumber));
-  }, [dispatch, id,pageNumber]);
+    dispatch(fetchCategory(id, pageNumber));
+  }, [dispatch, id, pageNumber]);
 
   useEffect(() => {
     const updateDisplayedPages = () => {
@@ -84,44 +84,44 @@ const Category = () => {
     updateDisplayedPages();
   }, [pageNumber, totalPages]);
 
+  // Pgination
 
-// Pgination
+  const handlePageClick = (page) => {
+    setFilteredProducts([]);
+    setCheckedFilters(false);
+    setPageNumber(page);
 
-const handlePageClick = (page) => {
-  setFilteredProducts([])
-  setCheckedFilters(false)
-  setPageNumber(page)
- 
-  // dispatch(fetchBrandproduct(brand_id, page));
-};
+    // dispatch(fetchBrandproduct(brand_id, page));
+  };
 
-const handlePreviousClick = () => {
-  if (pageNumber > 1) {
-    setPageNumber((prevPage) => prevPage - 1);
-    // dispatch(fetchBrandproduct(brand_id, pageNumber - 1));
-  }
-};
+  const handlePreviousClick = () => {
+    if (pageNumber > 1) {
+      setPageNumber((prevPage) => prevPage - 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber - 1));
+    }
+  };
 
-const handleNextClick = () => {
-  if (pageNumber < totalPages) {
-    setPageNumber((prevPage) => prevPage + 1);
-    // dispatch(fetchBrandproduct(brand_id, pageNumber + 1));
-  }
-};
+  const handleNextClick = () => {
+    if (pageNumber < totalPages) {
+      setPageNumber((prevPage) => prevPage + 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber + 1));
+    }
+  };
 
-const renderPageNumbers = () => {
-  return displayedPages.map((page) => (
-    <li className="page-item" key={page}>
-      <Link
-        className={`page-link page-number ${pageNumber === page ? "active" : ""}`}
-        onClick={() => handlePageClick(page)}
-      >
-        {page}
-      </Link>
-    </li>
-  ));
-};
-
+  const renderPageNumbers = () => {
+    return displayedPages.map((page) => (
+      <li className="page-item" key={page}>
+        <Link
+          className={`page-link page-number ${
+            pageNumber === page ? "active" : ""
+          }`}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Link>
+      </li>
+    ));
+  };
 
   //  sorting
   const handleSortHighToLow = () => {
@@ -394,6 +394,8 @@ const renderPageNumbers = () => {
   //for scroll
 
   function handleClick(categoryId) {
+    setPageNumber(1)
+    setCheckedFilters(false);
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
@@ -401,6 +403,7 @@ const renderPageNumbers = () => {
   }
 
   function handleClickbrand(brandId) {
+    setPageNumber(1)
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
@@ -912,7 +915,7 @@ const renderPageNumbers = () => {
                               />
 
                               <label className="form-check-label">
-                                {e.name} (106)
+                                {e.name}
                               </label>
                             </div>
                           ))}
@@ -974,7 +977,7 @@ const renderPageNumbers = () => {
                                 className="form-check-label"
                                 htmlFor={e.name}
                               >
-                                {e.name} (51)
+                                {e.name}
                               </label>
                             </div>
                           ))}
@@ -1381,7 +1384,7 @@ const renderPageNumbers = () => {
               page {pageNumber} of {totalPages}
             </div>
 
-            <div style={{marginRight:"37rem"}}>
+            <div style={{ marginRight: "37rem" }}>
               <ul
                 className="pagination"
                 style={{
@@ -1400,9 +1403,9 @@ const renderPageNumbers = () => {
                   </Link>
                 </li>
                 <div className="numbers">
-                  <li className="page-item" ><Link className="page-number" >{renderPageNumbers()}</Link></li>
-                  
-                  
+                  <li className="page-item">
+                    <Link className="page-number">{renderPageNumbers()}</Link>
+                  </li>
                 </div>
                 <li className="page-item">
                   <Link className="page-link" onClick={handleNextClick}>
@@ -1411,8 +1414,6 @@ const renderPageNumbers = () => {
                 </li>
               </ul>
             </div>
-
-           
           </nav>
         </div>
       </HomeLayout>

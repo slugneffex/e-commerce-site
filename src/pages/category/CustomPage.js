@@ -1249,228 +1249,228 @@ const CustomPage = () => {
             {isLoading ? (
                 <div id="cover-spin"></div>
               ) : (
-                <div style={{ display: "none" }}></div>
-              )}
-            <div className="col-md-9 " >
-            <div className="banner" key={banner.id}>
-              <img src={banner.thumbnail?.url} width="100%" alt="baner" />
-            </div>
-
-            <div className="row">
-              <nav>
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <Link>Categories</Link>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <Link className="categoriesName">{banner.name}</Link>
-                  </li>
-                </ol>
-              </nav>
-            </div>
-            <div className="row" style={{ marginTop: "3rem" }}>
-              <div className="col-md-6">
-                <h4>
-                  <strong>Top Trending</strong>
-                </h4>
-              </div>
-              {/* <div className="col-md-6" style={{ textAlign: "end" }}>
-                <div className="" style={{}}>
-                  <Dropdown>
-                    <Dropdown.Toggle
-                      variant=""
-                      id="dropdown-basic"
-                      style={{
-                        border: "1px solid",
-                        marginLeft: "3rem",
-                        width: "120px",
-                      }}
-                    >
-                      Sort by
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                      <Dropdown.Item onClick={lowtoHigh}>
-                        low to High
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={sortData}>
-                        High to low
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                <div className="col-md-9 " >
+                <div className="banner" key={banner.id}>
+                  <img src={banner.thumbnail?.url} width="100%" alt="baner" />
                 </div>
-              </div> */}
-            </div>
-
-            <div className="row" style={{ marginTop: "1rem" }}>
-              {/* Combo products */}
-
-              {section}
-
-              {/* Categories combo secetion */}
-              {categoriesComboSection}
-
-              <hr />
-              <div className="byocc">
-                <h3>Bulid Your Own Combo</h3>
-                <img src="/assets/img/byoc.png" alt="byoc-img" />
-              </div>
-              <hr />
-
-              {/* Single Products */}
-              {filteredProducts.length > 0
-                ? filteredProducts.map((p) => (
-                    <div className="col-md-4" key={p.id}>
-                      <div className="newComboCart">
-                        <div
-                          className="cart-img-sec"
-                          style={{ position: "relative" }}
+    
+                <div className="row">
+                  <nav>
+                    <ol className="breadcrumb">
+                      <li className="breadcrumb-item">
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li className="breadcrumb-item">
+                        <Link>Categories</Link>
+                      </li>
+                      <li className="breadcrumb-item">
+                        <Link className="categoriesName">{banner.name}</Link>
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+                <div className="row" style={{ marginTop: "3rem" }}>
+                  <div className="col-md-6">
+                    <h4>
+                      <strong>Top Trending</strong>
+                    </h4>
+                  </div>
+                  {/* <div className="col-md-6" style={{ textAlign: "end" }}>
+                    <div className="" style={{}}>
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          variant=""
+                          id="dropdown-basic"
+                          style={{
+                            border: "1px solid",
+                            marginLeft: "3rem",
+                            width: "120px",
+                          }}
                         >
-                          <Link
-                            onClick={() => wishlistProductData(p.id)}
-                            className="addtofavCategory"
-                          >
-                            <ul>
-                              <li className="youMayLikeHeart">
-                                {heartFilled === p.id ? (
-                                  <i
-                                    style={{ color: "#fe9e2d" }}
-                                    className="bi bi-heart-fill"
-                                  ></i>
-                                ) : (
-                                  <i className="bi bi-heart"></i>
-                                )}
-                              </li>
-                            </ul>
-                          </Link>
-                          <Link to={`/product/${p.id}`}>
-                            <img
-                              src={p.thumbnail_img?.original_url}
-                              alt={p.name}
-                              width="100%"
-                            ></img>
-                          </Link>
-                        </div>
-
-                        <div className="card-det-sec">
-                          <div className="headingCard pt-3 ">
-                            <span>{p.name.substring(0, 40)}</span>
-                          </div>
-                          <div>
-                            <span className="packof">(Pack of 2)</span>
-                          </div>
-                          <div className="price-sec">
-                            <span className="spSingleProduct">
-                              ₹{p.selling_price}
-                            </span>
-                          </div>
-                          <div className="card-btn-sec ">
-                            <div
-                              className="btn_atc"
-                              onClick={() => {
-                                addToSingleCart(p);
-                                alert("product added to cart successfully");
-                              }}
-                              style={{ cursor: "pointer" }}
-                            >
-                              <i className="bi bi-cart" id={p.id}>
-                                Add to Cart
-                              </i>
-                              {/* key={subArray[0].id} */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                          Sort by
+                        </Dropdown.Toggle>
+    
+                        <Dropdown.Menu>
+                          <Dropdown.Item onClick={lowtoHigh}>
+                            low to High
+                          </Dropdown.Item>
+                          <Dropdown.Item onClick={sortData}>
+                            High to low
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
                     </div>
-                  ))
-                : brandProduct.map((subArray) => {
-                    if (subArray.length > 0) {
-                      return (
-                        <>
-                          {subArray.map((p) => (
-                            <div className="col-md-4" key={p.id}>
-                              <div className="newComboCart">
-                                <div
-                                  className="cart-img-sec"
-                                  style={{ position: "relative" }}
-                                >
-                                  <Link
-                                    onClick={() => wishlistProductData(p.id)}
-                                    className="addtofavCategory"
-                                  >
-                                    <ul>
-                                      <li className="youMayLikeHeart">
-                                        {heartFilled === p.id ? (
-                                          <i
-                                            style={{ color: "#fe9e2d" }}
-                                            className="bi bi-heart-fill"
-                                          ></i>
-                                        ) : (
-                                          <i className="bi bi-heart"></i>
-                                        )}
-                                      </li>
-                                    </ul>
-                                  </Link>
-                                  <Link to={`/product/${p.id}`}>
-                                    <img
-                                      src={p.thumbnail_img?.original_url}
-                                      alt={p.name}
-                                      width="100%"
-                                    ></img>
-                                  </Link>
-                                </div>
-
-                                <div className="card-det-sec">
-                                  <div className="headingCard pt-3 ">
-                                    {/* <span>{p.name.substring(0, 40)}</span> */}
-                                    {p.name && (
-                                      <span>{p.name.substring(0, 40)}</span>
+                  </div> */}
+                </div>
+    
+                <div className="row" style={{ marginTop: "1rem" }}>
+                  {/* Combo products */}
+    
+                  {section}
+    
+                  {/* Categories combo secetion */}
+                  {categoriesComboSection}
+    
+                  <hr />
+                  <div className="byocc">
+                    <h3>Bulid Your Own Combo</h3>
+                    <img src="/assets/img/byoc.png" alt="byoc-img" />
+                  </div>
+                  <hr />
+    
+                  {/* Single Products */}
+                  {filteredProducts.length > 0
+                    ? filteredProducts.map((p) => (
+                        <div className="col-md-4" key={p.id}>
+                          <div className="newComboCart">
+                            <div
+                              className="cart-img-sec"
+                              style={{ position: "relative" }}
+                            >
+                              <Link
+                                onClick={() => wishlistProductData(p.id)}
+                                className="addtofavCategory"
+                              >
+                                <ul>
+                                  <li className="youMayLikeHeart">
+                                    {heartFilled === p.id ? (
+                                      <i
+                                        style={{ color: "#fe9e2d" }}
+                                        className="bi bi-heart-fill"
+                                      ></i>
+                                    ) : (
+                                      <i className="bi bi-heart"></i>
                                     )}
-                                  </div>
-                                  <div>
-                                    <span className="packof">
-                                      (Pack of 2)
-                                    </span>
-                                  </div>
-                                  <div className="price-sec">
-                                    <span className="spSingleProduct">
-                                      ₹{p.selling_price}
-                                    </span>
-                                  </div>
-                                  <div className="card-btn-sec ">
-                                    <div
-                                      className="btn_atc"
-                                      onClick={() => {
-                                        addToSingleCart(p);
-                                        alert(
-                                          "product added to cart successfully"
-                                        );
-                                      }}
-                                      style={{ cursor: "pointer" }}
-                                    >
-                                      <i className="bi bi-cart" id={p.id}>
-                                        Add to Cart
-                                      </i>
-                                    </div>
-                                  </div>
+                                  </li>
+                                </ul>
+                              </Link>
+                              <Link to={`/product/${p.id}`}>
+                                <img
+                                  src={p.thumbnail_img?.original_url}
+                                  alt={p.name}
+                                  width="100%"
+                                ></img>
+                              </Link>
+                            </div>
+    
+                            <div className="card-det-sec">
+                              <div className="headingCard pt-3 ">
+                                <span>{p.name.substring(0, 40)}</span>
+                              </div>
+                              <div>
+                                <span className="packof">(Pack of 2)</span>
+                              </div>
+                              <div className="price-sec">
+                                <span className="spSingleProduct">
+                                  ₹{p.selling_price}
+                                </span>
+                              </div>
+                              <div className="card-btn-sec ">
+                                <div
+                                  className="btn_atc"
+                                  onClick={() => {
+                                    addToSingleCart(p);
+                                    alert("product added to cart successfully");
+                                  }}
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <i className="bi bi-cart" id={p.id}>
+                                    Add to Cart
+                                  </i>
+                                  {/* key={subArray[0].id} */}
                                 </div>
                               </div>
                             </div>
-                          ))}
-                        </>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-
-              {/* Categories single Product */}
-              {categoriesProductSection}
-            </div>
-          </div>
+                          </div>
+                        </div>
+                      ))
+                    : brandProduct.map((subArray) => {
+                        if (subArray.length > 0) {
+                          return (
+                            <>
+                              {subArray.map((p) => (
+                                <div className="col-md-4" key={p.id}>
+                                  <div className="newComboCart">
+                                    <div
+                                      className="cart-img-sec"
+                                      style={{ position: "relative" }}
+                                    >
+                                      <Link
+                                        onClick={() => wishlistProductData(p.id)}
+                                        className="addtofavCategory"
+                                      >
+                                        <ul>
+                                          <li className="youMayLikeHeart">
+                                            {heartFilled === p.id ? (
+                                              <i
+                                                style={{ color: "#fe9e2d" }}
+                                                className="bi bi-heart-fill"
+                                              ></i>
+                                            ) : (
+                                              <i className="bi bi-heart"></i>
+                                            )}
+                                          </li>
+                                        </ul>
+                                      </Link>
+                                      <Link to={`/product/${p.id}`}>
+                                        <img
+                                          src={p.thumbnail_img?.original_url}
+                                          alt={p.name}
+                                          width="100%"
+                                        ></img>
+                                      </Link>
+                                    </div>
+    
+                                    <div className="card-det-sec">
+                                      <div className="headingCard pt-3 ">
+                                        {/* <span>{p.name.substring(0, 40)}</span> */}
+                                        {p.name && (
+                                          <span>{p.name.substring(0, 40)}</span>
+                                        )}
+                                      </div>
+                                      <div>
+                                        <span className="packof">
+                                          (Pack of 2)
+                                        </span>
+                                      </div>
+                                      <div className="price-sec">
+                                        <span className="spSingleProduct">
+                                          ₹{p.selling_price}
+                                        </span>
+                                      </div>
+                                      <div className="card-btn-sec ">
+                                        <div
+                                          className="btn_atc"
+                                          onClick={() => {
+                                            addToSingleCart(p);
+                                            alert(
+                                              "product added to cart successfully"
+                                            );
+                                          }}
+                                          style={{ cursor: "pointer" }}
+                                        >
+                                          <i className="bi bi-cart" id={p.id}>
+                                            Add to Cart
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
+    
+                  {/* Categories single Product */}
+                  {categoriesProductSection}
+                </div>
+              </div>
+              )}
+          
       
           
           </div>
