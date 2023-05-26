@@ -44,7 +44,7 @@ const Product = () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/combo/${id}`,
-          options 
+          options
         );
         setCombos(response.data.combo);
         setComboproduct(response.data.combo.gallery);
@@ -92,7 +92,7 @@ const Product = () => {
     dispatch(getTotalDiscount());
   };
 
- 
+
 
   return (
     <div className="product_div">
@@ -115,13 +115,13 @@ const Product = () => {
                     style={{ border: "1px solid #464646" }}
                   >
                     <img src={combos.meta_img?.url} alt={combos.name} width='100%' />
-                  
+
 
                   </div>
 
                   {comboproduct.map((e) => (
                     <div className="item big-img" data-hash="two" key={e.id}>
-                      <img src={e.original_url} alt="name"  width='100%'/>
+                      <img src={e.original_url} alt="name" width='100%' />
                     </div>
                   ))}
                 </Carousel>
@@ -144,11 +144,29 @@ const Product = () => {
                   </ol>
                 </nav>
               </div>
+
               <div className="heading" style={{ padding: "0" }}>
                 <h1>{combos.name}</h1>
               </div>
-              <div className="quantity">
-                <span>(Pack of {combos.packqty})</span>
+
+
+
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="quantity">
+                  <span>(Pack of {combos.packqty})</span>
+                </div>
+
+                <div className="productIconDiv" style={{ display: "flex", justifyContent: "center" }}>
+
+                  <div style={{ backgroundColor: "gray", borderRadius: "100%", width: "30px", height: "30px", textAlign: "center" }}>
+                    <i class="bi bi-upload" style={{  fontSize: "18px" }}></i>
+                  </div>
+
+                  <div style={{ backgroundColor: "gray", borderRadius: "100%", width: "30px", height: "30px", marginLeft: "20px", textAlign: "center", textAlignLast: "center",paddingTop: "3px" }}>
+                    <i class="bi bi-heart" style={{ margin: "auto", fontSize: "18px" }}></i>
+                  </div>
+                  {/* <i class="bi bi-heart " style={{ marginLeft: "20px"}}></i> */}
+                </div>
               </div>
               <div className="ratings">
                 <i className="bi bi-star-fill"></i>
@@ -328,7 +346,7 @@ const Product = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                  <div dangerouslySetInnerHTML={{ __html:combos.desc }} />
+                    <div dangerouslySetInnerHTML={{ __html: combos.desc }} />
                     {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li> */}
@@ -412,7 +430,7 @@ const Product = () => {
                   </h2>
                   <div className="review-card d-flex">
                     <div className="img-sec text-center d-grid">
-                      <img src="assets/img/product/small.png" alt=""width='100%' />
+                      <img src="assets/img/product/small.png" alt="" width='100%' />
                       <span>Gwalesh Singh</span>
                     </div>
                     <div className="card-body text-left">
