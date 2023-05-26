@@ -188,7 +188,7 @@ const Product = () => {
               </div>
               <div className="basic-details">
                 <span>Sold By:</span>
-                <span className="sold-by" style={{ marginLeft: ".5rem" }} onClick={sharePage}>
+                <span className="sold-by" style={{ marginLeft: ".5rem" }}>
                   Born Unicorn Tech Prise Pvt. Ltd.
                 </span>
                 <br />
