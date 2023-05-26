@@ -98,7 +98,7 @@ const BrandProduct = () => {
     ));
   };
 
-  console.log(pageNumber);
+
 
   // filteration
 
@@ -1190,21 +1190,7 @@ const BrandProduct = () => {
                 </li>
                 <div className="numbers">
                   <li className="page-item" ><Link className="page-number" >{renderPageNumbers()}</Link></li>
-                  {/* {Array.from(
-                    { length: totalPages },
-                    (_, index) => index + 1
-                  ).map((page) => (
-                    <li className="page-item" key={page}>
-                      <Link
-                        className={`page-link page-number ${
-                          pageNumber === page ? "active" : ""
-                        }`}
-                        onClick={() => handlePageClick(page)}
-                      >
-                        {page}
-                      </Link>
-                    </li>
-                  ))} */}
+                  
                   
                 </div>
                 <li className="page-item">
@@ -1215,7 +1201,7 @@ const BrandProduct = () => {
               </ul>
             </div>
 
-            <div></div>
+           
           </nav>
         </div>
       </HomeLayout>
