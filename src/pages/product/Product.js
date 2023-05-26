@@ -15,6 +15,17 @@ import {
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
 import { useDispatch } from "react-redux";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  InstapaperShareButton,
+
+} from "react-share";
+
 // import { fetchCombodetails } from "../../components/features/actions/combodetailsActions";
 
 const Product = () => {
@@ -62,10 +73,46 @@ const Product = () => {
     fetchData();
   }, [id]);
 
+  // share page
+  const [showShareOption, setShowShareOption] = useState(false);
+  const ShareOption = () => {
+    const pageUrl = `${window.location.origin}/combo/${id}`;
 
+    const sharingOptions = {
+      title: "Page Title",
+      url: pageUrl,
+    };
+
+    return (
+      <div>
+        <FacebookShareButton url={sharingOptions.url}>
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        <TwitterShareButton url={sharingOptions.url}>
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
+        <WhatsappShareButton url={sharingOptions.url}>
+          <WhatsappIcon size={32} round />
+        </WhatsappShareButton>
+        <InstapaperShareButton url={sharingOptions.url}>
+
+        </InstapaperShareButton>
+      
+      </div>  
+    );
+  };
+  const handleShareButtonClick = () => {
+    // If the share option is already open, close it
+    if (showShareOption) {
+      setShowShareOption(false);
+    } else {
+      // Fetch product details and open the share option
+
+      setShowShareOption(true);
+    }
+  };
 
   // add to cart for combo
-
 
   let productObj = {
     id: "",
@@ -92,8 +139,6 @@ const Product = () => {
     dispatch(getTotalDiscount());
   };
 
-
-
   return (
     <div className="product_div">
       <HomeLayout>
@@ -114,14 +159,16 @@ const Product = () => {
                     key={combos.id}
                     style={{ border: "1px solid #464646" }}
                   >
-                    <img src={combos.meta_img?.url} alt={combos.name} width='100%' />
-
-
+                    <img
+                      src={combos.meta_img?.url}
+                      alt={combos.name}
+                      width="100%"
+                    />
                   </div>
 
                   {comboproduct.map((e) => (
                     <div className="item big-img" data-hash="two" key={e.id}>
-                      <img src={e.original_url} alt="name" width='100%' />
+                      <img src={e.original_url} alt="name" width="100%" />
                     </div>
                   ))}
                 </Carousel>
@@ -149,21 +196,49 @@ const Product = () => {
                 <h1>{combos.name}</h1>
               </div>
 
-
-
               <div style={{ display: "flex", alignItems: "center" }}>
                 <div className="quantity">
                   <span>(Pack of {combos.packqty})</span>
                 </div>
 
-                <div className="productIconDiv" style={{ display: "flex", justifyContent: "center" }}>
-
-                  <div style={{ backgroundColor: "gray", borderRadius: "100%", width: "30px", height: "30px", textAlign: "center" }}>
-                    <i class="bi bi-upload" style={{  fontSize: "18px" }}></i>
+                <div
+                  className="productIconDiv"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <div
+                    style={{
+                      backgroundColor: "gray",
+                      borderRadius: "100%",
+                      width: "30px",
+                      height: "30px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <i
+                      onClick={handleShareButtonClick}
+                      class="bi bi-upload"
+                      style={{ fontSize: "18px" }}
+                    >
+                      {showShareOption && <ShareOption />}
+                    </i>
                   </div>
 
-                  <div style={{ backgroundColor: "gray", borderRadius: "100%", width: "30px", height: "30px", marginLeft: "20px", textAlign: "center", textAlignLast: "center",paddingTop: "3px" }}>
-                    <i class="bi bi-heart" style={{ margin: "auto", fontSize: "18px" }}></i>
+                  <div
+                    style={{
+                      backgroundColor: "gray",
+                      borderRadius: "100%",
+                      width: "30px",
+                      height: "30px",
+                      marginLeft: "20px",
+                      textAlign: "center",
+                      textAlignLast: "center",
+                      paddingTop: "3px",
+                    }}
+                  >
+                    <i
+                      class="bi bi-heart"
+                      style={{ margin: "auto", fontSize: "18px" }}
+                    ></i>
                   </div>
                   {/* <i class="bi bi-heart " style={{ marginLeft: "20px"}}></i> */}
                 </div>
@@ -266,7 +341,7 @@ const Product = () => {
                   src="../assets/img/usps.svg"
                   alt="img-fluid"
                   className="img-fluid"
-                  width='100%'
+                  width="100%"
                 />
               </div>
             </div>
@@ -278,7 +353,7 @@ const Product = () => {
                 src="../assets/img/slabs-freebies.png"
                 alt="img-fluid"
                 className="img-fluid"
-                width='100%'
+                width="100%"
               />
             </div>
             <div className="col-md-6">
@@ -286,7 +361,7 @@ const Product = () => {
                 src="../assets/img/slabs-tnc.png"
                 alt="img-fluid"
                 className="img-fluid"
-                width='100%'
+                width="100%"
               />
             </div>
           </div>
@@ -430,7 +505,11 @@ const Product = () => {
                   </h2>
                   <div className="review-card d-flex">
                     <div className="img-sec text-center d-grid">
-                      <img src="assets/img/product/small.png" alt="" width='100%' />
+                      <img
+                        src="assets/img/product/small.png"
+                        alt=""
+                        width="100%"
+                      />
                       <span>Gwalesh Singh</span>
                     </div>
                     <div className="card-body text-left">
@@ -458,10 +537,26 @@ const Product = () => {
                         temporibus ducimus.
                       </p>
                       <div className="rev-img-sec">
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
                       </div>
                       <div className="likes my-3">
                         <i className="bi bi-hand-thumbs-up"></i> 5

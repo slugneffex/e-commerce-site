@@ -6,6 +6,15 @@ import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import axios from "axios";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  InstapaperShareButton,
+} from "react-share";
 
 const Singleproduct = () => {
   const { id } = useParams();
@@ -46,6 +55,41 @@ const Singleproduct = () => {
     console.log(error);
   }
 
+  const [showShareOption, setShowShareOption] = useState(false);
+  const ShareOption = () => {
+    const pageUrl = `${window.location.origin}/product/${id}`;
+
+    const sharingOptions = {
+      title: "Page Title",
+      url: pageUrl,
+    };
+
+    return (
+      <div>
+        <FacebookShareButton url={sharingOptions.url}>
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        <TwitterShareButton url={sharingOptions.url}>
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
+        <WhatsappShareButton url={sharingOptions.url}>
+          <WhatsappIcon size={32} round />
+        </WhatsappShareButton>
+        <InstapaperShareButton url={sharingOptions.url}></InstapaperShareButton>
+      </div>
+    );
+  };
+  const handleShareButtonClick = () => {
+    // If the share option is already open, close it
+    if (showShareOption) {
+      setShowShareOption(false);
+    } else {
+      // Fetch product details and open the share option
+
+      setShowShareOption(true);
+    }
+  };
+
   return (
     <div>
       <HomeLayout>
@@ -68,13 +112,18 @@ const Singleproduct = () => {
                       src={product.thumbnail_img?.original_url}
                       alt="name"
                       className=""
-                      width='100%'
+                      width="100%"
                     />
                   </div>
 
                   {productimg.map((e) => (
                     <div className="item big-img" data-hash="two">
-                      <img src={e.original_url} alt="name" className="" width='100%' />
+                      <img
+                        src={e.original_url}
+                        alt="name"
+                        className=""
+                        width="100%"
+                      />
                     </div>
                   ))}
                 </Carousel>
@@ -103,6 +152,47 @@ const Singleproduct = () => {
               {/* <div className="quantity">
                 <span>()</span>
               </div> */}
+              <div
+                className="productIconDiv"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "gray",
+                    borderRadius: "100%",
+                    width: "30px",
+                    height: "30px",
+                    textAlign: "center",
+                  }}
+                >
+                  <i
+                    onClick={handleShareButtonClick}
+                    class="bi bi-upload"
+                    style={{ fontSize: "18px" }}
+                  >
+                    {showShareOption && <ShareOption />}
+                  </i>
+                </div>
+
+                <div
+                  style={{
+                    backgroundColor: "gray",
+                    borderRadius: "100%",
+                    width: "30px",
+                    height: "30px",
+                    marginLeft: "20px",
+                    textAlign: "center",
+                    textAlignLast: "center",
+                    paddingTop: "3px",
+                  }}
+                >
+                  <i
+                    class="bi bi-heart"
+                    style={{ margin: "auto", fontSize: "18px" }}
+                  ></i>
+                </div>
+                {/* <i class="bi bi-heart " style={{ marginLeft: "20px"}}></i> */}
+              </div>
               <div className="ratings">
                 <i className="bi bi-star-fill"></i>
                 <i className="bi bi-star-fill"></i>
@@ -121,7 +211,10 @@ const Singleproduct = () => {
               </div>
               <div className="basic-details">
                 <span>Sold By:</span>
-                <span className="sold-by"> Born Unicorn Tech Prise Pvt. Ltd.</span>
+                <span className="sold-by">
+                  {" "}
+                  Born Unicorn Tech Prise Pvt. Ltd.
+                </span>
                 <br />
                 <span>MRP:</span>
                 <del className="mrp">₹{product.mrp}</del>
@@ -180,7 +273,7 @@ const Singleproduct = () => {
                   src="../assets/img/usps.svg"
                   alt="img-fluid"
                   className="img-fluid"
-                  width='100%'
+                  width="100%"
                 />
               </div>
               {/* <div className="coupon-sec text-center">
@@ -285,7 +378,7 @@ const Singleproduct = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                  <div dangerouslySetInnerHTML={{ __html:product.desc }} />
+                    <div dangerouslySetInnerHTML={{ __html: product.desc }} />
                     {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li> */}
