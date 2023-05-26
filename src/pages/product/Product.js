@@ -85,6 +85,8 @@ const Product = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+
   const ShareOption = () => {
     const pageUrl = `${window.location.origin}/combo/${id}`;
 
@@ -283,6 +285,7 @@ const Product = () => {
                   style={{ display: "flex", justifyContent: "center" }}
                 >
                   <div
+                    className="desktop"
                     style={{
                       backgroundColor: "#fe9e2d",
                       color: "white",
@@ -292,10 +295,32 @@ const Product = () => {
                       textAlign: "center",
                       paddingTop: "1px"
                     }}
-                    onClick={handleShow}
                   >
                     <i
                       onClick={handleShareButtonClick}
+                      // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
+                      className="bi bi-upload"
+                      style={{ fontSize: "18px" }}
+                    >
+                      {showShareOption && <ShareOption />}
+                    </i>
+                  </div>
+
+
+                  <div
+                  className="mobile"
+                    style={{
+                      backgroundColor: "#fe9e2d",
+                      color: "white",
+                      borderRadius: "100%",
+                      width: "30px",
+                      height: "30px",
+                      textAlign: "center",
+                      paddingTop: "1px"
+                    }}
+                  >
+                    <i
+                      onClick={handleShow}
                       // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
                       className="bi bi-upload"
                       style={{ fontSize: "18px" }}
