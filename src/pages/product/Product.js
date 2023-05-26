@@ -7,6 +7,10 @@ import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import "./product.css";
 import axios from "axios";
+
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from 'react-bootstrap/Button';
+
 import {
   addCartProduct,
   getCartCount,
@@ -15,6 +19,17 @@ import {
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
 import { useDispatch } from "react-redux";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  InstapaperShareButton,
+
+} from "react-share";
+
 // import { fetchCombodetails } from "../../components/features/actions/combodetailsActions";
 
 const Product = () => {
@@ -44,7 +59,7 @@ const Product = () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/combo/${id}`,
-          options 
+          options
         );
         setCombos(response.data.combo);
         setComboproduct(response.data.combo.gallery);
@@ -62,8 +77,119 @@ const Product = () => {
     fetchData();
   }, [id]);
 
-  // add to cart for combo
+  // share page
+  const [showShareOption, setShowShareOption] = useState(false);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const ShareOption = () => {
+    const pageUrl = `${window.location.origin}/combo/${id}`;
+
+    const sharingOptions = {
+      title: "Page Title",
+      url: pageUrl,
+    };
+
+    return (
+      <>
+        <div className="desktop">
+          <div style={{ backgroundColor: "white", color: "#464646", display: "flex", width: "265px", height: "80px", justifyContent: "", marginTop: "10px", marginLeft: "10px", padding: "5px", paddingTop: "10px", boxShadow: "0 4px 16px 0 rgba(0,0,0,.2)", borderRadius: "10px" }}>
+            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+              <FacebookShareButton url={sharingOptions.url}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <br />
+              <p style={{ fontSize: "12px" }}>FaceBook</p>
+            </div>
+
+
+            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+              <TwitterShareButton url={sharingOptions.url}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <p style={{ fontSize: "12px" }}>Twitter</p>
+            </div>
+
+            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+              <WhatsappShareButton url={sharingOptions.url}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+              <p style={{ fontSize: "12px" }}>WhatsApp</p>
+            </div>
+
+            {/* <InstapaperShareButton url={sharingOptions.url}>
+
+        </InstapaperShareButton> */}
+
+          </div>
+        </div>
+
+        <div className="mobile">
+          <Offcanvas show={show} onHide={handleClose} placement="bottom" style={{ height: "35%" }} >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Share</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div className="row bg-light" style={{ height: "70px", padding: "10px" }}>
+                <div className="col-2" style={{ overflow: "hidden" }}>
+                  <img src={comboproduct[0].original_url} style={{ width: "100%", height: "100%" }} alt="ProductImg" />
+                </div>
+                <div className="col-10">
+                  {combos.name}
+                </div>
+              </div>
+
+              <div className="row" style={{ marginTop: "20px" }}>
+                <div className="col-3" style={{ padding: "0 10px 0 10px", textAlign: "center" }}>
+                  <i class="bi bi-link" style={{ fontSize: "26px" }}></i>
+                  <br />
+                  Copy Link
+                </div>
+
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <FacebookShareButton url={sharingOptions.url}>
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+                  FaceBook
+                </div>
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <TwitterShareButton url={sharingOptions.url}>
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+                  Twitter
+                </div>
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <WhatsappShareButton url={sharingOptions.url}>
+                    <WhatsappIcon size={40} round />
+                  </WhatsappShareButton>
+                  WhatsApp
+                </div>
+              </div>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </div>
+
+
+      </>
+
+
+    );
+  };
+  const handleShareButtonClick = () => {
+    // If the share option is already open, close it
+    if (showShareOption) {
+      setShowShareOption(false);
+    } else {
+      // Fetch product details and open the share option
+
+      setShowShareOption(true);
+    }
+  };
+
+  // add to cart for combo
 
   let productObj = {
     id: "",
@@ -90,8 +216,6 @@ const Product = () => {
     dispatch(getTotalDiscount());
   };
 
- 
-
   return (
     <div className="product_div">
       <HomeLayout>
@@ -112,14 +236,16 @@ const Product = () => {
                     key={combos.id}
                     style={{ border: "1px solid #464646" }}
                   >
-                    <img src={combos.meta_img?.url} alt={combos.name} width='100%' />
-                  
-
+                    <img
+                      src={combos.meta_img?.url}
+                      alt={combos.name}
+                      width="100%"
+                    />
                   </div>
 
                   {comboproduct.map((e) => (
                     <div className="item big-img" data-hash="two" key={e.id}>
-                      <img src={e.original_url} alt="name"  width='100%'/>
+                      <img src={e.original_url} alt="name" width="100%" />
                     </div>
                   ))}
                 </Carousel>
@@ -142,11 +268,63 @@ const Product = () => {
                   </ol>
                 </nav>
               </div>
+
               <div className="heading" style={{ padding: "0" }}>
                 <h1>{combos.name}</h1>
               </div>
-              <div className="quantity">
-                <span>()</span>
+
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="quantity">
+                  <span>(Pack of {combos.packqty})</span>
+                </div>
+
+                <div
+                  className="productIconDiv"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <div
+                    style={{
+                      backgroundColor: "#fe9e2d",
+                      color: "white",
+                      borderRadius: "100%",
+                      width: "30px",
+                      height: "30px",
+                      textAlign: "center",
+                      paddingTop: "1px"
+                    }}
+                    onClick={handleShow}
+                  >
+                    <i
+                      onClick={handleShareButtonClick}
+                      // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
+                      className="bi bi-upload"
+                      style={{ fontSize: "18px" }}
+                    >
+                      {showShareOption && <ShareOption />}
+                    </i>
+                  </div>
+
+
+                  <div
+                    style={{
+                      backgroundColor: "#fe9e2d",
+                      color: "white",
+                      borderRadius: "100%",
+                      width: "30px",
+                      height: "30px",
+                      marginLeft: "20px",
+                      textAlign: "center",
+                      textAlignLast: "center",
+                      paddingTop: "4px",
+                    }}
+                  >
+                    <i
+                      className="bi bi-heart"
+                      style={{ margin: "auto", fontSize: "18px" }}
+                    ></i>
+                  </div>
+                  {/* <i className="bi bi-heart " style={{ marginLeft: "20px"}}></i> */}
+                </div>
               </div>
               <div className="ratings">
                 <i className="bi bi-star-fill"></i>
@@ -169,7 +347,7 @@ const Product = () => {
               <div className="basic-details">
                 <span>Sold By:</span>
                 <span className="sold-by" style={{ marginLeft: ".5rem" }}>
-                  XYZ Pvt. Ltd.
+                  Born Unicorn Tech Prise Pvt. Ltd.
                 </span>
                 <br />
                 <div style={{ marginTop: ".3rem" }}>
@@ -230,7 +408,7 @@ const Product = () => {
                   </Link>
                 </div>
 
-                <div className="wishlist-sec">
+                {/* <div className="wishlist-sec">
                   <i
                     className="bi bi-heart"
                     style={{ marginRight: ".5rem" }}
@@ -238,7 +416,7 @@ const Product = () => {
                   <Link to="#" className="wishlist">
                     Add To Wishlist
                   </Link>
-                </div>
+                </div> */}
               </div>
 
               <div className="coupon-sec text-center mb-3">
@@ -246,7 +424,7 @@ const Product = () => {
                   src="../assets/img/usps.svg"
                   alt="img-fluid"
                   className="img-fluid"
-                  width='100%'
+                  width="100%"
                 />
               </div>
             </div>
@@ -258,7 +436,7 @@ const Product = () => {
                 src="../assets/img/slabs-freebies.png"
                 alt="img-fluid"
                 className="img-fluid"
-                width='100%'
+                width="100%"
               />
             </div>
             <div className="col-md-6">
@@ -266,7 +444,7 @@ const Product = () => {
                 src="../assets/img/slabs-tnc.png"
                 alt="img-fluid"
                 className="img-fluid"
-                width='100%'
+                width="100%"
               />
             </div>
           </div>
@@ -326,7 +504,7 @@ const Product = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                  <div dangerouslySetInnerHTML={{ __html:combos.desc }} />
+                    <div dangerouslySetInnerHTML={{ __html: combos.desc }} />
                     {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li> */}
@@ -410,7 +588,11 @@ const Product = () => {
                   </h2>
                   <div className="review-card d-flex">
                     <div className="img-sec text-center d-grid">
-                      <img src="assets/img/product/small.png" alt=""width='100%' />
+                      <img
+                        src="assets/img/product/small.png"
+                        alt=""
+                        width="100%"
+                      />
                       <span>Gwalesh Singh</span>
                     </div>
                     <div className="card-body text-left">
@@ -438,10 +620,26 @@ const Product = () => {
                         temporibus ducimus.
                       </p>
                       <div className="rev-img-sec">
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
-                        <img src="./assets/img/review-img.png" alt="" width='100%' />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
+                        <img
+                          src="./assets/img/review-img.png"
+                          alt=""
+                          width="100%"
+                        />
                       </div>
                       <div className="likes my-3">
                         <i className="bi bi-hand-thumbs-up"></i> 5

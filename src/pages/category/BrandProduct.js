@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
@@ -17,7 +17,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { fetchBrandproduct,sortBrandproduct,filterBrandproduct } from "../../components/features/actions/brandproductActions";
+import {
+  fetchBrandproduct,
+  sortBrandproduct,
+} from "../../components/features/actions/brandproductActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 // import Loader from "../../components/home/Loader/Loader";
@@ -29,12 +32,14 @@ const BrandProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { brand_id } = useParams();
+ 
 
   // filteration state
-
+  // const [noProduct, setNoProduct] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-  const [noProduct, setNoProduct] = useState(false);
+
+
   const [priceRanges, setPriceRanges] = useState([
     { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
     { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
@@ -43,65 +48,91 @@ const BrandProduct = () => {
     { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
   ]);
 
-
-
-  
-
   // filteration state end
-
-  const { brandproduct, brandname, loading } = useSelector(
-    (state) => state.branddata
-  );
+  const [pageNumber, setPageNumber] = useState(1);
+  const { brandproduct, brandname, loading,  totalPages } =
+    useSelector((state) => state.branddata);
   const handleSort = (sortOrder) => {
     dispatch(sortBrandproduct(sortOrder));
   };
 
-  
   useEffect(() => {
-    dispatch(fetchBrandproduct(brand_id));
-  }, [dispatch, brand_id,]);
+    dispatch(fetchBrandproduct(brand_id, pageNumber));
+  }, [dispatch, brand_id, pageNumber]);
 
 
-  const handleFilter = (minPrice, maxPrice) => {
-    dispatch(filterBrandproduct(minPrice, maxPrice));
+ 
+
+  const handlePageClick = (page) => {
+    setFilteredProducts([])
+    setCheckedFilters(false)
+    setPageNumber(page)
+   
+    // dispatch(fetchBrandproduct(brand_id, page));
   };
 
-  
-  
+  const handlePreviousClick = () => {
+    if (pageNumber > 1) {
+      setPageNumber((prevPage) => prevPage - 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber - 1));
+    }
+  };
+
+  const handleNextClick = () => {
+    if (pageNumber < totalPages) {
+      setPageNumber((prevPage) => prevPage + 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber + 1));
+    }
+  };
+
+  const renderPageNumbers = () => {
+    return Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+      <li className="page-item" key={page}>
+        <Link
+          className={`page-link page-number ${pageNumber === page ? "active" : ""}`}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Link>
+      </li>
+    ));
+  };
+
+
 
   // filteration
 
-  // const handleFilter = (minPrice, maxPrice) => {
-  //   const key = `${minPrice}-${maxPrice}`;
+  const handleFilter = (minPrice, maxPrice) => {
+    const key = `${minPrice}-${maxPrice}`;
 
-  //   if (checkedFilters[key]) {
-  //     // If the filter is already checked, remove it
-  //     const newFilters = { ...checkedFilters };
-  //     delete newFilters[key];
-  //     setCheckedFilters(newFilters);
+    if (checkedFilters[key]) {
+      // If the filter is already checked, remove it
+      const newFilters = { ...checkedFilters };
+      delete newFilters[key];
+      setCheckedFilters(newFilters);
 
-  //     // Update the filtered products list
-  //     const newFilteredProducts = filteredProducts.filter((product) => {
-  //       const price = product.selling_price;
-  //       return !(price >= minPrice && price <= maxPrice);
-  //     });
-  //     setFilteredProducts(newFilteredProducts);
-  //   } else {
-  //     // If the filter is not checked, add it
-  //     setCheckedFilters({ ...checkedFilters, [key]: true });
+      // Update the filtered products list
+      const newFilteredProducts = filteredProducts.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilteredProducts(newFilteredProducts);
+    } else {
+      // If the filter is not checked, add it
+      setCheckedFilters({ ...checkedFilters, [key]: true });
 
-  //     // Update the filtered products list
-  //     const filtered = brandproduct.filter((product) => {
-  //       const price = product.selling_price;
-  //       return price >= minPrice && price <= maxPrice;
-  //     });
+      // Update the filtered products list
+      const filtered = brandproduct.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
 
-  //     setFilteredProducts((prevFilteredProducts) => [
-  //       ...prevFilteredProducts,
-  //       ...filtered,
-  //     ]);
-  //   }
-  // };
+      setFilteredProducts((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered,
+      ]);
+    }
+  };
 
   useEffect(() => {
     const updatePriceRangeVisibility = () => {
@@ -109,7 +140,8 @@ const BrandProduct = () => {
         const { minPrice, maxPrice } = range;
         const isVisible = brandproduct.some(
           (product) =>
-            product.selling_price >= minPrice && product.selling_price <= maxPrice
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
         );
         return { ...range, isVisible };
       });
@@ -119,60 +151,7 @@ const BrandProduct = () => {
     updatePriceRangeVisibility();
   }, [brandproduct, priceRanges]);
 
-
   // shorting
-
-
-
-
-
-
-
-  // const handleFilter = (minPrice, maxPrice) => {
-  //   const key = `${minPrice}-${maxPrice}`;
-
-  //   if (checkedFilters[key]) {
-  //     // If the filter is already checked, remove it
-  //     const newFilters = { ...checkedFilters };
-  //     delete newFilters[key];
-  //     setCheckedFilters(newFilters);
-
-  //     // Update the filtered products list
-  //     const newFilteredProducts = filteredProducts.filter((product) => {
-  //       const price = product.selling_price;
-  //       return !(price >= minPrice && price <= maxPrice);
-  //     });
-  //     setFilteredProducts(newFilteredProducts);
-  //     setNoProduct(false);
-  //   } else {
-  //     // If the filter is not checked, add it
-  //     setCheckedFilters({ ...checkedFilters, [key]: true });
-
-  //     // Update the filtered products list
-  //     const filtered = brandproduct.filter((product) => {
-  //       const price = product.selling_price;
-  //       return price >= minPrice && price <= maxPrice;
-  //     });
-  //     // setFilteredProducts((prevFilteredProducts) => [
-  //     //   ...prevFilteredProducts,
-  //     //   ...filtered,
-  //     // ]);
-
-  //     if (filtered.length > 0) {
-  //       setNoProduct(false); // hide message
-  //     } else {
-  //       setNoProduct(true); // show message
-  //       alert("Item not found in this price range");
-  //       // setCheckedFilters(false)
-  //       setCheckedFilters({ ...checkedFilters, [key]: false });
-  //     }
-
-  //     setFilteredProducts((prevFilteredProducts) => [
-  //       ...prevFilteredProducts,
-  //       ...filtered,
-  //     ]);
-  //   }
-  // };
 
   // Filterration end
 
@@ -194,7 +173,7 @@ const BrandProduct = () => {
   }, [dispatch]);
 
   //for scroll
- 
+
   // Add to cart single brand products
 
   let SingleproductObj = {
@@ -251,16 +230,16 @@ const BrandProduct = () => {
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
+    setPageNumber(1)
     navigate(`/category/${categoryId}`);
     // window.location.reload(`/category/${categoryId}`)
-  
   }
 
   function handleClickbrand(brandId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
+    setPageNumber(1)
     navigate(`/brand/${brandId}`);
-   
   }
 
   let singlebrandProduct = null;
@@ -271,7 +250,7 @@ const BrandProduct = () => {
           <div className="col-md-4 " key={p.id}>
             <div className="newComboCart">
               <div className="cart-img-sec" style={{ position: "relative" }}>
-                <Link  className="addtofavCategory">
+                <Link className="addtofavCategory">
                   <i
                     className="bi bi-heart"
                     style={{
@@ -281,7 +260,7 @@ const BrandProduct = () => {
                     }}
                   ></i>
                 </Link>
-                <Link  to={`/product/${p.id}`}>
+                <Link to={`/product/${p.id}`}>
                   <img
                     src={p.thumbnail_img?.original_url}
                     alt="img"
@@ -332,19 +311,52 @@ const BrandProduct = () => {
   return (
     <div>
       <HomeLayout>
-      <div className="mobile">
-          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
+        <div className="mobile">
+          <div
+            className="d-flex fixed-bottom bg-light"
+            style={{
+              textAlign: "center",
+              fontSize: "16px",
+              height: "40px",
+              alignItems: "center",
+            }}
+          >
             <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasLeft"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <CgSortAz /> Sort By
+              </div>
 
-              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
-
-              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+              <div
+                className="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasLeft"
+                aria-labelledby="offcanvasLeftLabel"
+                style={{ height: "80%" }}
+              >
                 <div className="offcanvas-header">
                   <h1 id="offcanvasLeftLabel">Sort By</h1>
-                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button
+                    type="button"
+                    className="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <hr />
-                <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                <div
+                  className="offcanvas-body"
+                  style={{
+                    textAlign: "left",
+                    lineHeight: "2",
+                    marginTop: "20px",
+                  }}
+                >
                   <ul>
                     <li>Name</li>
                     <li>Category</li>
@@ -355,18 +367,34 @@ const BrandProduct = () => {
             </div>
 
             <div className="col-6">
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <BiFilterAlt /> Filter
+              </div>
 
-              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
-
-              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+              <div
+                className="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel"
+                style={{ height: "80%" }}
+              >
                 <div className="offcanvas-header">
                   <h1 id="offcanvasRightLabel">Filter</h1>
-                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button
+                    type="button"
+                    className="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <hr />
                 <div className="offcanvas-body" style={{ textAlign: "left" }}>
-
-
                   <div>
                     <h5
                       variant="primary"
@@ -375,10 +403,16 @@ const BrandProduct = () => {
                       // aria-expanded={isOpen4}
                     >
                       Category
-
-                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen4 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h5>
-
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
@@ -393,7 +427,10 @@ const BrandProduct = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label
+                                className="form-check-label"
+                                htmlFor={e.name}
+                              >
                                 {e.name}
                               </label>
                             </div>
@@ -411,10 +448,16 @@ const BrandProduct = () => {
                       // aria-expanded={isOpen5}
                     >
                       Price
-
-                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen5 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h5>
-
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
@@ -424,7 +467,34 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          <div className="sortBy">
+                          {priceRanges.map((range) => {
+                            const { minPrice, maxPrice, label, isVisible } =
+                              range;
+                            const key = `${minPrice}-${maxPrice}`;
+
+                            return isVisible ? (
+                              <div key={key} className="sortBy">
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={key}
+                                >
+                                  {label}
+                                </label>
+                                <input
+                                  style={{ marginLeft: "7rem" }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  checked={!!checkedFilters[key]}
+                                  onChange={() =>
+                                    handleFilter(minPrice, maxPrice)
+                                  }
+                                  id={key}
+                                />
+                              </div>
+                            ) : null;
+                          })}
+                          {/* <div className="sortBy">
                             <label
                               className="form-check-label"
                               htmlFor="50-499"
@@ -508,13 +578,11 @@ const BrandProduct = () => {
                               onChange={() => handleFilter(5000, 500000)}
                               id="5000 & Above"
                             />
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </Collapse>
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -644,23 +712,25 @@ const BrandProduct = () => {
                           Categories
                         </h6>
 
-                        {isOpen1 ? <RiArrowDropUpLine 
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        /> 
-                         :
+                        {isOpen1 ? (
+                          <RiArrowDropUpLine
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        ) : (
                           <RiArrowDropDownLine
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        />}
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        )}
                       </div>
 
                       <Collapse in={isOpen1}>
@@ -705,23 +775,25 @@ const BrandProduct = () => {
                           Brand
                         </h6>
 
-                        {isOpen2 ? <RiArrowDropUpLine 
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        /> 
-                         :
+                        {isOpen2 ? (
+                          <RiArrowDropUpLine
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        ) : (
                           <RiArrowDropDownLine
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        />}
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        )}
                       </div>
 
                       <Collapse in={isOpen2}>
@@ -746,7 +818,7 @@ const BrandProduct = () => {
 
                             //   />
                             // </div>
-                            <div className="form-check" key={e.id}>
+                            <div className="form-check"  key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
@@ -754,6 +826,8 @@ const BrandProduct = () => {
                                 defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
+                             
+                               
                               />
                               <label className="form-check-label" htmlFor={103}>
                                 {e.name}
@@ -779,23 +853,25 @@ const BrandProduct = () => {
                           Price
                         </h6>
 
-                        {isOpen3 ? <RiArrowDropUpLine 
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        /> 
-                         :
+                        {isOpen3 ? (
+                          <RiArrowDropUpLine
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        ) : (
                           <RiArrowDropDownLine
-                          className="col-3 "
-                          style={{
-                            fontSize: "30px",
-                            backgroundColor: "#FFF",
-                            color: "#464646",
-                          }}
-                        />}
+                            className="col-3 "
+                            style={{
+                              fontSize: "30px",
+                              backgroundColor: "#FFF",
+                              color: "#464646",
+                            }}
+                          />
+                        )}
                       </div>
 
                       <Collapse in={isOpen3}>
@@ -805,7 +881,7 @@ const BrandProduct = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                           {priceRanges.map((range) => {
+                          {priceRanges.map((range) => {
                             const { minPrice, maxPrice, label, isVisible } =
                               range;
                             const key = `${minPrice}-${maxPrice}`;
@@ -934,9 +1010,12 @@ const BrandProduct = () => {
 
             {/* end mobile filter */}
 
-              <div className="col-md-9">
-                
-              {loading ? (<div id="cover-spin"></div>) : <div style={{display: "none" }}></div>}
+            <div className="col-md-9">
+              {loading ? (
+                <div id="cover-spin"></div>
+              ) : (
+                <div style={{ display: "none" }}></div>
+              )}
               {/* <div id="cover-spin"></div> */}
               <div>
                 <div className="row">
@@ -964,38 +1043,40 @@ const BrandProduct = () => {
                     </h4>
                   </div>
                   <div className="col-md-6">
-                  <div>
-                    <div style={{ textAlign: "end" }}>
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant=""
-                          id="dropdown-basic"
-                          style={{
-                            border: "1px solid",
-                            marginLeft: "3rem",
-                            width: "120px",
-                          }}
-                         
-                        >
-                          Sort by
-                        </Dropdown.Toggle>
+                    <div>
+                      <div style={{ textAlign: "end" }}>
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant=""
+                            id="dropdown-basic"
+                            style={{
+                              border: "1px solid",
+                              marginLeft: "3rem",
+                              width: "120px",
+                            }}
+                          >
+                            Sort by
+                          </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                     
-                          {/* <Dropdown.Item href="#/action-1">
+                          <Dropdown.Menu>
+                            {/* <Dropdown.Item href="#/action-1">
                             Action
                           </Dropdown.Item> */}
-                          <Dropdown.Item onClick={() => handleSort("lowToHigh")}>
-                            LOW TO HIGH
-                          </Dropdown.Item>
-                          <Dropdown.Item onClick={() => handleSort("highToLow")} >
-                           HIGH TO LOW
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                            <Dropdown.Item
+                              onClick={() => handleSort("lowToHigh")}
+                            >
+                              LOW TO HIGH
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => handleSort("highToLow")}
+                            >
+                              HIGH TO LOW
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
 
                 <div className="row" style={{ marginTop: "1rem" }}>
@@ -1072,9 +1153,56 @@ const BrandProduct = () => {
                   )}
                 </div>
               </div>
-              </div>
-              
+            </div>
           </div>
+        </div>
+        <div className="container mb-4">
+          <nav
+            aria-label="Page navigation example"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              page {pageNumber} of {totalPages}
+            </div>
+
+            <div>
+              <ul
+                className="pagination"
+                style={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <li className="page-item">
+                  <Link
+                    className="page-link"
+                    tabindex="-1"
+                    onClick={handlePreviousClick}
+                    disabled={pageNumber === 1}
+                  >
+                    Previous
+                  </Link>
+                </li>
+                <div className="numbers">
+                  <li className="page-item" ><Link className="page-number" >{renderPageNumbers()}</Link></li>
+                  
+                  
+                </div>
+                <li className="page-item">
+                  <Link className="page-link" onClick={handleNextClick}>
+                    Next
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+           
+          </nav>
         </div>
       </HomeLayout>
     </div>

@@ -13,6 +13,10 @@
     width: 100%;
     height: auto;
 }
+
+.productIconDiv {
+    margin-left: 150px;
+}
     
     
 .product-car .small-img img {
@@ -345,6 +349,10 @@ a {
 
     .addCart {
         width: 100%;
+    }
+
+    .productIconDiv {
+        margin-left: 200px;
     }
 
    

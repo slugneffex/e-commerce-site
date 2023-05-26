@@ -26,7 +26,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { fetchCategory } from "../../components/features/actions/categoryActions";
+import {
+  fetchCategory,
+  sortHighToLow,
+  sortLowToHigh,
+} from "../../components/features/actions/categoryActions";
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 
@@ -49,25 +53,84 @@ const Category = () => {
   const [filterCombo, setFilterCombo] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
+  const [displayedPages, setDisplayedPages] = useState([]);
 
   // const [noProduct, setNoProduct] = useState(false);
 
   const [noProduct, setNoProduct] = useState(false);
- 
 
   // filteration state end
 
   // category api fetching
-  const { combo, product, banner, loading } = useSelector(
+  const [pageNumber, setPageNumber] = useState(1);
+  const { combo, product, banner, loading, totalPages } = useSelector(
     (state) => state.data
   );
   useEffect(() => {
-    dispatch(fetchCategory(id));
-  }, [dispatch, id]);
+    dispatch(fetchCategory(id, pageNumber));
+  }, [dispatch, id, pageNumber]);
 
- 
+  useEffect(() => {
+    const updateDisplayedPages = () => {
+      const minPage = Math.max(pageNumber, pageNumber - 4);
+      const maxPage = Math.min(totalPages, pageNumber + 4);
+      const pages = [];
+      for (let i = minPage; i <= maxPage; i++) {
+        pages.push(i);
+      }
+      setDisplayedPages(pages);
+    };
 
- 
+    updateDisplayedPages();
+  }, [pageNumber, totalPages]);
+
+  // Pgination
+
+  const handlePageClick = (page) => {
+    setFilteredProducts([]);
+    setCheckedFilters(false);
+    setPageNumber(page);
+
+    // dispatch(fetchBrandproduct(brand_id, page));
+  };
+
+  const handlePreviousClick = () => {
+    if (pageNumber > 1) {
+      setPageNumber((prevPage) => prevPage - 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber - 1));
+    }
+  };
+
+  const handleNextClick = () => {
+    if (pageNumber < totalPages) {
+      setPageNumber((prevPage) => prevPage + 1);
+      // dispatch(fetchBrandproduct(brand_id, pageNumber + 1));
+    }
+  };
+
+  const renderPageNumbers = () => {
+    return displayedPages.map((page) => (
+      <li className="page-item" key={page}>
+        <Link
+          className={`page-link page-number ${
+            pageNumber === page ? "active" : ""
+          }`}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Link>
+      </li>
+    ));
+  };
+
+  //  sorting
+  const handleSortHighToLow = () => {
+    dispatch(sortHighToLow());
+  };
+
+  const handleSortLowToHigh = () => {
+    dispatch(sortLowToHigh());
+  };
 
   // const sortData = () => {
   //   const sortedData = [...combo].sort(
@@ -329,29 +392,28 @@ const Category = () => {
   };
 
   //for scroll
- 
+
   function handleClick(categoryId) {
+    setPageNumber(1)
+    setCheckedFilters(false);
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/category/${categoryId}`);
-   
   }
 
   function handleClickbrand(brandId) {
+    setPageNumber(1)
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
-  
   }
 
   // if there is no combo hide the section of combos
 
   let section = null;
-  if (loading) {
-    section = <div>Loading...</div>;
-  } else if (combo.length >= 1) {
+  if (combo.length >= 1) {
     section = (
       <>
         {/* section content */}
@@ -452,7 +514,7 @@ const Category = () => {
                       <span>{e.name}</span>
                     </div>
                     <div>
-                      <span className="packof">(Pack of 2)</span>
+                      <span className="packof">(Pack of {e.packqty})</span>
                     </div>
                     <div className="price-sec">
                       <div className="col-4" style={{ textAlign: "end" }}>
@@ -772,7 +834,7 @@ const Category = () => {
                     <input
                       style={{ marginLeft: "8.3rem" }}
                       className="form-check-input"
-                      type="checkbox"
+                      type="radio"
                       value=""
                       id="PriceHighToLow"
                     />
@@ -786,11 +848,9 @@ const Category = () => {
                       Price: Low to High
                     </label>
                     <input
-                      style={{ marginLeft: "8.3rem" }}
+                      type="radio"
+                      name="category_id"
                       className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="PriceLowToHigh"
                     />
                   </div>
                 </div>
@@ -855,7 +915,7 @@ const Category = () => {
                               />
 
                               <label className="form-check-label">
-                                {e.name} (106)
+                                {e.name}
                               </label>
                             </div>
                           ))}
@@ -917,7 +977,7 @@ const Category = () => {
                                 className="form-check-label"
                                 htmlFor={e.name}
                               >
-                                {e.name} (51)
+                                {e.name}
                               </label>
                             </div>
                           ))}
@@ -1138,10 +1198,10 @@ const Category = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item >
+                        <Dropdown.Item onClick={handleSortLowToHigh}>
                           low to High
                         </Dropdown.Item>
-                        <Dropdown.Item >
+                        <Dropdown.Item onClick={handleSortHighToLow}>
                           High to low
                         </Dropdown.Item>
                       </Dropdown.Menu>
@@ -1201,9 +1261,9 @@ const Category = () => {
                             <div className="headingCard pt-3 ">
                               <span>{p.name.substring(0, 40)}</span>
                             </div>
-                            <div>
+                            {/* <div>
                               <span className="packof">(Pack of 2)</span>
-                            </div>
+                            </div> */}
                             <div className="price-sec">
                               <span className="spSingleProduct">
                                 ₹{p.selling_price}
@@ -1271,20 +1331,22 @@ const Category = () => {
                             <div className="headingCard pt-3 ">
                               <span>{p.name.substring(0, 40)}</span>
                             </div>
-                            <div>
+                            {/* <div>
                               <span className="packof">(Pack of 2)</span>
-                            </div>
+                            </div> */}
                             <div className="price-sec">
                               <span className="spSingleProduct">
                                 ₹{p.selling_price}
                               </span>
 
+                              <div className="col-4">
+                                <del className="mrp">₹{p.mrp}</del>
+                              </div>
                               {/* <div className="col-4">
-                            <del className="mrp">₹{e.mrp}</del>
-                          </div> */}
-                              {/* <div className="col-4">
-                            <span className="discount">{p.discount}% OFF</span>
-                          </div> */}
+                                <span className="discount">
+                                  {p.discount}% OFF
+                                </span>
+                              </div> */}
                             </div>
                             <div className="card-btn-sec ">
                               <div
@@ -1307,6 +1369,52 @@ const Category = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="container mr-5">
+          <nav
+            aria-label="Page navigation example"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              page {pageNumber} of {totalPages}
+            </div>
+
+            <div style={{ marginRight: "37rem" }}>
+              <ul
+                className="pagination"
+                style={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <li className="page-item">
+                  <Link
+                    className="page-link"
+                    tabindex="-1"
+                    onClick={handlePreviousClick}
+                    disabled={pageNumber === 1}
+                  >
+                    Previous
+                  </Link>
+                </li>
+                <div className="numbers">
+                  <li className="page-item">
+                    <Link className="page-number">{renderPageNumbers()}</Link>
+                  </li>
+                </div>
+                <li className="page-item">
+                  <Link className="page-link" onClick={handleNextClick}>
+                    Next
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
       </HomeLayout>
     </>

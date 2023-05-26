@@ -140,9 +140,7 @@ const Header = () => {
     return pageCategories.show_with_category === "on";
   });
 
-  const handleClick = () => {
-    window.scrollTo(0,0);
-  };
+  
 
   return (
     <div>
@@ -234,11 +232,11 @@ const Header = () => {
         {/* navbar Start */}
         <div className="">
           <div id="navSec" className={navbarSticky ? "fixed-top " : ""}>
-            <nav className="navbar navbar-expand-lg bg-light ">
+            <nav className="navbar navbar-expand-lg bg-light">
               <div className="container">
                 {Array.isArray(byoc) &&
                   byoc.map((e) => (
-                    <Link onClick={handleClick} className="navbar-brand" to="/" key={e.id}>
+                    <Link className="navbar-brand" to="/" key={e.id}>
                       <img
                         src={e.logo?.original_url}
                         alt="logo-combonation"
@@ -267,7 +265,7 @@ const Header = () => {
                     aria-label="Search"
                     value={data.search}
                     onChange={(e) => handle(e)}
-                    onClick={handleClick}
+                   
                   ></input>
                 </form>
                 <div
@@ -282,7 +280,7 @@ const Header = () => {
                         id="navbarDropdown"
                         role="button"
                         aria-expanded="false"
-                        onClick={handleClick}
+                      
                       >
                         CATEGORIES
                       </Link>
@@ -298,7 +296,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link onClick={handleClick} to={`/category/${e.id}`}>
+                                <Link  to={`/category/${e.id}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.image?.url}
@@ -313,7 +311,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link onClick={handleClick} to={`/page/${e.id}`}>
+                                <Link  to={`/page/${e.id}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.icon?.original_url}
@@ -335,7 +333,7 @@ const Header = () => {
                         id="navbarDropdown"
                         role="button"
                         aria-expanded="false"
-                        onClick={handleClick}
+                     
                       >
                         BRANDS
                       </Link>
@@ -354,7 +352,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link onClick={handleClick} to={`/brand/${e.id}`}>
+                                <Link to={`/brand/${e.id}`}>
                                   <img
                                     src={e.image?.original_url}
                                     alt={e.name}
@@ -364,7 +362,7 @@ const Header = () => {
                               </div>
                             ))}
                             <div className="col-lg-3 col-50 text-center">
-                              <Link onClick={handleClick} to="/brandlogolist">
+                              <Link  to="/brandlogolist">
                                 <img
                                   src="https://www.combonation.in/assets_new/img/viewall.png"
                                   alt="view-all"
@@ -384,14 +382,14 @@ const Header = () => {
                         role="button"
                         // data-bs-toggle="dropdown"
                         aria-expanded="false"
-                        onClick={handleClick}
+                       
                       >
                         <i className="bi bi-geo-alt"></i> LOCATE MY STORES
                       </Link>
                       <ul className="dropdown-menu" id="stores-menu">
                         {store.map((e) => (
                           <li style={{ marginTop: "0.5rem" }} key={e.id}>
-                            <Link onClick={handleClick} to={`/store/${e.id}`}>{e.name}</Link>
+                            <Link to={`/store/${e.id}`}>{e.name}</Link>
                           </li>
                         ))}
                       </ul>
@@ -479,13 +477,13 @@ const Header = () => {
                     style={{ marginLeft: "auto" }}
                   >
                     <li className="nav-item">
-                      <Link onClick={handleClick} to="/signin" className="nav-link">
+                      <Link to="/signin" className="nav-link">
                         <i className="bi bi-person-circle"></i>
                         <span>Account</span>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link onClick={handleClick} to="/Wishlist" className="nav-link">
+                      <Link  to="/Wishlist" className="nav-link">
                         <i className="bi bi-heart"></i>
                         <span>Wishlist</span>
                       </Link>
@@ -493,7 +491,7 @@ const Header = () => {
 
                     <li className="nav-item">
                       <Link 
-                      onClick={handleClick}
+                     
                         to="/Cart"
                         className="nav-link"
                         style={{ position: "relative" }}
@@ -521,33 +519,33 @@ const Header = () => {
                     </li>
                     <div className="mobile">
                       <li className="nav-item">
-                        <Link onClick={handleClick} to="/Acccount" className="nav-link">
+                        <Link  to="/Acccount" className="nav-link">
                           My Profile
                         </Link>
                       </li>
                       <li className="nav-item">
                         {" "}
-                        <Link onClick={handleClick} to="/Place" className="nav-link">
+                        <Link  to="/Place" className="nav-link">
                           My Address
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link onClick={handleClick} to="/Wishlist" className="nav-link">
+                        <Link  to="/Wishlist" className="nav-link">
                           My whishlist
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link onClick={handleClick} to="/Orders" className="nav-link">
+                        <Link  to="/Orders" className="nav-link">
                           My Orders
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link onClick={handleClick} to="/Wallet" className="nav-link">
+                        <Link  to="/Wallet" className="nav-link">
                           My Wallet
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link onClick={handleClick} to="" className="nav-link">
+                        <Link  to="" className="nav-link">
                           Logout
                         </Link>
                       </li>

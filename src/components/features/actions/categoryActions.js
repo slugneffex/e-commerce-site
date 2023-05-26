@@ -3,6 +3,8 @@ import axios from "axios";
 export const FETCH_CATEGORY_REQUEST = "FETCH_CATEGORY_REQUEST";
 export const FETCH_CATEGORY_SUCCESS = "FETCH_CATEGORY_SUCCESS";
 export const FETCH_CATEGORY_FAILURE = "FETCH_CATEGORY_FAILURE";
+export const SORT_HIGH_TO_LOW = "SORT_HIGH_TO_LOW";
+export const SORT_LOW_TO_HIGH = "SORT_LOW_TO_HIGH";
 
 
 
@@ -18,15 +20,22 @@ export const fetchCategorySuccess = (data) => ({
 });
 
 
-
 export const fetchCategoryFailure = (error) => ({
   type: FETCH_CATEGORY_FAILURE,
   payload: error,
 });
 
+export const sortHighToLow = () => ({
+  type: SORT_HIGH_TO_LOW,
+});
+
+export const sortLowToHigh = () => ({
+  type: SORT_LOW_TO_HIGH,
+});
 
 
-export const fetchCategory = (id) => {
+
+export const fetchCategory = (id,pageNumber) => {
   return async (dispatch) => {
     dispatch(fetchCategoryRequest());
     const options = {
@@ -41,7 +50,7 @@ export const fetchCategory = (id) => {
     try {
      
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/category/${id}`,
+          `${process.env.REACT_APP_BASE_URL}/category/${id}?page=${pageNumber}`,
           options
         );
         dispatch(fetchCategorySuccess(response.data));

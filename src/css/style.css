@@ -12,7 +12,7 @@
 
 html body.custom-scroll {
   overflow-y: scroll !important;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 /* nav {
@@ -84,7 +84,7 @@ body {
   padding: 0;
   overflow-x: hidden !important;
   overflow-y: scroll !important;
- 
+
 }
 
 
@@ -99,8 +99,8 @@ a {
 }
 
 .nav-link {
-  color: #000000;
-  font-weight: bold;
+  color: #444;
+  /* font-weight: bold; */
 }
 
 #navbar-right .nav-link {
@@ -697,6 +697,7 @@ footer .links ul li a:hover:after {
   opacity: 1;
   color: #A2A2A2;
 }
+
 /* 
 footer .links ul li a:after {
   font-family: 'themify';
@@ -1211,6 +1212,20 @@ ul.additional_links li:after {
 .btn_atc:hover li {
   color: #FFF;
 }
+
+
+.btn_gtc {
+  border: 1px solid #05A856;
+  padding: 0.8rem;
+  text-decoration: none;
+  color: #05A856;
+  background-color: #DBF4E1;
+  font-weight: bold;
+  border-radius: 4px;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
 
 
 

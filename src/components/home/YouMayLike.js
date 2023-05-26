@@ -11,7 +11,7 @@ import {
   getTotalAmount,
   getTotalDiscount,
 } from "../features/useCartSlice";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { fetchYoumaylike } from "../features/actions/youmaylikeActions";
@@ -38,62 +38,15 @@ const responsive = {
 
 const YouMayLike = () => {
   const dispatch = useDispatch();
-  const {  youmaylike } = useSelector((state) => state.youmaylike);
-  
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const { youmaylike } = useSelector((state) => state.youmaylike);
 
   useEffect(() => {
     dispatch(fetchYoumaylike());
   }, [dispatch]);
-  
-  // changing wl btn
-
-  // Featured combos
-  // const [feature, setFeature] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     async function fetchData() {
-  //       setError(null);
-  //       setLoading(true);
-  //       const options = {
-  //         headers: {
-  //           "X-Authorization":
-  //             "CxD6Am0jGol8Bh21ZjB9Gjbm3jyI9w4ZeHJAmYHdfdP4bCClNn7euVxXcGm1dvYs",
-  //           "Cache-Control": "no-cache, no-store, must-revalidate",
-  //           mode: "cors",
-  //           credentials: "include",
-  //         },
-  //       };
-
-  //       try {
-  //         const response = await axios.get(
-  //           `${process.env.REACT_APP_BASE_URL}/combos`,
-  //           options
-  //         );
-  //         setFeature(response.data.data);
-  //         setLoading(false);
-  //       } catch (error) {
-  //         if (error.response && error.response.status === 429) {
-  //           const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //           setTimeout(() => {
-  //             fetchData();
-  //           }, retryAfter * 1000);
-  //         } else {
-  //           setError(error.message);
-  //         }
-  //       }
-  //     }
-  //     fetchData();
-  //   }, 2000);
-  // }, []);
-  // if (error) {
-  //   console.log(error);
-  // }
 
   // add to cart
-
 
   let productObj = {
     id: "",
@@ -103,6 +56,7 @@ const YouMayLike = () => {
     mrp: "",
     discount: "",
   };
+
   const addToCart = (e) => {
     productObj = {
       id: e.id,
@@ -118,6 +72,11 @@ const YouMayLike = () => {
     dispatch(calculateTax());
     dispatch(getTotalAmount());
     dispatch(getTotalDiscount());
+    setAddedToCart(true);
+
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 3000);
   };
 
   // add to wishlist
@@ -149,6 +108,20 @@ const YouMayLike = () => {
       });
   }
 
+  const { cartItems } = useSelector((state) => state.cart);
+
+  console.log(cartItems);
+
+  const goToCart = () => {
+    return (
+      <div className="btn_gtc" style={{ cursor: "pointer" }}>
+        <Link to="/cart" style={{ color: "#05A856" }}>
+          Go to Cart
+        </Link>
+        <i className="bi bi-arrow-right"></i>
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -193,7 +166,7 @@ const YouMayLike = () => {
                               </li>
                             </ul>
                           </Link>
-                          <Link  to={`/combo/${e.id}`}>
+                          <Link onClick={handleClick} to={`/combo/${e.id}`}>
                             <img
                               src={e.meta_img?.url}
                               alt="img"
@@ -202,48 +175,46 @@ const YouMayLike = () => {
                           </Link>
                         </div>
 
-                        <div className="card-det-sec">
-                          <div className="headingCard pt-3">
-                            <span>{e.name}</span>
-                          </div>
-                          {/* <div>
+                      <div className="card-det-sec">
+                        <div className="headingCard pt-3">
+                          <span>{e.name}</span>
+                        </div>
+                        {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-                          <div className="price-sec">
-                            <div className="col-4">
-                              <span className="sp">₹{e.selling_price}</span>
-                            </div>
-                            <div className="col-4">
-                              <del className="mrp">₹{e.mrp}</del>
-                            </div>
-                            <div className="col-4">
-                              <span className="discount">
-                                {e.discount}% OFF
-                              </span>
-                            </div>
+                        <div className="price-sec">
+                          <div className="col-4">
+                            <span className="sp">₹{e.selling_price}</span>
                           </div>
-                          <div className="card-btn-sec ">
-                            <div
-                              className="btn_atc"
-                              onClick={() => {
-                                addToCart(e);
-                                alert("product added to cart successfully");
-                              }}
-                              style={{ cursor: "pointer" }}
-                            >
-                              <i className="bi bi-cart" id={e.id}>
-                                Add to Cart
-                              </i>
-                            </div>
+                          <div className="col-4">
+                            <del className="mrp">₹{e.mrp}</del>
+                          </div>
+                          <div className="col-4">
+                            <span className="discount">{e.discount}% OFF</span>
+                          </div>
+                        </div>
+                        <div className="card-btn-sec ">
+                          <div
+                            className="btn_atc"
+                            onClick={() => {
+                              addToCart(e);
+
+                              alert("product added to cart successfully");
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <i className="bi bi-cart" id={e.id}>
+                              Add to Cart
+                            </i>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
-              </Carousel>
-            </div>
+                  </div>
+                ))}
+            </Carousel>
           </div>
-       
+        </div>
       </section>
     </div>
   );
