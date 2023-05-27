@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "react-bootstrap";
 import HomeLayout from "../../layouts/HomeLayout";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -8,8 +8,8 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./category.css";
 import axios from "axios";
-import { CgSortAz } from "react-icons/cg"
-import { BiFilterAlt } from "react-icons/bi"
+import { CgSortAz } from "react-icons/cg";
+import { BiFilterAlt } from "react-icons/bi";
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
 
 import {
@@ -83,7 +83,6 @@ const CustomPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-     
       const options = {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -113,56 +112,7 @@ const CustomPage = () => {
     fetchData();
   }, [id]);
 
-  // Filteration
-
-  const handleFilter = (minPrice, maxPrice) => {
-    const key = `${minPrice}-${maxPrice}`;
-
-    if (checkedFilters[key]) {
-      // If the filter is already checked, remove it
-      const newFilters = { ...checkedFilters };
-      delete newFilters[key];
-      setCheckedFilters(newFilters);
-
-      // Update the filtered products lists
-      const newFilteredProducts1 = filterCombo.filter((product) => {
-        const price = product.selling_price;
-        return !(price >= minPrice && price <= maxPrice);
-      });
-      setFilterCombo(newFilteredProducts1);
-
-      const newFilteredProducts2 = filteredProducts.filter((product) => {
-        const price = product.selling_price;
-        return !(price >= minPrice && price <= maxPrice);
-      });
-      setFilteredProducts(newFilteredProducts2);
-    } else {
-      // If the filter is not checked, add it
-      setCheckedFilters({ ...checkedFilters, [key]: true });
-
-      // Update the filtered products lists
-      const filtered1 = combo.filter((product) => {
-        const price = product.selling_price;
-        return price >= minPrice && price <= maxPrice;
-      });
-      setFilterCombo((prevFilteredProducts) => [
-        ...prevFilteredProducts,
-        ...filtered1,
-      ]);
-
-      const filtered2 = brandProduct.filter((product) => {
-        const price = product.selling_price;
-        return price >= minPrice && price <= maxPrice;
-      });
-      setFilteredProducts((prevFilteredProducts) => [
-        ...prevFilteredProducts,
-        ...filtered2,
-      ]);
-    }
-  };
-
   // add to cart for combo
-
 
   let productObj = {
     id: "",
@@ -218,7 +168,7 @@ const CustomPage = () => {
   };
 
   // Categories
- 
+
   const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
@@ -278,7 +228,6 @@ const CustomPage = () => {
   useEffect(() => {
     dispatch(fetchBrand());
   }, [dispatch]);
- 
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
@@ -316,7 +265,7 @@ const CustomPage = () => {
         console.error(error);
       }
     }
-
+    setIsLoading(true);
     fetchProducts();
   }, [brandId]);
 
@@ -354,7 +303,7 @@ const CustomPage = () => {
         const productData = responses.map(
           (response) => response.data.data.products.data
         );
-       
+
         setCategoriesProduct(productData);
 
         setCategoriesCombo(data);
@@ -363,9 +312,143 @@ const CustomPage = () => {
         console.error(error);
       }
     }
-
+    setIsLoading(true);
     fetchProducts();
   }, [categoriesId]);
+
+  // filteration
+
+  const [filterPageCombo, setFilterPageCombo] = useState([]);
+  const [filterPageBrand, setFilterPageBrand] = useState([]);
+  const [filterPageCategoryCombo, setFilterPageCategoryCombo] = useState([]);
+  const [filterPageCategoryProduct, setFilterPageCategoryProduct] = useState(
+    []
+  );
+  const [priceRanges, setPriceRanges] = useState([
+    { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
+    { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
+    { minPrice: 1000, maxPrice: 1999, label: "1000-1999", isVisible: true },
+    { minPrice: 2000, maxPrice: 4999, label: "2000-4999", isVisible: true },
+    { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
+  ]);
+
+  const handleFilter = (minPrice, maxPrice) => {
+    const key = `${minPrice}-${maxPrice}`;
+
+    if (checkedFilters[key]) {
+      // If the filter is already checked, remove it
+      const newFilters = { ...checkedFilters };
+      delete newFilters[key];
+      setCheckedFilters(newFilters);
+
+      // Update the filtered products lists
+      const newFilteredProducts1 = filterPageCombo.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilterPageCombo(newFilteredProducts1);
+
+      const newFilteredProducts2 = filterPageBrand.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilterPageBrand(newFilteredProducts2);
+
+      const newFilteredProducts3 = filterPageCategoryCombo.filter((product) => {
+        const price = product.selling_price;
+        return !(price >= minPrice && price <= maxPrice);
+      });
+      setFilterPageCategoryCombo(newFilteredProducts3);
+
+      const newFilteredProducts4 = filterPageCategoryProduct.filter(
+        (product) => {
+          const price = product.selling_price;
+          return !(price >= minPrice && price <= maxPrice);
+        }
+      );
+      setFilterPageCategoryProduct(newFilteredProducts4);
+    } else {
+      // If the filter is not checked, add it
+      setCheckedFilters({ ...checkedFilters, [key]: true });
+
+      // Update the filtered products lists
+      const filtered1 = combo.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+
+      setFilterPageCombo((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered1,
+      ]);
+
+      const filtered2 = brandProduct.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+
+      setFilterPageBrand((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered2,
+      ]);
+      const filtered3 = categoriesCombo.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+
+      setFilterPageCategoryCombo((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered3,
+      ]);
+
+      const filtered4 = categoriesProduct.filter((product) => {
+        const price = product.selling_price;
+        return price >= minPrice && price <= maxPrice;
+      });
+
+      setFilterPageCategoryProduct((prevFilteredProducts) => [
+        ...prevFilteredProducts,
+        ...filtered4,
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    const updatePriceRangeVisibility = () => {
+      const updatedPriceRanges = priceRanges.map((range) => {
+        const { minPrice, maxPrice } = range;
+        const hasComboProductsInRange = combo.some(
+          (product) =>
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
+        );
+        const hasProductInRange = brandProduct.some(
+          (product) =>
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
+        );
+        const hasCategorycomboInRange = categoriesCombo.some(
+          (product) =>
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
+        );
+        const hasCategoryproductInRange = categoriesProduct.some(
+          (product) =>
+            product.selling_price >= minPrice &&
+            product.selling_price <= maxPrice
+        );
+        const isVisible =
+          hasComboProductsInRange ||
+          hasProductInRange ||
+          hasCategorycomboInRange ||
+          hasCategoryproductInRange;
+        return { ...range, isVisible };
+      });
+      setPriceRanges(updatedPriceRanges);
+    };
+
+    updatePriceRangeVisibility();
+  }, [combo, brandProduct, categoriesCombo, categoriesProduct, priceRanges]);
 
   // Collapse for filters ui
   const [isOpen1, setIsOpen1] = useState(false);
@@ -382,7 +465,6 @@ const CustomPage = () => {
   const handleToggle3 = () => {
     setIsOpen3(!isOpen3);
   };
-
 
   const [isOpen4, setIsOpen4] = useState(false);
   const handleToggle4 = () => {
@@ -408,7 +490,6 @@ const CustomPage = () => {
     navigate(`/brand/${brandId}`);
   }
 
-
   let section = null;
   if (combo.length >= 1) {
     section = (
@@ -419,8 +500,8 @@ const CustomPage = () => {
           <h3>Precurated Combo</h3>
         </div>
         <hr />
-        {filterCombo.length > 0
-          ? filterCombo.map((e) => (
+        {filterPageCombo.length > 0
+          ? filterPageCombo.map((e) => (
               <div className="col-md-4 " key={e.id}>
                 <div className="newComboCart">
                   <div
@@ -556,6 +637,7 @@ const CustomPage = () => {
           <h3>Precurated Combo</h3>
         </div>
         <hr />
+
         {categoriesCombo.map((subArray) => {
           if (subArray.length > 0) {
             return (
@@ -644,6 +726,7 @@ const CustomPage = () => {
           <h3>Precurated Combo</h3>
         </div>
         <hr />
+
         {categoriesProduct.map((subArray) => {
           if (subArray.length > 0) {
             return (
@@ -725,20 +808,52 @@ const CustomPage = () => {
   return (
     <>
       <HomeLayout>
+        <div className="mobile">
+          <div
+            className="d-flex fixed-bottom bg-light"
+            style={{
+              textAlign: "center",
+              fontSize: "16px",
+              height: "40px",
+              alignItems: "center",
+            }}
+          >
+            <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasLeft"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <CgSortAz /> Sort By
+              </div>
 
-      <div className="mobile">
-          <div className="d-flex fixed-bottom bg-light" style={{ textAlign: "center", fontSize: "16px", height: "40px", alignItems: "center" }}>
-            <div className="col-6" style={{ borderRight: "1px solid #464646"}}>
-
-              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasRight"> <CgSortAz /> Sort By</div>
-
-              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel" style={{ height: "80%" }}>
+              <div
+                className="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasLeft"
+                aria-labelledby="offcanvasLeftLabel"
+                style={{ height: "80%" }}
+              >
                 <div className="offcanvas-header">
                   <h1 id="offcanvasLeftLabel">Sort By</h1>
-                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button
+                    type="button"
+                    className="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <hr />
-                <div className="offcanvas-body" style={{ textAlign: "left", lineHeight: "2", marginTop: "20px" }}>
+                <div
+                  className="offcanvas-body"
+                  style={{
+                    textAlign: "left",
+                    lineHeight: "2",
+                    marginTop: "20px",
+                  }}
+                >
                   <ul className="filterul">
                     <li>Name</li>
                     <li>Category</li>
@@ -749,18 +864,34 @@ const CustomPage = () => {
             </div>
 
             <div className="col-6">
+              <div
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+              >
+                {" "}
+                <BiFilterAlt /> Filter
+              </div>
 
-              <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <BiFilterAlt /> Filter</div>
-
-              <div className="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ height: "80%" }}>
+              <div
+                className="offcanvas offcanvas-bottom"
+                tabindex="-1"
+                id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel"
+                style={{ height: "80%" }}
+              >
                 <div className="offcanvas-header">
                   <h1 id="offcanvasRightLabel">Filter</h1>
-                  <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button
+                    type="button"
+                    className="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <hr />
                 <div className="offcanvas-body" style={{ textAlign: "left" }}>
-
-
                   <div>
                     <h5
                       variant="primary"
@@ -769,10 +900,16 @@ const CustomPage = () => {
                       // aria-expanded={isOpen4}
                     >
                       Category
-
-                      {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen4 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h5>
-
 
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
@@ -787,7 +924,10 @@ const CustomPage = () => {
                                 onClick={() => handleClick(e.id)}
                               />
 
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label
+                                className="form-check-label"
+                                htmlFor={e.name}
+                              >
                                 {e.name}
                               </label>
                             </div>
@@ -805,10 +945,16 @@ const CustomPage = () => {
                       // aria-expanded={isOpen5}
                     >
                       Price
-
-                      {isOpen5 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
+                      {isOpen5 ? (
+                        <TfiAngleUp
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      ) : (
+                        <TfiAngleDown
+                          style={{ position: "absolute", right: "1rem" }}
+                        />
+                      )}
                     </h5>
-
 
                     <Collapse in={isOpen5}>
                       <div id="collapseExample">
@@ -907,14 +1053,11 @@ const CustomPage = () => {
                       </div>
                     </Collapse>
                   </div>
-
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
 
         <div className="container">
           <div className="row">
@@ -1113,7 +1256,10 @@ const CustomPage = () => {
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.id)}
                               />
-                              <label className="form-check-label" htmlFor={e.name}>
+                              <label
+                                className="form-check-label"
+                                htmlFor={e.name}
+                              >
                                 {e.name} (51)
                               </label>
                             </div>
@@ -1247,13 +1393,15 @@ const CustomPage = () => {
               </div>
             </div>
             {isLoading ? (
-                <div id="cover-spin"></div>
-              ) : (
-                <div className="col-md-9 " >
+              <div>
+                <Loader />
+              </div>
+            ) : (
+              <div className="col-md-9 ">
                 <div className="banner" key={banner.id}>
                   <img src={banner.thumbnail?.url} width="100%" alt="baner" />
                 </div>
-    
+
                 <div className="row">
                   <nav>
                     <ol className="breadcrumb">
@@ -1302,22 +1450,22 @@ const CustomPage = () => {
                     </div>
                   </div> */}
                 </div>
-    
+
                 <div className="row" style={{ marginTop: "1rem" }}>
                   {/* Combo products */}
-    
+
                   {section}
-    
+
                   {/* Categories combo secetion */}
                   {categoriesComboSection}
-    
+
                   <hr />
                   <div className="byocc">
                     <h3>Bulid Your Own Combo</h3>
                     <img src="/assets/img/byoc.png" alt="byoc-img" />
                   </div>
                   <hr />
-    
+
                   {/* Single Products */}
                   {filteredProducts.length > 0
                     ? filteredProducts.map((p) => (
@@ -1352,7 +1500,7 @@ const CustomPage = () => {
                                 ></img>
                               </Link>
                             </div>
-    
+
                             <div className="card-det-sec">
                               <div className="headingCard pt-3 ">
                                 <span>{p.name.substring(0, 40)}</span>
@@ -1396,7 +1544,9 @@ const CustomPage = () => {
                                       style={{ position: "relative" }}
                                     >
                                       <Link
-                                        onClick={() => wishlistProductData(p.id)}
+                                        onClick={() =>
+                                          wishlistProductData(p.id)
+                                        }
                                         className="addtofavCategory"
                                       >
                                         <ul>
@@ -1420,7 +1570,7 @@ const CustomPage = () => {
                                         ></img>
                                       </Link>
                                     </div>
-    
+
                                     <div className="card-det-sec">
                                       <div className="headingCard pt-3 ">
                                         {/* <span>{p.name.substring(0, 40)}</span> */}
@@ -1464,15 +1614,12 @@ const CustomPage = () => {
                           return null;
                         }
                       })}
-    
+
                   {/* Categories single Product */}
                   {categoriesProductSection}
                 </div>
               </div>
-              )}
-          
-      
-          
+            )}
           </div>
         </div>
       </HomeLayout>

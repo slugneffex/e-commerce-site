@@ -8,8 +8,8 @@ import SimilarProduct from "./SimilarProduct";
 import "./product.css";
 import axios from "axios";
 
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Button from 'react-bootstrap/Button';
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Button from "react-bootstrap/Button";
 
 import {
   addCartProduct,
@@ -27,7 +27,6 @@ import {
   TwitterIcon,
   WhatsappIcon,
   InstapaperShareButton,
-
 } from "react-share";
 
 // import { fetchCombodetails } from "../../components/features/actions/combodetailsActions";
@@ -85,8 +84,6 @@ const Product = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
-
   const ShareOption = () => {
     const pageUrl = `${window.location.origin}/combo/${id}`;
 
@@ -95,29 +92,59 @@ const Product = () => {
       url: pageUrl,
     };
 
-    
-
     return (
       <>
         <div className="desktop">
-          <div style={{ backgroundColor: "white", color: "#464646", display: "flex", width: "265px", height: "80px", justifyContent: "", marginTop: "10px", marginLeft: "10px", padding: "5px", paddingTop: "10px", boxShadow: "0 4px 16px 0 rgba(0,0,0,.2)", borderRadius: "10px" }}>
-            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+          <div
+            style={{
+              backgroundColor: "white",
+              color: "#464646",
+              display: "flex",
+              width: "265px",
+              height: "80px",
+              justifyContent: "",
+              marginTop: "10px",
+              marginLeft: "10px",
+              padding: "5px",
+              paddingTop: "10px",
+              boxShadow: "0 4px 16px 0 rgba(0,0,0,.2)",
+              borderRadius: "10px",
+            }}
+          >
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px",
+                margin: "0 12px 10px 5px",
+              }}
+            >
               <FacebookShareButton url={sharingOptions.url}>
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
               <br />
               <p style={{ fontSize: "12px" }}>FaceBook</p>
-            </div>  
+            </div>
 
-
-            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px",
+                margin: "0 12px 10px 5px",
+              }}
+            >
               <TwitterShareButton url={sharingOptions.url}>
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
               <p style={{ fontSize: "12px" }}>Twitter</p>
             </div>
 
-            <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px",
+                margin: "0 12px 10px 5px",
+              }}
+            >
               <WhatsappShareButton url={sharingOptions.url}>
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
@@ -127,27 +154,39 @@ const Product = () => {
             {/* <InstapaperShareButton url={sharingOptions.url}>
 
         </InstapaperShareButton> */}
-
           </div>
         </div>
 
         <div className="mobile">
-          <Offcanvas show={show} onHide={handleClose} placement="bottom" style={{ height: "35%" }} >
+          <Offcanvas
+            show={show}
+            onHide={handleClose}
+            placement="bottom"
+            style={{ height: "35%" }}
+          >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>Share</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <div className="row bg-light" style={{ height: "70px", padding: "10px" }}>
+              <div
+                className="row bg-light"
+                style={{ height: "70px", padding: "10px" }}
+              >
                 <div className="col-2" style={{ overflow: "hidden" }}>
-                  <img src={comboproduct[0].original_url} style={{ width: "100%", height: "100%" }} alt="ProductImg" />
+                  <img
+                    src={comboproduct[0].original_url}
+                    style={{ width: "100%", height: "100%" }}
+                    alt="ProductImg"
+                  />
                 </div>
-                <div className="col-10">
-                  {combos.name}
-                </div>
+                <div className="col-10">{combos.name}</div>
               </div>
 
               <div className="row" style={{ marginTop: "20px" }}>
-                <div className="col-3" style={{ padding: "0 10px 0 10px", textAlign: "center" }}>
+                <div
+                  className="col-3"
+                  style={{ padding: "0 10px 0 10px", textAlign: "center" }}
+                >
                   <i class="bi bi-link" style={{ fontSize: "26px" }}></i>
                   <br />
                   Copy Link
@@ -175,11 +214,7 @@ const Product = () => {
             </Offcanvas.Body>
           </Offcanvas>
         </div>
-
-
       </>
-
-
     );
   };
   const handleShareButtonClick = () => {
@@ -295,7 +330,7 @@ const Product = () => {
                       width: "30px",
                       height: "30px",
                       textAlign: "center",
-                      paddingTop: "1px"
+                      paddingTop: "1px",
                     }}
                   >
                     <i
@@ -308,9 +343,8 @@ const Product = () => {
                     </i>
                   </div>
 
-
                   <div
-                  className="mobile"
+                    className="mobile"
                     style={{
                       backgroundColor: "#fe9e2d",
                       color: "white",
@@ -318,7 +352,7 @@ const Product = () => {
                       width: "30px",
                       height: "30px",
                       textAlign: "center",
-                      paddingTop: "1px"
+                      paddingTop: "1px",
                     }}
                   >
                     <i
@@ -330,7 +364,6 @@ const Product = () => {
                       {showShareOption && <ShareOption />}
                     </i>
                   </div>
-
 
                   <div
                     style={{
