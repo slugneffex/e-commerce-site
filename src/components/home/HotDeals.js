@@ -31,9 +31,7 @@ const HotDeals = () => {
   //   fetchData();
   // }, []);
 
-  const handleClick = () => {
-    window.scrollTo(0,0);
-  };
+  
 
   return (
     <div>
@@ -45,7 +43,7 @@ const HotDeals = () => {
         {Array.isArray(hotdeal) &&
           hotdeal.map((e) => (
             <div key={e.banner?.id}>
-              <Link onClick={handleClick} to="/view-all-products">
+              <Link  to="/view-all-products">
                 <img
                   src={e.banner?.original_url}
                   width="100%"

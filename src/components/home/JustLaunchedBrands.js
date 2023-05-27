@@ -106,9 +106,7 @@ const JustLaunchedBrands = () => {
   //   console.log(error);
   // }
 
-  const handleClick = () => {
-    window.scrollTo(0,0);
-  };
+  
 
   return (
     <>
@@ -128,7 +126,7 @@ const JustLaunchedBrands = () => {
               {jbrands.map((e) => ( 
                   <div key={e.id}>
                     {e.brand_id && (
-                      <Link onClick={handleClick} to={`/brand/${e.brand_id}`}>
+                      <Link  to={`/brand/${e.brand_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="80%"
@@ -137,7 +135,7 @@ const JustLaunchedBrands = () => {
                       </Link>
                     )}
                     {e.product_id && (
-                      <Link onClick={handleClick} to={`/product/${e.product_id}`}>
+                      <Link  to={`/product/${e.product_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="80%"
@@ -146,7 +144,7 @@ const JustLaunchedBrands = () => {
                       </Link>
                     )}
                     {e.combo_id && (
-                      <Link onClick={handleClick} to={`/combo/${e.combo_id}`}>
+                      <Link  to={`/combo/${e.combo_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="80%"
@@ -155,7 +153,7 @@ const JustLaunchedBrands = () => {
                       </Link>
                     )}
                     {e.page_id && (
-                      <Link onClick={handleClick} to={`/page/${e.page_id}`}>
+                      <Link  to={`/page/${e.page_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="80%"
@@ -164,7 +162,7 @@ const JustLaunchedBrands = () => {
                       </Link>
                     )}
                     {e.category_id && (
-                      <Link onClick={handleClick} to={`/category/${e.category_id}`}>
+                      <Link  to={`/category/${e.category_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="80%"

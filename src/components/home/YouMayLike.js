@@ -131,49 +131,49 @@ const YouMayLike = () => {
             <h3>You May Like...</h3>
           </div>
         </div>
-
-        <div className="container ">
-          <div className="row">
-            <Carousel
-              responsive={responsive}
-              showDots={false}
-              infinite={true}
-              arrows={false}
-            >
-              {Array.isArray(youmaylike) &&
-                youmaylike.map((e) => (
-                  <div
-                    className="item carouselItemCard"
-                    key={e.id}
-                    style={{ marginRight: ".8rem" }}
-                  >
-                    <div className="newComboCart">
-                      <div className="cart-img-sec">
-                        <Link
-                          onClick={() => wishlistData(e.id)}
-                          className="addtofav"
-                        >
-                          <ul>
-                            <li className="youMayLikeHeart">
-                              {heartFilled === e.id ? (
-                                <i
-                                  style={{ color: "#fe9e2d" }}
-                                  className="bi bi-heart-fill"
-                                ></i>
-                              ) : (
-                                <i className="bi bi-heart"></i>
-                              )}
-                            </li>
-                          </ul>
-                        </Link>
-                        <Link to={`/combo/${e.id}`}>
-                          <img
-                            src={e.meta_img?.url}
-                            alt="img"
-                            width="100%"
-                          ></img>
-                        </Link>
-                      </div>
+        
+          <div className="container ">
+            <div className="row">
+              <Carousel
+                responsive={responsive}
+                showDots={false}
+                infinite={true}
+                arrows={false}
+              >
+                {Array.isArray(youmaylike) &&
+                  youmaylike.map((e) => (
+                    <div
+                      className="item carouselItemCard"
+                      key={e.id}
+                      style={{ marginRight: ".8rem" }}
+                    >
+                      <div className="newComboCart">
+                        <div className="cart-img-sec">
+                          <Link
+                            onClick={() => wishlistData(e.id)}
+                            className="addtofav"
+                          >
+                            <ul>
+                              <li className="youMayLikeHeart">
+                                {heartFilled === e.id ? (
+                                  <i
+                                    style={{ color: "#fe9e2d" }}
+                                    className="bi bi-heart-fill"
+                                  ></i>
+                                ) : (
+                                  <i className="bi bi-heart"></i>
+                                )}
+                              </li>
+                            </ul>
+                          </Link>
+                          <Link onClick={handleClick} to={`/combo/${e.id}`}>
+                            <img
+                              src={e.meta_img?.url}
+                              alt="img"
+                              width="100%"
+                            ></img>
+                          </Link>
+                        </div>
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">

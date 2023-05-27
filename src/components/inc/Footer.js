@@ -193,7 +193,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <span>
-                      © 2020-22 Combonation.in. <br /> Powered By Born Unicorn
+                    &#169; 2020-23 Combonation.in. <br /> Powered By Born Unicorn
                       Tech Prise Pvt. Ltd.
                     </span>
                   </li>
