@@ -93,6 +93,8 @@ const Product = () => {
       url: pageUrl,
     };
 
+    
+
     return (
       <>
         <div className="desktop">
@@ -103,7 +105,7 @@ const Product = () => {
               </FacebookShareButton>
               <br />
               <p style={{ fontSize: "12px" }}>FaceBook</p>
-            </div>
+            </div>  
 
 
             <div style={{ display: "inline-block", padding: "8px", margin: "0 12px 10px 5px" }}>
