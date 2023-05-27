@@ -84,7 +84,7 @@ const Category = () => {
     updateDisplayedPages();
   }, [pageNumber, totalPages]);
 
-  // Pgination
+  // Pageination
 
   const handlePageClick = (page) => {
     setFilteredProducts([]);
@@ -132,46 +132,7 @@ const Category = () => {
     dispatch(sortLowToHigh());
   };
 
-  // const sortData = () => {
-  //   const sortedData = [...combo].sort(
-  //     (a, b) => b.selling_price - a.selling_price
-  //   );
-  //   const sortedDataProduct = [...product].sort(
-  //     (a, b) => b.selling_price - a.selling_price
-  //   );
-  //   // setCategory(sortedData);
-  //   // category(sortedData)
-
-  //   // setProduct(sortedDataProduct);
-  // };
-
-  // const handleSortClick = () => {
-  //   const combinedData = [...combo, ...product];
-
-  //   const sortedData = [...combinedData].sort((a, b) => b.selling_price - a.selling_price);
-
-  //   const sortedCombo = sortedData.filter(item => combo.includes(item));
-  //   const sortedProduct = sortedData.filter(item => product.includes(item));
-
-  //   // Use sortedCombo and sortedProduct arrays for further processing or display
-
-  //   // Example of displaying the sorted data
-  //   console.log("Sorted Combo:", sortedCombo);
-  //   console.log("Sorted Product:", sortedProduct);
-  // };
-
-  // const lowtoHigh = () => {
-  //   const sortedData = [...combo].sort(
-  //     (a, b) => a.selling_price - b.selling_price
-  //   );
-  //   const sortedDataProducts = [...product].sort(
-  //     (a, b) => a.selling_price - b.selling_price
-  //   );
-
-  //   // setCategory(sortedData);
-  //   // category(sortedData)
-  //   // setProduct(sortedDataProducts);
-  // };
+  
 
   // filteration
 
