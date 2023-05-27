@@ -8,8 +8,12 @@ import SimilarProduct from "./SimilarProduct";
 import "./product.css";
 import axios from "axios";
 
+
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
+
 
 import {
   addCartProduct,
@@ -26,7 +30,10 @@ import {
   FacebookIcon,
   TwitterIcon,
   WhatsappIcon,
-  InstapaperShareButton,
+
+  // InstapaperShareButton,
+
+
 } from "react-share";
 
 // import { fetchCombodetails } from "../../components/features/actions/combodetailsActions";
@@ -38,6 +45,33 @@ const Product = () => {
   const [combos, setCombos] = useState([]);
   const [comboproduct, setComboproduct] = useState([]);
   const [error, setError] = useState(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Check if the window width is less than or equal to 768px
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+        setShowOffcanvas(false)
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    // Check on initial mount
+    handleResize();
+
+    // Attach an event listener to the window resize event
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   // const {combos, comboproduct,  loading } = useSelector(
   //   (state) => state.combodetails
@@ -76,13 +110,21 @@ const Product = () => {
     fetchData();
   }, [id]);
 
+  if(error) {
+    console.log(error)
+  }
+
   // share page
   const [showShareOption, setShowShareOption] = useState(false);
 
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+
+//   const [show, setShow] = useState(false);
+
+//   const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
+
 
   const ShareOption = () => {
     const pageUrl = `${window.location.origin}/combo/${id}`;
@@ -125,6 +167,7 @@ const Product = () => {
               <p style={{ fontSize: "12px" }}>FaceBook</p>
             </div>
 
+
             <div
               style={{
                 display: "inline-block",
@@ -157,13 +200,34 @@ const Product = () => {
           </div>
         </div>
 
+
+
+
+      </>
+
+
+    );
+  };
+
+
+  const ShareOptionMobile = ({ showOffcanvas, handleCloseOffcanvas }) => {
+
+    const pageUrl = `${window.location.origin}/combo/${id}`;
+
+    const sharingOptions = {
+      title: "Page Title",
+      url: pageUrl,
+    };
+
+
+    return (
+      <>
         <div className="mobile">
-          <Offcanvas
-            show={show}
-            onHide={handleClose}
-            placement="bottom"
-            style={{ height: "35%" }}
-          >
+
+          <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="bottom" style={{ height: "35%" }} >
+
+        
+
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>Share</Offcanvas.Title>
             </Offcanvas.Header>
@@ -173,21 +237,23 @@ const Product = () => {
                 style={{ height: "70px", padding: "10px" }}
               >
                 <div className="col-2" style={{ overflow: "hidden" }}>
-                  <img
-                    src={comboproduct[0].original_url}
-                    style={{ width: "100%", height: "100%" }}
-                    alt="ProductImg"
-                  />
+
+                  <img src={combos.meta_img?.url} style={{ width: "100%", height: "100%" }} alt="ProductImg" />
+                </div>
+                <div className="col-10">
+                  {combos.name}
+
+         
                 </div>
                 <div className="col-10">{combos.name}</div>
               </div>
 
               <div className="row" style={{ marginTop: "20px" }}>
-                <div
-                  className="col-3"
-                  style={{ padding: "0 10px 0 10px", textAlign: "center" }}
-                >
-                  <i class="bi bi-link" style={{ fontSize: "26px" }}></i>
+
+                <div className="col-3" style={{ padding: "0 10px 0 10px", textAlign: "center" }}>
+                  <i className="bi bi-link" style={{ fontSize: "26px" }}></i>
+
+             
                   <br />
                   Copy Link
                 </div>
@@ -214,9 +280,29 @@ const Product = () => {
             </Offcanvas.Body>
           </Offcanvas>
         </div>
+
+
       </>
     );
+  }
+
+
+
+
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const handleButtonClickMobile = () => {
+    setShowOffcanvas(true);
+
   };
+
+  const handleCloseOffcanvasMobile = () => {
+    setShowOffcanvas(false);
+  };
+
+
+
+
   const handleShareButtonClick = () => {
     // If the share option is already open, close it
     if (showShareOption) {
@@ -356,14 +442,22 @@ const Product = () => {
                     }}
                   >
                     <i
-                      onClick={handleShow}
+                      onClick={handleButtonClickMobile}
                       // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
                       className="bi bi-upload"
                       style={{ fontSize: "18px" }}
                     >
-                      {showShareOption && <ShareOption />}
+
                     </i>
                   </div>
+
+
+                  {isMobile && showOffcanvas && (<ShareOptionMobile
+                    showOffcanvas={showOffcanvas}
+                    handleCloseOffcanvas={handleCloseOffcanvasMobile}
+                  />)}
+
+
 
                   <div
                     style={{
@@ -731,7 +825,7 @@ const Product = () => {
               </div>
             </div>
 
-            <SimilarProduct id={combos.id} />
+            {/* <SimilarProduct id={combos.id} /> */}
           </div>
         </div>
       </HomeLayout>
