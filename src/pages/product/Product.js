@@ -11,8 +11,6 @@ import axios from "axios";
 
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Button from "react-bootstrap/Button";
 
 
 import {
@@ -245,7 +243,6 @@ const Product = () => {
 
          
                 </div>
-                <div className="col-10">{combos.name}</div>
               </div>
 
               <div className="row" style={{ marginTop: "20px" }}>
