@@ -89,6 +89,7 @@ const MYOC = () => {
       </li>
     ));
   };
+  
 
 
   const handlePreviousClick = () => {
@@ -107,39 +108,10 @@ const MYOC = () => {
     }
   };
 
-  // const generatePageNumbers = () => {
-  //   const pageNumbers = [];
-  //   for (let i = 1; i <= totalPages; i++) {
-  //     pageNumbers.push(
-  //       <li className="page-item" key={i}>
-  //         <Link
-  //           className={`page-link page-number ${pageNumber === i ? "active" : ""}`}
-  //           onClick={() => handlePageClick(i)}
-  //         >
-  //           {i}
-  //         </Link>
-  //       </li>
-  //     );
-  //   }
-  //   return pageNumbers;
-  // };
+ 
 
 
-  // const handleScroll = useCallback(() => {
-  //   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-  //   if (
-  //     scrollTop + clientHeight >= scrollHeight - 5 &&
-  //     products.length &&
-  //     !loading
-  //   ) {
-  //     setPageNumber((prevPageNumber) => prevPageNumber + 1);
-  //   }
-  // }, [products.length, loading]);
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [handleScroll]);
+ 
 
   if (error) {
     console.log(error);
@@ -205,7 +177,7 @@ const MYOC = () => {
             <div className="col-md-6"></div>
           </div>
           <div className="row">
-            {products.map((e) => (
+            {/* {products.map((e) => (
               <div className="col-lg-3 col-md-3" key={e.id}>
                 <div className="newComboCart">
                   <div
@@ -255,8 +227,8 @@ const MYOC = () => {
                   </div>
                 </div>
               </div>
-            ))}
-           
+            ))} */}
+          
           </div>
         </div>
         <div className="container mb-4">

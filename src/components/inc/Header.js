@@ -779,6 +779,26 @@ const Header = () => {
                               </Link>
                             </div>
                           ))}
+                          {filterCategories.map((e) => (
+                             <div
+                             className="col-lg-3 col-50 text-center"
+                             key={e.id}
+                           >
+                             <Link to={`/page/${e.id}`}>
+                               <h6>{e.name}</h6>
+                               <img
+                                 src={e.icon?.original_url}
+                                 alt={e.slug}
+                                 style={{
+                                   width: "100px",
+                                   height: "auto",
+                                   marginTop: "0",
+                                 }}
+                               />
+                             </Link>
+                           </div>
+
+                          ))}
                         </div>
                       </div>
 
