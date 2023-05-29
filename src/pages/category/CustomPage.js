@@ -453,7 +453,7 @@ const CustomPage = () => {
     };
 
     updatePriceRangeVisibility();
-  }, [combo, brandProduct, categoriesCombo, categoriesProduct, priceRanges]);
+  }, []);
 
   // Collapse for filters ui
   const [isOpen1, setIsOpen1] = useState(false);
