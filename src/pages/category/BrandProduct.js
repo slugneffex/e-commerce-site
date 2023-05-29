@@ -155,7 +155,7 @@ const BrandProduct = () => {
     };
   
     updatePriceRangeVisibility();
-  }, []);
+  }, [brandproduct, priceRanges]);
   
   
   

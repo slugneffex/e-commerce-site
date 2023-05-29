@@ -1,9 +1,7 @@
 import React, { useEffect, useCallback, useMemo } from "react";
 import "./categories.css";
-
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
-
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../features/actions/categoriesActions";
