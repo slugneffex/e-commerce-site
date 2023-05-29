@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
@@ -61,14 +61,18 @@ const Category = () => {
 
   // filteration state end
 
-  // category api fetching
+  // category product api fetching
   const [pageNumber, setPageNumber] = useState(1);
   const { combo, product, banner, loading, totalPages } = useSelector(
     (state) => state.data
   );
-  useEffect(() => {
+  const fetchCategoryData = useCallback(() => {
     dispatch(fetchCategory(id, pageNumber));
   }, [dispatch, id, pageNumber]);
+
+  useEffect(() => {
+    fetchCategoryData();
+  }, [fetchCategoryData]);
 
   useEffect(() => {
     const updateDisplayedPages = () => {
@@ -131,8 +135,6 @@ const Category = () => {
   const handleSortLowToHigh = () => {
     dispatch(sortLowToHigh());
   };
-
-  
 
   // filteration
 
@@ -211,9 +213,13 @@ const Category = () => {
 
   const { categories } = useSelector((state) => state.categories);
 
-  useEffect(() => {
+  const fetchCategoriesData = useCallback(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    fetchCategoriesData();
+  }, [fetchCategoriesData]);
 
   // add to cart for combo
 
@@ -321,9 +327,13 @@ const Category = () => {
   // total brands
   const { brand } = useSelector((state) => state.brand);
 
-  useEffect(() => {
+  const fetchBrandData = useCallback(() => {
     dispatch(fetchBrand());
   }, [dispatch]);
+
+  useEffect(() => {
+    fetchBrandData();
+  }, [fetchBrandData]);
 
   const filterbrandsApi = brand.filter((e) => e.focused === "on");
 
@@ -355,7 +365,7 @@ const Category = () => {
   //for scroll
 
   function handleClick(categoryId) {
-    setPageNumber(1)
+    setPageNumber(1);
     setCheckedFilters(false);
     setFilteredProducts([]);
     setFilterCombo([]);
@@ -364,7 +374,7 @@ const Category = () => {
   }
 
   function handleClickbrand(brandId) {
-    setPageNumber(1)
+    setPageNumber(1);
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);

@@ -14,7 +14,7 @@ import { fetchFreebies } from "../../components/features/actions/freebiesActions
 const Freebies = () => {
   const dispatch = useDispatch();
   // freebies product Api
-  const {  freeebies } = useSelector((state) => state.freeebies);
+  const {  freeebies,loading } = useSelector((state) => state.freeebies);
   
     useEffect(() => {
       dispatch(fetchFreebies());
@@ -149,6 +149,11 @@ const Freebies = () => {
             <div className="row">
               <div className="col-md-3"></div>
               <div className="col-md-9">
+                 {loading ? (
+                <div id="cover-spin"></div>
+              ) : (
+                <div style={{ display: "none" }}></div>
+              )}
                 <div className="row">
                   <div className="col-9 availableFreebie">
                     <h3>

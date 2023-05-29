@@ -378,7 +378,7 @@ const Singleproduct = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                    <div dangerouslySetInnerHTML={{ __html: product.desc }} />
+                    <div dangerouslySetInnerHTML={{ __html: product.description }} />
                     {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li> */}
