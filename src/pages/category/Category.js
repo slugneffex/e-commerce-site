@@ -234,7 +234,7 @@ const Category = () => {
     };
 
     updatePriceRangeVisibility();
-  }, []);
+  }, [combo, product, priceRanges]);
 
 
 
