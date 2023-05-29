@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useCallback,useRef} from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
@@ -134,6 +134,12 @@ const BrandProduct = () => {
     }
   };
 
+
+  
+  
+  
+  
+  
   useEffect(() => {
     const updatePriceRangeVisibility = () => {
       const updatedPriceRanges = priceRanges.map((range) => {
@@ -147,9 +153,29 @@ const BrandProduct = () => {
       });
       setPriceRanges(updatedPriceRanges);
     };
-
+  
     updatePriceRangeVisibility();
-  }, [brandproduct, priceRanges]);
+  }, []);
+  
+  
+  
+
+  // useEffect(() => {
+  //   const updatePriceRangeVisibility = () => {
+  //     const updatedPriceRanges = priceRanges.map((range) => {
+  //       const { minPrice, maxPrice } = range;
+  //       const isVisible = brandproduct.some(
+  //         (product) =>
+  //           product.selling_price >= minPrice &&
+  //           product.selling_price <= maxPrice
+  //       );
+  //       return { ...range, isVisible };
+  //     });
+  //     setPriceRanges(updatedPriceRanges);
+  //   };
+
+  //   updatePriceRangeVisibility();
+  // }, [brandproduct, priceRanges]);
 
   // shorting
 
