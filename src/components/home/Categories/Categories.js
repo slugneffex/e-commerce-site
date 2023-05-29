@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import "./categories.css";
 
 import { Link } from "react-router-dom";
@@ -14,20 +14,30 @@ const Categories = () => {
   // categories api
   const { categories } = useSelector((state) => state.categories);
 
-  useEffect(() => {
+  const fetchCategoriesData = useCallback(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    fetchCategoriesData();
+  }, [fetchCategoriesData]);
 
   // page categories api
   const { page } = useSelector((state) => state.page);
 
-  useEffect(() => {
+  const fetchPageData = useCallback(() => {
     dispatch(fetchPage());
   }, [dispatch]);
 
-  const filterCategories = page.filter((pageCategories) => {
-    return pageCategories.show_with_category === "on";
-  });
+  useEffect(() => {
+    fetchPageData();
+  }, [fetchPageData]);
+
+  const filterCategories = useMemo(() => {
+    return page.filter(
+      (pageCategory) => pageCategory.show_with_category === "on"
+    );
+  }, [page]);
 
   const responsive = {
     superLargeDesktop: {
@@ -97,7 +107,7 @@ const Categories = () => {
             ))}
             {filterCategories.map((e) => (
               <div className="my-auto" key={e.id}>
-                <Link to={`/category/${e.id}`} style={{ color: "#464646" }}>
+                <Link to={`/page/${e.id}`} style={{ color: "#464646" }}>
                   <img src={e.icon?.original_url} alt="" width="70%" />
                   <br />
                   <span style={{ fontSize: "12px" }}>{e.name.slice(0, 9)}</span>

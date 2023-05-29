@@ -6,6 +6,8 @@ import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import axios from "axios";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -21,6 +23,33 @@ const Singleproduct = () => {
   const [product, setProduct] = useState([]);
   const [productimg, setProductimg] = useState([]);
   const [error, setError] = useState(null);
+
+
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Check if the window width is less than or equal to 768px
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+        setShowOffcanvas(false)
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    // Check on initial mount
+    handleResize();
+
+    // Attach an event listener to the window resize event
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -57,7 +86,7 @@ const Singleproduct = () => {
 
   const [showShareOption, setShowShareOption] = useState(false);
   const ShareOption = () => {
-    const pageUrl = `${window.location.origin}/product/${id}`;
+    const pageUrl = `${window.location.origin}/combo/${id}`;
 
     const sharingOptions = {
       title: "Page Title",
@@ -65,20 +94,171 @@ const Singleproduct = () => {
     };
 
     return (
-      <div>
-        <FacebookShareButton url={sharingOptions.url}>
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-        <TwitterShareButton url={sharingOptions.url}>
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-        <WhatsappShareButton url={sharingOptions.url}>
-          <WhatsappIcon size={32} round />
-        </WhatsappShareButton>
-        <InstapaperShareButton url={sharingOptions.url}></InstapaperShareButton>
-      </div>
+      <>
+        <div className="desktop">
+          <div
+            style={{
+              backgroundColor: "white",
+              color: "#464646",
+              display: "flex",
+              width: "265px",
+              height: "80px",
+              justifyContent: "",
+              marginTop: "10px",
+              marginLeft: "10px",
+              padding: "5px",
+              paddingTop: "10px",
+              boxShadow: "0 4px 16px 0 rgba(0,0,0,.2)",
+              borderRadius: "10px",
+            }}
+          >
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px",
+                margin: "0 12px 10px 5px",
+              }}
+            >
+              <FacebookShareButton url={sharingOptions.url}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <br />
+              <p style={{ fontSize: "12px" }}>FaceBook</p>
+            </div>
+
+
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px",
+                margin: "0 12px 10px 5px",
+              }}
+            >
+              <TwitterShareButton url={sharingOptions.url}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <p style={{ fontSize: "12px" }}>Twitter</p>
+            </div>
+
+            <div
+              style={{
+                display: "inline-block",
+                padding: "8px",
+                margin: "0 12px 10px 5px",
+              }}
+            >
+              <WhatsappShareButton url={sharingOptions.url}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+              <p style={{ fontSize: "12px" }}>WhatsApp</p>
+            </div>
+
+            {/* <InstapaperShareButton url={sharingOptions.url}>
+
+        </InstapaperShareButton> */}
+          </div>
+        </div>
+
+
+
+
+      </>
+
+
     );
   };
+
+  const ShareOptionMobile = ({ showOffcanvas, handleCloseOffcanvas }) => {
+
+    const pageUrl = `${window.location.origin}/product/${id}`;
+
+    const sharingOptions = {
+      title: "Page Title",
+      url: pageUrl,
+    };
+
+
+    return (
+      <>
+        <div className="mobile">
+
+          <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="bottom" style={{ height: "35%" }} >
+
+
+
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Share</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div
+                className="row bg-light"
+                style={{ height: "70px", padding: "10px" }}
+              >
+                <div className="col-2" style={{ overflow: "hidden" }}>
+
+                  <img src={product.thumbnail_img?.original_url} style={{ width: "100%", height: "100%" }} alt="ProductImg" />
+                </div>
+                <div className="col-10">
+                  {product.name}
+
+
+                </div>
+              </div>
+
+              <div className="row" style={{ marginTop: "20px" }}>
+
+                <div className="col-3" style={{ padding: "0 10px 0 10px", textAlign: "center" }}>
+                  <i className="bi bi-link" style={{ fontSize: "26px" }}></i>
+
+
+                  <br />
+                  Copy Link
+                </div>
+
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <FacebookShareButton url={sharingOptions.url}>
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+                  FaceBook
+                </div>
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <TwitterShareButton url={sharingOptions.url}>
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+                  Twitter
+                </div>
+                <div className="col-3" style={{ textAlign: "center" }}>
+                  <WhatsappShareButton url={sharingOptions.url}>
+                    <WhatsappIcon size={40} round />
+                  </WhatsappShareButton>
+                  WhatsApp
+                </div>
+              </div>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </div>
+
+
+      </>
+    );
+  }
+
+
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const handleButtonClickMobile = () => {
+    setShowOffcanvas(true);
+
+  };
+
+  const handleCloseOffcanvasMobile = () => {
+    setShowOffcanvas(false);
+  };
+
+
+
+
+
   const handleShareButtonClick = () => {
     // If the share option is already open, close it
     if (showShareOption) {
@@ -157,17 +337,21 @@ const Singleproduct = () => {
                 style={{ display: "flex", justifyContent: "center" }}
               >
                 <div
+                  className="desktop"
                   style={{
-                    backgroundColor: "gray",
+                    backgroundColor: "#fe9e2d",
+                    color: "white",
                     borderRadius: "100%",
                     width: "30px",
                     height: "30px",
                     textAlign: "center",
+                    paddingTop: "1px",
                   }}
                 >
                   <i
                     onClick={handleShareButtonClick}
-                    class="bi bi-upload"
+                    // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
+                    className="bi bi-upload"
                     style={{ fontSize: "18px" }}
                   >
                     {showShareOption && <ShareOption />}
@@ -175,19 +359,48 @@ const Singleproduct = () => {
                 </div>
 
                 <div
+                  className="mobile"
                   style={{
-                    backgroundColor: "gray",
+                    backgroundColor: "#fe9e2d",
+                    color: "white",
+                    borderRadius: "100%",
+                    width: "30px",
+                    height: "30px",
+                    textAlign: "center",
+                    paddingTop: "1px",
+                  }}
+                >
+                  <i
+                    onClick={handleButtonClickMobile}
+                    // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
+                    className="bi bi-upload"
+                    style={{ fontSize: "18px" }}
+                  >
+
+                  </i>
+                </div>
+
+
+                {isMobile && showOffcanvas && (<ShareOptionMobile
+                  showOffcanvas={showOffcanvas}
+                  handleCloseOffcanvas={handleCloseOffcanvasMobile}
+                />)}
+
+                <div
+                  style={{
+                    backgroundColor: "#fe9e2d",
+                    color: "white",
                     borderRadius: "100%",
                     width: "30px",
                     height: "30px",
                     marginLeft: "20px",
                     textAlign: "center",
                     textAlignLast: "center",
-                    paddingTop: "3px",
+                    paddingTop: "4px",
                   }}
                 >
                   <i
-                    class="bi bi-heart"
+                    className="bi bi-heart"
                     style={{ margin: "auto", fontSize: "18px" }}
                   ></i>
                 </div>
@@ -378,7 +591,7 @@ const Singleproduct = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                    <div dangerouslySetInnerHTML={{ __html: product.desc }} />
+                    <div dangerouslySetInnerHTML={{ __html: product.description }} />
                     {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li> */}
