@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+
+import React, { useState, useEffect,useCallback } from "react";
+
+
+
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
@@ -186,28 +190,51 @@ const Category = () => {
     }
   };
 
-  useEffect(() => {
-    const updatePriceRangeVisibility = () => {
-      const updatedPriceRanges = priceRanges.map((range) => {
-        const { minPrice, maxPrice } = range;
-        const hasComboProductsInRange = combo.some(
-          (product) =>
-            product.selling_price >= minPrice &&
-            product.selling_price <= maxPrice
-        );
-        const hasProductInRange = product.some(
-          (product) =>
-            product.selling_price >= minPrice &&
-            product.selling_price <= maxPrice
-        );
-        const isVisible = hasComboProductsInRange || hasProductInRange;
-        return { ...range, isVisible };
-      });
-      setPriceRanges(updatedPriceRanges);
-    };
+  // useEffect(() => {
+  //   const updatePriceRangeVisibility = () => {
+  //     const updatedPriceRanges = priceRanges.map((range) => {
+  //       const { minPrice, maxPrice } = range;
+  //       const hasComboProductsInRange = combo.some(
+  //         (product) =>
+  //           product.selling_price >= minPrice &&
+  //           product.selling_price <= maxPrice
+  //       );
+  //       const hasProductInRange = product.some(
+  //         (product) =>
+  //           product.selling_price >= minPrice &&
+  //           product.selling_price <= maxPrice
+  //       );
+  //       const isVisible = hasComboProductsInRange || hasProductInRange;
+  //       return { ...range, isVisible };
+  //     });
+  //     setPriceRanges(updatedPriceRanges);
+  //   };
 
+  //   updatePriceRangeVisibility();
+  // }, [combo, product, priceRanges]);
+
+  const updatePriceRangeVisibility = useCallback(() => {
+    const updatedPriceRanges = priceRanges.map((range) => {
+      const { minPrice, maxPrice } = range;
+      const hasComboProductsInRange = combo.some(
+        (product) =>
+          product.selling_price >= minPrice &&
+          product.selling_price <= maxPrice
+      );
+      const hasProductInRange = product.some(
+        (product) =>
+          product.selling_price >= minPrice &&
+          product.selling_price <= maxPrice
+      );
+      const isVisible = hasComboProductsInRange || hasProductInRange;
+      return { ...range, isVisible };
+    });
+    setPriceRanges(updatedPriceRanges);
+  }, [priceRanges, combo, product]);
+
+  useEffect(() => {
     updatePriceRangeVisibility();
-  }, [combo, product, priceRanges]);
+  }, []);
 
   // Categories api
 
@@ -1123,11 +1150,11 @@ const Category = () => {
             </div>
 
             <div className="col-md-9 mt-2">
-              {loading ? (
+              {/* {loading ? (
                 <div id="cover-spin"></div>
               ) : (
                 <div style={{ display: "none" }}></div>
-              )}
+              )} */}
               <div className="banner" key={banner.id}>
                 <img src={banner.banner?.url} width="100%" alt="baner" />
               </div>
