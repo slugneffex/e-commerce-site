@@ -31,7 +31,7 @@ const BrandProduct = () => {
   // Brand products api
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { brand_id } = useParams();
+  const { slug } = useParams();
  
 
   // filteration state
@@ -57,8 +57,8 @@ const BrandProduct = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchBrandproduct(brand_id, pageNumber));
-  }, [dispatch, brand_id, pageNumber]);
+    dispatch(fetchBrandproduct(slug, pageNumber));
+  }, [dispatch, slug, pageNumber]);
 
 
  
@@ -450,7 +450,7 @@ const BrandProduct = () => {
                                 name="category_id"
                                 id={e.name}
                                 className="form-check-input"
-                                onClick={() => handleClick(e.id)}
+                                onClick={() => handleClick(e.slug)}
                               />
 
                               <label
@@ -774,7 +774,7 @@ const BrandProduct = () => {
                                 id="category_id103"
                                 defaultValue={103}
                                 className="form-check-input"
-                                onClick={() => handleClick(e.id)}
+                                onClick={() => handleClick(e.slug)}
                               />
 
                               <label className="form-check-label" htmlFor={103}>
@@ -851,7 +851,7 @@ const BrandProduct = () => {
                                 id="category_id103"
                                 defaultValue={103}
                                 className="form-check-input"
-                                onClick={() => handleClickbrand(e.id)}
+                                onClick={() => handleClickbrand(e.slug)}
                              
                                
                               />
@@ -1125,7 +1125,7 @@ const BrandProduct = () => {
                                 }}
                               ></i>
                             </Link>
-                            <Link to={`/product/${p.id}`}>
+                            <Link to={`/product/${p.slug}`}>
                               <img
                                 src={p.thumbnail_img?.original_url}
                                 alt="img"

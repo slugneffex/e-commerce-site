@@ -64,7 +64,7 @@ const Categories = () => {
         <div className="container">
           <div className="my-auto categoriesDiv">
             {categories.map((e) => (
-              <Link to={`/category/${e.id}`} key={e.id}>
+              <Link to={`/category/${e.slug}`} key={e.id}>
                 {e.name}
               </Link>
             ))}
