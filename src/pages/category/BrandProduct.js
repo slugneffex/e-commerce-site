@@ -1192,7 +1192,7 @@ const BrandProduct = () => {
               alignItems: "center",
             }}
           >
-            <div>
+            <div className="desktop">
               page {pageNumber} of {totalPages}
             </div>
 
@@ -1226,6 +1226,8 @@ const BrandProduct = () => {
                 </li>
               </ul>
             </div>
+
+            <div className="desktop"></div>
 
            
           </nav>
