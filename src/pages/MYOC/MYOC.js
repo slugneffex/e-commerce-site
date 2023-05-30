@@ -8,7 +8,7 @@ import { fetchhotdeal } from "../../components/features/actions/hotdealActions";
 
 const MYOC = () => {
   const [products, setProducts] = useState([]);
- 
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -32,6 +32,7 @@ const MYOC = () => {
       },
     };
     try {
+      setLoading(true);
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/view-all-products?page=${pageNumber}`,
         options
@@ -89,7 +90,7 @@ const MYOC = () => {
       </li>
     ));
   };
-  
+
 
 
   const handlePreviousClick = () => {
@@ -108,10 +109,10 @@ const MYOC = () => {
     }
   };
 
- 
 
 
- 
+
+
 
   if (error) {
     console.log(error);
@@ -125,6 +126,13 @@ const MYOC = () => {
         <div className="container mt-2">
           {/* desktop  */}
           <div className="desktop">
+            {
+              loading ? (
+                <div id="cover-spin" ></div>
+              ) : (
+                <div style={{ display: "none" }}></div>
+              )}
+
             {Array.isArray(hotdeal) &&
               hotdeal.map((e) => (
                 <div key={e.banner?.id}>
@@ -142,6 +150,12 @@ const MYOC = () => {
 
           {/* mobile */}
           <div className="mobile">
+          {
+              loading ? (
+                <div id="cover-spin" ></div>
+              ) : (
+                <div style={{ display: "none" }}></div>
+              )}
             {Array.isArray(hotdeal) &&
               hotdeal.map((e) => (
                 <div className="byoc" key={e.mobile_banner?.id}>
@@ -176,8 +190,13 @@ const MYOC = () => {
             </div>
             <div className="col-md-6"></div>
           </div>
+
+
+
           <div className="row">
-            {/* {products.map((e) => (
+
+            {products.map((e) => (
+
               <div className="col-lg-3 col-md-3" key={e.id}>
                 <div className="newComboCart">
                   <div
@@ -227,8 +246,8 @@ const MYOC = () => {
                   </div>
                 </div>
               </div>
-            ))} */}
-          
+            ))}
+
           </div>
         </div>
         <div className="container mb-4">
@@ -240,7 +259,7 @@ const MYOC = () => {
             <div>
               <ul className="pagination" style={{ justifyContent: "space-between", alignItems: "center" }}>
                 <li className="page-item">
-                  <Link className="page-link"  tabindex="-1"    onClick={handlePreviousClick}>Previous</Link>
+                  <Link className="page-link" tabindex="-1" onClick={handlePreviousClick}>Previous</Link>
                 </li>
                 <div className="numbers">
                   <li className="page-item"><Link className="page-number" style={{ border: "none" }} > {renderPageNumbers()}</Link></li>
@@ -259,7 +278,7 @@ const MYOC = () => {
             <div></div>
           </nav>
         </div>
-      </HomeLayout>
+      </HomeLayout >
     </>
   );
 };
