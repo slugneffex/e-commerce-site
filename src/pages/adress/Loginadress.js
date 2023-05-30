@@ -340,7 +340,9 @@ const Loginadress = () => {
       )
       .then((res) => {
         alert(res.data.message);
+        navigate("/thanks")
       });
+      
   };
 
   if (error) {

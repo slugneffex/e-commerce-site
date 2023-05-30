@@ -1383,8 +1383,7 @@ const Category = () => {
           >
             <div className="desktop">
               page {pageNumber} of {totalPages}
-            </div>
-
+            </div>                                          
             <div >
               <ul
                 className="pagination"
