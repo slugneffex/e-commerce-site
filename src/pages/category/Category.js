@@ -1381,11 +1381,11 @@ const Category = () => {
               alignItems: "center",
             }}
           >
-            <div>
+            <div className="desktop">
               page {pageNumber} of {totalPages}
             </div>
 
-            <div style={{ marginRight: "37rem" }}>
+            <div >
               <ul
                 className="pagination"
                 style={{
@@ -1393,7 +1393,7 @@ const Category = () => {
                   alignItems: "center",
                 }}
               >
-                <li className="page-item">
+                <li className="page-item px-1">
                   <Link
                     className="page-link"
                     tabindex="-1"
@@ -1415,6 +1415,7 @@ const Category = () => {
                 </li>
               </ul>
             </div>
+            <div></div>
           </nav>
         </div>
       </HomeLayout>
