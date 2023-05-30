@@ -298,10 +298,14 @@ const Loginadress = () => {
   }
 
   const totalcartItems = {
-    cartItems: [{ cartType: "normal" }, ...cartItems],
-    singleCartItems: [{ cartType: "custom" }, ...singleCartItems],
-    freebiescartItems: [{ cartType: "freebies" }, ...freebiescartItems],
+    comboItems: [ ...cartItems],
+    customItems: [ ...singleCartItems],
+    freebiesItems: [ ...freebiescartItems],
   };
+
+  console.log(totalcartItems)
+
+  
 
   // Order Validate
 

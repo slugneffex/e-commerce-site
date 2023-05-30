@@ -28,7 +28,7 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        banner: action.payload.category,
+        banner: action.payload.data.category,
         combo: action.payload.data.combos.data,
         product: action.payload.data.products.data,
         totalPages:action.payload.data.products.last_page

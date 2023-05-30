@@ -296,7 +296,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link  to={`/category/${e.id}`}>
+                                <Link  to={`/category/${e.slug}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.image?.url}
@@ -311,7 +311,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link  to={`/page/${e.id}`}>
+                                <Link  to={`/page/${e.slug}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.icon?.original_url}
@@ -352,7 +352,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link to={`/brand/${e.id}`}>
+                                <Link to={`/brand/${e.slug}`}>
                                   <img
                                     src={e.image?.original_url}
                                     alt={e.name}
@@ -765,7 +765,7 @@ const Header = () => {
                               className="col-lg-3 col-50 text-center"
                               key={e.id}
                             >
-                              <Link to={`/category/${e.id}`}>
+                              <Link to={`/category/${e.slug}`}>
                                 <h6>{e.name}</h6>
                                 <img
                                   src={e.image?.url}
@@ -784,7 +784,7 @@ const Header = () => {
                              className="col-lg-3 col-50 text-center"
                              key={e.id}
                            >
-                             <Link to={`/page/${e.id}`}>
+                             <Link to={`/page/${e.slug}`}>
                                <h6>{e.name}</h6>
                                <img
                                  src={e.icon?.original_url}
@@ -823,7 +823,7 @@ const Header = () => {
                               className="col-lg-3 col-50 text-center"
                               key={e.id}
                             >
-                              <Link to={`/brand/${e.id}`}>
+                              <Link to={`/brand/${e.slug}`}>
                                 <img
                                   src={e.image?.original_url}
                                   alt={e.name}
