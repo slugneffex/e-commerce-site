@@ -19,7 +19,7 @@ import {
 } from "react-share";
 
 const Singleproduct = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [product, setProduct] = useState([]);
   const [productimg, setProductimg] = useState([]);
   const [error, setError] = useState(null);
@@ -61,7 +61,7 @@ const Singleproduct = () => {
       };
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/product/${id}`,
+          `${process.env.REACT_APP_BASE_URL}/product/${slug}`,
           options
         );
         setProduct(response.data.products);
@@ -78,7 +78,7 @@ const Singleproduct = () => {
       }
     }
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   if (error) {
     console.log(error);
@@ -86,7 +86,7 @@ const Singleproduct = () => {
 
   const [showShareOption, setShowShareOption] = useState(false);
   const ShareOption = () => {
-    const pageUrl = `${window.location.origin}/combo/${id}`;
+    const pageUrl = `${window.location.origin}/combo/${slug}`;
 
     const sharingOptions = {
       title: "Page Title",
@@ -170,7 +170,7 @@ const Singleproduct = () => {
 
   const ShareOptionMobile = ({ showOffcanvas, handleCloseOffcanvas }) => {
 
-    const pageUrl = `${window.location.origin}/product/${id}`;
+    const pageUrl = `${window.location.origin}/product/${slug}`;
 
     const sharingOptions = {
       title: "Page Title",

@@ -38,7 +38,7 @@ import {
 
 const Product = () => {
   // Combos Product
-  const { id } = useParams();
+  const { slug} = useParams();
   const dispatch = useDispatch();
   const [combos, setCombos] = useState([]);
   const [comboproduct, setComboproduct] = useState([]);
@@ -89,7 +89,7 @@ const Product = () => {
       };
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/combo/${id}`,
+          `${process.env.REACT_APP_BASE_URL}/combo/${slug}`,
           options
         );
         setCombos(response.data.combo);
@@ -106,7 +106,7 @@ const Product = () => {
       }
     }
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   if(error) {
     console.log(error)
@@ -125,7 +125,7 @@ const Product = () => {
 
 
   const ShareOption = () => {
-    const pageUrl = `${window.location.origin}/combo/${id}`;
+    const pageUrl = `${window.location.origin}/combo/${slug}`;
 
     const sharingOptions = {
       title: "Page Title",
@@ -210,7 +210,7 @@ const Product = () => {
 
   const ShareOptionMobile = ({ showOffcanvas, handleCloseOffcanvas }) => {
 
-    const pageUrl = `${window.location.origin}/combo/${id}`;
+    const pageUrl = `${window.location.origin}/combo/${slug}`;
 
     const sharingOptions = {
       title: "Page Title",

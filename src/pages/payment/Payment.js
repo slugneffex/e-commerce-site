@@ -202,7 +202,7 @@ const Payment = () => {
     }
 
     const options = {
-      key: 'rzp_test_7Ynqg7Kwiuxr5Z',
+      key: `${process.env.REACT_APP_RAZORPAY_KEY}`,
       amount: Math.round(Number(totalCartSubAmount) * 100),
     
       currency: 'INR',

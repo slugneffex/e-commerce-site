@@ -166,7 +166,7 @@ const YouMayLike = () => {
                               </li>
                             </ul>
                           </Link>
-                          <Link  to={`/combo/${e.id}`}>
+                          <Link  to={`/combo/${e.slug}`}>
                             <img
                               src={e.meta_img?.url}
                               alt="img"
