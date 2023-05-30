@@ -58,7 +58,7 @@ const App = () => {
       <Route path="/page/:id" element={<CustomPage />} />
       <Route path="/brand/:slug" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
-      <Route path="/Thanks" element={<Thanks />} />
+      <Route path="/thanks" element={<Thanks />} />
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       <Route path="/view-all-products" element={<MYOC />} />

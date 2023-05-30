@@ -344,8 +344,11 @@ const Loginadress = () => {
       )
       .then((res) => {
         alert(res.data.message);
-        navigate('/thanks')
+
+        navigate("/thanks")
+
       });
+      
   };
 
   if (error) {
