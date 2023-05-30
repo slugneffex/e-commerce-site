@@ -324,13 +324,21 @@
     color: #ffffff;
     background-color: #009444;
     margin-top: .5rem;
+    border-radius: 5px;
     
 }
+
+.buttonAddress .btn-2:hover {
+    color: white;
+}
+
+
 
 .buttonAddress {
     margin-top: 2rem;
     margin-bottom: 1rem;
-    margin-left: 7.1rem;
+    text-align: end;
+    /* margin-left: 7.1rem; */
 }
 
 .extras .btn {
@@ -341,4 +349,18 @@
 
 .bagLink li {
     color:#464646
+}
+
+@media (max-width: 720px) {
+    .buttonAddress {
+        margin-left: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+    }
+
+    .buttonAddress .btn-2 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
