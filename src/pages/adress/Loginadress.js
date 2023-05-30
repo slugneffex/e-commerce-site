@@ -344,6 +344,7 @@ const Loginadress = () => {
       )
       .then((res) => {
         alert(res.data.message);
+        navigate('/thanks')
       });
   };
 
@@ -508,7 +509,7 @@ const Loginadress = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 mt-5">
+              <div className="col-md-4 mt-3">
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>
@@ -564,7 +565,7 @@ const Loginadress = () => {
             <div className="row">
               <div className="col-md-8">
                 <div className="heading">
-                  <h1>Your Addresses ({address.length})</h1>
+                  <h2>Your Addresses ({address.length})</h2>
                 </div>
               </div>
             </div>
@@ -609,7 +610,7 @@ const Loginadress = () => {
                   </div>
                 ))}
               </div>
-              <div className="col-md-4 mt-5 mb-5">
+              <div className="col-md-4 mt-3 mb-5">
                 <div className="overview-card">
                   <div className="overview-card-head">
                     <h3>Order Summary</h3>

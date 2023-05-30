@@ -15,7 +15,7 @@ import {
   FacebookIcon,
   TwitterIcon,
   WhatsappIcon,
-  InstapaperShareButton,
+  // InstapaperShareButton,
 } from "react-share";
 
 const Singleproduct = () => {
