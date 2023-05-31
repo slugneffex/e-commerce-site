@@ -59,7 +59,7 @@ const Footer = () => {
   };
 
   const handleClick = () => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -79,7 +79,11 @@ const Footer = () => {
                     <Link to="/">About us</Link>
                   </li>
                   <li>
-                    <Link to="/">Help</Link>
+                    <a
+                      href="mailto:customercare@combonation.in"
+                    >
+                      Help
+                    </a>
                   </li>
                   <li>
                     <Link to="/">My account</Link>
@@ -122,8 +126,15 @@ const Footer = () => {
                     </p>
                   </li>
                   <li>
-                    <i className="bi bi-envelope-fill"></i>
-                    <Link to="#0">customercare@combonation.in</Link>
+                    <i
+                      style={{ marginTop: ".5rem" }}
+                      className="bi bi-envelope-fill"></i>
+                    <a
+                      style={{ color: "#A2A2A2" }}
+                      href="mailto:customercare@combonation.in"
+                    >
+                      customercare@combonation.in
+                    </a>
                   </li>
                   <li>
                     <i className="bi bi-geo-alt"></i>301-303, 3rd Floor,
@@ -156,16 +167,16 @@ const Footer = () => {
                 <div className="follow_us">
                   <h5>Follow Us</h5>
                   <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
-                    <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
-                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin"  style={{fontSize: "30px"}}></i></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{ fontSize: "30px" }}></i></a></li>
+                    <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{ fontSize: "30px" }}></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{ fontSize: "30px" }}></i></a></li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
+
         <section id="footer-secondary">
           <div className="container">
             <div
@@ -193,7 +204,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <span>
-                    &#169; 2020-23 Combonation.in. <br /> Powered By Born Unicorn
+                      &#169; 2020-23 Combonation.in. <br /> Powered By Born Unicorn
                       Tech Prise Pvt. Ltd.
                     </span>
                   </li>
@@ -248,13 +259,13 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle1}
                 aria-controls="collapseExample"
-                // aria-expanded={isOpen1}
+              // aria-expanded={isOpen1}
               >
                 Quick Links
 
-                {isOpen1 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
+                {isOpen1 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
               </h3>
-              
+
 
               <Collapse in={isOpen1}>
                 <div id="collapseExample">
@@ -263,7 +274,11 @@ const Footer = () => {
                       <a href="/page/about-us">About us</a>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="/help">Help</a>
+                      <a
+                        href="mailto:customercare@combonation.in"
+                      >
+                        Help
+                      </a>
                     </li>
                     <li style={{ color: "#fff" }}>
                       <a href="/user/home">My account</a>
@@ -280,11 +295,11 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle2}
                 aria-controls="collapseExample"
-                // aria-expanded={isOpen2}
+              // aria-expanded={isOpen2}
               >
                 Categories
 
-                {isOpen2 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
+                {isOpen2 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
               </h3>
 
               <Collapse in={isOpen2}>
@@ -322,14 +337,14 @@ const Footer = () => {
                     </li>
                   </ul> */}
                   <ul>
-                  {categories.map((e) => (
-                    <li key={e.id}>
-                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.slug}`}>
-                        {e.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                    {categories.map((e) => (
+                      <li key={e.id}>
+                        <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.slug}`}>
+                          {e.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Collapse>
             </div>
@@ -338,11 +353,11 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle3}
                 aria-controls="collapseExample"
-                // aria-expanded={isOpen3}
+              // aria-expanded={isOpen3}
               >
                 Contacts
 
-                {isOpen3 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
+                {isOpen3 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
               </h3>
 
               <Collapse in={isOpen3}>
@@ -367,10 +382,9 @@ const Footer = () => {
                     <li style={{ color: "#fff" }}>
                       <HiOutlineMail />
                       <a
-                        style={{ marginLeft: "1rem" }}
                         href="mailto:customercare@combonation.in"
                       >
-                        customercare@combonation.in
+                        Help
                       </a>
                     </li>
                   </ul>
@@ -382,11 +396,11 @@ const Footer = () => {
                 variant="primary"
                 onClick={handleToggle4}
                 aria-controls="collapseExample"
-                // aria-expanded={isOpen4}
+              // aria-expanded={isOpen4}
               >
                 Keep In Touch
 
-                {isOpen4 ? <TfiAngleUp style={{position: "absolute", right: "1rem"}}/> : <TfiAngleDown style={{position: "absolute", right: "1rem"}}/>}
+                {isOpen4 ? <TfiAngleUp style={{ position: "absolute", right: "1rem" }} /> : <TfiAngleDown style={{ position: "absolute", right: "1rem" }} />}
               </h3>
 
               <Collapse in={isOpen4}>
@@ -410,9 +424,9 @@ const Footer = () => {
                   <div className="follow_us">
                     <h5>Follow Us</h5>
                     <ul>
-                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{fontSize: "30px"}}></i></a></li>
-                      <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{fontSize: "30px"}}></i></a></li>
-                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{fontSize: "30px"}}></i></a></li>
+                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{ fontSize: "30px" }}></i></a></li>
+                      <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{ fontSize: "30px" }}></i></a></li>
+                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{ fontSize: "30px" }}></i></a></li>
                     </ul>
                   </div>
                 </div>

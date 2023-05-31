@@ -115,12 +115,12 @@ const JustLaunchedBrands = () => {
           Just Launched Brands
         </h3>
       
-          <div className="container">
+          <div className="container needToBeSetMobile youmaylikeboxshadow">
             <Carousel
               responsive={responsive}
-              arrows={false}
-              infinite
+              arrows={isCenterMode}
               centerMode={isCenterMode}
+              infinite
               dotListClass="custom-dot-list-style"
             >
               {jbrands.map((e) => ( 

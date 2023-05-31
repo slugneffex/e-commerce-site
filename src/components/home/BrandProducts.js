@@ -69,6 +69,22 @@ const BrandProducts = () => {
     fetchData();
   }, []);
 
+  const [ isArrow, setIsArrow ] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsArrow(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   // add to cart single product
   const dispatch = useDispatch();
 
@@ -123,6 +139,9 @@ const BrandProducts = () => {
     return console.log(error);
   }
 
+
+  
+
  
 
   return (
@@ -135,12 +154,12 @@ const BrandProducts = () => {
         </div>
 
         <div className="container ">
-          <div className="row">
+          <div className="row youmaylikeboxshadow">
             <Carousel
               responsive={responsive}
               showDots={false}
               infinite={true}
-              arrows={false}
+              arrows={isArrow}
             >
               {brandProduct.map((e) => (
                 <div

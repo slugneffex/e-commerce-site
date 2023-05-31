@@ -59,7 +59,7 @@ const ComboDeals = () => {
         <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
           Top Combo Deals For You
         </h3>
-        <div className="container">
+        <div className="container needToBeSetMobile">
           <Carousel
             responsive={responsive}
             arrows={false}

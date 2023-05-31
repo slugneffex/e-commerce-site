@@ -90,7 +90,7 @@ const ForHer = () => {
   
   return (
     <>
-      <div className="top-brand-deals container">
+      <div className="top-brand-deals container needToBeSetMobile">
         <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
           Top Picks For Her
         </h3>
