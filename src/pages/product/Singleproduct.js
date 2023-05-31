@@ -6,7 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import axios from "axios";
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 import {
   FacebookShareButton,
@@ -17,23 +17,30 @@ import {
   WhatsappIcon,
   // InstapaperShareButton,
 } from "react-share";
+import {
+  singleaddCartProduct,
+  getsingleCartCount,
+  getsingleSubTotal,
+  getsingleTotalAmount,
+  getsingleTotalDiscount,
+} from "../../components/features/SingleCartSlice";
+import { useDispatch } from "react-redux";
 
 const Singleproduct = () => {
+  const dispatch = useDispatch();
   const { slug } = useParams();
   const [product, setProduct] = useState([]);
   const [productimg, setProductimg] = useState([]);
   const [error, setError] = useState(null);
 
-
   const [isMobile, setIsMobile] = useState(false);
-
 
   useEffect(() => {
     const handleResize = () => {
       // Check if the window width is less than or equal to 768px
       if (window.innerWidth <= 768) {
         setIsMobile(true);
-        setShowOffcanvas(false)
+        setShowOffcanvas(false);
       } else {
         setIsMobile(false);
       }
@@ -43,11 +50,11 @@ const Singleproduct = () => {
     handleResize();
 
     // Attach an event listener to the window resize event
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -84,6 +91,34 @@ const Singleproduct = () => {
     console.log(error);
   }
 
+  // Add to cart single brand products
+
+  let SingleproductObj = {
+    id: "",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
+  };
+
+  const addToSingleCart = (p) => {
+    SingleproductObj = {
+      id: p.id,
+      title: p.name,
+      price: p.selling_price,
+      image: p.thumbnail_img?.original_url,
+      mrp: p.mrp,
+      discount: p.discount,
+    };
+
+    dispatch(singleaddCartProduct(SingleproductObj));
+    dispatch(getsingleCartCount());
+    dispatch(getsingleSubTotal());
+    dispatch(getsingleTotalAmount());
+    dispatch(getsingleTotalDiscount());
+  };
+
   const [showShareOption, setShowShareOption] = useState(false);
   const ShareOption = () => {
     const pageUrl = `${window.location.origin}/combo/${slug}`;
@@ -92,6 +127,8 @@ const Singleproduct = () => {
       title: "Page Title",
       url: pageUrl,
     };
+
+    
 
     return (
       <>
@@ -126,7 +163,6 @@ const Singleproduct = () => {
               <p style={{ fontSize: "12px" }}>FaceBook</p>
             </div>
 
-
             <div
               style={{
                 display: "inline-block",
@@ -158,18 +194,11 @@ const Singleproduct = () => {
         </InstapaperShareButton> */}
           </div>
         </div>
-
-
-
-
       </>
-
-
     );
   };
 
   const ShareOptionMobile = ({ showOffcanvas, handleCloseOffcanvas }) => {
-
     const pageUrl = `${window.location.origin}/product/${slug}`;
 
     const sharingOptions = {
@@ -177,15 +206,15 @@ const Singleproduct = () => {
       url: pageUrl,
     };
 
-
     return (
       <>
         <div className="mobile">
-
-          <Offcanvas show={showOffcanvas} onHide={handleCloseOffcanvas} placement="bottom" style={{ height: "35%" }} >
-
-
-
+          <Offcanvas
+            show={showOffcanvas}
+            onHide={handleCloseOffcanvas}
+            placement="bottom"
+            style={{ height: "35%" }}
+          >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>Share</Offcanvas.Title>
             </Offcanvas.Header>
@@ -195,22 +224,21 @@ const Singleproduct = () => {
                 style={{ height: "70px", padding: "10px" }}
               >
                 <div className="col-2" style={{ overflow: "hidden" }}>
-
-                  <img src={product.thumbnail_img?.original_url} style={{ width: "100%", height: "100%" }} alt="ProductImg" />
+                  <img
+                    src={product.thumbnail_img?.original_url}
+                    style={{ width: "100%", height: "100%" }}
+                    alt="ProductImg"
+                  />
                 </div>
-                <div className="col-10">
-                  {product.name}
-
-
-                </div>
+                <div className="col-10">{product.name}</div>
               </div>
 
               <div className="row" style={{ marginTop: "20px" }}>
-
-                <div className="col-3" style={{ padding: "0 10px 0 10px", textAlign: "center" }}>
+                <div
+                  className="col-3"
+                  style={{ padding: "0 10px 0 10px", textAlign: "center" }}
+                >
                   <i className="bi bi-link" style={{ fontSize: "26px" }}></i>
-
-
                   <br />
                   Copy Link
                 </div>
@@ -237,27 +265,19 @@ const Singleproduct = () => {
             </Offcanvas.Body>
           </Offcanvas>
         </div>
-
-
       </>
     );
-  }
-
+  };
 
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   const handleButtonClickMobile = () => {
     setShowOffcanvas(true);
-
   };
 
   const handleCloseOffcanvasMobile = () => {
     setShowOffcanvas(false);
   };
-
-
-
-
 
   const handleShareButtonClick = () => {
     // If the share option is already open, close it
@@ -375,16 +395,15 @@ const Singleproduct = () => {
                     // data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"
                     className="bi bi-upload"
                     style={{ fontSize: "18px" }}
-                  >
-
-                  </i>
+                  ></i>
                 </div>
 
-
-                {isMobile && showOffcanvas && (<ShareOptionMobile
-                  showOffcanvas={showOffcanvas}
-                  handleCloseOffcanvas={handleCloseOffcanvasMobile}
-                />)}
+                {isMobile && showOffcanvas && (
+                  <ShareOptionMobile
+                    showOffcanvas={showOffcanvas}
+                    handleCloseOffcanvas={handleCloseOffcanvasMobile}
+                  />
+                )}
 
                 <div
                   style={{
@@ -466,7 +485,12 @@ const Singleproduct = () => {
                 </div>
                 <br /> */}
                 <div className="addCart col-4" id={product.id}>
-                  <Link to="">
+                  <Link
+                    to=""
+                    onClick={() => {
+                      addToSingleCart(product);
+                    }}
+                  >
                     <div className="btn_atc">
                       <i className="bi bi-cart"></i>Add To Cart
                     </div>
@@ -591,7 +615,9 @@ const Singleproduct = () => {
                   tabIndex="0"
                 >
                   <ul className="combo-product">
-                    <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                    <div
+                      dangerouslySetInnerHTML={{ __html: product.description }}
+                    />
                     {/* <li>Organic Harvest Strwberry Lip Balm - Velvet Red 3 g</li>
                     <li>Coloressence Britone Cleanse Moisture</li>
                     <li>Organic Harvest Diamond Shine</li> */}

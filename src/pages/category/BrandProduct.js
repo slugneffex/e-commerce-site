@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useCallback,useRef} from "react";
+import React, { useState, useEffect } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
@@ -32,13 +32,11 @@ const BrandProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { slug } = useParams();
- 
 
   // filteration state
   // const [noProduct, setNoProduct] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
-
 
   const [priceRanges, setPriceRanges] = useState([
     { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
@@ -50,24 +48,25 @@ const BrandProduct = () => {
 
   // filteration state end
   const [pageNumber, setPageNumber] = useState(1);
-  const { brandproduct, brandname, loading,  totalPages } =
-    useSelector((state) => state.branddata);
+  const { brandproduct, brandname, loading, totalPages } = useSelector(
+    (state) => state.branddata
+  );
+
   const handleSort = (sortOrder) => {
     dispatch(sortBrandproduct(sortOrder));
   };
 
   useEffect(() => {
     dispatch(fetchBrandproduct(slug, pageNumber));
+    setFilteredProducts([]);
+    setCheckedFilters(false);
   }, [dispatch, slug, pageNumber]);
 
-
- 
-
   const handlePageClick = (page) => {
-    setFilteredProducts([])
-    setCheckedFilters(false)
-    setPageNumber(page)
-   
+    setFilteredProducts([]);
+    setCheckedFilters(false);
+    setPageNumber(page);
+
     // dispatch(fetchBrandproduct(brand_id, page));
   };
 
@@ -86,19 +85,21 @@ const BrandProduct = () => {
   };
 
   const renderPageNumbers = () => {
-    return Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-      <li className="page-item" key={page}>
-        <Link
-          className={`page-link page-number ${pageNumber === page ? "active" : ""}`}
-          onClick={() => handlePageClick(page)}
-        >
-          {page}
-        </Link>
-      </li>
-    ));
+    return Array.from({ length: totalPages }, (_, index) => index + 1).map(
+      (page) => (
+        <li className="page-item" key={page}>
+          <Link
+            className={`page-link page-number ${
+              pageNumber === page ? "active" : ""
+            }`}
+            onClick={() => handlePageClick(page)}
+          >
+            {page}
+          </Link>
+        </li>
+      )
+    );
   };
-
-
 
   // filteration
 
@@ -134,12 +135,6 @@ const BrandProduct = () => {
     }
   };
 
-
-  
-  
-  
-  
-  
   useEffect(() => {
     const updatePriceRangeVisibility = () => {
       const updatedPriceRanges = priceRanges.map((range) => {
@@ -153,31 +148,12 @@ const BrandProduct = () => {
       });
       setPriceRanges(updatedPriceRanges);
     };
-  
+
     updatePriceRangeVisibility();
-  }, [brandproduct, priceRanges]);
-  
-  
-  
+  }, [brandproduct]);
 
-  // useEffect(() => {
-  //   const updatePriceRangeVisibility = () => {
-  //     const updatedPriceRanges = priceRanges.map((range) => {
-  //       const { minPrice, maxPrice } = range;
-  //       const isVisible = brandproduct.some(
-  //         (product) =>
-  //           product.selling_price >= minPrice &&
-  //           product.selling_price <= maxPrice
-  //       );
-  //       return { ...range, isVisible };
-  //     });
-  //     setPriceRanges(updatedPriceRanges);
-  //   };
 
-  //   updatePriceRangeVisibility();
-  // }, [brandproduct, priceRanges]);
 
-  // shorting
 
   // Filterration end
 
@@ -256,7 +232,7 @@ const BrandProduct = () => {
   function handleClick(categoryId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
-    setPageNumber(1)
+    setPageNumber(1);
     navigate(`/category/${categoryId}`);
     // window.location.reload(`/category/${categoryId}`)
   }
@@ -264,7 +240,7 @@ const BrandProduct = () => {
   function handleClickbrand(brandId) {
     setFilteredProducts([]);
     setCheckedFilters(false);
-    setPageNumber(1)
+    setPageNumber(1);
     navigate(`/brand/${brandId}`);
   }
 
@@ -286,7 +262,7 @@ const BrandProduct = () => {
                     }}
                   ></i>
                 </Link>
-                <Link to={`/product/${p.id}`}>
+                <Link to={`/product/${p.slug}`}>
                   <img
                     src={p.thumbnail_img?.original_url}
                     alt="img"
@@ -844,7 +820,7 @@ const BrandProduct = () => {
 
                             //   />
                             // </div>
-                            <div className="form-check"  key={e.id}>
+                            <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
@@ -852,8 +828,6 @@ const BrandProduct = () => {
                                 defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.slug)}
-                             
-                               
                               />
                               <label className="form-check-label" htmlFor={103}>
                                 {e.name}
@@ -1215,9 +1189,9 @@ const BrandProduct = () => {
                   </Link>
                 </li>
                 <div className="numbers">
-                  <li className="page-item" ><Link className="page-number" >{renderPageNumbers()}</Link></li>
-                  
-                  
+                  <li className="page-item">
+                    <Link className="page-number">{renderPageNumbers()}</Link>
+                  </li>
                 </div>
                 <li className="page-item">
                   <Link className="page-link" onClick={handleNextClick}>
@@ -1228,8 +1202,6 @@ const BrandProduct = () => {
             </div>
 
             <div className="desktop"></div>
-
-           
           </nav>
         </div>
       </HomeLayout>

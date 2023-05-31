@@ -1,8 +1,4 @@
-
-import React, { useState, useEffect,useCallback } from "react";
-
-
-
+import React, { useState, useEffect, useCallback } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./category.css";
@@ -61,13 +57,11 @@ const Category = () => {
 
   // const [noProduct, setNoProduct] = useState(false);
 
-
-
   // filteration state end
 
   // category product api fetching
   const [pageNumber, setPageNumber] = useState(1);
-  const { combo, product, loading,banner, totalPages } = useSelector(
+  const { combo, product, loading, banner, totalPages } = useSelector(
     (state) => state.data
   );
   const fetchCategoryData = useCallback(() => {
@@ -76,8 +70,10 @@ const Category = () => {
 
   useEffect(() => {
     fetchCategoryData();
+    setFilterCombo([]);
+    setFilteredProducts([]);
+    setCheckedFilters(false);
   }, [fetchCategoryData]);
-
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -92,7 +88,7 @@ const Category = () => {
   //         options
   //       );
   //       setBanner(response.data.data.category)
-       
+
   //     } catch (error) {
   //       if (error.response && error.response.status === 429) {
   //         const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -240,7 +236,7 @@ const Category = () => {
   //   updatePriceRangeVisibility();
   // }, [combo, product, priceRanges]);
 
-    useEffect(() => {
+  useEffect(() => {
     const updatePriceRangeVisibility = () => {
       const updatedPriceRanges = priceRanges.map((range) => {
         const { minPrice, maxPrice } = range;
@@ -261,10 +257,7 @@ const Category = () => {
     };
 
     updatePriceRangeVisibility();
-  }, [combo, product, priceRanges]);  
-
-
-
+  }, [combo, product]);
 
   // Categories api
 
@@ -471,7 +464,7 @@ const Category = () => {
                         }}
                       ></i>
                     </div>
-                    <Link to={`/combo/${e.id}`}>
+                    <Link to={`/combo/${e.slug}`}>
                       <img src={e.meta_img?.url} alt="img" width="100%"></img>
                     </Link>
                   </div>
@@ -1276,7 +1269,7 @@ const Category = () => {
                                 </li>
                               </ul>
                             </Link>
-                            <Link to={`/product/${p.id}`}>
+                            <Link to={`/product/${p.slug}`}>
                               <img
                                 src={p.thumbnail_img?.original_url}
                                 alt={p.name}
@@ -1346,7 +1339,7 @@ const Category = () => {
                                 </li>
                               </ul>
                             </Link>
-                            <Link to={`/product/${p.id}`}>
+                            <Link to={`/product/${p.slug}`}>
                               <img
                                 src={p.thumbnail_img?.original_url}
                                 alt={p.name}
@@ -1410,8 +1403,8 @@ const Category = () => {
           >
             <div className="desktop">
               page {pageNumber} of {totalPages}
-            </div>                                          
-            <div >
+            </div>
+            <div>
               <ul
                 className="pagination"
                 style={{
