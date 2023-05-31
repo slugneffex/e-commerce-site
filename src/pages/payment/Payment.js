@@ -3,6 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import { Link } from "react-router-dom";
 import "./payment.css";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -150,38 +151,100 @@ const Payment = () => {
       </li>
     );
   }
+  console.log(totalCartSubAmount)
 
   // Razorpay
 
-  async function displayRazorpay() {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
+  const handlePaymentSuccess = async (response) => {
+    try {
+      // Make a POST request to your API endpoint with the payment details
+      const apiResponse = await makeAPICall(response.razorpay_payment_id);
+      
+      // Process the API response here if needed
+      console.log('API response:', apiResponse);
+    } catch (error) {
+      console.error('Error while calling API:', error);
+    }
+
+    alert('Payment Successful!');
+    alert(response.razorpay_payment_id);
+    localStorage.setItem('transaction_id', response.razorpay_payment_id);
+    setShowButton(true);
+  };
+
+  const makeAPICall = async (paymentId) => {
+    try {
+      // Make a POST request to your API endpoint with the payment ID
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/getRazorpayDetails`, {
+        payment_id: paymentId,
+        // Add more payment details as needed
+      },
+      {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+        },
+      });
+      console.log(response.data)
+      return response.data;
+       // Return the API response if needed
+    } catch (error) {
+      throw new Error('Error while calling API:', error);
+    }
+  };
+
+
+  const displayRazorpay = async () => {
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
     if (!res) {
-      alert("Razorpay SDK failed to load. Are you Online");
+      alert('Razorpay SDK failed to load. Are you online?');
       return;
     }
 
     const options = {
-      key: "rzp_test_7Ynqg7Kwiuxr5Z",
-      amount: Number(totalCartSubAmount) * 100,
-      currency: "INR",
-      name: "Combonation",
-      description: "Test payment",
-      handler: function (response) {
-        alert("Payment Successful!");
-        alert(response.razorpay_payment_id);
-        localStorage.setItem("transaction_id", response.razorpay_payment_id);
-        setShowButton(true);
-      },
+      key: `${process.env.REACT_APP_RAZORPAY_KEY}`,
+      amount: Math.round(Number(totalCartSubAmount) * 100),
+    
+      currency: 'INR',
+      name: 'Combonation',
+      description: 'Test payment',
+      handler: handlePaymentSuccess,
     };
-    // alert(response.razorpay_order_id);
-    // alert(response.razorpay_signature);
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-  }
+  };
+
+  // async function displayRazorpay() {
+  //   const res = await loadScript(
+  //     "https://checkout.razorpay.com/v1/checkout.js"
+  //   );
+
+  //   if (!res) {
+  //     alert("Razorpay SDK failed to load. Are you Online");
+  //     return;
+  //   }
+
+  //   const options = {
+  //     key: "rzp_test_7Ynqg7Kwiuxr5Z",
+  //     amount: Number(totalCartSubAmount) * 100,
+  //     currency: "INR",
+  //     name: "Combonation",
+  //     description: "Test payment",
+  //     handler: function (response) {
+  //       alert("Payment Successful!");
+  //       alert(response.razorpay_payment_id);
+  //       localStorage.setItem("transaction_id", response.razorpay_payment_id);
+  //       setShowButton(true);
+        
+  //     },
+  //   };
+  
+    
+
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // }
 
   return (
     <>

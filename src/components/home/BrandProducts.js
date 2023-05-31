@@ -159,7 +159,7 @@ const BrandProducts = () => {
                         onClick={() => wishlistProductData(e.id)}
                         className="addtofav"
                       ></Link>
-                      <Link  to={`/product/${e.id}`}>
+                      <Link  to={`/product/${e.slug}`}>
                         <img
                           src={e.thumbnail_img?.original_url}
                           alt="img"

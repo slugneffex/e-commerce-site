@@ -96,7 +96,7 @@ const Footer = () => {
                 <ul>
                   {categories.map((e) => (
                     <li key={e.id}>
-                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.id}`}>
+                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.slug}`}>
                         {e.name}
                       </Link>
                     </li>
@@ -324,7 +324,7 @@ const Footer = () => {
                   <ul>
                   {categories.map((e) => (
                     <li key={e.id}>
-                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.id}`}>
+                      <Link onClick={handleClick} className="dropdown-item" to={`/category/${e.slug}`}>
                         {e.name}
                       </Link>
                     </li>

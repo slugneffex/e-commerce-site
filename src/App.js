@@ -52,15 +52,14 @@ const App = () => {
      <Routes>
       <Route exact path="/" element={<Home></Home>}></Route>
       <Route path="/Cart" element={<Cart />} />
-      <Route path="/combo/:id" element={<Product />} />
-      <Route path="/product/:id" element={<Singleproduct />} />
+      <Route path="/combo/:slug" element={<Product />} />
+      <Route path="/product/:slug" element={<Singleproduct />} />
       {/* <Route path="/Login" element={<Login />} /> */}
-      <Route path="/category/:id" element={<Category />} />
-      <Route path="/subcategory/:id" element={<SubCategory />} />
+      <Route path="/category/:slug" element={<Category />} />
       <Route path="/page/:id" element={<CustomPage />} />
-      <Route path="/brand/:brand_id" element={<BrandProduct />} />
+      <Route path="/brand/:slug" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
-      <Route path="/Thanks" element={<Thanks />} />
+      <Route path="/thanks" element={<Thanks />} />
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       <Route path="/view-all-products" element={<MYOC />} />

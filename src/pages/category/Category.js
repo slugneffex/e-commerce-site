@@ -42,7 +42,7 @@ const Category = () => {
   const dispatch = useDispatch();
   // Categories products combo & single Products
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { slug } = useParams();
 
   // filteration state
   // const [originalCategory, setOriginalCategory] = useState([]);
@@ -61,22 +61,49 @@ const Category = () => {
 
   // const [noProduct, setNoProduct] = useState(false);
 
-  const [noProduct, setNoProduct] = useState(false);
+
 
   // filteration state end
 
   // category product api fetching
   const [pageNumber, setPageNumber] = useState(1);
-  const { combo, product, banner, loading, totalPages } = useSelector(
+  const { combo, product, loading,banner, totalPages } = useSelector(
     (state) => state.data
   );
   const fetchCategoryData = useCallback(() => {
-    dispatch(fetchCategory(id, pageNumber));
-  }, [dispatch, id, pageNumber]);
+    dispatch(fetchCategory(slug, pageNumber));
+  }, [dispatch, slug, pageNumber]);
 
   useEffect(() => {
     fetchCategoryData();
   }, [fetchCategoryData]);
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const options = {
+  //       headers: {
+  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       },
+  //     };
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/category/${slug}`,
+  //         options
+  //       );
+  //       setBanner(response.data.data.category)
+       
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
+  //         setTimeout(() => {
+  //           fetchData();
+  //         }, retryAfter * 1000);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [slug]);
 
   useEffect(() => {
     const updateDisplayedPages = () => {
@@ -234,7 +261,7 @@ const Category = () => {
     };
 
     updatePriceRangeVisibility();
-  }, [combo, product, priceRanges]);
+  }, [combo, product, priceRanges]);  
 
 
 
@@ -394,13 +421,13 @@ const Category = () => {
 
   //for scroll
 
-  function handleClick(categoryId) {
+  function handleClick(categorySlug) {
     setPageNumber(1);
     setCheckedFilters(false);
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
-    navigate(`/category/${categoryId}`);
+    navigate(`/category/${categorySlug}`);
   }
 
   function handleClickbrand(brandId) {
@@ -505,7 +532,7 @@ const Category = () => {
                         }}
                       ></i>
                     </div>
-                    <Link to={`/combo/${e.id}`}>
+                    <Link to={`/combo/${e.slug}`}>
                       <img src={e.meta_img?.url} alt="img" width="100%"></img>
                     </Link>
                   </div>
@@ -666,7 +693,7 @@ const Category = () => {
                                 name="category_id"
                                 id={e.name}
                                 className="form-check-input"
-                                onClick={() => handleClick(e.id)}
+                                onClick={() => handleClick(e.slug)}
                               />
 
                               <label
@@ -912,7 +939,7 @@ const Category = () => {
                                 // id={`category_id${category.id}`}
                                 // defaultValue={category.id}
                                 className="form-check-input"
-                                onClick={() => handleClick(e.id)}
+                                onClick={() => handleClick(e.slug)}
                               />
 
                               <label className="form-check-label">
@@ -972,7 +999,7 @@ const Category = () => {
                                 name="category_id"
                                 id={e.name}
                                 className="form-check-input"
-                                onClick={() => handleClickbrand(e.id)}
+                                onClick={() => handleClickbrand(e.slug)}
                               />
                               <label
                                 className="form-check-label"
@@ -1381,11 +1408,10 @@ const Category = () => {
               alignItems: "center",
             }}
           >
-            <div>
+            <div className="desktop">
               page {pageNumber} of {totalPages}
-            </div>
-
-            <div style={{ marginRight: "37rem" }}>
+            </div>                                          
+            <div >
               <ul
                 className="pagination"
                 style={{
@@ -1393,7 +1419,7 @@ const Category = () => {
                   alignItems: "center",
                 }}
               >
-                <li className="page-item">
+                <li className="page-item px-1">
                   <Link
                     className="page-link"
                     tabindex="-1"
@@ -1415,6 +1441,7 @@ const Category = () => {
                 </li>
               </ul>
             </div>
+            <div></div>
           </nav>
         </div>
       </HomeLayout>

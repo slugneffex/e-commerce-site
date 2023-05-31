@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import useCartReducer from "../components/features/useCartSlice";
 import useSingleCartReducer from "../components/features/SingleCartSlice";
 import freebiesCartReducer from "../components/features/freebiesCartSlice";
+import freeCartReducer from "../components/features/freeCartSlice"
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import categoriesReducer from "../components/features/reducer/categoriesReducer";
@@ -35,6 +36,7 @@ export const rootReducers = combineReducers({
   cart: useCartReducer,
   SingleCart: useSingleCartReducer,
   freebies: freebiesCartReducer,
+  free:freeCartReducer,
   categories: categoriesReducer,
   data: categoryReducer,
   branddata: brandproductReducer,
