@@ -24,6 +24,12 @@ const useCartSlice = createSlice({
         }
       },
     },
+    clearComboCart: (state) => {
+      state.cartItems = [];
+      state.totalCount=0;
+      state.subAmount = 0;
+      state.totalAmount=0
+    },
 
     getCartProducts: (state, action) => {
       return {
@@ -96,5 +102,6 @@ export const {
   calculateTax,
   getTotalAmount,
   getTotalDiscount,
+  clearComboCart,
 } = useCartSlice.actions;
 export default useCartSlice.reducer;

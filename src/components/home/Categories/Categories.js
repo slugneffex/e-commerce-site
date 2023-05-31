@@ -97,7 +97,7 @@ const Categories = () => {
           >
             {categories.map((e) => (
               <div className="my-auto" key={e.id}>
-                <Link to={`/category/${e.id}`} style={{ color: "#464646" }}>
+                <Link to={`/category/${e.slug}`} style={{ color: "#464646" }}>
                   <img src={e.image?.original_url} alt="" width="70%" />
                   <br />
                   <span style={{ fontSize: "12px" }}>{e.name.slice(0, 9)}</span>
