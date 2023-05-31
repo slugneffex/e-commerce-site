@@ -4,11 +4,13 @@ import axios from "axios";
 
 const StoreAdress = () => {
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
 
   const [storeAddress, setStoreAddress] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
     async function fetchData() {
+      setLoading(true)
       setError(null);
       const options = {
         headers: {
@@ -21,6 +23,7 @@ const StoreAdress = () => {
           options
         );
         setStoreAddress(response.data);
+        setLoading(false)
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -42,6 +45,7 @@ const StoreAdress = () => {
   return (
     <>
       <div className="col">
+        {loading && <div id="cover-spin"></div>}
         <div className="storeAddressSection">
           <h2 className="text-center">Store Address :</h2>
           <p className="text-center">{storeAddress.full_address}</p>
