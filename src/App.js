@@ -5,6 +5,7 @@ import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
 // import Login from "./pages/auth/Login";
 import Category from "./pages/category/Category";
+import SubCategory from "./pages/category/SubCategory";
 import VerifyOtp from "./pages/auth/VerifyOtp";
 import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SignIn";
@@ -55,6 +56,7 @@ const App = () => {
       <Route path="/product/:slug" element={<Singleproduct />} />
       {/* <Route path="/Login" element={<Login />} /> */}
       <Route path="/category/:slug" element={<Category />} />
+      <Route path="/subcat" element={<SubCategory />} />
       <Route path="/page/:id" element={<CustomPage />} />
       <Route path="/brand/:slug" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />

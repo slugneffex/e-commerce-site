@@ -10,6 +10,11 @@ import { clearComboCart } from "../../components/features/useCartSlice";
 import { useDispatch } from "react-redux";
 
 const Loginadress = () => {
+
+  const [loading, setLoading] = useState(false);
+  const clickHandler = () => {
+    setLoading(true);
+  }
   // Card Pricing details
   // Single Product Cart
   const dispatch = useDispatch();
@@ -659,7 +664,7 @@ const Loginadress = () => {
                         {totalCartCount} Item ({freebiesCount} Free) | ₹
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
-                      <Link to="/Adress" className="btn">
+                      <Link onClick={clickHandler} to="/Adress" className="btn">
                         Proceed To Pay
                       </Link>
                     </div>

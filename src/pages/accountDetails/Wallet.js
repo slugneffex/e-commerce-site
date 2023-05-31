@@ -3,6 +3,7 @@ import HomeLayout from '../../layouts/HomeLayout'
 import './accountDetails.css'
 import Sidebar from "./Sidebar"
 import { Link } from 'react-router-dom'
+import { AiOutlineArrowRight } from "react-icons/ai"
 
 
 const Wallet = () => {
@@ -46,12 +47,15 @@ const Wallet = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-4">
-
+                                        <div className="col-md-4 col-sm-12 top-up-btn">
+                                            <button className='btn  btn-primary'>
+                                                Top Up The Wallet
+                                                <AiOutlineArrowRight style={{marginLeft: "10px"}} /> 
+                                            </button>
                                         </div>
 
                                     </div>
-                                    <div className="row d-flex">
+                                    <div className="row d-flex" style={{justifyContent: "center", alignItems: "center"}}>
                                         <div className="col-md-8">
                                             <h6 className="note">Kindly Note</h6>
                                             <ul className="notes">
@@ -62,8 +66,8 @@ const Wallet = () => {
                                                 <li>To know more <Link to="/">read our T&Cs.</Link> </li>
                                             </ul>
                                         </div>
-                                        <div className="col-md-4">
-                                            <img src='./assets/img/piggy.png' alt="piggy" width="150px" />
+                                        <div className="col-md-4 col-sm-12" style={{textAlign: "end"}}>
+                                            <img className='piggy' src='./assets/img/piggy.png' alt="piggy" width="150px" />
                                         </div>
                                     </div>
                                 </div>
