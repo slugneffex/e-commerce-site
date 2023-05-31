@@ -29,7 +29,7 @@ const Categories = () => {
               <Link to={`/view-all-products`}>
                 <img
                   src={e.myoc_banner?.original_url}
-                  className="img-fluid"
+                  className="byocImg"
                   alt="super-deal"
                 />
               </Link>

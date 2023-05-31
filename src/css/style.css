@@ -11,6 +11,11 @@
 }
 
 
+.byocImg {
+  width: 100vw;
+}
+
+
 
 html body.custom-scroll {
   overflow-y: scroll !important;

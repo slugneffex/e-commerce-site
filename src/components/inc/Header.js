@@ -50,7 +50,6 @@ const Header = () => {
       .then((res) => {
         setSearchResult(res.data);
         navigate("/search", { state: res.data });
-        console.log(searchResult);
       });
   }
   function handle(e) {

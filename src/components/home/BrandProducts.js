@@ -169,7 +169,7 @@ const BrandProducts = () => {
 
                     <div className="card-det-sec">
                       <div className="headingCard pt-3">
-                        <span>{e.name.substring(0, 40)}</span>
+                        <span>{e.name.substring(0, 23) + "..."}</span>
                       </div>
                       {/* <div>
                         <span className="packof">(Pack of 2)</span>
