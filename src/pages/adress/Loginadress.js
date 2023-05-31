@@ -4,10 +4,15 @@ import "./adress.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { clearCart } from "../../components/features/freebiesCartSlice";
+import { clearSingleCart } from "../../components/features/SingleCartSlice";
+import { clearComboCart } from "../../components/features/useCartSlice";
+import { useDispatch } from "react-redux";
 
 const Loginadress = () => {
   // Card Pricing details
   // Single Product Cart
+  const dispatch = useDispatch();
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
@@ -298,14 +303,12 @@ const Loginadress = () => {
   }
 
   const totalcartItems = {
-    comboItems: [ ...cartItems],
-    customItems: [ ...singleCartItems],
-    freebiesItems: [ ...freebiescartItems],
+    comboItems: [...cartItems],
+    customItems: [...singleCartItems],
+    freebiesItems: [...freebiescartItems],
   };
 
-  console.log(totalcartItems)
-
-  
+  console.log(totalcartItems);
 
   // Order Validate
 
@@ -318,9 +321,9 @@ const Loginadress = () => {
       .post(
         `${process.env.REACT_APP_BASE_URL}/order-validate`,
         {
-          city_id: formData.city_id,
+          city: formData.city_id,
           address: formData.address,
-          state_id: state_id,
+          state: state_id,
           name: formData.name,
           postal_code: formData.postal_code,
           transaction_id: transaction_id,
@@ -329,11 +332,11 @@ const Loginadress = () => {
           email: email,
           password: password,
           phone: formData.phone,
-          subtotal: "1000",
+          subtotal: `${totalCartSubAmount}`,
           grand_total: `${totalCartSubAmount}`,
           tax: "600",
           lname: "tiwari",
-          cart: totalcartItems,
+          orderproducts: totalcartItems,
         },
         {
           headers: {
@@ -345,10 +348,11 @@ const Loginadress = () => {
       .then((res) => {
         alert(res.data.message);
 
-        navigate("/thanks")
-
+        navigate("/thanks");
+        dispatch(clearCart());
+        dispatch(clearComboCart());
+        dispatch(clearSingleCart());
       });
-      
   };
 
   if (error) {

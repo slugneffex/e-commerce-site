@@ -26,6 +26,13 @@ const useSingleCartSlicer = createSlice({
         }
       },
     },
+    clearSingleCart:(statee) => {
+      statee.singleCartItems = [];
+      statee.singletotalCount = 0;
+      statee.singlesubAmount=0;
+      statee.singletotalAmount=0;
+      
+    },
 
     getsingleCartProducts: (statee, action) => {
       return {
@@ -80,5 +87,6 @@ export const {
   getsingleTotalDiscount,
   getsingleTotalAmount,
   getsingleSubTotal,
+  clearSingleCart,
 } = useSingleCartSlicer.actions;
 export default useSingleCartSlicer.reducer;
