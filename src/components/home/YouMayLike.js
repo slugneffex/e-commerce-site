@@ -177,7 +177,7 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{e.name}</span>
+                          <span>{(e.name).substring(0, 25) + "..."}</span>
                         </div>
                         {/* <div>
                           <span className="packof">(Pack of 2)</span>
