@@ -114,7 +114,7 @@ const Brands = () => {
               fliterData.map((e) => (
                 <div key={e.id} className="logoBox">
                   <div className="logoImgDiv">
-                    <Link onClick={handleClick} to={`/brand/${e.id}`}>
+                    <Link onClick={handleClick} to={`/brand/${e.slug}`}>
                       <img
                         src={e.image?.original_url}
                         width="80%"

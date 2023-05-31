@@ -7,8 +7,6 @@ import HomeLayout from "../../layouts/HomeLayout";
 import SimilarProduct from "./SimilarProduct";
 import "./product.css";
 import axios from "axios";
-
-
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 

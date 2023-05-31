@@ -259,7 +259,7 @@ const CustomPage = () => {
       };
       try {
         const promises = brandId.map((e) =>
-          axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${e.id}`, options)
+          axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${e.slug}`, options)
         );
         const responses = await Promise.all(promises);
         const data = responses.map((response) => response.data.products.data);
@@ -297,7 +297,7 @@ const CustomPage = () => {
       try {
         const promises = categoriesId.map((e) =>
           axios.get(
-            `${process.env.REACT_APP_BASE_URL}/category/${e.id}`,
+            `${process.env.REACT_APP_BASE_URL}/category/${e.slug}`,
             options
           )
         );
@@ -453,7 +453,7 @@ const CustomPage = () => {
     };
 
     updatePriceRangeVisibility();
-  }, []);
+  }, [brandProduct,categoriesCombo,categoriesProduct,combo]);
 
   // Collapse for filters ui
   const [isOpen1, setIsOpen1] = useState(false);
