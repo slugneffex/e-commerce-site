@@ -1,11 +1,11 @@
-/* .lds-ellipsis {
+.lds-ellipsis {
     display: inline-block;
     position: relative;
     width: 40px;
     height: 80px;
-    background-color: #000;
-    color: #fff;
-    opacity: .5;
+    background-color: rgba(255,255,255,0.7);
+    color:#fe9e2d;
+    opacity: 1;
   }
   .lds-ellipsis div {
     position: absolute;
@@ -13,7 +13,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background-color: #fe9e2d;
+    background-color: #fe9e2d !important;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   .lds-ellipsis div:nth-child(1) {
@@ -127,7 +127,7 @@
         transform: translate(24px, 0);
       }
     }
-  } */
+  }
 
 
 #cover-spin {

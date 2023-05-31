@@ -6,6 +6,7 @@ import "./login.css";
 import Features from "../../components/inc/Fetures";
 import jwtDecode from "jwt-decode";
 import { LoginSocialFacebook } from "reactjs-social-login";
+import Loader from "../../components/home/Loader/Loader";
 
 // import { FacebookLoginButton } from "react-social-login-buttons";
 // import zIndex from "@mui/material/styles/zIndex";
@@ -78,8 +79,45 @@ const SignIn = () => {
 
   localStorage.setItem("password", data.password);
 
-  function submit(e) {
+  //for loading 
+  const [loading, setLoading] = useState(false);
+
+  // function submit(e) {
+  //   e.preventDefault();
+  //   axios
+  //     .post(
+  //       url,
+  //       {
+  //         email: data.email,
+  //         password: data.password,
+  //       },
+  //       {
+  //         headers: {
+  //           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //         },
+  //       }
+  //     )
+
+  //     .then((res) => {
+  //       if (res.data.status === 401) {
+  //         alert(res.data.message);
+  //         navigate("/Signin");
+  //       } else {
+  //         alert("Login Succesfully");
+  //         localStorage.setItem("name", res.data.user?.name);
+  //         localStorage.setItem("email", res.data.user?.email);
+  //         localStorage.setItem("phone", res.data.user?.phone);
+  //         localStorage.setItem("token", res.data.token);
+  //         localStorage.setItem("id", res.data.user?.id);
+  //         navigate("/");
+  //       }
+  //     });
+  // }
+
+  const submit = (e) => {
     e.preventDefault();
+    setLoading(true);
+  
     axios
       .post(
         url,
@@ -93,13 +131,12 @@ const SignIn = () => {
           },
         }
       )
-
       .then((res) => {
         if (res.data.status === 401) {
           alert(res.data.message);
           navigate("/Signin");
         } else {
-          alert("Login Succesfully");
+          // alert("Login Successfully");
           localStorage.setItem("name", res.data.user?.name);
           localStorage.setItem("email", res.data.user?.email);
           localStorage.setItem("phone", res.data.user?.phone);
@@ -107,8 +144,11 @@ const SignIn = () => {
           localStorage.setItem("id", res.data.user?.id);
           navigate("/");
         }
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }
+  };
 
   function handle(e) {
     const newdata = { ...data };
@@ -203,6 +243,7 @@ const SignIn = () => {
                           Proceed To log In
                         </button>
                       </form>
+                      {loading && <Loader/>}
                       <div className="social-login mt-3">
                         <span>or Login Via</span>
                         <div className="d-flex mt-5 align-items-center justify-center">
@@ -211,9 +252,8 @@ const SignIn = () => {
                               <div id="signInDiv" style={{opacity: "0",zIndex: 1,marginRight: " 1rem", position: "absolute", left: "0"}}></div>
                               <img style={{}}
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt="google" width="100px"                                                         
+                                alt="google" width="100px"                                                        
                               />
-
                               {/* {user?localStorage.setItem("gmailname",user.name ):""} */}
 
                               {/* <div>
@@ -221,14 +261,11 @@ const SignIn = () => {
 
                               </div> */}
 
-                            
-
-
                             {/* <div></div>
                             <div style={{ boxShadow: "none" }}>
                               <img
                                 src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt="google"                                                             
+                                alt="google"                                                          
                               />
                             </div> */}
                           </div>
