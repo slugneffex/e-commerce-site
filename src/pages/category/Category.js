@@ -54,6 +54,7 @@ const Category = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
   const [displayedPages, setDisplayedPages] = useState([]);
+  const [banner, setBanner] = useState([]);
 
   // const [noProduct, setNoProduct] = useState(false);
 
@@ -61,7 +62,7 @@ const Category = () => {
 
   // category product api fetching
   const [pageNumber, setPageNumber] = useState(1);
-  const { combo, product, loading, banner, totalPages } = useSelector(
+  const { combo, product, loading, totalPages } = useSelector(
     (state) => state.data
   );
   const fetchCategoryData = useCallback(() => {
@@ -75,31 +76,30 @@ const Category = () => {
     setCheckedFilters(false);
   }, [fetchCategoryData]);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/category/${slug}`,
-  //         options
-  //       );
-  //       setBanner(response.data.data.category)
-
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, [slug]);
+  useEffect(() => {
+    async function fetchData() {
+      const options = {
+        headers: {
+          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/category/${slug}`,
+          options
+        );
+        setBanner(response.data.data.category);
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = parseInt(error.response.headers["retry-after"]);
+          setTimeout(() => {
+            fetchData();
+          }, retryAfter * 1000);
+        }
+      }
+    }
+    fetchData();
+  }, [slug]);
 
   useEffect(() => {
     const updateDisplayedPages = () => {
