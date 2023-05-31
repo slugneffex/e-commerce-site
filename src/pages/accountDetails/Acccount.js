@@ -82,6 +82,7 @@ const Account = () => {
                       <h6 className="edit d-flex">
                         <span className="green">Verified</span>
                         <img
+                          className="verified"
                           src="./assets/img/verified.png"
                           width="25px"
                           height="25px"
