@@ -28,8 +28,6 @@ const Orders = () => {
                       <img
                         src="./assets/img/wishlist.png"
                         className="order"
-                        width="100px"
-                        height="100px"
                         alt="img"
                       />
                     </div>
