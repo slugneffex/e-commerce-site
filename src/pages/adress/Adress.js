@@ -3,9 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import HomeLayout from "../../layouts/HomeLayout";
 import "./adress.css";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../../components/features/freebiesCartSlice";
+import { clearSingleCart } from "../../components/features/SingleCartSlice";
+import { clearComboCart } from "../../components/features/useCartSlice";
 
 const Adress = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +57,7 @@ const Adress = () => {
   const handleStateChange = (event) => {
     const selectedID = event.target.value;
     setSelectedState(selectedID);
+    localStorage.setItem("state", selectedID);
 
     const url = `${process.env.REACT_APP_BASE_URL}/get-city-by-state`;
 
@@ -78,19 +83,25 @@ const Adress = () => {
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
 
-  const { singlesubAmount, singletotalAmount, singletotalDiscount } =
-    useSelector((statee) => statee.SingleCart);
+  const {
+    singlesubAmount,
+    singletotalAmount,
+    singletotalDiscount,
+    singleCartItems,
+  } = useSelector((statee) => statee.SingleCart);
 
   // Combo Product Cart
 
   const { totalCount } = useSelector((state) => state.cart);
-  const { subAmount, totalAmount, totalDiscount } = useSelector(
+  const { subAmount, totalAmount, totalDiscount, cartItems } = useSelector(
     (state) => state.cart
   );
 
   // Freebies cart section
   const { freebiesCount } = useSelector((state) => state.freebies);
-  const { freebiestotalAmount } = useSelector((state) => state.freebies);
+  const { freebiestotalAmount, freebiescartItems } = useSelector(
+    (state) => state.freebies
+  );
 
   const totalCartCount = totalCount + singletotalCount;
 
@@ -201,8 +212,69 @@ const Adress = () => {
   }
 
   if (error) {
-    console.log(error)
+    console.log(error);
   }
+
+  // place order for non login users
+  const totalcartItems = {
+    comboItems: [...cartItems],
+    customItems: [...singleCartItems],
+    freebiesItems: [...freebiescartItems],
+  };
+  const [formData, setFormData] = useState({
+    address: "",
+    city_id: "",
+    address_id: "",
+    email: "",
+    name: "",
+    postal_code: "",
+    phone: "",
+  });
+  const state_id = localStorage.getItem("state");
+  const transaction_id = localStorage.getItem("transaction_id");
+  // const email = localStorage.getItem("email");
+  // const password = localStorage.getItem("password");
+  const payment_type = transaction_id ? "prepaid" : "cod";
+  const payment_method = transaction_id ? "prepaid" : "cod";
+
+  const sendOrder = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_BASE_URL}/order-validate`,
+        {
+          city: formData.city_id,
+          address: formData.address,
+          state: state_id,
+          name: formData.name,
+          pincode: formData.postal_code,
+          transaction_id: transaction_id,
+          payment_type: payment_type,
+          payment_method: payment_method,
+          email: formData.email,
+
+          phone: formData.phone,
+          subtotal: `${totalCartSubAmount}`,
+          grand_total: `${totalCartSubAmount}`,
+          tax: "600",
+          lname: "tiwari",
+          orderproducts: totalcartItems,
+        },
+        {
+          headers: {
+            "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+          },
+        }
+      )
+      .then((res) => {
+        alert(res.data.message);
+
+        navigate("/thanks");
+        dispatch(clearCart());
+        dispatch(clearComboCart());
+        dispatch(clearSingleCart());
+        localStorage.removeItem("transaction_id");
+      });
+  };
 
   return (
     <HomeLayout>
@@ -245,6 +317,10 @@ const Adress = () => {
                       placeholder="Name*"
                       required
                       className="form-control"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
                     />
                     <input
                       type="number"
@@ -253,12 +329,20 @@ const Adress = () => {
                       max="10"
                       min="10"
                       className="form-control"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
                     />
                     <input
                       type="email"
                       placeholder="Email*"
                       required
                       className="form-control"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -273,6 +357,13 @@ const Adress = () => {
                       required
                       placeholder="Pin Code*"
                       className="form-control"
+                      value={formData.postal_code}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          postal_code: e.target.value,
+                        })
+                      }
                     />
                     <input
                       type="text"
@@ -280,6 +371,10 @@ const Adress = () => {
                       required
                       placeholder="Address (House No, Building Street, Area)*"
                       className="form-control"
+                      value={formData.address}
+                      onChange={(e) =>
+                        setFormData({ ...formData, address: e.target.value })
+                      }
                     />
                     <input
                       type="text"
@@ -310,6 +405,13 @@ const Adress = () => {
                           name="city_id"
                           required
                           className="form-control"
+                          value={formData.value}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              city_id: e.target.value,
+                            })
+                          }
                         >
                           <option value="null">City</option>
                           {cities.map((e) => (
@@ -364,7 +466,7 @@ const Adress = () => {
                       {totalCartCount} Item ({freebiesCount} Free) | ₹
                       {parseFloat(totalCartSubAmount).toFixed(0)}
                     </p>
-                    <Link to="/address" className="btn">
+                    <Link onClick={sendOrder} className="btn">
                       Proceed To Pay
                     </Link>
                   </div>

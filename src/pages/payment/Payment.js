@@ -151,7 +151,7 @@ const Payment = () => {
       </li>
     );
   }
-  console.log(totalCartSubAmount)
+  
 
   // Razorpay
 
@@ -398,7 +398,7 @@ const Payment = () => {
                       </p>
                       {showButton && (
                         <Link to="/Adress" className="btn">
-                          Proceed To Pay
+                         Add Delivery Details
                         </Link>
                       )}
                     </div>
