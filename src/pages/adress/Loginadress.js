@@ -314,13 +314,15 @@ const Loginadress = () => {
     freebiesItems: [...freebiescartItems],
   };
 
-  console.log(totalcartItems);
+
 
   // Order Validate
 
   const transaction_id = localStorage.getItem("transaction_id");
   const email = localStorage.getItem("email");
   const password = localStorage.getItem("password");
+  const payment_type = transaction_id ? "prepaid" : "cod";
+  const payment_method = transaction_id ? "prepaid" : "cod";
 
   const sendOrder = () => {
     axios
@@ -333,8 +335,8 @@ const Loginadress = () => {
           name: formData.name,
           pincode: formData.postal_code,
           transaction_id: transaction_id,
-          payment_type: "prepaid",
-          payment_method: "prepaid",
+          payment_type: payment_type,
+          payment_method: payment_method,
           email: email,
           password: password,
           phone: formData.phone,
@@ -358,6 +360,7 @@ const Loginadress = () => {
         dispatch(clearCart());
         dispatch(clearComboCart());
         dispatch(clearSingleCart());
+        localStorage.removeItem("transaction_id");
       });
   };
 
