@@ -331,7 +331,7 @@ const Loginadress = () => {
           address: formData.address,
           state: state_id,
           name: formData.name,
-          postal_code: formData.postal_code,
+          pincode: formData.postal_code,
           transaction_id: transaction_id,
           payment_type: "prepaid",
           payment_method: "prepaid",
