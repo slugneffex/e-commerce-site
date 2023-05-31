@@ -196,7 +196,7 @@ a:link {
     display: none;
 }
 
-.card img {
+.card .verified {
     width: 25px !important;
     height: 25px !important;
     margin: 0 !important;
