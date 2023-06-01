@@ -6,9 +6,7 @@ h1 h2 h3 h4 h5 h6 p {
     font-family: 'Poppins';
 }
 
-.fixed-top {
-    
-}
+
 
 .row ul li {
     /* color: #FFF; */
@@ -76,7 +74,7 @@ h1 h2 h3 h4 h5 h6 p {
 
 
 .top-banner {
-    background-image: linear-gradient(to left, #FF5E00, #FD8A03);
+    background-color: #FE9E2D;
 }
 
 .whyChooseCombonation {

@@ -151,58 +151,42 @@ const Header = () => {
             <div className="row py-1">
               <div className="col-md-6 py-2" id="mainTitle">
                 <Link
-                  to="/why-choose-combonation"
+                  // to="/why-choose-combonation"
                   className="whyChooseCombonation"
                 >
                   <p className="my-auto text-white blink">
-                    Why Choose Combonation?
+                    Get Extra 10% OFF on Your First Order
                   </p>
                 </Link>
               </div>
-              <div className="col-md-2 getAppSection">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="23"
-                  height="32"
-                  viewBox="0 0 23 32"
-                  className="getAppSvg"
-                >
-                  <g
-                    id="Icon_feather-smartphone"
-                    data-name="Icon feather-smartphone"
-                    transform="translate(-6.5 -2)"
-                  >
-                    <path
-                      id="Path_1699"
-                      data-name="Path 1699"
-                      d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z"
-                      stroke="#fff"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    />
-                    <line
-                      id="Line_116"
-                      data-name="Line 116"
-                      x2="11"
-                      transform="translate(12.5 27)"
-                      fill="none"
-                      stroke="#fff"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                    />
-                  </g>
+
+              <div className="col-md-2 getAppSection pt-0" >
+                <button style={{ backgroundColor: "#fff", border: "none", borderRadius: "4px" }}>
+                  <Link style={{ color: "#464646" }} to="/why-choose-combonation">
+                    Why COMBONATION?
+                  </Link>
+                </button>
+              </div>
+              <div className="col-md-2 saleSection" style={{ paddingTop: "5px",position: "relative" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="32" viewBox="0 0 23 32">
+                  <path id="Path_1699" data-name="Path 1699" d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z" transform="translate(-6.5 -2)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+
                 </svg>
+
+                <svg style={{ position: "absolute",left: "68px", bottom: "10px" }} xmlns="http://www.w3.org/2000/svg" width="13" height="2" viewBox="0 0 13 2">
+                  <line id="Line_116" data-name="Line 116" x2="11" transform="translate(1 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" />
+                </svg>
+
 
                 <Link className="text-white text-align: left; getApp" to="/">
                   Get App
                 </Link>
               </div>
-              <div className="col-md-2 saleSection">
+              {/* <div className="col-md-2 saleSection">
                 <Link className="text-white saleText" to="/">
                   SALE
                 </Link>
-              </div>
+              </div> */}
               <div className="col-md-2 helpSection">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -569,10 +553,10 @@ const Header = () => {
             <div className="py-1 divWcc">
               <div className=" py-2" id="mainTitle">
                 <Link
-                  to="/why-choose-combonation"
+                  // to="/account"
                   className="whyChooseCombonation"
                 >
-                  <p className="my-auto blink">Why Choose Combonation?</p>
+                  <p className="my-auto blink">Get Extra 10% OFF on Your First Order</p>
                 </Link>
               </div>
               <div
@@ -581,48 +565,27 @@ const Header = () => {
                   justifyContent: "space-between",
                   height: "2rem",
                   alignItems: "center",
+                  position: "relative"
                 }}
               >
                 <div className="getAppSection" style={{ display: "flex" }}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="23"
-                    height="32"
-                    viewBox="0 0 23 32"
-                    className="getAppSvg"
-                  >
-                    <g
-                      id="Icon_feather-smartphone"
-                      data-name="Icon feather-smartphone"
-                      transform="translate(-6.5 -2)"
-                    >
-                      <path
-                        id="Path_1699"
-                        data-name="Path 1699"
-                        d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                      />
-                      <line
-                        id="Line_116"
-                        data-name="Line 116"
-                        x2="11"
-                        transform="translate(12.5 27)"
-                        fill="none"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeWidth="2"
-                      />
-                    </g>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="32" viewBox="0 0 23 32">
+                    <path id="Path_1699" data-name="Path 1699" d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z" transform="translate(-6.5 -2)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+
                   </svg>
+
+                  <svg style={{ position: "absolute", bottom: "2px", left: "2.5px", width: "5px" }} xmlns="http://www.w3.org/2000/svg" width="13" height="2" viewBox="0 0 13 2">
+                    <line id="Line_116" data-name="Line 116" x2="11" transform="translate(1 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" />
+                  </svg>
+
+
 
                   <Link className="text-white text-align: left; getApp" to="/">
                     Get App
                   </Link>
                 </div>
-                <div
+
+                {/* <div
                   className="saleSection"
                   style={{
                     paddingTop: "0",
@@ -633,7 +596,8 @@ const Header = () => {
                   <Link className="text-white saleText" to="/">
                     SALE
                   </Link>
-                </div>
+                </div> */}
+
                 <div
                   className="helpSection"
                   style={{ display: "flex", alignItems: "center" }}
