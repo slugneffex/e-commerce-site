@@ -1,6 +1,6 @@
 .categoriesMainDiv {
-    background-color: #FFF4E3;
-    padding: 0.5rem;
+    background-color: #fff;    padding: 0.5rem;
+    border-bottom: 3px solid #ebebeb;
 }
 
 .categoriesDiv {
@@ -10,14 +10,19 @@
     margin-right: 40px;
     justify-content: space-between;
     text-decoration: none;
+    /* position: relative; */
+    background-color: #fff;
 }
 
 .categoriesDiv a {
     color: #464646;
+    border: 3px solid #FFF ; 
 }
 
 .categoriesDiv a:hover {
-    color: #B53800;
+    /* position: absolute; */
+    color: #fe9e2d;
+    border-bottom: 3px solid #fe9e2d;
 }
 
 .carouselResponsive {
