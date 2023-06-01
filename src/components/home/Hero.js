@@ -89,16 +89,16 @@ const Hero = () => {
               hero.map((e) => (
                 <div key={e.banner?.id} style={{ width: "100%" }}>
                   <div>
-                    {e.brand_id && (
-                      <Link to={`/brand/${e.brand_id}`}>
+                   
+                      <Link to={`${e.link}`}>
                         <img
                           src={e.banner?.original_url}
                           width="100%"
                           alt={e.name}
                         />
                       </Link>
-                    )}
-                    {e.page_id && (
+                
+                    {/* {e.page_id && (
                       <Link to={`/page/${e.page_id}`}>
                         <img
                           src={e.banner?.original_url}
@@ -133,7 +133,7 @@ const Hero = () => {
                           alt={e.name}
                         />
                       </Link>
-                    )}
+                    )} */}
                   </div>
                 </div>
               ))}

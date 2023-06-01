@@ -36,7 +36,7 @@ import { fetchBrand } from "../../components/features/actions/brandActions";
 const CustomPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { slug } = useParams();
   const [banner, setBanner] = useState([]);
   const [combo, setCombo] = useState([]);
   const [product, setProduct] = useState([]);
@@ -95,7 +95,7 @@ const CustomPage = () => {
       };
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/page/${id}`,
+          `${process.env.REACT_APP_BASE_URL}/page/${slug}`,
           options
         );
         setBanner(response.data);
@@ -115,7 +115,7 @@ const CustomPage = () => {
       }
     }
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   // add to cart for combo
 
@@ -258,14 +258,16 @@ const CustomPage = () => {
         },
       };
       try {
-        const promises = brandId.map((e) =>
-          axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${e.slug}`, options)
-        );
-        const responses = await Promise.all(promises);
-        const data = responses.map((response) => response.data.products.data);
-        setIsLoading(false);
-
-        setBrandProduct(data);
+        if (brandId) {
+          const promises = brandId.map((e) =>
+            axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${e.slug}`, options)
+          );
+          const responses = await Promise.all(promises);
+          const data = responses.map((response) => response.data.products.data);
+          setIsLoading(false);
+  
+          setBrandProduct(data);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -295,24 +297,25 @@ const CustomPage = () => {
         },
       };
       try {
-        const promises = categoriesId.map((e) =>
-          axios.get(
-            `${process.env.REACT_APP_BASE_URL}/category/${e.slug}`,
-            options
-          )
-        );
-        const responses = await Promise.all(promises);
-        const data = responses.map(
-          (response) => response.data.data.combos.data
-        );
-        const productData = responses.map(
-          (response) => response.data.data.products.data
-        );
-
-        setCategoriesProduct(productData);
-
-        setCategoriesCombo(data);
-        // setIsLoading(false);
+        if (categoriesId) {
+          const promises = categoriesId.map((e) =>
+            axios.get(
+              `${process.env.REACT_APP_BASE_URL}/category/${e.slug}`,
+              options
+            )
+          );
+          const responses = await Promise.all(promises);
+          const data = responses.map(
+            (response) => response.data.data.combos.data
+          );
+          const productData = responses.map(
+            (response) => response.data.data.products.data
+          );
+  
+          setCategoriesProduct(productData);
+          setCategoriesCombo(data);
+          // setIsLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -422,22 +425,22 @@ const CustomPage = () => {
     const updatePriceRangeVisibility = () => {
       const updatedPriceRanges = priceRanges.map((range) => {
         const { minPrice, maxPrice } = range;
-        const hasComboProductsInRange = combo.some(
+        const hasComboProductsInRange = combo?.some(
           (product) =>
             product.selling_price >= minPrice &&
             product.selling_price <= maxPrice
         );
-        const hasProductInRange = brandProduct.some(
+        const hasProductInRange = brandProduct?.some(
           (product) =>
             product.selling_price >= minPrice &&
             product.selling_price <= maxPrice
         );
-        const hasCategorycomboInRange = categoriesCombo.some(
+        const hasCategorycomboInRange = categoriesCombo?.some(
           (product) =>
             product.selling_price >= minPrice &&
             product.selling_price <= maxPrice
         );
-        const hasCategoryproductInRange = categoriesProduct.some(
+        const hasCategoryproductInRange = categoriesProduct?.some(
           (product) =>
             product.selling_price >= minPrice &&
             product.selling_price <= maxPrice
@@ -496,7 +499,7 @@ const CustomPage = () => {
   }
 
   let section = null;
-  if (combo.length >= 1) {
+  if (combo && combo.length >= 1) {
     section = (
       <>
         {/* section content */}
@@ -1252,7 +1255,7 @@ const CustomPage = () => {
                       <Collapse in={isOpen2}>
                         <div id="collapseExample">
                           {filterbrandsApi.map((e) => (
-                            <div className="form-check">
+                            <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"

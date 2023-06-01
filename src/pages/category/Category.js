@@ -434,7 +434,7 @@ const Category = () => {
   // if there is no combo hide the section of combos
 
   let section = null;
-  if (combo.length >= 1) {
+  if (combo && combo.length >= 1) {
     section = (
       <>
         {/* section content */}

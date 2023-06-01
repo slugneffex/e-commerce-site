@@ -138,8 +138,12 @@ const Cart = () => {
   useEffect(() => {
     if (singlesubAmount >= 7999) {
       freecartAPI();
+    }else {
+      setFreeProduct7999(null);
+      setFreeProduct8999(null);
     }
   }, [singlesubAmount]);
+
 
   const freecartAPI = async () => {
     const options = {
@@ -160,39 +164,111 @@ const Cart = () => {
       const levels = response.data.levels;
 
       // Check if total amount is greater than 7999
-      if (singlesubAmount > 7999) {
+      if (singlesubAmount >= 7999) {
         // Find the cart level with autoadd_amount equal to 7999
         const level7999 = levels.find(
           (level) => level.autoadd_amount === "7999"
         );
 
         if (level7999) {
+          // Set the free product for autoadd_amount equal to 7999
           setFreeProduct7999(level7999.product);
+          console.log(level7999.product)
           // Show the free product for autoadd_amount equal to 7999
           // showFreeProduct(level7999);
         }
-      }
+      } 
 
       // Check if total amount is greater than 8999
-      if (singlesubAmount > 8999) {
+      if (singlesubAmount >=8999) {
         // Find the cart level with autoadd_amount equal to 8999
-        const level8999 = levels.find(
-          (level) => level.autoadd_amount === "8999"
-        );
+        // const level8999 = levels.find(
+        //   (level) => level.autoadd_amount === "8999"
+        // );
 
-        if (level8999) {
-          setFreeProduct8999(level8999.product);
+       
+          // Set the free product for autoadd_amount equal to 8999
+          setFreeProduct8999(levels.product);
+          console.log(levels.product)
           // Show the free product for autoadd_amount equal to 8999
-          // showFreeProduct(level8999);
-        }
-      }
+          // showFreeProduct(levels.8999);
+          // showFreeProduct(level7999)
 
-      setCartlevel(response.data);
-      console.log(levels);
+      
+
+        // Show the free product for autoadd_amount equal to 7999 as well
+       
+      } 
+
+      // setCartlevel(response.data);
+      // console.log(levels);
     } catch (error) {
       console.error("API call failed:", error);
     }
   };
+
+  // const freecartAPI = async () => {
+  //   const options = {
+  //     headers: {
+  //       "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       "Cache-Control": "no-cache, no-store, must-revalidate",
+  //       mode: "cors",
+  //       credentials: "include",
+  //     },
+  //   };
+
+  //   try {
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_BASE_URL}/cartlevels`,
+  //       options
+  //     );
+
+  //     const levels = response.data.levels;
+
+  //     // Check if total amount is greater than 7999
+  //     if (singlesubAmount > 7999) {
+  //       // Find the cart level with autoadd_amount equal to 7999
+  //       const level7999 = levels.find(
+  //         (level) => level.autoadd_amount === "7999"
+  //       );
+
+  //       if (level7999) {
+  //         setFreeProduct7999(level7999.product);
+  //         console.log(level7999.product.name)
+  //         // Show the free product for autoadd_amount equal to 7999
+  //         showFreeProduct(level7999);
+  //       }
+  //     }
+
+  //     // Check if total amount is greater than 8999
+  //     if (singlesubAmount > 8999) {
+        
+  //       // Find the cart level with autoadd_amount equal to 8999
+  //       const level8999 = levels.find(
+  //         (level) => level.autoadd_amount === "8999"
+  //       );
+
+  //       if (level8999) {
+  //         setFreeProduct8999(level8999.product);
+  //         console.log(level8999.product.name)
+  //         // Show the free product for autoadd_amount equal to 8999
+  //         showFreeProduct(level8999);
+  //       }
+  //     }
+
+  //     setCartlevel(response.data);
+  //     console.log(levels);
+  //   } catch (error) {
+  //     console.error("API call failed:", error);
+  //   }
+  // };
+
+  const showFreeProduct = (level) => {
+    // Logic to display the free product based on the cart level
+    console.log("Free product is available for level:", level);
+  };
+
+  
 
 
 

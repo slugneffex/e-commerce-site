@@ -107,7 +107,7 @@ const ForHim = () => {
             {Array.isArray(forhim) &&
               forhim.map((e) => (
                 <div key={e.banner?.id}>
-                  {/* {e.brand_id && ( */}
+                
                     <Link  to={`${e.link}`}>
                       <img
                         src={e.banner?.original_url}
@@ -115,7 +115,7 @@ const ForHim = () => {
                         alt={e.name}
                       />
                     </Link>
-                  {/* )} */}
+          
                   {/* {e.product_id && (
                     <Link  to={`/product/${e.slug}`}>
                       <img

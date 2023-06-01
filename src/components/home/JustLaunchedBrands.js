@@ -125,16 +125,16 @@ const JustLaunchedBrands = () => {
             >
               {jbrands.map((e) => ( 
                   <div key={e.id}>
-                    {e.brand_id && (
-                      <Link  to={`/brand/${e.brand_id}`}>
+                
+                      <Link  to={`${e.link}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="80%"
                           alt={e.name}
                         />
                       </Link>
-                    )}
-                    {e.product_id && (
+             
+                    {/* {e.product_id && (
                       <Link  to={`/product/${e.product_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
@@ -169,7 +169,7 @@ const JustLaunchedBrands = () => {
                           alt={e.name}
                         />
                       </Link>
-                    )}
+                    )} */}
                   </div>
                 ))}
             </Carousel>

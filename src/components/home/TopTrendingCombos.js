@@ -82,16 +82,16 @@ const TopTrendingCombos = () => {
               toppicks.map((e) => (
                 <div className="col-md-6" style={{marginTop:"20px"}} key={e.id}>
                   <div className="top-picks-img">
-                    {e.brand_id && (
-                      <Link  to={`/brand/${e.brand_id}`}>
+                  
+                      <Link  to={`${e.link}`}>
                         <img
                           src={e.thumbnail?.original_url}
                           width="100%"
                           alt={e.name}
                         />
                       </Link>
-                    )}
-                    {e.product_id && (
+                
+                    {/* {e.product_id && (
                       <Link  to={`/product/${e.product_id}`}>
                         <img
                           src={e.thumbnail?.original_url}
@@ -126,7 +126,7 @@ const TopTrendingCombos = () => {
                           alt={e.name}
                         />
                       </Link>
-                    )}
+                    )} */}
                     {/* <Link to={`/brand/${e.brand_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
