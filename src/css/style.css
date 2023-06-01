@@ -451,6 +451,11 @@ a {
   margin-top: 1rem;
   margin-bottom: 1rem;
   position: relative;
+
+}
+
+.newComboCart .price-sec .col-4{
+  padding-bottom: 0;
 }
 
 .cart-img-sec {
@@ -542,9 +547,9 @@ a {
   font-size: 22px;
 }
 
-.youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart {
-  box-shadow: 2px 2px 2px #C9C9C9;
-  z-index: 9999;
+.youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart:hover {
+  box-shadow: 2px 2px 2px #C9C9C9 !important;
+  z-index: 9999 !important;
 }
 
 .youmaylikeboxshadow .react-multiple-carousel__arrow--left {
@@ -552,8 +557,9 @@ a {
   left: 0;
   color: white;
   background-color: #fe9e2d;
-  border-radius: 0;
-  height: 80px;
+  /* border-radius: 0; */
+  height: 58px;
+  width: 58px;
 
 }
 
@@ -562,8 +568,9 @@ a {
   right: 0;
   color: white;
   background-color: #fe9e2d;
-  border-radius: 0;
-  height: 80px;
+  /* border-radius: 0; */
+  height: 58px;
+  width: 58px;
 
 }
 
@@ -571,8 +578,9 @@ a {
   position: absolute;
   left: 0;
   background-color: white;
-  border-radius: 0px 5px 5px 0;
-  height: 80px;
+  /* border-radius: 0px 5px 5px 0; */
+  height: 58px;
+  width: 58px;
 }
 
 .heroCarousel .react-multiple-carousel__arrow::before {
@@ -584,9 +592,10 @@ a {
   right: 0;
   color: white;
   background-color: white;
-  border-radius: 0;
-  height: 80px;
-  border-radius: 5px 0 0 5px;
+  /* border-radius: 0; */
+  height: 58px;
+  width: 58px;
+  /* border-radius: 5px 0 0 5px; */
 
 }
 
@@ -597,12 +606,12 @@ a {
 .viewAllBtn button {
   border: 1px solid #FF9100;
   width: 95px;
-  border-radius: 0 0 5px 5px;
-  color: #464646;
+  border-radius: 4px;
+  color: white !important ;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #FFF9F5;
+  background-color: #fe9e2d;
   color: #464646;
   position: absolute;
   right: 0;
@@ -621,12 +630,12 @@ a {
   .viewAllBtn button {
     border: 1px solid #FF9100;
     width: 80px;
-    border-radius: 0 0 5px 5px;
-    color: #464646;
+    border-radius: 4px;
+    color: white !important ;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #FFF9F5;
+    background-color: #fe9e2d;
     color: #464646;
     position: absolute;
     right: 0;
@@ -643,9 +652,9 @@ a {
 
 
 
-  .youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart {
-    box-shadow: 1px 1px 1px #C9C9C9;
-    z-index: 9999;
+  .youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart:hover {
+    box-shadow: 1px 1px 1px #C9C9C9 !important;
+    z-index: 9999 !important;
   }
 
   .needToBeSetMobile .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item {
