@@ -145,14 +145,16 @@ const YouMayLike = () => {
       <section>
         <div className="top-trending container">
           <div className="row" style={{alignItems:"center"}}>
-            <div className="col-md-11 top-trending-head">
+            <div className="col-6 top-trending-head">
               <h3>You May Like...</h3>
             </div>
 
-            <div className="col-md-1 viewAllBtn" style={{ marginTop: "67px", textAlign: "end" }}>
-              <div style={{border: "1px solid #FF9100", borderRadius:"0 0 5px 5px", color: "464646"}}>
+            <div className="col-6 viewAllButton">
+              <div className="viewAllBtn">
+                <button>
                 View All
                 <AiOutlineArrowRight />
+                </button>
               </div>
             </div>
           </div>
