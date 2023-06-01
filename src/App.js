@@ -34,6 +34,7 @@ import ServerError from "./pages/ErrorPages/ServerError";
 import Expired from "./pages/ErrorPages/Expired";
 import CustomPage from "./pages/category/CustomPage";
 import AllCombos from "./pages/category/AllCombos";
+import AllBrand from "./pages/category/AllBrand";
 
 
 const ScrollToTop = () => {
@@ -68,10 +69,11 @@ const App = () => {
       <Route path="Signin" element={<SignIn />} />
       <Route path="/make-your-own-combo" element={<MYOC />} />
       <Route path="/combos" element={<AllCombos />} />
+      <Route path="/latestPros" element={<AllBrand />} />
       <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/address" element={<Loginadress />} />
-      <Route path="/Adress" element={<Adress />} />
+      <Route path="/adress" element={<Adress />} />
       <Route path="/why-choose-combonation" element={<WCC />} />
       <Route path="/store/:id" element={<Store />} />
       <Route path="/Acccount" element={<Acccount />} />

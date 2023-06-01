@@ -9,8 +9,8 @@ const Wishlist = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      alert("login please");
-      navigate("/Signin");
+     navigate("/signin")
+     alert("login please")
     }
   });
   const token = localStorage.getItem("token");
