@@ -57,13 +57,13 @@ const App = () => {
       {/* <Route path="/Login" element={<Login />} /> */}
       <Route path="/category/:slug" element={<Category />} />
       <Route path="/subcat" element={<SubCategory />} />
-      <Route path="/page/:id" element={<CustomPage />} />
+      <Route path="/page/:slug" element={<CustomPage />} />
       <Route path="/brand/:slug" element={<BrandProduct />} />
       <Route path="/VerifyOtp" element={<VerifyOtp />} />
       <Route path="/thanks" element={<Thanks />} />
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
-      <Route path="/view-all-products" element={<MYOC />} />
+      <Route path="/make-your-own-combo" element={<MYOC />} />
       <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/address" element={<Loginadress />} />

@@ -69,7 +69,7 @@ const Categories = () => {
               </Link>
             ))}
             {filterCategories.map((e) => (
-              <Link to={`/page/${e.id}`} key={e.id}>
+              <Link to={`/page/${e.slug}`} key={e.id}>
                 {e.name}
               </Link>
             ))}
@@ -106,7 +106,7 @@ const Categories = () => {
             ))}
             {filterCategories.map((e) => (
               <div className="my-auto" key={e.id}>
-                <Link to={`/page/${e.id}`} style={{ color: "#464646" }}>
+                <Link to={`/page/${e.slug}`} style={{ color: "#464646" }}>
                   <img src={e.icon?.original_url} alt="" width="70%" />
                   <br />
                   <span style={{ fontSize: "12px" }}>{e.name.slice(0, 9)}</span>

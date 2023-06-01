@@ -1,4 +1,4 @@
-import React, {useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -22,13 +22,13 @@ const responsive = {
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 2,
-    centerMode: false
+    centerMode: false,
   },
 };
 
 const ForHer = () => {
   const dispatch = useDispatch();
-  const {  forher } = useSelector((state) => state.forher);
+  const { forher } = useSelector((state) => state.forher);
 
   useEffect(() => {
     dispatch(fetchForher());
@@ -70,7 +70,6 @@ const ForHer = () => {
   //   console.log(error);
   // }
 
-
   const [isCenterMode, setIsCenterMode] = useState(false);
 
   useEffect(() => {
@@ -80,14 +79,13 @@ const ForHer = () => {
 
     handleResize(); // Initial check on component mount
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  
   return (
     <>
       <div className="top-brand-deals container needToBeSetMobile">
@@ -95,24 +93,26 @@ const ForHer = () => {
           Top Picks For Her
         </h3>
         <div className="container">
-          <Carousel responsive={responsive} arrows={false} infinite
-           
-    centerMode={isCenterMode}
+          <Carousel
+            responsive={responsive}
+            arrows={false}
+            infinite
+            centerMode={isCenterMode}
           >
             {Array.isArray(forher) &&
               forher.map((e) => (
                 <div key={e.banner?.id}>
-                  {e.brand_id && (
-                    <Link  to={`/brand/${e.brand_id}`}>
+                 
+                    <Link to={`${e.link}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
                         alt={e.name}
                       />
                     </Link>
-                  )}
-                  {e.product_id && (
-                    <Link  to={`/product/${e.product_id}`}>
+            
+                  {/* {e.product_id && (
+                    <Link to={`/product/${e.product_id}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
@@ -121,7 +121,7 @@ const ForHer = () => {
                     </Link>
                   )}
                   {e.combo_id && (
-                    <Link  to={`/combo/${e.combo_id}`}>
+                    <Link to={`/combo/${e.combo_id}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
@@ -130,7 +130,7 @@ const ForHer = () => {
                     </Link>
                   )}
                   {e.page_id && (
-                    <Link  to={`/page/${e.page_id}`}>
+                    <Link to={`/page/${e.page_id}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
@@ -139,14 +139,14 @@ const ForHer = () => {
                     </Link>
                   )}
                   {e.category_id && (
-                    <Link  to={`/category/${e.category_id}`}>
+                    <Link to={`/category/${e.category_id}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
                         alt={e.name}
                       />
                     </Link>
-                  )}
+                  )} */}
                   {/* <Link to={`/brand/${e.brand_id}`}>
                     <img
                       src={e.banner?.original_url}

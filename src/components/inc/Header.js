@@ -314,7 +314,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link to={`/page/${e.id}`}>
+                                <Link to={`/page/${e.slug}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.icon?.original_url}
@@ -392,7 +392,7 @@ const Header = () => {
                       <ul className="dropdown-menu" id="stores-menu">
                         {store.map((e) => (
                           <li style={{ marginTop: "0.5rem" }} key={e.id}>
-                            <Link to={`/store/${e.id}`}>{e.name}</Link>
+                            <Link to={`/store/${e.slug}`}>{e.name}</Link>
                           </li>
                         ))}
                       </ul>
@@ -793,7 +793,7 @@ const Header = () => {
                               className="col-lg-3 col-50 text-center"
                               key={e.id}
                             >
-                              <Link to={`/page/${e.id}`}>
+                              <Link to={`/page/${e.slug}`}>
                                 <h6>{e.name}</h6>
                                 <img
                                   src={e.icon?.original_url}
@@ -870,7 +870,7 @@ const Header = () => {
                         <div className="card card-body">
                           {store.map((e) => (
                             <li style={{ marginTop: "0.5rem" }} key={e.id}>
-                              <Link to={`/store/${e.id}`}>{e.name}</Link>
+                              <Link to={`/store/${e.slug}`}>{e.name}</Link>
                             </li>
                           ))}
                         </div>

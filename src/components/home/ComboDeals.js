@@ -69,12 +69,12 @@ const ComboDeals = () => {
           >
             {combodeal.map((e) => (
               <div key={e.id}>
-                {e.brand_id && (
-                  <Link  to={`/brand/${e.brand_id}`}>
+              
+                  <Link  to={`${e.link}`}>
                     <img src={e.thumbnail?.url} width="80%" alt={e.name} />
                   </Link>
-                )}
-                {e.product_id && (
+             
+                {/* {e.product_id && (
                   <Link to={`/product/${e.product_id}`}>
                     <img
                       src={e.thumbnail?.original_url}
@@ -110,7 +110,7 @@ const ComboDeals = () => {
                       alt={e.name}
                     />
                   </Link>
-                )}
+                )} */}
                 {/* <div>{e.name}</div>
                 <div> <img
                       src={e.thumbnail?.original_url}
