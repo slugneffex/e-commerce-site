@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
@@ -108,17 +107,17 @@ const ForHim = () => {
             {Array.isArray(forhim) &&
               forhim.map((e) => (
                 <div key={e.banner?.id}>
-                  {e.brand_id && (
-                    <Link  to={`/brand/${e.brand_id}`}>
+                  {/* {e.brand_id && ( */}
+                    <Link  to={`${e.link}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
                         alt={e.name}
                       />
                     </Link>
-                  )}
-                  {e.product_id && (
-                    <Link  to={`/product/${e.product_id}`}>
+                  {/* )} */}
+                  {/* {e.product_id && (
+                    <Link  to={`/product/${e.slug}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
@@ -127,7 +126,7 @@ const ForHim = () => {
                     </Link>
                   )}
                   {e.combo_id && (
-                    <Link  to={`/combo/${e.combo_id}`}>
+                    <Link  to={`/combo/${e.slug}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
@@ -145,14 +144,14 @@ const ForHim = () => {
                     </Link>
                   )}
                   {e.category_id && (
-                    <Link  to={`/category/${e.category_id}`}>
+                    <Link  to={`/category/${e.slug}`}>
                       <img
                         src={e.banner?.original_url}
                         width="80%"
                         alt={e.name}
                       />
                     </Link>
-                  )}
+                  )} */}
 
                   {/* <Link to={`/brand/${e.brand_id}`}>
                   <img

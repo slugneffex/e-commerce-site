@@ -1,6 +1,6 @@
 import "./cart.css";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useDispatch, useSelector } from "react-redux";
@@ -130,6 +130,95 @@ const Cart = () => {
       discount = 0;
       break;
   }
+
+  // free items
+  const [cartlevel, setCartlevel] = useState([]);
+  const [freeProduct7999, setFreeProduct7999] = useState(null);
+  const [freeProduct8999, setFreeProduct8999] = useState(null);
+  useEffect(() => {
+    if (singlesubAmount >= 7999) {
+      freecartAPI();
+    }
+  }, [singlesubAmount]);
+
+  const freecartAPI = async () => {
+    const options = {
+      headers: {
+        "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        mode: "cors",
+        credentials: "include",
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/cartlevels`,
+        options
+      );
+
+      const levels = response.data.levels;
+
+      // Check if total amount is greater than 7999
+      if (singlesubAmount > 7999) {
+        // Find the cart level with autoadd_amount equal to 7999
+        const level7999 = levels.find(
+          (level) => level.autoadd_amount === "7999"
+        );
+
+        if (level7999) {
+          setFreeProduct7999(level7999.product);
+          // Show the free product for autoadd_amount equal to 7999
+          // showFreeProduct(level7999);
+        }
+      }
+
+      // Check if total amount is greater than 8999
+      if (singlesubAmount > 8999) {
+        // Find the cart level with autoadd_amount equal to 8999
+        const level8999 = levels.find(
+          (level) => level.autoadd_amount === "8999"
+        );
+
+        if (level8999) {
+          setFreeProduct8999(level8999.product);
+          // Show the free product for autoadd_amount equal to 8999
+          // showFreeProduct(level8999);
+        }
+      }
+
+      setCartlevel(response.data);
+      console.log(levels);
+    } catch (error) {
+      console.error("API call failed:", error);
+    }
+  };
+
+
+
+  // const freecartAPI = async () => {
+  //   const options = {
+  //     headers: {
+  //       "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+  //       "Cache-Control": "no-cache, no-store, must-revalidate",
+  //       mode: "cors",
+  //       credentials: "include",
+  //     },
+  //   };
+  //   try {
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_BASE_URL}/cartlevels`,
+  //       options
+  //     );
+
+     
+  //       setCartlevel(response.data);
+  //       console.log(response.data.levels);
+
+  //   } catch (error) {
+  //     console.error("API call failed:", error);
+  //   }
+  // };
 
   // Freebies cart section
   const { freebiesCount } = useSelector((state) => state.freebies);
@@ -487,7 +576,8 @@ const Cart = () => {
                       <div className="price-sec">
                         <del className="mrp">₹{product.mrp}</del>
                         <span className="sp">₹{product.price}</span>
-                        <div className="dis"
+                        <div
+                          className="dis"
                           style={{
                             backgroundColor: "#fe9e2d",
                             color: "#ffffff",
@@ -771,8 +861,6 @@ const Cart = () => {
     );
   }
 
- 
-
   return (
     <>
       <HomeLayout>
@@ -807,11 +895,19 @@ const Cart = () => {
                 <div class="coupon-sec mb-3 text-center">
                   <div
                     class="coupon-card"
-                    style={{ border: "5px dotted ",width:"100%",display: "flex", borderColor: "#fe9e2d" }}
+                    style={{
+                      border: "5px dotted ",
+                      width: "100%",
+                      display: "flex",
+                      borderColor: "#fe9e2d",
+                    }}
                   >
                     <div class="card-head">
                       <div class="tag">
-                        <i class="bi bi-tag-fill" style={{fontSize: "30px"}}></i>
+                        <i
+                          class="bi bi-tag-fill"
+                          style={{ fontSize: "30px" }}
+                        ></i>
                       </div>
                       <div class="det">
                         <span class="use">Use Code</span>
