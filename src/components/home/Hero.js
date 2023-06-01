@@ -77,7 +77,7 @@ const Hero = () => {
 
   return (
     <>
-      <div className="desktop">
+      <div className="desktop heroCarousel">
        
           <Carousel
             showDots={false}

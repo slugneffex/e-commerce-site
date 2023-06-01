@@ -50,6 +50,7 @@ const Header = () => {
       .then((res) => {
         setSearchResult(res.data);
         navigate("/search", { state: res.data });
+        console.log(searchResult);
       });
   }
   function handle(e) {
@@ -139,7 +140,7 @@ const Header = () => {
     return pageCategories.show_with_category === "on";
   });
 
-  
+
 
   return (
     <div>
@@ -219,9 +220,12 @@ const Header = () => {
                   />
                 </svg>
 
-                <Link to="/help" className="text-white helpText">
-                  Help
-                </Link>
+                <a style={{ color: "#A2A2A2" }}
+                  className="text-white helpText"
+                  href="mailto:customercare@combonation.in"
+                >
+                  Help</a>
+
               </div>
             </div>
           </div>
@@ -264,7 +268,7 @@ const Header = () => {
                     aria-label="Search"
                     value={data.search}
                     onChange={(e) => handle(e)}
-                   
+
                   ></input>
                 </form>
                 <div
@@ -279,7 +283,7 @@ const Header = () => {
                         id="navbarDropdown"
                         role="button"
                         aria-expanded="false"
-                      
+
                       >
                         CATEGORIES
                       </Link>
@@ -295,7 +299,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link  to={`/category/${e.slug}`}>
+                                <Link to={`/category/${e.slug}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.image?.url}
@@ -310,7 +314,7 @@ const Header = () => {
                                 className="col-lg-3 col-50 text-center"
                                 key={e.id}
                               >
-                                <Link  to={`/page/${e.id}`}>
+                                <Link to={`/page/${e.id}`}>
                                   <h6>{e.name}</h6>
                                   <img
                                     src={e.icon?.original_url}
@@ -332,7 +336,7 @@ const Header = () => {
                         id="navbarDropdown"
                         role="button"
                         aria-expanded="false"
-                     
+
                       >
                         BRANDS
                       </Link>
@@ -361,7 +365,7 @@ const Header = () => {
                               </div>
                             ))}
                             <div className="col-lg-3 col-50 text-center">
-                              <Link  to="/brandlogolist">
+                              <Link to="/brandlogolist">
                                 <img
                                   src="https://www.combonation.in/assets_new/img/viewall.png"
                                   alt="view-all"
@@ -381,7 +385,7 @@ const Header = () => {
                         role="button"
                         // data-bs-toggle="dropdown"
                         aria-expanded="false"
-                       
+
                       >
                         <i className="bi bi-geo-alt"></i> LOCATE MY STORES
                       </Link>
@@ -482,15 +486,15 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link  to="/Wishlist" className="nav-link">
+                      <Link to="/Wishlist" className="nav-link">
                         <i className="bi bi-heart"></i>
                         <span>Wishlist</span>
                       </Link>
                     </li>
 
                     <li className="nav-item">
-                      <Link 
-                     
+                      <Link
+
                         to="/Cart"
                         className="nav-link"
                         style={{ position: "relative" }}
@@ -518,33 +522,33 @@ const Header = () => {
                     </li>
                     <div className="mobile">
                       <li className="nav-item">
-                        <Link  to="/Acccount" className="nav-link">
+                        <Link to="/Acccount" className="nav-link">
                           My Profile
                         </Link>
                       </li>
                       <li className="nav-item">
                         {" "}
-                        <Link  to="/Place" className="nav-link">
+                        <Link to="/Place" className="nav-link">
                           My Address
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link  to="/Wishlist" className="nav-link">
+                        <Link to="/Wishlist" className="nav-link">
                           My whishlist
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link  to="/Orders" className="nav-link">
+                        <Link to="/Orders" className="nav-link">
                           My Orders
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link  to="/Wallet" className="nav-link">
+                        <Link to="/Wallet" className="nav-link">
                           My Wallet
                         </Link>
                       </li>
                       <li className="nav-item">
-                        <Link  to="" className="nav-link">
+                        <Link to="" className="nav-link">
                           Logout
                         </Link>
                       </li>
@@ -650,9 +654,15 @@ const Header = () => {
                     />
                   </svg>
 
-                  <Link to="/help" className="text-white helpText">
+                  <a style={{ color: "#A2A2A2" }}
+                    className="text-white helpText"
+                    href="mailto:customercare@combonation.in"
+                  >
+                    Help</a>
+
+                  {/* <Link to="/help" className="text-white helpText">
                     Help
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -779,23 +789,23 @@ const Header = () => {
                             </div>
                           ))}
                           {filterCategories.map((e) => (
-                             <div
-                             className="col-lg-3 col-50 text-center"
-                             key={e.id}
-                           >
-                             <Link to={`/page/${e.id}`}>
-                               <h6>{e.name}</h6>
-                               <img
-                                 src={e.icon?.original_url}
-                                 alt={e.slug}
-                                 style={{
-                                   width: "100px",
-                                   height: "auto",
-                                   marginTop: "0",
-                                 }}
-                               />
-                             </Link>
-                           </div>
+                            <div
+                              className="col-lg-3 col-50 text-center"
+                              key={e.id}
+                            >
+                              <Link to={`/page/${e.id}`}>
+                                <h6>{e.name}</h6>
+                                <img
+                                  src={e.icon?.original_url}
+                                  alt={e.slug}
+                                  style={{
+                                    width: "100px",
+                                    height: "auto",
+                                    marginTop: "0",
+                                  }}
+                                />
+                              </Link>
+                            </div>
 
                           ))}
                         </div>
@@ -927,7 +937,9 @@ const Header = () => {
                     className="col"
                     style={{ paddingRight: "0", textAlign: "start" }}
                   >
-                    <i className="bi bi-heart" style={{ fontSize: "15px" }} />
+                    <Link to="/Wishlist">
+                      <i className="bi bi-heart" style={{ fontSize: "15px" }} />
+                    </Link>
                   </div>
                   <div
                     className="col"

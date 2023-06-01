@@ -11,6 +11,7 @@ import {
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
 import { useDispatch } from "react-redux";
+import { AiOutlineArrowRight } from "react-icons/ai"
 
 const responsive = {
   superLargeDesktop: {
@@ -69,6 +70,22 @@ const BrandProducts = () => {
     fetchData();
   }, []);
 
+  const [isArrow, setIsArrow] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsArrow(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   // add to cart single product
   const dispatch = useDispatch();
 
@@ -123,24 +140,40 @@ const BrandProducts = () => {
     return console.log(error);
   }
 
- 
+
+
+
+
 
   return (
     <>
       <section>
         <div className="top-trending container">
-          <div className="top-trending-head">
-            <h3>Products From Latest Brands</h3>
+
+          <div className="row" style={{ alignItems: "center" }}>
+            <div className="col-6 top-trending-head">
+              <h3 className="mobileFont">Products From Latest Brands</h3>
+            </div>
+
+
+            <div className="col-6 viewAllButton">
+              <div className="viewAllBtn">
+                <button>
+                  View All
+                  <AiOutlineArrowRight />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="container ">
-          <div className="row">
+          <div className="row youmaylikeboxshadow">
             <Carousel
               responsive={responsive}
               showDots={false}
               infinite={true}
-              arrows={false}
+              arrows={isArrow}
             >
               {brandProduct.map((e) => (
                 <div
@@ -159,7 +192,7 @@ const BrandProducts = () => {
                         onClick={() => wishlistProductData(e.id)}
                         className="addtofav"
                       ></Link>
-                      <Link  to={`/product/${e.slug}`}>
+                      <Link to={`/product/${e.slug}`}>
                         <img
                           src={e.thumbnail_img?.original_url}
                           alt="img"

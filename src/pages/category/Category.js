@@ -470,7 +470,7 @@ const Category = () => {
                   </div>
 
                   <div className="card-det-sec">
-                    <div className="headingCard pt-3">
+                    <div className="headingCard pt-3" style={{ width: "55px" }}>
                       <span>{e.name}</span>
                     </div>
                     <div>

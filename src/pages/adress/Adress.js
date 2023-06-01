@@ -237,7 +237,10 @@ const Adress = () => {
   const payment_type = transaction_id ? "prepaid" : "cod";
   const payment_method = transaction_id ? "prepaid" : "cod";
 
+  const [loading, setLoading] = useState(false)
+
   const sendOrder = () => {
+    setLoading(true)
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/order-validate`,
@@ -266,7 +269,7 @@ const Adress = () => {
         }
       )
       .then((res) => {
-        alert(res.data.message);
+        setLoading(false);
 
         navigate("/thanks");
         dispatch(clearCart());
@@ -279,6 +282,7 @@ const Adress = () => {
   return (
     <HomeLayout>
       <section className="address">
+        {loading && <div id="cover-spin"></div>}
         <div className="container">
           <div className="row text-center pb-5" id="progessbarRow">
             <ul className="mt-5" id="progressbarrr">
@@ -467,7 +471,7 @@ const Adress = () => {
                       {parseFloat(totalCartSubAmount).toFixed(0)}
                     </p>
                     <Link onClick={sendOrder} className="btn">
-                      Proceed To Pay
+                      Place Order 
                     </Link>
                   </div>
                 </div>

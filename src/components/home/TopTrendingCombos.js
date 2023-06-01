@@ -76,11 +76,11 @@ const TopTrendingCombos = () => {
             <h3>Top Picks For You...</h3>
           </div>
         </div>
-        <div className="container" style={{ marginTop: "48px" }}>
+        <div className="container" style={{ marginTop: "28px" }}>
           <div className="row">
             {Array.isArray(toppicks) &&
               toppicks.map((e) => (
-                <div className="col-md-6" key={e.id}>
+                <div className="col-md-6" style={{marginTop:"20px"}} key={e.id}>
                   <div className="top-picks-img">
                     {e.brand_id && (
                       <Link  to={`/brand/${e.brand_id}`}>
@@ -151,18 +151,19 @@ const TopTrendingCombos = () => {
             <h3>Top Picks For You...</h3>
           </div>
         </div>
+        <div className="topPicksCarousel">
         <Carousel
           showDots={false}
           responsive={responsive}
           infinite={true}
-          autoPlay
+          autoPlay={true}
           arrows={false}
           centerMode
         >
           {Array.isArray(toppicks) &&
             toppicks.map((e) => (
               <div key={e.id} style={{ width: "100%" }}>
-                <div>
+                <div style={{ marginLeft:"10px", marginRight: "10px"}}>
                   {e.brand_id && (
                     <Link  to={`/brand/${e.brand_id}`}>
                       <img
@@ -219,6 +220,7 @@ const TopTrendingCombos = () => {
               </div>
             ))}
         </Carousel>
+        </div>
       </div>
     </>
   );

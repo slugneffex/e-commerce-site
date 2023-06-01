@@ -12,10 +12,8 @@ import { useDispatch } from "react-redux";
 
 const Loginadress = () => {
 
-  const [loading, setLoading] = useState(false);
-  const clickHandler = () => {
-    setLoading(true);
-  }
+  
+  
   // Card Pricing details
   // Single Product Cart
   const dispatch = useDispatch();
@@ -315,6 +313,8 @@ const Loginadress = () => {
   };
 
 
+  const [ loading, setLoading ] = useState(false);
+
 
   // Order Validate
 
@@ -325,6 +325,7 @@ const Loginadress = () => {
   const payment_method = transaction_id ? "prepaid" : "cod";
 
   const sendOrder = () => {
+    setLoading(true)
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/order-validate`,
@@ -354,7 +355,8 @@ const Loginadress = () => {
         }
       )
       .then((res) => {
-        alert(res.data.message);
+        setLoading(false)
+        // alert(res.data.message);
 
         navigate("/thanks");
         dispatch(clearCart());
@@ -362,6 +364,7 @@ const Loginadress = () => {
         dispatch(clearSingleCart());
         localStorage.removeItem("transaction_id");
       });
+     
   };
 
   if (error) {
@@ -372,6 +375,7 @@ const Loginadress = () => {
     <>
       <HomeLayout>
         <section className="address">
+          {loading && <div id="cover-spin"></div>}
           <div className="container">
             <div className="row text-center pb-5" id="progessbarRow">
               <ul className="mt-5" id="progressbarrr">
@@ -568,7 +572,7 @@ const Loginadress = () => {
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
                       <Link onClick={sendOrder} className="btn">
-                        Proceed To Pay
+                        Place Order
                       </Link>
                     </div>
                   </div>
@@ -668,8 +672,8 @@ const Loginadress = () => {
                         {totalCartCount} Item ({freebiesCount} Free) | ₹
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
-                      <Link onClick={clickHandler} to="/Adress" className="btn">
-                        Proceed To Pay
+                      <Link onClick={sendOrder} className="btn">
+                        Place Order
                       </Link>
                     </div>
                   </div>

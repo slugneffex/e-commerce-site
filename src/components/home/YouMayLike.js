@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { AiOutlineArrowRight } from "react-icons/ai"
 import {
   addCartProduct,
   getCartCount,
@@ -123,57 +124,84 @@ const YouMayLike = () => {
     );
   };
 
+  const [isArrow, setIsArrow] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsArrow(window.innerWidth > 768); // Set breakpoint according to your needs
+    };
+
+    handleResize(); // Initial check on component mount
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div>
       <section>
         <div className="top-trending container">
-          <div className="top-trending-head">
-            <h3>You May Like...</h3>
+          <div className="row" style={{alignItems:"center"}}>
+            <div className="col-6 top-trending-head">
+              <h3>You May Like...</h3>
+            </div>
+
+            <div className="col-6 viewAllButton">
+              <div className="viewAllBtn">
+                <button>
+                View All
+                <AiOutlineArrowRight />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        
-          <div className="container ">
-            <div className="row">
-              <Carousel
-                responsive={responsive}
-                showDots={false}
-                infinite={true}
-                arrows={false}
-              >
-                {Array.isArray(youmaylike) &&
-                  youmaylike.map((e) => (
-                    <div
-                      className="item carouselItemCard"
-                      key={e.id}
-                      style={{ marginRight: ".8rem" }}
-                    >
-                      <div className="newComboCart">
-                        <div className="cart-img-sec">
-                          <Link
-                            onClick={() => wishlistData(e.id)}
-                            className="addtofav"
-                          >
-                            <ul>
-                              <li className="youMayLikeHeart">
-                                {heartFilled === e.id ? (
-                                  <i
-                                    style={{ color: "#fe9e2d" }}
-                                    className="bi bi-heart-fill"
-                                  ></i>
-                                ) : (
-                                  <i className="bi bi-heart"></i>
-                                )}
-                              </li>
-                            </ul>
-                          </Link>
-                          <Link  to={`/combo/${e.slug}`}>
-                            <img
-                              src={e.meta_img?.url}
-                              alt="img"
-                              width="100%"
-                            ></img>
-                          </Link>
-                        </div>
+
+        <div className="container">
+          <div className="row youmaylikeboxshadow">
+            <Carousel
+              responsive={responsive}
+              showDots={false}
+              infinite={true}
+              arrows={isArrow}
+            >
+              {Array.isArray(youmaylike) &&
+                youmaylike.map((e) => (
+                  <div
+                    className="item carouselItemCard"
+                    key={e.id}
+                    style={{ marginRight: ".8rem" }}
+                  >
+                    <div className="newComboCart">
+                      <div className="cart-img-sec">
+                        <Link
+                          onClick={() => wishlistData(e.id)}
+                          className="addtofav"
+                        >
+                          <ul>
+                            <li className="youMayLikeHeart">
+                              {heartFilled === e.id ? (
+                                <i
+                                  style={{ color: "#fe9e2d" }}
+                                  className="bi bi-heart-fill"
+                                ></i>
+                              ) : (
+                                <i className="bi bi-heart"></i>
+                              )}
+                            </li>
+                          </ul>
+                        </Link>
+                        <Link to={`/combo/${e.slug}`}>
+                          <img
+                            src={e.meta_img?.url}
+                            alt="img"
+                            width="100%"
+                          ></img>
+                        </Link>
+                      </div>
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">

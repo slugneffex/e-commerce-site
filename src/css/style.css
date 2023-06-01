@@ -436,6 +436,8 @@ a {
   padding-right: 0;
 }
 
+
+
 .redHeart {
   display: none;
   border: none;
@@ -540,6 +542,73 @@ a {
   font-size: 22px;
 }
 
+.youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart {
+  box-shadow: 2px 2px 2px #C9C9C9;
+  z-index: 9999;
+}
+
+.youmaylikeboxshadow .react-multiple-carousel__arrow--left {
+  position: absolute;
+  left: 0;
+  color: white;
+  background-color: #fe9e2d;
+  border-radius: 0;
+  height: 80px;
+
+}
+
+.youmaylikeboxshadow .react-multiple-carousel__arrow--right {
+  position: absolute;
+  right: 0;
+  color: white;
+  background-color: #fe9e2d;
+  border-radius: 0;
+  height: 80px;
+
+}
+
+.heroCarousel .react-multiple-carousel__arrow--left {
+  position: absolute;
+  left: 0;
+  background-color: white;
+  border-radius: 0px 5px 5px 0;
+  height: 80px;
+}
+
+.heroCarousel .react-multiple-carousel__arrow::before {
+  color: #464646;
+}
+
+.heroCarousel .react-multiple-carousel__arrow--right {
+  position: absolute;
+  right: 0;
+  color: white;
+  background-color: white;
+  border-radius: 0;
+  height: 80px;
+  border-radius: 5px 0 0 5px;
+
+}
+
+.viewAllBtn {
+  position: relative;
+}
+
+.viewAllBtn button {
+  border: 1px solid #FF9100;
+  width: 95px;
+  border-radius: 0 0 5px 5px;
+  color: #464646;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFF9F5;
+  color: #464646;
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
 /* Feature Section End */
 
 /* Top Trending Combos */
@@ -548,6 +617,42 @@ a {
   .top-trending-head {
     margin-top: 2.5rem;
   }
+
+  .viewAllBtn button {
+    border: 1px solid #FF9100;
+    width: 80px;
+    border-radius: 0 0 5px 5px;
+    color: #464646;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFF9F5;
+    color: #464646;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .mobileFont {
+    font-size: 22px;
+  }
+
+  .top-trending-head .col-md-6 {
+    width: 50%;
+  }
+
+
+
+  .youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart {
+    box-shadow: 1px 1px 1px #C9C9C9;
+    z-index: 9999;
+  }
+
+  .needToBeSetMobile .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item {
+    width: 135px !important;
+  }
+
+
 }
 
 /*-------- 3.7 Footer --------*/
@@ -557,6 +662,8 @@ a {
     height: auto !important;
     visibility: visible !important;
   }
+
+
 
 
 }
@@ -1097,6 +1204,8 @@ ul.additional_links li:after {
     padding: 8px;
     font-size: 11px;
     color: #464646;
+    max-height: 65px;
+    line-height: 20px;
   }
 
   .packof {
@@ -1163,6 +1272,7 @@ ul.additional_links li:after {
   padding: 8px;
   font-size: 15px;
   color: #464646;
+  height: 75px;
 }
 
 .packof {
