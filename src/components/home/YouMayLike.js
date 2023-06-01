@@ -151,10 +151,12 @@ const YouMayLike = () => {
 
             <div className="col-6 viewAllButton">
               <div className="viewAllBtn">
+                <Link to={`/combos`}>
                 <button>
                 View All
                 <AiOutlineArrowRight />
                 </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -164,7 +164,7 @@ const Cart = () => {
       const levels = response.data.levels;
 
       // Check if total amount is greater than 7999
-      if (singlesubAmount >= 7999) {
+      if (singlesubAmount >= 7999 && singlesubAmount < 8999) {
         // Find the cart level with autoadd_amount equal to 7999
         const level7999 = levels.find(
           (level) => level.autoadd_amount === "7999"
@@ -173,7 +173,7 @@ const Cart = () => {
         if (level7999) {
           // Set the free product for autoadd_amount equal to 7999
           setFreeProduct7999(level7999.product);
-          console.log(level7999.product)
+          console.log(level7999)
           // Show the free product for autoadd_amount equal to 7999
           // showFreeProduct(level7999);
         }
@@ -181,22 +181,21 @@ const Cart = () => {
 
       // Check if total amount is greater than 8999
       if (singlesubAmount >=8999) {
-        // Find the cart level with autoadd_amount equal to 8999
-        // const level8999 = levels.find(
-        //   (level) => level.autoadd_amount === "8999"
-        // );
+        const level7999 = levels.find(
+          (level) => level.autoadd_amount === "7999"
+        );
+        const level8999 = levels.find(
+          (level) => level.autoadd_amount === "8999"
+        );
 
-       
-          // Set the free product for autoadd_amount equal to 8999
-          setFreeProduct8999(levels.product);
-          console.log(levels.product)
-          // Show the free product for autoadd_amount equal to 8999
-          // showFreeProduct(levels.8999);
-          // showFreeProduct(level7999)
-
-      
-
-        // Show the free product for autoadd_amount equal to 7999 as well
+        if (level7999 && level8999) {
+          // Set the free products for autoadd_amount equal to 7999 and 8999
+          setFreeProduct7999(level7999.product);
+          setFreeProduct8999(level8999.product);
+          // Show the free products for autoadd_amount equal to 7999 and 8999
+          showFreeProduct(level7999);
+          showFreeProduct(level8999);
+        }
        
       } 
 

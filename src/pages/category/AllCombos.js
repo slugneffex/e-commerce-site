@@ -1,33 +1,30 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-import HomeLayout from "../../layouts/HomeLayout";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
-import axios from "axios";
 import { CgSortAz } from "react-icons/cg";
 import { BiFilterAlt } from "react-icons/bi";
-import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
-import { fetchBrand } from "../../components/features/actions/brandActions";
+import HomeLayout from "../../layouts/HomeLayout";
 import { Collapse } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  singleaddCartProduct,
-  getsingleCartCount,
-  getsingleSubTotal,
-  getsingleTotalAmount,
-  getsingleTotalDiscount,
-} from "../../components/features/SingleCartSlice";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import {
+  addCartProduct,
+  getCartCount,
+  getSubTotal,
+  getTotalAmount,
+  getTotalDiscount,
+} from "../../components/features/useCartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBrand } from "../../components/features/actions/brandActions";
+import { fetchCategories } from "../../components/features/actions/categoriesActions";
+import { fetchYoumaylike } from "../../components/features/actions/youmaylikeActions";
 
-const SubCategory = () => {
+import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
+const AllCombos = () => {
   const dispatch = useDispatch();
-  const { slug } = useParams();
   const navigate = useNavigate();
-  const [subCat, setSubCat] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
   const [priceRanges, setPriceRanges] = useState([
     { minPrice: 50, maxPrice: 499, label: "50-499", isVisible: true },
     { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
@@ -36,68 +33,67 @@ const SubCategory = () => {
     {
       minPrice: 5000,
       maxPrice: 500000,
-      label: "5000 & above",
+      label: "5000 & Above",
       isVisible: true,
     },
   ]);
-  // subcat api
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/category/${slug}`,
-  //         options
-  //       );
+  // Categories api
 
-  //       setSubCat(response.data.data.subcats);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, [slug]);
+  const { categories } = useSelector((state) => state.categories);
 
-  //   subCat product
-  const [product, setProduct] = useState([]);
-  const [name, setName] = useState([]);
+  const fetchCategoriesData = useCallback(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   useEffect(() => {
-    async function fetchData() {
-      const options = {
-        headers: {
-          "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-        },
-      };
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/subcat/${slug}`,
-          options
-        );
+    fetchCategoriesData();
+  }, [fetchCategoriesData]);
+  // total brands
+  const { brand } = useSelector((state) => state.brand);
 
-        setProduct(response.data.data.products);
-        setName(response.data.data.subcat);
-        setIsLoading(false);
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = parseInt(error.response.headers["retry-after"]);
-          setTimeout(() => {
-            fetchData();
-          }, retryAfter * 1000);
-        }
-      }
-    }
-    fetchData();
-  }, [slug]);
+  const fetchBrandData = useCallback(() => {
+    dispatch(fetchBrand());
+  }, [dispatch]);
 
+  useEffect(() => {
+    fetchBrandData();
+  }, [fetchBrandData]);
+
+  const filterbrandsApi = brand.filter((e) => e.focused === "on");
+
+  // combos api
+  const { youmaylike } = useSelector((state) => state.youmaylike);
+
+  useEffect(() => {
+    dispatch(fetchYoumaylike());
+  }, [dispatch]);
+
+  // add to cart for combo
+
+  let productObj = {
+    id: "",
+    title: "",
+    price: "",
+    image: "",
+    mrp: "",
+    discount: "",
+  };
+  const addToCart = (e) => {
+    productObj = {
+      id: e.id,
+      title: e.name,
+      price: e.selling_price,
+      image: e.meta_img?.url,
+      mrp: e.mrp,
+      discount: e.discount,
+    };
+
+    dispatch(addCartProduct(productObj));
+    dispatch(getCartCount());
+    dispatch(getSubTotal());
+    dispatch(getTotalAmount());
+    dispatch(getTotalDiscount());
+  };
   // filteration
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({});
@@ -122,7 +118,7 @@ const SubCategory = () => {
       setCheckedFilters({ ...checkedFilters, [key]: true });
 
       // Update the filtered products list
-      const filtered = product.filter((product) => {
+      const filtered = youmaylike.filter((product) => {
         const price = product.selling_price;
         return price >= minPrice && price <= maxPrice;
       });
@@ -138,7 +134,7 @@ const SubCategory = () => {
     const updatePriceRangeVisibility = () => {
       const updatedPriceRanges = priceRanges.map((range) => {
         const { minPrice, maxPrice } = range;
-        const isVisible = product.some(
+        const isVisible = youmaylike.some(
           (product) =>
             product.selling_price >= minPrice &&
             product.selling_price <= maxPrice
@@ -149,63 +145,20 @@ const SubCategory = () => {
     };
 
     updatePriceRangeVisibility();
-  }, [product, priceRanges]);
+  }, [youmaylike]);
 
-  // brand api
-  const { brand } = useSelector((state) => state.brand);
-
-  const fetchBrandData = useCallback(() => {
-    dispatch(fetchBrand());
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchBrandData();
-  }, [fetchBrandData]);
-
-  const filterbrandsApi = brand.filter((e) => e.focused === "on");
-
-  // add to cart single product
-
-  let SingleproductObj = {
-    id: "",
-    title: "",
-    price: "",
-    image: "",
-    mrp: "",
-    discount: "",
-  };
-
-  const addToSingleCart = (p) => {
-    SingleproductObj = {
-      id: p.id,
-      title: p.name,
-      price: p.selling_price,
-      image: p.thumbnail_img?.original_url,
-      mrp: p.mrp,
-      discount: p.discount,
-    };
-
-    dispatch(singleaddCartProduct(SingleproductObj));
-    dispatch(getsingleCartCount());
-    dispatch(getsingleSubTotal());
-    dispatch(getsingleTotalAmount());
-    dispatch(getsingleTotalDiscount());
-  };
-
-  function handleClick(categorySlug) {
+  function handleClick(categoryId) {
+    setFilteredProducts([]);
+    setCheckedFilters(false);
     // setPageNumber(1);
-    // setCheckedFilters(false);
-    // setFilteredProducts([]);
-    // setFilterCombo([]);
-    // setCheckedFilters(false);
-    navigate(`/subcat/${categorySlug}`);
+    navigate(`/category/${categoryId}`);
+    // window.location.reload(`/category/${categoryId}`)
   }
 
   function handleClickbrand(brandId) {
+    setFilteredProducts([]);
+    setCheckedFilters(false);
     // setPageNumber(1);
-    // setFilteredProducts([]);
-    // setFilterCombo([]);
-    // setCheckedFilters(false);
     navigate(`/brand/${brandId}`);
   }
 
@@ -233,6 +186,7 @@ const SubCategory = () => {
   const handleToggle5 = () => {
     setIsOpen5(!isOpen5);
   };
+
   return (
     <>
       <HomeLayout>
@@ -342,7 +296,7 @@ const SubCategory = () => {
                     <Collapse in={isOpen4}>
                       <div id="collapseExample">
                         <div style={{ margin: "10px 5px 5px 5px" }}>
-                          {subCat.map((e) => (
+                          {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
@@ -419,6 +373,91 @@ const SubCategory = () => {
                               </div>
                             ) : null;
                           })}
+                          {/* <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="50-499"
+                            >
+                              50-499
+                            </label>
+                            <input
+                              style={{ marginLeft: "7rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["50-499"]}
+                              onChange={() => handleFilter(50, 499)}
+                              id="50-499"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="500-999"
+                            >
+                              500-999
+                            </label>
+                            <input
+                              style={{ marginLeft: "6.45rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["500-999"]}
+                              onChange={() => handleFilter(500, 999)}
+                              id="500-999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="1000-1999"
+                            >
+                              1000-1999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.88rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["1000-1999"]}
+                              onChange={() => handleFilter(1000, 1999)}
+                              id="1000-1999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="2000-4999"
+                            >
+                              2000-4999
+                            </label>
+                            <input
+                              style={{ marginLeft: "5.34rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["2000-4999"]}
+                              onChange={() => handleFilter(2000, 4999)}
+                              id="2000-4999"
+                            />
+                          </div>
+                          <div className="sortBy">
+                            <label
+                              className="form-check-label"
+                              htmlFor="5000 & Above"
+                            >
+                              5000 & Above
+                            </label>
+                            <input
+                              style={{ marginLeft: "3.963rem" }}
+                              className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              checked={!!checkedFilters["5000-500000"]}
+                              onChange={() => handleFilter(5000, 500000)}
+                              id="5000 & Above"
+                            />
+                          </div> */}
                         </div>
                       </div>
                     </Collapse>
@@ -428,6 +467,7 @@ const SubCategory = () => {
             </div>
           </div>
         </div>
+
         <div className="container">
           <div className="row">
             <div className="col-md-3 desktop">
@@ -452,7 +492,7 @@ const SubCategory = () => {
                     />
                   </div>
 
-                  <div className="sortBy">
+                  <div>
                     <label className="form-check-label" htmlFor="Discount">
                       Discount
                     </label>
@@ -465,7 +505,7 @@ const SubCategory = () => {
                     />
                   </div>
 
-                  <div className="sortBy">
+                  <div>
                     <label className="form-check-label" htmlFor="Name">
                       Name
                     </label>
@@ -478,11 +518,8 @@ const SubCategory = () => {
                     />
                   </div>
 
-                  <div className="sortBy">
-                    <label
-                      className="form-check-label"
-                      htmlFor="CustomerTopRated"
-                    >
+                  <div>
+                    <label className="form-check-label" for="CustomerTopRated">
                       Customer Top Rated
                     </label>
                     <input
@@ -494,8 +531,8 @@ const SubCategory = () => {
                     />
                   </div>
 
-                  <div className="sortBy">
-                    <label className="form-check-label" htmlFor="NewArrivals">
+                  <div>
+                    <label className="form-check-label" for="NewArrivals">
                       New Arrivals
                     </label>
                     <input
@@ -507,38 +544,34 @@ const SubCategory = () => {
                     />
                   </div>
 
-                  <div className="sortBy">
-                    <label
-                      className="form-check-label"
-                      htmlFor="PriceHighToLow"
-                    >
+                  <div>
+                    <label className="form-check-label" for="PriceHighToLow">
                       Price: High to Low
                     </label>
                     <input
                       style={{ marginLeft: "8.3rem" }}
                       className="form-check-input"
-                      type="radio"
+                      type="checkbox"
                       value=""
                       id="PriceHighToLow"
                     />
                   </div>
 
-                  <div className="sortBy">
-                    <label
-                      className="form-check-label"
-                      htmlFor="PriceLowToHigh"
-                    >
+                  <div>
+                    <label className="form-check-label" for="PriceLowToHigh">
                       Price: Low to High
                     </label>
                     <input
-                      type="radio"
-                      name="category_id"
+                      style={{ marginLeft: "8.3rem" }}
                       className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="PriceLowToHigh"
                     />
                   </div>
                 </div>
               </div>
-
+              {/* Filter  */}
               <div className="card">
                 <div className="card-header">Filter By</div>
                 <div className="card-body">
@@ -555,7 +588,7 @@ const SubCategory = () => {
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
-                          Subcategory
+                          Categories
                         </h6>
 
                         {isOpen1 ? (
@@ -586,18 +619,18 @@ const SubCategory = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          {subCat.map((e) => (
+                          {categories.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
-                                // id={`category_id${category.id}`}
-                                // defaultValue={category.id}
+                                id="category_id103"
+                                defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClick(e.slug)}
                               />
 
-                              <label className="form-check-label">
+                              <label className="form-check-label" htmlFor={103}>
                                 {e.name}
                               </label>
                             </div>
@@ -643,23 +676,37 @@ const SubCategory = () => {
                       </div>
 
                       <Collapse in={isOpen2}>
-                        <div
-                          id="collapseExample"
-                          style={{ margin: "10px 5px 5px 5px" }}
-                        >
+                        <div id="collapseExample">
                           {filterbrandsApi.map((e) => (
+                            // <div className="sortBy" key={e.id}>
+                            //   <label
+                            //     className="form-check-label"
+
+                            //     htmlFor={`brand_${brand.id}`}
+                            //   >
+                            //     {e.name}
+                            //   </label>
+                            //   <input
+                            //     type="checkbox"
+                            //     name="brand"
+                            //     id={`brand_${brand.id}`}
+                            //     value={brand.id}
+                            //     className="form-check-input"
+                            //     checked={selectedBrands.includes(brand.id)}
+                            //     onChange={handleBrandSelection}
+
+                            //   />
+                            // </div>
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
                                 name="category_id"
-                                id={e.name}
+                                id="category_id103"
+                                defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.slug)}
                               />
-                              <label
-                                className="form-check-label"
-                                htmlFor={e.name}
-                              >
+                              <label className="form-check-label" htmlFor={103}>
                                 {e.name}
                               </label>
                             </div>
@@ -705,10 +752,7 @@ const SubCategory = () => {
                       </div>
 
                       <Collapse in={isOpen3}>
-                        <div
-                          id="collapseExample"
-                          style={{ margin: "10px 5px 5x 5px" }}
-                        >
+                        <div id="collapseExample">
                           <input
                             type="hidden"
                             name="_token"
@@ -753,7 +797,7 @@ const SubCategory = () => {
                               className="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["50-499"]}
+                              checked={!!checkedFilters["50-499"]}
                               onChange={() => handleFilter(50, 499)}
                               id="50-499"
                             />
@@ -770,7 +814,7 @@ const SubCategory = () => {
                               className="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["500-999"]}
+                              checked={!!checkedFilters["500-999"]}
                               onChange={() => handleFilter(500, 999)}
                               id="500-999"
                             />
@@ -787,7 +831,7 @@ const SubCategory = () => {
                               className="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["1000-1999"]}
+                              checked={!!checkedFilters["1000-1999"]}
                               onChange={() => handleFilter(1000, 1999)}
                               id="1000-1999"
                             />
@@ -804,7 +848,7 @@ const SubCategory = () => {
                               className="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["2000-4999"]}
+                              checked={!!checkedFilters["2000-4999"]}
                               onChange={() => handleFilter(2000, 4999)}
                               id="2000-4999"
                             />
@@ -812,7 +856,7 @@ const SubCategory = () => {
                           <div className="sortBy">
                             <label
                               className="form-check-label"
-                              htmlFor="5000&Above"
+                              htmlFor="5000 & Above"
                             >
                               5000 & Above
                             </label>
@@ -821,9 +865,9 @@ const SubCategory = () => {
                               className="form-check-input"
                               type="checkbox"
                               value=""
-                              checked={checkedFilters["5000-500000"]}
+                              checked={!!checkedFilters["5000-500000"]}
                               onChange={() => handleFilter(5000, 500000)}
-                              id="5000&Above"
+                              id="5000 & Above"
                             />
                           </div> */}
                         </div>
@@ -834,221 +878,218 @@ const SubCategory = () => {
               </div>
             </div>
 
-            <div className="col-md-9 mt-2">
-              {isLoading && <div id="cover-spin"></div>}
+            {/* mobile filter */}
+            <div className="bottom-bar mobile">
+              <ul className="nav justify-content-center bg-white">
+                <li></li>
+              </ul>
+            </div>
+
+            {/* end mobile filter */}
+
+            <div className="col-md-9">
               {/* {loading ? (
                 <div id="cover-spin"></div>
               ) : (
                 <div style={{ display: "none" }}></div>
               )} */}
-              {/* <div className="banner" key={banner.id}>
-                <img src={banner.banner?.url} width="100%" alt="baner" />
-              </div> */}
-
-              <div className="row">
-                <nav>
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link>Brand</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link className="categoriesName">{name.name}</Link>
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-              <div className="byoccBrand">
-                <img src="/assets/img/byoc.png" alt="byoc-img" />
-              </div>
-              <div className="row" style={{ marginTop: "3rem" }}>
-                <div className="col-md-6">
-                  <h4>
-                    <strong>Top Trending</strong>
-                  </h4>
+              {/* <div id="cover-spin"></div> */}
+              <div>
+                <div className="row">
+                  <nav>
+                    <ol className="breadcrumb">
+                      <li className="breadcrumb-item">
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li className="breadcrumb-item">
+                        <Link>Brand</Link>
+                      </li>
+                      <li className="breadcrumb-item">
+                        <Link className="categoriesName">Combos</Link>
+                      </li>
+                    </ol>
+                  </nav>
                 </div>
-                <div className="col-md-6">
-                  <div>
-                    <div style={{ textAlign: "end" }}>
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant=""
-                          id="dropdown-basic"
-                          style={{
-                            border: "1px solid",
-                            marginLeft: "3rem",
-                            width: "120px",
-                          }}
-                        >
-                          Sort by
-                        </Dropdown.Toggle>
+                {/* <div className="byoccBrand">
+                  <img src="/assets/img/byoc.png" alt="byoc-img" />
+                </div> */}
+                <div className="row" style={{ marginTop: "3rem" }}>
+                  <div className="col-md-6">
+                    <h4>
+                      <strong>Top Trending</strong>
+                    </h4>
+                  </div>
+                  <div className="col-md-6">
+                    <div>
+                      <div style={{ textAlign: "end" }}>
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant=""
+                            id="dropdown-basic"
+                            style={{
+                              border: "1px solid",
+                              marginLeft: "3rem",
+                              width: "120px",
+                            }}
+                          >
+                            Sort by
+                          </Dropdown.Toggle>
 
-                        {/* <Dropdown.Menu>
-                        
-                          <Dropdown.Item
-                            onClick={() => handleSort("lowToHigh")}
-                          >
-                            LOW TO HIGH
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => handleSort("highToLow")}
-                          >
-                            HIGH TO LOW
-                          </Dropdown.Item>
-                        </Dropdown.Menu> */}
-                      </Dropdown>
+                          {/* <Dropdown.Menu>
+                         
+                            <Dropdown.Item
+                              onClick={() => handleSort("lowToHigh")}
+                            >
+                              LOW TO HIGH
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              onClick={() => handleSort("highToLow")}
+                            >
+                              HIGH TO LOW
+                            </Dropdown.Item>
+                          </Dropdown.Menu> */}
+                        </Dropdown>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="row" style={{ marginTop: "1rem" }}>
-                {/* Combo products */}
-
-               
-
-                {/* Single Products */}
-                {filteredProducts.length > 0
-                  ? filteredProducts.map((p) => (
-                      <div className="col-md-4 " key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link className="addtofavCategory">
-                              <i
-                                className="bi bi-heart"
-                                style={{
-                                  position: "absolute",
-                                  right: "0.8rem",
-                                  top: "0.5rem",
-                                }}
-                              ></i>
-                            </Link>
-                            <Link to={`/product/${p.slug}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt="img"
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3">
-                              <span>{p.name.substring(0, 40)}</span>
-                            </div>
-
-                            <div className="price-sec">
-                              <div
-                                className="col-4"
-                                style={{ textAlign: "end" }}
-                              >
-                                <span className="sp">₹{p.selling_price}</span>
-                              </div>
-                              <div className="col-4">
-                                <del className="mrp">₹{p.mrp}</del>
-                              </div>
-                              <div className="col-4">
-                                <span className="discount">
-                                  {p.discount}% OFF
-                                </span>
-                              </div>
-                            </div>
-                            <div className="card-btn-sec">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                }}
-                                style={{
-                                  cursor: "pointer",
-                                }}
-                              >
-                                <i className="bi bi-cart" id={p.id}>
-                                  Add to Cart
-                                </i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  : product.map((p) => (
-                      <div className="col-md-4" key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link
-                              //   onClick={() => wishlistProductData(p.id)}
-                              className="addtofavCategory"
+                <div className="row" style={{ marginTop: "1rem" }}>
+                  {/* {noProduct && <p>No product in this price range</p>} */}
+                  {filteredProducts.length > 0
+                    ? filteredProducts.map((p) => (
+                        <div className="col-md-4 " key={p.id}>
+                          <div className="newComboCart">
+                            <div
+                              className="cart-img-sec"
+                              style={{ position: "relative" }}
                             >
-                              <ul>
-                                {/* <li className="youMayLikeHeart">
-                              {heartFilled === p.id ? (
+                              <Link className="addtofavCategory">
                                 <i
-                                  style={{ color: "#fe9e2d" }}
-                                  className="bi bi-heart-fill"
+                                  className="bi bi-heart"
+                                  style={{
+                                    position: "absolute",
+                                    right: "0.8rem",
+                                    top: "0.5rem",
+                                  }}
                                 ></i>
-                              ) : (
-                                <i className="bi bi-heart"></i>
-                              )}
-                            </li> */}
-                              </ul>
-                            </Link>
-                            <Link to={`/product/${p.slug}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt={p.name}
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
+                              </Link>
+                              <Link to={`/combo/${p.slug}`}>
+                                <img
+                                  src={p.meta_img?.url}
+                                  alt="img"
+                                  width="100%"
+                                ></img>
+                              </Link>
                             </div>
-                            {/* <div>
-                              <span className="packof">(Pack of 2)</span>
-                            </div> */}
-                            <div className="price-sec">
-                              <span className="spSingleProduct">
-                                ₹{p.selling_price}
-                              </span>
 
-                              <div className="col-4">
-                                <del className="mrp">₹{p.mrp}</del>
+                            <div className="card-det-sec">
+                              <div className="headingCard pt-3">
+                                <span>{p.name.substring(0, 40)}</span>
                               </div>
-                              {/* <div className="col-4">
-                                <span className="discount">
-                                  {p.discount}% OFF
-                                </span>
-                              </div> */}
-                            </div>
-                            <div className="card-btn-sec ">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                  alert("product added to cart successfully");
-                                }}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <i className="bi bi-cart" id={p.id}>
-                                  Add to Cart
-                                </i>
+
+                              <div className="price-sec">
+                                <div
+                                  className="col-4"
+                                  style={{ textAlign: "end" }}
+                                >
+                                  <span className="sp">₹{p.selling_price}</span>
+                                </div>
+                                <div className="col-4">
+                                  <del className="mrp">₹{p.mrp}</del>
+                                </div>
+                                <div className="col-4">
+                                  <span className="discount">
+                                    {p.discount}% OFF
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="card-btn-sec">
+                                <div
+                                  className="btn_atc"
+                                  onClick={() => {
+                                    addToCart(p);
+                                  }}
+                                  style={{
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  <i className="bi bi-cart" id={p.id}>
+                                    Add to Cart
+                                  </i>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    : youmaylike.map((p) => (
+                        <div className="col-md-4 " key={p.id}>
+                          <div className="newComboCart">
+                            <div
+                              className="cart-img-sec"
+                              style={{ position: "relative" }}
+                            >
+                              <Link className="addtofavCategory">
+                                <i
+                                  className="bi bi-heart"
+                                  style={{
+                                    position: "absolute",
+                                    right: "0.8rem",
+                                    top: "0.5rem",
+                                  }}
+                                ></i>
+                              </Link>
+                              <Link to={`/combo/${p.slug}`}>
+                                <img
+                                  src={p.meta_img?.url}
+                                  alt="img"
+                                  width="100%"
+                                ></img>
+                              </Link>
+                            </div>
+
+                            <div className="card-det-sec">
+                              <div className="headingCard pt-3">
+                                <span>{p.name.substring(0, 40)}</span>
+                              </div>
+
+                              <div className="price-sec">
+                                <div
+                                  className="col-4"
+                                  style={{ textAlign: "end" }}
+                                >
+                                  <span className="sp">₹{p.selling_price}</span>
+                                </div>
+                                <div className="col-4">
+                                  <del className="mrp">₹{p.mrp}</del>
+                                </div>
+                                <div className="col-4">
+                                  <span className="discount">
+                                    {p.discount}% OFF
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="card-btn-sec ">
+                                <div
+                                  className="btn_atc"
+                                  onClick={() => {
+                                    addToCart(p);
+                                  }}
+                                  style={{
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  <i className="bi bi-cart" id={p.id}>
+                                    Add to Cart
+                                  </i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                </div>
               </div>
             </div>
           </div>
@@ -1058,4 +1099,4 @@ const SubCategory = () => {
   );
 };
 
-export default SubCategory;
+export default AllCombos;

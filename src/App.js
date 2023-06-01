@@ -33,6 +33,8 @@ import Noresult from "./pages/ErrorPages/Noresult";
 import ServerError from "./pages/ErrorPages/ServerError";
 import Expired from "./pages/ErrorPages/Expired";
 import CustomPage from "./pages/category/CustomPage";
+import AllCombos from "./pages/category/AllCombos";
+
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -56,6 +58,7 @@ const App = () => {
       <Route path="/product/:slug" element={<Singleproduct />} />
       {/* <Route path="/Login" element={<Login />} /> */}
       <Route path="/category/:slug" element={<Category />} />
+      <Route path="/subcat/:slug" element={<SubCategory />} />
       <Route path="/subcat" element={<SubCategory />} />
       <Route path="/page/:slug" element={<CustomPage />} />
       <Route path="/brand/:slug" element={<BrandProduct />} />
@@ -64,6 +67,7 @@ const App = () => {
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
       <Route path="/make-your-own-combo" element={<MYOC />} />
+      <Route path="/combos" element={<AllCombos />} />
       <Route path="/EmptyCart" element={<Emptycart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/address" element={<Loginadress />} />
