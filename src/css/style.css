@@ -554,43 +554,48 @@ a {
 
 .youmaylikeboxshadow .react-multiple-carousel__arrow--left {
   position: absolute;
-  left: 0;
-  color: white;
-  background-color: #fe9e2d;
+  /* left: 12px; */
+  color: rgb(6, 0, 0);
+  background-color: #ebebeb;
   /* border-radius: 0; */
   height: 58px;
   width: 58px;
-
+  box-shadow: 2px 2px 4px #e2e2e2;
 }
 
 .youmaylikeboxshadow .react-multiple-carousel__arrow--right {
   position: absolute;
-  right: 0;
-  color: white;
-  background-color: #fe9e2d;
+  /* right: 0; */
+  color: #464646;
+  background-color: #ebebeb;
   /* border-radius: 0; */
   height: 58px;
   width: 58px;
-
+  box-shadow: 2px 2px 4px #e2e2e2;
 }
 
 .heroCarousel .react-multiple-carousel__arrow--left {
   position: absolute;
-  left: 0;
+  /* left: 0; */
   background-color: white;
   /* border-radius: 0px 5px 5px 0; */
   height: 58px;
   width: 58px;
+  box-shadow: 2px 2px 4px #e2e2e2;
 }
 
 .heroCarousel .react-multiple-carousel__arrow::before {
   color: #464646;
 }
+.youmaylikeboxshadow .react-multiple-carousel__arrow::before {
+  color: #464646;
+  font-weight: bold;
+}
 
 .heroCarousel .react-multiple-carousel__arrow--right {
   position: absolute;
-  right: 0;
-  color: white;
+  /* right: 0; */
+  color: #464646;
   background-color: white;
   /* border-radius: 0; */
   height: 58px;
@@ -658,7 +663,7 @@ a {
   }
 
   .needToBeSetMobile .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item {
-    width: 135px !important;
+    width: 180px !important;
   }
 
 
