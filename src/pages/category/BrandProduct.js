@@ -43,7 +43,7 @@ const BrandProduct = () => {
     { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
     { minPrice: 1000, maxPrice: 1999, label: "1000-1999", isVisible: true },
     { minPrice: 2000, maxPrice: 4999, label: "2000-4999", isVisible: true },
-    { minPrice: 5000, maxPrice: 500000, label: "5000-500000", isVisible: true },
+    { minPrice: 5000, maxPrice: 500000, label: "5000 & above", isVisible: true },
   ]);
 
   // filteration state end

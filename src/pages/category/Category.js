@@ -36,7 +36,7 @@ import { fetchBrand } from "../../components/features/actions/brandActions";
 
 const Category = () => {
   const dispatch = useDispatch();
-  // Categories products combo & single Products
+ 
   const navigate = useNavigate();
   const { slug } = useParams();
 
@@ -55,6 +55,7 @@ const Category = () => {
   const [checkedFilters, setCheckedFilters] = useState({});
   const [displayedPages, setDisplayedPages] = useState([]);
   const [banner, setBanner] = useState([]);
+  const [subCat,setSubCat] = useState([])
 
   // const [noProduct, setNoProduct] = useState(false);
 
@@ -89,6 +90,7 @@ const Category = () => {
           options
         );
         setBanner(response.data.data.category);
+        setSubCat(response.data.data.subcats)
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -420,7 +422,7 @@ const Category = () => {
     setFilteredProducts([]);
     setFilterCombo([]);
     setCheckedFilters(false);
-    navigate(`/category/${categorySlug}`);
+    navigate(`/subcat/${categorySlug}`);
   }
 
   function handleClickbrand(brandId) {
@@ -893,7 +895,7 @@ const Category = () => {
                           className="col-9 mb-0 px-0"
                           style={{ backgroundColor: "#FFF", textAlign: "left" }}
                         >
-                          Categories
+                          Subcategory
                         </h6>
 
                         {isOpen1 ? (
@@ -924,7 +926,7 @@ const Category = () => {
                             name="_token"
                             defaultValue="uBsUNvaRvvXcIHGdYxLZYD6MSJAGnnqBe7BvE1ah"
                           />{" "}
-                          {categories.map((e) => (
+                          {subCat.map((e) => (
                             <div className="form-check" key={e.id}>
                               <input
                                 type="radio"
