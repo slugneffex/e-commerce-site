@@ -582,15 +582,18 @@ a {
 .heroCarousel .react-multiple-carousel__arrow--left {
   position: absolute;
   /* left: 0; */
-  background-color: white;
+  background-color: #ebebeb;
+  color: #464646;
+
   /* border-radius: 0px 5px 5px 0; */
   height: 58px;
   width: 58px;
-  box-shadow: 2px 2px 4px #e2e2e2;
+  box-shadow: 2px 2px 3px #e2e2e2;
 }
 
 .heroCarousel .react-multiple-carousel__arrow::before {
   color: #464646;
+  font-weight: bold;
 }
 .youmaylikeboxshadow .react-multiple-carousel__arrow::before {
   color: #464646;
@@ -600,12 +603,13 @@ a {
 .heroCarousel .react-multiple-carousel__arrow--right {
   position: absolute;
   /* right: 0; */
+  background-color: #ebebeb;
   color: #464646;
-  background-color: white;
   /* border-radius: 0; */
   height: 58px;
   width: 58px;
   /* border-radius: 5px 0 0 5px; */
+  box-shadow: 2px 2px 3px #e2e2e2;
 
 }
 
