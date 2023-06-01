@@ -72,6 +72,37 @@ h1 h2 h3 h4 h5 h6 p {
     color: #fe9e2d;
 }
 
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+
+#navSec .collapse ul {
+    text-align: center;
+   /* margin: 8px 10px 8px 30px !important; */
+}
+#navSec .collapse .nav-link {
+    text-align: center;
+    margin: 8px 5px 8px 20px !important;
+   /* padding: 8px 10px 8px 30px !important; */
+}
+
+#navSec .collapse .rightPartOfNav {
+    color: #464646;
+    margin: 8px 5px 8px 30px !important;
+}
+
+#navSec .collapse .nav-link {
+   /* border: 1px solid #F8F9FA; */
+   border-bottom: 3px solid #F9F8FA;
+
+}
+#navSec .collapse .nav-link:hover {
+   border-bottom: 3px solid #FE9E2D;
+
+}
+
+
 
 .top-banner {
     background-color: #FE9E2D;

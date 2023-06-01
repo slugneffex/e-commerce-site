@@ -9,6 +9,10 @@ import { fetchByoc } from "../features/actions/byocActions";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchStore } from "../features/actions/storeAction";
 import { fetchPage } from "../features/actions/pageActions";
+import {RiShoppingBag3Line} from "react-icons/ri"
+import {CiHeart } from "react-icons/ci"
+import {VscAccount } from "react-icons/vsc"
+
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -167,13 +171,13 @@ const Header = () => {
                   </Link>
                 </button>
               </div>
-              <div className="col-md-2 saleSection" style={{ paddingTop: "5px",position: "relative" }}>
+              <div className="col-md-2 saleSection" style={{ paddingTop: "5px", position: "relative" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="32" viewBox="0 0 23 32">
                   <path id="Path_1699" data-name="Path 1699" d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z" transform="translate(-6.5 -2)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
 
                 </svg>
 
-                <svg style={{ position: "absolute",left: "68px", bottom: "10px" }} xmlns="http://www.w3.org/2000/svg" width="13" height="2" viewBox="0 0 13 2">
+                <svg style={{ position: "absolute", left: "68px", bottom: "10px" }} xmlns="http://www.w3.org/2000/svg" width="13" height="2" viewBox="0 0 13 2">
                   <line id="Line_116" data-name="Line 116" x2="11" transform="translate(1 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" />
                 </svg>
 
@@ -461,36 +465,35 @@ const Header = () => {
                   <ul
                     className="navbar-nav ml-auto"
                     id="navbar-right"
-                    style={{ marginLeft: "auto" }}
+                    style={{ marginLeft: "auto",alignItems: "center" }}
                   >
                     <li className="nav-item">
-                      <Link to="/signin" className="nav-link">
-                        <i className="bi bi-person-circle"></i>
-                        <span>Account</span>
+                      <Link to="/signin" className="rightPartOfNav">
+                      <VscAccount style={{ fontSize: "30px"}}/>
+                        <span style={{ marginLeft: "4px",fontSize: "15px"}}>Account</span>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/Wishlist" className="nav-link">
-                        <i className="bi bi-heart"></i>
-                        <span>Wishlist</span>
+                      <Link to="/Wishlist" className="rightPartOfNav">
+                        <CiHeart style={{ fontSize: "40px",color:"#464646" }} />
+                        {/* <span>Wishlist</span> */}
                       </Link>
                     </li>
 
                     <li className="nav-item">
                       <Link
-
                         to="/Cart"
-                        className="nav-link"
+                        className="rightPartOfNav"
+                        // className="nav-link"
                         style={{ position: "relative" }}
                       >
-                        <i className="bi bi-cart-fill"></i>
-                        <span>Cart</span>
+                        <RiShoppingBag3Line style={{ fontSize: "30px" }}/>
                         <strong
                           className="desktop"
                           style={{
                             position: "absolute",
-                            right: ".3rem",
-                            bottom: "3rem",
+                            right: "-.5rem",
+                            bottom: "1rem",
                             zInd: "2",
                             fontSize: "10px",
                             color: "white",
