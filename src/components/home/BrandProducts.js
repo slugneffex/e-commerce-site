@@ -158,10 +158,12 @@ const BrandProducts = () => {
 
             <div className="col-6 viewAllButton">
               <div className="viewAllBtn">
+              <Link to={`/latestPros`}>
                 <button>
                   View All
                   <AiOutlineArrowRight />
                 </button>
+                </Link>
               </div>
             </div>
           </div>

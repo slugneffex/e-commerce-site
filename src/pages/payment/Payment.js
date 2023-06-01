@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./payment.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -20,6 +20,7 @@ function loadScript(src) {
 }
 
 const Payment = () => {
+  const navigate = useNavigate()
   // Hide and show button
   const [showButton, setShowButton] = useState(false);
 
@@ -168,6 +169,11 @@ const Payment = () => {
 
     alert('Payment Successful!');
     alert(response.razorpay_payment_id);
+    if (!localStorage.getItem("token")) {
+      navigate("/adress");
+    }else{
+      navigate("/address")
+    }
     localStorage.setItem('transaction_id', response.razorpay_payment_id);
     setShowButton(true);
   };
