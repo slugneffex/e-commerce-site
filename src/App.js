@@ -34,6 +34,7 @@ import ServerError from "./pages/ErrorPages/ServerError";
 import Expired from "./pages/ErrorPages/Expired";
 import CustomPage from "./pages/category/CustomPage";
 import AllCombos from "./pages/category/AllCombos";
+import Help from "./components/Help/Help";
 
 
 const ScrollToTop = () => {
@@ -92,6 +93,7 @@ const App = () => {
       <Route path="/Noresult" element={<Noresult/>}/>
       <Route path="/ServerError" element={<ServerError/>}/>
       <Route path="/Expired" element={<Expired/>}/>
+      <Route path="/help" element={<Help />}/>
     </Routes>
     </>
    
