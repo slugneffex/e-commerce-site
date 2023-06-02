@@ -48,11 +48,6 @@ const CustomPage = () => {
 
   const [brandId, setBrandId] = useState([]);
   const [categoriesId, setCategoriesId] = useState([]);
-  
-
-
-  
-
 
   // const {  banner ,combo,brandId,categoriesId} = useSelector((state) => state.pagedata);
 
@@ -126,7 +121,7 @@ const CustomPage = () => {
     image: "",
     mrp: "",
     discount: "",
-    slug:"",
+    slug: "",
   };
   const addToCart = (e) => {
     productObj = {
@@ -155,7 +150,7 @@ const CustomPage = () => {
     image: "",
     mrp: "",
     discount: "",
-    slug:"",
+    slug: "",
   };
 
   const addToSingleCart = (p) => {
@@ -264,12 +259,15 @@ const CustomPage = () => {
       try {
         if (brandId) {
           const promises = brandId.map((e) =>
-            axios.get(`${process.env.REACT_APP_BASE_URL}/brand/${e.slug}`, options)
+            axios.get(
+              `${process.env.REACT_APP_BASE_URL}/brand/${e.slug}`,
+              options
+            )
           );
           const responses = await Promise.all(promises);
           const data = responses.map((response) => response.data.products.data);
           setIsLoading(false);
-  
+
           setBrandProduct(data);
         }
       } catch (error) {
@@ -315,7 +313,7 @@ const CustomPage = () => {
           const productData = responses.map(
             (response) => response.data.data.products.data
           );
-  
+
           setCategoriesProduct(productData);
           setCategoriesCombo(data);
           // setIsLoading(false);
@@ -460,7 +458,7 @@ const CustomPage = () => {
     };
 
     updatePriceRangeVisibility();
-  }, [brandProduct,categoriesCombo,categoriesProduct,combo]);
+  }, [brandProduct, categoriesCombo, categoriesProduct, combo]);
 
   // Collapse for filters ui
   const [isOpen1, setIsOpen1] = useState(false);
@@ -514,29 +512,30 @@ const CustomPage = () => {
         <hr />
         {filterPageCombo.length > 0
           ? filterPageCombo.map((e) => (
-            <div className="col-md-4 " key={e.id}>
-              <div className="newComboCart">
-                <div
-                  className="cart-img-sec"
-                  style={{ position: "relative" }}
-                >
+              <div className="col-md-4 " key={e.id}>
+                <div className="newComboCart">
                   <div
-                    onClick={() => wishlistData(e.id)}
-                    className="addtofavCategory"
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
                   >
-                    <i
-                      className="bi bi-heart"
-                      style={{
-                        position: "absolute",
-                        right: "1rem",
-                        top: ".8rem",
-                      }}
-                    ></i>
+                    <div
+                      onClick={() => wishlistData(e.id)}
+                      className="addtofavCategory"
+                    >
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: "1rem",
+                          top: ".8rem",
+                        }}
+                      ></i>
+                    </div>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                    </Link>
                   </div>
-                  <Link to={`/combo/${e.id}`}>
-                    <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                  </Link>
-                </div>
+
 
                 <div className="card-det-sec">
                   <div className="headingCard pt-3">
@@ -548,13 +547,27 @@ const CustomPage = () => {
                   <div className="price-sec">
                     <div className="col-4" style={{ textAlign: "end" }}>
                       <span className="sp">₹{e.selling_price}</span>
+
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+
                     </div>
-                    <div className="col-4">
-                      <del className="mrp">₹{e.mrp}</del>
+                    <div>
+                      <span className="packof">(Pack of 2)</span>
                     </div>
-                    <div className="col-4">
-                      <span className="discount">{e.discount}% OFF</span>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
+                      </div>
                     </div>
+
                   </div>
                   <div className="card-btn-sec ">
                     <div
@@ -568,36 +581,51 @@ const CustomPage = () => {
                       <p className="cartTextMob" id={e.id}>
                         Add to Cart
                       </p>
+
+                    <div className="card-btn-sec ">
+                      <div
+                        className="btn_atc"
+                        onClick={() => {
+                          addToCart(e);
+                          alert("product added to cart successfully");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <i className="bi bi-cart" id={e.id}>
+                          Add to Cart
+                        </i>
+                      </div>
+
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))
           : combo.map((e) => (
-            <div className="col-md-4 " key={e.id}>
-              <div className="newComboCart">
-                <div
-                  className="cart-img-sec"
-                  style={{ position: "relative" }}
-                >
+              <div className="col-md-4 " key={e.id}>
+                <div className="newComboCart">
                   <div
-                    onClick={() => wishlistData(e.id)}
-                    className="addtofavCategory"
+                    className="cart-img-sec"
+                    style={{ position: "relative" }}
                   >
-                    <i
-                      className="bi bi-heart"
-                      style={{
-                        position: "absolute",
-                        right: "1rem",
-                        top: ".8rem",
-                      }}
-                    ></i>
+                    <div
+                      onClick={() => wishlistData(e.id)}
+                      className="addtofavCategory"
+                    >
+                      <i
+                        className="bi bi-heart"
+                        style={{
+                          position: "absolute",
+                          right: "1rem",
+                          top: ".8rem",
+                        }}
+                      ></i>
+                    </div>
+                    <Link to={`/combo/${e.id}`}>
+                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                    </Link>
                   </div>
-                  <Link to={`/combo/${e.id}`}>
-                    <img src={e.meta_img?.url} alt="img" width="100%"></img>
-                  </Link>
-                </div>
+
 
                 <div className="card-det-sec">
                   <div className="headingCard pt-3">
@@ -609,13 +637,27 @@ const CustomPage = () => {
                   <div className="price-sec">
                     <div className="col-4" style={{ textAlign: "end" }}>
                       <span className="sp">₹{e.selling_price}</span>
+
+                  <div className="card-det-sec">
+                    <div className="headingCard pt-3">
+                      <span>{e.name}</span>
+
                     </div>
-                    <div className="col-4">
-                      <del className="mrp">₹{e.mrp}</del>
+                    <div>
+                      <span className="packof">(Pack of){e.packqty}</span>
                     </div>
-                    <div className="col-4">
-                      <span className="discount">{e.discount}% OFF</span>
+                    <div className="price-sec">
+                      <div className="col-4" style={{ textAlign: "end" }}>
+                        <span className="sp">₹{e.selling_price}</span>
+                      </div>
+                      <div className="col-4">
+                        <del className="mrp">₹{e.mrp}</del>
+                      </div>
+                      <div className="col-4">
+                        <span className="discount">{e.discount}% OFF</span>
+                      </div>
                     </div>
+ 
                   </div>
                   <div className="card-btn-sec ">
                     <div
@@ -629,18 +671,32 @@ const CustomPage = () => {
                       <p className="cartTextMob" id={e.id}>
                         Add to Cart
                       </p>
+
+                    <div className="card-btn-sec ">
+                      <div
+                        className="btn_atc"
+                        onClick={() => {
+                          addToCart(e);
+                          alert("product added to cart successfully");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <i className="bi bi-cart" id={e.id}>
+                          Add to Cart
+                        </i>
+                      </div>
+ 
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
       </>
     );
   }
 
   let categoriesComboSection = null;
-  if (categoriesCombo.length >= 1) {
+  if (categoriesCombo && categoriesCombo.length >= 1) {
     categoriesComboSection = (
       <>
         {/* section content */}
@@ -909,7 +965,7 @@ const CustomPage = () => {
                       variant="primary"
                       onClick={handleToggle4}
                       aria-controls="collapseExample"
-                    // aria-expanded={isOpen4}
+                      // aria-expanded={isOpen4}
                     >
                       Category
                       {isOpen4 ? (
@@ -954,7 +1010,7 @@ const CustomPage = () => {
                       variant="primary"
                       onClick={handleToggle5}
                       aria-controls="collapseExample"
-                    // aria-expanded={isOpen5}
+                      // aria-expanded={isOpen5}
                     >
                       Price
                       {isOpen5 ? (
@@ -1404,41 +1460,41 @@ const CustomPage = () => {
                 </div>
               </div>
             </div>
-            
-              <div className="col-md-9 ">
-                {isLoading && <div id="cover-spin"></div>}
-                
-                {/* {isLoading ? (
+
+            <div className="col-md-9 ">
+              {isLoading && <div id="cover-spin"></div>}
+
+              {/* {isLoading ? (
                   <div id="cover-spin"></div>
                 ) : (
                   <div style={{ display: "none" }}></div>
                 )} */}
-                <div className="banner" key={banner.id}>
-                  <img src={banner.thumbnail?.url} width="100%" alt="baner" />
-                </div>
+              <div className="banner" key={banner.id}>
+                <img src={banner.thumbnail?.url} width="100%" alt="baner" />
+              </div>
 
-                <div className="row">
-                  <nav>
-                    <ol className="breadcrumb">
-                      <li className="breadcrumb-item">
-                        <Link to="/">Home</Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link>Categories</Link>
-                      </li>
-                      <li className="breadcrumb-item">
-                        <Link className="categoriesName">{banner.name}</Link>
-                      </li>
-                    </ol>
-                  </nav>
+              <div className="row">
+                <nav>
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link>Categories</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link className="categoriesName">{banner.name}</Link>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+              <div className="row" style={{ marginTop: "3rem" }}>
+                <div className="col-md-6">
+                  <h4>
+                    <strong>Top Trending</strong>
+                  </h4>
                 </div>
-                <div className="row" style={{ marginTop: "3rem" }}>
-                  <div className="col-md-6">
-                    <h4>
-                      <strong>Top Trending</strong>
-                    </h4>
-                  </div>
-                  {/* <div className="col-md-6" style={{ textAlign: "end" }}>
+                {/* <div className="col-md-6" style={{ textAlign: "end" }}>
                     <div className="" style={{}}>
                       <Dropdown>
                         <Dropdown.Toggle
@@ -1464,26 +1520,26 @@ const CustomPage = () => {
                       </Dropdown>
                     </div>
                   </div> */}
+              </div>
+
+              <div className="row" style={{ marginTop: "1rem" }}>
+                {/* Combo products */}
+
+                {section}
+
+                {/* Categories combo secetion */}
+                {categoriesComboSection}
+
+                <hr />
+                <div className="byocc">
+                  <h3>Bulid Your Own Combo</h3>
+                  <img src="/assets/img/byoc.png" alt="byoc-img" />
                 </div>
+                <hr />
 
-                <div className="row" style={{ marginTop: "1rem" }}>
-                  {/* Combo products */}
-
-                  {section}
-
-                  {/* Categories combo secetion */}
-                  {categoriesComboSection}
-
-                  <hr />
-                  <div className="byocc">
-                    <h3>Bulid Your Own Combo</h3>
-                    <img src="/assets/img/byoc.png" alt="byoc-img" />
-                  </div>
-                  <hr />
-
-                  {/* Single Products */}
-                  {filteredProducts.length > 0
-                    ? filteredProducts.map((p) => (
+                {/* Single Products */}
+                {filteredProducts.length > 0
+                  ? filteredProducts.map((p) => (
                       <div className="col-md-4" key={p.id}>
                         <div className="newComboCart">
                           <div
@@ -1547,7 +1603,7 @@ const CustomPage = () => {
                         </div>
                       </div>
                     ))
-                    : brandProduct.map((subArray) => {
+                  : brandProduct.map((subArray) => {
                       if (subArray.length > 0) {
                         return (
                           <>
@@ -1559,9 +1615,7 @@ const CustomPage = () => {
                                     style={{ position: "relative" }}
                                   >
                                     <Link
-                                      onClick={() =>
-                                        wishlistProductData(p.id)
-                                      }
+                                      onClick={() => wishlistProductData(p.id)}
                                       className="addtofavCategory"
                                     >
                                       <ul>
@@ -1630,10 +1684,10 @@ const CustomPage = () => {
                       }
                     })}
 
-                  {/* Categories single Product */}
-                  {categoriesProductSection}
-                </div>
+                {/* Categories single Product */}
+                {categoriesProductSection}
               </div>
+            </div>
           </div>
         </div>
       </HomeLayout>

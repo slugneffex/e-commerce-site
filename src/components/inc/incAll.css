@@ -223,6 +223,11 @@ h1 h2 h3 h4 h5 h6 p {
     color: #464646;
 }
 
+.ofcanvas-text{
+    font-size: 12px;
+    font-weight: 500;
+}
+
 
 @media (max-width: 720px) {
 
@@ -276,7 +281,7 @@ h1 h2 h3 h4 h5 h6 p {
     .offcanvas-header h1{
         font-size: calc(1.1rem + 1.5vw);
         margin-top: 40px;
-        margin-bottom: -20px
+        margin-bottom: 0px
     }
 
     #search {
