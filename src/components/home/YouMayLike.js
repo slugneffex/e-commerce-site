@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { Link,useNavigate } from "react-router-dom";
-import { AiOutlineArrowRight } from "react-icons/ai"
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import {
   addCartProduct,
   getCartCount,
@@ -42,13 +42,6 @@ const YouMayLike = () => {
   const navigate = useNavigate();
   const [addedToCart, setAddedToCart] = useState(false);
 
-  // useEffect(() => {
-  //   if (!localStorage.getItem("token")) {
-  //    navigate("/signin")
-  //    alert("login please")
-  //   }  
-  // });
-
   const { youmaylike } = useSelector((state) => state.youmaylike);
 
   useEffect(() => {
@@ -82,7 +75,6 @@ const YouMayLike = () => {
     dispatch(getTotalAmount());
     dispatch(getTotalDiscount());
     setAddedToCart(true);
-
     setTimeout(() => {
       setAddedToCart(false);
     }, 3000);
@@ -141,10 +133,10 @@ const YouMayLike = () => {
 
     handleResize(); // Initial check on component mount
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -152,7 +144,7 @@ const YouMayLike = () => {
     <div>
       <section>
         <div className="top-trending container">
-          <div className="row" style={{alignItems:"center"}}>
+          <div className="row" style={{ alignItems: "center" }}>
             <div className="col-6 top-trending-head">
               <h3>You May Like...</h3>
             </div>
@@ -160,10 +152,10 @@ const YouMayLike = () => {
             <div className="col-6 viewAllButton">
               <div className="viewAllBtn">
                 <Link to={`/combos`}>
-                <button>
-                View All
-                <AiOutlineArrowRight />
-                </button>
+                  <button>
+                    View All
+                    <AiOutlineArrowRight />
+                  </button>
                 </Link>
               </div>
             </div>
@@ -215,12 +207,15 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{(e.name)}</span>
+                          <span>{e.name}</span>
                         </div>
                         {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-                        <div className="price-sec" style={{padding: "0 8px 0 20px"}}>
+                        <div
+                          className="price-sec"
+                          style={{ padding: "0 8px 0 20px" }}
+                        >
                           <div className="col-2">
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
@@ -232,7 +227,32 @@ const YouMayLike = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          <div
+                          {addedToCart ? (
+                            <div
+                              className="btn_gtc"
+                              style={{ cursor: "pointer" }}
+                            >
+                              <Link to="/cart" style={{ color: "#05A856" }}>
+                                Go to Cart
+                              </Link>
+                              <i className="bi bi-arrow-right"></i>
+                            </div>
+                          ) : (
+                            <div
+                              className="btn_atc"
+                              onClick={() => {
+                                addToCart(e);
+
+                                alert("Product added to cart successfully");
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <i className="bi bi-cart" id={e.id}>
+                                Add to Cart
+                              </i>
+                            </div>
+                          )}
+                          {/* <div
                             className="btn_atc"
                             onClick={() => {
                               addToCart(e);
@@ -244,7 +264,7 @@ const YouMayLike = () => {
                             <i className="bi bi-cart" id={e.id}>
                               Add to Cart
                             </i>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
