@@ -215,16 +215,16 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{(e.name).substring(0, 25) + "..."}</span>
+                          <span>{(e.name)}</span>
                         </div>
                         {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-                        <div className="price-sec">
-                          <div className="col-4">
+                        <div className="price-sec" style={{padding: "0 8px 0 20px"}}>
+                          <div className="col-2">
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
-                          <div className="col-4">
+                          <div className="col-2">
                             <del className="mrp">₹{e.mrp}</del>
                           </div>
                           <div className="col-4">
