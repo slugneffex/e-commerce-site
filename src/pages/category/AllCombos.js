@@ -312,7 +312,7 @@ const AllCombos = () => {
                                 className="form-check-label"
                                 htmlFor={e.name}
                               >
-                                {e.name}
+                                {e.name.substring(0, 25) + "..."}
                               </label>
                             </div>
                           ))}
@@ -1016,9 +1016,9 @@ const AllCombos = () => {
                                     cursor: "pointer",
                                   }}
                                 >
-                                  <i className="bi bi-cart" id={p.id}>
+                                  <p className="cartTextMob" id={p.id}>
                                     Add to Cart
-                                  </i>
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -1082,9 +1082,9 @@ const AllCombos = () => {
                                     cursor: "pointer",
                                   }}
                                 >
-                                  <i className="bi bi-cart" id={p.id}>
+                                  <p className="cartTextMob" id={p.id}>
                                     Add to Cart
-                                  </i>
+                                  </p>
                                 </div>
                               </div>
                             </div>

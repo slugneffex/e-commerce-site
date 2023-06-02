@@ -150,6 +150,10 @@ input[type=checkbox]:checked {
     font-size: 10px;
   }
 
+  .mobile .col-6 {
+    width: 50%;
+  }
+
   .filterul li {
     list-style-type: circle !important;
   }

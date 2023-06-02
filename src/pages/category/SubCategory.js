@@ -941,7 +941,7 @@ const SubCategory = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <span>{p.name.substring(0, 25) + "..."}</span>
                             </div>
 
                             <div className="price-sec">
@@ -970,9 +970,9 @@ const SubCategory = () => {
                                   cursor: "pointer",
                                 }}
                               >
-                                <i className="bi bi-cart" id={p.id}>
+                                <p className="cartTextMob" id={p.id}>
                                   Add to Cart
-                                </i>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -1014,7 +1014,7 @@ const SubCategory = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <span>{p.name.substring(0, 25) + "..."}</span>
                             </div>
                             {/* <div>
                               <span className="packof">(Pack of 2)</span>
@@ -1042,9 +1042,9 @@ const SubCategory = () => {
                                 }}
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="bi bi-cart" id={p.id}>
+                                <p className="cartTextMob" id={p.id}>
                                   Add to Cart
-                                </i>
+                                </p>
                               </div>
                             </div>
                           </div>

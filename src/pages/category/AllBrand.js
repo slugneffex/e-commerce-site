@@ -347,7 +347,7 @@ useEffect(() => {
                                 className="form-check-label"
                                 htmlFor={e.name}
                               >
-                                {e.name}
+                                {e.name.substring(0, 25) + "..."}
                               </label>
                             </div>
                           ))}
@@ -739,7 +739,6 @@ useEffect(() => {
                                 type="radio"
                                 name="category_id"
                                 id="category_id103"
-                                defaultValue={103}
                                 className="form-check-input"
                                 onClick={() => handleClickbrand(e.slug)}
                               />
@@ -1051,9 +1050,9 @@ useEffect(() => {
                                     cursor: "pointer",
                                   }}
                                 >
-                                  <i className="bi bi-cart" id={p.id}>
+                                  <p className="cartTextMob" id={p.id}>
                                     Add to Cart
-                                  </i>
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -1117,9 +1116,9 @@ useEffect(() => {
                                     cursor: "pointer",
                                   }}
                                 >
-                                  <i className="bi bi-cart" id={p.id}>
+                                  <p className="cartTextMob" id={p.id}>
                                     Add to Cart
-                                  </i>
+                                  </p>
                                 </div>
                               </div>
                             </div>

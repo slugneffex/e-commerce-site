@@ -477,7 +477,7 @@ const Category = () => {
 
                   <div className="card-det-sec">
                     <div className="headingCard pt-3" style={{ width: "55px" }}>
-                      <span>{e.name}</span>
+                      <span>{e.name.substring(0, 25) + "..."}</span>
                     </div>
                     <div>
                       <span className="packof">(Pack of 2)</span>
@@ -502,9 +502,9 @@ const Category = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-cart cartTextMob" id={e.id}>
+                        <p className="cartTextMob" id={e.id}>
                           Add to Cart
-                        </i>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -538,7 +538,7 @@ const Category = () => {
 
                   <div className="card-det-sec">
                     <div className="headingCard pt-3">
-                      <span>{e.name}</span>
+                      <span>{e.name.substring(0, 25) + "..."}</span>
                     </div>
                     <div>
                       <span className="packof">(Pack of {e.packqty})</span>
@@ -563,9 +563,9 @@ const Category = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-cart cartTextMob" id={e.id}>
+                        <p className="cartTextMob" id={e.id}>
                           Add to Cart
-                        </i>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -1286,7 +1286,7 @@ const Category = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 20)}</span>
+                              <span>{p.name.substring(0, 25) + "..."}</span>
                             </div>
                             {/* <div>
                               <span className="packof">(Pack of 2)</span>
@@ -1312,9 +1312,9 @@ const Category = () => {
                                 }}
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="bi bi-cart cartTextMob" id={p.id}>
+                                <p className="cartTextMob" id={p.id}>
                                   Add to Cart
-                                </i>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -1357,7 +1357,7 @@ const Category = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <span>{p.name.substring(0, 25) + "..."}</span>
                             </div>
                             {/* <div>
                               <span className="packof">(Pack of 2)</span>
@@ -1385,9 +1385,9 @@ const Category = () => {
                                 }}
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="bi bi-cart cartTextMob" id={p.id}>
+                                <p className="cartTextMob" id={p.id}>
                                   Add to Cart
-                                </i>
+                                </p>
                               </div>
                             </div>
                           </div>

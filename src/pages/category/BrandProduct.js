@@ -298,9 +298,9 @@ const BrandProduct = () => {
                       cursor: "pointer",
                     }}
                   >
-                    <i className="bi bi-cart cartTextMob" id={p.id}>
+                    <p className="cartTextMob" id={p.id}>
                       Add to Cart
-                    </i>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -322,6 +322,7 @@ const BrandProduct = () => {
               fontSize: "16px",
               height: "40px",
               alignItems: "center",
+              width: "100vw"
             }}
           >
             <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
@@ -1111,7 +1112,7 @@ const BrandProduct = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3">
-                              <span>{p.name.substring(0, 30) + "..."}</span>
+                              <span>{p.name.substring(0, 25) + "..."}</span>
                             </div>
 
 
@@ -1136,9 +1137,9 @@ const BrandProduct = () => {
                                   cursor: "pointer",
                                 }}
                               >
-                                <i className="bi bi-cart" id={p.id}>
+                                <p className="cartTextMob" id={p.id}>
                                   Add to Cart
-                                </i>
+                                </p>
                               </div>
                             </div>
                           </div>
