@@ -213,28 +213,30 @@ const YouMayLike = () => {
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
 
-                        
-                        <div className="price-sec" style={{padding: "0 8px 0 20px"}}>
-                          <div className="col-3">
-
                         <div
                           className="price-sec"
                           style={{ padding: "0 8px 0 20px" }}
                         >
-                          <div className="col-2">
+                          <div className="col-3">
+                            <div
+                              className="price-sec"
+                              style={{ padding: "0 8px 0 20px" }}
+                            >
+                              <div className="col-2">
+                                <span className="sp">₹{e.selling_price}</span>
+                              </div>
+                              <div className="col-4">
+                                <del className="mrp">₹{e.mrp}</del>
+                              </div>
+                              <div className="col-4">
+                                <span className="discount">
+                                  {e.discount}% OFF
+                                </span>
+                              </div>
+                            </div>
 
-                            <span className="sp">₹{e.selling_price}</span>
-                          </div>
-                          <div className="col-4">
-                            <del className="mrp">₹{e.mrp}</del>
-                          </div>
-                          <div className="col-4">
-                            <span className="discount">{e.discount}% OFF</span>
-                          </div>
-                        </div>
-
-                        <div className="card-btn-sec ">
-                          {/* {addedToCart ? (
+                            <div className="card-btn-sec ">
+                              {/* {addedToCart ? (
                             <div
                               className="btn_gtc"
                               style={{ cursor: "pointer" }}
@@ -259,18 +261,20 @@ const YouMayLike = () => {
                               </i>
                             </div>
                           )} */}
-                          <div
-                            className="btn_atc"
-                            onClick={() => {
-                              addToCart(e);
+                              <div
+                                className="btn_atc"
+                                onClick={() => {
+                                  addToCart(e);
 
-                              alert("product added to cart successfully");
-                            }}
-                            style={{ cursor: "pointer" }}
-                          >
-                            <i className="bi bi-cart" id={e.id}>
-                              Add to Cart
-                            </i>
+                                  alert("product added to cart successfully");
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <i className="bi bi-cart" id={e.id}>
+                                  Add to Cart
+                                </i>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
