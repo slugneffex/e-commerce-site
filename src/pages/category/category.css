@@ -142,12 +142,12 @@ input[type=checkbox]:checked {
   }
 
   .price-sec .discount {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .price-sec .mrp {
     color: #999999;
-    font-size: 14px;
+    font-size: 10px;
   }
 
   .filterul li {

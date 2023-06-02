@@ -498,7 +498,7 @@ const Category = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-cart" id={e.id}>
+                        <i className="bi bi-cart cartTextMob" id={e.id}>
                           Add to Cart
                         </i>
                       </div>
@@ -559,7 +559,7 @@ const Category = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-cart" id={e.id}>
+                        <i className="bi bi-cart cartTextMob" id={e.id}>
                           Add to Cart
                         </i>
                       </div>
@@ -1205,7 +1205,7 @@ const Category = () => {
                     <strong>Top Trending</strong>
                   </h4>
                 </div>
-                <div className="col-6" style={{ textAlign: "end" }}>
+                <div className="col-6 desktop" style={{ textAlign: "end" }}>
                   <div className="" style={{}}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -1282,7 +1282,7 @@ const Category = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <span>{p.name.substring(0, 20)}</span>
                             </div>
                             {/* <div>
                               <span className="packof">(Pack of 2)</span>
@@ -1308,7 +1308,7 @@ const Category = () => {
                                 }}
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="bi bi-cart" id={p.id}>
+                                <i className="bi bi-cart cartTextMob" id={p.id}>
                                   Add to Cart
                                 </i>
                               </div>
@@ -1380,7 +1380,7 @@ const Category = () => {
                                 }}
                                 style={{ cursor: "pointer" }}
                               >
-                                <i className="bi bi-cart" id={p.id}>
+                                <i className="bi bi-cart cartTextMob" id={p.id}>
                                   Add to Cart
                                 </i>
                               </div>
