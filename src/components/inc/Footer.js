@@ -8,6 +8,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../features/actions/categoriesActions";
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
+import { AiOutlineArrowUp } from "react-icons/ai"
 
 const Footer = () => {
 
@@ -232,10 +233,18 @@ const Footer = () => {
                   bottom: "52px",
                 }}
               >
-                <div className="how-we-help">
-                  <i className="bi bi-headset"></i>
-                  <h2>How may we help you</h2>
+              </div>
+            </div>
+            <div className="fixed-bottom">
+              <Link to="#">
+                <div style={{ position: "absolute", right: "30px", bottom: "60px", backgroundColor: "#ebebeb", textAlign: "center", fontSize: "30px", color: "#464646", width: "50px", height: "50px", borderRadius: "50%" }}>
+                  <AiOutlineArrowUp />
                 </div>
+              </Link>
+
+              <div className="how-we-help" style={{ width: "280px",marginRight: "10px", alignItems: "center" }}>
+                <i className="bi bi-headset"></i>
+                <h5>How may we help you</h5>
               </div>
             </div>
           </div>
