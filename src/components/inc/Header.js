@@ -702,8 +702,22 @@ const Header = () => {
                     <ul style={{ paddingLeft: "0" }}>
                       {/* Home Link */}
                       <li>
-                        <Link to="/">Home</Link>
-                        <hr />
+                        {/* <form
+                          className="d-flex search mx-auto"
+                          style={{ width: "95vw" }}
+                          onSubmit={(e) => submit(e)}
+                        >
+                          <input
+                            id="search"
+                            className="form-control"
+                            type="search"
+                            name="search"
+                            placeholder="Search over 4,000+ Products"
+                            aria-label="Search"
+                            value={data.search}
+                            onChange={(e) => handle(e)}
+                          ></input>
+                        </form> */}
                       </li>
 
                       {/* Category Part */}
