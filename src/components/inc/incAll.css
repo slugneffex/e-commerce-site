@@ -376,6 +376,11 @@ option {
     .getApp {
         font-size: 9px;
     }
+    
+
+    .wcc .cartImg {
+        width: 45%;
+    }
 
 
     .saleSection a {

@@ -919,7 +919,7 @@ const Header = () => {
                     }}
                   >
                     <Link to="/Cart">
-                      <img src="./assets/img/cartImg.svg" alt="" />
+                      <img className="cartImg" src="./assets/img/cartImg.svg" alt="" />
                     </Link>
                     <strong
                       style={{
