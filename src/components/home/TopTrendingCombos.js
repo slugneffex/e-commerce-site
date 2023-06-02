@@ -163,12 +163,12 @@ const TopTrendingCombos = () => {
           {Array.isArray(toppicks) &&
             toppicks.map((e) => (
               <div key={e.id} style={{ width: "100%" }}>
-                <div style={{ marginLeft:"10px", marginRight: "10px"}}>
+                <div >
                   {e.brand_id && (
                     <Link  to={`/brand/${e.brand_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
-                        width="95%"
+                        width="95%%"
                         alt={e.name}
                       />
                     </Link>

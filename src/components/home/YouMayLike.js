@@ -58,7 +58,7 @@ const YouMayLike = () => {
     image: "",
     mrp: "",
     discount: "",
-    slug:"",
+    slug: "",
   };
 
   const addToCart = (e) => {
@@ -121,10 +121,12 @@ const YouMayLike = () => {
     if (isInCart(productId)) {
       return (
         <div className="btn_gtc" style={{ cursor: "pointer" }}>
-          <Link className="cartTextMob" to="/cart" style={{ color: "#05A856" }}>
-            Go to Cart
-          </Link>
-          <i className="bi bi-arrow-right"></i>
+          <p>
+            <Link className="cartTextMob" to="/cart" style={{ color: "#05A856" }}>
+              Go to Cart
+            </Link>
+            <i className="bi bi-arrow-right"></i>
+          </p>
         </div>
       );
     } else {
@@ -143,7 +145,7 @@ const YouMayLike = () => {
               Add to Cart
             </i>
           </div>
-        
+
         </>
       );
     }
@@ -243,7 +245,7 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{e.name.substring(0, 18) + "..."}</span>
+                          <span>{e.name.substring(0, 25) + "..."}</span>
                         </div>
                         <div className="packOfDiv">
                           <span className="packof">(Pack of {e.packqty})</span>
@@ -271,7 +273,7 @@ const YouMayLike = () => {
                               onClick={() => {
                                 addToCart(e);
 
-                              
+
                               }}
                               style={{ cursor: "pointer" }}
                             >

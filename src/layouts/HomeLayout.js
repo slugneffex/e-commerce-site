@@ -7,7 +7,7 @@ import Footer from '../components/inc/Footer';
 const HomeLayout = ({children}) => {
   
   return (
-    <div style={{ width: "100vw"}}>
+    <div style={{ width: "100vw",overflowX:"hidden"}}>
         <main>
             <Header></Header>
                 {children}
