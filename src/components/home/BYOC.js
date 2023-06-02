@@ -26,7 +26,7 @@ const Categories = () => {
           {Array.isArray(byoc) &&
           byoc.map((e) => (
             <div className="byoc" key={e.myoc_banner?.id}>
-              <Link to={`/make-your-own-combo`}>
+              <Link to={`/view-all-products`}>
                 <img
                   src={e.myoc_banner?.original_url}
                   className="byocImg"

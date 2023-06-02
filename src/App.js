@@ -71,7 +71,7 @@ const App = () => {
       <Route path="/thanks" element={<Thanks />} />
       <Route path="/Signup" element={<SignUp />} />
       <Route path="Signin" element={<SignIn />} />
-      <Route path="/make-your-own-combo" element={<MYOC />} />
+      <Route path="/view-all-products" element={<MYOC />} />
       <Route path="/combos" element={<AllCombos />} />
       <Route path="/latestPros" element={<AllBrand />} />
       <Route path="/EmptyCart" element={<Emptycart />} />

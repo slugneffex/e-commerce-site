@@ -34,7 +34,7 @@ const MYOC = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/make-your-own-combo?page=${pageNumber}`,
+        `${process.env.REACT_APP_BASE_URL}/view-all-products?page=${pageNumber}`,
         options
       );
       const newData = response.data.data;
