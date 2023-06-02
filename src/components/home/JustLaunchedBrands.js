@@ -129,7 +129,7 @@ const JustLaunchedBrands = () => {
                       <Link  to={`${e.link}`}>
                         <img
                           src={e.thumbnail?.original_url}
-                          width="80%"
+                          width="95%"
                           alt={e.name}
                         />
                       </Link>

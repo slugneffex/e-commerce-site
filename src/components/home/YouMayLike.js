@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight } from "react-icons/ai"
 import {
   addCartProduct,
@@ -39,7 +39,15 @@ const responsive = {
 
 const YouMayLike = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [addedToCart, setAddedToCart] = useState(false);
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //    navigate("/signin")
+  //    alert("login please")
+  //   }  
+  // });
 
   const { youmaylike } = useSelector((state) => state.youmaylike);
 

@@ -111,7 +111,7 @@ const ForHim = () => {
                     <Link  to={`${e.link}`}>
                       <img
                         src={e.banner?.original_url}
-                        width="80%"
+                        width="95%"
                         alt={e.name}
                       />
                     </Link>

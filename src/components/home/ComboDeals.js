@@ -71,7 +71,7 @@ const ComboDeals = () => {
               <div key={e.id}>
               
                   <Link  to={`${e.link}`}>
-                    <img src={e.thumbnail?.url} width="80%" alt={e.name} />
+                    <img src={e.thumbnail?.url} width="95%" alt={e.name} />
                   </Link>
              
                 {/* {e.product_id && (

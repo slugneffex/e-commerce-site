@@ -9,9 +9,9 @@ import { fetchByoc } from "../features/actions/byocActions";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchStore } from "../features/actions/storeAction";
 import { fetchPage } from "../features/actions/pageActions";
-import {RiShoppingBag3Line} from "react-icons/ri"
-import {CiHeart } from "react-icons/ci"
-import {VscAccount } from "react-icons/vsc"
+import { RiShoppingBag3Line } from "react-icons/ri"
+import { CiHeart } from "react-icons/ci"
+import { VscAccount } from "react-icons/vsc"
 
 
 const Header = () => {
@@ -172,14 +172,7 @@ const Header = () => {
                 </button>
               </div>
               <div className="col-md-2 saleSection" style={{ paddingTop: "5px", position: "relative" }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="32" viewBox="0 0 23 32">
-                  <path id="Path_1699" data-name="Path 1699" d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z" transform="translate(-6.5 -2)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-
-                </svg>
-
-                <svg style={{ position: "absolute", left: "68px", bottom: "10px" }} xmlns="http://www.w3.org/2000/svg" width="13" height="2" viewBox="0 0 13 2">
-                  <line id="Line_116" data-name="Line 116" x2="11" transform="translate(1 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" />
-                </svg>
+                <img src="./assets/img/phoneIcon.svg" alt="" />
 
 
                 <Link className="text-white text-align: left; getApp" to="/">
@@ -208,11 +201,10 @@ const Header = () => {
                   />
                 </svg>
 
-                <a style={{ color: "#A2A2A2" }}
+                <Link style={{ color: "#A2A2A2" }}
                   className="text-white helpText"
-                  href="mailto:customercare@combonation.in"
-                >
-                  Help</a>
+                  to="/help">
+                  Help</Link>
 
               </div>
             </div>
@@ -465,17 +457,17 @@ const Header = () => {
                   <ul
                     className="navbar-nav ml-auto"
                     id="navbar-right"
-                    style={{ marginLeft: "auto",alignItems: "center" }}
+                    style={{ marginLeft: "auto", alignItems: "center" }}
                   >
                     <li className="nav-item">
                       <Link to="/signin" className="rightPartOfNav">
-                      <VscAccount style={{ fontSize: "30px"}}/>
-                        <span style={{ marginLeft: "4px",fontSize: "15px"}}>Account</span>
+                        <img src="./assets/img/profileIcon.svg" alt="" />
+                        <span style={{ marginLeft: "4px", fontSize: "15px" }}>Account</span>
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link to="/Wishlist" className="rightPartOfNav">
-                        <CiHeart style={{ fontSize: "40px",color:"#464646" }} />
+                        <img src="./assets/img/wishlistIcon.svg" alt="" />
                         {/* <span>Wishlist</span> */}
                       </Link>
                     </li>
@@ -487,7 +479,7 @@ const Header = () => {
                         // className="nav-link"
                         style={{ position: "relative" }}
                       >
-                        <RiShoppingBag3Line style={{ fontSize: "30px" }}/>
+                        <img src="./assets/img/cartImg.svg" alt="" />
                         <strong
                           className="desktop"
                           style={{
@@ -572,18 +564,11 @@ const Header = () => {
                 }}
               >
                 <div className="getAppSection" style={{ display: "flex" }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="32" viewBox="0 0 23 32">
-                    <path id="Path_1699" data-name="Path 1699" d="M10.5,3h15a3,3,0,0,1,3,3V30a3,3,0,0,1-3,3h-15a3,3,0,0,1-3-3V6a3,3,0,0,1,3-3Z" transform="translate(-6.5 -2)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-
-                  </svg>
-
-                  <svg style={{ position: "absolute", bottom: "2px", left: "2.5px", width: "5px" }} xmlns="http://www.w3.org/2000/svg" width="13" height="2" viewBox="0 0 13 2">
-                    <line id="Line_116" data-name="Line 116" x2="11" transform="translate(1 1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" />
-                  </svg>
+                  <img src="./assets/img/phoneIcon.svg" width="20%" />
 
 
 
-                  <Link className="text-white text-align: left; getApp" to="/">
+                  <Link className="text-white getApp" to="/">
                     Get App
                   </Link>
                 </div>
@@ -919,7 +904,7 @@ const Header = () => {
                     }}
                   >
                     <Link to="/Cart">
-                      <i className="bi bi-cart" style={{ fontSize: "15px" }} />
+                      <img src="./assets/img/cartImg.svg" alt="" />
                     </Link>
                     <strong
                       style={{
