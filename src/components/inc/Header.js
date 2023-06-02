@@ -274,7 +274,7 @@ const Header = () => {
                         role="button"
                         aria-expanded="false"
                       >
-                        CATEGORIES
+                        Categories
                       </Link>
                       <ul
                         className="dropdown-menu"
@@ -326,7 +326,7 @@ const Header = () => {
                         role="button"
                         aria-expanded="false"
                       >
-                        BRANDS
+                        Brands
                       </Link>
 
                       {/* brand dropdown */}
@@ -374,7 +374,7 @@ const Header = () => {
                         // data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        <i className="bi bi-geo-alt"></i> LOCATE MY STORES
+                        <i className="bi bi-geo-alt"></i> Locate My Stores
                       </Link>
                       <ul className="dropdown-menu" id="stores-menu">
                         {store.map((e) => (
