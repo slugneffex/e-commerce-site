@@ -9,15 +9,13 @@ import { fetchByoc } from "../features/actions/byocActions";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchStore } from "../features/actions/storeAction";
 import { fetchPage } from "../features/actions/pageActions";
-import { RiShoppingBag3Line } from "react-icons/ri"
-import { CiHeart } from "react-icons/ci"
-import { VscAccount } from "react-icons/vsc"
-import {AiOutlineSearch} from "react-icons/ai"
-
+import { RiShoppingBag3Line } from "react-icons/ri";
+import { CiHeart } from "react-icons/ci";
+import { VscAccount } from "react-icons/vsc";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Header = () => {
   const dispatch = useDispatch();
-
 
   // set a cookie with SameSite=None and Secure attributes
   Cookies.set("myCookie", "cookieValue", { sameSite: "none", secure: true });
@@ -145,8 +143,6 @@ const Header = () => {
     return pageCategories.show_with_category === "on";
   });
 
-
-
   return (
     <div>
       <header className="my-auto desktop">
@@ -165,16 +161,28 @@ const Header = () => {
                 </Link>
               </div>
 
-              <div className="col-md-2 getAppSection pt-0" >
-                <button style={{ backgroundColor: "#000", border: "none", borderRadius: "4px",height: "31px",fontWeight: "400" ,position:"absolute", top:"4px" }}>
+              <div className="col-md-2 getAppSection pt-0">
+                <button
+                  style={{
+                    backgroundColor: "#000",
+                    border: "none",
+                    borderRadius: "4px",
+                    height: "31px",
+                    fontWeight: "400",
+                    position: "absolute",
+                    top: "4px",
+                  }}
+                >
                   <Link style={{ color: "#fff" }} to="/why-choose-combonation">
                     Why COMBONATION?
                   </Link>
                 </button>
               </div>
-              <div className="col-md-2 saleSection" style={{ paddingTop: "5px", position: "relative" }}>
+              <div
+                className="col-md-2 saleSection"
+                style={{ paddingTop: "5px", position: "relative" }}
+              >
                 <img src="./assets/img/phoneIcon.svg" alt="" />
-
 
                 <Link className="text-white text-align: left; getApp" to="/">
                   Get App
@@ -202,11 +210,13 @@ const Header = () => {
                   />
                 </svg>
 
-                <Link style={{ color: "#A2A2A2" }}
+                <Link
+                  style={{ color: "#A2A2A2" }}
                   className="text-white helpText"
-                  to="/help">
-                  Help</Link>
-
+                  to="/help"
+                >
+                  Help
+                </Link>
               </div>
             </div>
           </div>
@@ -249,7 +259,6 @@ const Header = () => {
                     aria-label="Search"
                     value={data.search}
                     onChange={(e) => handle(e)}
-
                   ></input>
                 </form>
                 <div
@@ -264,7 +273,6 @@ const Header = () => {
                         id="navbarDropdown"
                         role="button"
                         aria-expanded="false"
-
                       >
                         CATEGORIES
                       </Link>
@@ -317,7 +325,6 @@ const Header = () => {
                         id="navbarDropdown"
                         role="button"
                         aria-expanded="false"
-
                       >
                         BRANDS
                       </Link>
@@ -366,7 +373,6 @@ const Header = () => {
                         role="button"
                         // data-bs-toggle="dropdown"
                         aria-expanded="false"
-
                       >
                         <i className="bi bi-geo-alt"></i> LOCATE MY STORES
                       </Link>
@@ -463,7 +469,9 @@ const Header = () => {
                     <li className="nav-item">
                       <Link to="/signin" className="rightPartOfNav">
                         <img src="./assets/img/profileIcon.svg" alt="" />
-                        <span style={{ marginLeft: "4px", fontSize: "15px" }}>Account</span>
+                        <span style={{ marginLeft: "4px", fontSize: "15px" }}>
+                          Account
+                        </span>
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -552,7 +560,9 @@ const Header = () => {
                   // to="/account"
                   className="whyChooseCombonation"
                 >
-                  <p className="my-auto blink">Get Extra 10% OFF on Your First Order</p>
+                  <p className="my-auto blink">
+                    Get Extra 10% OFF on Your First Order
+                  </p>
                 </Link>
               </div>
               <div
@@ -561,13 +571,11 @@ const Header = () => {
                   justifyContent: "space-between",
                   height: "2rem",
                   alignItems: "center",
-                  position: "relative"
+                  position: "relative",
                 }}
               >
                 <div className="getAppSection" style={{ display: "flex" }}>
                   <img src="./assets/img/phoneIcon.svg" width="20%" />
-
-
 
                   <Link className="text-white getApp" to="/">
                     Get App
@@ -607,11 +615,13 @@ const Header = () => {
                     />
                   </svg>
 
-                  <a style={{ color: "#A2A2A2" }}
+                  <a
+                    style={{ color: "#A2A2A2" }}
                     className="text-white helpText"
                     href="mailto:customercare@combonation.in"
                   >
-                    Help</a>
+                    Help
+                  </a>
 
                   {/* <Link to="/help" className="text-white helpText">
                     Help
@@ -684,7 +694,7 @@ const Header = () => {
                             ></img>
                           </Link>
                         ))} */}
-                        <h1>Why choose combonaition?</h1>
+                      <h1>Why Choose Combonation?</h1>
 
                       <button
                         type="button"
@@ -709,9 +719,8 @@ const Header = () => {
                           style={{ width: "95vw" }}
                           onSubmit={(e) => submit(e)}
                         >
-                          <AiOutlineSearch/>
+                          <AiOutlineSearch />
                           <input
-                          
                             id="search"
                             className="form-control"
                             type="search"
@@ -725,7 +734,7 @@ const Header = () => {
                           </input>
                         </form>
                       </li>
-                      <hr/>
+                      <hr />
 
                       {/* Category Part */}
 
@@ -736,7 +745,8 @@ const Header = () => {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>CATEGORIES</Link>
+                        {/* <Link>Categories</Link> */}
+                        <h5 className="ofcanvas-text">Categories</h5>
                         <hr />
                       </li>
 
@@ -779,7 +789,6 @@ const Header = () => {
                                 />
                               </Link>
                             </div>
-
                           ))}
                         </div>
                       </div>
@@ -793,8 +802,8 @@ const Header = () => {
                         // aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>BRANDS</Link>
-
+                        {/* <Link>Brands</Link> */}
+                        <h5 className="ofcanvas-text">Brands</h5>
                         <hr />
                       </li>
 
@@ -835,7 +844,8 @@ const Header = () => {
                         aria-expanded="false"
                         aria-controls="collapseExample"
                       >
-                        <Link>STORES</Link>
+                        {/* <Link>Stores</Link> */}
+                        <h5 className="ofcanvas-text">Stores</h5>
                         <hr />
                       </li>
 
@@ -848,7 +858,84 @@ const Header = () => {
                           ))}
                         </div>
                       </div>
+                      {/* my Account part */}
+                      <li
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample4"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                      >
+                        {/* <Link>My Account</Link> */}
+                        <h5 className="ofcanvas-text">My Account</h5>
+
+                        <hr />
+                      </li>
+
+                      <div className="collapse" id="collapseExample4">
+                        <div className="card card-body">
+                          <ul>
+                            <li style={{ marginTop: "0.5rem" }}>
+                              <Link to="/Acccount">My Profile</Link>
+                            </li>
+
+                            <li style={{ marginTop: "0.5rem" }}>
+                              <Link to="/place">My Address</Link>
+                            </li>
+                            <li style={{ marginTop: "0.5rem" }}>
+                              <Link to="/Wishlist">My Wishlist</Link>
+                            </li>
+                            <li style={{ marginTop: "0.5rem" }}>
+                              <Link to="Orders">My Orders</Link>
+                            </li>
+                            <li style={{ marginTop: "0.5rem" }}>
+                              <Link to="/">Logout</Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </ul>
+                    <div style={{ display: "flex", alignItems:"center" }}>
+                      <h5 className="ofcanvas-text">Follow us at:</h5>
+                      <ul style={{ display: "flex" , justifyContent:"space-between", width:150}}>
+                        <li>
+                          <Link
+                            href="https://www.facebook.com/profile.php?id=100078539967313"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <i
+                              className="bi bi-facebook"
+                              style={{ fontSize: "30px" }}
+                            ></i>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="https://instagram.com/combonation_in"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <i
+                              className="bi bi-instagram"
+                              style={{ fontSize: "30px" }}
+                            ></i>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="https://www.linkedin.com/company/combo-nation/mycompany"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <i
+                              className="bi bi-linkedin"
+                              style={{ fontSize: "30px" }}
+                            ></i>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -925,7 +1012,11 @@ const Header = () => {
                     }}
                   >
                     <Link to="/Cart">
-                      <img className="cartImg" src="./assets/img/cartImg.svg" alt="" />
+                      <img
+                        className="cartImg"
+                        src="./assets/img/cartImg.svg"
+                        alt=""
+                      />
                     </Link>
                     <strong
                       style={{
