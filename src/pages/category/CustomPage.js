@@ -536,22 +536,9 @@ const CustomPage = () => {
                     </Link>
                   </div>
 
-
-                <div className="card-det-sec">
-                  <div className="headingCard pt-3">
-                    <span>{e.name.substring(0, 25) + "..."}</span>
-                  </div>
-                  <div>
-                    <span className="packof">(Pack of 2)</span>
-                  </div>
-                  <div className="price-sec">
-                    <div className="col-4" style={{ textAlign: "end" }}>
-                      <span className="sp">₹{e.selling_price}</span>
-
                   <div className="card-det-sec">
                     <div className="headingCard pt-3">
                       <span>{e.name}</span>
-
                     </div>
                     <div>
                       <span className="packof">(Pack of 2)</span>
@@ -567,21 +554,6 @@ const CustomPage = () => {
                         <span className="discount">{e.discount}% OFF</span>
                       </div>
                     </div>
-
-                  </div>
-                  <div className="card-btn-sec ">
-                    <div
-                      className="btn_atc"
-                      onClick={() => {
-                        addToCart(e);
-                        alert("product added to cart successfully");
-                      }}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <p className="cartTextMob" id={e.id}>
-                        Add to Cart
-                      </p>
-
                     <div className="card-btn-sec ">
                       <div
                         className="btn_atc"
@@ -591,11 +563,10 @@ const CustomPage = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-cart" id={e.id}>
+                        <p className="cartTextMob" id={e.id}>
                           Add to Cart
-                        </i>
+                        </p>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -626,22 +597,9 @@ const CustomPage = () => {
                     </Link>
                   </div>
 
-
-                <div className="card-det-sec">
-                  <div className="headingCard pt-3">
-                    <span>{e.name.substring(0, 25) + "..."}</span>
-                  </div>
-                  <div>
-                    <span className="packof">(Pack of){e.packqty}</span>
-                  </div>
-                  <div className="price-sec">
-                    <div className="col-4" style={{ textAlign: "end" }}>
-                      <span className="sp">₹{e.selling_price}</span>
-
                   <div className="card-det-sec">
                     <div className="headingCard pt-3">
                       <span>{e.name}</span>
-
                     </div>
                     <div>
                       <span className="packof">(Pack of){e.packqty}</span>
@@ -657,21 +615,6 @@ const CustomPage = () => {
                         <span className="discount">{e.discount}% OFF</span>
                       </div>
                     </div>
- 
-                  </div>
-                  <div className="card-btn-sec ">
-                    <div
-                      className="btn_atc"
-                      onClick={() => {
-                        addToCart(e);
-                        alert("product added to cart successfully");
-                      }}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <p className="cartTextMob" id={e.id}>
-                        Add to Cart
-                      </p>
-
                     <div className="card-btn-sec ">
                       <div
                         className="btn_atc"
@@ -681,11 +624,10 @@ const CustomPage = () => {
                         }}
                         style={{ cursor: "pointer" }}
                       >
-                        <i className="bi bi-cart" id={e.id}>
+                        <p className="cartTextMob" id={e.id}>
                           Add to Cart
-                        </i>
+                        </p>
                       </div>
- 
                     </div>
                   </div>
                 </div>
@@ -705,12 +647,13 @@ const CustomPage = () => {
           <h3>Precurated Combo</h3>
         </div>
         <hr />
+        
 
-        {categoriesCombo.map((subArray) => {
+       {categoriesCombo.map((subArray) => {
           if (subArray.length > 0) {
             return (
               <>
-                {subArray.map((p) => (
+                {subArray.map((p) => ( 
                   <div className="col-md-4" key={p.id}>
                     <div className="newComboCart">
                       <div
@@ -746,7 +689,7 @@ const CustomPage = () => {
                       <div className="card-det-sec">
                         <div className="headingCard pt-3 ">
                           {/* <span>{p.name.substring(0, 40)}</span> */}
-                          {p.name && <span>{p.name.substring(0, 25) + "..."}</span>}
+                          {p.name && <span>{p.name.substring(0, 40)}</span>}
                         </div>
                         <div>
                           <span className="packof">(Pack of 2)</span>
@@ -835,7 +778,7 @@ const CustomPage = () => {
                       <div className="card-det-sec">
                         <div className="headingCard pt-3 ">
                           {/* <span>{p.name.substring(0, 40)}</span> */}
-                          {p.name && <span>{p.name.substring(0, 25) + "..."}</span>}
+                          {p.name && <span>{p.name.substring(0, 40)}</span>}
                         </div>
                         <div>
                           <span className="packof">(Pack of 2)</span>
@@ -1574,7 +1517,7 @@ const CustomPage = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 25) + "..."}</span>
+                              <span>{p.name.substring(0, 40)}</span>
                             </div>
                             <div>
                               <span className="packof">(Pack of 2)</span>
@@ -1644,7 +1587,7 @@ const CustomPage = () => {
                                     <div className="headingCard pt-3 ">
                                       {/* <span>{p.name.substring(0, 40)}</span> */}
                                       {p.name && (
-                                        <span>{p.name.substring(0, 25) + "..."}</span>
+                                        <span>{p.name.substring(0, 40)}</span>
                                       )}
                                     </div>
                                     <div>
