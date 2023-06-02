@@ -126,10 +126,12 @@ const CustomPage = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug:"",
   };
   const addToCart = (e) => {
     productObj = {
       id: e.id,
+      slug: e.slug,
       title: e.name,
       price: e.selling_price,
       image: e.meta_img?.url,
@@ -153,11 +155,13 @@ const CustomPage = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug:"",
   };
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
       id: p.id,
+      slug: p.slug,
       title: p.name,
       price: p.selling_price,
       image: p.thumbnail_img?.original_url,

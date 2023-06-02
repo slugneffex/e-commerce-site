@@ -58,11 +58,13 @@ const YouMayLike = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug:"",
   };
 
   const addToCart = (e) => {
     productObj = {
       id: e.id,
+      slug: e.slug,
       title: e.name,
       price: e.selling_price,
       image: e.meta_img?.url,
