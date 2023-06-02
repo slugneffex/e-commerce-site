@@ -166,8 +166,8 @@ const Header = () => {
               </div>
 
               <div className="col-md-2 getAppSection pt-0" >
-                <button style={{ backgroundColor: "#fff", border: "none", borderRadius: "4px" }}>
-                  <Link style={{ color: "#464646" }} to="/why-choose-combonation">
+                <button style={{ backgroundColor: "#000", border: "none", borderRadius: "4px",height: "31px",fontWeight: "400" ,position:"absolute", top:"4px" }}>
+                  <Link style={{ color: "#fff" }} to="/why-choose-combonation">
                     Why COMBONATION?
                   </Link>
                 </button>
@@ -693,7 +693,7 @@ const Header = () => {
                         aria-label="Close"
                         style={{
                           position: "absolute",
-                          right: "22.7rem",
+                          left: "5px",
                           top: "1.6rem",
                         }}
                       />

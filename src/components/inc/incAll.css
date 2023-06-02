@@ -5,8 +5,17 @@ body {
 h1 h2 h3 h4 h5 h6 p {
     font-family: 'Poppins';
 }
+.getAppSection{
+    position: relative;
+}
 
-
+#navbarDropdown{
+    font-size: 14px;
+    font-weight: 500
+}
+.categoriesDiv{
+    font-size:13.5px;
+}
 
 .row ul li {
     /* color: #FFF; */
@@ -123,6 +132,7 @@ h1 h2 h3 h4 h5 h6 p {
 
 .search{
     width: 280px;
+    
 }
 
 .bi-search {
@@ -130,6 +140,7 @@ h1 h2 h3 h4 h5 h6 p {
     padding-top: .5rem;
     padding-left: .5rem;
     padding-left: 1rem;
+    
 }
 
 
@@ -189,9 +200,10 @@ h1 h2 h3 h4 h5 h6 p {
 .menu-wrapper {
     width: 890px;
 }
-
+/* fontsize of search over 4000+ products */
 .form-control {
     padding-left: 2.5rem;
+    font-size: 14px !important;
 }
 
 .small-gutters {
