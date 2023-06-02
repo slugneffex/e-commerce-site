@@ -249,8 +249,29 @@ h1 h2 h3 h4 h5 h6 p {
         font-weight: bold;
     }
 
+    .btn-close {
+        
+                          
+    }
+
+    .icon svg{
+        margin-top: 7px;
+        /* font-weight: bold; */
+        font-size: 23px;
+        margin-right: 7px
+    }
+
+    .offcanvas-header h1{
+        font-size: calc(1.1rem + 1.5vw);
+        margin-top: 40px;
+        margin-bottom: -20px
+    }
+
     #search {
-        margin-right: 0;
+        margin-right: 20px;
+        border: none;
+        outline: none;
+        /* margin-left: -9px; */
     }
 
     #collapseExample4 .search {

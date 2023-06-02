@@ -12,6 +12,7 @@ import { fetchPage } from "../features/actions/pageActions";
 import { RiShoppingBag3Line } from "react-icons/ri"
 import { CiHeart } from "react-icons/ci"
 import { VscAccount } from "react-icons/vsc"
+import {AiOutlineSearch} from "react-icons/ai"
 
 
 const Header = () => {
@@ -692,8 +693,8 @@ const Header = () => {
                         aria-label="Close"
                         style={{
                           position: "absolute",
-                          right: "2rem",
-                          top: "2rem",
+                          right: "22.7rem",
+                          top: "1.6rem",
                         }}
                       />
                     </div>
@@ -702,24 +703,29 @@ const Header = () => {
                   <div className="offcanvas-body">
                     <ul style={{ paddingLeft: "0" }}>
                       {/* Home Link */}
-                      <li>
-                        {/* <form
-                          className="d-flex search mx-auto"
+                      <li className="icon">
+                        <form
+                          className="d-flex search"
                           style={{ width: "95vw" }}
                           onSubmit={(e) => submit(e)}
                         >
+                          <AiOutlineSearch/>
                           <input
+                          
                             id="search"
                             className="form-control"
                             type="search"
                             name="search"
-                            placeholder="Search over 4,000+ Products"
+                            placeholder="Search"
                             aria-label="Search"
                             value={data.search}
                             onChange={(e) => handle(e)}
-                          ></input>
-                        </form> */}
+                          >
+                            {/* <AiOutlineSearch/> */}
+                          </input>
+                        </form>
                       </li>
+                      <hr/>
 
                       {/* Category Part */}
 
