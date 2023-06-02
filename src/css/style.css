@@ -1082,8 +1082,10 @@ ul.additional_links li:after {
     text-align: left;
   }
 
-  .fontMobileSize {
-    font-size: 11px;
+
+
+  .cartTextMob {
+    font-size: 9px;
   }
 
   .col-md-3 {
@@ -1249,13 +1251,13 @@ ul.additional_links li:after {
 
   .mrp {
     color: #999999;
-    font-size: 14px;
+    font-size: 10px;
   }
 
   .discount {
     color: #05a856;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .btn-atc {

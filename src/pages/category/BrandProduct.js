@@ -89,9 +89,8 @@ const BrandProduct = () => {
       (page) => (
         <li className="page-item" key={page}>
           <Link
-            className={`page-link page-number ${
-              pageNumber === page ? "active" : ""
-            }`}
+            className={`page-link page-number ${pageNumber === page ? "active" : ""
+              }`}
             onClick={() => handlePageClick(page)}
           >
             {page}
@@ -273,17 +272,17 @@ const BrandProduct = () => {
 
               <div className="card-det-sec">
                 <div className="headingCard pt-3">
-                  <span>{p.name.substring(0, 40)}</span>
+                  <span>{p.name.substring(0, 25) + "..."}</span>
                 </div>
 
-                <div className="price-sec">
-                  <div className="col-4" style={{ textAlign: "end" }}>
+                <div className="price-sec" style={{ padding: "0 8px 0 20px" }}>
+                  <div className="col-3">
                     <span className="sp">₹{p.selling_price}</span>
                   </div>
                   <div className="col-4">
                     <del className="mrp">₹{p.mrp}</del>
                   </div>
-                  <div className="col-4">
+                  <div className="col-5">
                     <span className="discount">{p.discount}% OFF</span>
                   </div>
                 </div>
@@ -297,7 +296,7 @@ const BrandProduct = () => {
                       cursor: "pointer",
                     }}
                   >
-                    <i className="bi bi-cart" id={p.id}>
+                    <i className="bi bi-cart cartTextMob" id={p.id}>
                       Add to Cart
                     </i>
                   </div>
@@ -402,7 +401,7 @@ const BrandProduct = () => {
                       variant="primary"
                       onClick={handleToggle4}
                       aria-controls="collapseExample"
-                      // aria-expanded={isOpen4}
+                    // aria-expanded={isOpen4}
                     >
                       Category
                       {isOpen4 ? (
@@ -447,7 +446,7 @@ const BrandProduct = () => {
                       variant="primary"
                       onClick={handleToggle5}
                       aria-controls="collapseExample"
-                      // aria-expanded={isOpen5}
+                    // aria-expanded={isOpen5}
                     >
                       Price
                       {isOpen5 ? (
@@ -1042,7 +1041,7 @@ const BrandProduct = () => {
                       <strong>Top Trending</strong>
                     </h4>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 desktop">
                     <div>
                       <div style={{ textAlign: "end" }}>
                         <Dropdown>
@@ -1110,25 +1109,21 @@ const BrandProduct = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3">
-                              <span>{p.name.substring(0, 40)}</span>
+                              <span>{p.name.substring(0, 30) + "..."}</span>
                             </div>
 
-                            <div className="price-sec">
-                              <div
-                                className="col-4"
-                                style={{ textAlign: "end" }}
-                              >
-                                <span className="sp">₹{p.selling_price}</span>
-                              </div>
-                              <div className="col-4">
-                                <del className="mrp">₹{p.mrp}</del>
-                              </div>
-                              <div className="col-4">
-                                <span className="discount">
-                                  {p.discount}% OFF
-                                </span>
-                              </div>
-                            </div>
+
+                            <div className="price-sec" style={{ padding: "0 8px 0 20px" }}>
+                        <div className="col-3">
+                          <span className="sp">₹{p.selling_price}</span>
+                        </div>
+                        <div className="col-4">
+                          <del className="mrp">₹{p.mrp}</del>
+                        </div>
+                        <div className="col-5">
+                          <span className="discount">{p.discount}% OFF</span>
+                        </div>
+                      </div>
                             <div className="card-btn-sec">
                               <div
                                 className="btn_atc"

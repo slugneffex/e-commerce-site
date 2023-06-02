@@ -204,7 +204,7 @@ const BrandProducts = () => {
 
                     <div className="card-det-sec">
                       <div className="headingCard pt-3">
-                        <span>{e.name.substring(0, 30) + "..."}</span>
+                        <span>{e.name.substring(0, 25) + "..."}</span>
                       </div>
                       {/* <div>
                         <span className="packof">(Pack of 2)</span>
@@ -216,7 +216,7 @@ const BrandProducts = () => {
                         <div className="col-4">
                           <del className="mrp">₹{e.mrp}</del>
                         </div>
-                        <div className="col-4">
+                        <div className="col-5">
                           <span className="discount">{e.discount}% OFF</span>
                         </div>
                       </div>
@@ -224,7 +224,7 @@ const BrandProducts = () => {
                       <div className="card-btn-sec ">
                         <div className="btn_atc">
                           <i
-                            className="bi bi-cart"
+                            className="bi bi-cart cartTextMob"
                             onClick={() => {
                               addToSingleCart(e);
                               alert("product added to cart successfully");
