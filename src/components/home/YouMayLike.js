@@ -227,7 +227,7 @@ const YouMayLike = () => {
                           </div>
                         </div>
                         <div className="card-btn-sec ">
-                          {addedToCart ? (
+                          {/* {addedToCart ? (
                             <div
                               className="btn_gtc"
                               style={{ cursor: "pointer" }}
@@ -251,8 +251,8 @@ const YouMayLike = () => {
                                 Add to Cart
                               </i>
                             </div>
-                          )}
-                          {/* <div
+                          )} */}
+                          <div
                             className="btn_atc"
                             onClick={() => {
                               addToCart(e);
@@ -264,7 +264,7 @@ const YouMayLike = () => {
                             <i className="bi bi-cart" id={e.id}>
                               Add to Cart
                             </i>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                     </div>
