@@ -245,6 +245,8 @@ const BrandProduct = () => {
     navigate(`/brand/${brandId}`);
   }
 
+  
+
   let singlebrandProduct = null;
   if (brandproduct.length >= 1) {
     singlebrandProduct = (
@@ -814,11 +816,11 @@ const BrandProduct = () => {
                             //   <input
                             //     type="checkbox"
                             //     name="brand"
-                            //     id={`brand_${brand.id}`}
-                            //     value={brand.id}
+                            //     value={brand.slug}
+                            //     onChange={handleCheckboxChange}
+                               
                             //     className="form-check-input"
-                            //     checked={selectedBrands.includes(brand.id)}
-                            //     onChange={handleBrandSelection}
+                              
 
                             //   />
                             // </div>
