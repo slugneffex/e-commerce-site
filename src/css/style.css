@@ -1252,6 +1252,10 @@ ul.additional_links li:after {
     
     line-height: 1;
   }
+
+  .row .col-md-6 {
+    min-width: 280px;
+  }
   
 
   .packof {
@@ -1411,6 +1415,8 @@ a {
   .btn_atc {
     padding: 10px;
   }
+
+  
 
   .btn_atc li {
     font-size: 10px;
