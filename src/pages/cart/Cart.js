@@ -626,14 +626,14 @@ const Cart = () => {
               <li className="cart-item" key={product.id}>
                 <div className="row">
                   <div className="col-3">
-                    <Link to={`/combo/${product.id}`}>
+                    <Link to={`/combo/${product.slug}`}>
                       <img src={product.image} alt={product.title} />
                     </Link>
                   </div>
 
                   <div className="col-6">
                     <div className="det">
-                      <Link to={`/combo/${product.id}`}>
+                      <Link to={`/combo/${product.slug}`}>
                         <h6>{product.title}</h6>
                       </Link>
 
@@ -790,9 +790,9 @@ const Cart = () => {
           <ul className="cart-list">
             {singleCartItems.map((products, Singleindex) => (
               <li className="cart-item" key={products.id}>
-                <div className="row">
+                <div className="row"> 
                   <div className="col-3">
-                    <Link to={`/product/${products.id}`}>
+                    <Link to={`/product/${products.slug}`}>
                       <img src={products.image} alt="W" />
                     </Link>
                   </div>

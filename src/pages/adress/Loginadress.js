@@ -9,11 +9,7 @@ import { clearSingleCart } from "../../components/features/SingleCartSlice";
 import { clearComboCart } from "../../components/features/useCartSlice";
 import { useDispatch } from "react-redux";
 
-
 const Loginadress = () => {
-
-  
-  
   // Card Pricing details
   // Single Product Cart
   const dispatch = useDispatch();
@@ -312,9 +308,7 @@ const Loginadress = () => {
     freebiesItems: [...freebiescartItems],
   };
 
-
-  const [ loading, setLoading ] = useState(false);
-
+  const [loading, setLoading] = useState(false);
 
   // Order Validate
 
@@ -325,7 +319,7 @@ const Loginadress = () => {
   const payment_method = transaction_id ? "prepaid" : "cod";
 
   const sendOrder = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/order-validate`,
@@ -355,7 +349,7 @@ const Loginadress = () => {
         }
       )
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         // alert(res.data.message);
 
         navigate("/thanks");
@@ -364,7 +358,6 @@ const Loginadress = () => {
         dispatch(clearSingleCart());
         localStorage.removeItem("transaction_id");
       });
-     
   };
 
   if (error) {
