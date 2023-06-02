@@ -1082,6 +1082,10 @@ ul.additional_links li:after {
     text-align: left;
   }
 
+  .fontMobileSize {
+    font-size: 11px;
+  }
+
   .col-md-3 {
     width: 50%;
     /* margin: 0.5rem; */
