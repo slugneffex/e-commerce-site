@@ -799,7 +799,7 @@ const Cart = () => {
 
                   <div className="col-6">
                     <div className="det">
-                      <Link to={`/product/${products.id}`}>
+                      <Link to={`/product/${products.slug}`}>
                         <h6>{products.title}</h6>
                       </Link>
                       <br />

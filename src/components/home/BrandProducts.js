@@ -11,7 +11,7 @@ import {
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
 import { useDispatch } from "react-redux";
-import { AiOutlineArrowRight } from "react-icons/ai"
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const responsive = {
   superLargeDesktop: {
@@ -79,10 +79,10 @@ const BrandProducts = () => {
 
     handleResize(); // Initial check on component mount
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -96,11 +96,13 @@ const BrandProducts = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug:"",
   };
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
       id: p.id,
+      slug: p.slug,
       title: p.name,
       price: p.selling_price,
       image: p.thumbnail_img?.original_url,
@@ -140,21 +142,14 @@ const BrandProducts = () => {
     return console.log(error);
   }
 
-
-
-
-
-
   return (
     <>
       <section>
         <div className="top-trending container">
-
           <div className="row" style={{ alignItems: "center" }}>
             <div className="col-6 top-trending-head">
               <h3 className="mobileFont">Products From Latest Brands</h3>
             </div>
-
 
             <div className="col-6 viewAllButton">
               <div className="viewAllBtn">
@@ -209,7 +204,10 @@ const BrandProducts = () => {
                       {/* <div>
                         <span className="packof">(Pack of 2)</span>
                       </div> */}
-                      <div className="price-sec" style={{ padding: "0 8px 0 20px" }}>
+                      <div
+                        className="price-sec"
+                        style={{ padding: "0 8px 0 20px" }}
+                      >
                         <div className="col-3">
                           <span className="sp">₹{e.selling_price}</span>
                         </div>
@@ -222,13 +220,15 @@ const BrandProducts = () => {
                       </div>
 
                       <div className="card-btn-sec ">
-                        <div className="btn_atc">
+                        <div
+                          className="btn_atc"
+                          onClick={() => {
+                            addToSingleCart(e);
+                            alert("product added to cart successfully");
+                          }}
+                        >
                           <i
                             className="bi bi-cart cartTextMob"
-                            onClick={() => {
-                              addToSingleCart(e);
-                              alert("product added to cart successfully");
-                            }}
                             id={e.id}
                             style={{ cursor: "pointer" }}
                           >

@@ -173,11 +173,13 @@ const SubCategory = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug:"",
   };
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
       id: p.id,
+      slug: p.slug,
       title: p.name,
       price: p.selling_price,
       image: p.thumbnail_img?.original_url,

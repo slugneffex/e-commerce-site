@@ -36,7 +36,7 @@ import { fetchBrand } from "../../components/features/actions/brandActions";
 
 const Category = () => {
   const dispatch = useDispatch();
- 
+
   const navigate = useNavigate();
   const { slug } = useParams();
 
@@ -55,7 +55,7 @@ const Category = () => {
   const [checkedFilters, setCheckedFilters] = useState({});
   const [displayedPages, setDisplayedPages] = useState([]);
   const [banner, setBanner] = useState([]);
-  const [subCat,setSubCat] = useState([])
+  const [subCat, setSubCat] = useState([]);
 
   // const [noProduct, setNoProduct] = useState(false);
 
@@ -90,7 +90,7 @@ const Category = () => {
           options
         );
         setBanner(response.data.data.category);
-        setSubCat(response.data.data.subcats)
+        setSubCat(response.data.data.subcats);
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);
@@ -282,10 +282,12 @@ const Category = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug: "",
   };
   const addToCart = (e) => {
     productObj = {
       id: e.id,
+      slug: e.slug,
       title: e.name,
       price: e.selling_price,
       image: e.meta_img?.url,
@@ -309,11 +311,13 @@ const Category = () => {
     image: "",
     mrp: "",
     discount: "",
+    slug: "",
   };
 
   const addToSingleCart = (p) => {
     SingleproductObj = {
       id: p.id,
+      slug: p.slug,
       title: p.name,
       price: p.selling_price,
       image: p.thumbnail_img?.original_url,
@@ -1317,7 +1321,8 @@ const Category = () => {
                         </div>
                       </div>
                     ))
-                  : product.map((p) => (
+                  : product &&
+                    product.map((p) => (
                       <div className="col-md-4" key={p.id}>
                         <div className="newComboCart">
                           <div
