@@ -19,27 +19,6 @@ const Footer = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  // const [categories, setCategories] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_BASE_URL}/categories`,
-  //       options
-  //     );
-  //     setCategories(response.data);
-  //   }
-  //   fetchData();
-  // }, []);
-
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpen3, setIsOpen3] = useState(false);
@@ -77,14 +56,14 @@ const Footer = () => {
               <div className="collapse dont-collapse-sm links" id="collapse_1">
                 <ul>
                   <li>
-                    <Link to="/">About us</Link>
+                    <Link to="/page/about-us">About us</Link>
                   </li>
                   <li>
-                    <a
-                      href="mailto:customercare@combonation.in"
+                    <Link
+                      to="/help"
                     >
                       Help
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <Link to="/">My account</Link>
@@ -130,12 +109,12 @@ const Footer = () => {
                     <i
                       style={{ marginTop: ".5rem" }}
                       className="bi bi-envelope-fill"></i>
-                    <a
+                    <Link
                       style={{ color: "#A2A2A2" }}
                       href="mailto:customercare@combonation.in"
                     >
                       customercare@combonation.in
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <i className="bi bi-geo-alt"></i>301-303, 3rd Floor,
@@ -168,9 +147,9 @@ const Footer = () => {
                 <div className="follow_us">
                   <h5>Follow Us</h5>
                   <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{ fontSize: "30px" }}></i></a></li>
-                    <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{ fontSize: "30px" }}></i></a></li>
-                    <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{ fontSize: "30px" }}></i></a></li>
+                    <li><Link href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{ fontSize: "30px" }}></i></Link></li>
+                    <li><Link href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{ fontSize: "30px" }}></i></Link></li>
+                    <li><Link href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{ fontSize: "30px" }}></i></Link></li>
                   </ul>
                 </div>
               </div>
@@ -280,20 +259,20 @@ const Footer = () => {
                 <div id="collapseExample">
                   <ul>
                     <li style={{ color: "#fff" }}>
-                      <a href="/page/about-us">About us</a>
+                      <Link href="/page/about-us">About us</Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a
+                      <Link
                         href="mailto:customercare@combonation.in"
                       >
                         Help
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="/user/home">My account</a>
+                      <Link href="/user/home">My account</Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="/contact-us">Contacts</a>
+                      <Link href="/contact-us">Contacts</Link>
                     </li>
                   </ul>
                 </div>
@@ -315,34 +294,34 @@ const Footer = () => {
                 <div id="collapseExample">
                   {/* <ul>
                     <li style={{ color: "#fff" }}>
-                      <a href="https://www.combonation.in/category/baby-care-new">
+                      <Link href="https://www.combonation.in/category/baby-care-new">
                         Baby Care
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="https://www.combonation.in/category/beauty">
+                      <Link href="https://www.combonation.in/category/beauty">
                         Beauty
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="https://www.combonation.in/category/gifts-new">
+                      <Link href="https://www.combonation.in/category/gifts-new">
                         Gifts
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="https://www.combonation.in/category/health-and-wellness-new">
+                      <Link href="https://www.combonation.in/category/health-and-wellness-new">
                         Health &amp; Wellness
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="https://www.combonation.in/category/home-and-kitchen-new">
+                      <Link href="https://www.combonation.in/category/home-and-kitchen-new">
                         Home &amp; Kitchen
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
-                      <a href="https://www.combonation.in/category/personal-care-new">
+                      <Link href="https://www.combonation.in/category/personal-care-new">
                         Personal Care
-                      </a>
+                      </Link>
                     </li>
                   </ul> */}
                   <ul>
@@ -374,27 +353,27 @@ const Footer = () => {
                   <ul>
                     <li style={{ color: "#fff" }}>
                       <FiHome />
-                      <a href style={{ marginLeft: "1rem" }}>
+                      <Link href style={{ marginLeft: "1rem" }}>
                         Suite No 301, Third Floor, Good Earth Business Bay,
                         Sector 58, Gurugram Haryana (122011)
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
                       <FiHeadphones />
-                      <a
+                      <Link
                         style={{ marginLeft: "1rem" }}
                         href="tel:+919910722205"
                       >
                         9910722205
-                      </a>
+                      </Link>
                     </li>
                     <li style={{ color: "#fff" }}>
                       <HiOutlineMail />
-                      <a
+                      <Link
                         href="mailto:customercare@combonation.in"
                       >
                         Help
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -433,9 +412,9 @@ const Footer = () => {
                   <div className="follow_us">
                     <h5>Follow Us</h5>
                     <ul>
-                      <li><a href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{ fontSize: "30px" }}></i></a></li>
-                      <li><a href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{ fontSize: "30px" }}></i></a></li>
-                      <li><a href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{ fontSize: "30px" }}></i></a></li>
+                      <li><Link href="https://www.facebook.com/profile.php?id=100078539967313" target="_blank" rel="noreferrer"><i className="bi bi-facebook" style={{ fontSize: "30px" }}></i></Link></li>
+                      <li><Link href="https://instagram.com/combonation_in" target="_blank" rel="noreferrer"><i className="bi bi-instagram" style={{ fontSize: "30px" }}></i></Link></li>
+                      <li><Link href="https://www.linkedin.com/company/combo-nation/mycompany" target="_blank" rel="noreferrer"><i className="bi bi-linkedin" style={{ fontSize: "30px" }}></i></Link></li>
                     </ul>
                   </div>
                 </div>
@@ -477,13 +456,13 @@ const Footer = () => {
             <div className="col-lg-6">
               <ul className="additional_links">
                 <li>
-                  <a href="/page/terms-of-service">Terms and conditions</a>
+                  <Link href="/page/terms-of-service">Terms and conditions</Link>
                 </li>
                 <li>
-                  <a href="/page/privacy-policy">Privacy Policy</a>
+                  <Link href="/page/privacy-policy">Privacy Policy</Link>
                 </li>
                 <li>
-                  <a href="/page/returns-and-refunds">Returns And Refunds</a>
+                  <Link href="/page/returns-and-refunds">Returns And Refunds</Link>
                 </li>
                 <li>
                   <span>

@@ -36,8 +36,11 @@ import CustomPage from "./pages/category/CustomPage";
 import AllCombos from "./pages/category/AllCombos";
 
 import Help from "./components/Help/Help";
-
+import Terms from "./pages/termsConditions/Terms";
 import AllBrand from "./pages/category/AllBrand";
+import Privacy from "./pages/termsConditions/Privacy";
+import Return from "./pages/termsConditions/Return";
+import About from "./pages/termsConditions/About";
 
 
 
@@ -99,6 +102,10 @@ const App = () => {
       <Route path="/ServerError" element={<ServerError/>}/>
       <Route path="/Expired" element={<Expired/>}/>
       <Route path="/help" element={<Help />}/>
+      <Route path="/page/terms-of-service" element={<Terms />}/>
+      <Route path="/page/privacy-policy" element={<Privacy />}/>
+      <Route path="/page/returns-and-refunds" element={<Return />}/>
+      <Route path="/page/about-us" element={<About />}/>
     </Routes>
     </>
    
