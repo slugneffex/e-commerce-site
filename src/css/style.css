@@ -560,7 +560,7 @@ a {
 
 .youmaylikeboxshadow .react-multiple-carousel__arrow--left {
   position: absolute;
-  /* left: 12px; */
+  left: 12px;
   color: rgb(6, 0, 0);
   background-color: #ebebeb;
   /* border-radius: 0; */
@@ -571,7 +571,7 @@ a {
 
 .youmaylikeboxshadow .react-multiple-carousel__arrow--right {
   position: absolute;
-  /* right: 0; */
+  right: 2px;
   color: #464646;
   background-color: #ebebeb;
   /* border-radius: 0; */
@@ -670,10 +670,6 @@ a {
   .youmaylikeboxshadow .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item .newComboCart:hover {
     /* box-shadow: 1px 1px 1px #C9C9C9 !important; */
     z-index: 9999 !important;
-  }
-
-  .needToBeSetMobile .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item {
-    width: 180px !important;
   }
 
 
@@ -1076,17 +1072,29 @@ ul.additional_links li:after {
   display: none;
 }
 
+.cartTextMob  {
+  font-size: 14px;
+  margin: .5rem 0 !important;
+  font-weight: normal;
+
+}
+
 @media(max-width: 720px) {
   #navbar-right .nav-link {
     display: flex !important;
     text-align: left;
   }
 
-
-
-  .cartTextMob {
-    font-size: 9px;
+  .cartTextMob  {
+    font-size: 14px;
+    margin: 0 !important;
+    font-weight: normal;
+  
   }
+
+
+
+  
 
   .col-md-3 {
     width: 50%;
@@ -1230,18 +1238,25 @@ ul.additional_links li:after {
   display: none;
 }
 
+.priceMargin {
+  margin-right: 10px;
+}
+
+
+
 @media (max-width: 720px) {
-  .headingCard {
+  .headingCard span {
     padding: 8px;
-    font-size: 11px;
+    font-size: 12px;
     color: #464646;
-    max-height: 65px;
-    line-height: 20px;
+    
+    line-height: 1;
   }
+  
 
   .packof {
     color: #999999;
-    font-size: 16px;
+    font-size: 9px;
   }
 
   .sp {
@@ -1258,6 +1273,10 @@ ul.additional_links li:after {
     color: #05a856;
     font-weight: bold;
     font-size: 10px;
+  }
+
+  .priceMargin {
+    margin-right: 4px;
   }
 
   .btn-atc {
@@ -1301,14 +1320,19 @@ ul.additional_links li:after {
 
 .headingCard {
   padding: 15px;
-  font-size: 15px;
+  font-size: 14px;
   color: #464646;
-  height: 75px;
+  height: 35px;
+  line-height: 1.5;
 }
 
 .packof {
   color: #999999;
-  font-size: 16px;
+  font-size: 12px;
+}
+
+.packOfDiv {
+  padding: 5px 5px 0 20px;
 }
 
 .sp {
@@ -1338,11 +1362,9 @@ ul.additional_links li:after {
 .btn_atc {
   border: 1px solid #FE9E2D;
   background-color: #fff9f5;
-  font-weight: bold;
-  padding: .8rem;
+
+  /* padding: .8rem; */
   border-radius: 4px;
-  padding-right: 2rem;
-  padding-left: 2rem;
 }
 
 .btn_atc {

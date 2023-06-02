@@ -33,7 +33,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
+    items: 1.5,
   },
 };
 
@@ -121,7 +121,7 @@ const YouMayLike = () => {
     if (isInCart(productId)) {
       return (
         <div className="btn_gtc" style={{ cursor: "pointer" }}>
-          <Link to="/cart" style={{ color: "#05A856" }}>
+          <Link className="cartTextMob" to="/cart" style={{ color: "#05A856" }}>
             Go to Cart
           </Link>
           <i className="bi bi-arrow-right"></i>
@@ -243,19 +243,19 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{e.name}</span>
+                          <span>{e.name.substring(0, 18) + "..."}</span>
                         </div>
-                        {/* <div>
-                          <span className="packof">(Pack of 2)</span>
-                        </div> */}
+                        <div className="packOfDiv">
+                          <span className="packof">(Pack of {e.packqty})</span>
+                        </div>
                         <div
                           className="price-sec"
                           style={{ padding: "0 8px 0 20px" }}
                         >
-                          <div className="col-3">
+                          <div className="col-2 priceMargin">
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
-                          <div className="col-4">
+                          <div className="col-2 priceMargin">
                             <del className="mrp">₹{e.mrp}</del>
                           </div>
                           <div className="col-4">
@@ -275,10 +275,9 @@ const YouMayLike = () => {
                               }}
                               style={{ cursor: "pointer" }}
                             >
-                              <i className="bi bi-cart cartTextMob
-                              " id={e.id}>
+                              <p className="cartTextMob" id={e.id}>
                                 Add to Cart
-                              </i>
+                              </p>
                             </div>
                           )}
                           {/* <div
