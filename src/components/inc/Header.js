@@ -667,7 +667,7 @@ const Header = () => {
                 >
                   <div className="relative">
                     <div className="offcanvas-header pt-6 px-auto">
-                      {Array.isArray(byoc) &&
+                      {/* {Array.isArray(byoc) &&
                         byoc.map((e) => (
                           <Link
                             className="navbar-brand mx-auto"
@@ -682,7 +682,8 @@ const Header = () => {
                               style={{ width: "100%", height: "50px" }}
                             ></img>
                           </Link>
-                        ))}
+                        ))} */}
+                        <h1>Why choose combonaition?</h1>
 
                       <button
                         type="button"
