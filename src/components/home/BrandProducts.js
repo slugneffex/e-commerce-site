@@ -29,7 +29,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
+    items: 1.5,
   },
 };
 
@@ -158,11 +158,11 @@ const BrandProducts = () => {
 
             <div className="col-6 viewAllButton">
               <div className="viewAllBtn">
-              <Link to={`/latestPros`}>
-                <button>
-                  View All
-                  <AiOutlineArrowRight />
-                </button>
+                <Link to={`/latestPros`}>
+                  <button>
+                    View All
+                    <AiOutlineArrowRight />
+                  </button>
                 </Link>
               </div>
             </div>
@@ -204,13 +204,13 @@ const BrandProducts = () => {
 
                     <div className="card-det-sec">
                       <div className="headingCard pt-3">
-                        <span>{e.name.substring(0, 23) + "..."}</span>
+                        <span>{e.name.substring(0, 30) + "..."}</span>
                       </div>
                       {/* <div>
                         <span className="packof">(Pack of 2)</span>
                       </div> */}
-                      <div className="price-sec">
-                        <div className="col-4" style={{ textAlign: "end" }}>
+                      <div className="price-sec" style={{ padding: "0 8px 0 20px" }}>
+                        <div className="col-3">
                           <span className="sp">₹{e.selling_price}</span>
                         </div>
                         <div className="col-4">
@@ -220,6 +220,7 @@ const BrandProducts = () => {
                           <span className="discount">{e.discount}% OFF</span>
                         </div>
                       </div>
+
                       <div className="card-btn-sec ">
                         <div className="btn_atc">
                           <i
