@@ -215,12 +215,12 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{(e.name)}</span>
+                          <span>{(e.name).substring(0, 30) + "..."}</span>
                         </div>
                         {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-                        
+
                         <div className="price-sec" style={{padding: "0 8px 0 20px"}}>
                           <div className="col-3">
                             <span className="sp">₹{e.selling_price}</span>
@@ -243,7 +243,7 @@ const YouMayLike = () => {
                             }}
                             style={{ cursor: "pointer" }}
                           >
-                            <i className="bi bi-cart" id={e.id}>
+                            <i className="bi bi-cart fontMobileSize" id={e.id}>
                               Add to Cart
                             </i>
                           </div>
