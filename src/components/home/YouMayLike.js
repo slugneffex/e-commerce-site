@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { Link,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineArrowRight } from "react-icons/ai"
 import {
   addCartProduct,
@@ -39,15 +39,7 @@ const responsive = {
 
 const YouMayLike = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [addedToCart, setAddedToCart] = useState(false);
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem("token")) {
-  //    navigate("/signin")
-  //    alert("login please")
-  //   }  
-  // });
 
   const { youmaylike } = useSelector((state) => state.youmaylike);
 
@@ -215,24 +207,22 @@ const YouMayLike = () => {
 
                       <div className="card-det-sec">
                         <div className="headingCard pt-3">
-                          <span>{(e.name).substring(0, 30) + "..."}</span>
+                          <span>{(e.name)}</span>
                         </div>
                         {/* <div>
                           <span className="packof">(Pack of 2)</span>
                         </div> */}
-
                         <div className="price-sec" style={{padding: "0 8px 0 20px"}}>
-                          <div className="col-3">
+                          <div className="col-2">
                             <span className="sp">₹{e.selling_price}</span>
                           </div>
-                          <div className="col-4">
+                          <div className="col-2">
                             <del className="mrp">₹{e.mrp}</del>
                           </div>
                           <div className="col-4">
                             <span className="discount">{e.discount}% OFF</span>
                           </div>
                         </div>
-
                         <div className="card-btn-sec ">
                           <div
                             className="btn_atc"
@@ -243,7 +233,7 @@ const YouMayLike = () => {
                             }}
                             style={{ cursor: "pointer" }}
                           >
-                            <i className="bi bi-cart fontMobileSize" id={e.id}>
+                            <i className="bi bi-cart" id={e.id}>
                               Add to Cart
                             </i>
                           </div>
