@@ -21,7 +21,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 5,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -29,7 +29,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
+    items: 1.5,
   },
 };
 
@@ -208,10 +208,10 @@ const BrandProducts = () => {
                         className="price-sec"
                         style={{ padding: "0 8px 0 20px" }}
                       >
-                        <div className="col-3">
+                        <div className="col-2 priceMargin">
                           <span className="sp">₹{e.selling_price}</span>
                         </div>
-                        <div className="col-4">
+                        <div className="col-2 priceMargin">
                           <del className="mrp">₹{e.mrp}</del>
                         </div>
                         <div className="col-5">
@@ -227,13 +227,13 @@ const BrandProducts = () => {
                             alert("product added to cart successfully");
                           }}
                         >
-                          <i
-                            className="bi bi-cart cartTextMob"
+                          <p
+                            className="cartTextMob"
                             id={e.id}
                             style={{ cursor: "pointer" }}
                           >
                             Add to Cart
-                          </i>
+                          </p>
                         </div>
                       </div>
                     </div>
