@@ -25,7 +25,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 5,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -139,7 +139,7 @@ const YouMayLike = () => {
             }}
             style={{ cursor: "pointer" }}
           >
-            <i className="bi bi-cart" id={productId.id}>
+            <i className="bi bi-cart cartTextMob" id={productId.id}>
               Add to Cart
             </i>
           </div>
@@ -275,7 +275,8 @@ const YouMayLike = () => {
                               }}
                               style={{ cursor: "pointer" }}
                             >
-                              <i className="bi bi-cart" id={e.id}>
+                              <i className="bi bi-cart cartTextMob
+                              " id={e.id}>
                                 Add to Cart
                               </i>
                             </div>
