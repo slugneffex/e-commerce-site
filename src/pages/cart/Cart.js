@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react";
 import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useDispatch, useSelector } from "react-redux";
+
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 import axios from "axios";
 import {
   getCartProducts,
@@ -78,6 +82,23 @@ const Cart = () => {
     navigate("/EmptyCart");
   }
 
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1 // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    }
+  };
+
   // ADD TO WISHLIST
 
   const user_id = localStorage.getItem("id");
@@ -138,7 +159,7 @@ const Cart = () => {
   useEffect(() => {
     if (singlesubAmount >= 7999) {
       freecartAPI();
-    }else {
+    } else {
       setFreeProduct7999(null);
       setFreeProduct8999(null);
     }
@@ -177,10 +198,10 @@ const Cart = () => {
           // Show the free product for autoadd_amount equal to 7999
           // showFreeProduct(level7999);
         }
-      } 
+      }
 
       // Check if total amount is greater than 8999
-      if (singlesubAmount >=8999) {
+      if (singlesubAmount >= 8999) {
         const level7999 = levels.find(
           (level) => level.autoadd_amount === "7999"
         );
@@ -196,8 +217,8 @@ const Cart = () => {
           showFreeProduct(level7999);
           showFreeProduct(level8999);
         }
-       
-      } 
+
+      }
 
       // setCartlevel(response.data);
       // console.log(levels);
@@ -241,7 +262,7 @@ const Cart = () => {
 
   //     // Check if total amount is greater than 8999
   //     if (singlesubAmount > 8999) {
-        
+
   //       // Find the cart level with autoadd_amount equal to 8999
   //       const level8999 = levels.find(
   //         (level) => level.autoadd_amount === "8999"
@@ -267,7 +288,7 @@ const Cart = () => {
     console.log("Free product is available for level:", level);
   };
 
-  
+
 
 
 
@@ -286,7 +307,7 @@ const Cart = () => {
   //       options
   //     );
 
-     
+
   //       setCartlevel(response.data);
   //       console.log(response.data.levels);
 
@@ -447,6 +468,8 @@ const Cart = () => {
           </div>
         </div>
 
+
+
         {/*  mobile */}
         <div className="mobile">
           <div className="signalCart">
@@ -471,8 +494,11 @@ const Cart = () => {
           </div>
         </div>
       </li>
+
     );
   }
+
+
 
   // If Single cart===1 then i have to show the section
 
@@ -780,7 +806,76 @@ const Cart = () => {
       <div className="cartCard py-3">
         <div className="cart-type">
           <h3>Custom Combo</h3> <span>(Total {singletotalCount} Items)</span>
+
         </div>
+
+
+        {/* carousel for freebies */}
+
+
+        <Carousel
+          swipeable={false}
+          draggable={true}
+          arrows={false}
+          // autoPlay
+          autoPlaySpeed={1000}
+          responsive={responsive}
+          infinite
+        >
+
+          <div className="signalCart ">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-10">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+
+
+          <div class="card freebiesCartCard">
+            <div class="card-body" style={{ display: "flex" }}>
+              <div class="card-head">
+                <img src="https://www.combonation.in/storage/34260/646779e7daf6e_8906756657838.jpg" alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green" />
+              </div>
+              <div class="card-main px-3">
+                <h3><strong style={{color: "#009444"}}>Hurray!</strong> You Can Add This Product For Free</h3>
+                <h5 style={{color: "#009444"}}>Noise ColorFit Pro 3 Assist Smart Watch with Alexa Built-in - Smoke Green</h5>
+                <span>MRP: 5999</span>
+
+                <a class="btn">Get Item</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card freebiesCartCard">
+            <div class="card-body" style={{ display: "flex" }}>
+              <div class="card-head">
+                <img src="https://www.combonation.in/storage/34260/646779e7daf6e_8906756657838.jpg" alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green" />
+              </div>
+              <div class="card-main px-3">
+                <h3><strong style={{color: "#009444"}}>Hurray!</strong> You Can Add This Product For Free</h3>
+                <h5 style={{color: "#009444"}}>Noise ColorFit Pro 3 Assist Smart Watch with Alexa Built-in - Smoke Green</h5>
+                <span>MRP: 5999</span>
+
+                <a class="btn">Get Item</a>
+              </div>
+            </div>
+          </div>
+        </Carousel>
+
+
         {/* for freebies */}
         {freebiesDiscountSection}
 
@@ -790,7 +885,7 @@ const Cart = () => {
           <ul className="cart-list">
             {singleCartItems.map((products, Singleindex) => (
               <li className="cart-item" key={products.id}>
-                <div className="row"> 
+                <div className="row">
                   <div className="col-3">
                     <Link to={`/product/${products.slug}`}>
                       <img src={products.image} alt="W" />
@@ -931,6 +1026,8 @@ const Cart = () => {
               </li>
             ))}
           </ul>
+
+
         </div>
       </div>
     );
@@ -967,9 +1064,9 @@ const Cart = () => {
               </div>
 
               <div className="col-md-4 mt-5  overviewMobile">
-                <div class="coupon-sec mb-3 text-center">
+                <div className="coupon-sec mb-3 text-center">
                   <div
-                    class="coupon-card"
+                    className="coupon-card"
                     style={{
                       border: "5px dotted ",
                       width: "100%",
@@ -977,31 +1074,31 @@ const Cart = () => {
                       borderColor: "#fe9e2d",
                     }}
                   >
-                    <div class="card-head">
-                      <div class="tag">
+                    <div className="card-head">
+                      <div className="tag">
                         <i
-                          class="bi bi-tag-fill"
+                          className="bi bi-tag-fill"
                           style={{ fontSize: "30px" }}
                         ></i>
                       </div>
-                      <div class="det">
-                        <span class="use">Use Code</span>
+                      <div className="det">
+                        <span className="use">Use Code</span>
                         <br />
                         <span>SIGNUP10</span>
                       </div>
                     </div>
-                    <div class="vl"></div>
-                    <div class="card-body text-center">
-                      <div class="terms">
+                    <div className="vl"></div>
+                    <div className="card-body text-center">
+                      <div className="terms">
                         <p>SIGNUP10</p>
                       </div>
-                      {/* <div class="offer">
-                         <div class="form-group">
+                      {/* <div className="offer">
+                         <div className="form-group">
                         <form action="https://www.combonation.in/apply-coupon" method="POST">
                         <input type="hidden" name="_token" value="SszM7yPk6R7lrPkjriFCbqypf6GA3Y8v0XD5q55J" />  
                             <input type="text" name="code" value="" required="" hidden=""/>*/}
                       <button type="submit">
-                        Apply Code <i class="bi bi-arrow-right"></i>
+                        Apply Code <i className="bi bi-arrow-right"></i>
                       </button>
                       {/*</form>
                         </div>

@@ -676,7 +676,7 @@ const Header = () => {
                   aria-labelledby="offcanvasExampleLabel"
                   style={{ height: "90vh" }}
                 >
-                  <div className="relative">
+                  {/* <div className="relative"> */}
                     {/* height  235*/}
                     <div className="offcanvas-header pt-6 px-auto">
                       {/* {Array.isArray(byoc) &&
@@ -695,17 +695,20 @@ const Header = () => {
                             ></img>
                           </Link>
                         ))} */}
-                        <div>
-                          <Link to="/why-choose-combonation">
+                        {/* <div> */}
                           <button className="whyc" 
                         style={{
                           position: "absolute",
                           right: "13px",
                           top: "1.6rem",
-                        }}>Why Combonation ?</button>
+                        }}>
+                          <Link to="/why-choose-combonation">
+                          Why Combonation ?
+                        
                           </Link>
+                        </button>
                        
-                        </div>
+                        {/* </div> */}
                       <button
                         type="button"
                         className="btn-close text-reset"
@@ -718,7 +721,7 @@ const Header = () => {
                         }}
                       />
                     </div>
-                  </div>
+                  {/* </div> */}
 
                   <div className="offcanvas-body">
                     <ul style={{ paddingLeft: "0", marginTop: "60px" }}>

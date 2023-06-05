@@ -1243,7 +1243,7 @@ ul.additional_links li:after {
 }
 
 .priceMargin {
-  margin-right: 25px;
+  margin-right: 10px;
 }
 
 
@@ -1326,6 +1326,7 @@ ul.additional_links li:after {
 
 .card-det-sec .price-sec {
   display: flex;
+  align-items: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -1370,8 +1371,18 @@ ul.additional_links li:after {
   text-align: center;
   padding: .8rem;
   border-radius: 4px;
-  padding-right: 2rem;
-  padding-left: 2rem;
+}
+
+.freebiesCartCard {
+  border: 1px solid #FE9E2D;
+  background-color: #fff4e3;
+  box-shadow: none;
+}
+
+.freebiesCartCard img {
+  margin-top: 0;
+  width: 200px;
+  height: auto;
 }
 
 .btn_atc {
