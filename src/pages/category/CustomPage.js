@@ -26,10 +26,9 @@ import {
   getsingleTotalAmount,
   getsingleTotalDiscount,
 } from "../../components/features/SingleCartSlice";
-import { fetchPageproduct } from "../../components/features/actions/pageproductActions";
+
 import Loader from "../../components/home/Loader/Loader";
-// import { fetchPagecategory } from "../../components/features/actions/pagecategoryAction";
-// import { fetchPagebrand } from "../../components/features/actions/pagebrandActions";
+
 import { fetchCategories } from "../../components/features/actions/categoriesActions";
 import { fetchBrand } from "../../components/features/actions/brandActions";
 
@@ -842,7 +841,7 @@ const CustomPage = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasLeft"
                 aria-labelledby="offcanvasLeftLabel"
                 style={{ height: "80%" }}
@@ -887,7 +886,7 @@ const CustomPage = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel"
                 style={{ height: "80%" }}

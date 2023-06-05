@@ -26,7 +26,7 @@ const responsive = {
 
 const SimilarProduct = (props) => {
   // Related Product
-  const id = props.id;
+  const slug = props.id;
   const [related, setRelated] = useState([]);
   const [error, setError] = useState(null);
 
@@ -39,7 +39,7 @@ const SimilarProduct = (props) => {
         },
       };
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combo/${id}`, options);
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/combo/${slug}`, options);
       setRelated(response.data.related);
         
       }catch (error) {
@@ -55,7 +55,7 @@ const SimilarProduct = (props) => {
       
     }
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   if (error) {
     console.log(error)
@@ -74,6 +74,7 @@ const SimilarProduct = (props) => {
             removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
             className=""
           >
+            
             {related.map((e) => (
               <div className="item" key={e.id} style={{ marginRight: "20px" }}>
                 <div className="newComboCart">
@@ -81,7 +82,7 @@ const SimilarProduct = (props) => {
                     <Link className="addtofav">
                       <i className="bi bi-heart" style={{ color: "#464646", position: "absolute", top: ".3rem", right: ".8rem" }}></i>
                     </Link>
-                    <Link to={`/combo/${e.id}`}>
+                    <Link to={`/combo/${e.slug}`}>
                       <img src={e.meta_img?.url} alt="img" width='100%'></img>
                     </Link>
                   </div>

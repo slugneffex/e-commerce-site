@@ -4,7 +4,7 @@ import "./product.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import HomeLayout from "../../layouts/HomeLayout";
-import SimilarProduct from "./SimilarProduct";
+// import SimilarProduct from "./SimilarProduct";
 import axios from "axios";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -127,8 +127,6 @@ const Singleproduct = () => {
       title: "Page Title",
       url: pageUrl,
     };
-
-    
 
     return (
       <>
@@ -774,20 +772,17 @@ const Singleproduct = () => {
               </div>
             </div>
           </div>
-          <div className="row ">
+          {/* <div className="row ">
             <div className="top-trending">
               <div className="top-trending-head text-center">
                 <h3 className="hr-line-head">
                   Explore more from Across the Store
                 </h3>
-                {/* <Link to="#" className="btn_view_all">
-                  View All <i className="bi bi-arrow-right"></i>
-                </Link> */}
               </div>
             </div>
 
             <SimilarProduct id={product.id} />
-          </div>
+          </div> */}
         </div>
       </HomeLayout>
     </div>

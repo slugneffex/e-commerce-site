@@ -56,7 +56,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/Acccount");
+      navigate("/Acccount",-1);
     } else if (localStorage.getItem("gmail-token")) {
       navigate("/Acccount");
     } else if (localStorage.getItem("facebook-token")) {
@@ -134,7 +134,7 @@ const SignIn = () => {
       .then((res) => {
         if (res.data.status === 401) {
           alert(res.data.message);
-          navigate("/Signin");
+          navigate("/Signin"-1);
         } else {
           // alert("Login Successfully");
           localStorage.setItem("name", res.data.user?.name);

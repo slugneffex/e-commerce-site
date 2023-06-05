@@ -403,7 +403,7 @@ const Payment = () => {
                         {parseFloat(totalCartSubAmount).toFixed(0)}
                       </p>
                       {showButton && (
-                        <Link to="/Adress" className="btn">
+                        <Link to="/Address" className="btn">
                          Add Delivery Details
                         </Link>
                       )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -250,7 +250,7 @@ useEffect(() => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasLeft"
                 aria-labelledby="offcanvasLeftLabel"
                 style={{ height: "80%" }}
@@ -295,7 +295,7 @@ useEffect(() => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel"
                 style={{ height: "80%" }}
@@ -937,13 +937,13 @@ useEffect(() => {
                       <li className="breadcrumb-item">
                         <Link to="/">Home</Link>
                       </li>
-                      <li className="breadcrumb-item">
+                      {/* <li className="breadcrumb-item">
                         <Link>Brand</Link>
-                      </li>
+                      </li> */}
                       <li className="breadcrumb-item">
-                        <Link className="categoriesName">Combos</Link>
+                        <Link className="categoriesName">Brands</Link>
                       </li>
-                    </ol>
+                    </ol> 
                   </nav>
                 </div>
                 <div className="byoccBrand">

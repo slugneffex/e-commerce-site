@@ -67,7 +67,7 @@ const Wishlist = () => {
                 </div>
 
                 <div className="row" id="card-secction">
-                  {wishlist.map((e) => (
+                  {wishlist && wishlist.map((e) => (
                     <div className="col-4" key={e.id}>
                       <div className="card">
                         {e.product?.thumbnail_img?.original_url ? (
