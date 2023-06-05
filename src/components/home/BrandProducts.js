@@ -208,15 +208,12 @@ const BrandProducts = () => {
                         className="price-sec"
                         style={{ padding: "0 8px 0 20px" }}
                       >
-                        <div className="col-2 priceMargin">
-                          <span className="sp">₹{Math.round(e.selling_price)}</span>
-                        </div>
-                        <div className="col-2 priceMargin">
-                          <del className="mrp">₹{e.mrp}</del>
-                        </div>
-                        <div className="col-5">
+                        
+                          <span className="sp priceMargin">₹{Math.round(e.selling_price)}</span>
+                      
+                       
+                          <del className="mrp priceMargin">₹{e.mrp}</del>
                           <span className="discount">{e.discount}% OFF</span>
-                        </div>
                       </div>
 
                       <div className="card-btn-sec ">
