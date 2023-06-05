@@ -103,6 +103,7 @@ const ForHim = () => {
             infinite
             centerMode={isCenterMode}
             dotListClass="custom-dot-list-style"
+            showDots={isCenterMode}
           >
             {Array.isArray(forhim) &&
               forhim.map((e) => (

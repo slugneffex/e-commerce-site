@@ -94,7 +94,7 @@ const ForHer = () => {
         </h3>
         <div className="container">
           <Carousel
-            showDots={true}
+            showDots={isCenterMode}
             responsive={responsive}
             arrows={false}
             infinite
