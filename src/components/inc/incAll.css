@@ -278,11 +278,43 @@ h1 h2 h3 h4 h5 h6 p {
         margin-right: 7px
     }
 
-    .offcanvas-header h1{
+    /* .offcanvas-header button{
         font-size: calc(1.1rem + 1.5vw);
         margin-top: 40px;
         margin-bottom: 0px
+    } */
+    .whyc{
+        margin-top: 40px;
+        margin-bottom: 0px;
+        border-radius:9px;
+        border: none;
+        background-color: #ebebeb;
+        color: rgb(6, 0, 0);
+        box-shadow: 2px 2px 4px #e2e2e2;
+        font-size: 12px
     }
+    
+    @keyframes flash {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      .whyc {
+        animation: flash 1.2s infinite;
+      }
+
+      .lis{
+        
+      }
+
+      
 
     #search {
         margin-right: 20px;
