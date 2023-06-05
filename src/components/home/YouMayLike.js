@@ -43,6 +43,7 @@ const YouMayLike = () => {
   const [cartProducts, setCartProducts] = useState([]);
 
 
+
   const { youmaylike } = useSelector((state) => state.youmaylike);
 
   useEffect(() => {
@@ -239,7 +240,9 @@ const YouMayLike = () => {
                             src={e.meta_img?.url}
                             alt="img"
                             width="100%"
-                          ></img>
+                         
+                          />
+                      
                         </Link>
                       </div>
 
