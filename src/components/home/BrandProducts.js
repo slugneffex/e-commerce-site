@@ -199,7 +199,7 @@ const BrandProducts = () => {
 
                     <div className="card-det-sec">
                       <div className="headingCard pt-3">
-                        <span>{e.name.substring(0, 25) + "..."}</span>
+                        <span>{e.name.substring(0, 17) + "..."}</span>
                       </div>
                       {/* <div>
                         <span className="packof">(Pack of 2)</span>
@@ -209,7 +209,7 @@ const BrandProducts = () => {
                         style={{ padding: "0 8px 0 20px" }}
                       >
                         <div className="col-2 priceMargin">
-                          <span className="sp">₹{e.selling_price}</span>
+                          <span className="sp">₹{Math.round(e.selling_price)}</span>
                         </div>
                         <div className="col-2 priceMargin">
                           <del className="mrp">₹{e.mrp}</del>

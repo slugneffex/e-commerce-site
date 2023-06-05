@@ -142,33 +142,33 @@ const TopTrendingCombos = () => {
       </section>
 
       {/* mobile */}
-      <div className="mobile" style={{ maxWidth: "100vw" }}>
+      <div className="mobile">
         <div className="top-trending container">
           <div
             className="top-trending-head"
-            style={{ marginTop: "2rem", marginBottom: "2rem" }}
+            style={{ marginBottom: "2rem" }}
           >
             <h3>Top Picks For You...</h3>
           </div>
         </div>
-        <div className="topPicksCarousel">
+        <div className="topPicksCarousel container" style={{width: "100%"}}>
         <Carousel
           showDots={false}
           responsive={responsive}
           infinite={true}
           autoPlay={true}
           arrows={false}
-          centerMode
+          // centerMode
         >
           {Array.isArray(toppicks) &&
             toppicks.map((e) => (
-              <div key={e.id} style={{ width: "100%" }}>
-                <div >
+              <div key={e.id}>
+                <div>
                   {e.brand_id && (
                     <Link  to={`/brand/${e.brand_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
-                        width="95%%"
+                        width="100%"
                         alt={e.name}
                       />
                     </Link>
@@ -177,7 +177,7 @@ const TopTrendingCombos = () => {
                     <Link  to={`/product/${e.product_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
-                        width="95%"
+                        width="100%"
                         alt={e.name}
                       />
                     </Link>
@@ -186,7 +186,7 @@ const TopTrendingCombos = () => {
                     <Link  to={`/combo/${e.combo_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
-                        width="95%"
+                        width="100%"
                         alt={e.name}
                       />
                     </Link>
@@ -195,7 +195,7 @@ const TopTrendingCombos = () => {
                     <Link  to={`/page/${e.page_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
-                        width="95%"
+                        width="100%"
                         alt={e.name}
                       />
                     </Link>
@@ -204,7 +204,7 @@ const TopTrendingCombos = () => {
                     <Link  to={`/category/${e.category_id}`}>
                       <img
                         src={e.thumbnail?.original_url}
-                        width="95%"
+                        width="100%"
                         alt={e.name}
                       />
                     </Link>

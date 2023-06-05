@@ -1365,7 +1365,7 @@ const Category = () => {
 
                           <div className="card-det-sec">
                             <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 25) + "..."}</span>
+                              <span>{p.name.substring(0, 15) + "..."}</span>
                             </div>
                             {/* <div>
                               <span className="packof">(Pack of 2)</span>
