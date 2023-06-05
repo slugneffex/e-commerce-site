@@ -8,6 +8,7 @@ import axios from "axios";
 import { CgSortAz } from "react-icons/cg";
 import { BiFilterAlt } from "react-icons/bi";
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
+import {FadeLoader} from "react-spinners"
 
 import {
   addCartProduct,
@@ -439,6 +440,7 @@ const Category = () => {
 
   // if there is no combo hide the section of combos
 
+
   let section = null;
   if (combo && combo.length >= 1) {
     section = (
@@ -532,7 +534,13 @@ const Category = () => {
                       ></i>
                     </div>
                     <Link to={`/combo/${e.slug}`}>
-                      <img src={e.meta_img?.url} alt="img" width="100%"></img>
+                      <img
+                        src={e.meta_img?.url}
+                        alt="img"
+                        width="100%"
+                      
+                      />
+                    
                     </Link>
                   </div>
 
