@@ -677,6 +677,7 @@ const Header = () => {
                   style={{ height: "90vh" }}
                 >
                   <div className="relative">
+                    {/* height  235*/}
                     <div className="offcanvas-header pt-6 px-auto">
                       {/* {Array.isArray(byoc) &&
                         byoc.map((e) => (
@@ -694,8 +695,17 @@ const Header = () => {
                             ></img>
                           </Link>
                         ))} */}
-                      <h1>Why Choose Combonation?</h1>
-
+                        <div>
+                          <Link to="/why-choose-combonation">
+                          <button className="whyc" 
+                        style={{
+                          position: "absolute",
+                          right: "13px",
+                          top: "1.6rem",
+                        }}>Why Combonation ?</button>
+                          </Link>
+                       
+                        </div>
                       <button
                         type="button"
                         className="btn-close text-reset"
@@ -711,7 +721,7 @@ const Header = () => {
                   </div>
 
                   <div className="offcanvas-body">
-                    <ul style={{ paddingLeft: "0" }}>
+                    <ul style={{ paddingLeft: "0", marginTop: "60px" }}>
                       {/* Home Link */}
                       <li className="icon">
                         <form
@@ -874,7 +884,7 @@ const Header = () => {
 
                       <div className="collapse" id="collapseExample4">
                         <div className="card card-body">
-                          <ul>
+                          <ul className="lis">
                             <li style={{ marginTop: "0.5rem" }}>
                               <Link to="/Acccount">My Profile</Link>
                             </li>
