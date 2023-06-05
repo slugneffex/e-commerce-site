@@ -261,7 +261,7 @@ const SubCategory = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasLeft"
                 aria-labelledby="offcanvasLeftLabel"
                 style={{ height: "80%" }}
@@ -306,7 +306,7 @@ const SubCategory = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel"
                 style={{ height: "80%" }}

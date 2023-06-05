@@ -86,11 +86,13 @@ const Searchedpage = () => {
     dispatch(getsingleTotalDiscount());
   };
 
+
+  
+
   let comboSection = null;
   if (data.combos && data.combos.length >= 1) {
     comboSection = (
       <>
-      
         <h3>Precurated Combo</h3>
         <div className="row">
           {data.combos.map((e) => (

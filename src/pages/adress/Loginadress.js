@@ -8,6 +8,7 @@ import { clearCart } from "../../components/features/freebiesCartSlice";
 import { clearSingleCart } from "../../components/features/SingleCartSlice";
 import { clearComboCart } from "../../components/features/useCartSlice";
 import { useDispatch } from "react-redux";
+import { RiNumbersFill } from "react-icons/ri";
 
 const Loginadress = () => {
   // Card Pricing details
@@ -146,11 +147,11 @@ const Loginadress = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/Address");
-    }
-  });
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     navigate("/Address");
+  //   }
+  // });
 
   const [state, setState] = useState([]);
   const [selectedState, setSelectedState] = useState("");
@@ -574,7 +575,8 @@ const Loginadress = () => {
             </div>
           </div>
           <hr />
-          <div className="container">
+          {token ? (
+            <div className="container">
             <div className="row">
               <div className="col-md-8">
                 <div className="heading">
@@ -674,6 +676,9 @@ const Loginadress = () => {
               </div>
             </div>
           </div>
+
+          ):null}
+          
         </section>
       </HomeLayout>
     </>

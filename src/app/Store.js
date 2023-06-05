@@ -22,9 +22,7 @@ import brandproductReducer from "../components/features/reducer/brandproductRedu
 import pageReducer from "../components/features/reducer/pageReducer";
 import combodealReducer from "../components/features/reducer/combodealReducer";
 import storeReducer from "../components/features/reducer/storeReducer";
-// import pageproductReducer from "../components/features/reducer/pageproductReducer";
-// import pagecategoryReducer from "../components/features/reducer/pagecategoryReducer";
-// import pagebrandReducer from "../components/features/reducer/pagebrandReducer";
+
 import combodetailsReducer from "../components/features/reducer/combodetailsReducer";
 import { persistReducer } from "redux-persist";
 const persistConfig = {
@@ -53,9 +51,6 @@ export const rootReducers = combineReducers({
   page: pageReducer,
   combodeal: combodealReducer,
   store: storeReducer,
-  // pagedata:pageproductReducer,
-  // pagecategory: pagecategoryReducer,
-  // pagebrand: pagebrandReducer,
   combodetails: combodetailsReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);

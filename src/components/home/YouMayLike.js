@@ -108,7 +108,7 @@ const YouMayLike = () => {
       .then((res) => {
         if (res.data.status === true) {
           setHeartFilled(id);
-          setTimeout(() => setHeartFilled(null), 3000);
+          setTimeout(() => setHeartFilled(null), 50000);
         } else {
           alert(res.data.message);
         }
@@ -180,7 +180,7 @@ const YouMayLike = () => {
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       <section>
         <div className="top-trending container">
           <div className="row" style={{ alignItems: "center" }}>
@@ -307,7 +307,7 @@ const YouMayLike = () => {
           </div>
         </div>
       </section>
-    </div>
+    </React.Fragment>
   );
 };
 

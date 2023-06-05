@@ -340,7 +340,7 @@ const BrandProduct = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasLeft"
                 aria-labelledby="offcanvasLeftLabel"
                 style={{ height: "80%" }}
@@ -385,7 +385,7 @@ const BrandProduct = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel"
                 style={{ height: "80%" }}
@@ -1181,7 +1181,7 @@ const BrandProduct = () => {
                 <li className="page-item">
                   <Link
                     className="page-link"
-                    tabindex="-1"
+                    tabIndex="-1"
                     onClick={handlePreviousClick}
                     disabled={pageNumber === 1}
                   >

@@ -12,11 +12,11 @@ const Adress = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/address");
-    }
-  });
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/address");
+  //   }
+  // });
 
   const [state, setState] = useState([]);
   const [selectedState, setSelectedState] = useState("");

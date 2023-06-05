@@ -8,7 +8,7 @@ import axios from "axios";
 import { CgSortAz } from "react-icons/cg";
 import { BiFilterAlt } from "react-icons/bi";
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
-import {FadeLoader} from "react-spinners"
+import { FadeLoader } from "react-spinners";
 
 import {
   addCartProduct,
@@ -440,7 +440,6 @@ const Category = () => {
 
   // if there is no combo hide the section of combos
 
-
   let section = null;
   if (combo && combo.length >= 1) {
     section = (
@@ -534,13 +533,7 @@ const Category = () => {
                       ></i>
                     </div>
                     <Link to={`/combo/${e.slug}`}>
-                      <img
-                        src={e.meta_img?.url}
-                        alt="img"
-                        width="100%"
-                      
-                      />
-                    
+                      <img src={e.meta_img?.url} alt="img" width="100%" />
                     </Link>
                   </div>
 
@@ -610,7 +603,7 @@ const Category = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasLeft"
                 aria-labelledby="offcanvasLeftLabel"
                 style={{ height: "80%" }}
@@ -655,7 +648,7 @@ const Category = () => {
 
               <div
                 className="offcanvas offcanvas-bottom"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel"
                 style={{ height: "80%" }}
@@ -1193,7 +1186,14 @@ const Category = () => {
                 <div style={{ display: "none" }}></div>
               )}
               <div className="banner" key={banner.id}>
-                <img src={banner.banner?.url} width="100%" alt="baner" />
+                {banner.banner?.url !== null && (
+                  <img
+                    src={banner.banner?.url}
+                    style={{ display: banner.banner?.url ? "block" : "none" }}
+                    width="100%"
+                    alt="banner"
+                  />
+                )}
               </div>
 
               <div className="row">
@@ -1430,7 +1430,7 @@ const Category = () => {
                 <li className="page-item px-1">
                   <Link
                     className="page-link"
-                    tabindex="-1"
+                    tabIndex="-1"
                     onClick={handlePreviousClick}
                     disabled={pageNumber === 1}
                   >

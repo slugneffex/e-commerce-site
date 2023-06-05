@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import HomeLayout from "../../layouts/HomeLayout";
 import axios from "axios";
 // import Services from "./Services";
-import {Link} from "react-router-dom"
+import {Link,useNavigate} from "react-router-dom"
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const url = `${process.env.REACT_APP_BASE_URL}/register`;
   const [data, setData] = useState({
     name: "",
@@ -42,6 +43,7 @@ const SignUp = () => {
       .then((res) => {
         console.log(res.data);
         alert(res.data.message);
+        navigate('/signin')
       });
   }
 
