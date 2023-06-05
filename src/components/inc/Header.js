@@ -183,7 +183,7 @@ const Header = () => {
                 className="col-md-2 saleSection"
                 style={{ paddingTop: "5px", position: "relative" }}
               >
-                <CiMobile1 />
+                <CiMobile1  style={{fontSize:"30px"}}/>
 
                 <Link className="text-white text-align: left; getApp" to="/">
                   Get App
@@ -194,7 +194,7 @@ const Header = () => {
                   SALE
                 </Link>
               </div> */}
-              <div className="col-md-2 helpSection">
+              <div className="col-md-2 helpSection" style={{textAlign:"center"}}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30.31"
@@ -562,7 +562,7 @@ const Header = () => {
                   className="whyChooseCombonation"
                 >
                   <p className="my-auto blink">
-                    Get Extra 10% OFF on Your First Order | Code: <span> SIGNUP10</span>
+                    Get Extra 10% OFF on Your First Order | Code: <span style={{fontSize:"11px"}}> SIGNUP10</span>
                   </p>
                 </Link>
               </div>
