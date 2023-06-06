@@ -43,7 +43,12 @@ const BrandProduct = () => {
     { minPrice: 500, maxPrice: 999, label: "500-999", isVisible: true },
     { minPrice: 1000, maxPrice: 1999, label: "1000-1999", isVisible: true },
     { minPrice: 2000, maxPrice: 4999, label: "2000-4999", isVisible: true },
-    { minPrice: 5000, maxPrice: 500000, label: "5000 & above", isVisible: true },
+    {
+      minPrice: 5000,
+      maxPrice: 500000,
+      label: "5000 & above",
+      isVisible: true,
+    },
   ]);
 
   // filteration state end
@@ -89,8 +94,9 @@ const BrandProduct = () => {
       (page) => (
         <li className="page-item" key={page}>
           <Link
-            className={`page-link page-number ${pageNumber === page ? "active" : ""
-              }`}
+            className={`page-link page-number ${
+              pageNumber === page ? "active" : ""
+            }`}
             onClick={() => handlePageClick(page)}
           >
             {page}
@@ -151,9 +157,6 @@ const BrandProduct = () => {
     updatePriceRangeVisibility();
   }, [brandproduct]);
 
-
-
-
   // Filterration end
 
   // total brands
@@ -184,7 +187,7 @@ const BrandProduct = () => {
     image: "",
     mrp: "",
     discount: "",
-    slug:"",
+    slug: "",
   };
 
   const addToSingleCart = (p) => {
@@ -244,8 +247,6 @@ const BrandProduct = () => {
     setPageNumber(1);
     navigate(`/brand/${brandId}`);
   }
-
-  
 
   let singlebrandProduct = null;
   if (brandproduct.length >= 1) {
@@ -324,7 +325,7 @@ const BrandProduct = () => {
               fontSize: "16px",
               height: "40px",
               alignItems: "center",
-              width: "100vw"
+              width: "100vw",
             }}
           >
             <div className="col-6" style={{ borderRight: "1px solid #464646" }}>
@@ -406,7 +407,7 @@ const BrandProduct = () => {
                       variant="primary"
                       onClick={handleToggle4}
                       aria-controls="collapseExample"
-                    // aria-expanded={isOpen4}
+                      // aria-expanded={isOpen4}
                     >
                       Category
                       {isOpen4 ? (
@@ -451,7 +452,7 @@ const BrandProduct = () => {
                       variant="primary"
                       onClick={handleToggle5}
                       aria-controls="collapseExample"
-                    // aria-expanded={isOpen5}
+                      // aria-expanded={isOpen5}
                     >
                       Price
                       {isOpen5 ? (
@@ -818,9 +819,8 @@ const BrandProduct = () => {
                             //     name="brand"
                             //     value={brand.slug}
                             //     onChange={handleCheckboxChange}
-                               
+
                             //     className="form-check-input"
-                              
 
                             //   />
                             // </div>
@@ -1117,18 +1117,22 @@ const BrandProduct = () => {
                               <span>{p.name.substring(0, 25) + "..."}</span>
                             </div>
 
-
-                            <div className="price-sec" style={{ padding: "0 8px 0 20px" }}>
-                        <div className="col-3">
-                          <span className="sp">₹{p.selling_price}</span>
-                        </div>
-                        <div className="col-4">
-                          <del className="mrp">₹{p.mrp}</del>
-                        </div>
-                        <div className="col-5">
-                          <span className="discount">{p.discount}% OFF</span>
-                        </div>
-                      </div>
+                            <div
+                              className="price-sec"
+                              style={{ padding: "0 8px 0 20px" }}
+                            >
+                              <div className="col-3">
+                                <span className="sp">₹{p.selling_price}</span>
+                              </div>
+                              <div className="col-4">
+                                <del className="mrp">₹{p.mrp}</del>
+                              </div>
+                              <div className="col-5">
+                                <span className="discount">
+                                  {p.discount}% OFF
+                                </span>
+                              </div>
+                            </div>
                             <div className="card-btn-sec">
                               <div
                                 className="btn_atc"
