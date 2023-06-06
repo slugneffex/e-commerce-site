@@ -41,7 +41,7 @@ const Testimonials = () => {
           autoPlay
           centerMode
         >
-          <div className="text-center textCard" style={{ margin: "2rem 1rem", overflow: "hidden" }}>
+          <div className="text-center textCard" style={{ padding: "1rem 0 0 0", margin: "2rem 1rem", overflow: "hidden" }}>
             <div className="col">
               <FontAwesomeIcon icon={faStar} color="gold" />
               <FontAwesomeIcon icon={faStar} color="gold" />

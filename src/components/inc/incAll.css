@@ -47,23 +47,7 @@ h1 h2 h3 h4 h5 h6 p {
     font-family: 'Poppins';
 }
 
-.blink {
-    animation: blink-animation 1s infinite;
-}
 
-@keyframes blink-animation {
-    0% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: .5;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
 
 .img1 img {
     width: 90%;

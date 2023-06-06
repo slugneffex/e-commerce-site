@@ -92,11 +92,10 @@ const ForHer = () => {
         <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
           Top Picks For Her
         </h3>
-        <div className="container">
+        <div className="container youmaylikeboxshadow">
           <Carousel
-            showDots={isCenterMode}
             responsive={responsive}
-            arrows={false}
+            arrows={isCenterMode}
             infinite
             centerMode={isCenterMode}
           >
