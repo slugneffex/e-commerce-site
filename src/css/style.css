@@ -430,6 +430,10 @@ a {
   margin-top: 50px;
 }
 
+.top-trending-head h3 {
+  font-size: 22px;
+}
+
 .youMayLikeHeart i {
   position: absolute;
   right: 1rem;
@@ -561,7 +565,7 @@ a {
 
 .youmaylikeboxshadow .react-multiple-carousel__arrow--left {
   position: absolute;
-  left: 12px;
+  left: 0;
   color: rgb(6, 0, 0);
   background-color: #ebebeb;
   /* border-radius: 0; */
@@ -633,6 +637,7 @@ a {
   right: 0;
   top: 10px;
   font-size: 14px;
+  height: 30px;
 }
 
 /* Feature Section End */

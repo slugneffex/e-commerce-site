@@ -156,7 +156,7 @@ const Header = () => {
                   // to="/why-choose-combonation"
                   className="whyChooseCombonation"
                 >
-                  <p className="my-auto text-white blink">
+                  <p className="my-auto text-white">
                     Get Extra 10% OFF on Your First Order | Code:
                     <span style={{fontWeight:"bolder"}}> SIGNUP10</span>
                   </p>
@@ -569,7 +569,7 @@ const Header = () => {
                   // to="/account"
                   className="whyChooseCombonation"
                 >
-                  <p className="my-auto blink">
+                  <p className="my-auto">
                     Get Extra 10% OFF on Your First Order | Code: <span style={{fontSize:"11px"}}> SIGNUP10</span>
                   </p>
                 </Link>
@@ -929,7 +929,7 @@ const Header = () => {
                       <img
                         src={e.logo?.original_url}
                         alt="logo-combonation"
-                        style={{ width: "80%", height: "47px" }}
+                        style={{ width: "75%", height: "47px" }}
                       ></img>
                     </Link>
                   ))}
