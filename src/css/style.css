@@ -427,7 +427,7 @@ a {
 
 /* You May Like Section */
 .top-trending-head {
-  margin-top: 67px;
+  margin-top: 50px;
 }
 
 .youMayLikeHeart i {
@@ -1262,9 +1262,8 @@ ul.additional_links li:after {
   }
 
   .mobile .topPicksCarousel .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item  {
-    width: 278px !important;
+    width: 90vw !important; 
     margin: 0 .3rem 0 .4rem !important;
-
   }
   
 
