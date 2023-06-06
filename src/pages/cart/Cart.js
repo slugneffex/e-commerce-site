@@ -82,12 +82,11 @@ const Cart = () => {
     navigate("/EmptyCart");
   }
 
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 1,
-      slidesToSlide: 1 // optional, default to 1.
+      slidesToSlide: 1, // optional, default to 1.
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -96,7 +95,7 @@ const Cart = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-    }
+    },
   };
 
   // ADD TO WISHLIST
@@ -154,17 +153,18 @@ const Cart = () => {
 
   // free items
   const [cartlevel, setCartlevel] = useState([]);
+  const [cartlevelPic ,setCartlevelPic] = useState([])
   const [freeProduct7999, setFreeProduct7999] = useState(null);
-  const [freeProduct8999, setFreeProduct8999] = useState(null);
+  const [freeProduct7999Pic, setFreeProduct7999Pic] = useState([]);
+  // const [freeProduct8999, setFreeProduct8999] = useState(null);
   useEffect(() => {
     if (singlesubAmount >= 7999) {
       freecartAPI();
     } else {
       setFreeProduct7999(null);
-      setFreeProduct8999(null);
+      // setFreeProduct8999(null);
     }
   }, [singlesubAmount]);
-
 
   const freecartAPI = async () => {
     const options = {
@@ -194,104 +194,47 @@ const Cart = () => {
         if (level7999) {
           // Set the free product for autoadd_amount equal to 7999
           setFreeProduct7999(level7999.product);
-          console.log(level7999)
+          console.log(level7999.product);
+          setFreeProduct7999Pic(level7999.product.photos);
+
           // Show the free product for autoadd_amount equal to 7999
           // showFreeProduct(level7999);
         }
       }
 
       // Check if total amount is greater than 8999
-      if (singlesubAmount >= 8999) {
-        const level7999 = levels.find(
-          (level) => level.autoadd_amount === "7999"
-        );
-        const level8999 = levels.find(
-          (level) => level.autoadd_amount === "8999"
-        );
+      // if (singlesubAmount >= 8999) {
+      //   const level7999 = levels.find(
+      //     (level) => level.autoadd_amount === "7999"
+      //   );
+      //   const level8999 = levels.find(
+      //     (level) => level.autoadd_amount === "8999"
+      //   );
 
-        if (level7999 && level8999) {
-          // Set the free products for autoadd_amount equal to 7999 and 8999
-          setFreeProduct7999(level7999.product);
-          setFreeProduct8999(level8999.product);
-          // Show the free products for autoadd_amount equal to 7999 and 8999
-          showFreeProduct(level7999);
-          showFreeProduct(level8999);
-        }
+      //   if (level7999 && level8999) {
+      //     // Set the free products for autoadd_amount equal to 7999 and 8999
+      //     setFreeProduct7999(level7999);
+      //     // setFreeProduct8999(level8999.product);
+      //     // Show the free products for autoadd_amount equal to 7999 and 8999
+      //     showFreeProduct(level7999);
+      //     showFreeProduct(level8999);
+      //   }
+      // }
+      // const levels = response.data.levels
 
-      }
-
-      // setCartlevel(response.data);
-      // console.log(levels);
+      setCartlevel(response.data.levels);
+      // setCartlevelPic(response.data.levels.product.photos)
+      console.log(levels.product.photos);
     } catch (error) {
       console.error("API call failed:", error);
     }
   };
-
-  // const freecartAPI = async () => {
-  //   const options = {
-  //     headers: {
-  //       "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       "Cache-Control": "no-cache, no-store, must-revalidate",
-  //       mode: "cors",
-  //       credentials: "include",
-  //     },
-  //   };
-
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_BASE_URL}/cartlevels`,
-  //       options
-  //     );
-
-  //     const levels = response.data.levels;
-
-  //     // Check if total amount is greater than 7999
-  //     if (singlesubAmount > 7999) {
-  //       // Find the cart level with autoadd_amount equal to 7999
-  //       const level7999 = levels.find(
-  //         (level) => level.autoadd_amount === "7999"
-  //       );
-
-  //       if (level7999) {
-  //         setFreeProduct7999(level7999.product);
-  //         console.log(level7999.product.name)
-  //         // Show the free product for autoadd_amount equal to 7999
-  //         showFreeProduct(level7999);
-  //       }
-  //     }
-
-  //     // Check if total amount is greater than 8999
-  //     if (singlesubAmount > 8999) {
-
-  //       // Find the cart level with autoadd_amount equal to 8999
-  //       const level8999 = levels.find(
-  //         (level) => level.autoadd_amount === "8999"
-  //       );
-
-  //       if (level8999) {
-  //         setFreeProduct8999(level8999.product);
-  //         console.log(level8999.product.name)
-  //         // Show the free product for autoadd_amount equal to 8999
-  //         showFreeProduct(level8999);
-  //       }
-  //     }
-
-  //     setCartlevel(response.data);
-  //     console.log(levels);
-  //   } catch (error) {
-  //     console.error("API call failed:", error);
-  //   }
-  // };
 
   const showFreeProduct = (level) => {
     // Logic to display the free product based on the cart level
     console.log("Free product is available for level:", level);
   };
 
-
-
-
-
   // const freecartAPI = async () => {
   //   const options = {
   //     headers: {
@@ -306,7 +249,6 @@ const Cart = () => {
   //       `${process.env.REACT_APP_BASE_URL}/cartlevels`,
   //       options
   //     );
-
 
   //       setCartlevel(response.data);
   //       console.log(response.data.levels);
@@ -468,8 +410,6 @@ const Cart = () => {
           </div>
         </div>
 
-
-
         {/*  mobile */}
         <div className="mobile">
           <div className="signalCart">
@@ -494,11 +434,8 @@ const Cart = () => {
           </div>
         </div>
       </li>
-
     );
   }
-
-
 
   // If Single cart===1 then i have to show the section
 
@@ -797,6 +734,74 @@ const Cart = () => {
   }
 
   const BYOCSubTotal = singlesubAmount + ExtraFreebiesAmountt;
+
+  let cartLevel7999Section = null;
+  if (singlesubAmount >= 7999 && singlesubAmount < 8999) {
+    cartLevel7999Section = (
+      <div>
+        {/* {Array.isArray(freeProduct7999) && freeProduct7999.map ((e) => ( */}
+        <div class="card freebiesCartCard">
+          <div class="card-body" style={{ display: "flex" }}>
+            <div class="card-head">
+              {freeProduct7999Pic.map((e) => (
+                <img
+                  src={e.original_url}
+                  alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green"
+                />
+              ))}
+            </div>
+            <div class="card-main px-3">
+              <h3>
+                <strong style={{ color: "#009444" }}>Hurray!</strong> You Can
+                Add This Product For Free
+              </h3>
+              {freeProduct7999 && freeProduct7999.name && (
+                <h5 style={{ color: "#009444" }}>{freeProduct7999.name}</h5>
+              )}
+              {freeProduct7999 && freeProduct7999.selling_price && (
+                <span>MRP: {freeProduct7999.selling_price}</span>
+              )}
+
+              <a class="btn">Get Item</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  let cartLevel8999Section = null;
+  if (singlesubAmount >= 8999) {
+    cartLevel8999Section = (
+      <>
+        {cartlevel.map((e) => (
+          <div class="card freebiesCartCard" key={e.id}>
+            <div class="card-body" style={{ display: "flex" }}>
+              <div class="card-head">
+                { cartlevelPic && cartlevelPic.map((e) => (
+                <img
+                src={e.original_url}
+                  alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green"
+                />
+                ))}
+              </div>
+              <div class="card-main px-3">
+                <h3>
+                  <strong style={{ color: "#009444" }}>Hurray!</strong> You Can
+                  Add This Product For Free
+                </h3>
+                <h5 style={{ color: "#009444" }}>{e.product?.name}</h5>
+                <span>MRP: {e.product?.selling_price}</span>
+
+                <a class="btn">Get Item</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    );
+  }
+
   // single product cart section
 
   let SingleCartSection = null;
@@ -806,23 +811,19 @@ const Cart = () => {
       <div className="cartCard py-3">
         <div className="cart-type">
           <h3>Custom Combo</h3> <span>(Total {singletotalCount} Items)</span>
-
         </div>
 
-
         {/* carousel for freebies */}
-
 
         <Carousel
           swipeable={false}
           draggable={true}
           arrows={false}
           // autoPlay
-          autoPlaySpeed={1000}
+          autoPlaySpeed={100}
           responsive={responsive}
           infinite
         >
-
           <div className="signalCart ">
             <div className="col-2">
               <img
@@ -842,39 +843,9 @@ const Cart = () => {
               </Link>
             </div>
           </div>
-
-
-          <div class="card freebiesCartCard">
-            <div class="card-body" style={{ display: "flex" }}>
-              <div class="card-head">
-                <img src="https://www.combonation.in/storage/34260/646779e7daf6e_8906756657838.jpg" alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green" />
-              </div>
-              <div class="card-main px-3">
-                <h3><strong style={{color: "#009444"}}>Hurray!</strong> You Can Add This Product For Free</h3>
-                <h5 style={{color: "#009444"}}>Noise ColorFit Pro 3 Assist Smart Watch with Alexa Built-in - Smoke Green</h5>
-                <span>MRP: 5999</span>
-
-                <a class="btn">Get Item</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="card freebiesCartCard">
-            <div class="card-body" style={{ display: "flex" }}>
-              <div class="card-head">
-                <img src="https://www.combonation.in/storage/34260/646779e7daf6e_8906756657838.jpg" alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green" />
-              </div>
-              <div class="card-main px-3">
-                <h3><strong style={{color: "#009444"}}>Hurray!</strong> You Can Add This Product For Free</h3>
-                <h5 style={{color: "#009444"}}>Noise ColorFit Pro 3 Assist Smart Watch with Alexa Built-in - Smoke Green</h5>
-                <span>MRP: 5999</span>
-
-                <a class="btn">Get Item</a>
-              </div>
-            </div>
-          </div>
+          {cartLevel7999Section}
+          {cartLevel8999Section}
         </Carousel>
-
 
         {/* for freebies */}
         {freebiesDiscountSection}
@@ -1026,8 +997,6 @@ const Cart = () => {
               </li>
             ))}
           </ul>
-
-
         </div>
       </div>
     );
