@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchStore } from "../features/actions/storeAction";
 import { fetchPage } from "../features/actions/pageActions";
 import { RiShoppingBag3Line } from "react-icons/ri";
-import { CiHeart } from "react-icons/ci";
+import { CiHeart, CiMobile1 } from "react-icons/ci";
 import { VscAccount } from "react-icons/vsc";
 import { AiOutlineSearch } from "react-icons/ai";
 
@@ -156,7 +156,8 @@ const Header = () => {
                   className="whyChooseCombonation"
                 >
                   <p className="my-auto text-white blink">
-                    Get Extra 10% OFF on Your First Order
+                    Get Extra 10% OFF on Your First Order | Code:
+                    <span style={{fontWeight:"bolder"}}> SIGNUP10</span>
                   </p>
                 </Link>
               </div>
@@ -182,7 +183,7 @@ const Header = () => {
                 className="col-md-2 saleSection"
                 style={{ paddingTop: "5px", position: "relative" }}
               >
-                <img src="./assets/img/phoneIcon.svg" alt="" />
+                <CiMobile1  style={{fontSize:"30px"}}/>
 
                 <Link className="text-white text-align: left; getApp" to="/">
                   Get App
@@ -193,7 +194,7 @@ const Header = () => {
                   SALE
                 </Link>
               </div> */}
-              <div className="col-md-2 helpSection">
+              <div className="col-md-2 helpSection" style={{textAlign:"center"}}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30.31"
@@ -468,7 +469,8 @@ const Header = () => {
                   >
                     <li className="nav-item">
                       <Link to="/signin" className="rightPartOfNav">
-                        <img src="./assets/img/profileIcon.svg" alt="" />
+                        {/* <img src="./assets/img/profileIcon.svg" alt="" /> */}
+                        <VscAccount/>
                         <span style={{ marginLeft: "4px", fontSize: "15px" }}>
                           Account
                         </span>
@@ -476,7 +478,8 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <Link to="/Wishlist" className="rightPartOfNav">
-                        <img src="./assets/img/wishlistIcon.svg" alt="" />
+                        {/* <img src="./assets/img/wishlistIcon.svg" alt="" /> */}
+                        
                         {/* <span>Wishlist</span> */}
                       </Link>
                     </li>
@@ -561,73 +564,11 @@ const Header = () => {
                   className="whyChooseCombonation"
                 >
                   <p className="my-auto blink">
-                    Get Extra 10% OFF on Your First Order
+                    Get Extra 10% OFF on Your First Order | Code: <span style={{fontSize:"11px"}}> SIGNUP10</span>
                   </p>
                 </Link>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "2rem",
-                  alignItems: "center",
-                  position: "relative",
-                }}
-              >
-                <div className="getAppSection" style={{ display: "flex" }}>
-                  <img src="./assets/img/phoneIcon.svg" width="20%" />
-
-                  <Link className="text-white getApp" to="/">
-                    Get App
-                  </Link>
-                </div>
-
-                {/* <div
-                  className="saleSection"
-                  style={{
-                    paddingTop: "0",
-                    marginLeft: "5px",
-                    paddingLeft: "5px",
-                  }}
-                >
-                  <Link className="text-white saleText" to="/">
-                    SALE
-                  </Link>
-                </div> */}
-
-                <div
-                  className="helpSection"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="30.31"
-                    height="28.5"
-                    viewBox="0 0 30.31 28.5"
-                    className="helpSvg"
-                  >
-                    <path
-                      id="Path_759"
-                      data-name="Path 759"
-                      d="M821.409,1498.154v-1.3h11.535a1.007,1.007,0,0,0,1.01-1.01v-12.755a11.119,11.119,0,0,0-.989-4.631,12.922,12.922,0,0,0-2.652-3.852,12.535,12.535,0,0,0-3.873-2.631,11.661,11.661,0,0,0-9.3,0,12.537,12.537,0,0,0-3.873,2.631,12.923,12.923,0,0,0-2.652,3.852,11.12,11.12,0,0,0-.989,4.631v10.145h-.463a2.515,2.515,0,0,1-2.526-2.526v-3.368a2.147,2.147,0,0,1,.463-1.326,4.366,4.366,0,0,1,1.221-1.074l.042-2.231a13.072,13.072,0,0,1,1.179-5.115,13.584,13.584,0,0,1,7.157-6.925,12.994,12.994,0,0,1,5.094-1.01,13.391,13.391,0,0,1,5.115.989,13.061,13.061,0,0,1,4.231,2.757,13.8,13.8,0,0,1,2.9,4.147,13.155,13.155,0,0,1,1.179,5.157l.042,2.147a3.523,3.523,0,0,1,1.221.969,2,2,0,0,1,.463,1.262v3.873a2.007,2.007,0,0,1-.463,1.263,3.526,3.526,0,0,1-1.221.968v2.652a2.374,2.374,0,0,1-2.315,2.315Zm-4.041-11.7a1.047,1.047,0,0,1-.758-.337,1.092,1.092,0,0,1-.337-.8,1.045,1.045,0,0,1,.337-.757,1.093,1.093,0,0,1,.8-.337,1.156,1.156,0,0,1,1.094,1.095,1.151,1.151,0,0,1-1.136,1.137Zm8.84,0a1.151,1.151,0,0,1-1.137-1.137,1.046,1.046,0,0,1,.337-.757,1.093,1.093,0,0,1,.8-.337,1.157,1.157,0,0,1,1.095,1.095,1.092,1.092,0,0,1-.337.8A1.046,1.046,0,0,1,826.208,1486.451Zm-13.3-2.652a8.526,8.526,0,0,1,.589-4,9.161,9.161,0,0,1,8.377-5.641,8.274,8.274,0,0,1,5.746,2.147,9.058,9.058,0,0,1,2.926,5.346,11.1,11.1,0,0,1-6.231-1.894A12.484,12.484,0,0,1,820.1,1475a11.793,11.793,0,0,1-2.526,5.325A11.947,11.947,0,0,1,812.9,1483.8Z"
-                      transform="translate(-806.632 -1469.654)"
-                      fill="#fff"
-                    />
-                  </svg>
-
-                  <a
-                    style={{ color: "#A2A2A2" }}
-                    className="text-white helpText"
-                    href="mailto:customercare@combonation.in"
-                  >
-                    Help
-                  </a>
-
-                  {/* <Link to="/help" className="text-white helpText">
-                    Help
-                  </Link> */}
-                </div>
-              </div>
+             
             </div>
           </div>
         </section>
@@ -646,7 +587,7 @@ const Header = () => {
             >
               {/* button */}
               <div
-                className="col"
+                className="col-2"
                 style={{ paddingRight: "0", paddingLeft: "0" }}
               >
                 <nav
@@ -670,15 +611,15 @@ const Header = () => {
                   </button>
                 </nav>
                 <div
-                  className="offcanvas offcanvas-bottom"
+                  className="offcanvas offcanvas-start"
                   tabIndex={-1}
                   id="offcanvasExample"
                   aria-labelledby="offcanvasExampleLabel"
-                  style={{ height: "90vh" }}
+            
                 >
                   {/* <div className="relative"> */}
                     {/* height  235*/}
-                    <div className="offcanvas-header pt-6 px-auto">
+                    <div className="offcanvas-header pt-6 px-auto " style={{position:"relative", minHeight:"92px"}}>
                       {/* {Array.isArray(byoc) &&
                         byoc.map((e) => (
                           <Link
@@ -699,7 +640,7 @@ const Header = () => {
                           <button className="whyc" 
                         style={{
                           position: "absolute",
-                          right: "13px",
+                          
                           top: "1.6rem",
                         }}>
                           <Link to="/why-choose-combonation">
@@ -724,7 +665,7 @@ const Header = () => {
                   {/* </div> */}
 
                   <div className="offcanvas-body">
-                    <ul style={{ paddingLeft: "0", marginTop: "60px" }}>
+                    <ul style={{ paddingLeft: "0" }}>
                       {/* Home Link */}
                       <li className="icon">
                         <form
@@ -908,9 +849,27 @@ const Header = () => {
                         </div>
                       </div>
                     </ul>
-                    <div style={{ display: "flex", alignItems:"center" }}>
+                    <li
+                        role="button"                    
+                      >
+                        <Link to="/" className="ofcanvas-text" style={{fontWeight:"500"}} >Download App</Link>
+                        <hr />
+                      </li>    
+                      <li
+                        role="button"                    
+                      >
+                        <Link to="/help" className="ofcanvas-text" style={{fontWeight:"500"}} >Help and Support</Link>
+                        <hr />
+                      </li>                 
+                    <div style={{ display: "flex", alignItems: "center" }}>
                       <h5 className="ofcanvas-text">Follow us at:</h5>
-                      <ul style={{ display: "flex" , justifyContent:"space-between", width:150}}>
+                      <ul
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          width: 150,
+                        }}
+                      >
                         <li>
                           <Link
                             href="https://www.facebook.com/profile.php?id=100078539967313"
@@ -955,7 +914,7 @@ const Header = () => {
               {/* Offcanvas for navbar */}
               {/* logo */}
               <div
-                className="col"
+                className="col-6"
                 style={{ paddingLeft: "0", marginLeft: "-20px" }}
               >
                 {Array.isArray(byoc) &&
@@ -964,7 +923,7 @@ const Header = () => {
                       <img
                         src={e.logo?.original_url}
                         alt="logo-combonation"
-                        style={{ width: "100%", height: "50px" }}
+                        style={{ width: "80%", height: "47px" }}
                       ></img>
                     </Link>
                   ))}
