@@ -106,8 +106,10 @@ a {
 }
 
 .navbar-brand img {
-  width: 130px;
-  height: 60px;
+  /* width: 130px;
+  height: 60px; */
+  width: 68% ;
+    height: 47px ;
 }
 
 .nav-link {
