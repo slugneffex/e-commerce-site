@@ -1274,7 +1274,8 @@ ul.additional_links li:after {
 
   .sp {
     color: #464646;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
   }
 
   .mrp {
@@ -1284,8 +1285,8 @@ ul.additional_links li:after {
 
   .discount {
     color: #05a856;
-    font-weight: bold;
-    font-size: 10px;
+    font-weight: 600;
+    font-size: 12px;
   }
 
   .priceMargin {
@@ -1352,7 +1353,8 @@ ul.additional_links li:after {
 
 .sp {
   color: #464646;
-  font-size: 16px;
+  font-size: 14px;
+    font-weight: bold;
 }
 
 .mrp {
@@ -1362,8 +1364,8 @@ ul.additional_links li:after {
 
 .discount {
   color: #05a856;
-  font-weight: bold;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .card-btn-sec {
