@@ -259,10 +259,7 @@ const YouMayLike = () => {
                         >
                           
                             <span className="sp priceMargin">₹{Math.round(e.selling_price)}</span>
-                         
-                          
                             <del className="mrp priceMargin">₹{e.mrp}</del>
-                 
                             <span className="discount">{e.discount}% OFF</span>
                         
                         </div>

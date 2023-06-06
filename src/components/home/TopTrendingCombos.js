@@ -9,7 +9,7 @@ import { fetchToppicks } from "../features/actions/toppicksActions";
 const TopTrendingCombos = () => {
   const dispatch = useDispatch();
 
-  const {  toppicks } = useSelector((state) => state.toppicks);
+  const { toppicks } = useSelector((state) => state.toppicks);
   useEffect(() => {
     dispatch(fetchToppicks());
   }, [dispatch]);
@@ -66,7 +66,7 @@ const TopTrendingCombos = () => {
       items: 1,
     },
   };
-  
+
 
   return (
     <>
@@ -80,60 +80,16 @@ const TopTrendingCombos = () => {
           <div className="row">
             {Array.isArray(toppicks) &&
               toppicks.map((e) => (
-                <div className="col-md-6" style={{marginTop:"20px"}} key={e.id}>
+                <div className="col-md-6" style={{ marginTop: "20px" }} key={e.id}>
                   <div className="top-picks-img">
-                  
-                      <Link  to={`${e.link}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="100%"
-                          alt={e.name}
-                        />
-                      </Link>
-                
-                    {/* {e.product_id && (
-                      <Link  to={`/product/${e.product_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="100%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )}
-                    {e.combo_id && (
-                      <Link  to={`/combo/${e.combo_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="100%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )}
-                    {e.page_id && (
-                      <Link  to={`/page/${e.page_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="100%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )}
-                    {e.category_id && (
-                      <Link  to={`/category/${e.category_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="100%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )} */}
-                    {/* <Link to={`/brand/${e.brand_id}`}>
+
+                    <Link to={`${e.link}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="100%"
-                        alt="manish"
-                      ></img>
-                    </Link> */}
+                        alt={e.name}
+                      />
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -151,16 +107,18 @@ const TopTrendingCombos = () => {
             <h3>Top Picks For You...</h3>
           </div>
         </div>
-        <div className="topPicksCarousel container" style={{width: "100%"}}>
-        <Carousel
-          showDots={false}
-          responsive={responsive}
-          infinite={true}
-          autoPlay={true}
-          arrows={false}
-          // centerMode
-        >
-          {Array.isArray(toppicks) &&
+        <div className="topPicksCarousel container">
+          <Carousel
+            showDots={false}
+            responsive={responsive}
+            infinite={true}
+            autoPlay={true}
+            arrows={false}
+            centerMode
+          >
+
+            
+            {Array.isArray(toppicks) &&
             toppicks.map((e) => (
               <div key={e.id}>
                 <div>
@@ -209,17 +167,11 @@ const TopTrendingCombos = () => {
                       />
                     </Link>
                   )}
-                  {/* <Link to={`/brand/${e.brand_id}`}>
-                    <img
-                      src={e.thumbnail?.original_url}
-                      width="95%"
-                      alt="manish"
-                    ></img>
-                  </Link> */}
+                  
                 </div>
               </div>
             ))}
-        </Carousel>
+          </Carousel>
         </div>
       </div>
     </>

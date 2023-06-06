@@ -6,6 +6,7 @@ import "./Brand.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBrand } from "../../features/actions/brandActions";
+import { AiOutlineArrowRight } from "react-icons/ai"
 
 const responsive = {
   superLargeDesktop: {
@@ -91,15 +92,31 @@ const Brands = () => {
     };
   }, []);
   const handleClick = () => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   };
 
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
-          Build Your Combo From Top Brands
-        </h3>
+
+        <div className="row" style={{ alignItems: "center" }}>
+          <div className="col-6 top-trending-head">
+            <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
+              Build Your Combo From Top Brands
+            </h3>
+          </div>
+
+          <div className="col-6 viewAllButton">
+            <div className="viewAllBtn">
+              <Link to={`/brandlogolist`}>
+                <button>
+                  View All
+                  <AiOutlineArrowRight />
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="container py-12">
           <Carousel
             responsive={responsive}
