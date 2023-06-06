@@ -469,7 +469,8 @@ const Header = () => {
                   >
                     <li className="nav-item">
                       <Link to="/signin" className="rightPartOfNav">
-                        <img src="./assets/img/profileIcon.svg" alt="" />
+                        {/* <img src="./assets/img/profileIcon.svg" alt="" /> */}
+                        <VscAccount/>
                         <span style={{ marginLeft: "4px", fontSize: "15px" }}>
                           Account
                         </span>
@@ -477,7 +478,8 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <Link to="/Wishlist" className="rightPartOfNav">
-                        <img src="./assets/img/wishlistIcon.svg" alt="" />
+                        {/* <img src="./assets/img/wishlistIcon.svg" alt="" /> */}
+                        
                         {/* <span>Wishlist</span> */}
                       </Link>
                     </li>
