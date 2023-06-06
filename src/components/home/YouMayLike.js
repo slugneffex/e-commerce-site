@@ -13,8 +13,7 @@ import {
   getTotalDiscount,
 } from "../features/useCartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+
 import { fetchYoumaylike } from "../features/actions/youmaylikeActions";
 
 const responsive = {
@@ -22,10 +21,12 @@ const responsive = {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
     items: 5,
+    slidesToSlide: 2,
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 5,
+    slidesToSlide: 2,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -39,10 +40,8 @@ const responsive = {
 
 const YouMayLike = () => {
   const dispatch = useDispatch();
-  const [addedToCart, setAddedToCart] = useState(false);
+  // const [addedToCart, setAddedToCart] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
-
-
 
   const { youmaylike } = useSelector((state) => state.youmaylike);
 
@@ -78,12 +77,12 @@ const YouMayLike = () => {
     dispatch(calculateTax());
     dispatch(getTotalAmount());
     dispatch(getTotalDiscount());
-    setAddedToCart(true);
+    // setAddedToCart(true);
     setCartProducts((prevCartProducts) => [...prevCartProducts, e.id]);
 
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 80000);
+    // setTimeout(() => {
+    //   setAddedToCart(false);
+    // }, 80000);
   };
 
   // add to wishlist
@@ -115,7 +114,7 @@ const YouMayLike = () => {
       });
   }
 
-  const { cartItems } = useSelector((state) => state.cart);
+  // go to cart
   const isInCart = (productId) => cartProducts.includes(productId);
 
   const goToCart = (productId) => {
@@ -123,7 +122,11 @@ const YouMayLike = () => {
       return (
         <div className="btn_gtc" style={{ cursor: "pointer" }}>
           <p>
-            <Link className="cartTextMob" to="/cart" style={{ color: "#05A856" }}>
+            <Link
+              className="cartTextMob"
+              to="/cart"
+              style={{ color: "#05A856" }}
+            >
               Go to Cart
             </Link>
             <i className="bi bi-arrow-right"></i>
@@ -146,22 +149,10 @@ const YouMayLike = () => {
               Add to Cart
             </i>
           </div>
-
         </>
       );
     }
   };
-
-  // const goToCart = () => {
-  //   return (
-  //     <div className="btn_gtc" style={{ cursor: "pointer" }}>
-  //       <Link to="/cart" style={{ color: "#05A856" }}>
-  //         Go to Cart
-  //       </Link>
-  //       <i className="bi bi-arrow-right"></i>
-  //     </div>
-  //   );
-  // };
 
   const [isArrow, setIsArrow] = useState(false);
 
@@ -178,6 +169,8 @@ const YouMayLike = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  
 
   return (
     <React.Fragment>
@@ -208,6 +201,7 @@ const YouMayLike = () => {
               showDots={false}
               infinite={true}
               arrows={isArrow}
+             
             >
               {Array.isArray(youmaylike) &&
                 youmaylike.map((e) => (
@@ -236,13 +230,7 @@ const YouMayLike = () => {
                           </ul>
                         </Link>
                         <Link to={`/combo/${e.slug}`}>
-                          <img
-                            src={e.meta_img?.url}
-                            alt="img"
-                            width="100%"
-                         
-                          />
-                      
+                          <img src={e.meta_img?.url} alt="img" width="100%" />
                         </Link>
                       </div>
 
@@ -257,11 +245,11 @@ const YouMayLike = () => {
                           className="price-sec"
                           style={{ padding: "0 8px 0 20px" }}
                         >
-                          
-                            <span className="sp priceMargin">₹{Math.round(e.selling_price)}</span>
-                            <del className="mrp priceMargin">₹{e.mrp}</del>
-                            <span className="discount">{e.discount}% OFF</span>
-                        
+                          <span className="sp priceMargin">
+                            ₹{Math.round(e.selling_price)}
+                          </span>
+                          <del className="mrp priceMargin">₹{e.mrp}</del>
+                          <span className="discount">{e.discount}% OFF</span>
                         </div>
                         <div className="card-btn-sec ">
                           {isInCart(e.id) ? (
@@ -271,8 +259,6 @@ const YouMayLike = () => {
                               className="btn_atc"
                               onClick={() => {
                                 addToCart(e);
-
-
                               }}
                               style={{ cursor: "pointer" }}
                             >

@@ -37,6 +37,7 @@ const BrandProducts = () => {
   // brands Product Get API
   const [brandProduct, setBrandProduct] = useState([]);
   const [error, setError] = useState(null);
+  const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -96,7 +97,7 @@ const BrandProducts = () => {
     image: "",
     mrp: "",
     discount: "",
-    slug:"",
+    slug: "",
   };
 
   const addToSingleCart = (p) => {
@@ -115,6 +116,7 @@ const BrandProducts = () => {
     dispatch(getsingleSubTotal());
     dispatch(getsingleTotalAmount());
     dispatch(getsingleTotalDiscount());
+    setCartProducts((prevCartProducts) => [...prevCartProducts, p.id]);
   };
 
   // Add to wishlist For product
@@ -141,6 +143,43 @@ const BrandProducts = () => {
   if (error) {
     return console.log(error);
   }
+
+  // go to cart
+  const isInCart = (productId) => cartProducts.includes(productId);
+
+  const goToCart = (productId) => {
+    if (isInCart(productId)) {
+      return (
+        <div className="btn_gtc" style={{ cursor: "pointer" }}>
+          <p>
+            <Link className="cartTextMob" to="/cart" style={{ color: "#05A856" }}>
+              Go to Cart
+            </Link>
+            <i className="bi bi-arrow-right"></i>
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <>
+          <div
+            className="btn_atc"
+            onClick={() => {
+              addToSingleCart(productId);
+
+              alert("Product added to cart successfully");
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <i className="bi bi-cart cartTextMob" id={productId.id}>
+              Add to Cart
+            </i>
+          </div>
+
+        </>
+      );
+    }
+  };
 
   return (
     <>
@@ -208,30 +247,30 @@ const BrandProducts = () => {
                         className="price-sec"
                         style={{ padding: "0 8px 0 20px" }}
                       >
-                        
-                          <span className="sp priceMargin">₹{Math.round(e.selling_price)}</span>
-                      
-                       
-                          <del className="mrp priceMargin">₹{e.mrp}</del>
-                          <span className="discount">{e.discount}% OFF</span>
+                        <span className="sp priceMargin">
+                          ₹{Math.round(e.selling_price)}
+                        </span>
+
+                        <del className="mrp priceMargin">₹{e.mrp}</del>
+                        <span className="discount">{e.discount}% OFF</span>
                       </div>
 
                       <div className="card-btn-sec ">
-                        <div
-                          className="btn_atc"
-                          onClick={() => {
-                            addToSingleCart(e);
-                            alert("product added to cart successfully");
-                          }}
-                        >
-                          <p
-                            className="cartTextMob"
-                            id={e.id}
-                            style={{ cursor: "pointer" }}
-                          >
-                            Add to Cart
-                          </p>
-                        </div>
+                      {isInCart(e.id) ? (
+                            goToCart(e.id)
+                          ) : (
+                            <div
+                              className="btn_atc"
+                              onClick={() => {
+                                addToSingleCart(e);
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              <p className="cartTextMob" id={e.id}>
+                                Add to Cart
+                              </p>
+                            </div>
+                          )}
                       </div>
                     </div>
                   </div>
