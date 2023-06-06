@@ -646,13 +646,12 @@ const CustomPage = () => {
           <h3>Precurated Combo</h3>
         </div>
         <hr />
-        
 
-       {categoriesCombo.map((subArray) => {
+        {categoriesCombo.map((subArray) => {
           if (subArray.length > 0) {
             return (
               <>
-                {subArray.map((p) => ( 
+                {subArray.map((p) => (
                   <div className="col-md-4" key={p.id}>
                     <div className="newComboCart">
                       <div
@@ -1480,151 +1479,86 @@ const CustomPage = () => {
                 <hr />
 
                 {/* Single Products */}
-                {filteredProducts.length > 0
-                  ? filteredProducts.map((p) => (
-                      <div className="col-md-4" key={p.id}>
-                        <div className="newComboCart">
-                          <div
-                            className="cart-img-sec"
-                            style={{ position: "relative" }}
-                          >
-                            <Link
-                              onClick={() => wishlistProductData(p.id)}
-                              className="addtofavCategory"
-                            >
-                              <ul>
-                                <li className="youMayLikeHeart">
-                                  {heartFilled === p.id ? (
-                                    <i
-                                      style={{ color: "#fe9e2d" }}
-                                      className="bi bi-heart-fill"
-                                    ></i>
-                                  ) : (
-                                    <i className="bi bi-heart"></i>
-                                  )}
-                                </li>
-                              </ul>
-                            </Link>
-                            <Link to={`/product/${p.id}`}>
-                              <img
-                                src={p.thumbnail_img?.original_url}
-                                alt={p.name}
-                                width="100%"
-                              ></img>
-                            </Link>
-                          </div>
-
-                          <div className="card-det-sec">
-                            <div className="headingCard pt-3 ">
-                              <span>{p.name.substring(0, 40)}</span>
-                            </div>
-                            <div>
-                              <span className="packof">(Pack of 2)</span>
-                            </div>
-                            <div className="price-sec">
-                              <span className="spSingleProduct">
-                                ₹{p.selling_price}
-                              </span>
-                            </div>
-                            <div className="card-btn-sec ">
-                              <div
-                                className="btn_atc"
-                                onClick={() => {
-                                  addToSingleCart(p);
-                                  alert("product added to cart successfully");
-                                }}
-                                style={{ cursor: "pointer" }}
-                              >
-                                <p className="cartTextMob" id={p.id}>
-                                  Add to Cart
-                                </p>
-                                {/* key={subArray[0].id} */}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  : brandProduct.map((subArray) => {
-                      if (subArray.length > 0) {
-                        return (
-                          <>
-                            {subArray.map((p) => (
-                              <div className="col-md-4" key={p.id}>
-                                <div className="newComboCart">
-                                  <div
-                                    className="cart-img-sec"
-                                    style={{ position: "relative" }}
+               
+                  {brandProduct.map((subArray) => {
+                    if (subArray.length > 0) {
+                      return (
+                        <>
+                          {subArray.map((p) => (
+                            <div className="col-md-4" key={p.id}>
+                              <div className="newComboCart">
+                                <div
+                                  className="cart-img-sec"
+                                  style={{ position: "relative" }}
+                                >
+                                  <Link
+                                    onClick={() => wishlistProductData(p.id)}
+                                    className="addtofavCategory"
                                   >
-                                    <Link
-                                      onClick={() => wishlistProductData(p.id)}
-                                      className="addtofavCategory"
-                                    >
-                                      <ul>
-                                        <li className="youMayLikeHeart">
-                                          {heartFilled === p.id ? (
-                                            <i
-                                              style={{ color: "#fe9e2d" }}
-                                              className="bi bi-heart-fill"
-                                            ></i>
-                                          ) : (
-                                            <i className="bi bi-heart"></i>
-                                          )}
-                                        </li>
-                                      </ul>
-                                    </Link>
-                                    <Link to={`/product/${p.id}`}>
-                                      <img
-                                        src={p.thumbnail_img?.original_url}
-                                        alt={p.name}
-                                        width="100%"
-                                      ></img>
-                                    </Link>
-                                  </div>
+                                    <ul>
+                                      <li className="youMayLikeHeart">
+                                        {heartFilled === p.id ? (
+                                          <i
+                                            style={{ color: "#fe9e2d" }}
+                                            className="bi bi-heart-fill"
+                                          ></i>
+                                        ) : (
+                                          <i className="bi bi-heart"></i>
+                                        )}
+                                      </li>
+                                    </ul>
+                                  </Link>
+                                  <Link to={`/product/${p.id}`}>
+                                    <img
+                                      src={p.thumbnail_img?.original_url}
+                                      alt={p.name}
+                                      width="100%"
+                                    ></img>
+                                  </Link>
+                                </div>
 
-                                  <div className="card-det-sec">
-                                    <div className="headingCard pt-3 ">
-                                      {/* <span>{p.name.substring(0, 40)}</span> */}
-                                      {p.name && (
-                                        <span>{p.name.substring(0, 40)}</span>
-                                      )}
-                                    </div>
-                                    <div>
-                                      <span className="packof">
-                                        (Pack of 2)
-                                      </span>
-                                    </div>
-                                    <div className="price-sec">
-                                      <span className="spSingleProduct">
-                                        ₹{p.selling_price}
-                                      </span>
-                                    </div>
-                                    <div className="card-btn-sec ">
-                                      <div
-                                        className="btn_atc"
-                                        onClick={() => {
-                                          addToSingleCart(p);
-                                          alert(
-                                            "product added to cart successfully"
-                                          );
-                                        }}
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        <p className="cartTextMob" id={p.id}>
-                                          Add to Cart
-                                        </p>
-                                      </div>
+                                <div className="card-det-sec">
+                                  <div className="headingCard pt-3 ">
+                                    {/* <span>{p.name.substring(0, 40)}</span> */}
+                                    {p.name && (
+                                      <span>{p.name.substring(0, 40)}</span>
+                                    )}
+                                  </div>
+                                  <div>
+                                    <span className="packof">(Pack of 2)</span>
+                                  </div>
+                                  <div className="price-sec">
+                                    <span className="spSingleProduct">
+                                      ₹{p.selling_price}
+                                    </span>
+                                  </div>
+                                  <div className="card-btn-sec ">
+                                    <div
+                                      className="btn_atc"
+                                      onClick={() => {
+                                        addToSingleCart(p);
+                                        alert(
+                                          "product added to cart successfully"
+                                        );
+                                      }}
+                                      style={{ cursor: "pointer" }}
+                                    >
+                                      <p className="cartTextMob" id={p.id}>
+                                        Add to Cart
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            ))}
-                          </>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
+                            </div>
+                          ))}
+                        </>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}{" "}
+        
 
                 {/* Categories single Product */}
                 {categoriesProductSection}
