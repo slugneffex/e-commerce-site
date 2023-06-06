@@ -22,6 +22,7 @@ import {
   freeaddCartProduct,
   getfreeCartCount,
   getfreeProducts,
+  removefreeCartItem,
 } from "../../components/features/freeCartSlice";
 import {
   getsingleCartProducts,
@@ -274,6 +275,33 @@ const Cart = () => {
     dispatch(getfreebiesTotalAmount());
   }, [dispatch]);
 
+  //  add to cart freeitems
+  let FreeproductObj = {
+    id: "",
+    title: "",
+    mrp: "",
+    image: "",
+  };
+
+  const addToFreeCart = (e) => {
+    FreeproductObj = {
+      id: e.id,
+      title: e.name || e.product?.name,
+      mrp: e.selling_price || e.product?.selling_price,
+      image: e.thumbnail_img?.original_url || e.product?.thumbnail_img?.original_url,
+    };
+
+    dispatch(freeaddCartProduct(FreeproductObj));
+    dispatch(getfreeCartCount());
+  };
+
+  const { freecartItems } = useSelector((state) => state.free);
+
+  useEffect(() => {
+    dispatch(getfreeProducts());
+    dispatch(getfreeCartCount());
+  }, [dispatch]);
+
   // Total Pricing of products
 
   const ExtraFreebiesAmount = freebiestotalAmount - discount;
@@ -388,7 +416,7 @@ const Cart = () => {
 
   let freebiesDiscountSection = null;
 
-  if (singlesubAmount >= 1000) {
+  if (singlesubAmount >= 1000 && freecartItems.length === 0) {
     freebiesDiscountSection = (
       <li style={{ padding: "1rem" }}>
         {/*  desktop */}
@@ -530,7 +558,7 @@ const Cart = () => {
 
   let freebiesAmountSection = null;
 
-  if (discount > 0) {
+  if (discount > 0 && freecartItems.length === 0) {
     freebiesAmountSection = (
       <>
         <div
@@ -739,37 +767,14 @@ const Cart = () => {
 
   const BYOCSubTotal = singlesubAmount + ExtraFreebiesAmountt;
 
-  //  add to cart freeitems
-  let FreeproductObj = {
-    id: "",
-    title: "",
-    mrp: "",
-    image: "",
-  };
-
-  const addToFreeCart = (e) => {
-    FreeproductObj = {
-      id: e.id,
-      title: e.name,
-      mrp: e.selling_price,
-      image: e.thumbnail_img?.original_url,
-    };
-
-    dispatch(freeaddCartProduct(FreeproductObj));
-    dispatch(getfreeCartCount());
-  };
-
-  const { freecartItems } = useSelector((state) => state.free);
-
-  useEffect(() => {
-    dispatch(getfreebiesCartProducts());
-    dispatch(getfreebiesCartCount());
-    dispatch(getfreebiesTotalAmount());
-  }, [dispatch]);
-
   // free cartlevel section 7999
   let cartLevel7999Section = null;
-  if (singlesubAmount >= 7999 && singlesubAmount < 8999) {
+  if (
+    singlesubAmount >= 7999 &&
+    singlesubAmount < 8999 &&
+    freecartItems.length === 0 &&
+    freebiescartItems.length === 0
+  ) {
     cartLevel7999Section = (
       <div>
         {/* {Array.isArray(freeProduct7999) && freeProduct7999.map ((e) => ( */}
@@ -816,7 +821,11 @@ const Cart = () => {
 
   // free cartlevel section 8999
   let cartLevel8999Section = null;
-  if (singlesubAmount >= 8999) {
+  if (
+    singlesubAmount >= 8999 &&
+    freecartItems.length === 0 &&
+    freebiescartItems.length === 0
+  ) {
     cartLevel8999Section = (
       <>
         {cartlevel.map((e) => (
@@ -1042,7 +1051,7 @@ const Cart = () => {
                   <div className="col-6">
                     <div className="det">
                       <Link to="/freebies">
-                        <h6>{e.title.substring(0, 40)}...</h6>
+                      <h6>{e.title && e.title.substring(0, 40)}...</h6>
                       </Link>
                       <br />
 
@@ -1055,8 +1064,14 @@ const Cart = () => {
                   <div className="col-3">
                     <div className="actions">
                       <div className="editFreebie">
-                        <Link to="/freebies">
-                          <i className="bi bi-pencil-square"></i>
+                        <Link>
+                          <i
+                            onClick={() => {
+                              dispatch(removefreeCartItem(e.id));
+                              dispatch(getfreeCartCount());
+                            }}
+                            className="bi bi-pencil-square"
+                          ></i>
                         </Link>
                       </div>
                     </div>
