@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchhotdeal } from "../features/actions/hotdealActions";
@@ -10,26 +9,7 @@ const HotDeals = () => {
   useEffect(() => {
     dispatch(fetchhotdeal());
   }, [dispatch]);
-  // const [flash, setFlash] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //         "Cache-Control": "no-cache, no-store, must-revalidate",
-  //         mode: "cors",
-  //         credentials: "include",
-  //       },
-  //     };
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_BASE_URL}/superFlashDeals`,
-  //       options
-  //     );
-  //     setFlash(response.data);
-  //   }
-  //   fetchData();
-  // }, []);
+ 
 
   
 

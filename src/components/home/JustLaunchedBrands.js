@@ -37,51 +37,6 @@ const JustLaunchedBrands = () => {
     dispatch(fetchJbrands());
   }, [dispatch]);
 
-  
-  // const [brand, setBrand] = useState([]);
-  // const [error, setError] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     async function fetchData() {
-  //       setError(null);
-  //       setLoading(true);
-  //       const options = {
-  //         headers: {
-  //           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //           "Cache-Control": "no-cache, no-store, must-revalidate",
-  //           mode: "cors",
-  //           credentials: "include",
-  //         },
-  //       };
-
-  //       try {
-  //         const response = await axios.get(
-  //           `${process.env.REACT_APP_BASE_URL}/productDeals`,
-  //           options
-  //         );
-  //         setBrand(response.data);
-  //         setLoading(true);
-  //       } catch (error) {
-  //         if (error.response && error.response.status === 429) {
-  //           const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //           setTimeout(() => {
-  //             fetchData();
-  //           }, retryAfter * 1000);
-  //         } else {
-  //           setError(error.message);
-  //         }
-  //       }
-  //     }
-  //     fetchData();
-  //   }, 2000);
-  // }, []);
-
-
-  // if (error) {
-  //   console.log(error);
-  // }
 
 
   const [isCenterMode, setIsCenterMode] = useState(false);
