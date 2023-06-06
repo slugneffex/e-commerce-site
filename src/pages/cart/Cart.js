@@ -18,7 +18,11 @@ import {
   getTotalAmount,
   getTotalDiscount,
 } from "../../components/features/useCartSlice";
-
+import {
+  freeaddCartProduct,
+  getfreeCartCount,
+  getfreeProducts,
+} from "../../components/features/freeCartSlice";
 import {
   getsingleCartProducts,
   removesingleCartItem,
@@ -153,7 +157,7 @@ const Cart = () => {
 
   // free items
   const [cartlevel, setCartlevel] = useState([]);
-  const [cartlevelPic ,setCartlevelPic] = useState([])
+  const [cartlevelPic, setCartlevelPic] = useState([]);
   const [freeProduct7999, setFreeProduct7999] = useState(null);
   const [freeProduct7999Pic, setFreeProduct7999Pic] = useState([]);
   // const [freeProduct8999, setFreeProduct8999] = useState(null);
@@ -223,8 +227,8 @@ const Cart = () => {
       // const levels = response.data.levels
 
       setCartlevel(response.data.levels);
-      // setCartlevelPic(response.data.levels.product.photos)
-      console.log(levels.product.photos);
+      setCartlevelPic(levels.photos);
+      console.log(levels);
     } catch (error) {
       console.error("API call failed:", error);
     }
@@ -735,6 +739,35 @@ const Cart = () => {
 
   const BYOCSubTotal = singlesubAmount + ExtraFreebiesAmountt;
 
+  //  add to cart freeitems
+  let FreeproductObj = {
+    id: "",
+    title: "",
+    mrp: "",
+    image: "",
+  };
+
+  const addToFreeCart = (e) => {
+    FreeproductObj = {
+      id: e.id,
+      title: e.name,
+      mrp: e.selling_price,
+      image: e.thumbnail_img?.original_url,
+    };
+
+    dispatch(freeaddCartProduct(FreeproductObj));
+    dispatch(getfreeCartCount());
+  };
+
+  const { freecartItems } = useSelector((state) => state.free);
+
+  useEffect(() => {
+    dispatch(getfreebiesCartProducts());
+    dispatch(getfreebiesCartCount());
+    dispatch(getfreebiesTotalAmount());
+  }, [dispatch]);
+
+  // free cartlevel section 7999
   let cartLevel7999Section = null;
   if (singlesubAmount >= 7999 && singlesubAmount < 8999) {
     cartLevel7999Section = (
@@ -743,12 +776,16 @@ const Cart = () => {
         <div class="card freebiesCartCard">
           <div class="card-body" style={{ display: "flex" }}>
             <div class="card-head">
-              {freeProduct7999Pic.map((e) => (
-                <img
-                  src={e.original_url}
-                  alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green"
-                />
-              ))}
+              {/* {freeProduct7999Pic.map((e) => ( */}
+              {freeProduct7999 &&
+                freeProduct7999.thumbnail_img?.original_url && (
+                  <img
+                    src={freeProduct7999.thumbnail_img?.original_url}
+                    alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green"
+                  />
+                )}
+
+              {/* ))} */}
             </div>
             <div class="card-main px-3">
               <h3>
@@ -762,7 +799,14 @@ const Cart = () => {
                 <span>MRP: {freeProduct7999.selling_price}</span>
               )}
 
-              <a class="btn">Get Item</a>
+              <span
+                class="btn"
+                onClick={() => {
+                  addToFreeCart(freeProduct7999);
+                }}
+              >
+                Get Item
+              </span>
             </div>
           </div>
         </div>
@@ -770,6 +814,7 @@ const Cart = () => {
     );
   }
 
+  // free cartlevel section 8999
   let cartLevel8999Section = null;
   if (singlesubAmount >= 8999) {
     cartLevel8999Section = (
@@ -778,12 +823,10 @@ const Cart = () => {
           <div class="card freebiesCartCard" key={e.id}>
             <div class="card-body" style={{ display: "flex" }}>
               <div class="card-head">
-                { cartlevelPic && cartlevelPic.map((e) => (
                 <img
-                src={e.original_url}
+                  src={e.product?.thumbnail_img?.original_url}
                   alt="noise-colorfit-pro-3-assist-smart-watch-with-alexa-built-in---smoke-green"
                 />
-                ))}
               </div>
               <div class="card-main px-3">
                 <h3>
@@ -793,7 +836,14 @@ const Cart = () => {
                 <h5 style={{ color: "#009444" }}>{e.product?.name}</h5>
                 <span>MRP: {e.product?.selling_price}</span>
 
-                <a class="btn">Get Item</a>
+                <span
+                  class="btn"
+                  onClick={() => {
+                    addToFreeCart(e);
+                  }}
+                >
+                  Get Item
+                </span>
               </div>
             </div>
           </div>
@@ -824,31 +874,13 @@ const Cart = () => {
           responsive={responsive}
           infinite
         >
-          <div className="signalCart ">
-            <div className="col-2">
-              <img
-                src="./assets/img/percent-star.png"
-                alt="discountImg"
-                width="75px"
-                height="75px"
-              />
-            </div>
-            <div className="col-10">
-              <h3>
-                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
-              </h3>
-              <Link to="/freebies" className="btn_1">
-                Add Freebies Now <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
+          {freebiesDiscountSection}
           {cartLevel7999Section}
           {cartLevel8999Section}
         </Carousel>
 
         {/* for freebies */}
-        {freebiesDiscountSection}
+        {/* {freebiesDiscountSection} */}
 
         {/* It is for add more product for more saving and get 70 % OFF */}
         {freebiesUptoSection}
@@ -962,6 +994,7 @@ const Cart = () => {
             </div>
 
             <hr />
+            {/* freebies cart items */}
             {freebiescartItems.map((e, index) => (
               <li className="cart-item" key={e.id}>
                 <div className="row">
@@ -980,6 +1013,41 @@ const Cart = () => {
 
                       <div className="price-sec">
                         <del className="sp">₹ {e.price}</del>
+                        <span className="sp">Free</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-3">
+                    <div className="actions">
+                      <div className="editFreebie">
+                        <Link to="/freebies">
+                          <i className="bi bi-pencil-square"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+            {/* free cart items */}
+            {freecartItems.map((e) => (
+              <li className="cart-item" key={e.id}>
+                <div className="row">
+                  <div className="col-3">
+                    <Link to="/freebies" className="cart-item-img">
+                      <img className="freebieFreeImg" alt="freeImg" />
+                      <img src={e.image} alt="freebiesImg" />
+                    </Link>
+                  </div>
+                  <div className="col-6">
+                    <div className="det">
+                      <Link to="/freebies">
+                        <h6>{e.title.substring(0, 40)}...</h6>
+                      </Link>
+                      <br />
+
+                      <div className="price-sec">
+                        <del className="sp">₹ {e.mrp}</del>
                         <span className="sp">Free</span>
                       </div>
                     </div>
