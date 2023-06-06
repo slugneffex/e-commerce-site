@@ -13,6 +13,7 @@ import { RiShoppingBag3Line } from "react-icons/ri";
 import { CiHeart, CiMobile1 } from "react-icons/ci";
 import { VscAccount } from "react-icons/vsc";
 import { AiOutlineSearch } from "react-icons/ai";
+// import {LuShoppingBag} from "react-icons"
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -381,7 +382,9 @@ const Header = () => {
                         {store.map((e) => (
                           <li style={{ marginTop: "0.5rem" }} key={e.id}>
                             <Link to={`/store/${e.slug}`}>{e.name}</Link>
+                            <hr style={{margin:"0.25rem"}}/>
                           </li>
+                          
                         ))}
                       </ul>
                     </li>
@@ -468,19 +471,21 @@ const Header = () => {
                     style={{ marginLeft: "auto", alignItems: "center" }}
                   >
                     <li className="nav-item">
-                      <Link to="/signin" className="rightPartOfNav">
+                      <Link to="/signin" className="rightPartOfNav accountIcon">
                         {/* <img src="./assets/img/profileIcon.svg" alt="" /> */}
                         <VscAccount/>
+                        
                         <span style={{ marginLeft: "4px", fontSize: "15px" }}>
                           Account
                         </span>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/Wishlist" className="rightPartOfNav">
+                      <Link to="/Wishlist" className="rightPartOfNav" style={{}}>
                         {/* <img src="./assets/img/wishlistIcon.svg" alt="" /> */}
-                        
-                        {/* <span>Wishlist</span> */}
+                        <CiHeart style={{fontSize:"35px"}}/>
+                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" id="heart"><path fill="#1C1C1C" d="M27.657 5.343a8 8 0 0 0-11.314 0L16 5.715l-.343-.372A8 8 0 0 0 4.343 16.657l.778.843.675.731 9.518 10.312.686.742.686-.743 9.518-10.312.675-.731.778-.843a8 8 0 0 0 0-11.313zm-.545 10.445l-.908.982-.676.73L16 27.801 6.472 17.5l-.676-.731-.908-.982a6.77 6.77 0 0 1 0-9.575l.324-.324a6.77 6.77 0 0 1 9.575 0l.527.569.686.742.686-.741.527-.569a6.77 6.77 0 0 1 9.575 0l.324.324a6.77 6.77 0 0 1 0 9.575z"></path></svg>
+                        <span>Wishlist</span> */}
                       </Link>
                     </li>
 
@@ -492,6 +497,7 @@ const Header = () => {
                         style={{ position: "relative" }}
                       >
                         <img src="./assets/img/cartImg.svg" alt="" />
+                        {/* <LuShoppingBag/> */}
                         <strong
                           className="desktop"
                           style={{

@@ -90,6 +90,10 @@ h1 h2 h3 h4 h5 h6 p {
     text-align: center;
    /* margin: 8px 10px 8px 30px !important; */
 }
+#stores-menu{
+    text-align: start !important;
+    width: 210px !important;
+}
 #navSec .collapse .nav-link {
     text-align: center;
     margin: 8px 5px 8px 20px !important;
@@ -433,6 +437,8 @@ option {
         justify-content: space-between; */
         text-align: center;
     }
+
+  
 
 
 
