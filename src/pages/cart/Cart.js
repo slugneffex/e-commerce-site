@@ -23,6 +23,7 @@ import {
   getfreeCartCount,
   getfreeProducts,
   removefreeCartItem,
+  clearfreeCart,
 } from "../../components/features/freeCartSlice";
 import {
   getsingleCartProducts,
@@ -158,9 +159,8 @@ const Cart = () => {
 
   // free items
   const [cartlevel, setCartlevel] = useState([]);
-  const [cartlevelPic, setCartlevelPic] = useState([]);
-  const [freeProduct7999, setFreeProduct7999] = useState(null);
-  const [freeProduct7999Pic, setFreeProduct7999Pic] = useState([]);
+
+  const [freeProduct7999, setFreeProduct7999] = useState([]);
   // const [freeProduct8999, setFreeProduct8999] = useState(null);
   useEffect(() => {
     if (singlesubAmount >= 7999) {
@@ -191,45 +191,26 @@ const Cart = () => {
 
       // Check if total amount is greater than 7999
       if (singlesubAmount >= 7999 && singlesubAmount < 8999) {
-        // Find the cart level with autoadd_amount equal to 7999
         const level7999 = levels.find(
           (level) => level.autoadd_amount === "7999"
         );
 
         if (level7999) {
-          // Set the free product for autoadd_amount equal to 7999
           setFreeProduct7999(level7999.product);
-          console.log(level7999.product);
-          setFreeProduct7999Pic(level7999.product.photos);
-
-          // Show the free product for autoadd_amount equal to 7999
-          // showFreeProduct(level7999);
+        }else{
+          setFreeProduct7999([]);
         }
+      }else {
+        setFreeProduct7999([]);
       }
 
-      // Check if total amount is greater than 8999
-      // if (singlesubAmount >= 8999) {
-      //   const level7999 = levels.find(
-      //     (level) => level.autoadd_amount === "7999"
-      //   );
-      //   const level8999 = levels.find(
-      //     (level) => level.autoadd_amount === "8999"
-      //   );
+      if (singlesubAmount >= 8999) {
+        setCartlevel(response.data.levels);
+      } else {
+        setCartlevel([]); // Clear the array if the condition is not met
+      }
 
-      //   if (level7999 && level8999) {
-      //     // Set the free products for autoadd_amount equal to 7999 and 8999
-      //     setFreeProduct7999(level7999);
-      //     // setFreeProduct8999(level8999.product);
-      //     // Show the free products for autoadd_amount equal to 7999 and 8999
-      //     showFreeProduct(level7999);
-      //     showFreeProduct(level8999);
-      //   }
-      // }
-      // const levels = response.data.levels
-
-      setCartlevel(response.data.levels);
-      setCartlevelPic(levels.photos);
-      console.log(levels);
+      // setCartlevel(response.data.levels);
     } catch (error) {
       console.error("API call failed:", error);
     }
@@ -288,7 +269,8 @@ const Cart = () => {
       id: e.id,
       title: e.name || e.product?.name,
       mrp: e.selling_price || e.product?.selling_price,
-      image: e.thumbnail_img?.original_url || e.product?.thumbnail_img?.original_url,
+      image:
+        e.thumbnail_img?.original_url || e.product?.thumbnail_img?.original_url,
     };
 
     dispatch(freeaddCartProduct(FreeproductObj));
@@ -325,6 +307,80 @@ const Cart = () => {
       dispatch(clearCart());
     }
   }, [singlesubAmount, dispatch]);
+
+  //  Freebies Section
+
+  let freebiesDiscountSection = null;
+
+
+  if (singlesubAmount >= 1000 && freecartItems.length === 0) {
+    freebiesDiscountSection = (
+      <li style={{ padding: "1rem" }}>
+        {/*  desktop */}
+        <div className="desktop">
+          <div className="signalCart ">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-10">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/*  mobile */}
+        <div className="mobile">
+          <div className="signalCart">
+            <div className="col-2">
+              <img
+                src="./assets/img/percent-star.png"
+                alt="discountImg"
+                width="75px"
+                height="75px"
+              />
+            </div>
+            <div className="col-2"></div>
+            <div className="col-8">
+              <h3>
+                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
+                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
+              </h3>
+              <Link to="/freebies" className="btn_1">
+                Add Freebies Now <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </li>
+    );
+  }
+
+  // if single subamount is less than 7999 then clear the arrray of freecartitems
+
+  useEffect(() => {
+    if(singlesubAmount < 7999){
+      dispatch(clearfreeCart());
+     
+    }
+  },[singlesubAmount,dispatch]);
+
+  useEffect(() => {
+    if(singlesubAmount < 8999){
+      dispatch(clearfreeCart());
+     
+    }
+  },[singlesubAmount,dispatch]);
 
   // Shipping amount less than 499
 
@@ -412,62 +468,7 @@ const Cart = () => {
     );
   }
 
-  //  Freebies Section
 
-  let freebiesDiscountSection = null;
-
-  if (singlesubAmount >= 1000 && freecartItems.length === 0) {
-    freebiesDiscountSection = (
-      <li style={{ padding: "1rem" }}>
-        {/*  desktop */}
-        <div className="desktop">
-          <div className="signalCart ">
-            <div className="col-2">
-              <img
-                src="./assets/img/percent-star.png"
-                alt="discountImg"
-                width="75px"
-                height="75px"
-              />
-            </div>
-            <div className="col-10">
-              <h3>
-                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
-              </h3>
-              <Link to="/freebies" className="btn_1">
-                Add Freebies Now <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/*  mobile */}
-        <div className="mobile">
-          <div className="signalCart">
-            <div className="col-2">
-              <img
-                src="./assets/img/percent-star.png"
-                alt="discountImg"
-                width="75px"
-                height="75px"
-              />
-            </div>
-            <div className="col-2"></div>
-            <div className="col-8">
-              <h3>
-                <strong>Hurray !</strong> You are Eligible To Add Freebies{" "}
-                <span>Upto ₹ {parseFloat(discount).toFixed(0)}</span>
-              </h3>
-              <Link to="/freebies" className="btn_1">
-                Add Freebies Now <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </li>
-    );
-  }
 
   // If Single cart===1 then i have to show the section
 
@@ -820,6 +821,7 @@ const Cart = () => {
   }
 
   // free cartlevel section 8999
+
   let cartLevel8999Section = null;
   if (
     singlesubAmount >= 8999 &&
@@ -861,6 +863,8 @@ const Cart = () => {
     );
   }
 
+    
+
   // single product cart section
 
   let SingleCartSection = null;
@@ -878,18 +882,18 @@ const Cart = () => {
           swipeable={false}
           draggable={true}
           arrows={false}
-          // autoPlay
-          autoPlaySpeed={100}
+          autoPlay={true}
+          autoPlaySpeed={300}
           responsive={responsive}
           infinite
         >
-          {freebiesDiscountSection}
+          {/* {freebiesDiscountSection} */}
           {cartLevel7999Section}
           {cartLevel8999Section}
         </Carousel>
 
         {/* for freebies */}
-        {/* {freebiesDiscountSection} */}
+        {freebiesDiscountSection}
 
         {/* It is for add more product for more saving and get 70 % OFF */}
         {freebiesUptoSection}
@@ -1051,7 +1055,7 @@ const Cart = () => {
                   <div className="col-6">
                     <div className="det">
                       <Link to="/freebies">
-                      <h6>{e.title && e.title.substring(0, 40)}...</h6>
+                        <h6>{e.title && e.title.substring(0, 40)}...</h6>
                       </Link>
                       <br />
 

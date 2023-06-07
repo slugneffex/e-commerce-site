@@ -28,6 +28,10 @@ const freeCartSlice = createSlice({
         ...state,
       };
     },
+    clearfreeCart: (state) => {
+      state.freecartItems = [];
+      state.freeCount = 0
+    },
 
     getfreeCartCount: (state, action) => {
       let freecartCount = state.freecartItems.reduce((total, item) => {
@@ -53,5 +57,6 @@ export const {
   getfreeCartCount,
   getfreeProducts,
   removefreeCartItem,
+  clearfreeCart
 } = freeCartSlice.actions;
 export default freeCartSlice.reducer;
