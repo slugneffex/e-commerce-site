@@ -54,7 +54,7 @@ const ForHer = () => {
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
+        <h3 className="forher" style={{ marginTop: "67px", marginBottom: "47px" }}>
           Top Picks For Her
         </h3>
         <div className="container youmaylikeboxshadow">

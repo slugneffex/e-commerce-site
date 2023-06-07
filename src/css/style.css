@@ -736,6 +736,33 @@ footer .contacts ul {
     margin-top: 15px;
   }
 }
+@media (max-width: 767px) {
+  .top-trending-head h3 {
+    font-size: 15px;
+  }
+ .justlaunched {
+  font-size: 15px;
+  }
+  .forher{
+    font-size: 16px;
+    margin-top: 50px !important;
+  }
+  .flashdeal{
+    font-size: 15px;
+    margin-top: -12px !important;
+  }
+  .topdeal{
+    margin-top: 47px !important;
+    font-size: 15px;
+  }
+  .forhim{
+    margin-top: 47px !important;
+    font-size: 15px;
+  }
+  .buildyoc{
+    
+  }
+}
 
 footer .contacts ul li {
   padding-left: 35px;

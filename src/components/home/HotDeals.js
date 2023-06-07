@@ -17,7 +17,7 @@ const HotDeals = () => {
     <div>
       <div className="container my-5">
         <div className="hot-deals text-center">
-          <h3>Super Flash Deals For You</h3>
+          <h3 className="flashdeal">Super Flash Deals For You</h3>
         </div>
 
         {Array.isArray(hotdeal) &&
