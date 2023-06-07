@@ -14,6 +14,11 @@ import { CiHeart, CiMobile1 } from "react-icons/ci";
 import { VscAccount } from "react-icons/vsc";
 import { AiOutlineSearch } from "react-icons/ai";
 // import {LuShoppingBag} from "react-icons"
+// import cartImg from '../../../public/assets/img/cartImg.svg';
+import cartImg from './cartImg.svg'
+import wishlistIcon from './wishlistIcon.svg'
+import profileIcon from './profileIcon.svg'
+
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -151,7 +156,7 @@ const Header = () => {
         <section className="top-bar-blink top-banner wcc" id="section">
           <div className="container text-white">
             <div className="row py-1">
-              <div className="col-md-6 py-2" id="mainTitle">
+              <div className="col-md-6 py-2" id="mainTitle" style={{paddingLeft:"0px"}}>
                 <Link
                   // to="/why-choose-combonation"
                   className="whyChooseCombonation"
@@ -173,6 +178,7 @@ const Header = () => {
                     fontWeight: "400",
                     position: "absolute",
                     top: "4px",
+                    fontSize: "14px"
                   }}
                 >
                   <Link style={{ color: "#fff" }} to="/why-choose-combonation">
@@ -472,8 +478,8 @@ const Header = () => {
                   >
                     <li className="nav-item">
                       <Link to="/signin" className="rightPartOfNav accountIcon">
-                        {/* <img src="./assets/img/profileIcon.svg" alt="" /> */}
-                        <VscAccount/>
+                        <img src={profileIcon} alt="" />
+                        {/* <VscAccount/> */}
                         
                         <span style={{ marginLeft: "4px", fontSize: "15px" }}>
                           Account
@@ -482,8 +488,8 @@ const Header = () => {
                     </li>
                     <li className="nav-item">
                       <Link to="/Wishlist" className="rightPartOfNav" style={{}}>
-                        {/* <img src="./assets/img/wishlistIcon.svg" alt="" /> */}
-                        <CiHeart style={{fontSize:"35px"}}/>
+                        <img src={wishlistIcon}  alt="" />
+                        {/* <CiHeart style={{fontSize:"35px"}}/> */}
                         {/* <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" id="heart"><path fill="#1C1C1C" d="M27.657 5.343a8 8 0 0 0-11.314 0L16 5.715l-.343-.372A8 8 0 0 0 4.343 16.657l.778.843.675.731 9.518 10.312.686.742.686-.743 9.518-10.312.675-.731.778-.843a8 8 0 0 0 0-11.313zm-.545 10.445l-.908.982-.676.73L16 27.801 6.472 17.5l-.676-.731-.908-.982a6.77 6.77 0 0 1 0-9.575l.324-.324a6.77 6.77 0 0 1 9.575 0l.527.569.686.742.686-.741.527-.569a6.77 6.77 0 0 1 9.575 0l.324.324a6.77 6.77 0 0 1 0 9.575z"></path></svg>
                         <span>Wishlist</span> */}
                       </Link>
@@ -496,7 +502,7 @@ const Header = () => {
                         // className="nav-link"
                         style={{ position: "relative" }}
                       >
-                        <img src="./assets/img/cartImg.svg" alt="" />
+                        <img src={cartImg} alt="" />
                         {/* <LuShoppingBag/> */}
                         <strong
                           className="desktop"
@@ -976,7 +982,11 @@ const Header = () => {
                     style={{ paddingRight: "0", textAlign: "start" }}
                   >
                     <Link to="/Wishlist">
-                      <i className="bi bi-heart" style={{ fontSize: "15px" }} />
+                      {/* <i className="bi bi-heart" style={{ fontSize: "15px" }} /> */}
+                      <img 
+                      className="wishlistImg"
+                      src={wishlistIcon}
+                      />
                     </Link>
                   </div>
                   <div
@@ -992,7 +1002,7 @@ const Header = () => {
                     <Link to="/Cart">
                       <img
                         className="cartImg"
-                        src="./assets/img/cartImg.svg"
+                        src={cartImg}
                         alt=""
                       />
                     </Link>

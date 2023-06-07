@@ -86,7 +86,7 @@ h1 h2 h3 h4 h5 h6 p {
 
 #navSec .collapse .rightPartOfNav {
     color: #464646;
-    margin: 8px 5px 8px 30px !important;
+    margin: 8px 0px 8px 22px !important;
 }
 
 #navSec .collapse .nav-link {
@@ -437,10 +437,13 @@ option {
     .getApp {
         font-size: 9px;
     }
-    
+     .wishlistImg{
+        width: 43%;
+
+     }
 
     .cartImg {
-        width: 45%;
+        width: 37%;
     }
 
 
