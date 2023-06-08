@@ -1,13 +1,11 @@
 import "./cart.css";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useDispatch, useSelector } from "react-redux";
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
 import axios from "axios";
 import {
   getCartProducts,
@@ -59,12 +57,6 @@ const Cart = () => {
   // Single Product Cart
 
   const { singletotalCount } = useSelector((statee) => statee.SingleCart);
-
-  // const currentCartType = useSelector(
-  //   (statee) => statee.SingleCart.singleCartItems[index].cartType
-  // );
-
-  // console.log(currentCartType);
 
   const {
     singleCartItems,
@@ -162,16 +154,8 @@ const Cart = () => {
 
   const [freeProduct7999, setFreeProduct7999] = useState([]);
   // const [freeProduct8999, setFreeProduct8999] = useState(null);
-  useEffect(() => {
-    if (singlesubAmount >= 7999) {
-      freecartAPI();
-    } else {
-      setFreeProduct7999(null);
-      // setFreeProduct8999(null);
-    }
-  }, [singlesubAmount]);
 
-  const freecartAPI = async () => {
+  const freecartAPI = useCallback(async () => {
     const options = {
       headers: {
         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
@@ -197,10 +181,10 @@ const Cart = () => {
 
         if (level7999) {
           setFreeProduct7999(level7999.product);
-        }else{
+        } else {
           setFreeProduct7999([]);
         }
-      }else {
+      } else {
         setFreeProduct7999([]);
       }
 
@@ -214,35 +198,15 @@ const Cart = () => {
     } catch (error) {
       console.error("API call failed:", error);
     }
-  };
+  }, [singlesubAmount]);
 
-  const showFreeProduct = (level) => {
-    // Logic to display the free product based on the cart level
-    console.log("Free product is available for level:", level);
-  };
-
-  // const freecartAPI = async () => {
-  //   const options = {
-  //     headers: {
-  //       "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       "Cache-Control": "no-cache, no-store, must-revalidate",
-  //       mode: "cors",
-  //       credentials: "include",
-  //     },
-  //   };
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_BASE_URL}/cartlevels`,
-  //       options
-  //     );
-
-  //       setCartlevel(response.data);
-  //       console.log(response.data.levels);
-
-  //   } catch (error) {
-  //     console.error("API call failed:", error);
-  //   }
-  // };
+  useEffect(() => {
+    if (singlesubAmount >= 7999) {
+      freecartAPI();
+    } else {
+      setFreeProduct7999(null);
+    }
+  }, [singlesubAmount, freecartAPI]);
 
   // Freebies cart section
   const { freebiesCount } = useSelector((state) => state.freebies);
@@ -312,7 +276,6 @@ const Cart = () => {
 
   let freebiesDiscountSection = null;
 
-
   if (singlesubAmount >= 1000 && freecartItems.length === 0) {
     freebiesDiscountSection = (
       <li style={{ padding: "1rem" }}>
@@ -369,18 +332,16 @@ const Cart = () => {
   // if single subamount is less than 7999 then clear the arrray of freecartitems
 
   useEffect(() => {
-    if(singlesubAmount < 7999){
+    if (singlesubAmount < 7999) {
       dispatch(clearfreeCart());
-     
     }
-  },[singlesubAmount,dispatch]);
+  }, [singlesubAmount, dispatch]);
 
   useEffect(() => {
-    if(singlesubAmount < 8999){
+    if (singlesubAmount < 8999) {
       dispatch(clearfreeCart());
-     
     }
-  },[singlesubAmount,dispatch]);
+  }, [singlesubAmount, dispatch]);
 
   // Shipping amount less than 499
 
@@ -467,8 +428,6 @@ const Cart = () => {
       </>
     );
   }
-
-
 
   // If Single cart===1 then i have to show the section
 
@@ -863,8 +822,6 @@ const Cart = () => {
     );
   }
 
-    
-
   // single product cart section
 
   let SingleCartSection = null;
@@ -883,7 +840,7 @@ const Cart = () => {
           draggable={true}
           arrows={false}
           autoPlay={true}
-          autoPlaySpeed={300}
+          autoPlaySpeed={3000}
           responsive={responsive}
           infinite
         >

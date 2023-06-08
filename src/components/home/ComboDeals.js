@@ -73,58 +73,6 @@ const ComboDeals = () => {
                   <Link  to={`${e.link}`}>
                     <img src={e.thumbnail?.url} width="95%" alt={e.name} />
                   </Link>
-             
-                {/* {e.product_id && (
-                  <Link to={`/product/${e.product_id}`}>
-                    <img
-                      src={e.thumbnail?.original_url}
-                      width="80%"
-                      alt={e.name}
-                    />
-                  </Link>
-                )}
-                {e.com_id && (
-                  <Link  to={`/combo/${e.com_id}`}>
-                    <img
-                      src={e.thumbnail?.original_url}
-                      width="80%"
-                      alt={e.name}
-                    />
-                  </Link>
-                )}
-
-                {e.page_id && (
-                  <Link to={`/page/${e.page_id}`}>
-                    <img
-                      src={e.thumbnail?.original_url}
-                      width="80%"
-                      alt={e.name}
-                    />
-                  </Link>
-                )}
-                {e.category_id && (
-                  <Link  to={`/category/${e.category_id}`}>
-                    <img
-                      src={e.thumbnail?.original_url}
-                      width="80%"
-                      alt={e.name}
-                    />
-                  </Link>
-                )} */}
-                {/* <div>{e.name}</div>
-                <div> <img
-                      src={e.thumbnail?.original_url}
-                      width="80%"
-                      alt={e.name}
-                    /></div> */}
-
-                {/* <Link to={`/brand/${e.brand_id}`}>
-                  <img
-                    src={e.banner?.original_url}
-                    width="80%"
-                    alt={e.name}
-                  ></img>
-                  </Link> */}
               </div>
             ))}
           </Carousel>

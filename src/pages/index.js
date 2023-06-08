@@ -14,15 +14,13 @@ import ForHim from "../components/home/ForHim";
 import Brands from "../components/home/BrandLogos/Brands";
 import BYOC from "../components/home/BYOC";
 import BrandProducts from "../components/home/BrandProducts";
-
 import MobikwikBanner from "../components/mobikwikBanner";
-
 import JustLaunchedBrands from "../components/home/JustLaunchedBrands";
 import ComboDeals from "../components/home/ComboDeals";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <main>
         <HomeLayout>
           <Categories></Categories>
@@ -46,7 +44,7 @@ const Home = () => {
           <Features></Features>
         </HomeLayout>
       </main>
-    </div>
+    </>
   );
 };
 

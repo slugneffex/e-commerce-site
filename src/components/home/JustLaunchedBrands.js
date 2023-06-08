@@ -88,43 +88,6 @@ const JustLaunchedBrands = () => {
                           alt={e.name}
                         />
                       </Link>
-             
-                    {/* {e.product_id && (
-                      <Link  to={`/product/${e.product_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="80%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )}
-                    {e.combo_id && (
-                      <Link  to={`/combo/${e.combo_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="80%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )}
-                    {e.page_id && (
-                      <Link  to={`/page/${e.page_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="80%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )}
-                    {e.category_id && (
-                      <Link  to={`/category/${e.category_id}`}>
-                        <img
-                          src={e.thumbnail?.original_url}
-                          width="80%"
-                          alt={e.name}
-                        />
-                      </Link>
-                    )} */}
                   </div>
                 ))}
             </Carousel>

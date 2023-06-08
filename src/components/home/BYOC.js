@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// import Skeleton from "react-loading-skeleton";
-// import "react-loading-skeleton/dist/skeleton.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchByoc } from "../features/actions/byocActions";
 

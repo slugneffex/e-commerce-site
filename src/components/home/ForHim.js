@@ -78,51 +78,6 @@ const ForHim = () => {
                         alt={e.name}
                       />
                     </Link>
-          
-                  {/* {e.product_id && (
-                    <Link  to={`/product/${e.slug}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.combo_id && (
-                    <Link  to={`/combo/${e.slug}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.page_id && (
-                    <Link  to={`/page/${e.page_id}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.category_id && (
-                    <Link  to={`/category/${e.slug}`}>
-                      <img
-                        src={e.banner?.original_url}
-                        width="80%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )} */}
-
-                  {/* <Link to={`/brand/${e.brand_id}`}>
-                  <img
-                    src={e.banner?.original_url}
-                    width="80%"
-                    alt={e.name}
-                  ></img>
-                  </Link> */}
                 </div>
               ))}
           </Carousel>

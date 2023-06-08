@@ -5,13 +5,10 @@ import { fetchhotdeal } from "../features/actions/hotdealActions";
 
 const HotDeals = () => {
   const dispatch = useDispatch();
-  const {  hotdeal } = useSelector((state) => state.hotdeal);
+  const { hotdeal } = useSelector((state) => state.hotdeal);
   useEffect(() => {
     dispatch(fetchhotdeal());
   }, [dispatch]);
- 
-
-  
 
   return (
     <div>
@@ -23,7 +20,7 @@ const HotDeals = () => {
         {Array.isArray(hotdeal) &&
           hotdeal.map((e) => (
             <div key={e.banner?.id}>
-              <Link  to="/view-all-products">
+              <Link to="/view-all-products">
                 <img
                   src={e.banner?.original_url}
                   width="100%"
