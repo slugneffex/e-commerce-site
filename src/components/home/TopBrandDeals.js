@@ -57,7 +57,7 @@ const TopBrandDeals = () => {
   return (
     <div>
       <div className="top-brand-deals">
-        <h3 className="text-center">Top Combo Deals For You</h3>
+        <h3  className="text-center ">Top Combo Deals For You</h3>
         <div className="container">
           <Carousel responsive={responsive}
           arrows={false}

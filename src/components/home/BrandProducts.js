@@ -187,7 +187,9 @@ const BrandProducts = () => {
         <div className="top-trending container">
           <div className="row" style={{ alignItems: "center" }}>
             <div className="col-6 top-trending-head">
-              <h3 className="mobileFont">Products From Latest Brands</h3>
+              <h3 className="mobileFont mobile">Latest Brands</h3>
+              <h3 className="mobileFont desktop">Products From Latest Brands</h3>
+
             </div>
 
             <div className="col-6 viewAllButton">

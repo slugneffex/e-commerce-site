@@ -101,8 +101,11 @@ const Brands = () => {
 
         <div className="row" style={{ alignItems: "center" }}>
           <div className="col-6 top-trending-head">
-            <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
+            <h3 className="buildyoc desktop" style={{ marginTop: "67px", marginBottom: "47px" }}>
               Build Your Combo From Top Brands
+            </h3>
+            <h3 className="buildyoc mobile" style={{ marginTop: "67px", marginBottom: "47px" }}>
+              Build Your Combo
             </h3>
           </div>
 

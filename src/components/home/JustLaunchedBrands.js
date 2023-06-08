@@ -66,7 +66,7 @@ const JustLaunchedBrands = () => {
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 style={{ marginTop: "67px", marginBottom: "47px" }}>
+        <h3 className="justlaunched" style={{ marginTop: "67px", marginBottom: "47px" }}>
           Just Launched Brands
         </h3>
       
