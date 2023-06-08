@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -13,7 +12,6 @@ const TopTrendingCombos = () => {
   useEffect(() => {
     dispatch(fetchToppicks());
   }, [dispatch]);
- 
 
   // Carousel Responsive
 
@@ -29,10 +27,9 @@ const TopTrendingCombos = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      slidesToSlide: 1
+      slidesToSlide: 1,
     },
   };
-
 
   return (
     <>
@@ -46,9 +43,12 @@ const TopTrendingCombos = () => {
           <div className="row">
             {Array.isArray(toppicks) &&
               toppicks.map((e) => (
-                <div className="col-md-6" style={{ marginTop: "20px" }} key={e.id}>
+                <div
+                  className="col-md-6"
+                  style={{ marginTop: "20px" }}
+                  key={e.id}
+                >
                   <div className="top-picks-img">
-
                     <Link to={`${e.link}`}>
                       <img
                         src={e.thumbnail?.original_url}
@@ -66,10 +66,7 @@ const TopTrendingCombos = () => {
       {/* mobile */}
       <div className="mobile">
         <div className="top-trending container">
-          <div
-            className="top-trending-head"
-            style={{ marginBottom: "2rem" }}
-          >
+          <div className="top-trending-head" style={{ marginBottom: "2rem" }}>
             <h3>Top Picks For You...</h3>
           </div>
         </div>
@@ -82,61 +79,20 @@ const TopTrendingCombos = () => {
             arrows={false}
             centerMode
           >
-
-            
             {Array.isArray(toppicks) &&
-            toppicks.map((e) => (
-              <div key={e.id}>
-                <div>
-                  {e.brand_id && (
-                    <Link  to={`/brand/${e.brand_id}`}>
+              toppicks.map((e) => (
+                <div key={e.id}>
+                  <div>
+                    <Link to={`${e.link}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="100%"
                         alt={e.name}
                       />
                     </Link>
-                  )}
-                  {e.product_id && (
-                    <Link  to={`/product/${e.product_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.combo_id && (
-                    <Link  to={`/combo/${e.combo_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.page_id && (
-                    <Link  to={`/page/${e.page_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.category_id && (
-                    <Link  to={`/category/${e.category_id}`}>
-                      <img
-                        src={e.thumbnail?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </Carousel>
         </div>
       </div>

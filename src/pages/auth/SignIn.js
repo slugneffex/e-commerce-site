@@ -8,12 +8,6 @@ import jwtDecode from "jwt-decode";
 import { LoginSocialFacebook } from "reactjs-social-login";
 import Loader from "../../components/home/Loader/Loader";
 
-// import { FacebookLoginButton } from "react-social-login-buttons";
-// import zIndex from "@mui/material/styles/zIndex";
-
-
-
-
 const SignIn = () => {
   const navigate = useNavigate();
 
@@ -28,11 +22,10 @@ const SignIn = () => {
     setUser(userObject);
     localStorage.setItem("gmail-token", response.credential);
     localStorage.setItem("gmailname", userObject.name);
-    localStorage.setItem("gmailemail", userObject.email);
+    localStorage.setItem("gmail", userObject.email);
     localStorage.setItem("gmailimg", userObject.picture);
     document.getElementById("signInDiv");
   }
-
 
   useEffect(() => {
     /* global google */
@@ -56,7 +49,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/Acccount",-1);
+      navigate("/Acccount", -1);
     } else if (localStorage.getItem("gmail-token")) {
       navigate("/Acccount");
     } else if (localStorage.getItem("facebook-token")) {
@@ -79,7 +72,7 @@ const SignIn = () => {
 
   localStorage.setItem("password", data.password);
 
-  //for loading 
+  //for loading
   const [loading, setLoading] = useState(false);
 
   // function submit(e) {
@@ -117,7 +110,7 @@ const SignIn = () => {
   const submit = (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     axios
       .post(
         url,
@@ -128,13 +121,14 @@ const SignIn = () => {
         {
           headers: {
             "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+            withCredentials: true,
           },
         }
       )
       .then((res) => {
         if (res.data.status === 401) {
           alert(res.data.message);
-          navigate("/Signin"-1);
+          navigate("/Signin" - 1);
         } else {
           // alert("Login Successfully");
           localStorage.setItem("name", res.data.user?.name);
@@ -243,20 +237,33 @@ const SignIn = () => {
                           Proceed To log In
                         </button>
                       </form>
-                      {loading && <Loader/>}
+                      {loading && <Loader />}
                       <div className="social-login mt-3">
                         <span>or Login Via</span>
                         <div className="d-flex mt-5 align-items-center justify-center">
-                          <div className="col-4" style={{position: "relative"}}>
-                            
-                              <div id="signInDiv" style={{opacity: "0",zIndex: 1,marginRight: " 1rem", position: "absolute", left: "0"}}></div>
-                              <img style={{}}
-                                src="https://www.combonation.in/assets_new/img/social/google.png"
-                                alt="google" width="100px"                                                        
-                              />
-                              {/* {user?localStorage.setItem("gmailname",user.name ):""} */}
+                          <div
+                            className="col-4"
+                            style={{ position: "relative" }}
+                          >
+                            <div
+                              id="signInDiv"
+                              style={{
+                                opacity: "0",
+                                zIndex: 1,
+                                marginRight: " 1rem",
+                                position: "absolute",
+                                left: "0",
+                              }}
+                            ></div>
+                            <img
+                              style={{}}
+                              src="https://www.combonation.in/assets_new/img/social/google.png"
+                              alt="google"
+                              width="100px"
+                            />
+                            {/* {user?localStorage.setItem("gmailname",user.name ):""} */}
 
-                              {/* <div>
+                            {/* <div>
                                 <h3>{user.name}</h3>
 
                               </div> */}
@@ -270,7 +277,7 @@ const SignIn = () => {
                             </div> */}
                           </div>
                           <div className="col-4">
-                            <div  style={{ boxShadow: "none" }}>
+                            <div style={{ boxShadow: "none" }}>
                               <LoginSocialFacebook
                                 appId="1727203981032521"
                                 autoLoad={false}
