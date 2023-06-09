@@ -27,7 +27,10 @@ const TopTrendingCombos = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
+
+
       slidesToSlide: 1,
+
     },
   };
 
@@ -75,18 +78,62 @@ const TopTrendingCombos = () => {
             showDots={false}
             responsive={responsive}
             infinite={true}
-            autoPlay={true}
+            // autoPlay={true}
             arrows={false}
             centerMode
           >
             {Array.isArray(toppicks) &&
+
+            toppicks.map((e) => (
+              <div key={e.id} style={{width: "100%"}}>
+                <div className="top-picks-img my-3">
+                  {e.brand_id && (
+                    <Link  to={`/brand/${e.brand_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.product_id && (
+                    <Link  to={`/product/${e.product_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.combo_id && (
+                    <Link  to={`/combo/${e.combo_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.page_id && (
+                    <Link  to={`/page/${e.page_id}`}>
+                      <img
+                        src={e.thumbnail?.original_url}
+                        width="95%"
+                        alt={e.name}
+                      />
+                    </Link>
+                  )}
+                  {e.category_id && (
+                    <Link  to={`/category/${e.category_id}`}>
+
               toppicks.map((e) => (
                 <div key={e.id}>
                   <div>
                     <Link to={`${e.link}`}>
+
                       <img
                         src={e.thumbnail?.original_url}
-                        width="100%"
+                        width="95%"
                         alt={e.name}
                       />
                     </Link>

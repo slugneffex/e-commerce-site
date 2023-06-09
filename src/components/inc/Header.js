@@ -980,7 +980,7 @@ const Header = () => {
                       <img
                         src={e.logo?.original_url}
                         alt="logo-combonation"
-                        style={{ width: "75%", height: "47px" }}
+                        style={{ width: "60%", height: "47px" }}
                       ></img>
                     </Link>
                   ))}
