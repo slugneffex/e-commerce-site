@@ -13,7 +13,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
@@ -21,7 +21,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1.5,
+    items: 2.4,
     centerMode: false,
   },
 };
@@ -61,8 +61,8 @@ const ForHer = () => {
           <Carousel
             responsive={responsive}
             arrows={isCenterMode}
-            infinite
-            centerMode={isCenterMode}
+            // infinite
+            // centerMode={isCenterMode}
           >
             {Array.isArray(forher) &&
               forher.map((e) => (

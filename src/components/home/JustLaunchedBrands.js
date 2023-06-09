@@ -24,7 +24,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1.5,
+    items: 2.1,
   },
 };
 
@@ -66,7 +66,7 @@ const JustLaunchedBrands = () => {
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 className="justlaunched" style={{ marginTop: "67px", marginBottom: "47px" }}>
+        <h3 className="justlaunched">
           Just Launched Brands
         </h3>
       

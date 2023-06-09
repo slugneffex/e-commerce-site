@@ -642,6 +642,12 @@ a {
   height: 30px;
 }
 
+.justlaunched {
+  font-size: 22px;
+  margin-top: 67px;
+  margin-bottom: 47px;
+  }
+
 /* Feature Section End */
 
 /* Top Trending Combos */
@@ -742,10 +748,13 @@ footer .contacts ul {
   }
  .justlaunched {
   font-size: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   }
   .forher{
     font-size: 16px;
-    margin-top: 50px !important;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
   }
   .flashdeal{
     font-size: 15px;
@@ -756,12 +765,17 @@ footer .contacts ul {
     font-size: 15px;
   }
   .forhim{
-    margin-top: 47px !important;
+    margin-top: 30px ;
+    margin-bottom: 30px ;
     font-size: 15px;
   }
-  .buildyoc{
-    
-  }
+  
+}
+
+.forhim {
+  margin-top: 67px ;
+    margin-bottom: 47px ;
+    font-size: 15px;
 }
 
 footer .contacts ul li {
@@ -1123,7 +1137,7 @@ ul.additional_links li:after {
   }
 
   .cartTextMob  {
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 !important;
     font-weight: normal;
   
@@ -1283,8 +1297,12 @@ ul.additional_links li:after {
 
 
 @media (max-width: 720px) {
+  .headingCard {
+    height:50px !important;
+  }
+
   .headingCard span {
-    padding: 8px;
+    padding: 8px 8px 8px 0;
     font-size: 13px;
     color: #464646;
     
@@ -1296,7 +1314,7 @@ ul.additional_links li:after {
   }
 
   .mobile .topPicksCarousel .react-multi-carousel-list .react-multi-carousel-track .react-multi-carousel-item  {
-    width: 90vw !important; 
+    width: 310px !important; 
     margin: 0 .3rem 0 .4rem !important;
   }
   

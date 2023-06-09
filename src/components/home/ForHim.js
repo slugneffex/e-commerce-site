@@ -21,7 +21,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1.5,
+    items: 2.2,
   },
 };
 
@@ -61,7 +61,7 @@ const ForHim = () => {
         <div className="container">
           <Carousel
             responsive={responsive}
-            arrows={false}
+            arrows={isCenterMode}
             infinite
             centerMode={isCenterMode}
             dotListClass="custom-dot-list-style"
