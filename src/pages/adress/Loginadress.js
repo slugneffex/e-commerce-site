@@ -230,6 +230,8 @@ const Loginadress = () => {
     name: "",
     postal_code: "",
     phone: "",
+    name: "",
+    phone: "",
   });
 
   const sendData = () => {
@@ -241,6 +243,8 @@ const Loginadress = () => {
           address: formData.address,
           user_id: user_id,
           state_id: state_id,
+          name: formData.name,
+          phone: formData.phone,
         },
         {
           headers: {
@@ -295,7 +299,7 @@ const Loginadress = () => {
       .post(`${process.env.REACT_APP_BASE_URL}/deleteAddress/${id}`, {
         headers: {
           "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer${token}`,
         },
       })
       .then((res) => {
@@ -577,108 +581,107 @@ const Loginadress = () => {
           <hr />
           {token ? (
             <div className="container">
-            <div className="row">
-              <div className="col-md-8">
-                <div className="heading">
-                  <h2>Your Addresses ({address.length})</h2>
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="heading">
+                    <h2>Your Addresses ({address.length})</h2>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md-8">
-                {address.map((e) => (
-                  <div className="userAddress-card active" key={e.id}>
-                    <div className="row">
-                      <div className="col-2 text-center">
-                        <div className="card-head">
-                          <i className="bi bi-geo-alt"></i>
-                        </div>
-                      </div>
-                      <div className="col-7">
-                        <div className="card-body">
-                          <h6>{e.user?.name}</h6>
-                          <p>{e.address}</p>
-                          <p>Phone Number :- XXXXX56789</p>
-                        </div>
-                      </div>
-                      <div className="col-3">
-                        <div className="card-footer">
-                          <div className="actions">
-                            <i className="bi bi-pencil-square"></i>
-                            <i
-                              className="bi bi-trash3"
-                              onClick={() => deleteData(e.id)}
-                            ></i>
+              <div className="row">
+                <div className="col-md-8">
+                  {address.map((e) => (
+                    <div className="userAddress-card active" key={e.id}>
+                      <div className="row">
+                        <div className="col-2 text-center">
+                          <div className="card-head">
+                            <i className="bi bi-geo-alt"></i>
                           </div>
-                          <div className="form-group mt-5">
-                            <input
-                              type="radio"
-                              name="default"
-                              id=""
-                              className="form-checkbox-input"
-                            />
-                            <label for="">Make Default</label>
+                        </div>
+                        <div className="col-7">
+                          <div className="card-body">
+                            <h6>{e.name}</h6>
+                            <p>{e.address}</p>
+                            <p>Phone Number :- {e.phone}</p>
+                          </div>
+                        </div>
+                        <div className="col-3">
+                          <div className="card-footer">
+                            <div className="actions">
+                              <i className="bi bi-pencil-square"></i>
+                              <i
+                                className="bi bi-trash3"
+                                onClick={() => deleteData(e.id)}
+                              ></i>
+                            </div>
+                            <div className="form-group mt-5">
+                              <input
+                                type="radio"
+                                name="default"
+                                id=""
+                                className="form-checkbox-input"
+                              />
+                              <label for="">Make Default</label>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              <div className="col-md-4 mt-3 mb-5">
-                <div className="overview-card">
-                  <div className="overview-card-head">
-                    <h3>Order Summary</h3>
-                  </div>
-                  <div className="overview-card-body">
-                    <h6>
-                      Bill Details {totalCartCount} Items ({freebiesCount} Free)
-                    </h6>
+                  ))}
+                </div>
+                <div className="col-md-4 mt-3 mb-5">
+                  <div className="overview-card">
+                    <div className="overview-card-head">
+                      <h3>Order Summary</h3>
+                    </div>
+                    <div className="overview-card-body">
+                      <h6>
+                        Bill Details {totalCartCount} Items ({freebiesCount}{" "}
+                        Free)
+                      </h6>
 
-                    <ul className="price-breakup">
-                      <li className="price-type">
-                        <p>Total Price (Incl Taxes)</p>
-                        <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
-                      </li>
-                      {ExtraFreebiesAmountSection}
-                      {discountSection}
-                      {FreebiesCartDiscountSection}
-                      {shippingAmountSection}
-                      <li className="price-type">
-                        <p>Subtotal</p>
-                        <span>
+                      <ul className="price-breakup">
+                        <li className="price-type">
+                          <p>Total Price (Incl Taxes)</p>
+                          <span>₹{parseFloat(totalCartAmount).toFixed(0)}</span>
+                        </li>
+                        {ExtraFreebiesAmountSection}
+                        {discountSection}
+                        {FreebiesCartDiscountSection}
+                        {shippingAmountSection}
+                        <li className="price-type">
+                          <p>Subtotal</p>
+                          <span>
+                            ₹{parseFloat(totalCartSubAmount).toFixed(0)}
+                          </span>
+                        </li>
+                      </ul>
+                      {hurrryDiscountSection}
+                    </div>
+                    <hr />
+                    <div className="overview-card-footer">
+                      <div className="total-sec">
+                        <p className="total">Total</p>
+                        <span className="total">
                           ₹{parseFloat(totalCartSubAmount).toFixed(0)}
                         </span>
-                      </li>
-                    </ul>
-                    {hurrryDiscountSection}
-                  </div>
-                  <hr />
-                  <div className="overview-card-footer">
-                    <div className="total-sec">
-                      <p className="total">Total</p>
-                      <span className="total">
-                        ₹{parseFloat(totalCartSubAmount).toFixed(0)}
-                      </span>
-                    </div>
-                    <div className="extras">
-                      <p>
-                        {" "}
-                        {totalCartCount} Item ({freebiesCount} Free) | ₹
-                        {parseFloat(totalCartSubAmount).toFixed(0)}
-                      </p>
-                      <Link onClick={sendOrder} className="btn">
-                        Place Order
-                      </Link>
+                      </div>
+                      <div className="extras">
+                        <p>
+                          {" "}
+                          {totalCartCount} Item ({freebiesCount} Free) | ₹
+                          {parseFloat(totalCartSubAmount).toFixed(0)}
+                        </p>
+                        <Link onClick={sendOrder} className="btn">
+                          Place Order
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          ):null}
-          
+          ) : null}
         </section>
       </HomeLayout>
     </>

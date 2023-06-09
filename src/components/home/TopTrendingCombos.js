@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -13,7 +12,6 @@ const TopTrendingCombos = () => {
   useEffect(() => {
     dispatch(fetchToppicks());
   }, [dispatch]);
- 
 
   // Carousel Responsive
 
@@ -29,9 +27,12 @@ const TopTrendingCombos = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
+
+
+      slidesToSlide: 1,
+
     },
   };
-
 
   return (
     <>
@@ -45,9 +46,12 @@ const TopTrendingCombos = () => {
           <div className="row">
             {Array.isArray(toppicks) &&
               toppicks.map((e) => (
-                <div className="col-md-6" style={{ marginTop: "20px" }} key={e.id}>
+                <div
+                  className="col-md-6"
+                  style={{ marginTop: "20px" }}
+                  key={e.id}
+                >
                   <div className="top-picks-img">
-
                     <Link to={`${e.link}`}>
                       <img
                         src={e.thumbnail?.original_url}
@@ -65,10 +69,7 @@ const TopTrendingCombos = () => {
       {/* mobile */}
       <div className="mobile">
         <div className="top-trending container">
-          <div
-            className="top-trending-head"
-            style={{ marginBottom: "2rem" }}
-          >
+          <div className="top-trending-head" style={{ marginBottom: "2rem" }}>
             <h3>Top Picks For You...</h3>
           </div>
         </div>
@@ -81,9 +82,8 @@ const TopTrendingCombos = () => {
             arrows={false}
             centerMode
           >
-
-            
             {Array.isArray(toppicks) &&
+
             toppicks.map((e) => (
               <div key={e.id} style={{width: "100%"}}>
                 <div className="top-picks-img my-3">
@@ -125,17 +125,21 @@ const TopTrendingCombos = () => {
                   )}
                   {e.category_id && (
                     <Link  to={`/category/${e.category_id}`}>
+
+              toppicks.map((e) => (
+                <div key={e.id}>
+                  <div>
+                    <Link to={`${e.link}`}>
+
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
                         alt={e.name}
                       />
                     </Link>
-                  )}
-                  
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </Carousel>
         </div>
       </div>

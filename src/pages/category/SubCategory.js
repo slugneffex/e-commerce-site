@@ -40,32 +40,7 @@ const SubCategory = () => {
       isVisible: true,
     },
   ]);
-  // subcat api
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const options = {
-  //       headers: {
-  //         "X-Authorization": `${process.env.REACT_APP_HEADER}`,
-  //       },
-  //     };
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.REACT_APP_BASE_URL}/category/${slug}`,
-  //         options
-  //       );
-
-  //       setSubCat(response.data.data.subcats);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 429) {
-  //         const retryAfter = parseInt(error.response.headers["retry-after"]);
-  //         setTimeout(() => {
-  //           fetchData();
-  //         }, retryAfter * 1000);
-  //       }
-  //     }
-  //   }
-  //   fetchData();
-  // }, [slug]);
+  
 
   //   subCat product
   const [product, setProduct] = useState([]);

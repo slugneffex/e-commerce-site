@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -28,13 +27,11 @@ const responsive = {
 
 const TopBrandDeals = () => {
   const dispatch = useDispatch();
-  const {  combodeal } = useSelector((state) => state.combodeal);
+  const { combodeal } = useSelector((state) => state.combodeal);
 
   useEffect(() => {
     dispatch(fetchCombodeal());
   }, [dispatch]);
- 
-
 
   const [isCenterMode, setIsCenterMode] = useState(false);
 
@@ -45,30 +42,28 @@ const TopBrandDeals = () => {
 
     handleResize(); // Initial check on component mount
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  
 
   return (
     <div>
       <div className="top-brand-deals">
-        <h3  className="text-center ">Top Combo Deals For You</h3>
+        <h3 className="text-center ">Top Combo Deals For You</h3>
         <div className="container">
-          <Carousel responsive={responsive}
-          arrows={false}
-          infinite
-          centerMode={isCenterMode}
+          <Carousel
+            responsive={responsive}
+            arrows={false}
+            infinite
+            centerMode={isCenterMode}
           >
             {Array.isArray(combodeal) &&
               combodeal.map((e) => (
                 <div key={e.id}>
                   <Link>
-                  
                     <img
                       src={e.thumbnail?.original_url}
                       width="80%"

@@ -2,35 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./incAll.css";
-import Cookies from "js-cookie";
 import { fetchCategories } from "../features/actions/categoriesActions";
 import { fetchBrand } from "../features/actions/brandActions";
 import { fetchByoc } from "../features/actions/byocActions";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchStore } from "../features/actions/storeAction";
 import { fetchPage } from "../features/actions/pageActions";
-import { RiShoppingBag3Line } from "react-icons/ri";
-import { CiHeart, CiMobile1 } from "react-icons/ci";
-import { VscAccount } from "react-icons/vsc";
+import { CiMobile1 } from "react-icons/ci";
 import { AiOutlineSearch } from "react-icons/ai";
-// import {LuShoppingBag} from "react-icons"
-// import cartImg from '../../../public/assets/img/cartImg.svg';
-import cartImg from './cartImg.svg'
-import wishlistIcon from './wishlistIcon.svg'
-import profileIcon from './profileIcon.svg'
-
+import cartImg from "./cartImg.svg";
+import wishlistIcon from "./wishlistIcon.svg";
+import profileIcon from "./profileIcon.svg";
 
 const Header = () => {
   const dispatch = useDispatch();
-
-  // set a cookie with SameSite=None and Secure attributes
-  Cookies.set("myCookie", "cookieValue", { sameSite: "none", secure: true });
-
-  // set a cookie with SameSite=Strict attribute
-  Cookies.set("myCookie", "cookieValue", { sameSite: "strict" });
-
-  // set a cookie with SameSite=Lax attribute
-  Cookies.set("myCookie", "cookieValue", { sameSite: "lax" });
 
   const navigate = useNavigate();
 
@@ -156,14 +141,18 @@ const Header = () => {
         <section className="top-bar-blink top-banner wcc" id="section">
           <div className="container text-white">
             <div className="row py-1">
-              <div className="col-md-6 py-2" id="mainTitle" style={{paddingLeft:"0px"}}>
+              <div
+                className="col-md-6 py-2"
+                id="mainTitle"
+                style={{ paddingLeft: "0px" }}
+              >
                 <Link
                   // to="/why-choose-combonation"
                   className="whyChooseCombonation"
                 >
                   <p className="my-auto text-white">
                     Get Extra 10% OFF on Your First Order | Code:
-                    <span style={{fontWeight:"bolder"}}> SIGNUP10</span>
+                    <span style={{ fontWeight: "bolder" }}> SIGNUP10</span>
                   </p>
                 </Link>
               </div>
@@ -178,7 +167,7 @@ const Header = () => {
                     fontWeight: "400",
                     position: "absolute",
                     top: "4px",
-                    fontSize: "14px"
+                    fontSize: "14px",
                   }}
                 >
                   <Link style={{ color: "#fff" }} to="/why-choose-combonation">
@@ -190,7 +179,7 @@ const Header = () => {
                 className="col-md-2 saleSection"
                 style={{ paddingTop: "5px", position: "relative" }}
               >
-                <CiMobile1  style={{fontSize:"30px"}}/>
+                <CiMobile1 style={{ fontSize: "30px" }} />
 
                 <Link className="text-white text-align: left; getApp" to="/">
                   Get App
@@ -201,7 +190,10 @@ const Header = () => {
                   SALE
                 </Link>
               </div> */}
-              <div className="col-md-2 helpSection" style={{textAlign:"center"}}>
+              <div
+                className="col-md-2 helpSection"
+                style={{ textAlign: "center" }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30.31"
@@ -388,9 +380,8 @@ const Header = () => {
                         {store.map((e) => (
                           <li style={{ marginTop: "0.5rem" }} key={e.id}>
                             <Link to={`/store/${e.slug}`}>{e.name}</Link>
-                            <hr style={{margin:"0.25rem"}}/>
+                            <hr style={{ margin: "0.25rem" }} />
                           </li>
-                          
                         ))}
                       </ul>
                     </li>
@@ -480,15 +471,19 @@ const Header = () => {
                       <Link to="/signin" className="rightPartOfNav accountIcon">
                         <img src={profileIcon} alt="" />
                         {/* <VscAccount/> */}
-                        
+
                         <span style={{ marginLeft: "4px", fontSize: "15px" }}>
                           Account
                         </span>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/Wishlist" className="rightPartOfNav" style={{}}>
-                        <img src={wishlistIcon}  alt="" />
+                      <Link
+                        to="/Wishlist"
+                        className="rightPartOfNav"
+                        style={{}}
+                      >
+                        <img src={wishlistIcon} alt="" />
                         {/* <CiHeart style={{fontSize:"35px"}}/> */}
                         {/* <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" id="heart"><path fill="#1C1C1C" d="M27.657 5.343a8 8 0 0 0-11.314 0L16 5.715l-.343-.372A8 8 0 0 0 4.343 16.657l.778.843.675.731 9.518 10.312.686.742.686-.743 9.518-10.312.675-.731.778-.843a8 8 0 0 0 0-11.313zm-.545 10.445l-.908.982-.676.73L16 27.801 6.472 17.5l-.676-.731-.908-.982a6.77 6.77 0 0 1 0-9.575l.324-.324a6.77 6.77 0 0 1 9.575 0l.527.569.686.742.686-.741.527-.569a6.77 6.77 0 0 1 9.575 0l.324.324a6.77 6.77 0 0 1 0 9.575z"></path></svg>
                         <span>Wishlist</span> */}
@@ -576,11 +571,11 @@ const Header = () => {
                   className="whyChooseCombonation"
                 >
                   <p className="my-auto">
-                    Get Extra 10% OFF on Your First Order | Code: <span style={{fontSize:"11px"}}> SIGNUP10</span>
+                    Get Extra 10% OFF on Your First Order | Code:{" "}
+                    <span style={{ fontSize: "11px" }}> SIGNUP10</span>
                   </p>
                 </Link>
               </div>
-             
             </div>
           </div>
         </section>
@@ -627,12 +622,14 @@ const Header = () => {
                   tabIndex={-1}
                   id="offcanvasExample"
                   aria-labelledby="offcanvasExampleLabel"
-            
                 >
                   {/* <div className="relative"> */}
-                    {/* height  235*/}
-                    <div className="offcanvas-header pt-6 px-auto " style={{position:"relative", minHeight:"92px"}}>
-                      {/* {Array.isArray(byoc) &&
+                  {/* height  235*/}
+                  <div
+                    className="offcanvas-header pt-6 px-auto "
+                    style={{ position: "relative", minHeight: "92px" }}
+                  >
+                    {/* {Array.isArray(byoc) &&
                         byoc.map((e) => (
                           <Link
                             className="navbar-brand mx-auto"
@@ -648,32 +645,33 @@ const Header = () => {
                             ></img>
                           </Link>
                         ))} */}
-                        {/* <div> */}
-                          <button className="whyc" 
-                        style={{
-                          position: "absolute",
-                          
-                          top: "1.6rem",
-                        }}>
-                          <Link to="/why-choose-combonation">
-                          Why Combonation ?
-                        
-                          </Link>
-                        </button>
-                       
-                        {/* </div> */}
-                      <button
-                        type="button"
-                        className="btn-close text-reset"
-                        data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                        style={{
-                          position: "absolute",
-                          left: "5px",
-                          top: "1.6rem",
-                        }}
-                      />
-                    </div>
+                    {/* <div> */}
+                    <button
+                      className="whyc"
+                      style={{
+                        position: "absolute",
+
+                        top: "1.6rem",
+                      }}
+                    >
+                      <Link to="/why-choose-combonation">
+                        Why Combonation ?
+                      </Link>
+                    </button>
+
+                    {/* </div> */}
+                    <button
+                      type="button"
+                      className="btn-close text-reset"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
+                      style={{
+                        position: "absolute",
+                        left: "5px",
+                        top: "1.6rem",
+                      }}
+                    />
+                  </div>
                   {/* </div> */}
 
                   <div className="offcanvas-body">
@@ -687,7 +685,7 @@ const Header = () => {
                         >
                           <AiOutlineSearch />
                           <input
-                            id="search"
+                            id="search2"
                             className="form-control"
                             type="search"
                             name="search"
@@ -825,54 +823,101 @@ const Header = () => {
                         </div>
                       </div>
                       {/* my Account part */}
-                      <li
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseExample4"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="collapseExample"
-                      >
-                        {/* <Link>My Account</Link> */}
-                        <h5 className="ofcanvas-text">My Account</h5>
+                      {localStorage.getItem("token") ? (
+                        <li
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseExample4"
+                          role="button"
+                          aria-expanded="false"
+                          aria-controls="collapseExample"
+                        >
+                          {/* <Link>My Account</Link> */}
+                          <h5 className="ofcanvas-text">My Account</h5>
+                          <hr />
+                        </li>
+                      ) : (
+                        <li
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseExample4"
+                          role="button"
+                          aria-expanded="false"
+                          aria-controls="collapseExample"
+                        >
+                          {/* <Link>My Account</Link> */}
+                          <Link to="signin">
+                            {" "}
+                            <h5 className="ofcanvas-text">login</h5>
+                          </Link>
 
-                        <hr />
-                      </li>
+                          <hr />
+                        </li>
+                      )}
 
-                      <div className="collapse" id="collapseExample4">
-                        <div className="card card-body">
-                          <ul className="lis">
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/Acccount">My Profile</Link>
-                            </li>
+                      {localStorage.getItem("token") && (
+                        <div className="collapse" id="collapseExample4">
+                          <div className="card card-body">
+                            <ul className="lis">
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/signin">My Profile</Link>
+                              </li>
 
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/place">My Address</Link>
-                            </li>
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/Wishlist">My Wishlist</Link>
-                            </li>
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="Orders">My Orders</Link>
-                            </li>
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/">Logout</Link>
-                            </li>
-                          </ul>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/place">My Address</Link>
+                              </li>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/Wishlist">My Wishlist</Link>
+                              </li>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/Orders">My Orders</Link>
+                              </li>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link
+                                  onClick={() => {
+                                    localStorage.removeItem("token");
+                                    localStorage.removeItem("gmail-token");
+                                    localStorage.removeItem("gmailName");
+                                    localStorage.removeItem("gmailemail");
+                                    localStorage.removeItem("gmailimg");
+                                    localStorage.removeItem("facebook-token");
+                                    localStorage.removeItem("Facebook-name");
+                                    localStorage.removeItem("Facebook-email");
+                                    localStorage.removeItem("Facebook-img");
+                                    localStorage.removeItem("id");
+                                    localStorage.removeItem("name");
+                                    localStorage.removeItem("phone");
+                                    localStorage.removeItem("email");
+                                    alert("logout success");
+                                    navigate("/");
+                                  }}
+                                >
+                                  Logout
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </ul>
-                    <li
-                        role="button"                    
+                    <li role="button">
+                      <Link
+                        to="/"
+                        className="ofcanvas-text"
+                        style={{ fontWeight: "500" }}
                       >
-                        <Link to="/" className="ofcanvas-text" style={{fontWeight:"500"}} >Download App</Link>
-                        <hr />
-                      </li>    
-                      <li
-                        role="button"                    
+                        Download App
+                      </Link>
+                      <hr />
+                    </li>
+                    <li role="button">
+                      <Link
+                        to="/help"
+                        className="ofcanvas-text"
+                        style={{ fontWeight: "500" }}
                       >
-                        <Link to="/help" className="ofcanvas-text" style={{fontWeight:"500"}} >Help and Support</Link>
-                        <hr />
-                      </li>                 
+                        Help and Support
+                      </Link>
+                      <hr />
+                    </li>
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <h5 className="ofcanvas-text">Follow us at:</h5>
                       <ul
@@ -983,10 +1028,7 @@ const Header = () => {
                   >
                     <Link to="/Wishlist">
                       {/* <i className="bi bi-heart" style={{ fontSize: "15px" }} /> */}
-                      <img 
-                      className="wishlistImg"
-                      src={wishlistIcon}
-                      />
+                      <img className="wishlistImg" src={wishlistIcon} alt="wishlist img" />
                     </Link>
                   </div>
                   <div
@@ -1000,11 +1042,7 @@ const Header = () => {
                     }}
                   >
                     <Link to="/Cart">
-                      <img
-                        className="cartImg"
-                        src={cartImg}
-                        alt=""
-                      />
+                      <img className="cartImg" src={cartImg} alt="" />
                     </Link>
                     <strong
                       style={{
