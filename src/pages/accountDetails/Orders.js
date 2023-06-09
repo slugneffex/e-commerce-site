@@ -4,10 +4,23 @@ import "./accountDetails.css";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([]);
   const [ordersProduct, setOrdersProduct] = useState([]);
+
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/signin", -1);
+    } else if (!localStorage.getItem("gmail-token")) {
+      navigate("/signin");
+    } else if (!localStorage.getItem("facebook-token")) {
+      navigate("/signin");
+    }
+  });
 
   const token = localStorage.getItem("token");
 
@@ -26,8 +39,7 @@ const Orders = () => {
         );
         setOrders(response.response.data.orders);
         setOrdersProduct(response.data.orders.orderproducts);
-        console.log(response.data.orders.orderproducts)
-        console.log(response.data.orders)
+      
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = parseInt(error.response.headers["retry-after"]);

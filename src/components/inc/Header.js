@@ -823,41 +823,80 @@ const Header = () => {
                         </div>
                       </div>
                       {/* my Account part */}
-                      <li
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseExample4"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="collapseExample"
-                      >
-                        {/* <Link>My Account</Link> */}
-                        <h5 className="ofcanvas-text">My Account</h5>
+                      {localStorage.getItem("token") ? (
+                        <li
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseExample4"
+                          role="button"
+                          aria-expanded="false"
+                          aria-controls="collapseExample"
+                        >
+                          {/* <Link>My Account</Link> */}
+                          <h5 className="ofcanvas-text">My Account</h5>
+                          <hr />
+                        </li>
+                      ) : (
+                        <li
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseExample4"
+                          role="button"
+                          aria-expanded="false"
+                          aria-controls="collapseExample"
+                        >
+                          {/* <Link>My Account</Link> */}
+                          <Link to="signin">
+                            {" "}
+                            <h5 className="ofcanvas-text">login</h5>
+                          </Link>
 
-                        <hr />
-                      </li>
+                          <hr />
+                        </li>
+                      )}
 
-                      <div className="collapse" id="collapseExample4">
-                        <div className="card card-body">
-                          <ul className="lis">
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/Acccount">My Profile</Link>
-                            </li>
+                      {localStorage.getItem("token") && (
+                        <div className="collapse" id="collapseExample4">
+                          <div className="card card-body">
+                            <ul className="lis">
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/signin">My Profile</Link>
+                              </li>
 
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/place">My Address</Link>
-                            </li>
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/Wishlist">My Wishlist</Link>
-                            </li>
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="Orders">My Orders</Link>
-                            </li>
-                            <li style={{ marginTop: "0.5rem" }}>
-                              <Link to="/">Logout</Link>
-                            </li>
-                          </ul>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/place">My Address</Link>
+                              </li>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/Wishlist">My Wishlist</Link>
+                              </li>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link to="/Orders">My Orders</Link>
+                              </li>
+                              <li style={{ marginTop: "0.5rem" }}>
+                                <Link
+                                  onClick={() => {
+                                    localStorage.removeItem("token");
+                                    localStorage.removeItem("gmail-token");
+                                    localStorage.removeItem("gmailName");
+                                    localStorage.removeItem("gmailemail");
+                                    localStorage.removeItem("gmailimg");
+                                    localStorage.removeItem("facebook-token");
+                                    localStorage.removeItem("Facebook-name");
+                                    localStorage.removeItem("Facebook-email");
+                                    localStorage.removeItem("Facebook-img");
+                                    localStorage.removeItem("id");
+                                    localStorage.removeItem("name");
+                                    localStorage.removeItem("phone");
+                                    localStorage.removeItem("email");
+                                    alert("logout success");
+                                    navigate("/");
+                                  }}
+                                >
+                                  Logout
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </ul>
                     <li role="button">
                       <Link
@@ -989,7 +1028,7 @@ const Header = () => {
                   >
                     <Link to="/Wishlist">
                       {/* <i className="bi bi-heart" style={{ fontSize: "15px" }} /> */}
-                      <img className="wishlistImg" src={wishlistIcon} />
+                      <img className="wishlistImg" src={wishlistIcon} alt="wishlist img" />
                     </Link>
                   </div>
                   <div
