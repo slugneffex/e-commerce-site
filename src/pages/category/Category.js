@@ -8,7 +8,7 @@ import axios from "axios";
 import { CgSortAz } from "react-icons/cg";
 import { BiFilterAlt } from "react-icons/bi";
 import { TfiAngleDown, TfiAngleUp } from "react-icons/tfi";
-import { FadeLoader } from "react-spinners";
+
 
 import {
   addCartProduct,
@@ -216,28 +216,7 @@ const Category = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const updatePriceRangeVisibility = () => {
-  //     const updatedPriceRanges = priceRanges.map((range) => {
-  //       const { minPrice, maxPrice } = range;
-  //       const hasComboProductsInRange = combo.some(
-  //         (product) =>
-  //           product.selling_price >= minPrice &&
-  //           product.selling_price <= maxPrice
-  //       );
-  //       const hasProductInRange = product.some(
-  //         (product) =>
-  //           product.selling_price >= minPrice &&
-  //           product.selling_price <= maxPrice
-  //       );
-  //       const isVisible = hasComboProductsInRange || hasProductInRange;
-  //       return { ...range, isVisible };
-  //     });
-  //     setPriceRanges(updatedPriceRanges);
-  //   };
-
-  //   updatePriceRangeVisibility();
-  // }, [combo, product, priceRanges]);
+ 
 
   useEffect(() => {
     const updatePriceRangeVisibility = () => {
