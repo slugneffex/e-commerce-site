@@ -624,6 +624,19 @@ a {
 .viewAllBtn {
   position: relative;
 }
+ 
+.topdeal{
+  font-size: 22px;
+}
+.forhim {
+  margin-top: 67px ;
+    margin-bottom: 47px ;
+    font-size: 22px;
+}
+.forher{
+  font-size: 22px;
+
+}
 
 .viewAllBtn button {
   border: 1px solid #FF9100;
@@ -659,18 +672,19 @@ a {
 
   .viewAllBtn button {
     border: 1px solid #FF9100;
-    width: 80px;
+    width: 78px;
     border-radius: 4px;
     color: white !important ;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: normal;
     background-color: #fe9e2d;
     color: #464646;
     position: absolute;
     right: 0;
     top: 0;
     font-size: 12px;
+    height: 25px;
   }
 
   .mobileFont {
@@ -772,11 +786,7 @@ footer .contacts ul {
   
 }
 
-.forhim {
-  margin-top: 67px ;
-    margin-bottom: 47px ;
-    font-size: 15px;
-}
+
 
 footer .contacts ul li {
   padding-left: 35px;
