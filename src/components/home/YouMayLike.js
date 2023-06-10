@@ -185,7 +185,7 @@ const YouMayLike = () => {
               <div className="viewAllBtn">
                 <Link to={`/combos`}>
                   <button>
-                    View All
+                    <span>View All</span>
                     <AiOutlineArrowRight />
                   </button>
                 </Link>

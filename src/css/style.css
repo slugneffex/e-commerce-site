@@ -672,7 +672,7 @@ a {
 
   .viewAllBtn button {
     border: 1px solid #FF9100;
-    width: 78px;
+    width: 93px;
     border-radius: 4px;
     color: white !important ;
     display: flex;
@@ -685,6 +685,7 @@ a {
     top: 0;
     font-size: 12px;
     height: 25px;
+    padding: 0.5rem 1rem;
   }
 
   .mobileFont {
