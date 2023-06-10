@@ -703,6 +703,19 @@ a {
     z-index: 9999 !important;
   }
 
+  .hero-mobile .react-multi-carousel-list  {
+    overflow: visible !important;
+  }
+
+  .hero-mobile .react-multi-carousel-dot-list {
+    bottom: -15px !important;
+  }
+  .hero-mobile .react-multi-carousel-dot button {
+    width: 9px;
+    height: 9px;
+  }
+
+
 
 }
 
