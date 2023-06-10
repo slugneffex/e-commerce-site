@@ -96,9 +96,9 @@ const Hero = () => {
       </div>
 
       {/* mobile */}
-      <div className="mobile">
+      <div className="mobile hero-mobile">
         <Carousel
-          showDots={false}
+          showDots={true}
           responsive={responsive}
           infinite={true}
           // autoPlay
