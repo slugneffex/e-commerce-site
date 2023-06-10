@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -9,13 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHero } from "../features/actions/heroActions";
 const Hero = () => {
   const dispatch = useDispatch();
-  const {  hero } = useSelector((state) => state.hero);
-
+  const { hero } = useSelector((state) => state.hero);
 
   useEffect(() => {
     dispatch(fetchHero());
   }, [dispatch]);
-
 
   // Responsive
 
@@ -37,27 +35,25 @@ const Hero = () => {
   return (
     <>
       <div className="desktop heroCarousel">
-       
-          <Carousel
-            showDots={false}
-            responsive={responsive}
-            infinite={true}
-            autoPlay
-          >
-            {Array.isArray(hero) &&
-              hero.map((e) => (
-                <div key={e.banner?.id} style={{ width: "100%" }}>
-                  <div>
-                   
-                      <Link to={`${e.link}`}>
-                        <img
-                          src={e.banner?.original_url}
-                          width="100%"
-                          alt={e.name}
-                        />
-                      </Link>
-                
-                    {/* {e.page_id && (
+        <Carousel
+          showDots={false}
+          responsive={responsive}
+          infinite={true}
+          autoPlay
+        >
+          {Array.isArray(hero) &&
+            hero.map((e) => (
+              <div key={e.banner?.id} style={{ width: "100%" }}>
+                <div>
+                  <Link to={`${e.link}`}>
+                    <img
+                      src={e.banner?.original_url}
+                      width="100%"
+                      alt={e.name}
+                    />
+                  </Link>
+
+                  {/* {e.page_id && (
                       <Link to={`/page/${e.page_id}`}>
                         <img
                           src={e.banner?.original_url}
@@ -93,11 +89,10 @@ const Hero = () => {
                         />
                       </Link>
                     )} */}
-                  </div>
                 </div>
-              ))}
-          </Carousel>
-       
+              </div>
+            ))}
+        </Carousel>
       </div>
 
       {/* mobile */}
@@ -113,16 +108,14 @@ const Hero = () => {
             hero.map((e) => (
               <div key={e.mobile_banner?.id} style={{ width: "100vw" }}>
                 <div>
-                  {e.brand_id && (
-                    <Link to={`/brand/${e.brand_id}`}>
-                      <img
-                        src={e.mobile_banner?.original_url}
-                        width="100%"
-                        alt={e.name}
-                      />
-                    </Link>
-                  )}
-                  {e.page_id && (
+                  <Link to={`${e.link}`}>
+                    <img
+                      src={e.mobile_banner?.original_url}
+                      width="100%"
+                      alt={e.name}
+                    />
+                  </Link>
+                  {/* {e.page_id && (
                     <Link to={`/page/${e.page_id}`}>
                       <img
                         src={e.mobile_banner?.original_url}
@@ -157,15 +150,8 @@ const Hero = () => {
                         alt={e.name}
                       />
                     </Link>
-                  )}
+                  )} */}
                 </div>
-                {/* <Link to="/">
-                  <img
-                    src={e.mobile_banner?.original_url}
-                    alt="name"
-                    width="100%"
-                  />
-                </Link> */}
               </div>
             ))}
         </Carousel>
