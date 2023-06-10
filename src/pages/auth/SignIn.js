@@ -280,7 +280,7 @@ const SignIn = () => {
                           <div className="col-4">
                             <div style={{ boxShadow: "none" }}>
                               <LoginSocialFacebook
-                                appId="1727203981032521"
+                                appId="978463482842703"
                                 autoLoad={false}
                                 onResolve={(response) => {
                                   console.log(response);
