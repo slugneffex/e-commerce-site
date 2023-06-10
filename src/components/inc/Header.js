@@ -1028,7 +1028,11 @@ const Header = () => {
                   >
                     <Link to="/Wishlist">
                       {/* <i className="bi bi-heart" style={{ fontSize: "15px" }} /> */}
-                      <img className="wishlistImg" src={wishlistIcon} alt="wishlist img" />
+                      <img
+                        className="wishlistImg"
+                        src={wishlistIcon}
+                        alt="wishlist img"
+                      />
                     </Link>
                   </div>
                   <div

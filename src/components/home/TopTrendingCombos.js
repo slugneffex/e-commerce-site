@@ -28,9 +28,7 @@ const TopTrendingCombos = () => {
       breakpoint: { max: 464, min: 0 },
       items: 1,
 
-
       slidesToSlide: 1,
-
     },
   };
 
@@ -83,20 +81,18 @@ const TopTrendingCombos = () => {
             centerMode
           >
             {Array.isArray(toppicks) &&
-
-            toppicks.map((e) => (
-              <div key={e.id} style={{width: "100%"}}>
-                <div className="top-picks-img my-3">
-                  
-                    <Link  to={`${e.link}`}>
+              toppicks.map((e) => (
+                <div key={e.id} style={{ width: "100%" }}>
+                  <div className="top-picks-img my-3">
+                    <Link to={`${e.link}`}>
                       <img
                         src={e.thumbnail?.original_url}
                         width="95%"
                         alt={e.name}
                       />
                     </Link>
-               </div>
-               </div>
+                  </div>
+                </div>
               ))}
           </Carousel>
         </div>
