@@ -282,7 +282,7 @@ const BrandProduct = () => {
 
                 <div className="price-sec" style={{ padding: "0 8px 0 20px" }}>
                   <div className="col-3">
-                    <span className="sp">₹{p.selling_price}</span>
+                    <span className="sp">₹{Math.round(p.selling_price)}</span>
                   </div>
                   <div className="col-4">
                     <del className="mrp">₹{p.mrp}</del>
@@ -1038,7 +1038,7 @@ const BrandProduct = () => {
                               style={{ padding: "0 8px 0 20px" }}
                             >
                               <div className="col-3">
-                                <span className="sp">₹{p.selling_price}</span>
+                                <span className="sp">₹{Math.round(p.selling_price)}</span>
                               </div>
                               <div className="col-4">
                                 <del className="mrp">₹{p.mrp}</del>
