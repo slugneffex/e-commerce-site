@@ -18,7 +18,7 @@ const SignIn = () => {
   function handleCallbackResponse(response) {
     console.log("encoded jwt: " + response.credential);
     const userObject = jwtDecode(response.credential);
-    console.log(userObject);
+
     setUser(userObject);
     localStorage.setItem("gmail-token", response.credential);
     localStorage.setItem("gmailname", userObject.name);
@@ -281,9 +281,11 @@ const SignIn = () => {
                             <div style={{ boxShadow: "none" }}>
                               <LoginSocialFacebook
                                 appId="978463482842703"
+                                App Secret="32b1621deeff76bb2a3f514a48185f64"
+                                callback="https://combonation.in/login/facebook/callback"
                                 autoLoad={false}
                                 onResolve={(response) => {
-                                  console.log(response);
+                               
                                   setFaceboook(response.data);
                                   localStorage.setItem(
                                     "facebook-token",

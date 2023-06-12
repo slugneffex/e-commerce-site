@@ -822,6 +822,59 @@ const Cart = () => {
     );
   }
 
+  // coupones sections
+
+  const [coupon, setCoupon] = useState([]);
+
+  useEffect(() => {
+    const options = {
+      headers: {
+        "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+      },
+    };
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/coupons`, options)
+      .then((response) => {
+        const data = response.data;
+        const currentDate = new Date();
+        const validCoupons = data.filter((coupon) => {
+          const endDate = new Date(coupon.end_date);
+          const hasExpired = endDate.getTime() < currentDate.getTime();
+          const remainingUsages =
+            parseInt(coupon.number_of_usage) - parseInt(coupon.times_used);
+          return !hasExpired && remainingUsages > 0;
+        });
+
+        setCoupon(validCoupons);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [appliedCode, setAppliedCode] = useState("");
+  const handleApplyCode = () => {
+    const options = {
+      headers: {
+        "X-Authorization": `${process.env.REACT_APP_HEADER}`,
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    // Make a POST request to /applyMobile endpoint with the code
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/applyMobile`, options, {
+        code: coupon.code,
+      })
+      .then((response) => {
+        // Handle the response if needed
+        console.log(response.data);
+        setAppliedCode(coupon.code);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // single product cart section
 
   let SingleCartSection = null;
@@ -1077,49 +1130,46 @@ const Cart = () => {
               </div>
 
               <div className="col-md-4 mt-5  overviewMobile">
-                <div className="coupon-sec mb-3 text-center">
-                  <div
-                    className="coupon-card"
-                    style={{
-                      border: "5px dotted ",
-                      width: "100%",
-                      display: "flex",
-                      borderColor: "#fe9e2d",
-                    }}
-                  >
-                    <div className="card-head">
-                      <div className="tag">
-                        <i
-                          className="bi bi-tag-fill"
-                          style={{ fontSize: "30px" }}
-                        ></i>
-                      </div>
-                      <div className="det">
-                        <span className="use">Use Code</span>
-                        <br />
-                        <span>SIGNUP10</span>
-                      </div>
-                    </div>
-                    <div className="vl"></div>
-                    <div className="card-body text-center">
-                      <div className="terms">
-                        <p>SIGNUP10</p>
-                      </div>
-                      {/* <div className="offer">
-                         <div className="form-group">
-                        <form action="https://www.combonation.in/apply-coupon" method="POST">
-                        <input type="hidden" name="_token" value="SszM7yPk6R7lrPkjriFCbqypf6GA3Y8v0XD5q55J" />  
-                            <input type="text" name="code" value="" required="" hidden=""/>*/}
-                      <button type="submit">
-                        Apply Code <i className="bi bi-arrow-right"></i>
-                      </button>
-                      {/*</form>
+                {coupon &&
+                  coupon.map((e) => (
+                    <div className="coupon-sec mb-3 text-center" key={e.id}>
+                      <div
+                        className="coupon-card"
+                        style={{
+                          border: "5px dotted ",
+                          width: "100%",
+                          display: "flex",
+                          borderColor: "#fe9e2d",
+                        }}
+                      >
+                        <div className="card-head">
+                          <div className="tag">
+                            <i
+                              className="bi bi-tag-fill"
+                              style={{ fontSize: "30px" }}
+                            ></i>
+                          </div>
+                          <div className="det">
+                            <span className="use">Use Code</span>
+                            <br />
+                            <span>{e.name}</span>
+                          </div>
                         </div>
-
-                      </div>*/}
+                        <div className="vl"></div>
+                        <div className="card-body text-center">
+                          <div className="terms">
+                            <p>{e.name}</p>
+                          </div>
+                          <button type="submit" onClick={handleApplyCode}>
+                            Apply Code <i className="bi bi-arrow-right"></i>
+                          </button>
+                          {appliedCode && (
+                            <p>Code "{appliedCode}" applied successfully!</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  ))}
 
                 <div className="overview-card mb-3">
                   <div className="overview-card-head">

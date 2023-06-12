@@ -124,7 +124,7 @@ const SubCategory = () => {
     };
 
     updatePriceRangeVisibility();
-  }, [product, priceRanges]);
+  }, [product]);
 
   // brand api
   const { brand } = useSelector((state) => state.brand);

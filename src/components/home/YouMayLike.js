@@ -170,8 +170,6 @@ const YouMayLike = () => {
     };
   }, []);
 
-  
-
   return (
     <React.Fragment>
       <section>
@@ -199,9 +197,8 @@ const YouMayLike = () => {
             <Carousel
               responsive={responsive}
               showDots={false}
-              infinite={true}
+              // infinite={true}
               arrows={isArrow}
-             
             >
               {Array.isArray(youmaylike) &&
                 youmaylike.map((e) => (
