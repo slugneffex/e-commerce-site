@@ -3,6 +3,7 @@ import HomeLayout from "../../layouts/HomeLayout";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 const About = () => {
   const [terms, setTerms] = useState([]);
   useEffect(() => {
