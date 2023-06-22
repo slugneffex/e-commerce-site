@@ -152,7 +152,11 @@ const BrandProducts = () => {
       return (
         <div className="btn_gtc" style={{ cursor: "pointer" }}>
           <p>
-            <Link className="cartTextMob" to="/cart" style={{ color: "#05A856" }}>
+            <Link
+              className="cartTextMob"
+              to="/cart"
+              style={{ color: "#05A856" }}
+            >
               Go to Cart
             </Link>
             <i className="bi bi-arrow-right"></i>
@@ -175,7 +179,6 @@ const BrandProducts = () => {
               Add to Cart
             </i>
           </div>
-
         </>
       );
     }
@@ -188,8 +191,9 @@ const BrandProducts = () => {
           <div className="row" style={{ alignItems: "center" }}>
             <div className="col-6 top-trending-head">
               <h3 className="mobileFont mobile">Latest Brands</h3>
-              <h3 className="mobileFont desktop">Products From Latest Brands</h3>
-
+              <h3 className="mobileFont desktop">
+                Products From Latest Brands
+              </h3>
             </div>
 
             <div className="col-6 viewAllButton">
@@ -258,21 +262,21 @@ const BrandProducts = () => {
                       </div>
 
                       <div className="card-btn-sec ">
-                      {isInCart(e.id) ? (
-                            goToCart(e.id)
-                          ) : (
-                            <div
-                              className="btn_atc"
-                              onClick={() => {
-                                addToSingleCart(e);
-                              }}
-                              style={{ cursor: "pointer" }}
-                            >
-                              <p className="cartTextMob" id={e.id}>
-                                Add to Cart
-                              </p>
-                            </div>
-                          )}
+                        {isInCart(e.id) ? (
+                          goToCart(e.id)
+                        ) : (
+                          <div
+                            className="btn_atc"
+                            onClick={() => {
+                              addToSingleCart(e);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <p className="cartTextMob" id={e.id}>
+                              Add to Cart
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
