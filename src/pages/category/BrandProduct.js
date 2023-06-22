@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import { CgSortAz } from "react-icons/cg";
 import { BiFilterAlt } from "react-icons/bi";
-
 import {
   singleaddCartProduct,
   getsingleCartCount,
