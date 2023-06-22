@@ -12,15 +12,15 @@ const Orders = () => {
   const [ordersProduct, setOrdersProduct] = useState([]);
 
 
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/signin", -1);
-    } else if (!localStorage.getItem("gmail-token")) {
-      navigate("/signin");
-    } else if (!localStorage.getItem("facebook-token")) {
-      navigate("/signin");
-    }
-  });
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     navigate("/signin", -1);
+  //   } else if (!localStorage.getItem("gmail-token")) {
+  //     navigate("/signin");
+  //   } else if (!localStorage.getItem("facebook-token")) {
+  //     navigate("/signin");
+  //   }
+  // });
 
   const token = localStorage.getItem("token");
 

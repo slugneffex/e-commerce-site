@@ -1,28 +1,20 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
-
 import { useDispatch, useSelector } from "react-redux";
 import { fetchByoc } from "../features/actions/byocActions";
 
 const Categories = () => {
   const dispatch = useDispatch();
-
-
   const {  byoc } = useSelector((state) => state.byoc);
-
   useEffect(() => {
     dispatch(fetchByoc());
   }, [dispatch]);
   
- 
-
   return (
     <div>
       {/* desktop  */}
-      <div className="desktop">
-       
-          {Array.isArray(byoc) &&
+      <div className="desktop">   
+          {Array.isArray(byoc) && 
           byoc.map((e) => (
             <div className="byoc" key={e.myoc_banner?.id}>
               <Link to={`/view-all-products`}>
@@ -34,7 +26,6 @@ const Categories = () => {
               </Link>
             </div>
           ))}
-     
       </div>
 
       {/* mobile */}

@@ -1,7 +1,6 @@
 import "./cart.css";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState, useCallback } from "react";
-import "react-multi-carousel/lib/styles.css";
 import HomeLayout from "../../layouts/HomeLayout";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";

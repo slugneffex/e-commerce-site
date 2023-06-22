@@ -10,15 +10,15 @@ const Address = () => {
   const [address, setAddress] = useState([]);
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/signin", -1);
-    } else if (!localStorage.getItem("gmail-token")) {
-      navigate("/signin");
-    } else if (!localStorage.getItem("facebook-token")) {
-      navigate("/signin");
-    }
-  });
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     navigate("/signin", -1);
+  //   } else if (!localStorage.getItem("gmail-token")) {
+  //     navigate("/signin");
+  //   } else if (!localStorage.getItem("facebook-token")) {
+  //     navigate("/signin");
+  //   }
+  // });
 
   useEffect(() => {
     async function fetchData() {
