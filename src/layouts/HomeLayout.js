@@ -12,7 +12,6 @@ const HomeLayout = ({children}) => {
             <Header></Header>
                 {children}
             <Footer></Footer>
-            {/* <BottomBar></BottomBar> */}
         </main>
     </div>
   )
