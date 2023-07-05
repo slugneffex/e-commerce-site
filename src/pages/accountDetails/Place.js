@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Address = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [address, setAddress] = useState([]);
   const token = localStorage.getItem("token");
 

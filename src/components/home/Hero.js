@@ -48,12 +48,10 @@ const Hero = () => {
                   <Link to={`${e.link}`}>
                     <img
                       src={e.banner?.original_url}
-                      width="100%"
+                      width="100%"            
                       alt={e.name}
                     />
                   </Link>
-
-                
                 </div>
               </div>
             ))}

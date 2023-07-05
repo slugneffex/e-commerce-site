@@ -28,13 +28,11 @@ const responsive = {
 const ComboDeals = () => {
   const dispatch = useDispatch();
 
-
-  const {  combodeal } = useSelector((state) => state.combodeal);
+  const { combodeal } = useSelector((state) => state.combodeal);
 
   useEffect(() => {
     dispatch(fetchCombodeal());
   }, [dispatch]);
- 
 
   const [isCenterMode, setIsCenterMode] = useState(false);
 
@@ -45,18 +43,20 @@ const ComboDeals = () => {
 
     handleResize(); // Initial check on component mount
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
- 
 
   return (
     <>
       <div className="top-brand-deals container">
-        <h3 className="topdeal"  style={{ marginTop: "67px", marginBottom: "47px" }}>
+        <h3
+          className="topdeal"
+          style={{ marginTop: "67px", marginBottom: "47px" }}
+        >
           Top Combo Deals For You
         </h3>
         <div className="container needToBeSetMobile">
@@ -69,10 +69,9 @@ const ComboDeals = () => {
           >
             {combodeal.map((e) => (
               <div key={e.id}>
-              
-                  <Link  to={`${e.link}`}>
-                    <img src={e.thumbnail?.url} width="95%" alt={e.name} />
-                  </Link>
+                <Link to={`${e.link}`}>
+                  <img src={e.thumbnail?.url} width="95%" alt={e.name} />
+                </Link>
               </div>
             ))}
           </Carousel>
